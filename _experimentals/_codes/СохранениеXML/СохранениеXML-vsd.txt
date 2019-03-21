@@ -1,4 +1,4 @@
-
+ÿώ
 =>sheet: Δξκσμενς
   Section: 3>>>
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 ος; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 ος; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
@@ -102,7 +102,7 @@
   ObjectRow: 5>>>
     
   ObjectRow: 3>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 μμ; ShapeShdwOffsetY: 0 μμ; ShapeShdwObliqueAngle: 0 γπΰδ; ShapeShdwScaleFactor: 100%; 
+    FillForegnd: THEMEGUARD(RGB(146;208;80)); FillBkgnd: THEMEGUARD(SHADE(FillForegnd;LUMDIFF(THEME("FillColor");THEME("FillColor2")))); FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 μμ; ShapeShdwOffsetY: 0 μμ; ShapeShdwObliqueAngle: 0 γπΰδ; ShapeShdwScaleFactor: 100%; 
   ObjectRow: 22>>>
     SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
   ObjectRow: 16>>>
@@ -127,6 +127,48 @@
     LeftMargin: 4 ος; RightMargin: 4 ος; TopMargin: 4 ος; BottomMargin: 4 ος; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 μμ; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   ObjectRow: 1>>>
     PinX: 62,5 μμ; PinY: 212,5 μμ; Width: 45 μμ; Height: 45 μμ; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 γπΰδ; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+
+=>sheet: Sheet.2
+  Section: 3>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 ος; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 ος; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: 10>>>
+    Geometry1.NoFill: TRUE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
+    Geometry1.X1: Width*0; Geometry1.Y1: 0 μμ; 
+    Geometry1.X2: Width*1; Geometry1.Y2: 0 μμ; 
+  Section: 4>>>
+    Para.IndFirst: 0 μμ; Para.IndLeft: 0 μμ; Para.IndRight: 0 μμ; Para.SpLine: -120%; Para.SpBefore: 0 ος; Para.SpAfter: 0 ος; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 μμ; Para.Flags: 0; 
+  Section: 5>>>
+    Tabs.X1: 0; 
+  ObjectRow: 5>>>
+    
+  ObjectRow: 3>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 μμ; ShapeShdwOffsetY: 0 μμ; ShapeShdwObliqueAngle: 0 γπΰδ; ShapeShdwScaleFactor: 100%; 
+  ObjectRow: 22>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  ObjectRow: 16>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  ObjectRow: 21>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  ObjectRow: 2>>>
+    LineWeight: 0,72 ος; LineColor: 0; LinePattern: 1; Rounding: 0 μμ; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  ObjectRow: 15>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  ObjectRow: 17>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  ObjectRow: 24>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 μμ; LineToNodeY: 2,5 μμ; BlockSizeX: 5 μμ; BlockSizeY: 5 μμ; AvenueSizeX: 7,5 μμ; AvenueSizeY: 7,5 μμ; LineToLineX: 2,5 μμ; LineToLineY: 2,5 μμ; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  ObjectRow: 25>>>
+    PageLeftMargin: 6,35 μμ; PageRightMargin: 6,35 μμ; PageTopMargin: 6,35 μμ; PageBottomMargin: 6,35 μμ; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  ObjectRow: 23>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  ObjectRow: 8>>>
+    EnableLineProps: TRUE; EnableFillProps: TRUE; EnableTextProps: TRUE; HideForApply: FALSE; 
+  ObjectRow: 11>>>
+    LeftMargin: 4 ος; RightMargin: 4 ος; TopMargin: 4 ος; BottomMargin: 4 ος; VerticalAlign: 1; TextBkgnd: THEMEGUARD(THEME("BackgroundColor")+1); DefaultTabStop: 15 μμ; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  ObjectRow: 4>>>
+    BeginX: 50 μμ; BeginY: 80 μμ; EndX: 125 μμ; EndY: 190 μμ; 
+  ObjectRow: 1>>>
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 μμ; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Master.0
   Section: 3>>>

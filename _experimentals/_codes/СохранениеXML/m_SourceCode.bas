@@ -86,7 +86,7 @@ Dim mstr As Visio.Master
     
 '---Очищаем файл, если он уже есть
     With CreateObject("Scripting.FileSystemObject")
-        .CreateTextFile docFullName, True
+        .CreateTextFile docFullName, True, True
     End With
     
 '---Сохраняем состояние всех видов объектов в документе
