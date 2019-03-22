@@ -18,6 +18,7 @@ Public Sub ExportVBA(ByVal sDestinationFolder As String)
     Dim fullName As String
 
     For Each oVBComponent In Application.ActiveDocument.VBProject.VBComponents
+        Debug.Print oVBComponent.CodeModule.Lines(1, oVBComponent.CodeModule.CountOfLines) 'Считываем строки
         If oVBComponent.Type = 1 Then
             ' Standard Module
             fullName = sDestinationFolder & oVBComponent.Name & ".bas"
@@ -86,7 +87,7 @@ Dim mstr As Visio.Master
     
 '---Очищаем файл, если он уже есть
     With CreateObject("Scripting.FileSystemObject")
-        .CreateTextFile docFullName, True, True
+        .CreateTextFile docFullName, True
     End With
     
 '---Сохраняем состояние всех видов объектов в документе
