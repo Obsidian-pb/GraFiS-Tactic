@@ -1,6 +1,5 @@
-Attribute VB_Name = "m_SourceCode"
-'--------------Модуль хранить процедуры для экспорта кода VBA и исходника файла во внешние модули-------------
-'------------------Нужен чтобы была возможность коммитить код через ГитХаб------------------
+'--------------РњРѕРґСѓР»СЊ С…СЂР°РЅРёС‚СЊ РїСЂРѕС†РµРґСѓСЂС‹ РґР»СЏ СЌРєСЃРїРѕСЂС‚Р° РєРѕРґР° VBA Рё РёСЃС…РѕРґРЅРёРєР° С„Р°Р№Р»Р° РІРѕ РІРЅРµС€РЅРёРµ РјРѕРґСѓР»Рё-------------
+'------------------РќСѓР¶РµРЅ С‡С‚РѕР±С‹ Р±С‹Р»Р° РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РєРѕРјРјРёС‚РёС‚СЊ РєРѕРґ С‡РµСЂРµР· Р“РёС‚РҐР°Р±------------------
 Public Sub SaveSourceCode()
 
 Dim targetPath As String
@@ -8,52 +7,53 @@ Dim targetPath As String
     targetPath = GetCodePath
     ExportVBA targetPath
     ExportDocState targetPath
-    MsgBox "Исходный код экспортирован"
+    MsgBox "РСЃС…РѕРґРЅС‹Р№ РєРѕРґ СЌРєСЃРїРѕСЂС‚РёСЂРѕРІР°РЅ"
 
 End Sub
 
 Public Sub ExportVBA(ByVal sDestinationFolder As String)
-'Собственно экспорт кода
+'РЎРѕР±СЃС‚РІРµРЅРЅРѕ СЌРєСЃРїРѕСЂС‚ РєРѕРґР°
     Dim oVBComponent As Object
     Dim fullName As String
 
     For Each oVBComponent In Application.ActiveDocument.VBProject.VBComponents
-        Debug.Print oVBComponent.CodeModule.Lines(1, oVBComponent.CodeModule.CountOfLines) 'Считываем строки
+        Debug.Print oVBComponent.CodeModule.Lines(1, oVBComponent.CodeModule.CountOfLines) 'РЎС‡РёС‚С‹РІР°РµРј СЃС‚СЂРѕРєРё
         If oVBComponent.Type = 1 Then
             ' Standard Module
             fullName = sDestinationFolder & oVBComponent.Name & ".bas"
-            oVBComponent.Export fullName
+'            oVBComponent.Export fullName
         ElseIf oVBComponent.Type = 2 Then
             ' Class
             fullName = sDestinationFolder & oVBComponent.Name & ".cls"
-            oVBComponent.Export fullName
+'            oVBComponent.Export fullName
         ElseIf oVBComponent.Type = 3 Then
             ' Form
             fullName = sDestinationFolder & oVBComponent.Name & ".frm"
-            oVBComponent.Export fullName
+'            oVBComponent.Export fullName
         ElseIf oVBComponent.Type = 100 Then
             ' Document
             fullName = sDestinationFolder & oVBComponent.Name & ".bas"
-            oVBComponent.Export fullName
+'            oVBComponent.Export fullName
         Else
             ' UNHANDLED/UNKNOWN COMPONENT TYPE
         End If
-        Debug.Print "Сохранен " & fullName
+        SaveTextToFile oVBComponent.CodeModule.Lines(1, oVBComponent.CodeModule.CountOfLines), fullName
+        Debug.Print "РЎРѕС…СЂР°РЅРµРЅ " & fullName
     Next oVBComponent
 
 End Sub
 
 Private Function GetCodePath() As String
-'Возвращает путь к папке с исходными кодами
+'Р’РѕР·РІСЂР°С‰Р°РµС‚ РїСѓС‚СЊ Рє РїР°РїРєРµ СЃ РёСЃС…РѕРґРЅС‹РјРё РєРѕРґР°РјРё
 Dim path As String
 Dim docNameWODot As String
     
-    '---Путь к текущей папке
+    '---РџСѓС‚СЊ Рє С‚РµРєСѓС‰РµР№ РїР°РїРєРµ
     path = Application.ActiveDocument.path
-    '---Добавляем название папки с кодами
+    '---Р”РѕР±Р°РІР»СЏРµРј РЅР°Р·РІР°РЅРёРµ РїР°РїРєРё СЃ РєРѕРґР°РјРё
     path = GetDirPath(path & "_codes")
         
-    '---Добавляем путь к папке с кодами ДАННОГО документа
+    '---Р”РѕР±Р°РІР»СЏРµРј РїСѓС‚СЊ Рє РїР°РїРєРµ СЃ РєРѕРґР°РјРё Р”РђРќРќРћР“Рћ РґРѕРєСѓРјРµРЅС‚Р°
     docNameWODot = Split(Application.ActiveDocument.Name, ".")(0)
     path = GetDirPath(path & "\" & docNameWODot)
     
@@ -61,19 +61,62 @@ Dim docNameWODot As String
 End Function
 
 Private Function GetDirPath(ByVal path As String) As String
-'Возвращает путь к папке с указанным именем, если такой папки нет, предварительно создает ее
-    '---Проверяем есть ли такая папка, если нет - создаем
+'Р’РѕР·РІСЂР°С‰Р°РµС‚ РїСѓС‚СЊ Рє РїР°РїРєРµ СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРјРµРЅРµРј, РµСЃР»Рё С‚Р°РєРѕР№ РїР°РїРєРё РЅРµС‚, РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕ СЃРѕР·РґР°РµС‚ РµРµ
+    '---РџСЂРѕРІРµСЂСЏРµРј РµСЃС‚СЊ Р»Рё С‚Р°РєР°СЏ РїР°РїРєР°, РµСЃР»Рё РЅРµС‚ - СЃРѕР·РґР°РµРј
     If Dir(path, vbDirectory) = "" Then
         MkDir path
     End If
     GetDirPath = path
 End Function
 
+Function SaveTextToFile(ByVal txt$, ByVal filename$, Optional ByVal encoding$ = "windows-1251") As Boolean
+    ' С„СѓРЅРєС†РёСЏ СЃРѕС…СЂР°РЅСЏРµС‚ С‚РµРєСЃС‚ txt РІ РєРѕРґРёСЂРѕРІРєРµ Charset$ РІ С„Р°Р№Р» filename$
+    On Error Resume Next: Err.Clear
+'    Select Case encoding$
+'
+'        Case "windows-1251", "", "ansi"
+'            Set FSO = CreateObject("scripting.filesystemobject")
+'            Set ts = FSO.CreateTextFile(filename, True)
+'            ts.Write txt: ts.Close
+'            Set ts = Nothing: Set FSO = Nothing
+'
+'        Case "utf-16", "utf-16LE"
+'            Set FSO = CreateObject("scripting.filesystemobject")
+'            Set ts = FSO.CreateTextFile(filename, True, True)
+'            ts.Write txt: ts.Close
+'            Set ts = Nothing: Set FSO = Nothing
+'
+'        Case "utf-8noBOM"
+            With CreateObject("ADODB.Stream")
+                .Type = 2: .CharSet = "utf-8": .Open
+                .WriteText txt$
+ 
+                Set binaryStream = CreateObject("ADODB.Stream")
+                binaryStream.Type = 1: binaryStream.Mode = 3: binaryStream.Open
+                .Position = 3: .CopyTo binaryStream        'Skip BOM bytes
+                .flush: .Close
+                binaryStream.SaveToFile filename$, 2
+                binaryStream.Close
+            End With
+'
+'        Case Else
+'            With CreateObject("ADODB.Stream")
+'                .Type = 2: .CharSet = encoding$: .Open
+'                .WriteText txt$
+'                .SaveToFile filename$, 2        ' СЃРѕС…СЂР°РЅСЏРµРј С„Р°Р№Р» РІ Р·Р°РґР°РЅРЅРѕР№ РєРѕРґРёСЂРѕРІРєРµ
+'                .Close
+'            End With
+'    End Select
+    SaveTextToFile = Err = 0: DoEvents
+End Function
 
 
-'--------------------Работа с состоянием документа (страницы, фигуры, мастера, стили и т.д.)---------
+
+
+
+'--------------------Р Р°Р±РѕС‚Р° СЃ СЃРѕСЃС‚РѕСЏРЅРёРµРј РґРѕРєСѓРјРµРЅС‚Р° (СЃС‚СЂР°РЅРёС†С‹, С„РёРіСѓСЂС‹, РјР°СЃС‚РµСЂР°, СЃС‚РёР»Рё Рё С‚.Рґ.)---------
 Private Sub ExportDocState(ByVal sDestinationFolder As String)
-'Сохраняем состояние документа в текстовый файл
+'РЎРѕС…СЂР°РЅСЏРµРј СЃРѕСЃС‚РѕСЏРЅРёРµ РґРѕРєСѓРјРµРЅС‚Р° РІ С‚РµРєСЃС‚РѕРІС‹Р№ С„Р°Р№Р»
 Dim doc As Visio.Document
 Dim docFullName As String
 
@@ -81,28 +124,28 @@ Dim pg As Visio.Page
 Dim shp As Visio.Shape
 Dim mstr As Visio.Master
 
-'---Получаем ссылку на документ и полный путь к нему
+'---РџРѕР»СѓС‡Р°РµРј СЃСЃС‹Р»РєСѓ РЅР° РґРѕРєСѓРјРµРЅС‚ Рё РїРѕР»РЅС‹Р№ РїСѓС‚СЊ Рє РЅРµРјСѓ
     Set doc = Application.ActiveDocument
     docFullName = sDestinationFolder & Replace(doc.Name, ".", "-") & ".txt"
     
-'---Очищаем файл, если он уже есть
+'---РћС‡РёС‰Р°РµРј С„Р°Р№Р», РµСЃР»Рё РѕРЅ СѓР¶Рµ РµСЃС‚СЊ
     With CreateObject("Scripting.FileSystemObject")
         .CreateTextFile docFullName, True
     End With
     
-'---Сохраняем состояние всех видов объектов в документе
-    '---Документ
-    WriteSheetData doc.DocumentSheet, docFullName, "Документ"
-    '---Страницы
+'---РЎРѕС…СЂР°РЅСЏРµРј СЃРѕСЃС‚РѕСЏРЅРёРµ РІСЃРµС… РІРёРґРѕРІ РѕР±СЉРµРєС‚РѕРІ РІ РґРѕРєСѓРјРµРЅС‚Рµ
+    '---Р”РѕРєСѓРјРµРЅС‚
+    WriteSheetData doc.DocumentSheet, docFullName, "Р”РѕРєСѓРјРµРЅС‚"
+    '---РЎС‚СЂР°РЅРёС†С‹
     For Each pg In doc.Pages
         WriteSheetData pg.PageSheet, docFullName, pg.Name
-        'Фигуры
+        'Р¤РёРіСѓСЂС‹
         For Each shp In pg.Shapes
             WriteSheetData shp, docFullName, shp.Name
         Next shp
     Next pg
 
-    '---Мастера
+    '---РњР°СЃС‚РµСЂР°
     For Each mstr In doc.Masters
         WriteSheetData mstr.PageSheet, docFullName, mstr.Name
         For Each shp In mstr.Shapes
@@ -110,35 +153,35 @@ Dim mstr As Visio.Master
         Next shp
     Next mstr
     
-    '---Стили
+    '---РЎС‚РёР»Рё
     
     
-    '---Узоры заливки
+    '---РЈР·РѕСЂС‹ Р·Р°Р»РёРІРєРё
     
     
-    '---Шиблоны линий
+    '---РЁРёР±Р»РѕРЅС‹ Р»РёРЅРёР№
     
     
-    '---Концы линий
+    '---РљРѕРЅС†С‹ Р»РёРЅРёР№
     
     
-    Debug.Print "Сохранен " & docFullName
+    Debug.Print "РЎРѕС…СЂР°РЅРµРЅ " & docFullName
 End Sub
 
 Public Sub WriteSheetData(ByRef sheet As Visio.Shape, ByVal docFullName As String, ByVal printingName As String)
-'Сохраняем в файл по адресу docFullName текущее состояние листа документа, страницы или фигуры (мастера)
+'РЎРѕС…СЂР°РЅСЏРµРј РІ С„Р°Р№Р» РїРѕ Р°РґСЂРµСЃСѓ docFullName С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ Р»РёСЃС‚Р° РґРѕРєСѓРјРµРЅС‚Р°, СЃС‚СЂР°РЅРёС†С‹ РёР»Рё С„РёРіСѓСЂС‹ (РјР°СЃС‚РµСЂР°)
 Dim shp As Visio.Shape
 
-'---Открываем файл состояния документа
+'---РћС‚РєСЂС‹РІР°РµРј С„Р°Р№Р» СЃРѕСЃС‚РѕСЏРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р°
     Open docFullName For Append As #1
-    '---Записываем имя объекта
+    '---Р—Р°РїРёСЃС‹РІР°РµРј РёРјСЏ РѕР±СЉРµРєС‚Р°
     Print #1, ""
     Print #1, "=>sheet: " & printingName
-    '---Закрываем файл состояния документа
+    '---Р—Р°РєСЂС‹РІР°РµРј С„Р°Р№Р» СЃРѕСЃС‚РѕСЏРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р°
     Close #1
     
-'---Экспортируем данные по всем возможнымсекциям
-    '---Общие
+'---Р­РєСЃРїРѕСЂС‚РёСЂСѓРµРј РґР°РЅРЅС‹Рµ РїРѕ РІСЃРµРј РІРѕР·РјРѕР¶РЅС‹РјСЃРµРєС†РёСЏРј
+    '---РћР±С‰РёРµ
     SaveSectionState sheet, visSectionAction, docFullName
     SaveSectionState sheet, visSectionAnnotation, docFullName
     SaveSectionState sheet, visSectionCharacter, docFullName
@@ -160,7 +203,7 @@ Dim shp As Visio.Shape
     SaveSectionState sheet, visSectionTab, docFullName
     SaveSectionState sheet, visSectionTextField, docFullName
     SaveSectionState sheet, visSectionUser, docFullName
-    '---Секция Объект
+    '---РЎРµРєС†РёСЏ РћР±СЉРµРєС‚
     SaveSectionObjectState sheet, visRowAlign, docFullName
     SaveSectionObjectState sheet, visRowEvent, docFullName
     SaveSectionObjectState sheet, visRowDoc, docFullName
@@ -184,7 +227,7 @@ Dim shp As Visio.Shape
     SaveSectionObjectState sheet, visRowXFormOut, docFullName
     
     
-    'Если указанный объект имеет дочерние фигуры - запускаем процедуру сохранения и для них (актуально только для фигур)
+    'Р•СЃР»Рё СѓРєР°Р·Р°РЅРЅС‹Р№ РѕР±СЉРµРєС‚ РёРјРµРµС‚ РґРѕС‡РµСЂРЅРёРµ С„РёРіСѓСЂС‹ - Р·Р°РїСѓСЃРєР°РµРј РїСЂРѕС†РµРґСѓСЂСѓ СЃРѕС…СЂР°РЅРµРЅРёСЏ Рё РґР»СЏ РЅРёС… (Р°РєС‚СѓР°Р»СЊРЅРѕ С‚РѕР»СЊРєРѕ РґР»СЏ С„РёРіСѓСЂ)
     On Error GoTo EX
     If sheet.Shapes.Count > 0 Then
         For Each shp In pg.Shapes
@@ -199,8 +242,8 @@ End Sub
 
 
 Private Sub SaveSectionState(ByRef shp As Visio.Shape, ByVal sectID As VisSectionIndices, ByVal docFullName As String)
-'Сохраняем в файл по адресу docFullName текущее состояние указанной секции листа документа, страницы или фигуры (мастера)
-'ОБЩЕЕ
+'РЎРѕС…СЂР°РЅСЏРµРј РІ С„Р°Р№Р» РїРѕ Р°РґСЂРµСЃСѓ docFullName С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ СѓРєР°Р·Р°РЅРЅРѕР№ СЃРµРєС†РёРё Р»РёСЃС‚Р° РґРѕРєСѓРјРµРЅС‚Р°, СЃС‚СЂР°РЅРёС†С‹ РёР»Рё С„РёРіСѓСЂС‹ (РјР°СЃС‚РµСЂР°)
+'РћР‘Р©Р•Р•
 Dim sect As Visio.Section
 Dim rwI As Integer
 Dim rw As Visio.Row
@@ -211,12 +254,12 @@ Dim str As String
     If shp.SectionExists(sectID, 0) = 0 Then Exit Sub
     Set sect = shp.Section(sectID)
     
-    '---Открываем файл состояния документа
+    '---РћС‚РєСЂС‹РІР°РµРј С„Р°Р№Р» СЃРѕСЃС‚РѕСЏРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р°
     Open docFullName For Append As #1
-    '---Записываем индекс Секции
+    '---Р—Р°РїРёСЃС‹РІР°РµРј РёРЅРґРµРєСЃ РЎРµРєС†РёРё
     Print #1, "  Section: " & sectID & ">>>"
     
-    '---Перебираем все row секции и для каждой из row формируем строку содержащуюю пары Имя-Формула всех ячеек. При условии, что ячейка не пустая
+    '---РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ row СЃРµРєС†РёРё Рё РґР»СЏ РєР°Р¶РґРѕР№ РёР· row С„РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ СЃРѕРґРµСЂР¶Р°С‰СѓСЋСЋ РїР°СЂС‹ РРјСЏ-Р¤РѕСЂРјСѓР»Р° РІСЃРµС… СЏС‡РµРµРє. РџСЂРё СѓСЃР»РѕРІРёРё, С‡С‚Рѕ СЏС‡РµР№РєР° РЅРµ РїСѓСЃС‚Р°СЏ
     For rwI = 0 To sect.Count - 1
         Set rw = sect.Row(rwI)
         str = "    "
@@ -226,11 +269,11 @@ Dim str As String
                 str = str & cll.Name & ": " & cll.Formula & "; "
             End If
         Next cllI
-        'Сохраняем строку в файл
+        'РЎРѕС…СЂР°РЅСЏРµРј СЃС‚СЂРѕРєСѓ РІ С„Р°Р№Р»
         Print #1, str
     Next rwI
     
-    '---Закрываем файл состояния документа
+    '---Р—Р°РєСЂС‹РІР°РµРј С„Р°Р№Р» СЃРѕСЃС‚РѕСЏРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р°
     Close #1
     
 Exit Sub
@@ -239,8 +282,8 @@ EX:
 End Sub
 
 Private Sub SaveSectionObjectState(ByRef shp As Visio.Shape, ByVal rowID As VisRowIndices, ByVal docFullName As String)
-'Сохраняем в файл по адресу docFullName текущее состояние листа документа, страницы или фигуры (мастера)
-'!!!Для Ячейки ОБЪЕКТ!!!
+'РЎРѕС…СЂР°РЅСЏРµРј РІ С„Р°Р№Р» РїРѕ Р°РґСЂРµСЃСѓ docFullName С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ Р»РёСЃС‚Р° РґРѕРєСѓРјРµРЅС‚Р°, СЃС‚СЂР°РЅРёС†С‹ РёР»Рё С„РёРіСѓСЂС‹ (РјР°СЃС‚РµСЂР°)
+'!!!Р”Р»СЏ РЇС‡РµР№РєРё РћР‘РЄР•РљРў!!!
 Dim sect As Visio.Section
 Dim rw As Visio.Row
 Dim cllI As Integer
@@ -250,12 +293,12 @@ Dim str As String
     If shp.RowExists(visSectionObject, rowID, 0) = 0 Then Exit Sub
     Set sect = shp.Section(visSectionObject)
     
-    '---Открываем файл состояния документа
+    '---РћС‚РєСЂС‹РІР°РµРј С„Р°Р№Р» СЃРѕСЃС‚РѕСЏРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р°
     Open docFullName For Append As #1
-    '---Записываем индекс Секции
+    '---Р—Р°РїРёСЃС‹РІР°РµРј РёРЅРґРµРєСЃ РЎРµРєС†РёРё
     Print #1, "  ObjectRow: " & rowID & ">>>"
     
-    '---Перебираем все row секции и для каждой из row формируем строку содержащуюю пары Имя-Формула всех ячеек. При условии, что ячейка не пустая
+    '---РџРµСЂРµР±РёСЂР°РµРј РІСЃРµ row СЃРµРєС†РёРё Рё РґР»СЏ РєР°Р¶РґРѕР№ РёР· row С„РѕСЂРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ СЃРѕРґРµСЂР¶Р°С‰СѓСЋСЋ РїР°СЂС‹ РРјСЏ-Р¤РѕСЂРјСѓР»Р° РІСЃРµС… СЏС‡РµРµРє. РџСЂРё СѓСЃР»РѕРІРёРё, С‡С‚Рѕ СЏС‡РµР№РєР° РЅРµ РїСѓСЃС‚Р°СЏ
     Set rw = sect.Row(rowID)
     If rw.Count > 0 Then
         str = "    "
@@ -265,11 +308,11 @@ Dim str As String
                 str = str & cll.Name & ": " & cll.Formula & "; "
             End If
         Next cllI
-        'Сохраняем строку в файл
+        'РЎРѕС…СЂР°РЅСЏРµРј СЃС‚СЂРѕРєСѓ РІ С„Р°Р№Р»
         Print #1, str
     End If
     
-    '---Закрываем файл состояния документа
+    '---Р—Р°РєСЂС‹РІР°РµРј С„Р°Р№Р» СЃРѕСЃС‚РѕСЏРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р°
     Close #1
     
 Exit Sub
