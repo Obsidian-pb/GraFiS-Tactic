@@ -1,5 +1,7 @@
 '--------------Модуль хранить процедуры для экспорта кода VBA и исходника файла во внешние модули-------------
 '------------------Нужен чтобы была возможность коммитить код через ГитХаб------------------
+Private docStateDescription As String
+
 Public Sub SaveSourceCode()
 
 Dim targetPath As String
@@ -17,23 +19,18 @@ Public Sub ExportVBA(ByVal sDestinationFolder As String)
     Dim fullName As String
 
     For Each oVBComponent In Application.ActiveDocument.VBProject.VBComponents
-        Debug.Print oVBComponent.CodeModule.Lines(1, oVBComponent.CodeModule.CountOfLines) 'Считываем строки
         If oVBComponent.Type = 1 Then
             ' Standard Module
             fullName = sDestinationFolder & oVBComponent.Name & ".bas"
-'            oVBComponent.Export fullName
         ElseIf oVBComponent.Type = 2 Then
             ' Class
             fullName = sDestinationFolder & oVBComponent.Name & ".cls"
-'            oVBComponent.Export fullName
         ElseIf oVBComponent.Type = 3 Then
             ' Form
             fullName = sDestinationFolder & oVBComponent.Name & ".frm"
-'            oVBComponent.Export fullName
         ElseIf oVBComponent.Type = 100 Then
             ' Document
             fullName = sDestinationFolder & oVBComponent.Name & ".bas"
-'            oVBComponent.Export fullName
         Else
             ' UNHANDLED/UNKNOWN COMPONENT TYPE
         End If
@@ -69,49 +66,24 @@ Private Function GetDirPath(ByVal path As String) As String
     GetDirPath = path
 End Function
 
-Function SaveTextToFile(ByVal txt$, ByVal filename$, Optional ByVal encoding$ = "windows-1251") As Boolean
-    ' функция сохраняет текст txt в кодировке Charset$ в файл filename$
+Function SaveTextToFile(ByVal txt, ByVal filename) As Boolean
+'функция сохраняет текст txt в кодировке "utf-8" в файл filename
     On Error Resume Next: Err.Clear
-'    Select Case encoding$
-'
-'        Case "windows-1251", "", "ansi"
-'            Set FSO = CreateObject("scripting.filesystemobject")
-'            Set ts = FSO.CreateTextFile(filename, True)
-'            ts.Write txt: ts.Close
-'            Set ts = Nothing: Set FSO = Nothing
-'
-'        Case "utf-16", "utf-16LE"
-'            Set FSO = CreateObject("scripting.filesystemobject")
-'            Set ts = FSO.CreateTextFile(filename, True, True)
-'            ts.Write txt: ts.Close
-'            Set ts = Nothing: Set FSO = Nothing
-'
-'        Case "utf-8noBOM"
-            With CreateObject("ADODB.Stream")
-                .Type = 2: .CharSet = "utf-8": .Open
-                .WriteText txt$
- 
-                Set binaryStream = CreateObject("ADODB.Stream")
-                binaryStream.Type = 1: binaryStream.Mode = 3: binaryStream.Open
-                .Position = 3: .CopyTo binaryStream        'Skip BOM bytes
-                .flush: .Close
-                binaryStream.SaveToFile filename$, 2
-                binaryStream.Close
-            End With
-'
-'        Case Else
-'            With CreateObject("ADODB.Stream")
-'                .Type = 2: .CharSet = encoding$: .Open
-'                .WriteText txt$
-'                .SaveToFile filename$, 2        ' сохраняем файл в заданной кодировке
-'                .Close
-'            End With
-'    End Select
+
+    With CreateObject("ADODB.Stream")
+        .Type = 2: .CharSet = "utf-8": .Open
+        .WriteText txt
+
+        Set binaryStream = CreateObject("ADODB.Stream")
+        binaryStream.Type = 1: binaryStream.Mode = 3: binaryStream.Open
+        .Position = 3: .CopyTo binaryStream        'Skip BOM bytes
+        .flush: .Close
+        binaryStream.SaveToFile filename, 2
+        binaryStream.Close
+    End With
+
     SaveTextToFile = Err = 0: DoEvents
 End Function
-
-
-
 
 
 '--------------------Работа с состоянием документа (страницы, фигуры, мастера, стили и т.д.)---------
@@ -123,115 +95,104 @@ Dim docFullName As String
 Dim pg As Visio.Page
 Dim shp As Visio.Shape
 Dim mstr As Visio.Master
+Dim style As Visio.style
+
+'---Очищаем имеющийся текст
+    docStateDescription = ""
 
 '---Получаем ссылку на документ и полный путь к нему
     Set doc = Application.ActiveDocument
     docFullName = sDestinationFolder & Replace(doc.Name, ".", "-") & ".txt"
     
-'---Очищаем файл, если он уже есть
-    With CreateObject("Scripting.FileSystemObject")
-        .CreateTextFile docFullName, True
-    End With
-    
 '---Сохраняем состояние всех видов объектов в документе
     '---Документ
-    WriteSheetData doc.DocumentSheet, docFullName, "Документ"
+    FillSheetData doc.DocumentSheet, docFullName, "Документ"
     '---Страницы
     For Each pg In doc.Pages
-        WriteSheetData pg.PageSheet, docFullName, pg.Name
+        FillSheetData pg.PageSheet, docFullName, pg.Name
         'Фигуры
         For Each shp In pg.Shapes
-            WriteSheetData shp, docFullName, shp.Name
+            FillSheetData shp, docFullName, shp.Name
         Next shp
     Next pg
 
     '---Мастера
     For Each mstr In doc.Masters
-        WriteSheetData mstr.PageSheet, docFullName, mstr.Name
+        FillSheetData mstr.PageSheet, docFullName, mstr.Name
         For Each shp In mstr.Shapes
-            WriteSheetData shp, docFullName, shp.Name
+            FillSheetData shp, docFullName, shp.Name
         Next shp
     Next mstr
     
     '---Стили
+    Dim ss As Visio.Section
+    For Each style In doc.Styles
+        FillSheetData style, docFullName, style.Name
+    Next style
     
-    
-    '---Узоры заливки
-    
-    
-    '---Шиблоны линий
-    
-    
-    '---Концы линий
-    
-    
+    SaveTextToFile docStateDescription, docFullName
     Debug.Print "Сохранен " & docFullName
 End Sub
 
-Public Sub WriteSheetData(ByRef sheet As Visio.Shape, ByVal docFullName As String, ByVal printingName As String)
+Public Sub FillSheetData(ByRef sheet As Object, ByVal docFullName As String, ByVal printingName As String)
 'Сохраняем в файл по адресу docFullName текущее состояние листа документа, страницы или фигуры (мастера)
 Dim shp As Visio.Shape
 
-'---Открываем файл состояния документа
-    Open docFullName For Append As #1
-    '---Записываем имя объекта
-    Print #1, ""
-    Print #1, "=>sheet: " & printingName
-    '---Закрываем файл состояния документа
-    Close #1
+'---Добавляем название объекта состояния документа
+    docStateDescription = docStateDescription & Chr(10) & "=>sheet: " & printingName & Chr(10)
     
 '---Экспортируем данные по всем возможнымсекциям
     '---Общие
-    SaveSectionState sheet, visSectionAction, docFullName
-    SaveSectionState sheet, visSectionAnnotation, docFullName
-    SaveSectionState sheet, visSectionCharacter, docFullName
-    SaveSectionState sheet, visSectionConnectionPts, docFullName
-    SaveSectionState sheet, visSectionControls, docFullName
-    SaveSectionState sheet, visSectionFirst, docFullName
-    SaveSectionState sheet, visSectionFirstComponent, docFullName
-    SaveSectionState sheet, visSectionHyperlink, docFullName
-    SaveSectionState sheet, visSectionInval, docFullName
-    SaveSectionState sheet, visSectionLast, docFullName
-    SaveSectionState sheet, visSectionLastComponent, docFullName
-    SaveSectionState sheet, visSectionLayer, docFullName
-    SaveSectionState sheet, visSectionNone, docFullName
-    SaveSectionState sheet, visSectionParagraph, docFullName
-    SaveSectionState sheet, visSectionProp, docFullName
-    SaveSectionState sheet, visSectionReviewer, docFullName
-    SaveSectionState sheet, visSectionScratch, docFullName
-    SaveSectionState sheet, visSectionSmartTag, docFullName
-    SaveSectionState sheet, visSectionTab, docFullName
-    SaveSectionState sheet, visSectionTextField, docFullName
-    SaveSectionState sheet, visSectionUser, docFullName
+    FillSectionState sheet, visSectionAction, docFullName
+    FillSectionState sheet, visSectionAnnotation, docFullName
+    FillSectionState sheet, visSectionCharacter, docFullName
+    FillSectionState sheet, visSectionConnectionPts, docFullName
+    FillSectionState sheet, visSectionControls, docFullName
+    FillSectionState sheet, visSectionFirst, docFullName
+    FillSectionState sheet, visSectionFirstComponent, docFullName
+    FillSectionState sheet, visSectionHyperlink, docFullName
+    FillSectionState sheet, visSectionInval, docFullName
+    FillSectionState sheet, visSectionLast, docFullName
+    FillSectionState sheet, visSectionLastComponent, docFullName
+    FillSectionState sheet, visSectionLayer, docFullName
+    FillSectionState sheet, visSectionNone, docFullName
+    FillSectionState sheet, visSectionParagraph, docFullName
+    FillSectionState sheet, visSectionProp, docFullName
+    FillSectionState sheet, visSectionReviewer, docFullName
+    FillSectionState sheet, visSectionScratch, docFullName
+    FillSectionState sheet, visSectionSmartTag, docFullName
+    FillSectionState sheet, visSectionTab, docFullName
+    FillSectionState sheet, visSectionTextField, docFullName
+    FillSectionState sheet, visSectionUser, docFullName
     '---Секция Объект
-    SaveSectionObjectState sheet, visRowAlign, docFullName
-    SaveSectionObjectState sheet, visRowEvent, docFullName
-    SaveSectionObjectState sheet, visRowDoc, docFullName
-    SaveSectionObjectState sheet, visRowFill, docFullName
-    SaveSectionObjectState sheet, visRowForeign, docFullName
-    SaveSectionObjectState sheet, visRowGroup, docFullName
-    SaveSectionObjectState sheet, visRowHelpCopyright, docFullName
-    SaveSectionObjectState sheet, visRowImage, docFullName
-    SaveSectionObjectState sheet, visRowLayerMem, docFullName
-    SaveSectionObjectState sheet, visRowLine, docFullName
-    SaveSectionObjectState sheet, visRowLock, docFullName
-    SaveSectionObjectState sheet, visRowMisc, docFullName
-    SaveSectionObjectState sheet, visRowPageLayout, docFullName
-    SaveSectionObjectState sheet, visRowPage, docFullName
-    SaveSectionObjectState sheet, visRowPrintProperties, docFullName
-    SaveSectionObjectState sheet, visRowShapeLayout, docFullName
-    SaveSectionObjectState sheet, visRowStyle, docFullName
-    SaveSectionObjectState sheet, visRowTextXForm, docFullName
-    SaveSectionObjectState sheet, visRowText, docFullName
-    SaveSectionObjectState sheet, visRowXForm1D, docFullName
-    SaveSectionObjectState sheet, visRowXFormOut, docFullName
+    FillSectionObjectState sheet, visRowAlign, docFullName
+    FillSectionObjectState sheet, visRowEvent, docFullName
+    FillSectionObjectState sheet, visRowDoc, docFullName
+    FillSectionObjectState sheet, visRowFill, docFullName
+    FillSectionObjectState sheet, visRowForeign, docFullName
+    FillSectionObjectState sheet, visRowGroup, docFullName
+    FillSectionObjectState sheet, visRowHelpCopyright, docFullName
+    FillSectionObjectState sheet, visRowImage, docFullName
+    FillSectionObjectState sheet, visRowLayerMem, docFullName
+    FillSectionObjectState sheet, visRowLine, docFullName
+    FillSectionObjectState sheet, visRowLock, docFullName
+    FillSectionObjectState sheet, visRowMisc, docFullName
+    FillSectionObjectState sheet, visRowPageLayout, docFullName
+    FillSectionObjectState sheet, visRowPage, docFullName
+    FillSectionObjectState sheet, visRowPrintProperties, docFullName
+    FillSectionObjectState sheet, visRowShapeLayout, docFullName
+    FillSectionObjectState sheet, visRowStyle, docFullName
+    FillSectionObjectState sheet, visRowTextXForm, docFullName
+    FillSectionObjectState sheet, visRowText, docFullName
+    FillSectionObjectState sheet, visRowXForm1D, docFullName
+    FillSectionObjectState sheet, visRowXFormOut, docFullName
     
     
     'Если указанный объект имеет дочерние фигуры - запускаем процедуру сохранения и для них (актуально только для фигур)
     On Error GoTo EX
     If sheet.Shapes.Count > 0 Then
         For Each shp In pg.Shapes
-            WriteSheetData shp, docFullName, shp.Name
+            FillSheetData shp, docFullName, shp.Name
         Next shp
     End If
     
@@ -240,28 +201,26 @@ EX:
 End Sub
 
 
-
-Private Sub SaveSectionState(ByRef shp As Visio.Shape, ByVal sectID As VisSectionIndices, ByVal docFullName As String)
+Private Sub FillSectionState(ByRef shp As Object, ByVal sectID As VisSectionIndices, ByVal docFullName As String)
 'Сохраняем в файл по адресу docFullName текущее состояние указанной секции листа документа, страницы или фигуры (мастера)
 'ОБЩЕЕ
 Dim sect As Visio.Section
 Dim rwI As Integer
-Dim rw As Visio.Row
+Dim rw As Visio.row
 Dim cllI As Integer
 Dim cll As Visio.Cell
 Dim str As String
+       
+    On Error GoTo EX
+       
+    If Not TryGetSection(shp, sect, sectID) Then Exit Sub
     
-    If shp.SectionExists(sectID, 0) = 0 Then Exit Sub
-    Set sect = shp.Section(sectID)
-    
-    '---Открываем файл состояния документа
-    Open docFullName For Append As #1
     '---Записываем индекс Секции
-    Print #1, "  Section: " & sectID & ">>>"
+    docStateDescription = docStateDescription & "  Section: " & GetSectionName(sectID) & ">>>" & Chr(10)
     
     '---Перебираем все row секции и для каждой из row формируем строку содержащуюю пары Имя-Формула всех ячеек. При условии, что ячейка не пустая
     For rwI = 0 To sect.Count - 1
-        Set rw = sect.Row(rwI)
+        Set rw = sect.row(rwI)
         str = "    "
         For cllI = 0 To rw.Count - 1
             Set cll = rw.Cell(cllI)
@@ -270,36 +229,32 @@ Dim str As String
             End If
         Next cllI
         'Сохраняем строку в файл
-        Print #1, str
+        docStateDescription = docStateDescription & str & Chr(10)
     Next rwI
-    
-    '---Закрываем файл состояния документа
-    Close #1
     
 Exit Sub
 EX:
+    If TypeName(shp) = "Style" Then Exit Sub
     Debug.Print "Section ERROR: " & sectID
 End Sub
 
-Private Sub SaveSectionObjectState(ByRef shp As Visio.Shape, ByVal rowID As VisRowIndices, ByVal docFullName As String)
+Private Sub FillSectionObjectState(ByRef shp As Object, ByVal rowID As VisRowIndices, ByVal docFullName As String)
 'Сохраняем в файл по адресу docFullName текущее состояние листа документа, страницы или фигуры (мастера)
 '!!!Для Ячейки ОБЪЕКТ!!!
 Dim sect As Visio.Section
-Dim rw As Visio.Row
+Dim rw As Visio.row
 Dim cllI As Integer
 Dim cll As Visio.Cell
 Dim str As String
     
-    If shp.RowExists(visSectionObject, rowID, 0) = 0 Then Exit Sub
-    Set sect = shp.Section(visSectionObject)
+    On Error GoTo EX
+        
+    If Not TryGetObjectRow(shp, rw, rowID) Then Exit Sub
     
-    '---Открываем файл состояния документа
-    Open docFullName For Append As #1
     '---Записываем индекс Секции
-    Print #1, "  ObjectRow: " & rowID & ">>>"
+    docStateDescription = docStateDescription & "  Section Object, row: " & GetRowName(rowID) & ">>>" & Chr(10)
     
     '---Перебираем все row секции и для каждой из row формируем строку содержащуюю пары Имя-Формула всех ячеек. При условии, что ячейка не пустая
-    Set rw = sect.Row(rowID)
     If rw.Count > 0 Then
         str = "    "
         For cllI = 0 To rw.Count - 1
@@ -309,13 +264,131 @@ Dim str As String
             End If
         Next cllI
         'Сохраняем строку в файл
-        Print #1, str
+        docStateDescription = docStateDescription & str & Chr(10)
     End If
-    
-    '---Закрываем файл состояния документа
-    Close #1
     
 Exit Sub
 EX:
+    If TypeName(shp) = "Style" Then Exit Sub
     Debug.Print "Section Oject ERROR: " & sectID & ", rowID: " & rowID
 End Sub
+
+Private Function TryGetSection(ByRef shp As Object, ByRef sect As Visio.Section, ByVal sectID As VisSectionIndices) As Boolean
+'Пытаемся получить ссылку на указанную секцию, если это удалось - возвращаем True, иначе False
+    On Error GoTo EX
+    
+    Set sect = shp.Section(sectID)
+    
+    TryGetSection = True
+Exit Function
+EX:
+    TryGetSection = False
+End Function
+
+Private Function TryGetObjectRow(ByRef shp As Object, ByRef rw As Visio.row, ByVal rowID As VisRowIndices) As Boolean
+'Пытаемся получить ссылку на указанную строку секции Object, если это удалось - возвращаем True, иначе False
+    On Error GoTo EX
+    
+    Set rw = shp.Section(visSectionObject).row(rowID)
+    
+    TryGetObjectRow = True
+Exit Function
+EX:
+    TryGetObjectRow = False
+End Function
+
+Private Function GetSectionName(ByVal sectID As VisSectionIndices) As String
+    Select Case sectID
+        Case Is = VisSectionIndices.visSectionAction
+            GetSectionName = "Action"
+        Case Is = VisSectionIndices.visSectionAnnotation
+            GetSectionName = "Annotation"
+        Case Is = VisSectionIndices.visSectionCharacter
+            GetSectionName = "Character"
+        Case Is = VisSectionIndices.visSectionConnectionPts
+            GetSectionName = "ConnectionPts"
+        Case Is = VisSectionIndices.visSectionControls
+            GetSectionName = "Controls"
+        Case Is = VisSectionIndices.visSectionFirst
+            GetSectionName = "First"
+        Case Is = VisSectionIndices.visSectionFirstComponent
+            GetSectionName = "FirstComponent"
+        Case Is = VisSectionIndices.visSectionHyperlink
+            GetSectionName = "Hyperlink"
+        Case Is = VisSectionIndices.visSectionInval
+            GetSectionName = "Inval"
+        Case Is = VisSectionIndices.visSectionLast
+            GetSectionName = "Last"
+        Case Is = VisSectionIndices.visSectionLastComponent
+            GetSectionName = "LastComponent"
+        Case Is = VisSectionIndices.visSectionLayer
+            GetSectionName = "Layer"
+        Case Is = VisSectionIndices.visSectionNone
+            GetSectionName = "None"
+        Case Is = VisSectionIndices.visSectionObject
+            GetSectionName = "Object"
+        Case Is = VisSectionIndices.visSectionParagraph
+            GetSectionName = "Paragraph"
+        Case Is = VisSectionIndices.visSectionProp
+            GetSectionName = "Prop"
+        Case Is = VisSectionIndices.visSectionReviewer
+            GetSectionName = "Reviewer"
+        Case Is = VisSectionIndices.visSectionScratch
+            GetSectionName = "Scratch"
+        Case Is = VisSectionIndices.visSectionSmartTag
+            GetSectionName = "SmartTag"
+        Case Is = VisSectionIndices.visSectionTab
+            GetSectionName = "Tab"
+        Case Is = VisSectionIndices.visSectionTextField
+            GetSectionName = "TextField"
+        Case Is = VisSectionIndices.visSectionUser
+            GetSectionName = "User"
+    End Select
+End Function
+
+Private Function GetRowName(ByVal rowID As VisRowIndices) As String
+    Select Case rowID
+        Case Is = VisRowIndices.visRowAlign
+            GetRowName = "visRowAlign"
+        Case Is = VisRowIndices.visRowEvent
+            GetRowName = "visRowEvent"
+        Case Is = VisRowIndices.visRowDoc
+            GetRowName = "visRowDoc"
+        Case Is = VisRowIndices.visRowFill
+            GetRowName = "visRowFill"
+        Case Is = VisRowIndices.visRowForeign
+            GetRowName = "visRowForeign"
+        Case Is = VisRowIndices.visRowGroup
+            GetRowName = "visRowGroup"
+        Case Is = VisRowIndices.visRowHelpCopyright
+            GetRowName = "visRowHelpCopyright"
+        Case Is = VisRowIndices.visRowImage
+            GetRowName = "visRowImage"
+        Case Is = VisRowIndices.visRowLayerMem
+            GetRowName = "visRowLayerMem"
+        Case Is = VisRowIndices.visRowLine
+            GetRowName = "visRowLine"
+        Case Is = VisRowIndices.visRowLock
+            GetRowName = "visRowLock"
+        Case Is = VisRowIndices.visRowMisc
+            GetRowName = "visRowMisc"
+        Case Is = VisRowIndices.visRowPageLayout
+            GetRowName = "visRowPageLayout"
+        Case Is = VisRowIndices.visRowPage
+            GetRowName = "visRowPage"
+        Case Is = VisRowIndices.visRowPrintProperties
+            GetRowName = "visRowPrintProperties"
+        Case Is = VisRowIndices.visRowShapeLayout
+            GetRowName = "visRowShapeLayout"
+        Case Is = VisRowIndices.visRowStyle
+            GetRowName = "visRowStyle"
+        Case Is = VisRowIndices.visRowTextXForm
+            GetRowName = "visRowTextXForm"
+        Case Is = VisRowIndices.visRowText
+            GetRowName = "visRowText"
+        Case Is = VisRowIndices.visRowXForm1D
+            GetRowName = "visRowXForm1D"
+        Case Is = VisRowIndices.visRowXFormOut
+            GetRowName = "visRowXFormOut"
+    End Select
+End Function
