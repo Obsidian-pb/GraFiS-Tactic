@@ -830,9 +830,9 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section Object, row: visRowFill>>>
-    FillForegnd: REF(); FillBkgnd: REF(); FillPattern: REF(); ShdwForegnd: REF(); ShdwBkgnd: REF(); ShdwPattern: REF(); FillForegndTrans: REF(); FillBkgndTrans: REF(); ShdwForegndTrans: REF(); ShdwBkgndTrans: REF(); ShapeShdwType: REF(); ShapeShdwOffsetX: REF(); ShapeShdwOffsetY: REF(); ShapeShdwObliqueAngle: REF(); ShapeShdwScaleFactor: REF(); 
+    FillForegnd: "1"; FillBkgnd: "1"; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: "0,0000%"; FillBkgndTrans: "0,0000%"; ShdwForegndTrans: "0,0000%"; ShdwBkgndTrans: "0,0000%"; ShapeShdwType: 0; ShapeShdwOffsetX: "0,0000 мм"; ShapeShdwOffsetY: "0,0000 мм"; ShapeShdwObliqueAngle: "0,0000 град"; ShapeShdwScaleFactor: "100,0000%"; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: REF(); LinePattern: REF(); Rounding: REF(); EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: REF(); BeginArrowSize: 2; LineColorTrans: REF(); 
+    LineWeight: 0,72 пт; LineColor: "2"; LinePattern: 1; Rounding: "0,0000 мм"; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: "0,0000%"; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
@@ -844,9 +844,9 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section Object, row: visRowFill>>>
-    FillForegnd: REF(); FillBkgnd: REF(); FillPattern: REF(); ShdwForegnd: REF(); ShdwBkgnd: REF(); ShdwPattern: REF(); FillForegndTrans: REF(); FillBkgndTrans: REF(); ShdwForegndTrans: REF(); ShdwBkgndTrans: REF(); ShapeShdwType: REF(); ShapeShdwOffsetX: REF(); ShapeShdwOffsetY: REF(); ShapeShdwObliqueAngle: REF(); ShapeShdwScaleFactor: REF(); 
+    FillForegnd: "0"; FillBkgnd: "0"; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: "0,0000%"; FillBkgndTrans: "0,0000%"; ShdwForegndTrans: "0,0000%"; ShdwBkgndTrans: "0,0000%"; ShapeShdwType: 0; ShapeShdwOffsetX: "0,0000 мм"; ShapeShdwOffsetY: "0,0000 мм"; ShapeShdwObliqueAngle: "0,0000 град"; ShapeShdwScaleFactor: "100,0000%"; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: REF(); LinePattern: REF(); Rounding: REF(); EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: REF(); BeginArrowSize: 2; LineColorTrans: REF(); 
+    LineWeight: 0,72 пт; LineColor: "0"; LinePattern: 1; Rounding: "0,0000 мм"; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: "0,0000%"; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
@@ -860,6 +860,6 @@
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: REF(); LinePattern: REF(); Rounding: REF(); EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: REF(); BeginArrowSize: 2; LineColorTrans: REF(); 
+    LineWeight: 0,72 пт; LineColor: "0"; LinePattern: 1; Rounding: "0,0000 мм"; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: "0,0000%"; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 

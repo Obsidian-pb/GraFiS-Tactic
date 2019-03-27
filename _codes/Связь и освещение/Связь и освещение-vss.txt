@@ -1,0 +1,813 @@
+
+=>sheet: Документ
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Prop>>>
+    Prop.Units: 0; Prop.Units.Prompt: "Перечень подразделений. Значения импортируются из базы данных"; Prop.Units.Label: "Подразделения"; Prop.Units.Format: "ПЧ-1;ПЧ-2;ПЧ-3;ПЧ-4;ПЧ-5;ПЧ-6;ПЧ-7;ПЧ-8;ПЧ-9;ПЧ-10;ПЧ-19;ПЧ-24;ПЧ-47;СПЧ по ТКП;;"; Prop.Units.SortKey: 1; Prop.Units.Type: 4; Prop.Units.Invisible: FALSE; Prop.Units.Verify: FALSE; Prop.Units.LangID: 1033; Prop.Units.Calendar: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.CurrentTime: NOW(); User.CurrentTime.Prompt: ""; 
+    
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowDoc>>>
+    OutputFormat: 0; LockPreview: FALSE; Metric: TRUE; AddMarkup: FALSE; ViewMarkup: FALSE; PreviewQuality: 0; PreviewScope: 1; DocLangID: 1049; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Страница-1
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 1; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 210 мм; PageHeight: 297 мм; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 1 мм; DrawingScale: 1 мм; DrawingSizeType: 0; DrawingScaleType: 0; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Прожектор
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.GFS_Aspect: 1; User.GFS_Aspect.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 2,5 м; PageHeight: 2,5098535487767 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Прожектор
+  Section: Action>>>
+    Actions.ModelShow: "Показывать модель"; Actions.ModelShow._Unused1: ""; Actions.ModelShow._Unused2: ""; Actions.ModelShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.ModelShow.Checked";NOT(Actions.ModelShow.Checked)); Actions.ModelShow.Checked: 1; Actions.ModelShow.Disabled: 0; Actions.ModelShow.ReadOnly: FALSE; Actions.ModelShow.Invisible: FALSE; Actions.ModelShow.BeginGroup: TRUE; Actions.ModelShow.TagName: ""; Actions.ModelShow.ButtonFace: ""; Actions.ModelShow.SortKey: 20; 
+    Actions.LeftRight: "Отразить справа на лево"; Actions.LeftRight._Unused1: ""; Actions.LeftRight._Unused2: ""; Actions.LeftRight.Action: IF(User.Orientation=0;SETF(GetRef(User.Orientation);1);SETF(GetRef(User.Orientation);0)); Actions.LeftRight.Checked: 0; Actions.LeftRight.Disabled: 0; Actions.LeftRight.ReadOnly: FALSE; Actions.LeftRight.Invisible: FALSE; Actions.LeftRight.BeginGroup: TRUE; Actions.LeftRight.TagName: ""; Actions.LeftRight.ButtonFace: 196; Actions.LeftRight.SortKey: 10; 
+    Actions.MainManeure: "Маневр"; Actions.MainManeure._Unused1: ""; Actions.MainManeure._Unused2: ""; Actions.MainManeure.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.MainManeure.Checked";NOT(Actions.MainManeure.Checked)); Actions.MainManeure.Checked: 0; Actions.MainManeure.Disabled: 0; Actions.MainManeure.ReadOnly: FALSE; Actions.MainManeure.Invisible: FALSE; Actions.MainManeure.BeginGroup: FALSE; Actions.MainManeure.TagName: ""; Actions.MainManeure.ButtonFace: 92; Actions.MainManeure.SortKey: 1; 
+  Section: Character>>>
+    Char.Font: 4; Char.Color: Styles!С_Подпись!Char.Color; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Prop>>>
+    Prop.Model: "G-10"; Prop.Model.Prompt: "Тип прожектора"; Prop.Model.Label: "Тип прожектора"; Prop.Model.Format: ""; Prop.Model.SortKey: 20; Prop.Model.Type: 0; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Power: ""; Prop.Power.Prompt: "Мощность прожектора"; Prop.Power.Label: "Мощность"; Prop.Power.Format: ""; Prop.Power.SortKey: 21; Prop.Power.Type: 2; Prop.Power.Invisible: FALSE; Prop.Power.Verify: FALSE; Prop.Power.LangID: 1049; 
+    Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Список подразделений гарнизона"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: TheDoc!Prop.Units.Format; Prop.Unit.SortKey: 11; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
+    Prop.Personnel: 1; Prop.Personnel.Prompt: "Количество линого состава работающего с прожектором"; Prop.Personnel.Label: "Личный состав"; Prop.Personnel.Format: ""; Prop.Personnel.SortKey: 30; Prop.Personnel.Type: 2; Prop.Personnel.Invisible: FALSE; Prop.Personnel.Verify: FALSE; Prop.Personnel.LangID: 1049; 
+    Prop.Orientation: INDEX(User.Orientation;Prop.Orientation.Format); Prop.Orientation.Prompt: "Левая или правая ориентация"; Prop.Orientation.Label: "Ориентация"; Prop.Orientation.Format: "Левая;Правая"; Prop.Orientation.SortKey: 40; Prop.Orientation.Type: 1; Prop.Orientation.Invisible: TRUE; Prop.Orientation.Verify: FALSE; Prop.Orientation.LangID: 1049; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.IndexPers: 57; User.IndexPers.Prompt: "Прожектор"; 
+    User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет контура"; 
+    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.Version: 1; User.Version.Prompt: ""; 
+    User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
+    User.ShapeColor3: FillForegnd; User.ShapeColor3.Prompt: "Цвет заливки"; 
+    User.Orientation: 0; User.Orientation.Prompt: "0-левая,1-правая"; 
+  Section Object, row: visRowEvent>>>
+    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"Связь_и_освещение")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+  Section Object, row: visRowFill>>>
+    FillForegnd: Styles!С_Прож!FillForegnd; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 0; DisplayMode: 0; IsDropTarget: FALSE; IsSnapTarget: FALSE; IsTextEditTarget: FALSE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: Styles!С_Прож!LineColor; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 1; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 8; _Unused78: 0; _Unused79: 0; Comment: "Прожектор "&Prop.Model&", "&CHAR(13)&"Подразделение "&Prop.Unit; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  Section Object, row: visRowXFormOut>>>
+    PinX: 1250 мм; PinY: 1254,9267743883 мм; Width: 2,5 м*Страница!User.GFS_Aspect; Height: 2,5099 м*Страница!User.GFS_Aspect; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+
+=>sheet: Носимая радиостанция
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Layer>>>
+    Layers.Name: "Связь"; Layers.Password: ""; Layers.Color: 255; Layers.Status: 0; Layers.Visible: 1; Layers.Print: 1; Layers.Active: 0; Layers.Locked: 0; Layers.Snap: 1; Layers.Glue: 1; Layers.NameUniv: "Связь"; Layers.ColorTrans: 0%; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.GFS_Aspect: 1; User.GFS_Aspect.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 1,225 м; PageHeight: 2 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Sheet.5
+  Section: Action>>>
+    Actions.ModelShow: "Показывать модель"; Actions.ModelShow._Unused1: ""; Actions.ModelShow._Unused2: ""; Actions.ModelShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.ModelShow.Checked";NOT(Actions.ModelShow.Checked)); Actions.ModelShow.Checked: 0; Actions.ModelShow.Disabled: 0; Actions.ModelShow.ReadOnly: FALSE; Actions.ModelShow.Invisible: FALSE; Actions.ModelShow.BeginGroup: TRUE; Actions.ModelShow.TagName: ""; Actions.ModelShow.ButtonFace: ""; Actions.ModelShow.SortKey: 10; 
+    Actions.CallShow: "Показывать позывной"; Actions.CallShow._Unused1: ""; Actions.CallShow._Unused2: ""; Actions.CallShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.CallShow.Checked";NOT(Actions.CallShow.Checked)); Actions.CallShow.Checked: 0; Actions.CallShow.Disabled: 0; Actions.CallShow.ReadOnly: FALSE; Actions.CallShow.Invisible: FALSE; Actions.CallShow.BeginGroup: FALSE; Actions.CallShow.TagName: ""; Actions.CallShow.ButtonFace: ""; Actions.CallShow.SortKey: 21; 
+    Actions.MainManeure: "Маневр"; Actions.MainManeure._Unused1: ""; Actions.MainManeure._Unused2: ""; Actions.MainManeure.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.MainManeure.Checked";NOT(Actions.MainManeure.Checked)); Actions.MainManeure.Checked: 0; Actions.MainManeure.Disabled: 0; Actions.MainManeure.ReadOnly: FALSE; Actions.MainManeure.Invisible: FALSE; Actions.MainManeure.BeginGroup: FALSE; Actions.MainManeure.TagName: ""; Actions.MainManeure.ButtonFace: 92; Actions.MainManeure.SortKey: 1; 
+    Actions.UnitShow: "Показывать подразделение"; Actions.UnitShow._Unused1: ""; Actions.UnitShow._Unused2: ""; Actions.UnitShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.UnitShow.Checked";NOT(Actions.UnitShow.Checked)); Actions.UnitShow.Checked: 0; Actions.UnitShow.Disabled: 0; Actions.UnitShow.ReadOnly: FALSE; Actions.UnitShow.Invisible: FALSE; Actions.UnitShow.BeginGroup: TRUE; Actions.UnitShow.TagName: ""; Actions.UnitShow.ButtonFace: ""; Actions.UnitShow.SortKey: 20; 
+  Section: Character>>>
+    Char.Font: 4; Char.Color: Styles!Т_Позывные!Char.Color; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Prop>>>
+    Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Подразделение которое работает с радиостанцией"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: TheDoc!Prop.Units.Format; Prop.Unit.SortKey: 20; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
+    Prop.Call: "57"; Prop.Call.Prompt: "Позывной радиостанции"; Prop.Call.Label: "Позывной"; Prop.Call.Format: ""; Prop.Call.SortKey: 21; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель радиостанции"; Prop.Model.Label: "Модель радиостанции"; Prop.Model.Format: "Виола"; Prop.Model.SortKey: 30; Prop.Model.Type: 1; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.FIOWork: ""; Prop.FIOWork.Prompt: "Кто работает с радиостанцией"; Prop.FIOWork.Label: "ФИО работающего"; Prop.FIOWork.Format: ""; Prop.FIOWork.SortKey: 40; Prop.FIOWork.Type: 0; Prop.FIOWork.Invisible: FALSE; Prop.FIOWork.Verify: FALSE; Prop.FIOWork.LangID: 1049; 
+    Prop.CallShow: INDEX(0;Prop.CallShow.Format); Prop.CallShow.Prompt: "Показывать позывной"; Prop.CallShow.Label: "Показывать позывной"; Prop.CallShow.Format: "Да;Нет"; Prop.CallShow.SortKey: 50; Prop.CallShow.Type: 1; Prop.CallShow.Invisible: TRUE; Prop.CallShow.Verify: FALSE; Prop.CallShow.LangID: 1049; Prop.CallShow.Calendar: 0; 
+    Prop.ModelShow: INDEX(0;Prop.ModelShow.Format); Prop.ModelShow.Prompt: "Показывать модель"; Prop.ModelShow.Label: "Показывать модель"; Prop.ModelShow.Format: "Да;Нет"; Prop.ModelShow.SortKey: 51; Prop.ModelShow.Type: 1; Prop.ModelShow.Invisible: TRUE; Prop.ModelShow.Verify: FALSE; Prop.ModelShow.LangID: 1049; Prop.ModelShow.Calendar: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
+    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.IndexPers: 58; User.IndexPers.Prompt: "Носимая радиостанция"; 
+    User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
+    User.Version: 1; User.Version.Prompt: ""; 
+    User.ShapeColor3: FillBkgnd; User.ShapeColor3.Prompt: "Цвет подписи"; 
+    User.ShapeColor4: FillForegnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
+    User.TopLabel: IF(Actions.ModelShow.Checked;Prop.Model;""); User.TopLabel.Prompt: ""; 
+    User.BottomLabel: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";""); User.BottomLabel.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"Связь_и_освещение")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+  Section Object, row: visRowFill>>>
+    FillForegnd: Styles!С_РСт!FillForegnd; FillBkgnd: Styles!С_Подпись!Char.Color; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 0; DisplayMode: 0; IsDropTarget: FALSE; IsSnapTarget: FALSE; IsTextEditTarget: FALSE; DontMoveChildren: TRUE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "0"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: Styles!С_РСт!LineColor; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 1; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 8; _Unused78: 0; _Unused79: 0; Comment: "Подразделение: "&Prop.Unit&","&CHAR(13)&"Позывной: "&Prop.Call&IF(STRSAME(Prop.FIOWork;"");"";","&CHAR(13)&"Работающий: "&Prop.FIOWork); IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  Section Object, row: visRowXFormOut>>>
+    PinX: 612,5 мм; PinY: 1000 мм; Width: 1,225 м*Страница!User.GFS_Aspect; Height: 2 м*Страница!User.GFS_Aspect; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+
+=>sheet: Автомобильная радиостанция
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Layer>>>
+    Layers.Name: "Связь"; Layers.Password: ""; Layers.Color: 255; Layers.Status: 0; Layers.Visible: 1; Layers.Print: 1; Layers.Active: 0; Layers.Locked: 0; Layers.Snap: 1; Layers.Glue: 1; Layers.NameUniv: "Связь"; Layers.ColorTrans: 0%; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.GFS_Aspect: 1; User.GFS_Aspect.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 1,225 м; PageHeight: 2 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Носимая радиостанция
+  Section: Action>>>
+    Actions.MainManeure: "Маневр"; Actions.MainManeure._Unused1: ""; Actions.MainManeure._Unused2: ""; Actions.MainManeure.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.MainManeure.Checked";NOT(Actions.MainManeure.Checked)); Actions.MainManeure.Checked: 0; Actions.MainManeure.Disabled: 0; Actions.MainManeure.ReadOnly: FALSE; Actions.MainManeure.Invisible: FALSE; Actions.MainManeure.BeginGroup: FALSE; Actions.MainManeure.TagName: ""; Actions.MainManeure.ButtonFace: 92; Actions.MainManeure.SortKey: 1; 
+    Actions.ModelShow: "Показывать модель"; Actions.ModelShow._Unused1: ""; Actions.ModelShow._Unused2: ""; Actions.ModelShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.ModelShow.Checked";NOT(Actions.ModelShow.Checked)); Actions.ModelShow.Checked: 0; Actions.ModelShow.Disabled: 0; Actions.ModelShow.ReadOnly: FALSE; Actions.ModelShow.Invisible: FALSE; Actions.ModelShow.BeginGroup: TRUE; Actions.ModelShow.TagName: ""; Actions.ModelShow.ButtonFace: ""; Actions.ModelShow.SortKey: 10; 
+    Actions.UnitShow: "Показывать подразделение"; Actions.UnitShow._Unused1: ""; Actions.UnitShow._Unused2: ""; Actions.UnitShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.UnitShow.Checked";NOT(Actions.UnitShow.Checked)); Actions.UnitShow.Checked: 0; Actions.UnitShow.Disabled: 0; Actions.UnitShow.ReadOnly: FALSE; Actions.UnitShow.Invisible: FALSE; Actions.UnitShow.BeginGroup: TRUE; Actions.UnitShow.TagName: ""; Actions.UnitShow.ButtonFace: ""; Actions.UnitShow.SortKey: 20; 
+    Actions.CallShow: "Показывать позывной"; Actions.CallShow._Unused1: ""; Actions.CallShow._Unused2: ""; Actions.CallShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.CallShow.Checked";NOT(Actions.CallShow.Checked)); Actions.CallShow.Checked: 0; Actions.CallShow.Disabled: 0; Actions.CallShow.ReadOnly: FALSE; Actions.CallShow.Invisible: FALSE; Actions.CallShow.BeginGroup: FALSE; Actions.CallShow.TagName: ""; Actions.CallShow.ButtonFace: ""; Actions.CallShow.SortKey: 21; 
+  Section: Character>>>
+    Char.Font: 4; Char.Color: Styles!Т_Позывные!Char.Color; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Prop>>>
+    Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Подразделение которое работает с радиостанцией"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: TheDoc!Prop.Units.Format; Prop.Unit.SortKey: 20; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
+    Prop.Call: "51"; Prop.Call.Prompt: "Позывной радиостанции"; Prop.Call.Label: "Позывной"; Prop.Call.Format: ""; Prop.Call.SortKey: 21; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель радиостанции"; Prop.Model.Label: "Модель радиостанции"; Prop.Model.Format: "Виола"; Prop.Model.SortKey: 30; Prop.Model.Type: 1; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.FIOWork: ""; Prop.FIOWork.Prompt: "Кто работает с радиостанцией"; Prop.FIOWork.Label: "ФИО работающего"; Prop.FIOWork.Format: ""; Prop.FIOWork.SortKey: 40; Prop.FIOWork.Type: 0; Prop.FIOWork.Invisible: FALSE; Prop.FIOWork.Verify: FALSE; Prop.FIOWork.LangID: 1049; 
+    Prop.CallShow: INDEX(0;Prop.CallShow.Format); Prop.CallShow.Prompt: "Показывать позывной"; Prop.CallShow.Label: "Показывать позывной"; Prop.CallShow.Format: "Да;Нет"; Prop.CallShow.SortKey: "50"; Prop.CallShow.Type: 1; Prop.CallShow.Invisible: TRUE; Prop.CallShow.Verify: FALSE; Prop.CallShow.LangID: 1049; Prop.CallShow.Calendar: 0; 
+    Prop.ModelShow: INDEX(0;Prop.ModelShow.Format); Prop.ModelShow.Prompt: "Показывать модель"; Prop.ModelShow.Label: "Показывать модель"; Prop.ModelShow.Format: "Да;Нет"; Prop.ModelShow.SortKey: "51"; Prop.ModelShow.Type: 1; Prop.ModelShow.Invisible: TRUE; Prop.ModelShow.Verify: FALSE; Prop.ModelShow.LangID: 1049; Prop.ModelShow.Calendar: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
+    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.IndexPers: 59; User.IndexPers.Prompt: "Автомобильная радиостанция"; 
+    User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
+    User.Version: 1; User.Version.Prompt: ""; 
+    User.ShapeColor3: FillBkgnd; User.ShapeColor3.Prompt: "Цвет подписи"; 
+    User.ShapeColor4: FillForegnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
+    User.TopLabel: IF(Actions.ModelShow.Checked;Prop.Model;""); User.TopLabel.Prompt: ""; 
+    User.BottomLabel: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";""); User.BottomLabel.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"Связь_и_освещение")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+  Section Object, row: visRowFill>>>
+    FillForegnd: Styles!С_РСт!FillForegnd; FillBkgnd: Styles!С_Подпись!Char.Color; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 0; DisplayMode: 0; IsDropTarget: FALSE; IsSnapTarget: FALSE; IsTextEditTarget: FALSE; DontMoveChildren: TRUE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "0"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: Styles!С_РСт!LineColor; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 1; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 8; _Unused78: 0; _Unused79: 0; Comment: "Подразделение: "&Prop.Unit&","&CHAR(13)&"Позывной: "&Prop.Call&IF(STRSAME(Prop.FIOWork;"");"";","&CHAR(13)&"Работающий: "&Prop.FIOWork); IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  Section Object, row: visRowXFormOut>>>
+    PinX: 612,5 мм; PinY: 1000 мм; Width: 1,225 м*Страница!User.GFS_Aspect; Height: 2 м*Страница!User.GFS_Aspect; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+
+=>sheet: Стационарная радиостанция
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Layer>>>
+    Layers.Name: "Связь"; Layers.Password: ""; Layers.Color: 255; Layers.Status: 0; Layers.Visible: 1; Layers.Print: 1; Layers.Active: 0; Layers.Locked: 0; Layers.Snap: 1; Layers.Glue: 1; Layers.NameUniv: "Связь"; Layers.ColorTrans: 0%; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.GFS_Aspect: 1; User.GFS_Aspect.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 1,225 м; PageHeight: 2 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Автомобильная радиостанция.90
+  Section: Action>>>
+    Actions.MainManeure: "Маневр"; Actions.MainManeure._Unused1: ""; Actions.MainManeure._Unused2: ""; Actions.MainManeure.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.MainManeure.Checked";NOT(Actions.MainManeure.Checked)); Actions.MainManeure.Checked: 0; Actions.MainManeure.Disabled: 0; Actions.MainManeure.ReadOnly: FALSE; Actions.MainManeure.Invisible: FALSE; Actions.MainManeure.BeginGroup: FALSE; Actions.MainManeure.TagName: ""; Actions.MainManeure.ButtonFace: 92; Actions.MainManeure.SortKey: 1; 
+    Actions.ModelShow: "Показывать модель"; Actions.ModelShow._Unused1: ""; Actions.ModelShow._Unused2: ""; Actions.ModelShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.ModelShow.Checked";NOT(Actions.ModelShow.Checked)); Actions.ModelShow.Checked: 0; Actions.ModelShow.Disabled: 0; Actions.ModelShow.ReadOnly: FALSE; Actions.ModelShow.Invisible: FALSE; Actions.ModelShow.BeginGroup: TRUE; Actions.ModelShow.TagName: ""; Actions.ModelShow.ButtonFace: ""; Actions.ModelShow.SortKey: 10; 
+    Actions.UnitShow: "Показывать подразделение"; Actions.UnitShow._Unused1: ""; Actions.UnitShow._Unused2: ""; Actions.UnitShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.UnitShow.Checked";NOT(Actions.UnitShow.Checked)); Actions.UnitShow.Checked: 0; Actions.UnitShow.Disabled: 0; Actions.UnitShow.ReadOnly: FALSE; Actions.UnitShow.Invisible: FALSE; Actions.UnitShow.BeginGroup: TRUE; Actions.UnitShow.TagName: ""; Actions.UnitShow.ButtonFace: ""; Actions.UnitShow.SortKey: 20; 
+    Actions.CallShow: "Показывать позывной"; Actions.CallShow._Unused1: ""; Actions.CallShow._Unused2: ""; Actions.CallShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.CallShow.Checked";NOT(Actions.CallShow.Checked)); Actions.CallShow.Checked: 0; Actions.CallShow.Disabled: 0; Actions.CallShow.ReadOnly: FALSE; Actions.CallShow.Invisible: FALSE; Actions.CallShow.BeginGroup: FALSE; Actions.CallShow.TagName: ""; Actions.CallShow.ButtonFace: ""; Actions.CallShow.SortKey: 21; 
+  Section: Character>>>
+    Char.Font: 4; Char.Color: Styles!Т_Позывные!Char.Color; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Prop>>>
+    Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Подразделение которое работает с радиостанцией"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: TheDoc!Prop.Units.Format; Prop.Unit.SortKey: 20; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
+    Prop.Call: "Сибирь"; Prop.Call.Prompt: "Позывной радиостанции"; Prop.Call.Label: "Позывной"; Prop.Call.Format: ""; Prop.Call.SortKey: 21; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель радиостанции"; Prop.Model.Label: "Модель радиостанции"; Prop.Model.Format: "Виола-С"; Prop.Model.SortKey: 30; Prop.Model.Type: 1; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.FIOWork: ""; Prop.FIOWork.Prompt: "Кто работает с радиостанцией"; Prop.FIOWork.Label: "ФИО работающего"; Prop.FIOWork.Format: ""; Prop.FIOWork.SortKey: 40; Prop.FIOWork.Type: 0; Prop.FIOWork.Invisible: FALSE; Prop.FIOWork.Verify: FALSE; Prop.FIOWork.LangID: 1049; 
+    Prop.CallShow: INDEX(0;Prop.CallShow.Format); Prop.CallShow.Prompt: "Показывать позывной"; Prop.CallShow.Label: "Показывать позывной"; Prop.CallShow.Format: "Да;Нет"; Prop.CallShow.SortKey: 50; Prop.CallShow.Type: 1; Prop.CallShow.Invisible: TRUE; Prop.CallShow.Verify: FALSE; Prop.CallShow.LangID: 1049; Prop.CallShow.Calendar: 0; 
+    Prop.ModelShow: INDEX(0;Prop.ModelShow.Format); Prop.ModelShow.Prompt: "Показывать модель"; Prop.ModelShow.Label: "Показывать модель"; Prop.ModelShow.Format: "Да;Нет"; Prop.ModelShow.SortKey: 51; Prop.ModelShow.Type: 1; Prop.ModelShow.Invisible: TRUE; Prop.ModelShow.Verify: FALSE; Prop.ModelShow.LangID: 1049; Prop.ModelShow.Calendar: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
+    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.IndexPers: 23; User.IndexPers.Prompt: "Стационарная радиостанция"; 
+    User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
+    User.Version: 1; User.Version.Prompt: ""; 
+    User.ShapeColor3: FillBkgnd; User.ShapeColor3.Prompt: "Цвет подписи"; 
+    User.ShapeColor4: FillForegnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
+    User.TopLabel: IF(Actions.ModelShow.Checked;Prop.Model;""); User.TopLabel.Prompt: ""; 
+    User.BottomLabel: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";""); User.BottomLabel.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"Связь_и_освещение")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+  Section Object, row: visRowFill>>>
+    FillForegnd: Styles!С_РСт!FillForegnd; FillBkgnd: Styles!С_Подпись!Char.Color; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 0; DisplayMode: 0; IsDropTarget: FALSE; IsSnapTarget: FALSE; IsTextEditTarget: FALSE; DontMoveChildren: TRUE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "0"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: Styles!С_РСт!LineColor; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 1; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 8; _Unused78: 0; _Unused79: 0; Comment: "Подразделение: "&Prop.Unit&","&CHAR(13)&"Позывной: "&Prop.Call&IF(STRSAME(Prop.FIOWork;"");"";","&CHAR(13)&"Работающий: "&Prop.FIOWork); IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  Section Object, row: visRowXFormOut>>>
+    PinX: 612,5 мм; PinY: 1000 мм; Width: 1,225 м*Страница!User.GFS_Aspect; Height: 2 м*Страница!User.GFS_Aspect; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+
+=>sheet: Громкоговоритель
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Layer>>>
+    Layers.Name: "Связь"; Layers.Password: ""; Layers.Color: 255; Layers.Status: 0; Layers.Visible: 1; Layers.Print: 1; Layers.Active: 0; Layers.Locked: 0; Layers.Snap: 1; Layers.Glue: 1; Layers.NameUniv: "Связь"; Layers.ColorTrans: 0%; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.GFS_Aspect: 1; User.GFS_Aspect.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 1,8 м; PageHeight: 2,5 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Sheet.5
+  Section: Action>>>
+    Actions.MainManeure: "Маневр"; Actions.MainManeure._Unused1: ""; Actions.MainManeure._Unused2: ""; Actions.MainManeure.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.MainManeure.Checked";NOT(Actions.MainManeure.Checked)); Actions.MainManeure.Checked: 0; Actions.MainManeure.Disabled: 0; Actions.MainManeure.ReadOnly: FALSE; Actions.MainManeure.Invisible: FALSE; Actions.MainManeure.BeginGroup: FALSE; Actions.MainManeure.TagName: ""; Actions.MainManeure.ButtonFace: 92; Actions.MainManeure.SortKey: 1; 
+    Actions.SpikerTypeShow: "Показывать модель"; Actions.SpikerTypeShow._Unused1: ""; Actions.SpikerTypeShow._Unused2: ""; Actions.SpikerTypeShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.SpikerTypeShow.Checked";NOT(Actions.SpikerTypeShow.Checked)); Actions.SpikerTypeShow.Checked: 1; Actions.SpikerTypeShow.Disabled: 0; Actions.SpikerTypeShow.ReadOnly: FALSE; Actions.SpikerTypeShow.Invisible: FALSE; Actions.SpikerTypeShow.BeginGroup: TRUE; Actions.SpikerTypeShow.TagName: ""; Actions.SpikerTypeShow.ButtonFace: ""; Actions.SpikerTypeShow.SortKey: 10; 
+  Section: Character>>>
+    Char.Font: 4; Char.Color: Styles!С_Подпись!Char.Color; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Prop>>>
+    Prop.SpikerType: "ГГ-10"; Prop.SpikerType.Prompt: "Тип громкоговорителя"; Prop.SpikerType.Label: "Тип громкоговорителя"; Prop.SpikerType.Format: ""; Prop.SpikerType.SortKey: 20; Prop.SpikerType.Type: 0; Prop.SpikerType.Invisible: FALSE; Prop.SpikerType.Verify: FALSE; Prop.SpikerType.LangID: 1049; 
+    Prop.Situated: "0"; Prop.Situated.Prompt: "Расположение громкоговорителя"; Prop.Situated.Label: "Расположение"; Prop.Situated.Format: ""; Prop.Situated.SortKey: "21"; Prop.Situated.Type: 0; Prop.Situated.Invisible: FALSE; Prop.Situated.Verify: FALSE; Prop.Situated.LangID: 1049; Prop.Situated.Calendar: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.IndexPers: 60; User.IndexPers.Prompt: "Громкоговоритель"; 
+    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет контура"; 
+    User.Version: 1; User.Version.Prompt: ""; 
+    User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
+    User.ShapeColor3: FillForegnd; User.ShapeColor3.Prompt: "Цвет заливки"; 
+    User.TopLabel: IF(Actions.SpikerTypeShow.Checked;Prop.SpikerType;""); User.TopLabel.Prompt: ""; 
+    User.ShapeColor4: 1; User.ShapeColor4.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    EventDblClick: 0; EventDrop: DOCMD(1312)+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+  Section Object, row: visRowFill>>>
+    FillForegnd: THEMEGUARD(RGB(0;0;0)); FillBkgnd: THEMEGUARD(SHADE(FillForegnd;LUMDIFF(THEME("FillColor");THEME("FillColor2")))); FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 0; DisplayMode: 0; IsDropTarget: FALSE; IsSnapTarget: FALSE; IsTextEditTarget: FALSE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "0"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: Styles!С_Телф!LineColor; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 1; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: "Громкоговоритель"; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  Section Object, row: visRowXFormOut>>>
+    PinX: 900 мм; PinY: 1250 мм; Width: 1,8 м*Страница!User.GFS_Aspect; Height: 2,5 м*Страница!User.GFS_Aspect; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+
+=>sheet: Телефонный аппарат
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Layer>>>
+    Layers.Name: "Связь"; Layers.Password: ""; Layers.Color: 255; Layers.Status: 0; Layers.Visible: 1; Layers.Print: 1; Layers.Active: 0; Layers.Locked: 0; Layers.Snap: 1; Layers.Glue: 1; Layers.NameUniv: "Связь"; Layers.ColorTrans: 0%; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.GFS_Aspect: 1; User.GFS_Aspect.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 2,5 м; PageHeight: 3,5 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Sheet.5
+  Section: Action>>>
+    Actions.PhoneTypeShow: "Показывать тип телефона"; Actions.PhoneTypeShow._Unused1: ""; Actions.PhoneTypeShow._Unused2: ""; Actions.PhoneTypeShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.PhoneTypeShow.Checked";NOT(Actions.PhoneTypeShow.Checked)); Actions.PhoneTypeShow.Checked: 1; Actions.PhoneTypeShow.Disabled: 0; Actions.PhoneTypeShow.ReadOnly: FALSE; Actions.PhoneTypeShow.Invisible: FALSE; Actions.PhoneTypeShow.BeginGroup: TRUE; Actions.PhoneTypeShow.TagName: ""; Actions.PhoneTypeShow.ButtonFace: ""; Actions.PhoneTypeShow.SortKey: 10; 
+    Actions.PhoneNumberShow: "Показывать номер телефона"; Actions.PhoneNumberShow._Unused1: ""; Actions.PhoneNumberShow._Unused2: ""; Actions.PhoneNumberShow.Action: CALLTHIS("SetCheckForAll";"Связь_и_освещение";"Actions.PhoneNumberShow.Checked";NOT(Actions.PhoneNumberShow.Checked)); Actions.PhoneNumberShow.Checked: 1; Actions.PhoneNumberShow.Disabled: 0; Actions.PhoneNumberShow.ReadOnly: FALSE; Actions.PhoneNumberShow.Invisible: FALSE; Actions.PhoneNumberShow.BeginGroup: FALSE; Actions.PhoneNumberShow.TagName: ""; Actions.PhoneNumberShow.ButtonFace: ""; Actions.PhoneNumberShow.SortKey: 11; 
+  Section: Character>>>
+    Char.Font: 4; Char.Color: Styles!С_Подпись!Char.Color; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Prop>>>
+    Prop.PhoneType: "Sony"; Prop.PhoneType.Prompt: "Тип телефонного аппарата"; Prop.PhoneType.Label: "Тип аппарата"; Prop.PhoneType.Format: ""; Prop.PhoneType.SortKey: 20; Prop.PhoneType.Type: 0; Prop.PhoneType.Invisible: FALSE; Prop.PhoneType.Verify: FALSE; Prop.PhoneType.LangID: 1049; 
+    Prop.PhoneNumber: "012-34-56"; Prop.PhoneNumber.Prompt: "Номер телефонного аппарат"; Prop.PhoneNumber.Label: "Номер"; Prop.PhoneNumber.Format: ""; Prop.PhoneNumber.SortKey: 30; Prop.PhoneNumber.Type: 0; Prop.PhoneNumber.Invisible: FALSE; Prop.PhoneNumber.Verify: FALSE; Prop.PhoneNumber.LangID: 1049; 
+    Prop.Situated: ""; Prop.Situated.Prompt: "Место установки"; Prop.Situated.Label: "Расположение"; Prop.Situated.Format: ""; Prop.Situated.SortKey: 31; Prop.Situated.Type: 0; Prop.Situated.Invisible: FALSE; Prop.Situated.Verify: FALSE; Prop.Situated.LangID: 1049; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.IndexPers: 61; User.IndexPers.Prompt: "Телефонный аппарат"; 
+    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет контура"; 
+    User.Version: 1; User.Version.Prompt: ""; 
+    User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
+    User.ShapeColor3: FillBkgnd; User.ShapeColor3.Prompt: "Цвет номера"; 
+    User.ShapeColor4: FillForegnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
+    User.TopLabel: IF(Actions.PhoneTypeShow.Checked;Prop.PhoneType;""); User.TopLabel.Prompt: ""; 
+    User.BottomLabel: IF(Actions.PhoneNumberShow.Checked;Prop.PhoneNumber;""); User.BottomLabel.Prompt: ""; 
+  Section Object, row: visRowEvent>>>
+    EventDblClick: 0; EventDrop: DOCMD(1312)+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+  Section Object, row: visRowFill>>>
+    FillForegnd: Styles!С_Телф!FillForegnd; FillBkgnd: Styles!С_ТлфПодп!Char.Color; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 0; DisplayMode: 0; IsDropTarget: FALSE; IsSnapTarget: FALSE; IsTextEditTarget: FALSE; DontMoveChildren: TRUE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "0"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: Styles!С_Телф!LineColor; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 1; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: "Телефонный аппарат"&IF(STRSAME(Prop.Situated;"");"";", "&CHAR(13)&"Расположение: "&Prop.Situated); IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 2,5 мм; LineToNodeY: 2,5 мм; BlockSizeX: 5 мм; BlockSizeY: 5 мм; AvenueSizeX: 7,5 мм; AvenueSizeY: 7,5 мм; LineToLineX: 2,5 мм; LineToLineY: 2,5 мм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  Section Object, row: visRowXFormOut>>>
+    PinX: 1250 мм; PinY: 1750 мм; Width: 2,5 м*Страница!User.GFS_Aspect; Height: 3,5 м*Страница!User.GFS_Aspect; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+
+=>sheet: Нет стиля
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Только текст
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 0; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 0; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 0; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Нет
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 0; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 0; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Обычный
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Образец
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 4; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 9 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 0; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0 пт; LineColor: 4; LinePattern: 23; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 0 пт; BottomMargin: 0 пт; VerticalAlign: 2; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: С_Подпись
+  Section: Character>>>
+    Char.Font: 4; Char.Color: "RGB(0; 0; 0)"; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: "100,0000%"; Char._Unused6: 0; Char.Size: "12,0000 пт"; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: "0,0000 пт"; Char.ColorTrans: "0,0000%"; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: С_Прож
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: "1"; FillBkgnd: "0"; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: "0,0000%"; FillBkgndTrans: "0,0000%"; ShdwForegndTrans: "0,0000%"; ShdwBkgndTrans: "0,0000%"; ShapeShdwType: 0; ShapeShdwOffsetX: "0,0000 мм"; ShapeShdwOffsetY: "0,0000 мм"; ShapeShdwObliqueAngle: "0,0000 град"; ShapeShdwScaleFactor: "100,0000%"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: "RGB(0; 0; 0)"; LinePattern: 1; Rounding: "0,0000 м"; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: "0,0000%"; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: С_РСт
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: "RGB(255; 255; 255)"; FillBkgnd: "15"; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: "0,0000%"; FillBkgndTrans: "0,0000%"; ShdwForegndTrans: "0,0000%"; ShdwBkgndTrans: "0,0000%"; ShapeShdwType: 0; ShapeShdwOffsetX: "0,0000 мм"; ShapeShdwOffsetY: "0,0000 мм"; ShapeShdwObliqueAngle: "0,0000 град"; ShapeShdwScaleFactor: "100,0000%"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: "RGB(0; 0; 0)"; LinePattern: 1; Rounding: "0,0000 м"; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: "0,0000%"; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: С_Телф
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: "1"; FillBkgnd: "0"; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: "0,0000%"; FillBkgndTrans: "0,0000%"; ShdwForegndTrans: "0,0000%"; ShdwBkgndTrans: "0,0000%"; ShapeShdwType: 0; ShapeShdwOffsetX: "0,0000 мм"; ShapeShdwOffsetY: "0,0000 мм"; ShapeShdwObliqueAngle: "0,0000 град"; ShapeShdwScaleFactor: "100,0000%"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: "RGB(0; 0; 0)"; LinePattern: 1; Rounding: "0,0000 м"; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: "0,0000%"; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: С_ТлфПодп
+  Section: Character>>>
+    Char.Font: 4; Char.Color: "RGB(0; 0; 0)"; Char.Style: 34; Char.Case: 0; Char.Pos: 0; Char.FontScale: "100,0000%"; Char._Unused6: 0; Char.Size: "12,0000 пт"; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: "0,0000 пт"; Char.ColorTrans: "0,0000%"; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Т_Позывные
+  Section: Character>>>
+    Char.Font: 4; Char.Color: "RGB(128; 128; 128)"; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: "100,0000%"; Char._Unused6: 0; Char.Size: "12,0000 пт"; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: "0,0000 пт"; Char.ColorTrans: "0,0000%"; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 мм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
