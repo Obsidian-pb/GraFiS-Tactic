@@ -204,6 +204,15 @@ On Error GoTo EX
             '---Указываем, что к фигуре подсоединены рукава на вход
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 1
             End If
+            
+                        '---Дополнение для водосборника:
+            If vi_IPInShape = 105 Then
+            '---Указываем, что к фигуре подсоединены рукава на вход
+            cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 1
+            '---Указываем какие рукава присоеденены к ВС
+            cpO_InShape.Cells("Scratch.B" & CStr(ai_InRowNumber + 1)).Formula = "Sheet." & cpO_OutShape.ID & "!Prop.HoseDiameter"
+            End If
+            
             '---Привязываем маневренность линии к маневренности ствола
             If cpO_InShape.CellExists("Actions.MainManeure", 0) = True Then
                 cpO_OutShape.Cells("Prop.ManeverHose").Formula = "INDEX(Sheet." & cpO_InShape.ID _
@@ -217,6 +226,11 @@ On Error GoTo EX
             cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 5).Formula = _
                 "Sheet." & cpO_InShape.ID & "!Scratch.D1"
             cpO_InShape.Cells("User.FlowFromShape").Formula = """" & CStr(cpO_OutShape.NameU) & """"
+        
+              '---Дополнение для водосборника:
+            If vi_IPOutShape = 105 Then
+            cpO_OutShape.Cells("Scratch.B1").Formula = "Sheet." & cpO_InShape.ID & "!Prop.HoseDiameter"
+            End If
         End If
     '---Рукав->Рукав
         If vb_OutShapeType = vb_ShapeType_Hose And vb_InShapeType = vb_ShapeType_Hose Then
@@ -442,6 +456,13 @@ On Error GoTo EX
             '---Указываем, что от фигуры отсоединяются рукава на вход
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
             End If
+            '---Дополнение для водосборника:
+            If vi_IPInShape = 105 Then
+            '---оtсоединены рукава
+            cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
+            '---обнуление диаметров рукавов
+            cpO_InShape.Cells("Scratch.B" & CStr(ai_InRowNumber + 1)).Formula = ""
+            End If
             '---Привязываем маневренность линии к маневренности ствола
 '            If cpO_InShape.CellExists("Actions.MainManeure", 0) = True Then
                 cpO_OutShape.Cells("Prop.ManeverHose").FormulaU = "Index(0, Prop.ManeverHose.Format)"
@@ -452,6 +473,10 @@ On Error GoTo EX
             cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 4).Formula = 0
             cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 5).Formula = 0
             cpO_InShape.Cells("User.FlowFromShape").Formula = ""
+            '---Дополнение для водосборника:
+                        If vi_IPOutShape = 105 Then
+            cpO_OutShape.Cells("Scratch.B1").Formula = ""
+            End If
         End If
     '---Рукав->Рукав
         If vb_OutShapeType = vb_ShapeType_Hose And vb_InShapeType = vb_ShapeType_Hose Then
@@ -582,7 +607,7 @@ End Function
 '----------------------------------------Служебные Функции-----------------------------------------------
 Private Function f_IdentShape(ByVal ai_ShapeIP As Integer) As Integer
 'Функция идентифициурет фигуру и возвращает значение её типа
-Dim Arr_PTVs(27, 1) As Integer
+Dim Arr_PTVs(28, 1) As Integer
 Dim i As Integer
 
 '---Указываем значения IndexPers и соответствующие им определения
@@ -642,6 +667,8 @@ Dim i As Integer
         Arr_PTVs(26, 1) = vb_ShapeType_Tech  'Как ни странно, но так лучше
     Arr_PTVs(27, 0) = 22 'Гребенка пеногенераторов
         Arr_PTVs(27, 1) = vb_ShapeType_PTV
+    Arr_PTVs(28, 0) = 105 'Водосборник
+        Arr_PTVs(28, 1) = vb_ShapeType_Razv
         
         
         
@@ -649,7 +676,7 @@ Dim i As Integer
     f_IdentShape = vb_ShapeType_Other
 
 '---Проверяем является ли фигура
-        For i = 0 To 27
+        For i = 0 To 28
             If ai_ShapeIP = Arr_PTVs(i, 0) Then f_IdentShape = Arr_PTVs(i, 1): Exit Function
         Next i
 

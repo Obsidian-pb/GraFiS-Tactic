@@ -41,6 +41,7 @@ Public Hose150NV_Count As Integer
 Public Hose200NV_Count As Integer
 
 Public Razv_Count As Integer
+Public VS_Count As Integer
 Public GE_Count As Integer
 Public PS_Count As Integer
 Public VsasSetc_Count As Integer
@@ -172,6 +173,7 @@ Dim totalStr As String
 '    If StvGPS_Count > 0 Then totalStr = totalStr & "Пенных стволов стволов - " & StvGPS_Count & Chr(10)
     
     If Razv_Count > 0 Then totalStr = totalStr & "Разветвлений - " & Razv_Count & Chr(10)
+    If VS_Count > 0 Then totalStr = totalStr & "Водосборников - " & VS_Count & Chr(10)
     If GE_Count > 0 Then totalStr = totalStr & "Гидроэлеваторов - " & GE_Count & Chr(10)
     If PS_Count > 0 Then totalStr = totalStr & "Пеносмесителей - " & PS_Count & Chr(10)
     If VsasSetc_Count > 0 Then totalStr = totalStr & "Всасывающих сеток - " & VsasSetc_Count & Chr(10)
@@ -216,6 +218,7 @@ Public Sub ClearVaraibles()
      Hose200NV_Count = 0
     
      Razv_Count = 0
+     VS_Count = 0
      GE_Count = 0
      PS_Count = 0
      VsasSetc_Count = 0
@@ -273,31 +276,50 @@ Dim vsi_ShapeIndex As Integer
                         Case Is = 1 'Автоцистерны
                             PA_Count = PA_Count + 1
                             WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                         Case Is = 2 'АНР
                             PA_Count = PA_Count + 1
                             WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                         Case Is = 8 'ПНС
                             PA_Count = PA_Count + 1
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                         Case Is = 9 'AA
                             PA_Count = PA_Count + 1
                             WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                         Case Is = 10 'АВ
                             PA_Count = PA_Count + 1
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                         Case Is = 11 'АКТ
                             PA_Count = PA_Count + 1
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                         Case Is = 13 'АГВТ
                             PA_Count = PA_Count + 1
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 2 'Засчитываем водосборник на а/м
                         Case Is = 20 'АР
                             PA_Count = PA_Count + 1
                         Case Is = 161 'АЦЛ
                             PA_Count = PA_Count + 1
                             WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                         Case Is = 162 'АЦКП
                             PA_Count = PA_Count + 1
                             WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                         Case Is = 163 'АПП
                             PA_Count = PA_Count + 1
                             WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
+                            If vsO_Shape.Cells("Actions.WaterCollect.Checked") Then VS_Count = VS_Count + 1 'Засчитываем водосборник на а/м
                     
                     '---Прочая пожарная техника----------
                         Case Is = 24 'Поезда
@@ -330,6 +352,8 @@ Dim vsi_ShapeIndex As Integer
                             PodOut = PodOut + vsO_Shape.Cells("User.PodOut").Result(visNumber)
                         Case Is = 42 'Разветвление
                             Razv_Count = Razv_Count + 1
+                        Case Is = 105 'Vodosbornik
+                            VS_Count = VS_Count + 1
                         Case Is = 45 'Пеноподъемник
                         Case Is = 22 'Гребенка
     
