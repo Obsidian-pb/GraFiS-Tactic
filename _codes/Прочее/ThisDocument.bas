@@ -27,3 +27,5 @@ Tail:
     SaveLog Err, "Document_DocumentOpened"
     MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком."
 End Sub
+
+
