@@ -229,7 +229,8 @@ On Error GoTo EX
         
               '---Дополнение для водосборника:
             If vi_IPOutShape = 105 Then
-            cpO_OutShape.Cells("Scratch.B1").Formula = "Sheet." & cpO_InShape.ID & "!Prop.HoseDiameter"
+            cpO_OutShape.Cells("Scratch.B" & CStr(ai_OutRowNumber + 1)).Formula = "Sheet." & cpO_InShape.ID & "!Prop.HoseDiameter"
+            cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).Formula = 1
             End If
         End If
     '---Рукав->Рукав
@@ -475,7 +476,8 @@ On Error GoTo EX
             cpO_InShape.Cells("User.FlowFromShape").Formula = ""
             '---Дополнение для водосборника:
                         If vi_IPOutShape = 105 Then
-            cpO_OutShape.Cells("Scratch.B1").Formula = ""
+            cpO_OutShape.Cells("Scratch.B" & CStr(ai_OutRowNumber + 1)).Formula = ""
+            cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).Formula = 0
             End If
         End If
     '---Рукав->Рукав
