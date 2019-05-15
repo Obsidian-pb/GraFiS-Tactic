@@ -105,3 +105,29 @@ On Error Resume Next
 
 Set OtherShape = Nothing
 End Sub
+'Процедура маняет направление потока в водосборнике
+Public Sub DirectVS(shp As Visio.Shape, AsRazv As Boolean)
+  If AsRazv Then ' Сборник
+     shp.Cells("Connections.GFS_In").RowNameU = "GFS_Out"
+     shp.Cells("Connections.GFS_Out1").RowNameU = "GFS_In1"
+     shp.Cells("Connections.GFS_Out2").RowNameU = "GFS_In2"
+     shp.Cells("Scratch.C1").FormulaU = 0
+     shp.Cells("Scratch.D1").FormulaU = 0
+     shp.Cells("Scratch.C2").FormulaU = "Scratch.C1+Prop.HeadLost"
+     shp.Cells("Scratch.D2").FormulaU = "Scratch.D1/(Scratch.A3+Scratch.A2)"
+     shp.Cells("Scratch.C3").FormulaU = "Scratch.C1+Prop.HeadLost"
+     shp.Cells("Scratch.D3").FormulaU = "Scratch.D1/(Scratch.A3+Scratch.A2)"
+  Else           ' Разветвитель
+     shp.Cells("Connections.GFS_Out").RowNameU = "GFS_In"
+     shp.Cells("Connections.GFS_In1").RowNameU = "GFS_Out1"
+     shp.Cells("Connections.GFS_In2").RowNameU = "GFS_Out2"
+     shp.Cells("Scratch.C1").FormulaU = "MAX(Scratch.C2,Scratch.C3)+Prop.HeadLost"
+     shp.Cells("Scratch.D1").FormulaU = "Scratch.D2+Scratch.D3"
+     shp.Cells("Scratch.C2").FormulaU = 0
+     shp.Cells("Scratch.D2").FormulaU = 0
+     shp.Cells("Scratch.C3").FormulaU = 0
+     shp.Cells("Scratch.D3").FormulaU = 0
+  End If
+  
+End Sub
+
