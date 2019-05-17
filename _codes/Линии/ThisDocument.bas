@@ -86,6 +86,10 @@ End Sub
 Private Sub LineAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
+Dim shp As Visio.Shape
+Dim con As Visio.Connect
+Dim shp2 As Visio.Shape
+Dim con2 As Visio.Connect
 '---Проверяем имя ячейки
     
     If cell.Name = "Prop.HoseMaterial" Or cell.Name = "Prop.HoseDiameter" Then
@@ -100,10 +104,22 @@ Dim ShpInd As Integer
         HoseWeightValueImport (ShpInd)
     End If
     
+    'Если изменена ячейка фигуры "Водосборник"
+    If cell.Name = "Actions.UseAsRazv.Checked" Then
+        '---Запускаем процедуру обновления рукавных соединений для Водосборника
+        
+        Set shp = cell.Shape
+        
+        For Each con In shp.FromConnects
+            Set shp2 = con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
+            For Each con2 In shp2.Connects
+                Debug.Print con2.ToSheet.Name & " => " & con2.FromSheet.Name
+                C_ConnectionsTrace.Ps_ConnectionAdd con2
+            Next con2
+        Next con
+    End If
     
-    
-'MsgBox Cell.Shape.Index
-'MsgBox Cell.Shape.ID
+
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
 End Sub

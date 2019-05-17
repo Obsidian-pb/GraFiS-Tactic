@@ -133,5 +133,3 @@ Dim vO_Style As Visio.style
     Next vO_Style
 
 End Function
-
-

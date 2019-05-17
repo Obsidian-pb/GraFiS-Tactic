@@ -97,28 +97,30 @@ On Error GoTo EndSub
 
 '---Идентифицируем подающую и принимающую фигуры - при соединении рукавов и ПТВ!!!
     '---Для From фигуры
+    Debug.Print aO_Conn.FromCell.Name
+    Debug.Print aO_Conn.ToSheet.Name & " => " & aO_Conn.FromSheet.Name
     If Left(aO_Conn.FromCell.Name, 18) = ccs_InIdent Then
         Set cpO_InShape = aO_Conn.FromSheet
         Set cpO_OutShape = aO_Conn.ToSheet
-        vi_InRowNumber = aO_Conn.FromCell.row
-        vi_OutRowNumber = aO_Conn.ToCell.row
+        vi_InRowNumber = aO_Conn.FromCell.Row
+        vi_OutRowNumber = aO_Conn.ToCell.Row
     ElseIf Left(aO_Conn.FromCell.Name, 18) = ccs_OutIdent Then
         Set cpO_InShape = aO_Conn.ToSheet
         Set cpO_OutShape = aO_Conn.FromSheet
-        vi_InRowNumber = aO_Conn.ToCell.row
-        vi_OutRowNumber = aO_Conn.FromCell.row
+        vi_InRowNumber = aO_Conn.ToCell.Row
+        vi_OutRowNumber = aO_Conn.FromCell.Row
     End If
     '---Для То фигуры
     If Left(aO_Conn.ToCell.Name, 18) = ccs_InIdent Then
         Set cpO_InShape = aO_Conn.ToSheet
         Set cpO_OutShape = aO_Conn.FromSheet
-        vi_InRowNumber = aO_Conn.ToCell.row
-        vi_OutRowNumber = aO_Conn.FromCell.row
+        vi_InRowNumber = aO_Conn.ToCell.Row
+        vi_OutRowNumber = aO_Conn.FromCell.Row
     ElseIf Left(aO_Conn.ToCell.Name, 18) = ccs_OutIdent Then
         Set cpO_InShape = aO_Conn.FromSheet
         Set cpO_OutShape = aO_Conn.ToSheet
-        vi_InRowNumber = aO_Conn.FromCell.row
-        vi_OutRowNumber = aO_Conn.ToCell.row
+        vi_InRowNumber = aO_Conn.FromCell.Row
+        vi_OutRowNumber = aO_Conn.ToCell.Row
     End If
     '---В случае, если обе фигуры - рукава
     If vO_FromShape.Cells("User.IndexPers") = 100 And _
@@ -127,20 +129,20 @@ On Error GoTo EndSub
         If aO_Conn.ToSheet.Cells("Scratch.D1") > aO_Conn.FromSheet.Cells("Scratch.D1") Then
             Set cpO_InShape = aO_Conn.ToSheet
             Set cpO_OutShape = aO_Conn.FromSheet
-            vi_InRowNumber = aO_Conn.ToCell.row
-            vi_OutRowNumber = aO_Conn.FromCell.row
+            vi_InRowNumber = aO_Conn.ToCell.Row
+            vi_OutRowNumber = aO_Conn.FromCell.Row
         Else
             '---Проверяем у какой фигуры рукава ID выше (вброшена позже)
             If aO_Conn.ToSheet.ID > aO_Conn.FromSheet.ID Then
                 Set cpO_InShape = aO_Conn.ToSheet
                 Set cpO_OutShape = aO_Conn.FromSheet
-                vi_InRowNumber = aO_Conn.ToCell.row
-                vi_OutRowNumber = aO_Conn.FromCell.row
+                vi_InRowNumber = aO_Conn.ToCell.Row
+                vi_OutRowNumber = aO_Conn.FromCell.Row
             Else
                 Set cpO_InShape = aO_Conn.FromSheet
                 Set cpO_OutShape = aO_Conn.ToSheet
-                vi_InRowNumber = aO_Conn.FromCell.row
-                vi_OutRowNumber = aO_Conn.ToCell.row
+                vi_InRowNumber = aO_Conn.FromCell.Row
+                vi_OutRowNumber = aO_Conn.ToCell.Row
             End If
         End If
     End If
@@ -365,25 +367,25 @@ On Error GoTo EX
     If Left(aO_Conn.FromCell.Name, 18) = ccs_InIdent Then
         Set cpO_InShape = aO_Conn.FromSheet
         Set cpO_OutShape = aO_Conn.ToSheet
-        vi_InRowNumber = aO_Conn.FromCell.row
-        vi_OutRowNumber = aO_Conn.ToCell.row
+        vi_InRowNumber = aO_Conn.FromCell.Row
+        vi_OutRowNumber = aO_Conn.ToCell.Row
     ElseIf Left(aO_Conn.FromCell.Name, 18) = ccs_OutIdent Then
         Set cpO_InShape = aO_Conn.ToSheet
         Set cpO_OutShape = aO_Conn.FromSheet
-        vi_InRowNumber = aO_Conn.ToCell.row
-        vi_OutRowNumber = aO_Conn.FromCell.row
+        vi_InRowNumber = aO_Conn.ToCell.Row
+        vi_OutRowNumber = aO_Conn.FromCell.Row
     End If
     '---Для То фигуры
     If Left(aO_Conn.ToCell.Name, 18) = ccs_InIdent Then
         Set cpO_InShape = aO_Conn.ToSheet
         Set cpO_OutShape = aO_Conn.FromSheet
-        vi_InRowNumber = aO_Conn.ToCell.row
-        vi_OutRowNumber = aO_Conn.FromCell.row
+        vi_InRowNumber = aO_Conn.ToCell.Row
+        vi_OutRowNumber = aO_Conn.FromCell.Row
     ElseIf Left(aO_Conn.ToCell.Name, 18) = ccs_OutIdent Then
         Set cpO_InShape = aO_Conn.FromSheet
         Set cpO_OutShape = aO_Conn.ToSheet
-        vi_InRowNumber = aO_Conn.FromCell.row
-        vi_OutRowNumber = aO_Conn.ToCell.row
+        vi_InRowNumber = aO_Conn.FromCell.Row
+        vi_OutRowNumber = aO_Conn.ToCell.Row
     End If
     '---В случае, если обе фигуры - рукава
     If vO_FromShape.Cells("User.IndexPers") = 100 And _
@@ -392,20 +394,20 @@ On Error GoTo EX
         If aO_Conn.ToSheet.Cells("Scratch.D1") > aO_Conn.FromSheet.Cells("Scratch.D1") Then
             Set cpO_InShape = aO_Conn.ToSheet
             Set cpO_OutShape = aO_Conn.FromSheet
-            vi_InRowNumber = aO_Conn.ToCell.row
-            vi_OutRowNumber = aO_Conn.FromCell.row
+            vi_InRowNumber = aO_Conn.ToCell.Row
+            vi_OutRowNumber = aO_Conn.FromCell.Row
         Else
             '---Проверяем у какой фигуры рукава ID выше (вброшена позже)
             If aO_Conn.ToSheet.ID > aO_Conn.FromSheet.ID Then
                 Set cpO_InShape = aO_Conn.ToSheet
                 Set cpO_OutShape = aO_Conn.FromSheet
-                vi_InRowNumber = aO_Conn.ToCell.row
-                vi_OutRowNumber = aO_Conn.FromCell.row
+                vi_InRowNumber = aO_Conn.ToCell.Row
+                vi_OutRowNumber = aO_Conn.FromCell.Row
             Else
                 Set cpO_InShape = aO_Conn.FromSheet
                 Set cpO_OutShape = aO_Conn.ToSheet
-                vi_InRowNumber = aO_Conn.FromCell.row
-                vi_OutRowNumber = aO_Conn.ToCell.row
+                vi_InRowNumber = aO_Conn.FromCell.Row
+                vi_OutRowNumber = aO_Conn.ToCell.Row
             End If
         End If
     End If
