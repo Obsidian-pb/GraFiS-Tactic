@@ -104,8 +104,8 @@ Dim con2 As Visio.Connect
         HoseWeightValueImport (ShpInd)
     End If
     
-    'Если изменена ячейка фигуры "Водосборник"
-    If cell.Name = "Actions.UseAsRazv.Checked" Then
+    'Если изменена ячейка "User.UseAsRazv" фигуры "Водосборник"
+    If cell.Name = "User.UseAsRazv" Then
         '---Запускаем процедуру обновления рукавных соединений для Водосборника
         
         Set shp = cell.Shape
@@ -113,10 +113,10 @@ Dim con2 As Visio.Connect
         For Each con In shp.FromConnects
             Set shp2 = con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
             For Each con2 In shp2.Connects
-                Debug.Print con2.ToSheet.Name & " => " & con2.FromSheet.Name
                 C_ConnectionsTrace.Ps_ConnectionAdd con2
             Next con2
         Next con
+
     End If
     
 

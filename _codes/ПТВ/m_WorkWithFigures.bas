@@ -128,6 +128,7 @@ Public Sub DirectVS(shp As Visio.Shape, AsRazv As Boolean)
      shp.Cells("Scratch.C3").FormulaU = 0
      shp.Cells("Scratch.D3").FormulaU = 0
   End If
+  shp.Cells("User.UseAsRazv").FormulaU = AsRazv
   
 End Sub
 

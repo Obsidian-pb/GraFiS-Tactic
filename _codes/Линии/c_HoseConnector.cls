@@ -97,9 +97,9 @@ On Error GoTo EndSub
 
 '---Идентифицируем подающую и принимающую фигуры - при соединении рукавов и ПТВ!!!
     '---Для From фигуры
-    Debug.Print aO_Conn.FromCell.Name
-    Debug.Print aO_Conn.ToSheet.Name & " => " & aO_Conn.FromSheet.Name
-    If Left(aO_Conn.FromCell.Name, 18) = ccs_InIdent Then
+'    Debug.Print aO_Conn.ToCell.Name & " => " & aO_Conn.FromCell.Name
+'    Debug.Print aO_Conn.ToSheet.Name & " => " & aO_Conn.FromSheet.Name
+    If Left(aO_Conn.FromCell.NameU, 18) = ccs_InIdent Then
         Set cpO_InShape = aO_Conn.FromSheet
         Set cpO_OutShape = aO_Conn.ToSheet
         vi_InRowNumber = aO_Conn.FromCell.Row
