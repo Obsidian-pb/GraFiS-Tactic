@@ -207,13 +207,14 @@ On Error GoTo EX
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 1
             End If
             
-                        '---Дополнение для водосборника:
-            If vi_IPInShape = 105 Then
+                        '---Дополнение для водосборника, разветвления:
+            If vi_IPInShape = 105 Or vi_IPInShape = 42 Then
             '---Указываем, что к фигуре подсоединены рукава на вход
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 1
             '---Указываем какие рукава присоеденены к ВС
             cpO_InShape.Cells("Scratch.B" & CStr(ai_InRowNumber + 1)).Formula = "Sheet." & cpO_OutShape.ID & "!Prop.HoseDiameter"
             End If
+            
             
             '---Привязываем маневренность линии к маневренности ствола
             If cpO_InShape.CellExists("Actions.MainManeure", 0) = True Then
@@ -229,11 +230,12 @@ On Error GoTo EX
                 "Sheet." & cpO_InShape.ID & "!Scratch.D1"
             cpO_InShape.Cells("User.FlowFromShape").Formula = """" & CStr(cpO_OutShape.NameU) & """"
         
-              '---Дополнение для водосборника:
-            If vi_IPOutShape = 105 Then
+              '---Дополнение для водосборника, разветвления :
+            If vi_IPOutShape = 105 Or vi_IPOutShape = 42 Then
             cpO_OutShape.Cells("Scratch.B" & CStr(ai_OutRowNumber + 1)).Formula = "Sheet." & cpO_InShape.ID & "!Prop.HoseDiameter"
             cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).Formula = 1
             End If
+            
         End If
     '---Рукав->Рукав
         If vb_OutShapeType = vb_ShapeType_Hose And vb_InShapeType = vb_ShapeType_Hose Then
@@ -459,8 +461,8 @@ On Error GoTo EX
             '---Указываем, что от фигуры отсоединяются рукава на вход
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
             End If
-            '---Дополнение для водосборника:
-            If vi_IPInShape = 105 Then
+            '---Дополнение для водосборника и разветвления:
+            If vi_IPInShape = 105 Or vi_IPInShape = 42 Then
             '---оtсоединены рукава
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
             '---обнуление диаметров рукавов
@@ -473,14 +475,17 @@ On Error GoTo EX
         End If
     '---ПТВ->Рукав
         If (vb_OutShapeType = vb_ShapeType_PTV Or vb_OutShapeType = vb_ShapeType_Razv Or vb_OutShapeType = vb_ShapeType_GE) And vb_InShapeType = vb_ShapeType_Hose Then
-            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 4).Formula = 0
-            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 5).Formula = 0
+                 '---Дополнение для водосборника и разветвления:
+'                        If vi_IPOutShape = 105 And vi_IPOutShape = 42 Then
+'            cpO_OutShape.Cells("Scratch.B" & CStr(ai_OutRowNumber + 1)).FormulaU = ""
+'            cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).FormulaU = 0
+'            End If
+            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 2).FormulaU = 0
+            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 3).FormulaU = ""
+            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 4).FormulaU = 0
+            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 5).FormulaU = 0
             cpO_InShape.Cells("User.FlowFromShape").Formula = ""
-            '---Дополнение для водосборника:
-                        If vi_IPOutShape = 105 Then
-            cpO_OutShape.Cells("Scratch.B" & CStr(ai_OutRowNumber + 1)).Formula = ""
-            cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).Formula = 0
-            End If
+       
         End If
     '---Рукав->Рукав
         If vb_OutShapeType = vb_ShapeType_Hose And vb_InShapeType = vb_ShapeType_Hose Then
