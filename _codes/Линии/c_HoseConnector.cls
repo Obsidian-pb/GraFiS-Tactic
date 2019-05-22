@@ -91,10 +91,10 @@ On Error GoTo EndSub
     If vO_FromShape.CellExists("User.IndexPers", 0) = False Or _
         vO_ToShape.CellExists("User.IndexPers", 0) = False Then Exit Sub '---Проверяем являются ли фигуры _
                                                                                 фигурами ГаФиС
+
 '---Проверяем, являются ли соединенные фигуры элементами НРС
     If f_IdentShape(vO_FromShape.Cells("User.IndexPers").Result(visNumber)) = 0 Or _
         f_IdentShape(vO_ToShape.Cells("User.IndexPers").Result(visNumber)) = 0 Then Exit Sub
-
 '---Идентифицируем подающую и принимающую фигуры - при соединении рукавов и ПТВ!!!
     '---Для From фигуры
 '    Debug.Print aO_Conn.ToCell.Name & " => " & aO_Conn.FromCell.Name
@@ -146,12 +146,16 @@ On Error GoTo EndSub
             End If
         End If
     End If
-
+    
+   
     '---Запускаем процедуру связывания данных в фигурах
        ps_LinkShapes vi_InRowNumber, vi_OutRowNumber
 
     Set cpO_InShape = Nothing
     Set cpO_OutShape = Nothing
+    '---запуск процедуры разворота потока в водосборнике
+     turnVS aO_Conn
+
 Exit Sub
 
 EndSub:
