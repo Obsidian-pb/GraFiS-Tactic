@@ -106,17 +106,17 @@ Dim vO_Shape As Visio.Shape
             Case Is = "User.IndexPers.Prompt"
                 vO_LV.ListItems(vO_Shape.Name).ListSubItems(2).Text = pf_GetTimeLineType(vO_Shape)
             Case Is = "Prop.ArrivalTime"
-                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.ArrivalTime").ResultStr(visString)
+                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.ArrivalTime").ResultStr(visDate)
             Case Is = "Prop.LineTime"
-                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.LineTime").ResultStr(visString)
+                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.LineTime").ResultStr(visDate)
             Case Is = "Prop.SetTime"
-                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.SetTime").ResultStr(visString)
+                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.SetTime").ResultStr(visDate)
             Case Is = "Prop.FormingTime"
-                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.FormingTime").ResultStr(visString)
+                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.FormingTime").ResultStr(visDate)
             Case Is = "Prop.SquareTime"
-                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.SquareTime").ResultStr(visString)
+                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.SquareTime").ResultStr(visDate)
             Case Is = "Prop.FireTime"
-                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.FireTime").ResultStr(visString)
+                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.FireTime").ResultStr(visDate)
             
             Case Is = "Actions.MainManeure.Checked"
                 'Удаляем из списка
@@ -339,27 +339,27 @@ Private Function pf_GetTime(ByRef aO_Shape As Visio.Shape) As String
 On Error GoTo EX
 
     If aO_Shape.CellExists("Prop.ArrivalTime", 0) = True Then
-        pf_GetTime = aO_Shape.Cells("Prop.ArrivalTime").ResultStr(visString)
+        pf_GetTime = aO_Shape.Cells("Prop.ArrivalTime").ResultStr(visDate)
         Exit Function
     End If
     If aO_Shape.CellExists("Prop.LineTime", 0) = True Then
-        pf_GetTime = aO_Shape.Cells("Prop.LineTime").ResultStr(visString)
+        pf_GetTime = aO_Shape.Cells("Prop.LineTime").ResultStr(visDate)
         Exit Function
     End If
     If aO_Shape.CellExists("Prop.SetTime", 0) = True Then
-            pf_GetTime = aO_Shape.Cells("Prop.SetTime").ResultStr(visString)
+            pf_GetTime = aO_Shape.Cells("Prop.SetTime").ResultStr(visDate)
         Exit Function
     End If
     If aO_Shape.CellExists("Prop.FormingTime", 0) = True Then
-            pf_GetTime = aO_Shape.Cells("Prop.FormingTime").ResultStr(visString)
+            pf_GetTime = aO_Shape.Cells("Prop.FormingTime").ResultStr(visDate)
         Exit Function
     End If
     If aO_Shape.CellExists("Prop.SquareTime", 0) = True Then
-            pf_GetTime = aO_Shape.Cells("Prop.SquareTime").ResultStr(visString)
+            pf_GetTime = aO_Shape.Cells("Prop.SquareTime").ResultStr(visDate)
         Exit Function
     End If
     If aO_Shape.CellExists("Prop.FireTime", 0) = True Then
-            pf_GetTime = aO_Shape.Cells("Prop.FireTime").ResultStr(visString)
+            pf_GetTime = aO_Shape.Cells("Prop.FireTime").ResultStr(visDate)
         Exit Function
     End If
 
