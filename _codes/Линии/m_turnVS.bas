@@ -7,9 +7,9 @@ Public Sub turnVS(ByRef aO_Conn As Visio.Connect)
 '---скрытие стрелки направления потока при подключении вставки
   If aO_Conn.ToSheet.Cells("User.IndexPers").Result(visNumber) = 191 Then aO_Conn.ToSheet.Cells("Actions.DirectionShow.Checked").Formula = 0
    
-  If aO_Conn.ToSheet.Cells("User.IndexPers").Result(visNumber) = 105 Then
+ ' If aO_Conn.ToSheet.Cells("User.IndexPers").Result(visNumber) = 105 Then
 '---скрытие стрелки направления потока при подключении ВС
-     aO_Conn.ToSheet.Cells("Actions.DirectionShow.Checked").Formula = 0
+ '    aO_Conn.ToSheet.Cells("Actions.DirectionShow.Checked").Formula = 0
 
 '  If aO_Conn.ToSheet.Cells("Scratch.A1").Result(visNumber) = 1 Then
 '  Debug.Print aO_Conn.ToSheet
@@ -26,6 +26,6 @@ Public Sub turnVS(ByRef aO_Conn As Visio.Connect)
 '      End If
 '     End If
 '  End If
-  End If
+' End If
 End Sub
 

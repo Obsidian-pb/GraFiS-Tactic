@@ -413,7 +413,7 @@ End Function
 
 
 '-----------------------Соединение рукавных линий и ПТВ----------------------------------------------------------
-Private Sub ReconnectHose(ByRef ShpObj As Visio.Shape)
+Public Sub ReconnectHose(ByRef ShpObj As Visio.Shape)
 'Процедура запускает реконнект соединений для данной фигуры рукавной линии
 Dim C_ConnectionsTrace As c_HoseConnector
 Dim vO_Conn As Visio.Connect
@@ -438,7 +438,7 @@ Dim Con2 As Visio.Connect
     If Left(ConIndent1, 18) = Left(ConIndent2, 18) And ShpVS.Name <> "" Then
             
        If ShpVS.Cells("Actions.UseAsRazv.Checked").Result(visNumber) = 0 Then
-            MsgBox "Turn to RZV"
+            'MsgBox "Turn to RZV"
             ShpVS.Cells("Connections.GFS_Out").RowNameU = "GFS_In"
             ShpVS.Cells("Connections.GFS_In1").RowNameU = "GFS_Out1"
             ShpVS.Cells("Connections.GFS_In2").RowNameU = "GFS_Out2"
@@ -451,7 +451,7 @@ Dim Con2 As Visio.Connect
             ShpVS.Cells("Actions.UseAsRazv.Checked").FormulaU = 1
             ShpVS.Cells("User.UseAsRazv").FormulaU = True
        Else
-            MsgBox "Turn to VS"
+            'MsgBox "Turn to VS"
             ShpVS.Cells("Connections.GFS_In").RowNameU = "GFS_Out"
             ShpVS.Cells("Connections.GFS_Out1").RowNameU = "GFS_In1"
             ShpVS.Cells("Connections.GFS_Out2").RowNameU = "GFS_In2"
