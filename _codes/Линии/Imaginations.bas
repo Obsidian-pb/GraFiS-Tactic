@@ -449,6 +449,7 @@ Dim Con2 As Visio.Connect
             ShpVS.Cells("Scratch.C3").FormulaU = 0
             ShpVS.Cells("Scratch.D3").FormulaU = 0
             ShpVS.Cells("Actions.UseAsRazv.Checked").FormulaU = 1
+            ShpVS.Cells("User.UseAsRazv").FormulaU = True
        Else
             MsgBox "Turn to VS"
             ShpVS.Cells("Connections.GFS_In").RowNameU = "GFS_Out"
@@ -461,8 +462,15 @@ Dim Con2 As Visio.Connect
             ShpVS.Cells("Scratch.C3").FormulaU = "Scratch.C1+Prop.HeadLost"
             ShpVS.Cells("Scratch.D3").FormulaU = "Scratch.D1/(Scratch.A3+Scratch.A2)"
             ShpVS.Cells("Actions.UseAsRazv.Checked").FormulaU = 0
+            ShpVS.Cells("User.UseAsRazv").FormulaU = False
        End If
-          '---здесь нужно добавть обновление соединений
+          '---обновление соединений
+          For Each Con In ShpVS.FromConnects
+            Set Shp2 = Con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
+            For Each Con2 In Shp2.Connects
+                C_ConnectionsTrace.Ps_ConnectionAdd Con2
+            Next Con2
+          Next Con
     End If
 
 '---Очищаем объектные переменные
