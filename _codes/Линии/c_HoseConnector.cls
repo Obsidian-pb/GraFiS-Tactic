@@ -48,7 +48,6 @@ Const vb_ShapeType_WaterContainer = 7       'Водяная емкость
 
 '----------------------------------------Служебные процедуры------------------------------------------------------------
 Private Sub Class_Initialize()
-
     Set vO_App = Visio.Application
 
 End Sub
@@ -65,7 +64,7 @@ End Sub
 '-------------------Процедуры отслеживающие соединения и выполняющие соответствующие действия------------------------------------------------------------
 Private Sub vO_App_ConnectionsAdded(ByVal Connects As IVConnects)
 'Процедура отслеживает появление соединений фигур и запускает процедуру
-    
+  
     '---Проверяем какие фигуры соединены
     TurnIntoHoses Connects
     
@@ -592,21 +591,21 @@ End Sub
 '----------------------------------------Служебные процедуры-----------------------------------------------
 Private Function SelfWaterGetCheck(ByRef hoseShp As Visio.Shape) As Boolean
 'Прока проверяет, не осуществляется ли самозабор и если осуществляется, подключение к всасывающим патрубкам МСП обнуляется
-Dim con As Visio.Connect
+Dim Con As Visio.Connect
 Dim shpName1 As String
 Dim shpName2 As String
     
 '---Проверяем какие фигуры подключены к концам рукава
-    For Each con In hoseShp.Connects
+    For Each Con In hoseShp.Connects
 '        Debug.Print con.ToSheet.NameU & " - " & con.ToCell.Name
 '        Debug.Print con.FromSheet.NameU & " - " & con.FromCell.Name
-        If con.FromCell.Name = "BeginX" Then
-            shpName1 = con.ToSheet.NameU
+        If Con.FromCell.Name = "BeginX" Then
+            shpName1 = Con.ToSheet.NameU
         End If
-        If con.FromCell.Name = "EndX" Then
-            shpName2 = con.ToSheet.NameU
+        If Con.FromCell.Name = "EndX" Then
+            shpName2 = Con.ToSheet.NameU
         End If
-    Next con
+    Next Con
     
 '---Если подключена одна и та же фигура - возвращаем Истина иначе, Ложь
     If shpName1 = shpName2 Then
@@ -761,7 +760,7 @@ Private Sub TurnIntoHosesMain(hoseShp As Visio.Shape)
 'Основная процедура обращения
 Dim cnct As Visio.Connect
 Dim shp1 As Visio.Shape
-Dim shp2 As Visio.Shape
+Dim Shp2 As Visio.Shape
     
     On Error GoTo EndSub
     
@@ -770,13 +769,13 @@ Dim shp2 As Visio.Shape
     Set shp1 = cnct.ToSheet
     '---Получаем тип второй фигуры
     Set cnct = hoseShp.Connects(2)
-    Set shp2 = cnct.ToSheet
+    Set Shp2 = cnct.ToSheet
     
     '---Проверяем обе ли соединенные фигуры - фигуры ГраФиС
-    If Not IsGraFisShapes(shp1, shp2) Then Exit Sub
+    If Not IsGraFisShapes(shp1, Shp2) Then Exit Sub
 
     '---Получаем тип линии
-    GetLineType shp1, shp2, hoseShp
+    GetLineType shp1, Shp2, hoseShp
 
 Exit Sub
 EndSub:
@@ -787,7 +786,7 @@ Private Function GetHoseShape(ByRef Connects As IVConnects) As Visio.Shape
 Dim cnct As Visio.Connect
 Dim hoseShp As Visio.Shape
 Dim shp1 As Visio.Shape
-Dim shp2 As Visio.Shape
+Dim Shp2 As Visio.Shape
 Dim shpType1 As Integer
 Dim shpType2 As Integer
     
@@ -797,14 +796,14 @@ Dim shpType2 As Integer
     Set shp1 = cnct.ToSheet
     '---Получаем вторую фигуру
     Set cnct = Connects(1)
-    Set shp2 = cnct.FromSheet
+    Set Shp2 = cnct.FromSheet
     
     '---Получаем типы фигур
     shpType1 = GetShapeType(shp1)
-    shpType2 = GetShapeType(shp2)
+    shpType2 = GetShapeType(Shp2)
     If shpType1 = 0 Xor shpType2 = 0 Then
         If shpType1 = 0 Then Set hoseShp = shp1
-        If shpType2 = 0 Then Set hoseShp = shp2
+        If shpType2 = 0 Then Set hoseShp = Shp2
     Else
         Set GetHoseShape = Nothing
     End If
@@ -816,26 +815,26 @@ EndSub:
     SaveLog Err, "GetHoseShape"
 End Function
 
-Private Function GetShapeType(ByRef shp As Visio.Shape) As Integer
+Private Function GetShapeType(ByRef Shp As Visio.Shape) As Integer
 'Функция возвращает тип фигуры - если фигура не фигура ГраФиС - возвращается vb_ShapeType_Other
-    If shp.CellExists("User.IndexPers", 0) Then
-        GetShapeType = f_IdentShape(shp.Cells("User.IndexPers").Result(visNumber))
+    If Shp.CellExists("User.IndexPers", 0) Then
+        GetShapeType = f_IdentShape(Shp.Cells("User.IndexPers").Result(visNumber))
     Else
         GetShapeType = vb_ShapeType_Other
     End If
 End Function
 
-Private Function IsSpecificShape(ByRef shp As Visio.Shape, ByVal indexPers As Integer) As Boolean
+Private Function IsSpecificShape(ByRef Shp As Visio.Shape, ByVal indexPers As Integer) As Boolean
 'Функция возвращает истина, если указанная фигура имеет указанный IndexPers - если не ГраФиС, возвращается Ложь
-    If shp.CellExists("User.IndexPers", 0) Then
-        IsSpecificShape = (shp.Cells("User.IndexPers").Result(visNumber) = indexPers)
+    If Shp.CellExists("User.IndexPers", 0) Then
+        IsSpecificShape = (Shp.Cells("User.IndexPers").Result(visNumber) = indexPers)
     Else
         IsSpecificShape = False
     End If
 End Function
 
 
-Private Sub GetLineType(ByRef shp1 As Visio.Shape, ByRef shp2 As Visio.Shape, _
+Private Sub GetLineType(ByRef shp1 As Visio.Shape, ByRef Shp2 As Visio.Shape, _
                      ByRef hoseShape As Visio.Shape)
 'Функция возвращает тип необходимой линии
 Dim shp1Type As Integer
@@ -847,13 +846,13 @@ Dim diameter As Integer
     'Получаем тип первой фигуры
     shp1Type = GetShapeType(shp1)
     'Получаем тип второй фигуры
-    shp2Type = GetShapeType(shp2)
+    shp2Type = GetShapeType(Shp2)
     
     '---Проверяем кикие именно фигуры соединены и делаем вывод о типе линии
     '---Между ПТВ
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_PTV, vb_ShapeType_PTV) Then
         '---Проверяем какой условный проход имеет ПТВ (применяется для стволов)
-        diameter = GetDiameter(shp1, shp2)
+        diameter = GetDiameter(shp1, Shp2)
         If diameter = 0 Then
             MakeHoseLine 51, 0
         Else
@@ -863,7 +862,7 @@ Dim diameter As Integer
     End If
     '---Между ПТВ и разветвлением
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_PTV, vb_ShapeType_Razv) Then
-        diameter = GetDiameter(shp1, shp2)
+        diameter = GetDiameter(shp1, Shp2)
         If diameter = 0 Then
             MakeHoseLine 51, 0
         Else
@@ -873,13 +872,13 @@ Dim diameter As Integer
     End If
     '---Между ПТВ и Техникой
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_PTV, vb_ShapeType_Tech) Then
-        diameter = GetDiameter(shp1, shp2)
+        diameter = GetDiameter(shp1, Shp2)
         If diameter = 0 Then
             '---Проверяем не колонка ли подключена
             If shp1.Cells("User.IndexPers").Result(visNumber) = 72 Or _
-                    shp2.Cells("User.IndexPers").Result(visNumber) = 72 Then
+                    Shp2.Cells("User.IndexPers").Result(visNumber) = 72 Then
                 '---Проверяем к какой точке колонки подключена линия
-                If IsColonkaLineRight(shp1, shp2, hoseShape) Then
+                If IsColonkaLineRight(shp1, Shp2, hoseShape) Then
                     MakeNapVsasHoseLine
                 Else
                     MakeHoseLine 77, 2
@@ -911,7 +910,7 @@ Dim diameter As Integer
     '---Между техникой и емкостями
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Tech, vb_ShapeType_WaterContainer) Then
         '---Проверяем к какой точке емкости подключена линия
-            If IsEmkostIn(shp1, shp2, hoseShape) Then
+            If IsEmkostIn(shp1, Shp2, hoseShape) Then
                 MakeHoseLine 77, 1
             Else
                 MakeVHoseLine
@@ -921,7 +920,7 @@ Dim diameter As Integer
     '---Между техникой и гидроэлеваторами
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Tech, vb_ShapeType_GE) Then
         '---Проверяем к какой точке гидроэлеватора подключена линия
-        If IsGELineIn(shp1, shp2, hoseShape) Then
+        If IsGELineIn(shp1, Shp2, hoseShape) Then
             MakeHoseLine 66, 1
         Else
             MakeHoseLine 77, 1
@@ -931,7 +930,7 @@ Dim diameter As Integer
     '---Между разветвлениями и гидроэлеваторами
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Razv, vb_ShapeType_GE) Then
         '---Проверяем к какой точке гидроэлеватора подключена линия
-        If IsGELineIn(shp1, shp2, hoseShape) Then
+        If IsGELineIn(shp1, Shp2, hoseShape) Then
             MakeHoseLine 66, 1
         Else
             MakeHoseLine 77, 1
@@ -944,9 +943,9 @@ EndSub:
     SaveLog Err, "GetLineType"
 End Sub
 
-Private Function IsGraFisShapes(ByRef shp1 As Visio.Shape, ByRef shp2 As Visio.Shape) As Boolean
+Private Function IsGraFisShapes(ByRef shp1 As Visio.Shape, ByRef Shp2 As Visio.Shape) As Boolean
 'Функция возвращет Истина, если фигуры явля.тся фигурой ГраФиС
-    IsGraFisShapes = shp1.CellExists("IndexPers", 0) = 0 And shp2.CellExists("IndexPers", 0) = 0
+    IsGraFisShapes = shp1.CellExists("IndexPers", 0) = 0 And Shp2.CellExists("IndexPers", 0) = 0
 End Function
 
 Private Function GetOrEqual(ByVal val1 As Integer, ByVal val2 As Integer, _
@@ -965,7 +964,7 @@ Private Sub vO_App_ShapeAdded(ByVal Shape As IVShape)
     TurnIntoHoses2 Shape
 End Sub
 
-Private Function IsGELineIn(ByRef shp1 As Visio.Shape, ByRef shp2 As Visio.Shape, _
+Private Function IsGELineIn(ByRef shp1 As Visio.Shape, ByRef Shp2 As Visio.Shape, _
                             ByRef hoseShape As Visio.Shape) As Boolean
 'Функция возвращает Истина, если одна из фигур - Гидроэлеватор и к его точке входа подключена рукавная линия
 Dim shpGE As Visio.Shape
@@ -973,7 +972,7 @@ Dim cnct As Visio.Connect
 
     '---Проверяем какая именно из фигур - гидроэлеватор
     If GetShapeType(shp1) = vb_ShapeType_GE Then Set shpGE = shp1
-    If GetShapeType(shp2) = vb_ShapeType_GE Then Set shpGE = shp2
+    If GetShapeType(Shp2) = vb_ShapeType_GE Then Set shpGE = Shp2
     
     If hoseShape.Connects(1).ToSheet = shpGE Then Set cnct = hoseShape.Connects(1)
     If hoseShape.Connects(2).ToSheet = shpGE Then Set cnct = hoseShape.Connects(2)
@@ -981,7 +980,7 @@ Dim cnct As Visio.Connect
     IsGELineIn = Left(cnct.ToCell.Name, 18) = "Connections.GFS_In"
 End Function
 
-Private Function IsColonkaLineRight(ByRef shp1 As Visio.Shape, ByRef shp2 As Visio.Shape, _
+Private Function IsColonkaLineRight(ByRef shp1 As Visio.Shape, ByRef Shp2 As Visio.Shape, _
                             ByRef hoseShape As Visio.Shape) As Boolean
 'Функция возвращает Истина, если одна из фигур - Пожарная колонка и к его правому патрубку подключена рукавная линия
 Dim shpColonka As Visio.Shape
@@ -989,7 +988,7 @@ Dim cnct As Visio.Connect
 
     '---Проверяем какая именно из фигур - колонка
     If IsSpecificShape(shp1, 72) Then Set shpColonka = shp1
-    If IsSpecificShape(shp2, 72) Then Set shpColonka = shp2
+    If IsSpecificShape(Shp2, 72) Then Set shpColonka = Shp2
     
     If hoseShape.Connects(1).ToSheet = shpColonka Then Set cnct = hoseShape.Connects(1)
     If hoseShape.Connects(2).ToSheet = shpColonka Then Set cnct = hoseShape.Connects(2)
@@ -997,7 +996,7 @@ Dim cnct As Visio.Connect
     IsColonkaLineRight = Left(cnct.ToCell.Name, 20) = "Connections.GFS_Out2"
 End Function
 
-Private Function IsEmkostIn(ByRef shp1 As Visio.Shape, ByRef shp2 As Visio.Shape, _
+Private Function IsEmkostIn(ByRef shp1 As Visio.Shape, ByRef Shp2 As Visio.Shape, _
                             ByRef hoseShape As Visio.Shape) As Boolean
 'Функция возвращает Истина, если одна из фигур - Емкость и к ее входящейму коннекшн поинту подключена рукавная линия
 Dim shpEmkost As Visio.Shape
@@ -1005,7 +1004,7 @@ Dim cnct As Visio.Connect
 
     '---Проверяем какая именно из фигур - колонка
     If IsSpecificShape(shp1, 190) Then Set shpEmkost = shp1
-    If IsSpecificShape(shp2, 190) Then Set shpEmkost = shp2
+    If IsSpecificShape(Shp2, 190) Then Set shpEmkost = Shp2
     
     If hoseShape.Connects(1).ToSheet = shpEmkost Then Set cnct = hoseShape.Connects(1)
     If hoseShape.Connects(2).ToSheet = shpEmkost Then Set cnct = hoseShape.Connects(2)
@@ -1013,7 +1012,7 @@ Dim cnct As Visio.Connect
     IsEmkostIn = Left(cnct.ToCell.Name, 18) = "Connections.GFS_In"
 End Function
 
-Private Function GetDiameter(ByRef shp1 As Visio.Shape, ByRef shp2 As Visio.Shape) As Integer
+Private Function GetDiameter(ByRef shp1 As Visio.Shape, ByRef Shp2 As Visio.Shape) As Integer
 'Функция возвращает диаметр рукава для подключения к стволу
 Dim diameterUsl As Integer
     
@@ -1022,8 +1021,8 @@ Dim diameterUsl As Integer
     If shp1.CellExists("User.DiameterIn", 0) Then
         diameterUsl = shp1.Cells("User.DiameterIn").Result(visNumber)
     End If
-    If shp2.CellExists("User.DiameterIn", 0) Then
-        diameterUsl = shp2.Cells("User.DiameterIn").Result(visNumber)
+    If Shp2.CellExists("User.DiameterIn", 0) Then
+        diameterUsl = Shp2.Cells("User.DiameterIn").Result(visNumber)
     End If
     
     '---Проверяем получено ли значение диаметра

@@ -275,15 +275,15 @@ End Sub
 Public Sub SetFormulaForAll(ShpObj As Visio.Shape, ByVal aS_CellName As String, ByVal aS_NewFormula As String)
 'Процедура устанавливает содержимое для произвольной ячейки
 'Dim v_Str As String
-Dim shp As Visio.Shape
+Dim Shp As Visio.Shape
 
 '    v_Str = InputBox("Укажите новую подпись", "Изменение содержимого")
     'Перебираем все фигуры в выделении и если очередная фигура имеет такую же ячейку - присваиваем ей новое значение
-    For Each shp In Application.ActiveWindow.Selection
-        If shp.CellExists(aS_CellName, 0) = True Then
-            shp.Cells(aS_CellName).FormulaU = """" & aS_NewFormula & """"
+    For Each Shp In Application.ActiveWindow.Selection
+        If Shp.CellExists(aS_CellName, 0) = True Then
+            Shp.Cells(aS_CellName).FormulaU = """" & aS_NewFormula & """"
         End If
-    Next shp
+    Next Shp
 End Sub
 
 Public Sub MoveMeFront(ShpObj As Visio.Shape)
@@ -294,14 +294,14 @@ End Sub
 '-----------------------------------------Процедуры работы с фигурами----------------------------------------------
 Public Sub SetCheckForAll(ShpObj As Visio.Shape, aS_CellName As String, aB_Value As Boolean)
 'Процедура устанавливает новое значение для всех выбранных фигур одного типа
-Dim shp As Visio.Shape
+Dim Shp As Visio.Shape
     
     'Перебираем все фигуры в выделении и если очередная фигура имеет такую же ячейку - присваиваем ей новое значение
-    For Each shp In Application.ActiveWindow.Selection
-        If shp.CellExists(aS_CellName, 0) = True Then
-            shp.Cells(aS_CellName).Formula = aB_Value
+    For Each Shp In Application.ActiveWindow.Selection
+        If Shp.CellExists(aS_CellName, 0) = True Then
+            Shp.Cells(aS_CellName).Formula = aB_Value
         End If
-    Next shp
+    Next Shp
     
 End Sub
 

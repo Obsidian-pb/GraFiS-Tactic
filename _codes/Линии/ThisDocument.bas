@@ -86,10 +86,10 @@ End Sub
 Private Sub LineAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
-Dim shp As Visio.Shape
-Dim con As Visio.Connect
-Dim shp2 As Visio.Shape
-Dim con2 As Visio.Connect
+Dim Shp As Visio.Shape
+Dim Con As Visio.Connect
+Dim Shp2 As Visio.Shape
+Dim Con2 As Visio.Connect
 '---Проверяем имя ячейки
     
     If cell.Name = "Prop.HoseMaterial" Or cell.Name = "Prop.HoseDiameter" Then
@@ -108,14 +108,14 @@ Dim con2 As Visio.Connect
     If cell.Name = "User.UseAsRazv" Then
         '---Запускаем процедуру обновления рукавных соединений для Водосборника
         
-        Set shp = cell.Shape
+        Set Shp = cell.Shape
         
-        For Each con In shp.FromConnects
-            Set shp2 = con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
-            For Each con2 In shp2.Connects
-                C_ConnectionsTrace.Ps_ConnectionAdd con2
-            Next con2
-        Next con
+        For Each Con In Shp.FromConnects
+            Set Shp2 = Con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
+            For Each Con2 In Shp2.Connects
+                C_ConnectionsTrace.Ps_ConnectionAdd Con2
+            Next Con2
+        Next Con
 
     End If
     

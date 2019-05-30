@@ -91,32 +91,32 @@ EX:
     Set shapesInNRS = Nothing
 End Sub
 
-Private Sub GetTechShapeForGESystem(ByRef shp As Visio.Shape)
+Private Sub GetTechShapeForGESystem(ByRef Shp As Visio.Shape)
 'Заполняем коллекцию фигур соединенных в НРС
-Dim con As Connect
+Dim Con As Connect
 Dim sideShp As Visio.Shape
 
-    For Each con In shp.Connects
-        If Not IsShapeAllreadyChecked(con.ToSheet) Then
-            shapesInNRS.Add con.ToSheet
-            GetTechShapeForGESystem con.ToSheet
+    For Each Con In Shp.Connects
+        If Not IsShapeAllreadyChecked(Con.ToSheet) Then
+            shapesInNRS.Add Con.ToSheet
+            GetTechShapeForGESystem Con.ToSheet
         End If
-    Next con
-    For Each con In shp.FromConnects
-        If Not IsShapeAllreadyChecked(con.FromSheet) Then
-            shapesInNRS.Add con.FromSheet
-            GetTechShapeForGESystem con.FromSheet
+    Next Con
+    For Each Con In Shp.FromConnects
+        If Not IsShapeAllreadyChecked(Con.FromSheet) Then
+            shapesInNRS.Add Con.FromSheet
+            GetTechShapeForGESystem Con.FromSheet
         End If
-    Next con
+    Next Con
 
 End Sub
 
-Private Function IsShapeAllreadyChecked(ByRef shp As Visio.Shape) As Boolean
+Private Function IsShapeAllreadyChecked(ByRef Shp As Visio.Shape) As Boolean
 'Функция возвращает Истину, если фигура уже имеется и ложь, если нет
 Dim colShape As Visio.Shape
 
     For Each colShape In shapesInNRS
-        If colShape = shp Then
+        If colShape = Shp Then
             IsShapeAllreadyChecked = True
             Exit Function
         End If
@@ -460,10 +460,10 @@ EX:
     
 End Sub
 
-Private Function IsNotManeuwer(ByRef shp As Visio.Shape) As Boolean
+Private Function IsNotManeuwer(ByRef Shp As Visio.Shape) As Boolean
 'Функция возвращает Истину, если фигура не маневренная, или такое свойство у нее вообще отсутствует
-    If shp.CellExists("Actions.MainManeure.Checked", 0) = True Then
-        If shp.Cells("Actions.MainManeure.Checked").Result(visNumber) = 0 Then
+    If Shp.CellExists("Actions.MainManeure.Checked", 0) = True Then
+        If Shp.Cells("Actions.MainManeure.Checked").Result(visNumber) = 0 Then
             IsNotManeuwer = True
         Else
             IsNotManeuwer = False

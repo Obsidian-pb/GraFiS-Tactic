@@ -417,16 +417,58 @@ Private Sub ReconnectHose(ByRef ShpObj As Visio.Shape)
 'Процедура запускает реконнект соединений для данной фигуры рукавной линии
 Dim C_ConnectionsTrace As c_HoseConnector
 Dim vO_Conn As Visio.Connect
+Dim ConIndent1 As String
+Dim ConIndent2 As String
+Dim ShpVS As Visio.Shape
+Dim Shp As Visio.Shape
+Dim Shp2 As Visio.Shape
+Dim Con As Visio.Connect
+Dim Con2 As Visio.Connect
 
     '---Создаем экземпляр класса c_HoseConnector для осуществления соединений фигур
     Set C_ConnectionsTrace = New c_HoseConnector
     '---Для всех соединений иимеющихся у рукавной линии запускаем процедуру соединения
     For Each vO_Conn In ShpObj.Connects
         C_ConnectionsTrace.Ps_ConnectionAdd vO_Conn
+    '---определение имен патрубков соединяемых фигур
+      If ConIndent1 = "" Then ConIndent1 = vO_Conn.ToCell.Name Else ConIndent2 = vO_Conn.ToCell.Name
+      If vO_Conn.ToSheet.Cells("User.IndexPers").Result(visNumber) = 105 Then Set ShpVS = vO_Conn.ToSheet
     Next vO_Conn
+    '---проверка являются ли патрубки однонаправленнымии если нет, то переворачиваем водосборник
+    If Left(ConIndent1, 18) = Left(ConIndent2, 18) And ShpVS.Name <> "" Then
+            
+       If ShpVS.Cells("Actions.UseAsRazv.Checked").Result(visNumber) = 0 Then
+            MsgBox "Turn to RZV"
+            ShpVS.Cells("Connections.GFS_Out").RowNameU = "GFS_In"
+            ShpVS.Cells("Connections.GFS_In1").RowNameU = "GFS_Out1"
+            ShpVS.Cells("Connections.GFS_In2").RowNameU = "GFS_Out2"
+            ShpVS.Cells("Scratch.C1").FormulaU = "MAX(Scratch.C2,Scratch.C3)+Prop.HeadLost"
+            ShpVS.Cells("Scratch.D1").FormulaU = "Scratch.D2+Scratch.D3"
+            ShpVS.Cells("Scratch.C2").FormulaU = 0
+            ShpVS.Cells("Scratch.D2").FormulaU = 0
+            ShpVS.Cells("Scratch.C3").FormulaU = 0
+            ShpVS.Cells("Scratch.D3").FormulaU = 0
+            ShpVS.Cells("Actions.UseAsRazv.Checked").FormulaU = 1
+       Else
+            MsgBox "Turn to VS"
+            ShpVS.Cells("Connections.GFS_In").RowNameU = "GFS_Out"
+            ShpVS.Cells("Connections.GFS_Out1").RowNameU = "GFS_In1"
+            ShpVS.Cells("Connections.GFS_Out2").RowNameU = "GFS_In2"
+            ShpVS.Cells("Scratch.C1").FormulaU = 0
+            ShpVS.Cells("Scratch.D1").FormulaU = 0
+            ShpVS.Cells("Scratch.C2").FormulaU = "Scratch.C1+Prop.HeadLost"
+            ShpVS.Cells("Scratch.D2").FormulaU = "Scratch.D1/(Scratch.A3+Scratch.A2)"
+            ShpVS.Cells("Scratch.C3").FormulaU = "Scratch.C1+Prop.HeadLost"
+            ShpVS.Cells("Scratch.D3").FormulaU = "Scratch.D1/(Scratch.A3+Scratch.A2)"
+            ShpVS.Cells("Actions.UseAsRazv.Checked").FormulaU = 0
+       End If
+          '---здесь нужно добавть обновление соединений
+    End If
 
 '---Очищаем объектные переменные
 Set C_ConnectionsTraceLoc = Nothing
+Set ShpVS = Nothing
+
 End Sub
 
 
