@@ -71,7 +71,9 @@ Private Sub vO_App_ConnectionsAdded(ByVal Connects As IVConnects)
     '---Соединяем фигуры
     Ps_ConnectionAdd Connects(1)
     '---реконект уже обращенного рукава для ВС
+    On Error Resume Next
     If Connects(1).ToSheet.Cells("User.IndexPers").Result(visNumber) = 105 Then ReconnectHose Connects(1).FromSheet
+    On Error GoTo 0
 End Sub
 
 
