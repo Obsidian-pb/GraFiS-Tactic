@@ -907,7 +907,12 @@ Dim diameter As Integer
     End If
     '---Между техникой и техникой
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Tech, vb_ShapeType_Tech) Then
-        MakeHoseLine 77, 1
+        diameter = GetDiameter(shp1, Shp2)
+        If diameter = 0 Then
+            MakeHoseLine 77, 1
+        Else
+            MakeHoseLine diameter, 1
+        End If
         Exit Sub
     End If
     '---Между техникой и емкостями
@@ -940,7 +945,7 @@ Dim diameter As Integer
         End If
         Exit Sub
     End If
-
+    
 Exit Sub
 EndSub:
     SaveLog Err, "GetLineType"

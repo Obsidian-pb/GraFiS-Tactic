@@ -7,11 +7,14 @@ Private cpO_InShape As Visio.Shape, cpO_OutShape As Visio.Shape 'Фигуры в котору
 '---Постоянные индеков
 Const ccs_InIdent = "Connections.GFS_In"
 Const ccs_OutIdent = "Connections.GFS_Ou"
-Const vb_ShapeType_Other = 0
-Const vb_ShapeType_Hose = 1
-Const vb_ShapeType_PTV = 2
-Const vb_ShapeType_Razv = 3
-Const vb_ShapeType_Tech = 4
+Const vb_ShapeType_Other = 0                'Ничего
+Const vb_ShapeType_Hose = 1                 'Рукава
+Const vb_ShapeType_PTV = 2                  'ПТВ
+Const vb_ShapeType_Razv = 3                 'Разветвление
+Const vb_ShapeType_Tech = 4                 'Техника
+Const vb_ShapeType_VsasSet = 5              'Всасывающая сетка с линией
+Const vb_ShapeType_GE = 6                   'Гидроэлеватор
+Const vb_ShapeType_WaterContainer = 7       'Водяная емкость
 
 
 
@@ -207,7 +210,7 @@ On Error GoTo ExitSub
                 & ai_InRowNumber + 1 & "),0," & "Sheet." & cpO_InShape.ID & "!Scratch.D" & ai_InRowNumber + 1 & ")"
             cpO_OutShape.Cells("Scratch.B1").FormulaU = vs_Formula
             cpO_OutShape.Cells("User.FlowToShape").Formula = """" & CStr(cpO_InShape.NameU) & """"
-            cpO_OutShape.Cells("Prop.LineTime").Formula = "Sheet." & cpO_InShape.ID & "!Prop.ArrivalTime"
+'            cpO_OutShape.Cells("Prop.LineTime").Formula = "Sheet." & cpO_InShape.ID & "!Prop.ArrivalTime"
             cpO_OutShape.Cells("Prop.Unit").Formula = "Sheet." & cpO_InShape.ID & "!Prop.Unit"
             '---Указываем, что к фигуре подсоединены рукава на вход
             If cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Result(visNumber) = 0 Then
@@ -249,7 +252,7 @@ End Sub
 '----------------------------------------Служебные Функции-----------------------------------------------
 Private Function f_IdentShape(ByVal ai_ShapeIP As Integer) As Integer
 'Функция идентифициурет фигуру и возвращает значение её типа
-Dim Arr_PTVs(12, 2)
+Dim Arr_PTVs(28, 1) As Integer
 Dim i As Integer
 
 '---Указываем значения IndexPers и соответствующие им определения
@@ -263,26 +266,62 @@ Dim i As Integer
         Arr_PTVs(3, 1) = vb_ShapeType_PTV
     Arr_PTVs(4, 0) = 39  'Возимый лафетный ствол
         Arr_PTVs(4, 1) = vb_ShapeType_PTV
-    Arr_PTVs(5, 0) = 42  'Разветвление
-        Arr_PTVs(5, 1) = vb_ShapeType_Razv
-    Arr_PTVs(6, 0) = 45  'Пеноподъемник
-        Arr_PTVs(6, 1) = vb_ShapeType_PTV
-    Arr_PTVs(7, 0) = 72  'Колонка
+    Arr_PTVs(5, 0) = 40  'Гидроэлеватор
+        Arr_PTVs(5, 1) = vb_ShapeType_GE
+    Arr_PTVs(6, 0) = 42  'Разветвление
+        Arr_PTVs(6, 1) = vb_ShapeType_Razv
+    Arr_PTVs(7, 0) = 45  'Пеноподъемник
         Arr_PTVs(7, 1) = vb_ShapeType_PTV
-    Arr_PTVs(8, 0) = 100 'Напорная линия
-        Arr_PTVs(8, 1) = vb_ShapeType_Hose
-    Arr_PTVs(9, 0) = 1 'Автоцистерна пожарная
-        Arr_PTVs(9, 1) = vb_ShapeType_Tech
-    Arr_PTVs(10, 0) = 2 'АНР
-        Arr_PTVs(10, 1) = vb_ShapeType_Tech
-    Arr_PTVs(11, 0) = 20 'Рукавный автомобиль
-        Arr_PTVs(11, 1) = vb_ShapeType_Tech
+    Arr_PTVs(8, 0) = 72  'Колонка
+        Arr_PTVs(8, 1) = vb_ShapeType_PTV
+    Arr_PTVs(9, 0) = 88  'Всасывающая линия с сеткой
+        Arr_PTVs(9, 1) = vb_ShapeType_VsasSet
+    Arr_PTVs(10, 0) = 100 'Напорная линия
+        Arr_PTVs(10, 1) = vb_ShapeType_Hose
+    Arr_PTVs(11, 0) = 101 'Всасывающая линия
+        Arr_PTVs(11, 1) = vb_ShapeType_Hose
+    Arr_PTVs(12, 0) = 1 'Автоцистерна пожарная
+        Arr_PTVs(12, 1) = vb_ShapeType_Tech
+    Arr_PTVs(13, 0) = 2 'АНР
+        Arr_PTVs(13, 1) = vb_ShapeType_Tech
+    Arr_PTVs(14, 0) = 20 'Рукавный автомобиль
+        Arr_PTVs(14, 1) = vb_ShapeType_Tech
+    Arr_PTVs(15, 0) = 161 'АЦЛ
+        Arr_PTVs(15, 1) = vb_ShapeType_Tech
+    Arr_PTVs(16, 0) = 162 'АЦКП
+        Arr_PTVs(16, 1) = vb_ShapeType_Tech
+    Arr_PTVs(17, 0) = 163 'АПП
+        Arr_PTVs(17, 1) = vb_ShapeType_Tech
+    Arr_PTVs(18, 0) = 8 'ПНС
+        Arr_PTVs(18, 1) = vb_ShapeType_Tech
+    Arr_PTVs(19, 0) = 9 'АА
+        Arr_PTVs(19, 1) = vb_ShapeType_Tech
+    Arr_PTVs(20, 0) = 20 'АР
+        Arr_PTVs(20, 1) = vb_ShapeType_Tech
+    Arr_PTVs(21, 0) = 13 'АГВТ
+        Arr_PTVs(21, 1) = vb_ShapeType_Tech
+    Arr_PTVs(22, 0) = 28 'мотопомпа
+        Arr_PTVs(22, 1) = vb_ShapeType_Tech
+    Arr_PTVs(23, 0) = 190 'Емкость с водой
+        Arr_PTVs(23, 1) = vb_ShapeType_WaterContainer
+    Arr_PTVs(24, 0) = 191 'Пенная вставка
+        Arr_PTVs(24, 1) = vb_ShapeType_Tech  'Как ни странно, но так лучше
+    Arr_PTVs(25, 0) = 10 'автомобиль пенного тушения
+        Arr_PTVs(25, 1) = vb_ShapeType_Tech
+    Arr_PTVs(26, 0) = 41 'пеносмеситель
+        Arr_PTVs(26, 1) = vb_ShapeType_Tech  'Как ни странно, но так лучше
+    Arr_PTVs(27, 0) = 22 'Гребенка пеногенераторов
+        Arr_PTVs(27, 1) = vb_ShapeType_PTV
+    Arr_PTVs(28, 0) = 105 'Водосборник
+        Arr_PTVs(28, 1) = vb_ShapeType_Razv
+        
+        
         
 '---Указываем значение по умолчанию
     f_IdentShape = vb_ShapeType_Other
 
 '---Проверяем является ли фигура
-        For i = 0 To 11
+        For i = 0 To 28
             If ai_ShapeIP = Arr_PTVs(i, 0) Then f_IdentShape = Arr_PTVs(i, 1): Exit Function
         Next i
 
