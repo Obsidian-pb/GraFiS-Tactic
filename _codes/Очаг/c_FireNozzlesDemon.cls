@@ -80,31 +80,31 @@ End Sub
 
 Public Sub FindNozzles()
 'Формируем коллекцию стволов
-Dim shp As Visio.Shape
+Dim Shp As Visio.Shape
 Dim nozzle As c_FireNozzleModel
 Dim indexPers As Integer
     
-    For Each shp In Application.ActivePage.Shapes
-        If shp.CellExists("User.IndexPers", 0) Then
-            indexPers = shp.Cells("User.IndexPers").Result(visNumber)
+    For Each Shp In Application.ActivePage.Shapes
+        If Shp.CellExists("User.IndexPers", 0) Then
+            indexPers = Shp.Cells("User.IndexPers").Result(visNumber)
             If indexPers = 34 Or indexPers = 36 Or indexPers = 39 Then      '34 - ручной водяной ствол, 36 - лафетный водяной, 39 - возимый водяной
                 'Проверка на маневренность
-                If shp.Cells("Actions.MainManeure.Checked").Result(visNumber) = 0 Then
+                If Shp.Cells("Actions.MainManeure.Checked").Result(visNumber) = 0 Then
                     Set nozzle = New c_FireNozzleModel
                     If indexPers = 34 Then      '34 - ручной водяной ствол, 36 - лафетный водяной, 39 - возимый водяной
                         nozzle.nozzleType = waterHand
                     ElseIf indexPers = 36 Or indexPers = 39 Then
                         nozzle.nozzleType = waterLafet
                     End If
-                    Set nozzle.position = GetNozzlePosition(shp.Cells("PinX").Result(visMillimeters), _
-                        shp.Cells("PinY").Result(visMillimeters))
-                    nozzle.waterExpense = shp.Cells("User.PodOut").Result(visNumber)
-                    nozzle.angle = shp.Cells("Angle").Result(visNumber) + halfRadian
+                    Set nozzle.position = GetNozzlePosition(Shp.Cells("PinX").Result(visMillimeters), _
+                        Shp.Cells("PinY").Result(visMillimeters))
+                    nozzle.waterExpense = Shp.Cells("User.PodOut").Result(visNumber)
+                    nozzle.angle = Shp.Cells("Angle").Result(visNumber) + halfRadian
                     nozzles.Add nozzle
                 End If
             End If
         End If
-    Next shp
+    Next Shp
 End Sub
 
 Private Function GetNozzlePosition(ByVal xPos As Double, ByVal yPos As Double) As c_Cell

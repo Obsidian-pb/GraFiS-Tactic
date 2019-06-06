@@ -194,7 +194,7 @@ Public Sub ClearLayer(ByVal layerName As String)
     vsoSelection.Delete
 End Sub
 
-Public Function ShapeIsLine(ByRef shp As Visio.Shape) As Boolean
+Public Function ShapeIsLine(ByRef Shp As Visio.Shape) As Boolean
 'Функция возвращает истина, если переданная фигура - простая прямая линия, Ложь - если иначе
 Dim isLine As Boolean
 Dim isStrait As Boolean
@@ -203,8 +203,8 @@ Dim isStrait As Boolean
     
     On Error GoTo EX
     
-    If shp.RowCount(visSectionFirstComponent) <> 3 Then Exit Function       'Строк в секции геометрии больше или меньше двух
-    If shp.RowType(visSectionFirstComponent, 2) <> 139 Then Exit Function   '139 - LineTo
+    If Shp.RowCount(visSectionFirstComponent) <> 3 Then Exit Function       'Строк в секции геометрии больше или меньше двух
+    If Shp.RowType(visSectionFirstComponent, 2) <> 139 Then Exit Function   '139 - LineTo
     
 ShapeIsLine = True
 Exit Function
