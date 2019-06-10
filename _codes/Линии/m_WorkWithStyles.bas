@@ -1,17 +1,21 @@
 Attribute VB_Name = "m_WorkWithStyles"
 '----------------------------В модуле хранятся процедуры работы со стилями--------------------------------------
-Dim Line_StyleSet(4) As String
+Dim PTV_StyleSet(10) As String
 
 
 Private Sub s_StyleSetsDeclare()
 'Процедура задает перечень стилей для обновления
-'---Стили "Линии"
-    Line_StyleSet(0) = "Р_Вс"
-    Line_StyleSet(1) = "Р_Нап"
-    Line_StyleSet(2) = "Р_НВ"
-    Line_StyleSet(3) = "Р_Подпись"
-    
-    
+'---Стили "Пожарная техника"
+    PTV_StyleSet(0) = "ПТВ_ГидрОбор"
+    PTV_StyleSet(1) = "ПТВ_ГидрПодпись"
+    PTV_StyleSet(2) = "ПТВ_Дымососы"
+    PTV_StyleSet(3) = "ПТВ_Дымососы_Подпись"
+    PTV_StyleSet(4) = "ПТВ_Лестницы"
+    PTV_StyleSet(5) = "Т_Позывные"
+    PTV_StyleSet(6) = "Р_Вс"
+    PTV_StyleSet(7) = "ПТВ_ОТ_Контур"
+    PTV_StyleSet(8) = "ПТВ_ОТ_Знак"
+    PTV_StyleSet(9) = "ПТВ_Ведро"
 End Sub
 
 
@@ -28,13 +32,13 @@ Dim i As Integer
     Set vO_Doc = Application.ActiveDocument
     
     '---Перебираем все стили трафарета
-        For i = 0 To UBound(Line_StyleSet()) - 1
+        For i = 0 To UBound(PTV_StyleSet()) - 1
         '---Выбираем очередной стиль трафарета
-        Set vO_Stl = ThisDocument.Styles(Line_StyleSet(i))
+        Set vO_Stl = ThisDocument.Styles(PTV_StyleSet(i))
         '---Проверяем есть ли указаный стиль PT_StyleSet(i) в активном документе
-            If StyleExist(Line_StyleSet(i)) Then
+            If StyleExist(PTV_StyleSet(i)) Then
             '---Если есть - обновляем его
-                StyleRefresh Line_StyleSet(i)
+                StyleRefresh PTV_StyleSet(i)
             Else
             '---Если нет - вбрасываем стиь PT_StyleSet(i) в активный документе
                 vO_Doc.Drop vO_Stl, 0, 0
@@ -55,6 +59,7 @@ Dim vO_StyleTo As Visio.style
 Dim vs_RowName As String
 
     On Error GoTo EX
+
 '---Создвем необходимый набор объектов
     Set vO_StyleFrom = ThisDocument.Styles(as_StyleName)
     Set vO_StyleTo = ActiveDocument.Styles(as_StyleName)
@@ -106,13 +111,13 @@ Dim vs_RowName As String
     Set vO_StyleFrom = Nothing
     Set vO_StyleTo = Nothing
     Set vO_Stenc = Nothing
-    
 Exit Sub
 EX:
 '---Очищаем объекты
     Set vO_StyleFrom = Nothing
     Set vO_StyleTo = Nothing
     Set vO_Stenc = Nothing
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "StyleRefresh"
 End Sub
 
@@ -121,12 +126,10 @@ Private Function StyleExist(as_StyleName As String) As Boolean
 'Функция возвращает булево значение наличия данного стиля в активном документе
 Dim vO_Style As Visio.style
 
-StyleExist = False
-
-For Each vO_Style In Application.ActiveDocument.Styles
-    If vO_Style.Name = as_StyleName Then StyleExist = True
-Next vO_Style
+    StyleExist = False
+    
+    For Each vO_Style In Application.ActiveDocument.Styles
+        If vO_Style.Name = as_StyleName Then StyleExist = True
+    Next vO_Style
 
 End Function
-
-
