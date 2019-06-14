@@ -15,7 +15,7 @@ On Error Resume Next
         ShpObj.Cells("User.WaterExpence").FormulaU = "Sheet." & ToShape & "!Prop.Flow.Value" & ""
         ShpObj.Cells("User.Resistance").FormulaU = "Sheet." & ToShape & "!Prop.HoseResistance.Value" & ""
         ShpObj.Cells("User.LineLenight").FormulaU = "Sheet." & ToShape & "!User.TotalLenight" & ""
-        ShpObj.Cells("User.Pressure").FormulaU = "Sheet." & ToShape & "!User.TotalLenight" & ""
+        ShpObj.Cells("Prop.Pressure").FormulaU = "ROUND(Sheet." & ToShape & "!Prop.HeadInHose*Prop.Koeff,4)" & ""
     Else
         ToShape = ShpObj.Connects.Item(1).ToSheet.ID
         ShpObj.Cells("User.HoseDiameter").FormulaU = 0
@@ -23,7 +23,7 @@ On Error Resume Next
         ShpObj.Cells("User.WaterExpence").FormulaU = 0
         ShpObj.Cells("User.Resistance").FormulaU = 0
         ShpObj.Cells("User.LineLenight").FormulaU = 0
-        ShpObj.Cells("User.Pressure").FormulaU = 0
+        ShpObj.Cells("Prop.Pressure").FormulaU = 0
     End If
 
 End Sub

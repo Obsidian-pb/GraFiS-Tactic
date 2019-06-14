@@ -213,8 +213,8 @@ On Error GoTo EX
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 1
             End If
             
-                        '---Дополнение для водосборника, разветвления:
-            If vi_IPInShape = 105 Or vi_IPInShape = 42 Then
+                        '---Дополнение для водосборника, разветвления, collector:
+            If vi_IPInShape = 105 Or vi_IPInShape = 42 Or vi_IPInShape = 107 Then
             '---Указываем, что к фигуре подсоединены рукава на вход
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 1
             '---Указываем какие рукава присоеденены к ВС
@@ -236,8 +236,8 @@ On Error GoTo EX
                 "Sheet." & cpO_InShape.ID & "!Scratch.D1"
             cpO_InShape.Cells("User.FlowFromShape").Formula = """" & CStr(cpO_OutShape.NameU) & """"
         
-              '---Дополнение для водосборника, разветвления :
-            If vi_IPOutShape = 105 Or vi_IPOutShape = 42 Then
+              '---Дополнение для водосборника, разветвления, collector :
+            If vi_IPOutShape = 105 Or vi_IPOutShape = 42 Or vi_IPOutShape = 107 Then
             cpO_OutShape.Cells("Scratch.B" & CStr(ai_OutRowNumber + 1)).Formula = "Sheet." & cpO_InShape.ID & "!Prop.HoseDiameter"
             cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).Formula = 1
             End If
@@ -467,8 +467,8 @@ On Error GoTo EX
             '---Указываем, что от фигуры отсоединяются рукава на вход
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
             End If
-            '---Дополнение для водосборника и разветвления:
-            If vi_IPInShape = 105 Or vi_IPInShape = 42 Then
+            '---Дополнение для водосборника, разветвления, collector:
+            If vi_IPInShape = 105 Or vi_IPInShape = 42 Or vi_IPInShape = 107 Then
             '---оtсоединены рукава
             cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
             '---обнуление диаметров рукавов
@@ -622,7 +622,7 @@ End Function
 '----------------------------------------Служебные Функции-----------------------------------------------
 Private Function f_IdentShape(ByVal ai_ShapeIP As Integer) As Integer
 'Функция идентифициурет фигуру и возвращает значение её типа
-Dim Arr_PTVs(28, 1) As Integer
+Dim Arr_PTVs(29, 1) As Integer
 Dim i As Integer
 
 '---Указываем значения IndexPers и соответствующие им определения
@@ -684,6 +684,8 @@ Dim i As Integer
         Arr_PTVs(27, 1) = vb_ShapeType_PTV
     Arr_PTVs(28, 0) = 105 'Водосборник
         Arr_PTVs(28, 1) = vb_ShapeType_Razv
+    Arr_PTVs(29, 0) = 107 'Collector
+        Arr_PTVs(29, 1) = vb_ShapeType_Razv
         
         
         
@@ -691,7 +693,7 @@ Dim i As Integer
     f_IdentShape = vb_ShapeType_Other
 
 '---Проверяем является ли фигура
-        For i = 0 To 28
+        For i = 0 To 29
             If ai_ShapeIP = Arr_PTVs(i, 0) Then f_IdentShape = Arr_PTVs(i, 1): Exit Function
         Next i
 

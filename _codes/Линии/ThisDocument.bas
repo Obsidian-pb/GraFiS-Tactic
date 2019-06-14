@@ -7,132 +7,200 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-Dim WithEvents PTVAppEvents As Visio.Application
-Attribute PTVAppEvents.VB_VarHelpID = -1
+Dim ButEvent As Class1
+Dim C_ConnectionsTrace As c_HoseConnector
+Dim WithEvents LineAppEvents As Visio.Application
+Attribute LineAppEvents.VB_VarHelpID = -1
+
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
-'Процедура при закрытии документа
+'Процедура закрытия документа и удаления его рабочих элементов
 
+'---Очищаем объект ButEvent и удаляем кнопку "Рукав" с панели управления "Превращения"
+    Set ButEvent = Nothing
+    DeleteButtonLine
+    DeleteButtonMLine
+    DeleteButtonVHose
+    
+'---В случае, если на панели "Превращения нет ни одной кнопки, удаляем её
+    If Application.CommandBars("Превращения").Controls.Count = 0 Then RemoveTBImagination
+    
 '---Очищаем переменную приложения
-Set PTVAppEvents = Nothing
+Set LineAppEvents = Nothing
+Set C_ConnectionsTrace = Nothing
 End Sub
 
+
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
-'Процедура при открытии документа
+
+    On Error GoTo EX
+'---Показываем окно свойств
+    Application.ActiveWindow.Windows.ItemFromID(visWinIDCustProp).Visible = True
 
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
 
-'---Показываем окно свойств
-    Application.ActiveWindow.Windows.ItemFromID(visWinIDCustProp).Visible = True
-    
+'---Объявляем переменную приложения для дальнейшего реагирования на изменение содержимого ячеек
+    Set LineAppEvents = Visio.Application
+'---Активируем экземпляр класса для отслеживания соединений
+    Set C_ConnectionsTrace = New c_HoseConnector
+
+'---Импортируем мастера
+    sp_MastersImport
+
+'---Добавляем ячейку Аспект (если еще не была добавлена)
+    If Not Application.ActivePage.PageSheet.CellExists("User.GFS_Aspect", 0) Then
+        Application.ActivePage.PageSheet.AddNamedRow visSectionUser, "GFS_Aspect", 0
+        Application.ActivePage.PageSheet.Cells("User.GFS_Aspect").FormulaU = 1
+    End If
+
 '---ОБновляем/экспортируем в активный документ стили трафарета
     '---Проверяем не является ли активный документ документом цветовой схемы
     If Application.ActiveDocument.DocumentSheet.CellExists("User.GFSColorTheme", 0) = 0 Then
         StyleExport
     End If
 
-'---Объявляем переменную приложения для дальнейшего реагирования на изменение содержимого ячеек
-    Set PTVAppEvents = Visio.Application
+'---Создаем панель управления "Превращения" и добавляем на нее кнопку "Обратить в линию"
+    AddTBImagination   'Добавляем тулбокс Обрашщения
+    AddButtonLine      'Добавляем кнопку рабочей линии
+    AddButtonMLine     'Добавляем фигуру магистральной линии
+    AddButtonVHose     'Добавляем кнопку всасывающей линии
+
+Set ButEvent = New Class1
+
+'---Активируем опцию приклеивания к контурам фигур
+    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints
+
+'---Добавляем для документа своство "FireTime"
+    sm_AddFireTime
     
 '---Проверяем наличие обновлений
     fmsgCheckNewVersion.CheckUpdates
+    
+Exit Sub
+EX:
+    SaveLog Err, "Document_DocumentOpened"
+End Sub
+
+
+Private Sub LineAppEvents_CellChanged(ByVal cell As IVCell)
+'Процедура обновления списков в фигурах
+Dim ShpInd As Integer
+Dim Shp As Visio.Shape
+Dim Con As Visio.Connect
+Dim Shp2 As Visio.Shape
+Dim Con2 As Visio.Connect
+'---Проверяем имя ячейки
+    
+    If cell.Name = "Prop.HoseMaterial" Or cell.Name = "Prop.HoseDiameter" Then
+        ShpInd = cell.Shape.ID
+        '---Запускаем процедуру получения СПИСКОВ диаметров рукавов
+        HoseDiametersListImport (ShpInd)
+        '---Запускаем процедуру получения ЗНАЧЕНИЙ Сопротивлений рукавов
+        HoseResistanceValueImport (ShpInd)
+        '---Запускаем процедуру получения ЗНАЧЕНИЙ Пропускной способности рукавов
+        HoseMaxFlowValueImport (ShpInd)
+        '---Запускаем процедуру получения ЗНАЧЕНИЙ Массы рукавов
+        HoseWeightValueImport (ShpInd)
+    End If
+    
+    'Если изменена ячейка "User.UseAsRazv" фигуры "Водосборник"
+    If cell.Name = "User.UseAsRazv" Then
+        '---Запускаем процедуру обновления рукавных соединений для Водосборника
+        
+        Set Shp = cell.Shape
+        
+        For Each Con In Shp.FromConnects
+            Set Shp2 = Con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
+            For Each Con2 In Shp2.Connects
+                C_ConnectionsTrace.Ps_ConnectionAdd Con2
+            Next Con2
+        Next Con
+
+    End If
+    
+
+
+'В случае, если произошло изменение не нужной ячейки прекращаем событие
+End Sub
+
+Private Sub sp_TemplatesImport()
+
+Visio.Application.ActivePage.Drop (ThisDocument.Masters("ВсасывающийРукав"))
 
 End Sub
 
-Private Sub PTVAppEvents_CellChanged(ByVal cell As IVCell)
-'Процедура обновления списков в фигурах
-Dim ShpInd As Integer
-'---Проверяем имя ячейки
-'MsgBox Cell.Name
+
+Private Sub sp_MastersImport()
+'---Импортируем мастера
+
+    MasterImportSub "Линии.vss", "ВсасывающийРукав"
+    MasterImportSub "Линии.vss", "ВсасывающийРукав1000"
+    MasterImportSub "Линии.vss", "НапорноВсасывающийРукав"
     
+End Sub
+
+
+Private Sub sm_AddFireTime()
+'Процедура добавляет в документ свойство - время начала пожара, в случае его отсутствия
+
+    If Application.ActiveDocument.DocumentSheet.CellExists("User.FireTime", 0) = False Then
+        Application.ActiveDocument.DocumentSheet.AddNamedRow visSectionUser, "FireTime", 0
+        Application.ActiveDocument.DocumentSheet.Cells("User.FireTime").FormulaU = "Now()"
+    End If
+
+End Sub
+
+Private Sub LineAppEvents_ShapeAdded(ByVal Shape As IVShape)
+'Событие добавления на лист фигуры
+Dim v_Cntrl As CommandBarControl
+Dim SecExists As Boolean
+    
+'---Включаем обработку ошибок
     On Error GoTo Tail
-    
-    If cell.Name = "Prop.TTHType" Or cell.Name = "Prop.StvolType" Or cell.Name = "Prop.Variant" _
-            Or cell.Name = "Prop.StreamType" Or cell.Name = "Prop.Head" Then
-        ShpInd = cell.Shape.ID
-        'Проверяем, необходимо ли обновлять значения из БД
-        If cell.Shape.Cells("Prop.TTHType").ResultStr(visString) = "По модели ствола" Then
-            '---Запускаем процедуру получения СПИСКОВ стволов
-            If cell.Name = "Prop.TTHType" Then
-                StvolModelsListImport (ShpInd)
-            End If
-            
-            '---Запускаем процедуру получения списков ВАРИАНТОВ стволов
-            If cell.Name = "Prop.TTHType" Or cell.Name = "Prop.StvolType" Then
-                StvolVariantsListImport (ShpInd)
-            End If
-            
-            '---Запускаем процедуру получения Кратности для пенных стволов в соответствии с его моделью
-            StvolRFImport (ShpInd)
-            
-            '---Запускаем процедуру получения списков ВИДОВ СТРУЙ стволов
-            If cell.Name = "Prop.TTHType" Or cell.Name = "Prop.StvolType" Or cell.Name = "Prop.Variant" Then
-                StvolStreamTypesListImport (ShpInd)
-            End If
-            
-            '---Запускаем процедуру получения Условного прохода ствола в соответствии с его ВИДОМ СТРУИ
-            StvolDiameterInImport (ShpInd)
-            
-            '---Запускаем процедуру получения списка НАПОРОВ для данного вида струи стволов
-            If cell.Name = "Prop.TTHType" Or cell.Name = "Prop.StvolType" Or cell.Name = "Prop.Variant" _
-                Or cell.Name = "Prop.StreamType" Then
-                StvolHeadListImport (ShpInd)
-            End If
-            
-            '---Запускаем процедуру получения ТИПА СТРУи ствола в соответствии с его ВИДОМ СТРУИ (компактная, распыленная или иная)
-            If cell.Name = "Prop.TTHType" Or cell.Name = "Prop.StvolType" Or cell.Name = "Prop.Variant" _
-                Or cell.Name = "Prop.StreamType" Then
-                StvolStreamValueImport (ShpInd)
-            End If
-            
-            '---Запускаем процедуру пересчета расхода воды из ствола
-            If cell.Name = "Prop.TTHType" Or cell.Name = "Prop.StvolType" Or cell.Name = "Prop.Variant" _
-                Or cell.Name = "Prop.StreamType" Or cell.Name = "Prop.Head" Then
-                StvolProductionImport (ShpInd)
-            End If
-            
-            
+
+'---Проверяем какая кнопка нажата и в зависимости от этого выполняем действие
+    For Each v_Ctrl In Application.CommandBars("Превращения").Controls
+        If v_Ctrl.State = msoButtonDown Then
+            Select Case v_Ctrl.Caption
+                Case Is = "Рукав"
+                    '---Запускаем процедуру обращения в рабочую рукавную линию
+                    If IsSelectedOneShape(False) Then
+                    '---Если выбрана хоть одна фигура - пытаемся ее обратить
+                        If Not IsHavingUserSection(False) And Not IsSquare(False) Then
+                        '---Обращаем фигуру в фигуру рабочей рукавной линии
+'                            ButEvent.MakeHoseLine
+                            MakeHoseLine 51, 0
+                        End If
+                    End If
+                Case Is = "Всасывающий рукав"
+                    '---Запускаем процедуру обращения во всасывающую рукавную линию
+                    If IsSelectedOneShape(False) Then
+                    '---Если выбрана хоть одна фигура - пытаемся ее обратить
+                        If Not IsHavingUserSection(False) And Not IsSquare(False) Then
+                        '---Обращаем фигуру в фигуру всасывающей рукавной линии
+'                            ButEvent.MakeVHoseLine
+                            MakeVHoseLine
+                        End If
+                    End If
+                Case Is = "Магистральная линия"
+                    '---Запускаем процедуру обращения в магистральную рукавную линию
+                    If IsSelectedOneShape(False) Then
+                    '---Если выбрана хоть одна фигура - пытаемся ее обратить
+                        If Not IsHavingUserSection(False) And Not IsSquare(False) Then
+                        '---Обращаем фигуру в фигуру магистральной рукавной линии
+'                            ButEvent.MakeMagHoseLine
+                            MakeHoseLine 77, 1
+                        End If
+                    End If
+            End Select
         End If
-    End If
+    Next v_Ctrl
     
-    '---Получаем ссылку на страничку в wiki-fire.org (только для стволов!!!)
-    If cell.Name = "Prop.StvolType" Then
-        If cell.Shape.Cells("Prop.TTHType").ResultStr(visString) = "По модели ствола" Then
-            '---Запускаем проку получения ссылки на wiki-fire.org
-            StvolWFLinkImport (ShpInd)
-        Else
-            StvolWFLinkFree (ShpInd)
-        End If
-    End If
-    
-    If cell.Name = "Prop.WEType" Then
-        ShpInd = cell.Shape.ID
-        '---Запускаем процедуру получения СПИСКОВ гидроэлеваторов
-        WEModelsListImport (ShpInd)
-        '---Запускаем процедуру пересчета расхода воды из ствола
-        StvolProductionImport (ShpInd)
-    End If
-    
-    If cell.Name = "Prop.WFType" Then
-        ShpInd = cell.Shape.ID
-        '---Запускаем процедуру получения СПИСКОВ Всасывающих сеток
-        WFModelsListImport (ShpInd)
-        '---Запускаем процедуру пересчета производительности всасывающих сеток
-        StvolProductionImport (ShpInd)
-    End If
-    
-    If cell.Name = "Prop.ColPressure" Or cell.Name = "Prop.Patr" Then
-        ShpInd = cell.Shape.ID
-        '---Запускаем процедуру пересчета производительности колонок
-        ColFlowMaxImport (ShpInd)
-    End If
-    
-'В случае, если произошло изменение не нужной ячейки прекращаем событие
 Exit Sub
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
-    SaveLog Err, "PTVAppEvents_CellChanged"
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчику."
+    SaveLog Err, "Document_DocumentOpened"
 End Sub
 
 Private Sub AddTimeUserCells()

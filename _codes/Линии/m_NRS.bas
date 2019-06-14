@@ -42,6 +42,7 @@ Public Hose200NV_Count As Integer
 
 Public Razv_Count As Integer
 Public VS_Count As Integer
+Public Collector As Integer
 Public GE_Count As Integer
 Public PS_Count As Integer
 Public VsasSetc_Count As Integer
@@ -175,6 +176,7 @@ Dim totalStr As String
     
     If Razv_Count > 0 Then totalStr = totalStr & "Разветвлений - " & Razv_Count & Chr(10)
     If VS_Count > 0 Then totalStr = totalStr & "Водосборников - " & VS_Count & Chr(10)
+    If Collector > 0 Then totalStr = totalStr & "Коллекторов - " & VS_Count & Chr(10)
     If GE_Count > 0 Then totalStr = totalStr & "Гидроэлеваторов - " & GE_Count & Chr(10)
     If PS_Count > 0 Then totalStr = totalStr & "Пеносмесителей - " & PS_Count & Chr(10)
     If PV_Count > 0 Then totalStr = totalStr & "Пенных вставок - " & PV_Count & Chr(10)
@@ -221,6 +223,7 @@ Public Sub ClearVaraibles()
     
      Razv_Count = 0
      VS_Count = 0
+     Collector = 0
      GE_Count = 0
      PS_Count = 0
      VsasSetc_Count = 0
@@ -350,6 +353,8 @@ Dim vsi_ShapeIndex As Integer
                             Razv_Count = Razv_Count + 1
                         Case Is = 105 'Vodosbornik
                             VS_Count = VS_Count + 1
+                        Case Is = 107 'Collector
+                            Collector = Collector + 1
                         Case Is = 45 'Пеноподъемник
                         Case Is = 22 'Гребенка
                         Case Is = 191 'Пенная вставка
