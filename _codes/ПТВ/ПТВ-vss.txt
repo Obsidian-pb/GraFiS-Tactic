@@ -1455,7 +1455,6 @@
     User.LabelTop: IF(Actions.LabelShow.Checked;Prop.Mark;"")&IF(Actions.NumberShow.Checked;" №"&Prop.Number;""); User.LabelTop.Prompt: ""; 
     User.LabelBottom: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";"")&IF(OR(Actions.UnitShow.Checked;Actions.CallShow.Checked);CHAR(10);"")&IF(Actions.SetTimeShow.Checked;FORMAT(Prop.SetTime;"HH:mm");""); User.LabelBottom.Prompt: ""; 
     User.ShapeColor3: Char.Color; User.ShapeColor3.Prompt: "Цвет позывного"; 
-    User.InPage: 1; User.InPage.Prompt: "+"; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"ПТВ")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")&SETF("Prop.Number";Prop.Number+1); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
@@ -1802,7 +1801,7 @@
     Prop.HeadLost: 0; Prop.HeadLost.Prompt: "Потери напора на приборе, м"; Prop.HeadLost.Label: "Потери напора (м)"; Prop.HeadLost.Format: ""; Prop.HeadLost.SortKey: 40; Prop.HeadLost.Type: 2; Prop.HeadLost.Invisible: FALSE; Prop.HeadLost.Verify: FALSE; Prop.HeadLost.LangID: 1049; 
     Prop.RazvNumber: "РТ-1"; Prop.RazvNumber.Prompt: "Подпись коллектора"; Prop.RazvNumber.Label: "Подпись"; Prop.RazvNumber.Format: ""; Prop.RazvNumber.SortKey: 23; Prop.RazvNumber.Type: 0; Prop.RazvNumber.Invisible: TRUE; Prop.RazvNumber.Verify: FALSE; Prop.RazvNumber.LangID: 1049; 
     Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Подразделение пожарной охраны которому принадлежит разветвление"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: "ПЧ-1;ПЧ-10;ПЧ-15;ПЧ-19;ПЧ-2;ПЧ-24;ПЧ-3;ПЧ-4;ПЧ-47;ПЧ-5;ПЧ-6;ПЧ-7;ПЧ-8;ПЧ-9;СПСЧ"; Prop.Unit.SortKey: 20; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
-    Prop.SetTime: 43602,728240741; Prop.SetTime.Prompt: "Полное географическое время установки"; Prop.SetTime.Label: "Время установки"; Prop.SetTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.SetTime.SortKey: 24; Prop.SetTime.Type: 5; Prop.SetTime.Invisible: FALSE; Prop.SetTime.Verify: FALSE; Prop.SetTime.DataLinked: FALSE; Prop.SetTime.LangID: 1049; 
+    Prop.SetTime.Prompt: "Полное географическое время установки"; Prop.SetTime.Label: "Время установки"; Prop.SetTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.SetTime.SortKey: 24; Prop.SetTime.Type: 5; Prop.SetTime.Invisible: FALSE; Prop.SetTime.Verify: FALSE; Prop.SetTime.DataLinked: FALSE; Prop.SetTime.LangID: 1049; 
     Prop.Call: ""; Prop.Call.Prompt: "Позывной работающего на коллекторе"; Prop.Call.Label: "Позывной"; Prop.Call.Format: ""; Prop.Call.SortKey: 21; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
     Prop.StreamThrough: Scratch.D4; Prop.StreamThrough.Prompt: "Расход воды через разветвление"; Prop.StreamThrough.Label: "Расход (л/с)"; Prop.StreamThrough.Format: ""; Prop.StreamThrough.SortKey: "42"; Prop.StreamThrough.Type: 2; Prop.StreamThrough.Invisible: FALSE; Prop.StreamThrough.Verify: FALSE; Prop.StreamThrough.DataLinked: FALSE; Prop.StreamThrough.LangID: 1049; 
     Prop.Personnel: 0; Prop.Personnel.Prompt: "Количество линого состава работающего на разветвлении"; Prop.Personnel.Label: "Личный состав"; Prop.Personnel.Format: ""; Prop.Personnel.SortKey: 22; Prop.Personnel.Type: 2; Prop.Personnel.Invisible: FALSE; Prop.Personnel.Verify: FALSE; Prop.Personnel.LangID: 1049; Prop.Personnel.Calendar: 0; 
@@ -1829,7 +1828,6 @@
     User.LabelTop: IF(Actions.LabelShow.Checked;Prop.Mark;"")&IF(Actions.NumberShow.Checked;CHAR(10)&"№"&Prop.Number;""); User.LabelTop.Prompt: ""; 
     User.LabelBottom: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";"")&IF(OR(Actions.UnitShow.Checked;Actions.CallShow.Checked);CHAR(10);"")&IF(Actions.SetTimeShow.Checked;FORMAT(Prop.SetTime;"HH:mm");""); User.LabelBottom.Prompt: ""; 
     User.ShapeColor3: Char.Color; User.ShapeColor3.Prompt: "Цвет позывного"; 
-    User.InPage: 0; User.InPage.Prompt: "+"; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"ПТВ")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")&SETF("Prop.Number";Prop.Number+1); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
