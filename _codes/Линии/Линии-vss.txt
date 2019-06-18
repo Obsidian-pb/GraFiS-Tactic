@@ -786,6 +786,8 @@
     HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "0"; 
   Section Object, row: visRowLine>>>
     LineWeight: 0,72 пт; LineColor: Styles!Р_Мостик!LineColor; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; CompoundType: 0; 
   Section Object, row: visRowLock>>>
