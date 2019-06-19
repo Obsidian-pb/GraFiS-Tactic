@@ -1,4 +1,4 @@
-Attribute VB_Name = "m_webTools"
+Attribute VB_Name = "m_WEbTools"
 Option Explicit
 '----------------------Различные инструменты-----------------------
 
@@ -21,9 +21,14 @@ Const SW_SHOWNORMAL = 1
     
     If Len(strMain) > 0 Then
         If InStr(1, strMain, "wiki-fire.org") = 0 Then Exit Sub 'Если в строкой ссылке нет указания на wiki-fire.org - прекращаем выход на страничку - можно выходить ТОЛЬКО на странички wiki-fire.org
+'        Shell "cmd /cstart http://www.cbr.ru/"
         Shell "cmd /cstart " & strMain
+'        ShellExecute 0&, "Open", strMain, _
+                vbNullString, vbNullString, SW_SHOWNORMAL
     Else
         Shell "cmd /cstart http://wiki-fire.org/" & strAlt & ".ashx"
+'        ShellExecute 0&, "Open", "http://wiki-fire.org/" & strAlt & ".ashx", _
+'                vbNullString, vbNullString, SW_SHOWNORMAL
     End If
 End Sub
 
