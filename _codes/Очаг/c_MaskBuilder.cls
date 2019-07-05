@@ -141,9 +141,6 @@ On Error GoTo Tail
     Set col_Shadows = Nothing
 Exit Sub
 Tail:
-'    Debug.Print Err.Description
-'    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
-'    SaveLog Err, "s_makeMaskWalls"
     Set col_Shadows = Nothing
 End Sub
 
@@ -161,17 +158,12 @@ Dim rect As c_Rect
     '---перебираем все фигуры дверей
     For Each vO_Shape In col_DoorsShapes
         'Проеверяем необходимо ли проверять открытие двери (Не нужно но пока оставлю)
-'        If PB_CheckOpens Then
             'Проверяем открыты ли двери
             If DoorIsOpen(vO_Shape) Then
                 Set rect = New c_Rect                       'Создаем новую фигуру прямоугольника
                 Set vO_TempShape = rect.GetRectShape(vO_Shape)
                 col_Doors.Add vO_TempShape
             End If
-'        Else
-            
-'        End If
-
 
     Next vO_Shape
     
@@ -259,7 +251,6 @@ On Error GoTo Tail
 Exit Function
 
 Tail:
-'    Debug.Print Err.Description
     DoorIsOpen = True
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "DoorIsOpen"

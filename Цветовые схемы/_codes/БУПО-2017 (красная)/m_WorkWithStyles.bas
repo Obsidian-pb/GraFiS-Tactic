@@ -229,7 +229,7 @@ Dim vs_StyleName As String
 Dim vO_Stenc As Visio.Document
 Dim vO_Stl As Visio.style
 Dim i As Integer
-Dim Line_StyleSet(6) As String 'Линии
+Dim Line_StyleSet(7) As String 'Линии
 
     Line_StyleSet(0) = "Р_Вс"
     Line_StyleSet(1) = "Р_Нап"
@@ -237,6 +237,7 @@ Dim Line_StyleSet(6) As String 'Линии
     Line_StyleSet(3) = "Р_Подпись"
     Line_StyleSet(4) = "Р_Свищ"
     Line_StyleSet(5) = "Р_Мостик"
+    Line_StyleSet(6) = "Т_Позывные"
 
     '---Открываем для записи трафарет
         DocOpenClose "Линии.vss", 1
@@ -247,7 +248,7 @@ Dim Line_StyleSet(6) As String 'Линии
     '---Перебираем все стили трафарета
         For i = 0 To UBound(Line_StyleSet()) - 1
         '---Выбираем очередной стиль трафарета
-        Set vO_Stl = ThisDocument.Styles(Line_StyleSet(i))
+            Set vO_Stl = ThisDocument.Styles(Line_StyleSet(i))
         '---Проверяем есть ли указаный стиль vs_StyleName в трафарете vs_StencName
             If StyleExist("Линии.vss", Line_StyleSet(i)) Then
             '---Если есть - обновляем его

@@ -7,13 +7,6 @@ Public stopModellingFlag As Boolean      'Флаг остановки моделирования
 
 '------------------------Модуль для построения площади пожара с использованием тактического метода-------------------------------------------------
 
-'Public Sub ShowModellerF_InsertFire()
-''    Set frmF_InsertFire = New F_InsertFire
-'    F_InsertFire.Show
-'End Sub
-
-
-
 Public Sub MakeMatrix()
 'Формируем матрицу
 Dim matrix() As Variant
@@ -43,20 +36,13 @@ Dim matrixBuilder As c_MatrixBuilder
     
     'Указываем модельеру значение зерна
     fireModeller.grain = grain
-    
-'    'Указываем модельеру значение требуемой интенсивности подачи воды
-'    fireModeller.intenseNeed = 0.1          'ВРЕМЕННО 0,1 - потом нужно сделать указание из формы!!!
 
     'Ищем фигуры очага и по их координатам устанавливаем точки начала пожара
     GetFirePoints
-
-    '---Печатаем сколько потребовалось времени
-'    MsgBox "Матрица запечена за " & tmr.GetElapsedTime & " сек." & Chr(10) & Chr(13) & "Зерно " & grain & "мм."
     
     F_InsertFire.lblMatrixIsBaked.Caption = "Матрица запечена за " & tmr.GetElapsedTime & " сек."
     F_InsertFire.lblMatrixIsBaked.ForeColor = vbGreen
     
-'    Debug.Print "Матрица запечена..."
     tmr.PrintElapsedTime
     Set tmr = Nothing
 
@@ -91,8 +77,7 @@ Dim matrixBuilder As c_MatrixBuilder
     'Выводим сообщение о итогах обновления
     F_InsertFire.lblMatrixIsBaked.Caption = "Матрица обновлена за " & tmr.GetElapsedTime & " сек."
     F_InsertFire.lblMatrixIsBaked.ForeColor = vbGreen
-    
-'    Debug.Print "Матрица обновлена..."
+
     tmr.PrintElapsedTime
     Set tmr = Nothing
     
@@ -201,15 +186,9 @@ Dim modelledFireShape As Visio.Shape
             Exit Do
         End If
     Loop
-    
-'    fireModeller.distance = realCurrentDistance ' currentDistance
-'    fireModeller.time = currentTime
         
     '---Определяем получившуюся фигуру и обращаем ее в фигуру площади горения
-'    Dim vsoSelection As Visio.Selection
     Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
-'    Dim newFireShape As Visio.Shape
-'    Dim modelledFireShape As Visio.Shape
     Set modelledFireShape = vsoSelection(1)
     Set newFireShape = ActivePage.Drop(modelledFireShape, _
                         modelledFireShape.Cells("PinX").Result(visInches), modelledFireShape.Cells("PinY").Result(visInches))
