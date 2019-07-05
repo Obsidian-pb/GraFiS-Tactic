@@ -27,7 +27,7 @@ Public firedCells As Collection                             'Коллекция горящих к
 Public fireMaxCells As Collection                           'Коллекция горящих на максимум клеток (собственно зона горения)
 Public chargedCells As Collection                           'Коллекция клеток получившех в данном шаге энергию
 Public startedFireCells As Collection                       'Коллекция клеток, которые только загораются, но их мощность еще не максимальна
-Public activeFiredCells As Collection                       'Коллекция активных горящих клеток - тех, что участвуют в расчете - позволяет ускорить расчет в тактической модели, но в физической неприменимо, т.к. на позволяет уитывать гаснущие при тушении клетки
+Public activeFiredCells As Collection                       'Коллекция активных горящих клеток - тех, что участвуют в расчете - позволяет ускорить расчет в тактической модели, но в физической неприменимо, т.к. не позволяет уитывать гаснущие при тушении клетки
 Public fireFrontCells As Collection                         'Коллекция клеток фронта пожара - клеток горящих по максимуму и находящихся на границе зоны распространения огня
 Public keyCornerCells As Collection                         'Коллекция ключевых клеток - клеток в которых есть и огонь и стена и не поностью горящие клетки
 
@@ -99,6 +99,7 @@ Public Sub SetFireCell(ByVal x As Long, ByVal y As Long, Optional value As Doubl
     'Если указанная точка является стеной - выходим из процедуры
     If openSpaceLayer(x, y) = CellState.csWall Then Exit Sub
     
+    On Error Resume Next
     'Указываем данные новой точки
     If value = 0 Then
         currentgPowerLayer(x, y) = maximumBurnPower

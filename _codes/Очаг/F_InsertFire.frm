@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} F_InsertFire 
    Caption         =   "Укажите исходные данные"
-   ClientHeight    =   7320
+   ClientHeight    =   7575
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   8895
@@ -97,6 +97,16 @@ Private Sub btnDeleteMatrix_Click()
     'Указываем, что матрица не запечена
     lblMatrixIsBaked.Caption = "Матрица не запечена."
     lblMatrixIsBaked.ForeColor = vbRed
+End Sub
+
+Private Sub btnRefreshMatrix_Click()
+    If IsAcceptableMatrixSize(1200000) = False Then
+        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы."
+        Exit Sub
+    End If
+    
+    'Обновляем матрицу открытых пространств
+    RefreshOpenSpacesMatrix
 End Sub
 
 Private Sub btnRunFireModelling_Click()

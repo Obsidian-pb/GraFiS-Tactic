@@ -33,6 +33,11 @@ Public Sub setMatrix(ByRef m As c_Matrix)
     Set matrix = m
 End Sub
 
+Public Sub refreshOpenSpaces(ByRef outerMatrix() As Variant)
+'ќбновл€ем матрицу открытых пространств
+    matrix.SetOpenSpace outerMatrix
+End Sub
+
 Public Sub SetFireCell(ByVal x As Long, ByVal y As Long, Optional value As Double)
 '—оздаем новую точку горени€
     matrix.SetFireCell x, y, value
@@ -381,6 +386,19 @@ Private Sub RemoveFromFrontCells(ByVal x As Long, ByVal y As Long)
     matrix.fireFrontCells.Remove x & ":" & y
 End Sub
 
+Public Sub RefreshFirePerimeter()
+'ѕереводим все клетки наход€щиес€ на границе зоны горени€ в активное состо€ние
+'это позвол€ет возобновить расчет при по€влении дыр или при изменении конфигурации открытого пространства
+Dim cell As c_Cell
+    
+    'ѕровер€ем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удал€ем их из коллекций
+    For Each cell In matrix.firedCells
+        If Not matrix.IsInner(cell.x, cell.y) Then
+            AddToActiveCells cell.x, cell.y
+            AddToFrontCells cell.x, cell.y
+        End If
+    Next cell
+End Sub
 
 
 '-----------------------------—войства---------------------------------------------

@@ -160,9 +160,19 @@ Dim rect As c_Rect
     'Формируем коллекцию прямоугольников для исключения из маски стен
     '---перебираем все фигуры дверей
     For Each vO_Shape In col_DoorsShapes
-        Set rect = New c_Rect                       'Создаем новую фигуру прямоугольника
-        Set vO_TempShape = rect.GetRectShape(vO_Shape)
-        col_Doors.Add vO_TempShape
+        'Проеверяем необходимо ли проверять открытие двери (Не нужно но пока оставлю)
+'        If PB_CheckOpens Then
+            'Проверяем открыты ли двери
+            If DoorIsOpen(vO_Shape) Then
+                Set rect = New c_Rect                       'Создаем новую фигуру прямоугольника
+                Set vO_TempShape = rect.GetRectShape(vO_Shape)
+                col_Doors.Add vO_TempShape
+            End If
+'        Else
+            
+'        End If
+
+
     Next vO_Shape
     
     '---Очищаем выделение
@@ -184,6 +194,76 @@ Dim rect As c_Rect
     '---Добавляем маску в слой "Маска стен"
     pO_MaskShape.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = """" & GetLayerNumber("Маска") & """"
 End Sub
+
+Private Function DoorIsOpen(ByRef aO_DoorShape As Visio.Shape) As Boolean
+'Функция возвращает True если дверь открыта
+'!!!На вход принимаются только фигуры дверей!!!
+Dim vI_DoorType As Integer 'Тип двери
+
+On Error GoTo Tail
+
+    '---проверяем имеем ли мы дело с фигурой двери, если нет - выходим из функции
+    If Not aO_DoorShape.Cells("User.ShapeType").Result(visNumber) = 10 Then
+        DoorIsOpen = False
+        Exit Function
+    End If
+
+    vI_DoorType = aO_DoorShape.Cells("User.SubShapeType").Result(visNumber)
+    Select Case vI_DoorType
+        Case Is = 74 'Одностворчатая, двустворчатая распашная
+            If aO_DoorShape.Shapes(9).Cells("Angle") <> 0 Then
+                DoorIsOpen = True
+            End If
+        Case Is = 28 'Двойная, С разными створками, Противолежащие створки
+            Select Case aO_DoorShape.Cells("User.SubShapeType.Prompt").ResultStr(visUnitsString)
+            Case Is = "Двойная"
+                If aO_DoorShape.Shapes(11).Cells("Angle") <> 0 Then
+                    DoorIsOpen = True
+                End If
+            Case Is = "Противолежащие створки"
+                If aO_DoorShape.Shapes(9).Cells("Angle") <> 0 Then
+                    DoorIsOpen = True
+                End If
+            Case Is = "С разными створками"
+                If aO_DoorShape.Shapes(11).Cells("Angle") <> 0 Then
+                    DoorIsOpen = True
+                End If
+            End Select
+        Case Is = 64 'Вращающаяся
+            If aO_DoorShape.Shapes(9).Cells("Angle").ResultInt(visDegrees, 1) = 0 Or _
+                aO_DoorShape.Shapes(10).Cells("Angle").ResultInt(visDegrees, 1) = 0 Or _
+                aO_DoorShape.Shapes(11).Cells("Angle").ResultInt(visDegrees, 1) = 0 Or _
+                aO_DoorShape.Shapes(12).Cells("Angle").ResultInt(visDegrees, 1) = 0 Then
+                DoorIsOpen = False
+            Else
+                DoorIsOpen = True
+            End If
+            
+        '!!!Все прочие ПОКА принимаются открытыми
+        Case Is = 72 'С карманом
+            DoorIsOpen = True
+        Case Is = 26 'Двустворчатая с карманом
+            DoorIsOpen = True
+        Case Is = 73 'Одностворчатая скользящая
+            DoorIsOpen = True
+        Case Is = 71 'Одностворчатая складывающаяся
+            DoorIsOpen = True
+        Case Is = 25 'Двустворчатая складывающаяся
+            DoorIsOpen = True
+        Case Is = 65 'Рольставни
+            DoorIsOpen = True
+        Case Else    'Для всех прочих случаев
+            DoorIsOpen = True
+    End Select
+    
+Exit Function
+
+Tail:
+'    Debug.Print Err.Description
+    DoorIsOpen = True
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    SaveLog Err, "DoorIsOpen"
+End Function
 
 '-----------------------------------------Процедуры определения коллекций-------------------------------------------------------
 Private Sub ps_AddShape(ByRef aO_Shape As Visio.Shape)

@@ -15,7 +15,7 @@ Public stopModellingFlag As Boolean      'Флаг остановки моделирования
 
 
 Public Sub MakeMatrix()
-
+'Формируем матрицу
 Dim matrix() As Variant
 Dim matrixObj As c_Matrix
 Dim matrixBuilder As c_MatrixBuilder
@@ -56,11 +56,46 @@ Dim matrixBuilder As c_MatrixBuilder
     F_InsertFire.lblMatrixIsBaked.Caption = "Матрица запечена за " & tmr.GetElapsedTime & " сек."
     F_InsertFire.lblMatrixIsBaked.ForeColor = vbGreen
     
-    Debug.Print "Матрица запечена..."
+'    Debug.Print "Матрица запечена..."
     tmr.PrintElapsedTime
     Set tmr = Nothing
 
 
+End Sub
+
+Public Sub RefreshOpenSpacesMatrix()
+'Обновляем матрицу открытых пространств
+Dim matrix() As Variant
+Dim matrixBuilder As c_MatrixBuilder
+    
+    If fireModeller Is Nothing Then
+        MsgBox "Вы не можете обновить не запеченную матрицу!", vbCritical
+        Exit Sub
+    End If
+    
+    '---Подключаем таймер
+    Dim tmr As c_Timer
+    Set tmr = New c_Timer
+    
+    'Запекаем матрицу открытых пространств
+    Set matrixBuilder = New c_MatrixBuilder
+    matrixBuilder.SetForm F_InsertFire
+    matrix = matrixBuilder.NewMatrix(grain)
+    
+    'Обновляем матрицу открытых пространств
+    fireModeller.refreshOpenSpaces matrix
+    
+    'Обновляем периметр пожара
+    fireModeller.RefreshFirePerimeter
+    
+    'Выводим сообщение о итогах обновления
+    F_InsertFire.lblMatrixIsBaked.Caption = "Матрица обновлена за " & tmr.GetElapsedTime & " сек."
+    F_InsertFire.lblMatrixIsBaked.ForeColor = vbGreen
+    
+'    Debug.Print "Матрица обновлена..."
+    tmr.PrintElapsedTime
+    Set tmr = Nothing
+    
 End Sub
 
 
