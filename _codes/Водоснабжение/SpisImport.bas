@@ -22,6 +22,7 @@ Application.DoCmd (1312)
 End Sub
 
 '------------------------Блок зависимых списков------------------------------
+
 Public Sub DiametersListImport(ShpIndex As Long)
 'Процедура импорта списков диаметров
 '---Объявляем переменные
@@ -44,9 +45,9 @@ Dim Criteria As String
     End Select
 
 '---В случае, если значение поля для нового списка равно "", переводим фокус в ячейке на 0-е положение.
-    If shp.Cells("Prop.PipeDiameter").ResultStr(Visio.visNone) = "" Then
-        shp.Cells("Prop.PipeDiameter").FormulaU = "INDEX(0,Prop.PipeDiameter.Format)"
-    End If
+'    If shp.Cells("Prop.PipeDiameter").ResultStr(Visio.visNone) = "" Then
+'        shp.Cells("Prop.PipeDiameter").FormulaU = "INDEX(0,Prop.PipeDiameter.Format)"
+'    End If
     
     Set shp = Nothing
 
@@ -77,9 +78,10 @@ On Error GoTo EX
             shp.Cells("Prop.Pressure.Format").FormulaU = ListImportNum("ЗапросВодоотдачи", "Напор в сети", Criteria)
     End Select
 
-'---В случае, если значение поля для нового списка равно "", переводим фокус в ячейке на 0-е положение.
+'---В случае, если значение поля для нового списка равно "", включаем пользовательский ввод
     If shp.Cells("Prop.Pressure").ResultStr(Visio.visNone) = "" Then
-        shp.Cells("Prop.Pressure").FormulaU = "INDEX(0,Prop.Pressure.Format)"
+        'shp.Cells("Prop.Pressure").FormulaU = "INDEX(0,Prop.Pressure.Format)"
+        shp.Cells("Prop.ShowDirectProduction").FormulaU = "INDEX(1,Prop.ShowDirectProduction.Format)"
     End If
 
     Set shp = Nothing

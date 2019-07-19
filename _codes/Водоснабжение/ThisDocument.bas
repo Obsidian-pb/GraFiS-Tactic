@@ -77,7 +77,7 @@ Dim ShpInd As Integer
     If cell.Name = "Prop.PipeType" Or cell.Name = "Prop.PipeDiameter" Or cell.Name = "Prop.Pressure" Then
         ShpInd = cell.Shape.ID
         '---Запускаем процедуру получения СПИСКА диаметров
-        DiametersListImport (ShpInd)
+'        DiametersListImport (ShpInd)
         '---Запускаем процедуру получения СПИСКА напоров
         PressuresListImport (ShpInd)
         '---Запускаем процедуру пересчета водоотдачи

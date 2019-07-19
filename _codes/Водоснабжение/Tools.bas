@@ -164,6 +164,8 @@ Dim SQLQuery As String
 Dim RSField As DAO.Field
 Dim ValOfSerch As Single
 
+    On Error GoTo EX
+    
 '---Определяем запись с соответствующи параметром
     '---Определяем запрос SQL для отбора записей из базы данных
         SQLQuery = "SELECT [" & FieldName & "]" & _
@@ -194,6 +196,12 @@ ValueImportSng = ValOfSerch
 
 Set dbs = Nothing
 Set rst = Nothing
+Exit Function
+EX:
+    ValueImportSng = "0"
+
+    Set dbs = Nothing
+    Set rst = Nothing
 End Function
 
 
