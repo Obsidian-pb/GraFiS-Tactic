@@ -197,6 +197,32 @@ EX:
     SaveLog Err, "StvolWFLinkImport"
 End Sub
 
+Public Sub StvolHeadDiapasoneImport(ShpIndex As Long)
+'Процедура возвращающая и присваивающая ячейке WFLink (ссылка на страничку сайта wiki-fire.org)
+'в соответствии с моделью ствола
+'---Объявляем переменные
+Dim shp As Visio.Shape
+Dim IndexPers As Integer
+Dim Criteria As String
+
+    On Error GoTo EX
+    
+'---Проверяем к какой именно фигуре относится данная ячейка
+    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+'    IndexPers = shp.Cells("User.IndexPers")
+    
+'---Формируем запрос к БД и получаем значение ссылки на wiki-fire.org
+    Criteria = "[Модель ствола] = '" & shp.Cells("Prop.StvolType").ResultStr(visUnitsString) & "'"
+    shp.Cells("Prop.HeadDiapasone").FormulaU = ValueImportStr("МоделиСтволов", "Диапазон расходов", Criteria)
+   
+Set shp = Nothing
+Exit Sub
+EX:
+    Set shp = Nothing
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    SaveLog Err, "StvolWFLinkImport"
+End Sub
+
 Public Sub StvolRFImport(ShpIndex As Long)
 'Процедура возвращающая и присваивающая ячейке Кратность в соответсвии с моделью ствола
 '---Объявляем переменные

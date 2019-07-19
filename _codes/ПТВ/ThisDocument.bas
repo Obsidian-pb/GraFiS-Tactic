@@ -97,10 +97,11 @@ Dim ShpInd As Integer
     End If
     
     '---Получаем ссылку на страничку в wiki-fire.org (только для стволов!!!)
-    If cell.Name = "Prop.StvolType" Then
+    If cell.Name = "Prop.TTHType" Or cell.Name = "Prop.StvolType" Then
         If cell.Shape.Cells("Prop.TTHType").ResultStr(visString) = "По модели ствола" Then
             '---Запускаем проку получения ссылки на wiki-fire.org
             StvolWFLinkImport (ShpInd)
+            StvolHeadDiapasoneImport (ShpInd)
         Else
             StvolWFLinkFree (ShpInd)
         End If

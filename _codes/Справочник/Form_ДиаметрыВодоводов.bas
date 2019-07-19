@@ -14,5 +14,8 @@ Private Sub Form_BeforeUpdate(Cancel As Integer)
 End Sub
 
 Private Sub ПСС_ДиаметрВодовода_KeyDown(KeyCode As Integer, Shift As Integer)
-    If KeyCode = 13 Then DoCmd.Close acForm, "ДиаметрыВодоводов"
+    If KeyCode = 13 Then
+        DoCmd.Close acForm, "ДиаметрыВодоводов"
+        Form_Водоотдача.С_ДиаметрСети.Requery
+    End If
 End Sub
