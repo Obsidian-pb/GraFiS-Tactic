@@ -38,7 +38,7 @@ On Error GoTo Tail
 '---Ищем необходимую запись в наборе данных и по ней определяем ТТХ ПА для заданных параметров
     With rsPA
         .FindFirst Criteria
-'MsgBox .RecordCount
+
     '---Перебираем все строки фигуры
         For i = 0 To ShpObj.RowCount(visSectionProp) - 1
         '---Перебираем все поля набора записей
@@ -222,7 +222,7 @@ Const d = " | "
 End Sub
 
 
-''-----------------------------------------Функции проверки----------------------------------------------
+'-----------------------------------------Функции проверки----------------------------------------------
 'Public Function WindowCheck(ByRef a_WinCaption As String) As Boolean
 'Dim wnd As Window
 '    On Error GoTo Exc
@@ -234,7 +234,22 @@ End Sub
 'Exc:
 '    WindowCheck = False
 'End Function
-'
+Public Function IsShapeHaveCallout(ByRef shp As Visio.Shape) As Boolean
+    IsShapeHaveCallout = False
+    If shp.CellExists("User.visDGDefaultPos", 0) Then
+        IsShapeHaveCallout = True
+    End If
+End Function
+Public Function IsShapeHaveCalloutAndDropFirst(ByRef shp As Visio.Shape) As Boolean
+    IsShapeHaveCalloutAndDropFirst = False
+    If shp.CellExists("User.visDGDefaultPos", 0) Then
+        If shp.CellExists("User.InPage", 0) = False Then
+            IsShapeHaveCalloutAndDropFirst = True
+        End If
+    End If
+End Function
+
+
 ''------------------------------------------Процедуры работы с формой менеджмента-------------------------
 'Public Sub MngmnWndwShow(ShpObj As Visio.Shape)
 ''Процедура активирует форму ManagementTechnics

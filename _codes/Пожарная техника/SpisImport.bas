@@ -5,29 +5,50 @@ Attribute VB_Name = "SpisImport"
 
 Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
 'Процедура обновления данных фигуры (всех списков)
+'Dim isExternalData As Boolean
+'Dim dataForSave(2) As String
+'
+'    On Error GoTo EX
+'
+''---Проверяем, не импортируются ли данные извен (из окна"Внешние данные"
+'    isExternalData = WindowCheck("Внешние данные")
+'
+'    '---Сохраняем данные фигуры
+'    If isExternalData Then
+'        Exit Sub
+'        dataForSave(0) = ShpObj.Cells("Prop.Unit").ResultStr(visUnitsString)
+'        dataForSave(1) = ShpObj.Cells("Prop.Model").ResultStr(visUnitsString)
+'    End If
 
 '---Проверяем вбрасывается ли данная фигура впервые
     If IsFirstDrop(ShpObj) Then
-        '---Обновляем общие списки
-        ShpObj.Cells("Prop.Set.Format").FormulaU = ListImport("Наборы", "Набор")
-        ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
-        
-        '---Обновляем список моделей и их ТТХ
-        '    If Not WindowCheck("Внешние данные") Then
-                ModelsListImport (ShpObj.ID)
-                GetTTH (ShpObj.ID)
-        '    Else
-        '        ModelsListImport (ShpObj.ID)
-        '        ShpObj.Cells("  'Сюда вставить код в случае если окно есть!
-        '    End If
-        
-        '---Добавляем ссылку на текущее время страницы
-        ShpObj.Cells("Prop.ArrivalTime").Formula = _
-            Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
+        If Not ShpObj.CellExists("User.visDGDefaultPos", 0) Then
+            '---Обновляем общие списки
+            ShpObj.Cells("Prop.Set.Format").FormulaU = ListImport("Наборы", "Набор")
+            ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
+            
+            '---Обновляем список моделей и их ТТХ
+    '            If Not isExternalData Then
+'                If Not shp.CellExists("User.visDGDefaultPos", 0) Then
+                    ModelsListImport (ShpObj.ID)
+                    GetTTH (ShpObj.ID)
+                '---Добавляем ссылку на текущее время страницы
+                    ShpObj.Cells("Prop.ArrivalTime").Formula = _
+                        Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
+'                End If
+        End If
     End If
 
-'---Очищаем значения строки подключенного лафетного ствола (для предотвращения излишнего расходв в автомобиле)
+'---Очищаем значения строки подключенного лафетного ствола (для предотвращения излишнего расхода в автомобиле)
 '    ps_WaterClear ShpObj
+
+'---Восстанавливаем сохраненные данные фигуры
+'    If isExternalData Then
+'        Application.EventsEnabled = False
+'        ShpObj.Cells("Prop.Unit").Formula = """" & dataForSave(0) & """"
+'        ShpObj.Cells("Prop.Model").FormulaU = """" & dataForSave(1) & """"
+'        Application.EventsEnabled = True
+'    End If
 
 '---Очищаем значения подключенных рукавных линий
     ConnectionsRefresh ShpObj
@@ -35,8 +56,10 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
 On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИКИ
 Application.DoCmd (1312)
 
-'SendKeys "A"
-
+Exit Sub
+EX:
+    Application.EventsEnabled = True
+    SaveLog Err, "BaseListsRefresh", "Пожарная техника"
 End Sub
 Public Sub BaseListsRefresh2(ShpObj As Visio.Shape)
 'Процедура обновления данных фигуры (всех списков) ТОЛЬКО ДЛЯ ОБЩЕЙ ФИГУРЫ

@@ -40,6 +40,10 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 
 End Sub
 
+Public Sub DirectApp()
+Set vdAppEvents = Visio.Application
+End Sub
+
 Private Sub vdAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
@@ -51,8 +55,10 @@ Dim ShpInd As Integer
         ModelsListImport (ShpInd)
     ElseIf cell.Name = "Prop.Model" Then
         '---Процедура получения ТТХ - СДЕЛАТЬ
-        ShpInd = cell.Shape.ID
-        GetTTH (ShpInd)
+        If Not IsShapeHaveCalloutAndDropFirst(cell.Shape) Then
+            ShpInd = cell.Shape.ID
+            GetTTH (ShpInd)
+        End If
     End If
     
     
