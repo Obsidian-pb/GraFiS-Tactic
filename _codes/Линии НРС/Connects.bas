@@ -36,19 +36,30 @@ Public Sub NormalizeNRS()
 Dim shp As Visio.Shape
 Dim frml As String
 
+
     For Each shp In Application.ActivePage.Shapes
         If shp.CellExists("User.IndexPers", 0) = True Then
             If shp.Cells("User.IndexPers") = 100 Then
-                frml = shp.Cells("Scratch.C1").Formula
-                shp.Cells("Scratch.C1").Formula = ""
-                shp.Cells("Scratch.C1").Formula = frml
+                CellFix shp.Cells("Scratch.C1")
+'                shp.Cells("Scratch.C1").Formula = ""
+'                shp.Cells("Scratch.C1").Formula = frml
             End If
             If shp.Cells("User.IndexPers") = 34 Then
-                frml = shp.Cells("Scratch.A1").Formula
-                shp.Cells("Scratch.A1").Formula = ""
-                shp.Cells("Scratch.A1").Formula = frml
+                CellFix shp.Cells("Scratch.A1")
+                CellFix shp.Cells("User.PodOut")
+                CellFix shp.Cells("User.Head")
+'                shp.Cells("Scratch.A1").Formula = ""
+'                shp.Cells("Scratch.A1").Formula = frml
             End If
         End If
     Next shp
 
+End Sub
+
+Private Sub CellFix(ByRef cell As Visio.cell)
+Dim frml As String
+    
+    frml = cell.Formula
+    cell.FormulaForce = ""
+    cell.FormulaForce = frml
 End Sub
