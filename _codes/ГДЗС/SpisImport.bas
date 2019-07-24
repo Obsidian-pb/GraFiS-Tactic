@@ -7,29 +7,28 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
 
 '---Проверяем вбрасывается ли данная фигура впервые
     If IsFirstDrop(ShpObj) Then
-        '---Обновляем общие списки
-        ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
-        'ShpObj.Cells("Prop.AirDevice.Format").FormulaU = ListImport("ДАСВ", "Модель")
-        
-        '---Обновляем список моделей и их ТТХ
-        '---Проверяем для какой фигуры выполняется процедура и обновляем зависимые списки (только для звеньев)
-        Select Case ShpObj.Cells("User.IndexPers")
-            Case Is = 46 'ДАСВ
-                AirDevicesListImport (ShpObj.ID)
-                GetTTH (ShpObj.ID)
-            Case Is = 90 'ДАСК
-                AirDevicesListImport (ShpObj.ID)
-                GetTTH (ShpObj.ID)
-        End Select
-        
-        '---Добавляем ссылку на текущее время страницы                                                                                         'Для всех остальных
-            ShpObj.Cells("Prop.FormingTime").Formula = _
-                Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
-        
-
+        If IsFirstDrop(ShpObj) Then
+            '---Обновляем общие списки
+            ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
+            'ShpObj.Cells("Prop.AirDevice.Format").FormulaU = ListImport("ДАСВ", "Модель")
+            
+            '---Обновляем список моделей и их ТТХ
+            '---Проверяем для какой фигуры выполняется процедура и обновляем зависимые списки (только для звеньев)
+            Select Case ShpObj.Cells("User.IndexPers")
+                Case Is = 46 'ДАСВ
+                    AirDevicesListImport (ShpObj.ID)
+                    GetTTH (ShpObj.ID)
+                Case Is = 90 'ДАСК
+                    AirDevicesListImport (ShpObj.ID)
+                    GetTTH (ShpObj.ID)
+            End Select
+            
+            '---Добавляем ссылку на текущее время страницы                                                                                         'Для всех остальных
+                ShpObj.Cells("Prop.FormingTime").Formula = _
+                    Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
+    
+        End If
     End If
-
-
 
 On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИКИ
 Application.DoCmd (1312)

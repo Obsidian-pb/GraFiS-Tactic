@@ -40,26 +40,28 @@ Set GDZSAppEvents = Visio.Application
 
 End Sub
 
+'Public Sub ActivateApp()
+'Set GDZSAppEvents = Visio.Application
+'End Sub
+
 Private Sub GDZSAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
 '---Проверяем имя ячейки
 
-    If cell.Name = "Prop.AirDevice" Then
-        ShpInd = cell.Shape.ID
-        '---Запускаем процедуру получения списков аппаратов
-        AirDevicesListImport (ShpInd)
-        '---Запускаем процедуру получения ТТХ для указанной модели ДАСВ
-        GetTTH (ShpInd)
-    ElseIf cell.Name = "Prop.FogRMK" Then
-        ShpInd = cell.Shape.ID
-        '---Запускаем процедуру получения ТТХ для указанной модели Дымососов
-        GetTTH (ShpInd)
+    If Not IsShapeHaveCalloutAndDropFirst(cell.Shape) Then
+        If cell.Name = "Prop.AirDevice" Then
+            ShpInd = cell.Shape.ID
+            '---Запускаем процедуру получения списков аппаратов
+            AirDevicesListImport (ShpInd)
+            '---Запускаем процедуру получения ТТХ для указанной модели ДАСВ
+            GetTTH (ShpInd)
+        ElseIf cell.Name = "Prop.FogRMK" Then
+            ShpInd = cell.Shape.ID
+            '---Запускаем процедуру получения ТТХ для указанной модели Дымососов
+            GetTTH (ShpInd)
+        End If
     End If
-    
-    
-'MsgBox Cell.Shape.Index
-'MsgBox Cell.Shape.ID
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
 End Sub

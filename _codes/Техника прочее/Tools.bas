@@ -374,6 +374,20 @@ EX:
     Set GetDBEngine = CreateObject("DAO.DBEngine.120")
 End Function
 
+Public Function IsShapeHaveCallout(ByRef shp As Visio.Shape) As Boolean
+    IsShapeHaveCallout = False
+    If shp.CellExists("User.visDGDefaultPos", 0) Then
+        IsShapeHaveCallout = True
+    End If
+End Function
+Public Function IsShapeHaveCalloutAndDropFirst(ByRef shp As Visio.Shape) As Boolean
+    IsShapeHaveCalloutAndDropFirst = False
+    If shp.CellExists("User.visDGDefaultPos", 0) Then
+        If shp.CellExists("User.InPage", 0) = False Then
+            IsShapeHaveCalloutAndDropFirst = True
+        End If
+    End If
+End Function
 
 
 '-----------------------------------------Процедуры работы с фигурами----------------------------------------------

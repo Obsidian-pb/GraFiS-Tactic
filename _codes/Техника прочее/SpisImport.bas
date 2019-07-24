@@ -4,19 +4,21 @@ Attribute VB_Name = "SpisImport"
 
 Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
 'Процедура обновления данных фигуры (всех списков)
+
 '---Проверяем вбрасывается ли данная фигура впервые
     If IsFirstDrop(ShpObj) Then
-        '---Обновляем общие списки
-        ShpObj.Cells("Prop.Set.Format").FormulaU = ListImport("Наборы", "Набор")
-        ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
-        
-        '---Обновляем список моделей и их ТТХ
-        ModelsListImport (ShpObj.ID)
-        GetTTH (ShpObj.ID)
-        
-        '---Добавляем ссылку на текущее время страницы
-        ShpObj.Cells("Prop.ArrivalTime").Formula = _
-            Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
+        If Not ShpObj.CellExists("User.visDGDefaultPos", 0) Then
+            '---Обновляем общие списки
+            ShpObj.Cells("Prop.Set.Format").FormulaU = ListImport("Наборы", "Набор")
+            ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
+
+            '---Обновляем список моделей и их ТТХ
+            ModelsListImport (ShpObj.ID)
+            GetTTH (ShpObj.ID)
+            '---Добавляем ссылку на текущее время страницы
+            ShpObj.Cells("Prop.ArrivalTime").Formula = _
+                Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
+        End If
     End If
 
 

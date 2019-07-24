@@ -46,15 +46,17 @@ Dim ShpInd As Integer
 
     On Error GoTo EX
 '---Проверяем имя ячейки
-'MsgBox Cell.Name
-    If cell.Name = "Prop.Set" Or cell.Name = "Prop.Model" Then
+
+    If cell.Name = "Prop.Set" Then
         '---Запускаем процедуру получения списков моделей
         ShpInd = cell.Shape.ID
         ModelsListImport (ShpInd)
+    ElseIf cell.Name = "Prop.Model" Then
         '---Процедура получения ТТХ - СДЕЛАТЬ
-        GetTTH (ShpInd)
-
-
+        If Not IsShapeHaveCalloutAndDropFirst(cell.Shape) Then
+            ShpInd = cell.Shape.ID
+            GetTTH (ShpInd)
+        End If
     End If
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие

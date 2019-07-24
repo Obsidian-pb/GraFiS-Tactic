@@ -291,6 +291,21 @@ Public Function IsFirstDrop(ShpObj As Visio.Shape)
     End If
 End Function
 
+Public Function IsShapeHaveCallout(ByRef shp As Visio.Shape) As Boolean
+    IsShapeHaveCallout = False
+    If shp.CellExists("User.visDGDefaultPos", 0) Then
+        IsShapeHaveCallout = True
+    End If
+End Function
+Public Function IsShapeHaveCalloutAndDropFirst(ByRef shp As Visio.Shape) As Boolean
+    IsShapeHaveCalloutAndDropFirst = False
+    If shp.CellExists("User.visDGDefaultPos", 0) Then
+        If shp.CellExists("User.InPage", 0) = False Then
+            IsShapeHaveCalloutAndDropFirst = True
+        End If
+    End If
+End Function
+
 
 '--------------------------------Сохранение лога ошибки-------------------------------------
 Public Sub SaveLog(ByRef error As ErrObject, ByVal eroorPosition As String, Optional ByVal addition As String)
