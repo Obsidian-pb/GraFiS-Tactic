@@ -48,7 +48,7 @@ Private Sub vdAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
 '---Проверяем имя ячейки
-'MsgBox Cell.Name
+
     If cell.Name = "Prop.Set" Then
         '---Запускаем процедуру получения списков моделей
         ShpInd = cell.Shape.ID

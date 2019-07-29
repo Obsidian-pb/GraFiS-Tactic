@@ -26,7 +26,7 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
             '---Обновляем общие списки
             ShpObj.Cells("Prop.Set.Format").FormulaU = ListImport("Наборы", "Набор")
             ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
-            
+
             '---Обновляем список моделей и их ТТХ
     '            If Not isExternalData Then
 '                If Not shp.CellExists("User.visDGDefaultPos", 0) Then

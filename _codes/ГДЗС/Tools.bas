@@ -299,7 +299,7 @@ Public Function IsShapeHaveCallout(ByRef shp As Visio.Shape) As Boolean
 End Function
 Public Function IsShapeHaveCalloutAndDropFirst(ByRef shp As Visio.Shape) As Boolean
     IsShapeHaveCalloutAndDropFirst = False
-    If shp.CellExists("User.visDGDefaultPos", 0) Then
+    If shp.CellExists("User.visDGDefaultPos", 0) = True Then
         If shp.CellExists("User.InPage", 0) = False Then
             IsShapeHaveCalloutAndDropFirst = True
         End If
