@@ -1,2 +1,4 @@
 /Log.txt
 *.frx
+*.exe
+_source/*
