@@ -47,20 +47,23 @@ End Sub
 Private Sub vdAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
-'---Проверяем имя ячейки
 
-    If cell.Name = "Prop.Set" Then
-        '---Запускаем процедуру получения списков моделей
-        ShpInd = cell.Shape.ID
-        ModelsListImport (ShpInd)
-    ElseIf cell.Name = "Prop.Model" Then
-        '---Процедура получения ТТХ - СДЕЛАТЬ
-        If Not IsShapeHaveCalloutAndDropFirst(cell.Shape) Then
+'---Проверяем, имеет ли ячейка родительскую фигуру (например, является стилем)
+    If cell.Shape Is Nothing Then Exit Sub
+
+'---Проверяем имя ячейки
+    If Not IsShapeLinkedToDataAndDropFirst(cell.Shape) Then
+        If cell.Name = "Prop.Set" Then
+'            Debug.Print cell.Name & " -> " & cell.Shape.Name
+            '---Запускаем процедуру получения списков моделей
+            ShpInd = cell.Shape.ID
+            ModelsListImport (ShpInd)
+        ElseIf cell.Name = "Prop.Model" Then
+            '---Процедура получения ТТХ - СДЕЛАТЬ
             ShpInd = cell.Shape.ID
             GetTTH (ShpInd)
         End If
     End If
-    
     
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
 End Sub

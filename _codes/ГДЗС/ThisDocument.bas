@@ -52,7 +52,7 @@ Dim ShpInd As Integer
     If cell.Shape Is Nothing Then Exit Sub
     
 '---Проверяем имя ячейки
-    If Not IsShapeHaveCalloutAndDropFirst(cell.Shape) Then
+    If Not IsShapeLinkedToDataAndDropFirst(cell.Shape) Then
         If cell.Name = "Prop.AirDevice" Then
             ShpInd = cell.Shape.ID
             '---Запускаем процедуру получения списков аппаратов

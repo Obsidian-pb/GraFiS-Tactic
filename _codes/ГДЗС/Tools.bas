@@ -291,19 +291,29 @@ Public Function IsFirstDrop(ShpObj As Visio.Shape)
     End If
 End Function
 
-Public Function IsShapeHaveCallout(ByRef shp As Visio.Shape) As Boolean
-    IsShapeHaveCallout = False
-    If shp.CellExists("User.visDGDefaultPos", 0) Then
-        IsShapeHaveCallout = True
+'-----------------------------------------Функции проверки привязки данных----------------------------------------------
+Public Function IsShapeLinkedToDataAndDropFirst(ByRef shp As Visio.Shape) As Boolean
+IsShapeLinkedToDataAndDropFirst = False
+
+    If IsShapeLinked(shp) And shp.CellExists("User.InPage", 0) = False Then
+        IsShapeLinkedToDataAndDropFirst = True
+        Exit Function
     End If
 End Function
-Public Function IsShapeHaveCalloutAndDropFirst(ByRef shp As Visio.Shape) As Boolean
-    IsShapeHaveCalloutAndDropFirst = False
-    If shp.CellExists("User.visDGDefaultPos", 0) = True Then
-        If shp.CellExists("User.InPage", 0) = False Then
-            IsShapeHaveCalloutAndDropFirst = True
-        End If
-    End If
+Public Function IsShapeLinked(ByRef shp As Visio.Shape) As Boolean
+Dim rst As Visio.DataRecordset
+Dim propIndex As Integer
+    
+    IsShapeLinked = False
+    
+    For Each rst In Application.ActiveDocument.DataRecordsets
+        For propIndex = 0 To shp.RowCount(visSectionProp)
+            If shp.IsCustomPropertyLinked(rst.ID, propIndex) Then
+                IsShapeLinked = True
+                Exit Function
+            End If
+        Next propIndex
+    Next rst
 End Function
 
 

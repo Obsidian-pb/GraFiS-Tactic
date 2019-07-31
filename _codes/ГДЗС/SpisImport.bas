@@ -7,7 +7,7 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
 
 '---Проверяем вбрасывается ли данная фигура впервые
     If IsFirstDrop(ShpObj) Then
-        If Not ShpObj.CellExists("User.visDGDefaultPos", 0) Then
+        If Not IsShapeLinked(ShpObj) Then
             '---Обновляем общие списки
             ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
             'ShpObj.Cells("Prop.AirDevice.Format").FormulaU = ListImport("ДАСВ", "Модель")

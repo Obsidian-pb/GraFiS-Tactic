@@ -222,33 +222,30 @@ Const d = " | "
 End Sub
 
 
-'-----------------------------------------Функции проверки----------------------------------------------
-'Public Function WindowCheck(ByRef a_WinCaption As String) As Boolean
-'Dim wnd As Window
-'    On Error GoTo Exc
-'
-'    Set wnd = Application.ActiveWindow.Windows.ItemEx("Внешние данные")
-'    WindowCheck = True
-'    Set wnd = Nothing
-'Exit Function
-'Exc:
-'    WindowCheck = False
-'End Function
-Public Function IsShapeHaveCallout(ByRef shp As Visio.Shape) As Boolean
-    IsShapeHaveCallout = False
-    If shp.CellExists("User.visDGDefaultPos", 0) Then
-        IsShapeHaveCallout = True
-    End If
-End Function
-Public Function IsShapeHaveCalloutAndDropFirst(ByRef shp As Visio.Shape) As Boolean
-    IsShapeHaveCalloutAndDropFirst = False
-    If shp.CellExists("User.visDGDefaultPos", 0) Then
-        If shp.CellExists("User.InPage", 0) = False Then
-            IsShapeHaveCalloutAndDropFirst = True
-        End If
-    End If
-End Function
+'-----------------------------------------Функции проверки привязки данных----------------------------------------------
+Public Function IsShapeLinkedToDataAndDropFirst(ByRef shp As Visio.Shape) As Boolean
+IsShapeLinkedToDataAndDropFirst = False
 
+    If IsShapeLinked(shp) And shp.CellExists("User.InPage", 0) = False Then
+        IsShapeLinkedToDataAndDropFirst = True
+        Exit Function
+    End If
+End Function
+Public Function IsShapeLinked(ByRef shp As Visio.Shape) As Boolean
+Dim rst As Visio.DataRecordset
+Dim propIndex As Integer
+    
+    IsShapeLinked = False
+    
+    For Each rst In Application.ActiveDocument.DataRecordsets
+        For propIndex = 0 To shp.RowCount(visSectionProp)
+            If shp.IsCustomPropertyLinked(rst.ID, propIndex) Then
+                IsShapeLinked = True
+                Exit Function
+            End If
+        Next propIndex
+    Next rst
+End Function
 
 ''------------------------------------------Процедуры работы с формой менеджмента-------------------------
 'Public Sub MngmnWndwShow(ShpObj As Visio.Shape)
