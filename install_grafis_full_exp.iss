@@ -108,26 +108,26 @@ Source: "_source\OSM2Visio\v 2010, 2013, 2016\*"; DestDir: "{app}\v 2010, 2013, 
 [Tasks]
 Name: dao; Description: "Установить библиотеку dao360.dll (рекомендуется)"; GroupDescription: "Библиотеки:";
 Name: reg; Description: "Настроить политику безопасности MS Visio - включить все макросы"; GroupDescription: "Настройки MS Visio:";components: traf
-Name: desktopicon1; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 1:200"; GroupDescription: "Ярлыки:";components: traf
-Name: desktopicon2; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 1:500"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
-Name: desktopicon3; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 1:1000"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
-Name: desktopicon4; Description: "Создать ярлык на рабочем столе Шаблон моделирование НРС с масштабом 1:200"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
+Name: desktopicon1; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 200"; GroupDescription: "Ярлыки:";components: traf
+Name: desktopicon2; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 500"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
+Name: desktopicon3; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 1000"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
+Name: desktopicon4; Description: "Создать ярлык на рабочем столе Шаблон моделирование НРС с масштабом 200"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
 
 [Icons]
-Name: "{group}\Шаблон с масштабом 1:200"; Filename: "{app}\Шаблон с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон с масштабом 1:500"; Filename: "{app}\Шаблон с масштабом 500.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон с масштабом 1:1000"; Filename: "{app}\Шаблон с масштабом 1000.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон моделирование НРС с масштабом 1:200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон с масштабом 200"; Filename: "{app}\Шаблон с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон с масштабом 500"; Filename: "{app}\Шаблон с масштабом 500.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон с масштабом 1000"; Filename: "{app}\Шаблон с масштабом 1000.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон моделирование НРС с масштабом 200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
 Name: "{group}\Сведения по подразделениям"; Filename: "{app}\Сведения.xls"; WorkingDir: "{app}"; components: traf
 
 Name: "{group}\Справочник"; Filename: "{app}\Справочник.accdb"; WorkingDir: "{app}";components: traf
 Name: "{group}\ГраФиС-Справка"; Filename: "{app}\ГраФиС-Справка.chm"; WorkingDir: "{app}"
 Name: "{group}\Удаление\Удалить ГраФиС-Тактик"; Filename: "{uninstallexe}"
 
-Name: "{commondesktop}\Шаблон с масштабом 1:200"; Filename: "{app}\Шаблон с масштабом 200.vst"; Tasks: desktopicon1; IconFilename:"{app}\ico.ico";
-Name: "{commondesktop}\Шаблон с масштабом 1:500"; Filename: "{app}\Шаблон с масштабом 500.vst"; Tasks: desktopicon2; IconFilename:"{app}\ico.ico";
-Name: "{commondesktop}\Шаблон с масштабом 1:1000"; Filename: "{app}\Шаблон с масштабом 1000.vst"; Tasks: desktopicon3; IconFilename:"{app}\ico.ico";
-Name: "{commondesktop}\Шаблон моделирование НРС с масштабом 1:200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; Tasks: desktopicon4; IconFilename:"{app}\ico.ico";
+Name: "{commondesktop}\Шаблон с масштабом 200"; Filename: "{app}\Шаблон с масштабом 200.vst"; Tasks: desktopicon1; IconFilename:"{app}\ico.ico";
+Name: "{commondesktop}\Шаблон с масштабом 500"; Filename: "{app}\Шаблон с масштабом 500.vst"; Tasks: desktopicon2; IconFilename:"{app}\ico.ico";
+Name: "{commondesktop}\Шаблон с масштабом 1000"; Filename: "{app}\Шаблон с масштабом 1000.vst"; Tasks: desktopicon3; IconFilename:"{app}\ico.ico";
+Name: "{commondesktop}\Шаблон моделирование НРС с масштабом 200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; Tasks: desktopicon4; IconFilename:"{app}\ico.ico";
 
 [Registry]
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Visio\Security"; ValueType: dword; ValueName: "VBAWarnings"; ValueData: "1"; Flags: deletevalue; Tasks: Reg; 
