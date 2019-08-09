@@ -86,7 +86,7 @@ Source: "Шаблон с масштабом 200.vst"; DestDir: "{app}"; components: traf
 Source: "Шаблон с масштабом 500.vst"; DestDir: "{app}"; components: traf
 Source: "Bitmaps\*"; DestDir: "{app}\Bitmaps\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "_installer\ico.ico"; DestDir: "{app}"; components: traf
-Source: "Дополнительно\DAO\dao360.dll"; DestDir: "{dao}"; Flags: onlyifdoesntexist uninsneveruninstall; Tasks: dao
+Source: "Дополнительно\DAO\dao360.dll"; DestDir: "{dao}"; Flags: uninsneveruninstall; Tasks: dao
 Source: "Отчеты\Конструктор отчетов.vsd"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "Отчеты\Детали отчетов.vss"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "Цветовые схемы\Белая школьная доска - ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
