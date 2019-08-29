@@ -259,7 +259,8 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                 Case Is = 160 'ќбщее обозначение
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
-                    '>>>”чет возможности отсутстви€ €чеек "Prop.Dest", "Prop.RSCHS" дл€ старых фигур
+                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+                    '>>>”чет возможности отсутстви€ €чеек "Prop.Dest" дл€ старых фигур
                     On Error Resume Next
                     If vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString) = "—пециальный" _
                         Then pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -269,10 +270,11 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                         Then pi_TargetedPAHave = pi_TargetedPAHave + 1
                     If InStr(1, vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString), "ќснов") <> 0 _
                         Then pi_MainOverallCount = pi_MainOverallCount + 1
-                    If vsO_Shape.Cells("Prop.RSCHS").ResultStr(visUnitsString) = "¬ходит" _
-                        Then pi_TechTotalCount = pi_TechTotalCount + 1
                     On Error GoTo EX
                     '<<<”чет возможности отсутстви€ €чейки "Prop.Dest" дл€ старых фигур
+                Case Is = 33 'ќбщее обозначение
+                    If vsO_Shape.Cells("Actions.RSCHS.Checked").Result(visNumber) = 1 _
+                        Then pi_TechTotalCount = pi_TechTotalCount + 1
                     
 
                     
@@ -768,6 +770,22 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                 Case Is = 3002 'ћинздрав
                     pi_MZdravCount = pi_MZdravCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
                     pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                Case Is = 33 'ќбщее обозначение
+                    If vsO_Shape.Cells("Prop.RSCHS").ResultStr(visUnitsString) = "¬ходит" _
+                      Then pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                Case Is = 160 'ќбщее обозначение
+                    pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                    pi_FireTotalCount = pi_FireTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                     On Error Resume Next
+                    If vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString) = "—пециальный" _
+                        Then pi_SpecialPAHave = pi_SpecialPAHave + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                    If InStr(1, vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString), "общ") <> 0 _
+                        Then pi_MainPAHave = pi_MainPAHave + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                    If InStr(1, vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString), "целев") <> 0 _
+                        Then pi_TargetedPAHave = pi_TargetedPAHave + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                    If InStr(1, vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString), "ќснов") <> 0 _
+                        Then pi_MainOverallCount = pi_MainOverallCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                    On Error GoTo EX
                     End Select
     
                 
