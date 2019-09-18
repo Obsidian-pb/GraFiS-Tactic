@@ -170,7 +170,7 @@ Dim SecExists As Boolean
                         If Not IsHavingUserSection(False) And Not IsSquare(False) Then
                         '---ќбращаем фигуру в фигуру рабочей рукавной линии
 '                            ButEvent.MakeHoseLine
-                            MakeHoseLine 51, 0
+                            MakeHoseLine Shape, 51, 0
                         End If
                     End If
                 Case Is = "¬сасывающий рукав"
@@ -190,7 +190,7 @@ Dim SecExists As Boolean
                         If Not IsHavingUserSection(False) And Not IsSquare(False) Then
                         '---ќбращаем фигуру в фигуру магистральной рукавной линии
 '                            ButEvent.MakeMagHoseLine
-                            MakeHoseLine 77, 1
+                            MakeHoseLine Shape, 77, 1
                         End If
                     End If
             End Select

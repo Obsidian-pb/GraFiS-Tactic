@@ -47,7 +47,7 @@ Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As
         '---Если выбрана хоть одна фигура - пытаемся ее обратить
             If Not IsHavingUserSection(True) And Not IsSquare(True) Then
             '---Обращаем фигуру в фигуру линии
-                MakeHoseLine 51, 0
+                MakeHoseLine Application.ActiveWindow.Selection(1), 51, 0
             End If
         Else
 '            MsgBox "Не выбрано ни одной фигуры! Будет включен режим автоматического обращения!"
@@ -114,7 +114,7 @@ Private Sub ComBut3_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault A
         '---Если выбрана хоть одна фигура - пытаемся ее обратить
             If Not IsHavingUserSection(True) And Not IsSquare(True) Then
             '---Обращаем фигуру в фигуру магистральной линии
-                MakeHoseLine 77, 1
+                MakeHoseLine Application.ActiveWindow.Selection(1), 77, 1
             End If
         Else
 '            MsgBox "Не выбрано ни одной фигуры! Будет включен режим автоматического обращения!"

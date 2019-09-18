@@ -213,28 +213,28 @@ Set ShapeTo = Nothing
 End Sub
 
 
-Sub ImportHoseInformation()
+Sub ImportHoseInformation(ByRef ShapeTo As Visio.Shape)
 'Процедура для импорта свойств обекта донора (Рукавная линия)
 
 '---Объявляем переменные
 Dim IDFrom As Long, IDTo As Long
-Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
+Dim ShapeFrom As Visio.Shape
 
     On Error GoTo EX
-    '---Проверяем выбран ли какой либо объект
-    If Application.ActiveWindow.Selection.Count < 1 Then
-        MsgBox "Не выбрана ни одна фигура!", vbInformation
-        Exit Sub
-    End If
+'    '---Проверяем выбран ли какой либо объект
+'    If Application.ActiveWindow.Selection.Count < 1 Then
+'        MsgBox "Не выбрана ни одна фигура!", vbInformation
+'        Exit Sub
+'    End If
     
     '---Проверяем, не является ли выбранная фигура уже рукавом или другой фигурой с назначенными свойствами
-    If Application.ActiveWindow.Selection(1).RowCount(visSectionUser) > 0 Then
+    If ShapeTo.RowCount(visSectionUser) > 0 Then
         MsgBox "Выбранная фигура уже имеет специальные свойства и не может быть обращена в рукавную линию", vbInformation
         Exit Sub
     End If
     
     '---Проверяем Является ли выбранная фигура линией
-    If Application.ActiveWindow.Selection(1).AreaIU > 0 Then
+    If ShapeTo.AreaIU > 0 Then
         MsgBox "Выбранная фигура не является линией!", vbInformation
         Exit Sub
     End If
@@ -250,7 +250,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     End If
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
-    Set ShapeTo = Application.ActiveWindow.Selection(1)
+'    Set ShapeTo = Application.ActiveWindow.Selection(1)
     Set ShapeFrom = Application.Documents("Линии.vss").Masters("Рукав - скатка").Shapes(1)
     IDTo = ShapeTo.ID   'Application.ActivePage.Shapes("Sheet.2").ID
     'IDFrom = ShapeFrom.Index
@@ -284,13 +284,13 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     LenightSetInner (ShapeTo.Name)
 
 '---Очищаем объектные переменные
-    Set ShapeTo = Nothing
+'    Set ShapeTo = Nothing
     Set ShapeFrom = Nothing
     
 Exit Sub
 EX:
     '---Очищаем объектные переменные
-    Set ShapeTo = Nothing
+'    Set ShapeTo = Nothing
     Set ShapeFrom = Nothing
     SaveLog Err, "ImportHoseInformation"
 End Sub
@@ -434,6 +434,10 @@ Dim Con2 As Visio.Connect
       If ConIndent1 = "" Then ConIndent1 = vO_Conn.ToCell.Name Else ConIndent2 = vO_Conn.ToCell.Name
       If vO_Conn.ToSheet.Cells("User.IndexPers").Result(visNumber) = 105 Then Set ShpVS = vO_Conn.ToSheet
     Next vO_Conn
+    
+    '---проверяем получена ли фигура водосборника, если нет - выходим
+    If ShpVS Is Nothing Then Exit Sub
+    
     '---проверка являются ли патрубки однонаправленнымии если нет, то переворачиваем водосборник
     If Left(ConIndent1, 18) = Left(ConIndent2, 18) And ShpVS.Name <> "" Then
             
@@ -604,23 +608,31 @@ Tail:
     Application.EventsEnabled = True
 End Sub
 
-Public Sub MakeHoseLine(ByVal hoseDiameterIndex As Integer, ByVal lineType As Byte)
+Public Sub MakeHoseLine(ByRef ShpObj As Visio.Shape, ByVal hoseDiameterIndex As Integer, ByVal lineType As Byte)
 'Метод обращения в рукавную линию с заданными параметрами
-Dim ShpObj As Visio.Shape
+'Dim ShpObj As Visio.Shape
 Dim ShpInd As Integer
 Dim diameter As Integer
 
 '---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
     On Error GoTo Tail
 
-'---Отключаем обработку событий приложением, обращаем фигуру и вновь включаем обработку событий
-    Application.EventsEnabled = False
-    ImportHoseInformation
-    Application.EventsEnabled = True
-    
-'---Идентифицируем активную фигуру
-    Set ShpObj = Application.ActiveWindow.Selection(1)
-    ShpInd = ShpObj.ID
+
+'---Проверяем выбран ли какой либо объект
+'    If Application.ActiveWindow.Selection.Count < 1 Then
+'        MsgBox "Не выбрана ни одна фигура!", vbInformation
+'        Exit Sub
+'    Else
+        '---Идентифицируем активную фигуру
+'        Set ShpObj = Application.ActiveWindow.Selection(1)
+'        Application.Window.Selection.DeselectAll
+        ShpInd = ShpObj.ID
+        '---Отключаем обработку событий приложением, обращаем фигуру и вновь включаем обработку событий
+        Application.EventsEnabled = False
+        ImportHoseInformation ShpObj
+        Application.EventsEnabled = True
+'    End If
+
     
 '---Получаем списки для фигуры
     '---Запускаем процедуру получения списка Подразделений
@@ -647,6 +659,8 @@ Dim diameter As Integer
         
 '---Открываем окно свойств обращенной фигуры
     On Error Resume Next
+    Application.ActiveWindow.DeselectAll
+    Application.ActiveWindow.Select ShpObj, visSelect
     Application.DoCmd (1312)
     
 Exit Sub

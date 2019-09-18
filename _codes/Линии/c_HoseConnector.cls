@@ -859,9 +859,9 @@ Dim diameter As Integer
         '---Проверяем какой условный проход имеет ПТВ (применяется для стволов)
         diameter = GetDiameter(shp1, Shp2)
         If diameter = 0 Then
-            MakeHoseLine 51, 0
+            MakeHoseLine hoseShape, 51, 0
         Else
-            MakeHoseLine diameter, 0
+            MakeHoseLine hoseShape, diameter, 0
         End If
         Exit Sub
     End If
@@ -869,9 +869,9 @@ Dim diameter As Integer
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_PTV, vb_ShapeType_Razv) Then
         diameter = GetDiameter(shp1, Shp2)
         If diameter = 0 Then
-            MakeHoseLine 51, 0
+            MakeHoseLine hoseShape, 51, 0
         Else
-            MakeHoseLine diameter, 0
+            MakeHoseLine hoseShape, diameter, 0
         End If
         Exit Sub
     End If
@@ -886,34 +886,34 @@ Dim diameter As Integer
                 If IsColonkaLineRight(shp1, Shp2, hoseShape) Then
                     MakeNapVsasHoseLine
                 Else
-                    MakeHoseLine 77, 2
+                    MakeHoseLine hoseShape, 77, 2
                 End If
             Else
-                MakeHoseLine 51, 0
+                MakeHoseLine hoseShape, 51, 0
             End If
         Else
-            MakeHoseLine diameter, 0
+            MakeHoseLine hoseShape, diameter, 0
         End If
 
         Exit Sub
     End If
     '---Между Техникой и разветвлениями
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Tech, vb_ShapeType_Razv) Then
-        MakeHoseLine 77, 1
+        MakeHoseLine hoseShape, 77, 1
         Exit Sub
     End If
     '---Между разветвлениями и разветвлениями
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Razv, vb_ShapeType_Razv) Then
-        MakeHoseLine 77, 1
+        MakeHoseLine hoseShape, 77, 1
         Exit Sub
     End If
     '---Между техникой и техникой
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Tech, vb_ShapeType_Tech) Then
         diameter = GetDiameter(shp1, Shp2)
         If diameter = 0 Then
-            MakeHoseLine 77, 1
+            MakeHoseLine hoseShape, 77, 1
         Else
-            MakeHoseLine diameter, 1
+            MakeHoseLine hoseShape, diameter, 1
         End If
         Exit Sub
     End If
@@ -921,7 +921,7 @@ Dim diameter As Integer
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Tech, vb_ShapeType_WaterContainer) Then
         '---Проверяем к какой точке емкости подключена линия
             If IsEmkostIn(shp1, Shp2, hoseShape) Then
-                MakeHoseLine 77, 1
+                MakeHoseLine hoseShape, 77, 1
             Else
                 MakeVHoseLine
             End If
@@ -931,9 +931,9 @@ Dim diameter As Integer
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Tech, vb_ShapeType_GE) Then
         '---Проверяем к какой точке гидроэлеватора подключена линия
         If IsGELineIn(shp1, Shp2, hoseShape) Then
-            MakeHoseLine 66, 1
+            MakeHoseLine hoseShape, 66, 1
         Else
-            MakeHoseLine 77, 1
+            MakeHoseLine hoseShape, 77, 1
         End If
         Exit Sub
     End If
@@ -941,9 +941,9 @@ Dim diameter As Integer
     If GetOrEqual(shp1Type, shp2Type, vb_ShapeType_Razv, vb_ShapeType_GE) Then
         '---Проверяем к какой точке гидроэлеватора подключена линия
         If IsGELineIn(shp1, Shp2, hoseShape) Then
-            MakeHoseLine 66, 1
+            MakeHoseLine hoseShape, 66, 1
         Else
-            MakeHoseLine 77, 1
+            MakeHoseLine hoseShape, 77, 1
         End If
         Exit Sub
     End If
