@@ -193,7 +193,13 @@ Private Function DoorIsOpen(ByRef aO_DoorShape As Visio.Shape) As Boolean
 Dim vI_DoorType As Integer 'Тип двери
 
 On Error GoTo Tail
-
+    
+    '---проверяем имеем ли мы дело с фигурой проема, если да - выходим из функции с открытой дверью
+    If aO_DoorShape.Cells("User.ShapeType").Result(visNumber) = 25 Then
+        DoorIsOpen = True
+        Exit Function
+    End If
+    
     '---проверяем имеем ли мы дело с фигурой двери, если нет - выходим из функции
     If Not aO_DoorShape.Cells("User.ShapeType").Result(visNumber) = 10 Then
         DoorIsOpen = False
