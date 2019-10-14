@@ -39,26 +39,26 @@ End Sub
 Public Sub DescriptionsListImport(ShpIndex As Long)
 'Процедура импорта списка описаний
 '---Объявляем переменные
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 Dim Criteria As String
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set Shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
 
 '---Устанавливаем значение категории
-    Criteria = Shp.Cells("Prop.FireCategorie").ResultStr(Visio.visNone)
+    Criteria = shp.Cells("Prop.FireCategorie").ResultStr(Visio.visNone)
 
 '---Запускаем процедуру получения относительного списка КАТЕГОРИЙ для текущей фигуры
-        If Shp.Cells("Prop.IntenseShowType").ResultStr(Visio.visNone) = "По категории" Then
-            Shp.Cells("Prop.FireDescription.Format").FormulaU = ListImport2("З_Интенсивности", "Описание", "Категория", Criteria)
+        If shp.Cells("Prop.IntenseShowType").ResultStr(Visio.visNone) = "По категории" Then
+            shp.Cells("Prop.FireDescription.Format").FormulaU = ListImport2("З_Интенсивности", "Описание", "Категория", Criteria)
         End If
 
 '---В случае, если значение поля или формата для нового списка равно "", переводим фокус в ячейке на 0-е положение.
-    If Shp.Cells("Prop.FireDescription.Format").ResultStr(Visio.visNone) = "" Or Shp.Cells("Prop.FireDescription").ResultStr(Visio.visNone) = "" Then
-        Shp.Cells("Prop.FireDescription").FormulaU = "INDEX(0,Prop.FireDescription.Format)"
+    If shp.Cells("Prop.FireDescription.Format").ResultStr(Visio.visNone) = "" Or shp.Cells("Prop.FireDescription").ResultStr(Visio.visNone) = "" Then
+        shp.Cells("Prop.FireDescription").FormulaU = "INDEX(0,Prop.FireDescription.Format)"
     End If
 
-Set Shp = Nothing
+Set shp = Nothing
 End Sub
 
 
@@ -76,13 +76,13 @@ Private Sub ToZeroListIndex(cell As String, ShpIndex As Long) '!!!Временно не ис
 Dim CellName As String, CellContent As String
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set Shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     
 '---Определяем названия ячеек которым будут меняться значения
     CellName = "Prop." & cell
     CellContent = "INDEX(0,Prop." & cell & ".Format)"
-    If Shp.Cells(CellName).ResultStr(Visio.visNone) = "" Then
-        Shp.Cells(CellName).FormulaU = CellContent
+    If shp.Cells(CellName).ResultStr(Visio.visNone) = "" Then
+        shp.Cells(CellName).FormulaU = CellContent
     End If
 End Sub
 

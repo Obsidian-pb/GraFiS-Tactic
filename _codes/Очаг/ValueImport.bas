@@ -6,17 +6,17 @@ Public Sub GetFactorsByDescription(ShpIndex As Long)
 Dim dbsE As Database, rsType As Recordset
 Dim pth As String
 Dim Critria As String, Categorie As String, description As String, IntenseW As Single, speed As Single
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 
 '---Определяем действие в случае ошибки открытия слишком большого количества таблиц
     On Error GoTo Tail
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set Shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
 
 '---Определяем критерии поиска записи в наборе данных
-    Categorie = Shp.Cells("Prop.FireCategorie").ResultStr(visUnitsString)
-    description = Shp.Cells("Prop.FireDescription").ResultStr(visUnitsString)
+    Categorie = shp.Cells("Prop.FireCategorie").ResultStr(visUnitsString)
+    description = shp.Cells("Prop.FireDescription").ResultStr(visUnitsString)
     Criteria = "[Категория] = '" & Categorie & "' And [Описание] = '" & description & "'"
     
 '---Создаем соединение с БД Signs
@@ -45,8 +45,8 @@ Dim Shp As Visio.Shape
     End With
     
 '---Присваиваем полученные значения ячейкам
-        Shp.Cells("Prop.WaterIntense").FormulaU = str(Intense)
-        Shp.Cells("Prop.FireSpeedLine").FormulaU = str(speed)
+        shp.Cells("Prop.WaterIntense").FormulaU = str(Intense)
+        shp.Cells("Prop.FireSpeedLine").FormulaU = str(speed)
     
 '---Закрываем соединение с БД
 rsType.Close

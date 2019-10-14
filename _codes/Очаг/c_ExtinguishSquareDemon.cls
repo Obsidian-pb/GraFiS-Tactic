@@ -59,7 +59,7 @@ End Sub
 Public Sub DrawFireSquare(ByRef extSquare As c_ExtinguishingSquare)
 'Отрисовываем площадь тушения
 Dim cell As c_Cell
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 Const mmInInch As Double = 25.4
 
     'Перебираем все блоки и для каждого из них строим зоны горения
@@ -68,11 +68,11 @@ Const mmInInch As Double = 25.4
 
         For Each cell In block.extinguishingCells
 
-            Set Shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, _
+            Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, _
                     (cell.x + 1) * grain / mmInInch, (cell.y + 1) * grain / mmInInch)
-            Shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
-            Shp.Cells("LinePattern").FormulaU = "0"
-            Shp.Cells("FillForegnd").FormulaU = "4"
+            shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
+            shp.Cells("LinePattern").FormulaU = "0"
+            shp.Cells("FillForegnd").FormulaU = "4"
         Next cell
     Next block
 

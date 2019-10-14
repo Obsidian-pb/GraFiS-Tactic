@@ -620,7 +620,7 @@ Private Sub s_PrognoseFire()
 'Процедура строит прогноз развития пожара, обращает его в зону горения и предает полученной фигуре рассчитанные параметры
 Dim vO_Fire As c_Fire
 Dim x As Double, y As Double
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 Dim vsO_FireShape As Visio.Shape
 Dim vss_Speed As Single 'Скорость распространения огня
 Dim vsStr_FirePath As String 'путь пройденный огнем
@@ -633,9 +633,9 @@ On Error GoTo Tail
     Set vO_Fire = New c_Fire
 
 '---Определяем фигуру очага пожара и стартовые координаты
-    Set Shp = Application.ActiveWindow.Selection(1)
-    x = Shp.Cells("PinX").Result(visInches)
-    y = Shp.Cells("PinY").Result(visInches)
+    Set shp = Application.ActiveWindow.Selection(1)
+    x = shp.Cells("PinX").Result(visInches)
+    y = shp.Cells("PinY").Result(visInches)
 
 '---Определяем рассчетную скорость распространения огня
     vss_Speed = GetSpeed
@@ -704,7 +704,7 @@ On Error GoTo Tail
 
 Set vsO_FireShape = Nothing
 Set vO_Fire = Nothing
-Set Shp = Nothing
+Set shp = Nothing
 Set vO_Fire = Nothing
 
 Exit Sub
@@ -712,7 +712,7 @@ Tail:
 '    Debug.Print Err.Description
     Set vsO_FireShape = Nothing
     Set vO_Fire = Nothing
-    Set Shp = Nothing
+    Set shp = Nothing
     Set vO_Fire = Nothing
     SaveLog Err, "s_PrognoseFire"
 End Sub

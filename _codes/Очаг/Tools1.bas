@@ -194,7 +194,7 @@ Public Sub ClearLayer(ByVal layerName As String)
     vsoSelection.Delete
 End Sub
 
-Public Function ShapeIsLine(ByRef Shp As Visio.Shape) As Boolean
+Public Function ShapeIsLine(ByRef shp As Visio.Shape) As Boolean
 'Функция возвращает истина, если переданная фигура - простая прямая линия, Ложь - если иначе
 Dim isLine As Boolean
 Dim isStrait As Boolean
@@ -203,8 +203,8 @@ Dim isStrait As Boolean
     
     On Error GoTo EX
     
-    If Shp.RowCount(visSectionFirstComponent) <> 3 Then Exit Function       'Строк в секции геометрии больше или меньше двух
-    If Shp.RowType(visSectionFirstComponent, 2) <> 139 Then Exit Function   '139 - LineTo
+    If shp.RowCount(visSectionFirstComponent) <> 3 Then Exit Function       'Строк в секции геометрии больше или меньше двух
+    If shp.RowType(visSectionFirstComponent, 2) <> 139 Then Exit Function   '139 - LineTo
     
 ShapeIsLine = True
 Exit Function
@@ -225,7 +225,7 @@ End Function
 
 Public Function PFB_isWall(ByRef aO_Shape As Visio.Shape) As Boolean
 'Функция возвращает Истина, если фигура - стена, в противном случае - Ложь
-    
+Dim shapeType As Integer
 '---Проверяем, является ли фигура фигурой конструкций
     If aO_Shape.CellExists("User.ShapeClass", 0) = False Or aO_Shape.CellExists("User.ShapeType", 0) = False Then
         PFB_isWall = False
@@ -233,7 +233,9 @@ Public Function PFB_isWall(ByRef aO_Shape As Visio.Shape) As Boolean
     End If
 
 '---Проверяем, является ли фигура фигурой СТЕНА
-    If aO_Shape.Cells("User.ShapeClass").Result(visNumber) = 3 And aO_Shape.Cells("User.ShapeType").Result(visNumber) = 44 Then
+    shapeType = aO_Shape.Cells("User.ShapeType").Result(visNumber)
+    If aO_Shape.Cells("User.ShapeClass").Result(visNumber) = 3 And _
+        (shapeType = 44 Or shapeType = 6) Then
         PFB_isWall = True
         Exit Function
     End If
@@ -269,5 +271,69 @@ Dim i As Integer
     
 PFI_FirstSectionCount = i
 End Function
+
+Public Function IsShapeOnSheet(ByRef shp As Visio.Shape) As Boolean
+'Возвращает Истина, если фигура умещается на листе, иначе - ложь.
+'Должна быть на листе центральная точка
+Dim x As Double
+Dim y As Double
+
+    x = shp.Cells("PinX").Result(visInches)
+    y = shp.Cells("PinY").Result(visInches)
+
+    If x < 0 Or x > Application.ActivePage.PageSheet.Cells("PageWidth").Result(visInches) Or _
+        y < 0 Or y > Application.ActivePage.PageSheet.Cells("PageHeight").Result(visInches) Then
+        IsShapeOnSheet = False
+        Exit Function
+    End If
+    
+IsShapeOnSheet = True
+End Function
+
+'Public Sub MorphToGeometry(ByRef shpMain As Visio.Shape, ByRef shpDonor As Visio.Shape, Optional ByVal gsectionIndex As Byte = 0)
+''
+'Dim mainSection As Visio.Section
+'Dim donorSection As Visio.Section
+'Dim i As Integer
+'
+'    Set mainSection = shpMain.Section(visSectionFirstComponent)
+'    Set donorSection = shpMain.Section(visSectionFirstComponent + gsectionIndex)
+'
+'    For i = 1 To shpDonor.RowCount(visSectionFirstComponent + gsectionIndex)
+'        shpMain.AddRow visSectionFirstComponent, i, visTagLineTo
+'        shpMain.CellsSRC(visSectionFirstComponent, i, 0).FormulaU = _
+'            shpDonor.CellsSRC(visSectionFirstComponent + 1, i, 0)   '.FormulaU
+'        shpMain.CellsSRC(visSectionFirstComponent, i, 1).FormulaU = _
+'            shpDonor.CellsSRC(visSectionFirstComponent + 1, i, 1)   '.FormulaU
+'    Next i
+'End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

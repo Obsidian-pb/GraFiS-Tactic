@@ -259,17 +259,17 @@ End Sub
 
 Private Sub GetFirePoints()
 'Модуль ищет и указывает точки начала горения
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 
-    For Each Shp In Application.ActivePage.Shapes
-        If Shp.CellExists("User.IndexPers", 0) Then
-            If Shp.Cells("User.IndexPers") = 70 Then
+    For Each shp In Application.ActivePage.Shapes
+        If shp.CellExists("User.IndexPers", 0) Then
+            If shp.Cells("User.IndexPers") = 70 Then
                 '---Устанваливаем старотовую точку, для дальнейшего расчета распространения огня
-                SetFirePointFromCoordinates Shp.Cells("PinX").Result(visMillimeters), _
-                    Shp.Cells("PinY").Result(visMillimeters)
+                SetFirePointFromCoordinates shp.Cells("PinX").Result(visMillimeters), _
+                    shp.Cells("PinY").Result(visMillimeters)
             End If
         End If
-    Next Shp
+    Next shp
    
 End Sub
 

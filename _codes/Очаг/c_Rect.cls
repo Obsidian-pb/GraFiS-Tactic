@@ -42,16 +42,16 @@ Private Sub Class_Initialize()
     angle = 0
 End Sub
 
-Public Function GetRectShape(Shp As Visio.Shape) As Visio.Shape
-    ImportFromShape Shp
+Public Function GetRectShape(shp As Visio.Shape) As Visio.Shape
+    ImportFromShape shp
     Set GetRectShape = MakeNewRectShape
 End Function
 
-Public Sub ImportFromShape(Shp As Visio.Shape)
-    Shp.XYToPage Shp.Cells("LocPinX").Result(visInches), Shp.Cells("LocPinY").Result(visInches), x, y
-    width = Shp.Cells("Width").Result(visInches)
-    height = Shp.Cells("Height").Result(visInches)
-    angle = AngleToPage(Shp)
+Public Sub ImportFromShape(shp As Visio.Shape)
+    shp.XYToPage shp.Cells("LocPinX").Result(visInches), shp.Cells("LocPinY").Result(visInches), x, y
+    width = shp.Cells("Width").Result(visInches)
+    height = shp.Cells("Height").Result(visInches)
+    angle = AngleToPage(shp)
 End Sub
 
 Public Function MakeNewRectShape() As Visio.Shape
