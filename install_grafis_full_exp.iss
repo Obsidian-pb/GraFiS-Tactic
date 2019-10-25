@@ -84,6 +84,9 @@ Source: "Шаблон моделирование НРС с масштабом 200.vst"; DestDir: "{app}"; compon
 Source: "Шаблон с масштабом 1000.vst"; DestDir: "{app}"; components: traf
 Source: "Шаблон с масштабом 200.vst"; DestDir: "{app}"; components: traf
 Source: "Шаблон с масштабом 500.vst"; DestDir: "{app}"; components: traf
+Source: "Шаблон плана эвакуации (200).vst"; DestDir: "{app}"; components: templatesEvac
+Source: "Шаблон плана эвакуации (500).vst"; DestDir: "{app}"; components: templatesEvac
+Source: "Шаблон плана эвакуации (1000).vst"; DestDir: "{app}"; components: templatesEvac
 Source: "Bitmaps\*"; DestDir: "{app}\Bitmaps\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "_installer\ico.ico"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Дополнительно\DAO\dao360.dll"; DestDir: "{dao}"; Flags: uninsneveruninstall; Tasks: dao
@@ -111,6 +114,11 @@ Name: reg; Description: "Настроить политику безопасности MS Visio - включить все
 Name: desktopicon1; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 200"; GroupDescription: "Ярлыки:";components: traf
 Name: desktopicon2; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 500"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
 Name: desktopicon3; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 1000"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
+
+Name: desktopicon5; Description: "Создать ярлык на рабочем столе Шаблон плана эвакуации с масштабом 200"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: templatesEvac
+Name: desktopicon6; Description: "Создать ярлык на рабочем столе Шаблон плана эвакуации с масштабом 500"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: templatesEvac
+Name: desktopicon7; Description: "Создать ярлык на рабочем столе Шаблон плана эвакуации с масштабом 1000"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: templatesEvac
+
 Name: desktopicon4; Description: "Создать ярлык на рабочем столе Шаблон моделирование НРС с масштабом 200"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf_nrs
 
 [Icons]
@@ -118,6 +126,10 @@ Name: "{group}\Шаблон с масштабом 200"; Filename: "{app}\Шаблон с масштабом 200.
 Name: "{group}\Шаблон с масштабом 500"; Filename: "{app}\Шаблон с масштабом 500.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
 Name: "{group}\Шаблон с масштабом 1000"; Filename: "{app}\Шаблон с масштабом 1000.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
 Name: "{group}\Шаблон моделирование НРС с масштабом 200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон плана эвакуации с масштабом 200"; Filename: "{app}\Шаблон плана эвакуации (200).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон плана эвакуации с масштабом 500"; Filename: "{app}\Шаблон плана эвакуации (500).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон плана эвакуации с масштабом 1000"; Filename: "{app}\Шаблон плана эвакуации (1000).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+
 Name: "{group}\Сведения по подразделениям"; Filename: "{app}\Сведения.xls"; WorkingDir: "{app}"; components: traf
 
 Name: "{group}\Справочник"; Filename: "{app}\Справочник.accdb"; WorkingDir: "{app}";components: traf
@@ -128,6 +140,9 @@ Name: "{commondesktop}\Шаблон с масштабом 200"; Filename: "{app}\Шаблон с масшта
 Name: "{commondesktop}\Шаблон с масштабом 500"; Filename: "{app}\Шаблон с масштабом 500.vst"; Tasks: desktopicon2; IconFilename:"{app}\ico.ico";
 Name: "{commondesktop}\Шаблон с масштабом 1000"; Filename: "{app}\Шаблон с масштабом 1000.vst"; Tasks: desktopicon3; IconFilename:"{app}\ico.ico";
 Name: "{commondesktop}\Шаблон моделирование НРС с масштабом 200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; Tasks: desktopicon4; IconFilename:"{app}\ico.ico";
+Name: "{commondesktop}\Шаблон плана эвакуации с масштабом 200"; Filename: "{app}\Шаблон плана эвакуации (200).vst"; Tasks: desktopicon5; IconFilename:"{app}\ico.ico";
+Name: "{commondesktop}\Шаблон плана эвакуации с масштабом 500"; Filename: "{app}\Шаблон плана эвакуации (500).vst"; Tasks: desktopicon6; IconFilename:"{app}\ico.ico";
+Name: "{commondesktop}\Шаблон плана эвакуации с масштабом 1000"; Filename: "{app}\Шаблон плана эвакуации (1000).vst"; Tasks: desktopicon7; IconFilename:"{app}\ico.ico";
 
 [Registry]
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Visio\Security"; ValueType: dword; ValueName: "VBAWarnings"; ValueData: "1"; Flags: deletevalue; Tasks: Reg; 
@@ -151,6 +166,7 @@ Name: "custom"; Description: "Выборочная установка"; Flags: iscustom
 [Components]
 Name: "traf"; Description: "Трафареты УГО"; Types: main full
 Name: "traf_nrs"; Description: "Трафареты НРС"; Types: nrs full
+Name: "templatesEvac"; Description: "Шаблоны плана эвакуации"; Types: main full
 Name: "gr"; Description: "Надстройка OSM2Visio для MS Visio"; Types: osm full
 Name: "gr\visio07"; Description: "для MS Visio 2007"; Flags: exclusive
 Name: "gr\visio10"; Description: "для MS Visio 2010 и выше"; Flags: exclusive
