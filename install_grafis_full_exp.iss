@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "АИГС ГраФиС-Тактик"
-#define MyAppVersion "11.1.01"
+#define MyAppVersion "11.2.00"
 #define MyAppPublisher "НТЦ ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России"
 #define MyAppURL "https://www.graphicalfiresets.ru/"
 
