@@ -1552,7 +1552,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Толщина забора"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Толщина забора"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -1642,7 +1642,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Толщина забора"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Толщина забора"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -1732,7 +1732,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Толщина забора"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Толщина забора"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -1822,7 +1822,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Толщина забора"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Толщина забора"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -2086,7 +2086,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Ширина колеи"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Ширина колеи"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -2427,7 +2427,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 400 мм; Prop.FenceWidth.Label: "Ширина"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 400 мм; Prop.FenceWidth.Label: "Ширина"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -2768,7 +2768,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Ширина"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Label: "Ширина"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -3324,7 +3324,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 400 мм; Prop.FenceWidth.Label: "Ширина"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 400 мм; Prop.FenceWidth.Label: "Ширина"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -3880,7 +3880,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Prompt: "Толщина опашки (минерализованной полосы)"; Prop.FenceWidth.Label: "Толщина опашки"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1033; 
+    Prop.FenceWidth: 300 мм; Prop.FenceWidth.Prompt: "Толщина опашки (минерализованной полосы)"; Prop.FenceWidth.Label: "Толщина опашки"; Prop.FenceWidth.Format: "#.#### u"; Prop.FenceWidth.Type: 2; Prop.FenceWidth.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -3965,7 +3965,7 @@
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
     Prop.SO: INDEX(2;Prop.SO.Format); Prop.SO.Prompt: "Степень огнестойкости"; Prop.SO.Label: "Степень огнестойкости"; Prop.SO.Format: "I;II;III;IV;V;-;?"; Prop.SO.SortKey: 10; Prop.SO.Type: 1; Prop.SO.Invisible: FALSE; Prop.SO.Verify: FALSE; Prop.SO.LangID: 1049; Prop.SO.Calendar: 0; 
-    Prop.AuraMultiplicator: "3.5"; Prop.AuraMultiplicator.Prompt: "Указывает во сколько раз аура толще контура линии"; Prop.AuraMultiplicator.Label: "Множитель ауры"; Prop.AuraMultiplicator.Format: ""; Prop.AuraMultiplicator.SortKey: 20; Prop.AuraMultiplicator.Type: 0; Prop.AuraMultiplicator.Invisible: NOT(Actions.ShowAura.Checked); Prop.AuraMultiplicator.Verify: FALSE; Prop.AuraMultiplicator.LangID: 1033; Prop.AuraMultiplicator.Calendar: 0; 
+    Prop.AuraMultiplicator: "3.5"; Prop.AuraMultiplicator.Prompt: "Указывает во сколько раз аура толще контура линии"; Prop.AuraMultiplicator.Label: "Множитель ауры"; Prop.AuraMultiplicator.Format: ""; Prop.AuraMultiplicator.SortKey: 20; Prop.AuraMultiplicator.Type: 0; Prop.AuraMultiplicator.Invisible: NOT(Actions.ShowAura.Checked); Prop.AuraMultiplicator.Verify: FALSE; Prop.AuraMultiplicator.LangID: 1049; Prop.AuraMultiplicator.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>

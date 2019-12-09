@@ -772,7 +772,7 @@
   Section: Prop>>>
     Prop.Pressure: 0; Prop.Pressure.Prompt: "Давление в рукаве"; Prop.Pressure.Label: "Давление, "&Prop.Unit; Prop.Pressure.Format: ""; Prop.Pressure.SortKey: 30; Prop.Pressure.Type: 2; Prop.Pressure.Invisible: FALSE; Prop.Pressure.Verify: FALSE; Prop.G43: FALSE; Prop.Pressure.LangID: 1049; 
     Prop.Label: "Манометр"; Prop.Label.Prompt: "Произвольная маркировка манометра"; Prop.Label.Label: "Подпись"; Prop.Label.SortKey: "10"; Prop.Label.Type: 0; Prop.G102: FALSE; Prop.Label.LangID: 1049; 
-    Prop.Unit: INDEX(1;Prop.Unit.Format); Prop.Unit.Prompt: "Мера давления"; Prop.Unit.Label: "Единицы измерения"; Prop.Unit.Format: "м вод.ст;МПа;бар;ст. атм;psi"; Prop.Unit.SortKey: "31"; Prop.Unit.Type: 1; Prop.Unit.LangID: 1033; 
+    Prop.Unit: INDEX(1;Prop.Unit.Format); Prop.Unit.Prompt: "Мера давления"; Prop.Unit.Label: "Единицы измерения"; Prop.Unit.Format: "м вод.ст;МПа;бар;ст. атм;psi"; Prop.Unit.SortKey: "31"; Prop.Unit.Type: 1; Prop.Unit.LangID: 1049; 
     Prop.Koeff: GUARD(INDEX(LOOKUP(Prop.Unit;Prop.Unit.Format);"1;0.00980638;0.0980638;0.09678144584259;1.422295170521")); Prop.Koeff.Prompt: "Коэффициент умножения"; Prop.Koeff.Label: "Коэффициент умножения"; Prop.Koeff.Format: ""; Prop.Koeff.SortKey: ""; Prop.Koeff.Type: 2; Prop.Koeff.Invisible: TRUE; Prop.Koeff.Verify: FALSE; Prop.G109: FALSE; Prop.Koeff.LangID: 1049; Prop.Koeff.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
