@@ -17,8 +17,8 @@ Dim Criteria As String
         Case Is = 100
             Criteria = "[Материал рукава] = '" & Shp.Cells("Prop.HoseMaterial").ResultStr(visUnitsString) & "' And " & _
                 "[Диаметр рукавов] = " & Shp.Cells("Prop.HoseDiameter").ResultStr(visUnitsString)
-            Shp.Cells("Prop.HoseResistance").FormulaU = str(ValueImportSng("З_Рукава", "Сопротивление", Criteria))
-    
+            Debug.Print CStr(ValueImportSng("З_Рукава", "Сопротивление", Criteria))
+            Shp.Cells("Prop.HoseResistance").FormulaU = """" & CStr(ValueImportSng("З_Рукава", "Сопротивление", Criteria)) & """"
     End Select
 
 Set Shp = Nothing
