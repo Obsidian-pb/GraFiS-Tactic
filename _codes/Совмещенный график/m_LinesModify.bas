@@ -106,9 +106,8 @@ On Error GoTo EX
     
 Exit Sub
 EX:
-   'Exit
     MsgBox "Фигуры зоны горения на указанной схеме отсутствуют!", vbCritical
-   shp.Delete
+    shp.Delete
 End Sub
 
 
@@ -211,9 +210,8 @@ On Error GoTo EX
     
 Exit Sub
 EX:
-   'Exit
     MsgBox "Фигуры зоны горения на указанной схеме отсутствуют!", vbCritical
-   shp.Delete
+    shp.Delete
 End Sub
 
 
@@ -337,8 +335,6 @@ End Sub
 '--------------------------------Поле графика-----------------------------------------------------------
 Public Sub GetCommonDataFromAnalize(ByRef shp As Visio.Shape)
 'Модификация общих сведений в графике
-'Dim i As Integer
-'Dim DataArray()
 Dim GraphAnalizer As c_Graph
 Dim PageIndex As Integer
 

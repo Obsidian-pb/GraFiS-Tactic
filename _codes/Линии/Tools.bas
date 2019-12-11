@@ -90,6 +90,8 @@ Dim SQLQuery As String
 Dim List As String
 Dim RSField As Object
 
+    On Error GoTo EX
+
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
         SQLQuery = "SELECT [" & FieldName & "] " & _
@@ -110,7 +112,7 @@ Dim RSField As Object
     With rst
         .MoveFirst
         Do Until .EOF
-            List = List & RSField & ";"
+            List = List & Replace(RSField, Chr(34), "") & ";"
             .MoveNext
         Loop
     End With
@@ -119,6 +121,13 @@ Dim RSField As Object
 
 Set dbs = Nothing
 Set rst = Nothing
+Exit Function
+EX:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    SaveLog Err, "ListImport"
+    ListImport = Chr(34) & " " & Chr(34)
+    Set dbs = Nothing
+    Set rst = Nothing
 End Function
 
 Public Function ListImport2(TableName As String, FieldName As String, Criteria As String) As String
@@ -128,6 +137,8 @@ Dim pth As String
 Dim SQLQuery As String
 Dim List As String
 Dim RSField As Object, RSField2 As Object
+
+    On Error GoTo EX
 
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
@@ -152,7 +163,7 @@ Dim RSField As Object, RSField2 As Object
             With rst
                 .MoveFirst
                 Do Until .EOF
-                    List = List & RSField & ";"
+                    List = List & Replace(RSField, Chr(34), "") & ";"
                     .MoveNext
                 Loop
             End With
@@ -160,10 +171,17 @@ Dim RSField As Object, RSField2 As Object
             List = "0"
         End If
         List = Chr(34) & Left(List, Len(List) - 1) & Chr(34)
-ListImport2 = List
+    ListImport2 = List
 
 Set dbs = Nothing
 Set rst = Nothing
+Exit Function
+EX:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    SaveLog Err, "ListImport2"
+    ListImport2 = Chr(34) & " " & Chr(34)
+    Set dbs = Nothing
+    Set rst = Nothing
 End Function
 
 Public Function ValueImportStr(TableName As String, FieldName As String, Criteria As String) As String

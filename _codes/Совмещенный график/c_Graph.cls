@@ -13,7 +13,7 @@ Option Explicit
 '---------------------Коллекции-------------------------------------------------------------------------------------
 Public ColP_Fires As New Collection
 Public ColP_WStvols As New Collection
-'Public Colp_TempCol As Collection
+
 
 '---------------------Свойства--------------------------------------------------------------------------------------
 Public pi_TargetPageIndex As Integer          'Целевой лист подсчета (0-все листы, 1-... - лист с указанным номером)
@@ -69,7 +69,6 @@ Dim tempTime2 As Date
     On Error GoTo EX
 
 '---Указываем целевую страницу для анализа
-'    Set vsO_TargetPage = Application.ActiveDocument.Pages(as_PageIndex)
     Set vsO_TargetPage = Application.ActiveDocument.Pages(pi_TargetPageIndex)
 
 '---Перебираем все фигуры и в случае если фигура является фигурой ГраФиС анализируем её
@@ -96,8 +95,6 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
             Case Is = 70 'Очаг пожара
                 Set pcpO_BeginFire = vsO_Shape
                 pcpD_BeginDate = pcpO_BeginFire.Cells("Prop.FireTime")
-    '            MsgBox pcpD_BeginDate
-                
             End Select
         End If
     End If

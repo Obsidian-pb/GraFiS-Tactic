@@ -139,8 +139,6 @@ Dim i As Integer
 
     On Error GoTo EX
 
-'MsgBox "Удаляем колонку с индексом " & a_index
-
     '---Изменяем массив данных для Времени/Значения
         For i = a_index To UBound(TimeA) - 1
             TimeA(i) = TimeA(i + 1)
@@ -262,7 +260,6 @@ Dim TB As TextBox
 
 Exit Sub
 EX:
-'    Debug.Print "Нет такой колонки!"
     MsgBox "Такой колонки нет!"
     SaveLog Err, "PS_GoToDataColumn"
 End Sub
