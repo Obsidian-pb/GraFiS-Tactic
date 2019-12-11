@@ -7,7 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-Private dbs As Database
+'Private dbs As Database
 Dim WithEvents SquareAppEvents As Visio.Application
 Attribute SquareAppEvents.VB_VarHelpID = -1
 

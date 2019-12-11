@@ -369,7 +369,7 @@ End Sub
 
 Private Sub sf_ObjectTypesListRefresh()
 'Процедура обновления списка категорий объектов
-Dim vsO_DBS As DAO.Database, vsO_RST As DAO.Recordset
+Dim vsO_DBS As Object, vsO_RST As Object
 Dim vsStr_SQL As String
 Dim vsStr_Pth As String
 
@@ -384,9 +384,14 @@ Dim vsStr_Pth As String
     
 '---Создаем набор записей для получения списка категорий
     vsStr_Pth = ThisDocument.path & "Signs.fdb"
-    Set vsO_DBS = GetDBEngine.OpenDatabase(vsStr_Pth)
-    Set vsO_RST = vsO_DBS.CreateQueryDef("", vsStr_SQL).OpenRecordset(dbOpenDynaset)  'Создание набора записей
-
+'    Set vsO_DBS = GetDBEngine.OpenDatabase(vsStr_Pth)
+'    Set vsO_RST = vsO_DBS.CreateQueryDef("", vsStr_SQL).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+    Set vsO_DBS = CreateObject("ADODB.Connection")
+    vsO_DBS = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & vsStr_Pth & ";Uid=Admin;Pwd=;"
+    vsO_DBS.Open
+    Set vsO_RST = CreateObject("ADODB.Recordset")
+    vsO_RST.Open vsStr_SQL, vsO_DBS, 3, 1
+'    Set RSField = vsO_RST.Fields(FieldName)
 
 '---Ищем необходимую запись в наборе данных и добавляем её в список категорий объектов
     With vsO_RST
@@ -414,7 +419,7 @@ End Sub
 
 Private Sub sf_ObjectsListCreation()
 'Процедура формирует список объектов пожара
-Dim vsO_DBS As DAO.Database, vsO_RST As DAO.Recordset
+Dim vsO_DBS As Object, vsO_RST As Object
 Dim vsStr_SQL As String
 Dim vsStr_Pth As String
 Dim i As Integer
@@ -425,8 +430,14 @@ Dim i As Integer
     
 '---Создаем набор записей для получения списка категорий
     vsStr_Pth = ThisDocument.path & "Signs.fdb"
-    Set vsO_DBS = GetDBEngine.OpenDatabase(vsStr_Pth)
-    Set vsO_RST = vsO_DBS.CreateQueryDef("", vsStr_SQL).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+'    Set vsO_DBS = GetDBEngine.OpenDatabase(vsStr_Pth)
+'    Set vsO_RST = vsO_DBS.CreateQueryDef("", vsStr_SQL).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+    Set vsO_DBS = CreateObject("ADODB.Connection")
+    vsO_DBS = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & vsStr_Pth & ";Uid=Admin;Pwd=;"
+    vsO_DBS.Open
+    Set vsO_RST = CreateObject("ADODB.Recordset")
+    vsO_RST.Open vsStr_SQL, vsO_DBS, 3, 1
+'    Set RSField = vsO_RST.Fields(FieldName)
 
 '---Ищем необходимую запись в наборе данных и добавляем её в список категорий объектов
     With vsO_RST
@@ -437,14 +448,11 @@ Dim i As Integer
     '---Обновляем список обюъектов пожара и их скоростей
         .MoveFirst
         Do Until .EOF
-'            If !Категория = Me.CB_ObjectType.Value Then
             vfStr_ObjList(i, 0) = !Категория
             vfStr_ObjList(i, 1) = !Описание
             If !СкоростьРасч >= 0 Then vfStr_ObjList(i, 2) = !СкоростьРасч Else vfStr_ObjList(i, 2) = 0                             'Скорость распространения, линейная
             If !ИнтенсивностьПоВодеРасч >= 0 Then vfStr_ObjList(i, 3) = !ИнтенсивностьПоВодеРасч Else vfStr_ObjList(i, 3) = "0.1"   'Интенсивность по воде
-'            Debug.Print !Описание & " скор:" & vfStr_ObjList(i, 2) & " инт:" & vfStr_ObjList(i, 3)
             i = i + 1
-'            End If
             .MoveNext
         Loop
     End With

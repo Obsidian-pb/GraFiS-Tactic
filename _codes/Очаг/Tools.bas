@@ -4,11 +4,11 @@ Attribute VB_Name = "Tools"
 
 Public Function ListImport(TableName As String, FieldName As String) As String
 'Функция получения независимого списка из базы данных
-Dim dbs As Database, rst As Recordset
+Dim dbs As Object, rst As Object
 Dim pth As String
 Dim SQLQuery As String
 Dim List As String
-Dim RSField As DAO.Field
+Dim RSField As Object
 
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
@@ -19,8 +19,11 @@ Dim RSField As DAO.Field
         
     '---Создаем набор записей для получения списка
         pth = ThisDocument.path & "Signs.fdb"
-        Set dbs = GetDBEngine.OpenDatabase(pth)
-        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+        Set dbs = CreateObject("ADODB.Connection")
+        dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+        dbs.Open
+        Set rst = CreateObject("ADODB.Recordset")
+        rst.Open SQLQuery, dbs, 3, 1
         Set RSField = rst.Fields(FieldName)
         
     '---Ищем необходимую запись в наборе данных и по ней создаем набор значений для списка для заданных параметров
@@ -32,17 +35,19 @@ Dim RSField As DAO.Field
         Loop
     End With
     List = Chr(34) & Left(List, Len(List) - 1) & Chr(34)
-ListImport = List
+    ListImport = List
 
+Set dbs = Nothing
+Set rst = Nothing
 End Function
 
 Public Function ListImport2(TableName As String, FieldName As String, FieldName2 As String, Criteria As String) As String
 'Функция получения зависимого списка из базы данных
-Dim dbs As Database, rst As Recordset
+Dim dbs As Object, rst As Object
 Dim pth As String
 Dim SQLQuery As String
 Dim List As String
-Dim RSField As DAO.Field, RSField2 As DAO.Field
+Dim RSField As Object, RSField2 As Object
 
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
@@ -53,10 +58,18 @@ Dim RSField As DAO.Field, RSField2 As DAO.Field
             "AND (([" & FieldName2 & "])= '" & Criteria & "');"
         
     '---Создаем набор записей для получения списка
+'        pth = ThisDocument.path & "Signs.fdb"
+'        Set dbs = GetDBEngine.OpenDatabase(pth)
+'        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+'        Set RSField = rst.Fields(FieldName)
         pth = ThisDocument.path & "Signs.fdb"
-        Set dbs = GetDBEngine.OpenDatabase(pth)
-        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+        Set dbs = CreateObject("ADODB.Connection")
+        dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+        dbs.Open
+        Set rst = CreateObject("ADODB.Recordset")
+        rst.Open SQLQuery, dbs, 3, 1
         Set RSField = rst.Fields(FieldName)
+        Set RSField2 = rst.Fields(FieldName2)
         
     '---Проверяем количество записей в наборе и если их 0 возвращаем 0
         If rst.RecordCount > 0 Then
@@ -77,15 +90,15 @@ ListImport2 = List
 
 End Function
 
-Public Function GetDBEngine() As Object
-'Function returns DBEngine for current Office Engine Type (DAO.DBEngine.60 or DAO.DBEngine.120)
-Dim engine As Object
-    On Error GoTo EX
-    Set GetDBEngine = DBEngine
-Exit Function
-EX:
-    Set GetDBEngine = CreateObject("DAO.DBEngine.120")
-End Function
+'Public Function GetDBEngine() As Object
+''Function returns DBEngine for current Office Engine Type (DAO.DBEngine.60 or DAO.DBEngine.120)
+'Dim engine As Object
+'    On Error GoTo EX
+'    Set GetDBEngine = DBEngine
+'Exit Function
+'EX:
+'    Set GetDBEngine = CreateObject("DAO.DBEngine.120")
+'End Function
 
 
 
@@ -151,31 +164,7 @@ Public Function IsSquare(ShowMessage As Boolean) As Boolean
 IsSquare = True
 End Function
 
-'Public Function CheckSquareShape() As Boolean
-''Функция возвращает Истина, если фигуру можно преобразовать в фигуру c площадью, Ложь - если нет
-''---Проверяем выбран ли какой либо объект
-'    If Application.ActiveWindow.Selection.Count < 1 Then
-''        MsgBox "Не выбрана ни одна фигура!", vbInformation
-'        CheckSquareShape = False
-'        Exit Function
-'    End If
-'
-''---Проверяем, не является ли выбранная фигура уже площадью или другой фигурой с назначенными свойствами
-'    If Application.ActiveWindow.Selection(1).RowCount(visSectionUser) > 0 Then
-'        MsgBox "Выбранная фигура уже имеет специальные свойства и не может быть обращена в зону горения", vbInformation
-'        CheckSquareShape = False
-'        Exit Function
-'    End If
-'
-''---Проверяем Является ли выбранная фигура площадью
-'    If Application.ActiveWindow.Selection(1).AreaIU = 0 Then
-'        MsgBox "Выбранная фигура не имеет площади!", vbInformation
-'        CheckSquareShape = False
-'        Exit Function
-'    End If
-'
-'CheckSquareShape = True
-'End Function
+
 
 Public Function CheckRushShape() As Boolean
 'Функция возвращает Истина, если фигуру можно преобразовать в фигуру обрушения, Ложь - если нет

@@ -3,9 +3,9 @@ Attribute VB_Name = "ValueImport"
 '------------------------Блок Значений ячеек------------------------------------------
 Public Sub GetFactorsByDescription(ShpIndex As Long)
 'Процедура импорта данных о интенсивностях и линейной скорости из базы данных Signs по описанию пожара
-Dim dbsE As Database, rsType As Recordset
+Dim dbsE As Object, rsType As Object
 Dim pth As String
-Dim Critria As String, Categorie As String, description As String, IntenseW As Single, speed As Single
+Dim SQLQuery As String, Critria As String, Categorie As String, description As String, IntenseW As Single, speed As Single
 Dim shp As Visio.Shape
 
 '---Определяем действие в случае ошибки открытия слишком большого количества таблиц
@@ -21,26 +21,33 @@ Dim shp As Visio.Shape
     
 '---Создаем соединение с БД Signs
     pth = ThisDocument.path & "Signs.fdb"
-    Set dbsE = GetDBEngine.OpenDatabase(pth)
-    Set rsType = dbsE.OpenRecordset("З_Интенсивности", dbOpenDynaset) 'Создание набора записей
+    Set dbsE = CreateObject("ADODB.Connection")
+    dbsE = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+    dbsE.Open
+    Set rsType = CreateObject("ADODB.Recordset")
+    SQLQuery = "SELECT * From З_Интенсивности"
+    rsType.Open SQLQuery, dbsE, 3, 1
 
 '---Ищем необходимую запись в наборе данных и по ней определяем интенсивность для заданных параметров
     With rsType
-        .FindFirst Criteria
-        If ![ИнтенсивностьПоВодеРасч] > 0 Then 'Если значения интенсивности подачи воды в БД нет
-            Intense = ![ИнтенсивностьПоВодеРасч]
-        Else
-            MsgBox "Расчетное значение интенсивности подачи воды для данного описания в базе данных отсутствует! " & _
-                "Поэтому по умолчанию будет присовено значение 0л/с*м.кв.."
-            Intense = 0
-        End If
-        
-        If ![СкоростьРасч] > 0 Then 'Если значения скорости в БД нет
-            speed = ![СкоростьРасч]
-        Else
-            MsgBox "Расчетное значение линейной скорости распространения огня для данного описания в базе данных отсутствует! " & _
-                "Поэтому по умолчанию будет присовено значение 0м/мин."
-            speed = 0
+        .Filter = Criteria
+        If .RecordCount > 0 Then
+            .MoveFirst
+            If ![ИнтенсивностьПоВодеРасч] > 0 Then 'Если значения интенсивности подачи воды в БД нет
+                Intense = ![ИнтенсивностьПоВодеРасч]
+            Else
+                MsgBox "Расчетное значение интенсивности подачи воды для данного описания в базе данных отсутствует! " & _
+                    "Поэтому по умолчанию будет присовено значение 0л/с*м.кв.."
+                Intense = 0
+            End If
+            
+            If ![СкоростьРасч] > 0 Then 'Если значения скорости в БД нет
+                speed = ![СкоростьРасч]
+            Else
+                MsgBox "Расчетное значение линейной скорости распространения огня для данного описания в базе данных отсутствует! " & _
+                    "Поэтому по умолчанию будет присовено значение 0м/мин."
+                speed = 0
+            End If
         End If
     End With
     
