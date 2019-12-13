@@ -54,6 +54,15 @@ On Error GoTo Tail
     
     '---Формируем маску
         s_makeMask
+        
+    '---Проверяем удалось ли сформировать маску, если нет - выходим
+        If pO_MaskShape Is Nothing Then
+            vO_App.EventsEnabled = True
+            Set col_RoomsShapes = Nothing
+            Set col_PlaceShapes = Nothing
+            Set col_WallsShapes = Nothing
+            Exit Sub
+        End If
     
     '---Вбрасываем чистую фигуру с размерами листа
         Set vO_SheetShape = Application.ActiveWindow.Page.DrawRectangle(0, 0, _
