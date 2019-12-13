@@ -36,7 +36,7 @@ Sub AddButtonLine()
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Превращения")
-    DocPath = Application.Documents("Линии НРС.vss").path
+    DocPath = ThisDocument.path
 
 '---Проверяем есть ли уже на панели управления "Превращения" кнопка "Рукав"------------------------------
 '    For i = 1 To Application.CommandBars("Превращения").Controls.Count
@@ -93,7 +93,7 @@ Sub AddButtonMLine()
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Превращения")
-    DocPath = Application.Documents("Линии НРС.vss").path
+    DocPath = ThisDocument.path
     
 '---Добавляем кнопку на панель управления "Превращения"--------------------------------
 '---Кнопка "Обратить в магистральную рукавную линию"-------------------------------------------------
@@ -136,7 +136,7 @@ Sub AddButtonVHose()
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Превращения")
-    DocPath = Application.Documents("Линии НРС.vss").path
+    DocPath = ThisDocument.path
 '---Добавляем кнопки на панель управления "Превращения"--------------------------------
 '---Кнопка "Обратить во всасывающую линию"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
@@ -178,7 +178,7 @@ Sub AddButtonNormalize()
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Превращения")
-    DocPath = Application.Documents("Линии НРС.vss").path
+    DocPath = ThisDocument.path
 '---Добавляем кнопки на панель управления "Превращения"--------------------------------
 '---Кнопка "Нормализация"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)

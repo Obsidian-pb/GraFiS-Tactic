@@ -183,15 +183,6 @@ Tail:
     SaveLog Err, "ListImport2"
 End Function
 
-Public Function GetDBEngine() As Object
-'Function returns DBEngine for current Office Engine Type (DAO.DBEngine.60 or DAO.DBEngine.120)
-Dim engine As Object
-    On Error GoTo EX
-    Set GetDBEngine = DBEngine
-Exit Function
-EX:
-    Set GetDBEngine = CreateObject("DAO.DBEngine.120")
-End Function
 
 
 
@@ -219,7 +210,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке
@@ -231,26 +222,4 @@ Const d = " | "
 End Sub
 
 
-''-----------------------------------------Функции проверки----------------------------------------------
-'Public Function WindowCheck(ByRef a_WinCaption As String) As Boolean
-'Dim wnd As Window
-'    On Error GoTo Exc
-'
-'    Set wnd = Application.ActiveWindow.Windows.ItemEx("Внешние данные")
-'    WindowCheck = True
-'    Set wnd = Nothing
-'Exit Function
-'Exc:
-'    WindowCheck = False
-'End Function
-'
-''------------------------------------------Процедуры работы с формой менеджмента-------------------------
-'Public Sub MngmnWndwShow(ShpObj As Visio.Shape)
-''Процедура активирует форму ManagementTechnics
-'    If c_ManagementTech Is Nothing Then
-'        Set c_ManagementTech = New c_ManagementTechnics
-'    Else
-'        c_ManagementTech.PS_ShowWindow
-'    End If
-'    ShpObj.Delete
-'End Sub
+

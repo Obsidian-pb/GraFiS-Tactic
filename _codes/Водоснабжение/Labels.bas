@@ -19,7 +19,7 @@ Dim CellFormula As String
 
 '---Вбрасываем коннектор и соединяем фигуру водоисточника и подпись
     '---Вбрасываем коннектор и соединяем фигкуры водоисточника и подписи
-    Set mstrConnection = Application.Documents("Водоснабжение.vss").Masters("Коннектор")
+    Set mstrConnection = Application.ThisDocument.Masters("Коннектор")
     
     Set shpConnection = Application.ActiveWindow.Page.Drop(mstrConnection, 2, 2)
     Set vsoCell1 = shpConnection.CellsU("BeginX")
@@ -73,7 +73,7 @@ Dim CellFormula As String
 
 '---Вбрасываем коннектор и соединяем фигуру водоисточника и подпись
     '---Вбрасываем коннектор и соединяем фигкуры водоисточника и подписи
-    Set mstrConnection = Application.Documents("Водоснабжение.vss").Masters("Коннектор")
+    Set mstrConnection = Application.ThisDocument.Masters("Коннектор")
     
     Set shpConnection = Application.ActiveWindow.Page.Drop(mstrConnection, 2, 2)
     Set vsoCell1 = shpConnection.CellsU("BeginX")

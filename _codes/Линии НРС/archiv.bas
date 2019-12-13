@@ -7,7 +7,7 @@ Attribute VB_Name = "archiv"
 'Dim RowNum As Integer
 '
 ''---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-'Set ShapeFrom = Application.Documents("Линии НРС.vss").Masters(ShapeFromID).Shapes(1)
+'Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
 'Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 '
 ''---Сверяем наборы строк в обеих фигурах, и в случае отсутствия в них искомых - создаем их.

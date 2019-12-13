@@ -37,7 +37,7 @@ Sub AddButtons()
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Спецфункции")
-    DocPath = Application.Documents("Специальные Функции.vss").path
+    DocPath = ThisDocument.path
     
 '---Добавляем кнопки на панель управления "Спецфункции"--------------------------------
 '---Кнопка "Экспорт в JPG"-------------------------------------------------

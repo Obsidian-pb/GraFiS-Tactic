@@ -78,7 +78,7 @@ On Error GoTo Tail
     Application.EventsEnabled = False
     
     '---Получаем мастер строк
-    Set vO_StringMaster = Application.Documents("Прочее.vss").Masters("Экспликация")
+    Set vO_StringMaster = ThisDocument.Masters("Экспликация")
     
     '---Перебираем все фигуры на листе, и если фигура - фигура места, создаем строки экспликации
     i = 0

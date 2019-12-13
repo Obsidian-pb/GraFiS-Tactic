@@ -14,7 +14,7 @@ Dim str As String
 
 On Error GoTo EX
 '1 запоминаем фигуры
-    Set MasterBckRoad = Application.Documents("План на местности.vss").Masters("Bckgnd").Shapes(1)
+    Set MasterBckRoad = ThisDocument.Masters("Bckgnd").Shapes(1)
     Set FaceRoad = ShpObj
     Set BckRoad = Application.ActivePage.Drop(MasterBckRoad, 0, 0)
 
@@ -51,7 +51,7 @@ Dim str As String
 
     On Error GoTo EX
 '1 запоминаем фигуры
-    Set MasterBckRoad = Application.Documents("План на местности.vss").Masters("Bckgnd2").Shapes(1)
+    Set MasterBckRoad = ThisDocument.Masters("Bckgnd2").Shapes(1)
     Set FaceRoad = ShpObj
     Set BckRoad = Application.ActivePage.Drop(MasterBckRoad, 0, 0)
 

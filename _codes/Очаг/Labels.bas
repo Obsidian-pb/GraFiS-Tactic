@@ -18,7 +18,7 @@ Dim pnt1 As Long, pnt2 As Long
 
 '---Вбрасываем коннектор и соединяем фигуру площади и подпись
     '---Вбрасываем коннектор и соединяем фигкуры площади и подписи
-    Set mstrConnection = Application.Documents("Очаг.vss").Masters("Коннектор")
+    Set mstrConnection = ThisDocument.Masters("Коннектор")
     
     Set shpConnection = Application.ActiveWindow.Page.Drop(mstrConnection, 2, 2)
     Set vsoCell1 = shpConnection.CellsU("BeginX")

@@ -223,7 +223,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке
@@ -260,13 +260,4 @@ Dim propIndex As Integer
     Next rst
 End Function
 
-''------------------------------------------Процедуры работы с формой менеджмента-------------------------
-'Public Sub MngmnWndwShow(ShpObj As Visio.Shape)
-''Процедура активирует форму ManagementTechnics
-'    If c_ManagementTech Is Nothing Then
-'        Set c_ManagementTech = New c_ManagementTechnics
-'    Else
-'        c_ManagementTech.PS_ShowWindow
-'    End If
-'    ShpObj.Delete
-'End Sub
+

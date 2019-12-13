@@ -38,9 +38,7 @@ Public Sub CheckUpdates()
     
 Dim lastCheckDate As Date
 Dim currentVersion As Integer
-    
 
-    
     'Проверяем дату последней проверки - если прошло меньше суток выходим
     lastCheckDate = CDate(GetSetting("GraFiS", "GFS_Version", "LastCheckDate", Now()))
     If DateDiff("d", lastCheckDate, Now()) >= 1 Then
@@ -59,14 +57,14 @@ End Sub
 
 Private Function GetData(ByVal a_version As Integer) As Boolean
 'Функция возвращает Истина если получен ответ от сервера, а так же выполняются все условия
-Dim xmlDoc As MSXML2.DOMDocument60
-Dim xmlNode As MSXML2.IXMLDOMNode
+Dim xmlDoc As Object
+Dim xmlNode As Object
 
     GetData = False
     
     On Error GoTo EX
     
-    Set xmlDoc = New DOMDocument60
+    Set xmlDoc = CreateObject("MSXML.DOMDocument") ' New DOMDocument60
     xmlDoc.async = False
     xmlDoc.validateOnParse = False
     xmlDoc.Load "http://graphicalfiresets.ru/Source/GFSVersion.xml"
