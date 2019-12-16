@@ -46,8 +46,8 @@ Sub AddButtons()
     With Button
         .Caption = "Мастер проверок"
         .Tag = "show_m_chek_form"
-        .TooltipText = "Проверить правильность схемы"
-        .FaceID = 172
+        .TooltipText = "Мастер проверок"
+        .FaceID = 1820
         .BeginGroup = True
     End With
     

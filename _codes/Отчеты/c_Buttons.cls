@@ -32,8 +32,7 @@ Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As
     
 '---Запускаем основное событие
     MCheckForm.Show
-    
-Exit Sub
+    MCheckForm.B_Refresh_Click
 Tail:
     '---Выходим из процедуры обработки
 End Sub

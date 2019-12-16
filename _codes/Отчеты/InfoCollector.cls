@@ -94,6 +94,7 @@ Public pi_linesLableCount As Integer    'Podpisi linii
 Public pi_WorklinesCount As Integer     'Rabochie linii
 Public pi_BuildCount As Integer         'Zdania
 Public pi_SOCount As Integer            'Stepen ognestoikosti
+Public pi_FireCount As Integer          'Ploshad gorenia
 
 
 
@@ -373,6 +374,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     
             '---Объекты пожара-----------------
                 Case Is = 64 'Площадь пожара
+                      pi_FireCount = pi_FireCount + 1
                     If vsO_Shape.Cells("Prop.SquareTime") > pdt_LatestSquareTime Then 'Проверяем является ли данная фигура последней по времени
                         ps_FireSquare = vsO_Shape.Cells("User.FireSquare")
                         ps_ExtSquare = vsO_Shape.Cells("User.ExtSquare")
@@ -926,6 +928,7 @@ Private Sub sc_SetPropertiesNull()
     pi_WorklinesCount = 0         'Rabochie linii
     pi_BuildCount = 0             'Zdania
     pi_SOCount = 0                'Stepen ognestoikosti
+    pi_FireCount = 0              'Ploshad gorenia
     
     
     
