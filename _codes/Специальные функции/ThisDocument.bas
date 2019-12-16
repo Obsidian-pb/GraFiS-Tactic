@@ -53,8 +53,8 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
 '---Деактивируем объект отслеживания нажатия кнопок
     Set ButEvent = Nothing
     
-'---Удаляем панель управления "СпецФункции"
-    RemoveTB_SpecFunc
+'---Удаляем кнопки с панели управления "СпецФункции"
+    DeleteButtons
     
 '---Удаляем панель управления "Таймер"
     DelTBTimer

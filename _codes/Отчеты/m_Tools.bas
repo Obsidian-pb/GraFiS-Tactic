@@ -4,18 +4,6 @@ Option Explicit
 
 
 
-'Public Function GetDBEngine() As Object
-''Function returns DBEngine for current Office Engine Type (DAO.DBEngine.60 or DAO.DBEngine.120)
-'Dim engine As Object
-'    On Error GoTo EX
-'    Set GetDBEngine = DBEngine
-'Exit Function
-'EX:
-'    Set GetDBEngine = CreateObject("DAO.DBEngine.120")
-'End Function
-
-
-
 Public Function PF_RoundUp(afs_Value As Single) As Integer
 'Процедура округления ПОЛОЖИТЕЛЬНЫХ чисел в большую сторону
 Dim vfi_Temp As Integer

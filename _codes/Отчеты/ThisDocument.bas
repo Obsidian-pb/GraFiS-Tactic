@@ -9,6 +9,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Dim WithEvents vmO_App As Visio.Application
 Attribute vmO_App.VB_VarHelpID = -1
+Dim ButEvent As c_Buttons
 'Dim vOC_InfoAnalizer As InfoCollector
 
 
@@ -16,18 +17,33 @@ Attribute vmO_App.VB_VarHelpID = -1
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
 'Set vOC_InfoAnalizer = Nothing
-
+    
+'---Деактивируем объект отслеживания нажатия кнопок
+    Set ButEvent = Nothing
+    
+'---Удаляем кнопки с панели управления "СпецФункции"
+    DeleteButtons
+    
 sP_InfoCollectorDeActivate 'Деактивируем класс InfoCollector через обращение к модулю m_Analize
 End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 Set vmO_App = Visio.Application
-
+    
+'    Stop
+    
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
 
 '---Активируем класс InfoCollector через обращение к модулю m_Analize
     sP_InfoCollectorActivate
+    
+'---Добавляем панель инструментов "Спецфункции"
+    AddTB_SpecFunc
+    AddButtons
+    
+'---Активируем объект отслеживания нажатия кнопок
+    Set ButEvent = New c_Buttons
     
 '---Проверяем наличие обновлений
     fmsgCheckNewVersion.CheckUpdates
@@ -68,6 +84,4 @@ Dim cell As Visio.cell
     End If
 
 End Sub
-Sub show_m_chek_form()
-MCheckForm.Show
-End Sub
+

@@ -18,7 +18,7 @@ Sub AddTB_SpecFunc()
         .Name = "Спецфункции"
         .Visible = True
     End With
-'    AddButtons
+
 End Sub
 
 Sub RemoveTB_SpecFunc()
@@ -48,6 +48,7 @@ Sub AddButtons()
         .TooltipText = "Экспортировать все листы в JPG"
         .Picture = LoadPicture(DocPath & "Bitmaps\ExportJPG1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\ExportJPG2.bmp")
+        .BeginGroup = True
     End With
 '---Кнопка "Аспект"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
@@ -97,31 +98,34 @@ EX:
 End Sub
 
 
-'Sub DeleteButtons()
-''---Процедура удаления кнопок из панели управления "Спецфункции"--------------
-'
-''---Объявляем переменные и постоянные-------------------------------------------------
-'    Dim Bar As CommandBar, Button As CommandBarButton
-'    Dim DocPath As String
-'
-'    Set Bar = Application.CommandBars("Спецфункции")
-''---Удаление кнопки "Рукав" из панели управления "Превращения"------------------------
-'    Set Button = Bar.Controls("Экспорт в JPG")
-'    Button.Delete
-'''---Удаление кнопки "Шторм" из панели управления "Превращения"------------------------
-''    Set Button = Bar.Controls("Шторм")
-''    Button.Delete
-'''---Удаление кнопки "Задымление" из панели управления "Превращения"------------------------
-''    Set Button = Bar.Controls("Задымление")
-''    Button.Delete
-'''---Удаление кнопки "Обрушение" из панели управления "Превращения"------------------------
-''    Set Button = Bar.Controls("Обрушение")
-''    Button.Delete
-'
-'
-'Set Button = Nothing
-'Set Bar = Nothing
-'
-'End Sub
+Sub DeleteButtons()
+'---Процедура удаления кнопки "Мастер проверок" из панели управления "Спецфункции"--------------
+
+'---Объявляем переменные и постоянные-------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Спецфункции")
+'---Удаление кнопки "Рукав" из панели управления "Экспорт в JPG"------------------------
+    Set Button = Bar.Controls("Экспорт в JPG")
+    Button.Delete
+'---Удаление кнопки "Рукав" из панели управления "Аспект"------------------------
+    Set Button = Bar.Controls("Аспект")
+    Button.Delete
+'---Удаление кнопки "Рукав" из панели управления "Исправить расположение"------------------------
+    Set Button = Bar.Controls("Исправить расположение")
+    Button.Delete
+'---Удаление кнопки "Рукав" из панели управления "Количество фигур"------------------------
+    Set Button = Bar.Controls("Количество фигур")
+    Button.Delete
+'---Удаление кнопки "Рукав" из панели управления "Таймер"------------------------
+    Set Button = Bar.Controls("Таймер")
+    Button.Delete
+    
+    
+Set Button = Nothing
+Set Bar = Nothing
+
+End Sub
 
 
