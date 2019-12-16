@@ -68,3 +68,6 @@ Dim cell As Visio.cell
     End If
 
 End Sub
+Sub show_m_chek_form()
+MCheckForm.Show
+End Sub

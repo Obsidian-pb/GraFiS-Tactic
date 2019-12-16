@@ -7,6 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 '---------------------Класс сбора, обобщения и обобщения информации имеющейся на листе------------------------------------------
 Option Explicit
 
@@ -53,6 +54,8 @@ Public pi_GDZSChainsCount As Integer 'Количество звеньев ГДЗС
 Public pi_GDZSMansCount As Integer 'Количество газрдымозащитников
 Public ps_GDZSChainsRezCount As Single 'Количество резервных звеньев ГДЗС
 Public pi_GDZSMansRezCount As Integer 'Количество газодымозащитников для резервных звеньев ГДЗС
+Public pi_GDZSpbCount As Integer 'Kolichestvo PB
+Public pi_KPPCount As Integer 'Kolichestvo KPP
 
 
 Public pi_Hoses51Count As Integer  'Количество рукавов диаметром 51мм
@@ -78,6 +81,21 @@ Public pi_MZdravCount As Integer        'СМП
 Public pi_TechTotalCount As Integer     'Общее количество техники
 Public pi_FireTotalCount As Integer     'Пожарная
 Public pi_BUCount As Integer            'Боевых участков
+Public pi_ShtabCount As Integer         'Shtab
+Public pi_RNBDCount As Integer          'Reshaushee napravlenie
+Public pi_OchagCount As Integer         'Ochag
+Public pi_DevelopCount As Integer       'Rasprostranenie
+Public pi_SmokeCount As Integer         'Zadimlenie
+Public pi_WaterSourceCount As Integer   'Vodoistochniki
+Public pi_distanceCount As Integer      'Rasstoyanie
+Public pi_linesCount As Integer         'Otdelnie linii
+Public pi_linesPosCount As Integer      'Polozenie linii
+Public pi_linesLableCount As Integer    'Podpisi linii
+Public pi_WorklinesCount As Integer     'Rabochie linii
+Public pi_BuildCount As Integer         'Zdania
+Public pi_SOCount As Integer            'Stepen ognestoikosti
+
+
 
 
 
@@ -369,11 +387,16 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     End If
                     
                 Case Is = 71 'Задымление
+                    pi_SmokeCount = pi_SmokeCount + 1
                 Case Is = 70 'Очаг
+                    pi_OchagCount = pi_OchagCount + 1
                 Case Is = 92 'Гибель
                 Case Is = 84 'Распространение
+                    pi_DevelopCount = pi_DevelopCount + 1
                 Case Is = 86 'Огненный шторм
                 Case Is = 87 'Одиночный пожар
+                Case Is = 153 'stepen ognestoikosti
+                    pi_SOCount = pi_SOCount + 1
             
             '---СВязь и освещение------------------
                 Case Is = 57 'Прожектор
@@ -414,8 +437,10 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     End If
                     
                 Case Is = 47 'ПБ
+                    pi_GDZSpbCount = pi_GDZSpbCount + 1
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                 Case Is = 48 'КПП
+                    pi_KPPCount = pi_KPPCount + 1
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                 Case Is = 49 'Дымосос
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
@@ -424,6 +449,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                 Case Is = 63 'БУ
                     pi_BUCount = pi_BUCount + 1
                 Case Is = 62 'Штаб/РТП
+                    pi_ShtabCount = pi_ShtabCount + 1
                     pi_PersonnelNeed = pi_PersonnelNeed + 1
                     If Not vsO_Shape.Cells("Prop.NachStab").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
@@ -440,6 +466,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     If Not vsO_Shape.Cells("Prop.RTP5").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
                 Case Is = 83 'РНД
+                    pi_RNBDCount = pi_RNBDCount + 1
     
             '---ПТВ-----------------------------------
                 Case Is = 34 'Ручной водяной
@@ -545,18 +572,28 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
     
             '---Водоснабжение
                 Case Is = 50 'ПГ
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                 Case Is = 51 'ПВ
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                 Case Is = 52 'ПК
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                 Case Is = 53 'Водоем
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                     pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Value") * 1000
                 Case Is = 54 'Пирс
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                 Case Is = 56 'Башня
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                     pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.WTValue") * 1000
+                Case Is = 75 'Rasstoyanie
+                    pi_distanceCount = pi_distanceCount + 1
                     
             '---Линии
                 Case Is = 100 'Напорная линия
                     If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
                         And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
+                          pi_linesCount = pi_linesCount + 1
+                        If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then pi_WorklinesCount = pi_WorklinesCount + 1
                         Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
                             Case Is = 51
                                 If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
@@ -615,6 +652,12 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                         End If
                     End If
                 Case Is = 101 'Всасывающая линия или напорно-всасывающая
+                Case Is = 151 'Polozenie linii
+                    pi_linesPosCount = pi_linesPosCount + 1
+                Case Is = 150 'Podpis linii
+                    pi_linesLableCount = pi_linesLableCount + 1
+                Case Is = 135 'Zdania
+                    pi_BuildCount = pi_BuildCount + 1
                 Case Is = 195 'Index kolichestva izdeliy techniky
                     pi_PersonnelHave = pi_PersonnelHave + (vsO_Shape.Cells("Prop.PersonnelHave") - vsO_Shape.Cells("Prop.PersonnelHave") / vsO_Shape.Cells("Prop.Quantity")) - (vsO_Shape.Cells("Prop.Quantity") - 1)
                     pi_WaterValueHave = pi_WaterValueHave + (vsO_Shape.Cells("Prop.Water") - vsO_Shape.Cells("Prop.Water") / vsO_Shape.Cells("Prop.Quantity"))
@@ -841,6 +884,8 @@ Private Sub sc_SetPropertiesNull()
     ps_GDZSChainsRezCount = 0     'Количество резервных звеньев ГДЗС
     pi_GDZSMansCount = 0          'Количество газрдымозащитников
     pi_GDZSMansRezCount = 0       'Количество газодымозащитников для резервных звеньев ГДЗС
+    pi_GDZSpbCount = 0            'Kolichestvo PB
+    pi_KPPCount = 0               'Kolichestvo KPP
     pi_Hoses51Count = 0           'Количество рукавов диаметром 51мм
     pi_Hoses66Count = 0           'Количество рукавов диаметром 66мм
     pi_Hoses77Count = 0           'Количество рукавов диаметром 77мм
@@ -868,7 +913,19 @@ Private Sub sc_SetPropertiesNull()
     pi_TechTotalCount = 0         'Общее количество техники
     pi_FireTotalCount = 0         'Пожарная
     pi_BUCount = 0                'Боевых участков
-    
+    pi_ShtabCount = 0             'Shtab
+    pi_RNBDCount = 0              'Reshaushee napravlenie
+    pi_OchagCount = 0             'Ochag
+    pi_DevelopCount = 0           'Rasprostranenie
+    pi_SmokeCount = 0             'Zadimlenie
+    pi_WaterSourceCount = 0       'Vodoistochniki
+    pi_distanceCount = 0          'Rasstoyanie
+    pi_linesCount = 0             'Otdelnie linii
+    pi_linesPosCount = 0          'Polozenie linii
+    pi_linesLableCount = 0        'Podpisi linii
+    pi_WorklinesCount = 0         'Rabochie linii
+    pi_BuildCount = 0             'Zdania
+    pi_SOCount = 0                'Stepen ognestoikosti
     
     
     

@@ -199,3 +199,44 @@ End Select
 
 End Function
 
+'=================================== MASTER CHECK by Vasilchenko ================================================
+Public Sub Master_check_refresh()
+'Процедура реакции на действие пользователя
+Dim i As Integer
+Dim psi_TargetPageIndex As Integer
+
+    psi_TargetPageIndex = Application.ActivePage.Index
+
+'---обнуляем имеющиеся значения свойств
+'    psi_TargetPageIndex = ActivePage.Index
+    If vOC_InfoAnalizer Is Nothing Then
+        Set vOC_InfoAnalizer = New InfoCollector
+    End If
+    vOC_InfoAnalizer.sC_Refresh (psi_TargetPageIndex)
+
+'---Запускаем циклы обработки
+    MCheckForm.ListBox1.Clear
+
+    'GDZS
+    If vOC_InfoAnalizer.pi_GDZSpbCount < vOC_InfoAnalizer.pi_GDZSChainsCount Then MCheckForm.ListBox1.AddItem "Не выставлены посты безопасности для каждого звена ГДЗС"
+    If vOC_InfoAnalizer.pi_GDZSChainsCount >= 3 And vOC_InfoAnalizer.pi_KPPCount = 0 Then MCheckForm.ListBox1.AddItem "Не создан контрольно-пропускной пункт ГДЗС"
+    'Upravlenie
+    If vOC_InfoAnalizer.pi_BUCount >= 3 And vOC_InfoAnalizer.pi_ShtabCount = 0 Then MCheckForm.ListBox1.AddItem "Не создан оперативный штаб"
+    If vOC_InfoAnalizer.pi_RNBDCount = 0 And vOC_InfoAnalizer.pi_OchagCount > 0 Then MCheckForm.ListBox1.AddItem "Не указано решающее направление"
+    If vOC_InfoAnalizer.pi_RNBDCount > 1 Then MCheckForm.ListBox1.AddItem "Решающее напраление должно быть одним"
+    'Ochag
+    If vOC_InfoAnalizer.pi_OchagCount > 0 And vOC_InfoAnalizer.pi_SmokeCount = 0 Then MCheckForm.ListBox1.AddItem "Не указаны зоны задымления"
+    If vOC_InfoAnalizer.pi_OchagCount > 0 And vOC_InfoAnalizer.pi_DevelopCount = 0 Then MCheckForm.ListBox1.AddItem "Не указаны пути распространения пожара"
+    If vOC_InfoAnalizer.pi_SmokeCount > 0 And vOC_InfoAnalizer.pi_OchagCount = 0 Then MCheckForm.ListBox1.AddItem "Не указан очаг пожара"
+    If vOC_InfoAnalizer.pi_DevelopCount > 0 And vOC_InfoAnalizer.pi_OchagCount = 0 Then MCheckForm.ListBox1.AddItem "Не указан очаг пожара"
+    'PPW
+    If vOC_InfoAnalizer.pi_WaterSourceCount > vOC_InfoAnalizer.pi_distanceCount Then MCheckForm.ListBox1.AddItem "Не указаны расстояния от каждого водоисточника до места пожара"
+    'Hoses
+    If vOC_InfoAnalizer.pi_WorklinesCount > vOC_InfoAnalizer.pi_linesPosCount Then MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии"
+    If vOC_InfoAnalizer.pi_linesCount > vOC_InfoAnalizer.pi_linesLableCount Then MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии"
+    'Plan na mestnosti
+    If vOC_InfoAnalizer.pi_BuildCount > vOC_InfoAnalizer.pi_SOCount Then MCheckForm.ListBox1.AddItem "Не указаны подписи степени огнестойкости для каждого из зданий"
+                
+                      
+    
+End Sub
