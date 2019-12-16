@@ -23,6 +23,9 @@ Dim psi_TargetPageIndex As Integer
 
 '---обнуляем имеющиеся значения свойств
 '    psi_TargetPageIndex = ActivePage.Index
+    If vOC_InfoAnalizer Is Nothing Then
+        Set vOC_InfoAnalizer = New InfoCollector
+    End If
     vOC_InfoAnalizer.sC_Refresh (psi_TargetPageIndex)
 
 '---Запускаем циклы обработки фигур отчета

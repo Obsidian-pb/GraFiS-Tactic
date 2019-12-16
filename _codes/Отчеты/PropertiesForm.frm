@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Option Explicit
+
 
 Private Sub CBut_OK_Click()
 Me.Hide
@@ -40,10 +42,11 @@ End Sub
 Private Sub UserForm_Initialize()
 '---Заполняем списки
 '---Объявляем переменные
-Dim dbs As Database, rst As Recordset
+Dim dbs As Object, rst As Object
 Dim pth As String
 Dim SQLQuery As String
 Dim List As String
+Dim i As Integer
 
     On Error GoTo EX
     '---Список степеней огнестойкости
@@ -61,8 +64,11 @@ Dim List As String
 
     '---Создаем набор записей для получения списка
         pth = ThisDocument.path & "Signs.fdb"
-        Set dbs = GetDBEngine.OpenDatabase(pth)
-        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+        Set dbs = CreateObject("ADODB.Connection")
+        dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+        dbs.Open
+        Set rst = CreateObject("ADODB.Recordset")
+        rst.Open SQLQuery, dbs, 3, 1
         
     '---Ищем необходимую запись в наборе данных и по ней создаем набор значений для списка для заданных параметров
     With rst
