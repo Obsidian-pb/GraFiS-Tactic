@@ -55,7 +55,7 @@ Sub AddButtons()
         .Caption = "Аспект"
         .Tag = "Aspect"
         .TooltipText = "Изменить аспект"
-        .FaceID = 2589
+        .FaceID = 1648  ' 2589
     End With
 '---Кнопка "Исправить расположение"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)

@@ -235,10 +235,29 @@ Dim psi_TargetPageIndex As Integer
     'PPW
     If vOC_InfoAnalizer.pi_WaterSourceCount > vOC_InfoAnalizer.pi_distanceCount Then MCheckForm.ListBox1.AddItem "Не указаны расстояния от каждого водоисточника до места пожара"
     'Hoses
-    If vOC_InfoAnalizer.pi_WorklinesCount > vOC_InfoAnalizer.pi_linesPosCount Then MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии"
+    If vOC_InfoAnalizer.pb_AllHosesWithPos Then MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии"
     If vOC_InfoAnalizer.pi_linesCount > vOC_InfoAnalizer.pi_linesLableCount Then MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии"
     'Plan na mestnosti
     If vOC_InfoAnalizer.pi_BuildCount > vOC_InfoAnalizer.pi_SOCount Then MCheckForm.ListBox1.AddItem "Не указаны подписи степени огнестойкости для каждого из зданий"
                 
     
 End Sub
+
+'Private Function LinesPosCheck(ByRef infoAnalizer As InfoCollector, Optional simpleCase As Boolean = True) As Boolean
+'Dim vsO_TargetPage As Visio.Page
+'Dim shp As Visio.Shape
+'Dim shp2 As Visio.Shape
+'
+'
+'    If simpleCase Then      'Simple case
+'        LinesPosCheck = vOC_InfoAnalizer.pi_WorklinesCount > vOC_InfoAnalizer.pi_linesPosCount
+'    Else                    'Full case
+'        Set vsO_TargetPage = Application.ActiveDocument.Pages(infoAnalizer.pi_TargetPageIndex)
+'        For Each shp In vsO_TargetPage.Shapes
+'            Debug.Print shp.FromConnects.FromSheet.Name
+'        Next shp
+'
+'        LinesPosCheck = False
+'    End If
+'
+'End Function

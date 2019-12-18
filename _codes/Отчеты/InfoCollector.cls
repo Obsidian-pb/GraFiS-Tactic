@@ -96,7 +96,9 @@ Public pi_BuildCount As Integer         'Zdania
 Public pi_SOCount As Integer            'Stepen ognestoikosti
 Public pi_FireCount As Integer          'Ploshad gorenia
 
-
+'---Новые2------------
+Public pb_AllHosesWithLabels As Boolean         'Все рукавные линии с подписями
+Public pb_AllHosesWithPos As Boolean            'Все рабочие рукавные линии сподписями положения
 
 
 
@@ -117,23 +119,21 @@ Public pi_FireCount As Integer          'Ploshad gorenia
 
 '----------------------------------------Служебные процедуры------------------------------------------------------------
 Private Sub Class_Initialize()
-'MsgBox "Класс инициализирован"
-pi_TargetPageIndex = ActivePage.Index
-'Set vco_App = Visio.Application
-sC_Refresh (pi_TargetPageIndex)
-
-'MsgBox "Требуется личного состава: " & pi_PersonnelNeed
-'MsgBox "Требуется воды: " & ps_NeedStreemW
-'MsgBox "Рукавов 51мм: " & pi_Hoses51Count & "шт."
-'MsgBox "Рукавов 77мм: " & pi_Hoses77Count & "шт."
-'MsgBox "Длина рукавов: " & pi_HosesLength
-'MsgBox "Получается воды воды: " & ps_GetedWaterValue & "л/с"
+    pi_TargetPageIndex = ActivePage.Index
+    VarInit
+    sC_Refresh (pi_TargetPageIndex)
 End Sub
 
 
 Private Sub Class_Terminate()
 'Set vco_App = Nothing
 'MsgBox "Класс уничтожен"
+End Sub
+
+Private Sub VarInit()
+'Инициируются переменные
+    pb_AllHosesWithLabels = True
+    pb_AllHosesWithPos = True
 End Sub
 
 
@@ -595,7 +595,12 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
                         And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
                           pi_linesCount = pi_linesCount + 1
-                        If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then pi_WorklinesCount = pi_WorklinesCount + 1
+                        If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then
+                            pi_WorklinesCount = pi_WorklinesCount + 1
+                            'Проверяем имеет ли данная фигура подпись положения
+'                            Stop    'Реализовать!!!
+                            IsHoseShapeHavePos vsO_Shape
+                        End If
                         Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
                             Case Is = 51
                                 If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
@@ -646,12 +651,14 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                                     pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
                                 End If
                         End Select
-'                        pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
                         If vsO_Shape.CellExists("User.TotalLenight", 0) = True Then 'Имеет ли фигура ячейку "User.TotalLenight"
                             pi_HosesLength = pi_HosesLength + vsO_Shape.Cells("User.TotalLenight")
                         Else
                             pi_HosesLength = pi_HosesLength + vsO_Shape.Cells("Prop.LineLenightHose")
                         End If
+                        'Проверяем имеет ли данная фигура подпись описания
+                        Stop    'Реализовать!!!
+                        pb_AllHosesWithLabels = True
                     End If
                 Case Is = 101 'Всасывающая линия или напорно-всасывающая
                 Case Is = 151 'Polozenie linii
@@ -950,6 +957,21 @@ Private Function fb_FirstChain(as_Number As Single) As Boolean
         fb_FirstChain = False
     End If
 End Function
+
+Private Sub IsHoseShapeHavePos(ByRef hoseShape As Visio.Shape)
+'Проверяем наличие у рукавной линии подписи положения
+Dim con As Connect
+Dim tmpVal As Boolean
+
+    tmpVal = False
+    
+    For Each con In hoseShape.FromConnects
+        If con.FromSheet.Cells("User.IndexPers").Result(visNumber) = 151 Then tmpVal = True
+        Debug.Print con.FromSheet.Name
+    Next con
+    
+    If pb_AllHosesWithPos Then pb_AllHosesWithPos = tmpVal
+End Sub
 
 
 
