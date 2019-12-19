@@ -95,6 +95,7 @@ Public pi_WorklinesCount As Integer     'Rabochie linii
 Public pi_BuildCount As Integer         'Zdania
 Public pi_SOCount As Integer            'Stepen ognestoikosti
 Public pi_FireCount As Integer          'Ploshad gorenia
+Public pi_OrientCount As Integer        'Ориентиры
 
 '---Новые2------------
 Public pb_AllHosesWithLabels As Boolean         'Все рукавные линии с подписями
@@ -121,7 +122,9 @@ Public pb_AllHosesWithPos As Boolean            'Все рабочие рукавные линии спод
 Private Sub Class_Initialize()
     pi_TargetPageIndex = ActivePage.Index
     VarInit
+    'Set vco_App = Visio.Application
     sC_Refresh (pi_TargetPageIndex)
+
 End Sub
 
 
@@ -180,6 +183,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_MainPAHave = pi_MainPAHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                 Case Is = 3 'АЛ
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -304,6 +308,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_ACCount = pi_ACCount + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                 Case Is = 162 'АЦКП
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_MainPAHave = pi_MainPAHave + 1
@@ -311,11 +316,8 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_ACCount = pi_ACCount + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
-                Case Is = 163 'АПП
-                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                    pi_MainPAHave = pi_MainPAHave + 1
-                    pi_TechTotalCount = pi_TechTotalCount + 1
-                    pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+
             
             '---Прочая пожарная техника----------
                 Case Is = 24 'Поезда
@@ -595,7 +597,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
                         And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
                           pi_linesCount = pi_linesCount + 1
-                        If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then
+                                                If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then
                             pi_WorklinesCount = pi_WorklinesCount + 1
                             'Проверяем имеет ли данная фигура подпись положения
 '                            Stop    'Реализовать!!!
@@ -657,7 +659,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                             pi_HosesLength = pi_HosesLength + vsO_Shape.Cells("Prop.LineLenightHose")
                         End If
                         'Проверяем имеет ли данная фигура подпись описания
-                        Stop    'Реализовать!!!
+                        'Stop    'Реализовать!!!
                         pb_AllHosesWithLabels = True
                     End If
                 Case Is = 101 'Всасывающая линия или напорно-всасывающая
@@ -667,6 +669,11 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_linesLableCount = pi_linesLableCount + 1
                 Case Is = 135 'Zdania
                     pi_BuildCount = pi_BuildCount + 1
+                Case Is = 152 'Podis ulici
+                    pi_OrientCount = pi_OrientCount + 1
+                Case Is = 91 'Roza vetrov
+                    pi_OrientCount = pi_OrientCount + 1
+                    
                 Case Is = 195 'Index kolichestva izdeliy techniky
                     pi_PersonnelHave = pi_PersonnelHave + (vsO_Shape.Cells("Prop.PersonnelHave") - vsO_Shape.Cells("Prop.PersonnelHave") / vsO_Shape.Cells("Prop.Quantity")) - (vsO_Shape.Cells("Prop.Quantity") - 1)
                     pi_WaterValueHave = pi_WaterValueHave + (vsO_Shape.Cells("Prop.Water") - vsO_Shape.Cells("Prop.Water") / vsO_Shape.Cells("Prop.Quantity"))
@@ -936,7 +943,8 @@ Private Sub sc_SetPropertiesNull()
     pi_BuildCount = 0             'Zdania
     pi_SOCount = 0                'Stepen ognestoikosti
     pi_FireCount = 0              'Ploshad gorenia
-    
+    pi_OrientCount = 0            'Ориентиры
+   
     
     
     
@@ -972,6 +980,4 @@ Dim tmpVal As Boolean
     
     If pb_AllHosesWithPos Then pb_AllHosesWithPos = tmpVal
 End Sub
-
-
 

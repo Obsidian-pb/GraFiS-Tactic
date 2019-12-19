@@ -3085,7 +3085,7 @@
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Макс скорость"; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 14; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: FALSE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
     Prop.Dest: INDEX(0;Prop.Dest.Format); Prop.Dest.Prompt: "Вид пожарного автомобиля"; Prop.Dest.Label: "Вид ПА"; Prop.Dest.Format: "Специальный;Основной общего применения;Основной целевого применения"; Prop.Dest.SortKey: "15"; Prop.Dest.Type: 1; Prop.Dest.Verify: FALSE; Prop.Dest.LangID: 1049; 
-    Prop.RSCHS: 0; Prop.RSCHS.Prompt: "Относится ли техника к силам и средствам РСЧС"; Prop.RSCHS.Label: "РСЧС"; Prop.RSCHS.Format: "Входит;Не входит"; Prop.RSCHS.SortKey: 40; Prop.RSCHS.Type: 1; Prop.RSCHS.Invisible: FALSE; Prop.RSCHS.Verify: FALSE; Prop.RSCHS.LangID: 1049; Prop.RSCHS.Calendar: 0; 
+    Prop.RSCHS: 0; Prop.RSCHS.Prompt: "Относится ли техника к силам и средствам РСЧС"; Prop.RSCHS.Label: "РСЧС"; Prop.RSCHS.Format: "Входит;Не входит"; Prop.RSCHS.SortKey: 40; Prop.RSCHS.Type: 1; Prop.RSCHS.Invisible: TRUE; Prop.RSCHS.Verify: FALSE; Prop.RSCHS.LangID: 1049; Prop.RSCHS.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
