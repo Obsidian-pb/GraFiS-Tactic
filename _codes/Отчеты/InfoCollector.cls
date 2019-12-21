@@ -358,13 +358,13 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                 Case Is = 73 'Машины на гусеничном ходу
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+                    'pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 74 'Танки
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+                    'pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 3001 'МВД

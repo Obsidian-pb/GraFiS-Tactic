@@ -52,11 +52,11 @@ End Sub
 
 
 
-Private Sub vmO_App_CellChanged(ByVal cell As IVCell)
+Private Sub vmO_App_CellChanged(ByVal Cell As IVCell)
 'Процедура проверят была ли изменена ячейка Prop.FireMax или Prop.TimeMax и запускает процедуру обновления графика
 Dim vsS_CellName As String
 
-    vsS_CellName = cell.Name
+    vsS_CellName = Cell.Name
 '    If vsS_CellName = "Prop.FireMax" Or vsS_CellName = "Prop.TimeMax" Then
 '        sP_ChangeGraphDirect (Cell.Shape.ID)
 '    End If
@@ -70,7 +70,7 @@ End Sub
 Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
-Dim cell As Visio.cell
+Dim Cell As Visio.Cell
 
     Set docSheet = Application.ActiveDocument.DocumentSheet
     
