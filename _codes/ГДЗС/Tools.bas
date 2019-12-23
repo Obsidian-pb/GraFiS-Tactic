@@ -270,11 +270,6 @@ Dim shp As Visio.Shape
     Next shp
 End Sub
 
-Public Sub MoveMeFront(ShpObj As Visio.Shape)
-'Прока перемещает фигуру вперед
-    ShpObj.BringToFront
-End Sub
-
 Public Function IsFirstDrop(ShpObj As Visio.Shape)
 'Функция проверяет вброшенали фигура впервые и если вброшена впервые добавляет строчку свойства User.InPage
     If ShpObj.CellExists("User.InPage", 0) = 0 Then
@@ -325,7 +320,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке

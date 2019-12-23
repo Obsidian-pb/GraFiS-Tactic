@@ -5,11 +5,12 @@ Option Explicit
 
 
 Public Sub PS_GlueToShape(ShpObj As Visio.Shape)
-'Процедура привязывает инициировавшую фигуру (Звено ГДЗС ч ДАСВ) к целевой фигуре, в случае если она является _
+'Процедура привязывает инициировавшую фигуру (Звено ГДЗС) к целевой фигуре, в случае если она является _
  фигурой ранцевой установки
 Dim OtherShape As Visio.Shape
 Dim x As Double, y As Double
 Dim vS_ShapeName As String
+Dim shpSize As Double
 
     On Error GoTo EX
 
@@ -22,10 +23,8 @@ Dim vS_ShapeName As String
     For Each OtherShape In Application.ActivePage.Shapes
 '    '---Если фигура является группой перебираем и все входящие в нее фигуры тоже
 '        PS_GlueToShape OtherShape
-    '---Проверяем, является ли эта фигура фигурой АЦ, АНР, Ар или прочее
-    If GetTypeShape(OtherShape) > 0 Then
-        '---Переводим координаты к координатам фигуры
-'        OtherShape.XYFromPage x, y, x, y
+    '---Проверяем, является ли эта фигура фигурой ранцевой установки
+    If GetTypeShape(OtherShape, 104) > 0 Then
         If OtherShape.HitTest(x, y, 0.01) > 1 Then
             '---Приклеиваем фигуру (прописываем формулы)
             On Error Resume Next
@@ -51,6 +50,14 @@ Dim vS_ShapeName As String
             OtherShape.BringToFront
         End If
     End If
+    '---Проверяем, является ли эта фигура фигурой напорной рукавной линии
+    If GetTypeShape(OtherShape, 100) > 0 Then
+        '---Переводим координаты к координатам фигуры
+        shpSize = ShpObj.Cells("Height").Result(visInches) / 2
+        If OtherShape.HitTest(x, y, shpSize) > 0 Then
+            OtherShape.BringToFront
+        End If
+    End If
 Next OtherShape
 
 Set OtherShape = Nothing
@@ -61,16 +68,16 @@ EX:
     SaveLog Err, "PS_GlueToShape"
 End Sub
 
-Private Function GetTypeShape(ByRef aO_TergetShape As Visio.Shape) As Integer
+Private Function GetTypeShape(ByRef aO_TergetShape As Visio.Shape, ByVal aI_IndexPers As Integer) As Integer
 'Функция возвращает индехс целевой фигуры в случае если она является фигурой приемлемой _
- для установки лафетного ствола, в противном случае возвращается 0
+ для прикрепления звена, в противном случае возвращается 0
 Dim vi_TempIndex
 
 GetTypeShape = 0
 
 If aO_TergetShape.CellExists("User.IndexPers", 0) = True And aO_TergetShape.CellExists("User.Version", 0) = True Then
     vi_TempIndex = aO_TergetShape.Cells("User.IndexPers")
-    If vi_TempIndex = 104 Then
+    If vi_TempIndex = aI_IndexPers Then
         GetTypeShape = aO_TergetShape.Cells("User.IndexPers")
     End If
 End If
@@ -105,4 +112,10 @@ On Error Resume Next
 Set OtherShape = Nothing
 End Sub
 
-
+Public Sub MoveMeFront(ShpObj As Visio.Shape)
+'Прока перемещает фигуру вперед
+    ShpObj.BringToFront
+    
+'---Проверяем, не расположена ли фигура звена поверх рукавной линии
+'    PS_GlueToShape ShpObj
+End Sub
