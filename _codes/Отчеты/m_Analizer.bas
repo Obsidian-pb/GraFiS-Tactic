@@ -365,7 +365,7 @@ Dim psi_TargetPageIndex As Integer
     End If
     If vOC_InfoAnalizer.pi_StvolWHave <> 0 Then
          MCheckForm.ListBox2.AddItem "ֲמהÿםûץ סעגמכמג"
-           MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_StvolWHave & " (" & vOC_InfoAnalizer.pi_StvolWAHave & " סעג.ֱ, " & vOC_InfoAnalizer.pi_StvolWBHave & " סעג.ְ, " & vOC_InfoAnalizer.pi_StvolWLHave & " כאפועםûץ)"
+           MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_StvolWHave & " (" & vOC_InfoAnalizer.pi_StvolWBHave & " סעג.ֱ, " & vOC_InfoAnalizer.pi_StvolWAHave & " סעג.ְ, " & vOC_InfoAnalizer.pi_StvolWLHave & " כאפועםûץ)"
            
     End If
     If vOC_InfoAnalizer.pi_StvolFoamHave <> 0 Then
