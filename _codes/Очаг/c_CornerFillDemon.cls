@@ -104,13 +104,13 @@ End Function
 
 Private Sub AddToCellCollection(ByVal xVal As Long, ByVal yVal As Long)
 'Добавляем клетку в коллекцию
-    Dim cell As c_Cell
-    Set cell = New c_Cell
-    cell.x = xVal
-    cell.y = yVal
+    Dim Cell As c_Cell
+    Set Cell = New c_Cell
+    Cell.x = xVal
+    Cell.y = yVal
     
     On Error Resume Next
-    cellsForFill.Add cell, xVal & ":" & yVal
+    cellsForFill.Add Cell, xVal & ":" & yVal
 End Sub
 
 

@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SettingsForm
    ClientHeight    =   4980
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   8610
+   ClientWidth     =   8610.001
    OleObjectBlob   =   "SettingsForm.frx":0000
    ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner

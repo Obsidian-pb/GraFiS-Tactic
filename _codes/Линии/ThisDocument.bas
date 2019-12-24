@@ -7,6 +7,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+Option Explicit
+
+Private WithEvents app As Visio.Application
+Attribute app.VB_VarHelpID = -1
+Private cellChangedCount As Long
+Const cellChangedInterval = 100000
+
 Dim ButEvent As Class1
 Dim C_ConnectionsTrace As c_HoseConnector
 Dim WithEvents LineAppEvents As Visio.Application
@@ -21,6 +28,9 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     DeleteButtonLine
     DeleteButtonMLine
     DeleteButtonVHose
+    
+'---Деактивируем объект отслеживания изменений в приложении для 201х версий
+    If Application.version > 12 Then Set app = Nothing
     
 '---В случае, если на панели "Превращения нет ни одной кнопки, удаляем её
     If Application.CommandBars("Превращения").Controls.Count = 0 Then RemoveTBImagination
@@ -66,7 +76,14 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     AddButtonMLine     'Добавляем фигуру магистральной линии
     AddButtonVHose     'Добавляем кнопку всасывающей линии
 
-Set ButEvent = New Class1
+'---Активируем объект отслеживания нажатия кнопок
+    Set ButEvent = New Class1
+    
+'---Активируем объект отслеживания изменений в приложении для 201х версий
+    If Application.version > 12 Then
+        Set app = Visio.Application
+        cellChangedCount = cellChangedInterval - 10
+    End If
 
 '---Активируем опцию приклеивания к контурам фигур
     Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints
@@ -83,7 +100,7 @@ EX:
 End Sub
 
 
-Private Sub LineAppEvents_CellChanged(ByVal cell As IVCell)
+Private Sub LineAppEvents_CellChanged(ByVal Cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
 Dim Shp As Visio.Shape
@@ -92,8 +109,8 @@ Dim Shp2 As Visio.Shape
 Dim Con2 As Visio.Connect
 '---Проверяем имя ячейки
     
-    If cell.Name = "Prop.HoseMaterial" Or cell.Name = "Prop.HoseDiameter" Then
-        ShpInd = cell.Shape.ID
+    If Cell.Name = "Prop.HoseMaterial" Or Cell.Name = "Prop.HoseDiameter" Then
+        ShpInd = Cell.Shape.ID
         '---Запускаем процедуру получения СПИСКОВ диаметров рукавов
         HoseDiametersListImport (ShpInd)
         '---Запускаем процедуру получения ЗНАЧЕНИЙ Сопротивлений рукавов
@@ -105,10 +122,10 @@ Dim Con2 As Visio.Connect
     End If
     
     'Если изменена ячейка "User.UseAsRazv" фигуры "Водосборник"
-    If cell.Name = "User.UseAsRazv" Then
+    If Cell.Name = "User.UseAsRazv" Then
         '---Запускаем процедуру обновления рукавных соединений для Водосборника
         
-        Set Shp = cell.Shape
+        Set Shp = Cell.Shape
         
         For Each Con In Shp.FromConnects
             Set Shp2 = Con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
@@ -134,9 +151,9 @@ End Sub
 Private Sub sp_MastersImport()
 '---Импортируем мастера
 
-    MasterImportSub "Линии.vss", "ВсасывающийРукав"
-    MasterImportSub "Линии.vss", "ВсасывающийРукав1000"
-    MasterImportSub "Линии.vss", "НапорноВсасывающийРукав"
+    MasterImportSub "ВсасывающийРукав"
+    MasterImportSub "ВсасывающийРукав1000"
+    MasterImportSub "НапорноВсасывающийРукав"
     
 End Sub
 
@@ -153,7 +170,7 @@ End Sub
 
 Private Sub LineAppEvents_ShapeAdded(ByVal Shape As IVShape)
 'Событие добавления на лист фигуры
-Dim v_Cntrl As CommandBarControl
+Dim v_Ctrl As CommandBarControl
 Dim SecExists As Boolean
     
 '---Включаем обработку ошибок
@@ -169,7 +186,6 @@ Dim SecExists As Boolean
                     '---Если выбрана хоть одна фигура - пытаемся ее обратить
                         If Not IsHavingUserSection(False) And Not IsSquare(False) Then
                         '---Обращаем фигуру в фигуру рабочей рукавной линии
-'                            ButEvent.MakeHoseLine
                             MakeHoseLine Shape, 51, 0
                         End If
                     End If
@@ -179,7 +195,6 @@ Dim SecExists As Boolean
                     '---Если выбрана хоть одна фигура - пытаемся ее обратить
                         If Not IsHavingUserSection(False) And Not IsSquare(False) Then
                         '---Обращаем фигуру в фигуру всасывающей рукавной линии
-'                            ButEvent.MakeVHoseLine
                             MakeVHoseLine
                         End If
                     End If
@@ -189,7 +204,6 @@ Dim SecExists As Boolean
                     '---Если выбрана хоть одна фигура - пытаемся ее обратить
                         If Not IsHavingUserSection(False) And Not IsSquare(False) Then
                         '---Обращаем фигуру в фигуру магистральной рукавной линии
-'                            ButEvent.MakeMagHoseLine
                             MakeHoseLine Shape, 77, 1
                         End If
                     End If
@@ -206,7 +220,7 @@ End Sub
 Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
-Dim cell As Visio.cell
+Dim Cell As Visio.Cell
 
     Set docSheet = Application.ActiveDocument.DocumentSheet
     
@@ -220,3 +234,14 @@ Dim cell As Visio.cell
     End If
 
 End Sub
+
+'--------------Отслеживание изменений ячеек для приложений 201х версий
+Private Sub app_CellChanged(ByVal Cell As IVCell)
+'---Один раз в выполняем обновление иконок на кнопках
+    cellChangedCount = cellChangedCount + 1
+    If cellChangedCount > cellChangedInterval Then
+        ButEvent.PictureRefresh
+        cellChangedCount = 0
+    End If
+End Sub
+

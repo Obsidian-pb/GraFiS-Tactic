@@ -131,7 +131,7 @@ Dim sn As Double
 Dim x As Integer
 Dim y As Integer
 Dim i As Integer
-Dim cell As c_Cell
+Dim Cell As c_Cell
 
     If F_InsertFire.optValue Then
         On Error GoTo EX
@@ -161,12 +161,12 @@ Dim cell As c_Cell
         
         'Последовательно проверяем все клеткии линии, на предмет того, пересекаются ли они с фронтом пожара
         i = 0
-        Set cell = New c_Cell
-        cell.x = nozzle.position.x
-        cell.y = nozzle.position.y
+        Set Cell = New c_Cell
+        Cell.x = nozzle.position.x
+        Cell.y = nozzle.position.y
         Do While CellType = 0
-            cell.x = nozzle.position.x + Int(cs * i)
-            cell.y = nozzle.position.y + Int(sn * i)
+            Cell.x = nozzle.position.x + Int(cs * i)
+            Cell.y = nozzle.position.y + Int(sn * i)
 '------------------
 '            Dim shp As Visio.Shape
 '        Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, _
@@ -178,10 +178,10 @@ Dim cell As c_Cell
             
 '            Debug.Print cell.x & ", " & cell.y & " -> " & nozzle.position.x & ", " & nozzle.position.y
             
-            If IsIntercourseWithFront2(nozzle, cell) Then
+            If IsIntercourseWithFront2(nozzle, Cell) Then
                 Exit Do
             End If
-            If Math.Sqr((cell.x - nozzle.position.x) ^ 2 + (cell.y - nozzle.position.y) ^ 2) * grain > maxWay Then
+            If Math.Sqr((Cell.x - nozzle.position.x) ^ 2 + (Cell.y - nozzle.position.y) ^ 2) * grain > maxWay Then
                 Exit Do
             End If
             i = i + 1
@@ -199,13 +199,13 @@ End Sub
 Private Function OneStep(ByRef nozzle As c_FireNozzleModel, ByRef inColl As Collection, ByVal maxWay As Integer) As Collection
 'Функция возвращает Истину, если клетка является клеткой фронта пожара (имеет рядом хоть одну горящую не полностью клетку)
 'На входе получаем коллекцию текущей волны клеток, на выходе следующую после одного шага распространения волны
-Dim cell As c_Cell
+Dim Cell As c_Cell
 Dim newColl As Collection
 Dim cellWay As Single
     
     Set newColl = New Collection
     
-    For Each cell In inColl
+    For Each Cell In inColl
 '        cellWay = matrix(cell.x, cell.y)
 '        'Распространение по прямой
 '            'Заранее определяем косинус и синус угла - для дальнейшего построения линии
@@ -224,40 +224,40 @@ Dim cellWay As Single
 '            End If
         
         'Распространяем на соседние клетки
-        If IsIntercourseWithFront(nozzle, newColl, NextCell(cell, l), cellWay + orto * grain, maxWay) Then
+        If IsIntercourseWithFront(nozzle, newColl, NextCell(Cell, l), cellWay + orto * grain, maxWay) Then
             Set OneStep = Nothing
             Exit Function
         End If
-        If IsIntercourseWithFront(nozzle, newColl, NextCell(cell, lu), cellWay + diag * grain, maxWay) Then
+        If IsIntercourseWithFront(nozzle, newColl, NextCell(Cell, lu), cellWay + diag * grain, maxWay) Then
             Set OneStep = Nothing
             Exit Function
         End If
-        If IsIntercourseWithFront(nozzle, newColl, NextCell(cell, u), cellWay + orto * grain, maxWay) Then
+        If IsIntercourseWithFront(nozzle, newColl, NextCell(Cell, u), cellWay + orto * grain, maxWay) Then
             Set OneStep = Nothing
             Exit Function
         End If
-        If IsIntercourseWithFront(nozzle, newColl, NextCell(cell, ru), cellWay + diag * grain, maxWay) Then
+        If IsIntercourseWithFront(nozzle, newColl, NextCell(Cell, ru), cellWay + diag * grain, maxWay) Then
             Set OneStep = Nothing
             Exit Function
         End If
-        If IsIntercourseWithFront(nozzle, newColl, NextCell(cell, r), cellWay + orto * grain, maxWay) Then
+        If IsIntercourseWithFront(nozzle, newColl, NextCell(Cell, r), cellWay + orto * grain, maxWay) Then
             Set OneStep = Nothing
             Exit Function
         End If
-        If IsIntercourseWithFront(nozzle, newColl, NextCell(cell, rd), cellWay + diag * grain, maxWay) Then
+        If IsIntercourseWithFront(nozzle, newColl, NextCell(Cell, rd), cellWay + diag * grain, maxWay) Then
             Set OneStep = Nothing
             Exit Function
         End If
-        If IsIntercourseWithFront(nozzle, newColl, NextCell(cell, d), cellWay + orto * grain, maxWay) Then
+        If IsIntercourseWithFront(nozzle, newColl, NextCell(Cell, d), cellWay + orto * grain, maxWay) Then
         Set OneStep = Nothing
             Exit Function
         End If
-        If IsIntercourseWithFront(nozzle, newColl, NextCell(cell, ld), cellWay + diag * grain, maxWay) Then
+        If IsIntercourseWithFront(nozzle, newColl, NextCell(Cell, ld), cellWay + diag * grain, maxWay) Then
             Set OneStep = Nothing
             Exit Function
         End If
 
-    Next cell
+    Next Cell
     
     Set OneStep = newColl
     
@@ -265,28 +265,28 @@ Dim cellWay As Single
 
 End Function
 
-Private Function IsIntercourseWithFront(ByRef nozzle As c_FireNozzleModel, ByRef coll As Collection, ByRef cell As c_Cell, _
+Private Function IsIntercourseWithFront(ByRef nozzle As c_FireNozzleModel, ByRef coll As Collection, ByRef Cell As c_Cell, _
                                         ByVal wayLen As Single, ByVal maxWay As Integer) As Boolean
 'Проверяем путь пройденный до клетки и если он больше входящего, заменяем его
 'Клетку пытаемся добавить в пришедшую коллекцию
     'Если клетка находится за пределами матрицы - выходим
-    If Not IsInMatrix(cell) Then Exit Function
+    If Not IsInMatrix(Cell) Then Exit Function
     
     'Проверяем, является ли ячейка открытым пространством
-    If Not fireMatrixObject.GetOpenSpaceLayerValue(cell.x, cell.y) = CellState.csOpenSpace Then Exit Function
+    If Not fireMatrixObject.GetOpenSpaceLayerValue(Cell.x, Cell.y) = CellState.csOpenSpace Then Exit Function
     
     'Если путь превышает предельное значение - не учитываем его
-    If wayLen > maxWay Or calculatedCells(cell.x, cell.y) = 1 Then Exit Function
+    If wayLen > maxWay Or calculatedCells(Cell.x, Cell.y) = 1 Then Exit Function
     
     'Если больше предлагаемого пути, то...
-    If matrix(cell.x, cell.y) = 0 Or matrix(cell.x, cell.y) > wayLen Then
+    If matrix(Cell.x, Cell.y) = 0 Or matrix(Cell.x, Cell.y) > wayLen Then
         'Проверяем, является ли клетка клеткой фронта пожара
     'ДОБАВИТЬ ПРОВЕРКУ МАКСИМАЛЬНОГО ГОРЕНИЯ!!!
-        If fireMatrixObject.IsCellMaxFire(cell.x, cell.y) Then
-            If Not fireMatrixObject.IsInner(cell.x, cell.y) Then
+        If fireMatrixObject.IsCellMaxFire(Cell.x, Cell.y) Then
+            If Not fireMatrixObject.IsInner(Cell.x, Cell.y) Then
                 'Добавляем для ствола значение точки контакта с фронтом пожара
 '                Debug.Print "cell." & cell.x & ":" & cell.y & " команда на отрисовку!!!"
-                Set nozzle.fireContactCell = cell
+                Set nozzle.fireContactCell = Cell
                 
                 'Выходим из функции возвратив Истина - зона работы ствола касается фронта пожара (найдена!)
                 IsIntercourseWithFront = True
@@ -295,21 +295,21 @@ Private Function IsIntercourseWithFront(ByRef nozzle As c_FireNozzleModel, ByRef
         End If
         
         'Ставим новое значение и пытаемся добавить в коллекция (если такая клетка в коллекции уже есть, ничего не происходит - через Error)
-        matrix(cell.x, cell.y) = wayLen
+        matrix(Cell.x, Cell.y) = wayLen
 
         On Error Resume Next
-        coll.Add cell, cell.x & ":" & cell.y
+        coll.Add Cell, Cell.x & ":" & Cell.y
     End If
     
 End Function
 
-Private Function IsIntercourseWithFront2(ByRef nozzle As c_FireNozzleModel, ByRef cell As c_Cell) As Boolean
+Private Function IsIntercourseWithFront2(ByRef nozzle As c_FireNozzleModel, ByRef Cell As c_Cell) As Boolean
 'Проверяем является ли клетка частью вронта пожара
     'Если клетка находится за пределами матрицы - выходим
-    If Not IsInMatrix(cell) Then Exit Function
+    If Not IsInMatrix(Cell) Then Exit Function
     
     'Проверяем, является ли ячейка открытым пространством
-    If Not fireMatrixObject.GetOpenSpaceLayerValue(cell.x, cell.y) = CellState.csOpenSpace Then
+    If Not fireMatrixObject.GetOpenSpaceLayerValue(Cell.x, Cell.y) = CellState.csOpenSpace Then
         'Выходим из функции - найдена стена, но фронт не найден, ячейка точки касания фронта не задана
         IsIntercourseWithFront2 = True
         Exit Function
@@ -319,11 +319,11 @@ Private Function IsIntercourseWithFront2(ByRef nozzle As c_FireNozzleModel, ByRe
 '    If matrix(cell.x, cell.y) = 0 Or matrix(cell.x, cell.y) > wayLen Then
         'Проверяем, является ли клетка клеткой фронта пожара
     'ДОБАВИТЬ ПРОВЕРКУ МАКСИМАЛЬНОГО ГОРЕНИЯ!!!
-        If fireMatrixObject.IsCellMaxFire(cell.x, cell.y) Then
-            If Not fireMatrixObject.IsInner(cell.x, cell.y) Then
+        If fireMatrixObject.IsCellMaxFire(Cell.x, Cell.y) Then
+            If Not fireMatrixObject.IsInner(Cell.x, Cell.y) Then
                 'Добавляем для ствола значение точки контакта с фронтом пожара
 '                Debug.Print "cell." & cell.x & ":" & cell.y & " команда на отрисовку!!!"
-                Set nozzle.fireContactCell = cell
+                Set nozzle.fireContactCell = Cell
                 
                 'Выходим из функции возвратив Истина - зона работы ствола касается фронта пожара (найдена!)
                 IsIntercourseWithFront2 = True
@@ -344,41 +344,41 @@ End Function
 
 
 '-----------------------Инструменты-----------------------------------------
-Private Function NextCell(ByRef cell As c_Cell, ByVal dir As Directions) As c_Cell
+Private Function NextCell(ByRef Cell As c_Cell, ByVal dir As Directions) As c_Cell
 'Возвращает следующую клетку согласно указанного направления
     Select Case dir
         Case Is = Directions.l
-            Set NextCell = NewCell(cell.x - 1, cell.y)
+            Set NextCell = NewCell(Cell.x - 1, Cell.y)
         Case Is = Directions.lu
-            Set NextCell = NewCell(cell.x - 1, cell.y + 1)
+            Set NextCell = NewCell(Cell.x - 1, Cell.y + 1)
         Case Is = Directions.u
-            Set NextCell = NewCell(cell.x, cell.y + 1)
+            Set NextCell = NewCell(Cell.x, Cell.y + 1)
         Case Is = Directions.ru
-            Set NextCell = NewCell(cell.x + 1, cell.y + 1)
+            Set NextCell = NewCell(Cell.x + 1, Cell.y + 1)
         Case Is = Directions.r
-            Set NextCell = NewCell(cell.x + 1, cell.y)
+            Set NextCell = NewCell(Cell.x + 1, Cell.y)
         Case Is = Directions.rd
-            Set NextCell = NewCell(cell.x + 1, cell.y - 1)
+            Set NextCell = NewCell(Cell.x + 1, Cell.y - 1)
         Case Is = Directions.d
-            Set NextCell = NewCell(cell.x, cell.y - 1)
+            Set NextCell = NewCell(Cell.x, Cell.y - 1)
         Case Is = Directions.ld
-            Set NextCell = NewCell(cell.x - 1, cell.y - 1)
+            Set NextCell = NewCell(Cell.x - 1, Cell.y - 1)
     End Select
 End Function
 
 Private Function NewCell(ByVal x As Long, ByVal y As Long) As c_Cell
 'Создаем новую клетку
-Dim cell As c_Cell
-    Set cell = New c_Cell
-    cell.x = x
-    cell.y = y
+Dim Cell As c_Cell
+    Set Cell = New c_Cell
+    Cell.x = x
+    Cell.y = y
     
-    Set NewCell = cell
+    Set NewCell = Cell
 End Function
 
-Private Function IsInMatrix(ByRef cell As c_Cell) As Boolean
+Private Function IsInMatrix(ByRef Cell As c_Cell) As Boolean
 'Возвращает Истина, если клетка находится в пределах матрицы
-    If cell.x <= 0 Or cell.y <= 0 Or cell.x > UBound(matrix, 1) Or cell.y > UBound(matrix, 2) Then
+    If Cell.x <= 0 Or Cell.y <= 0 Or Cell.x > UBound(matrix, 1) Or Cell.y > UBound(matrix, 2) Then
         IsInMatrix = False
     Else
         IsInMatrix = True

@@ -110,7 +110,7 @@ End Sub
 
 Public Sub OneRound()
 'один шаг моделирования
-Dim cell As c_Cell
+Dim Cell As c_Cell
     
     'РАЗОБРАТЬСЯ С ЭТИМ - рисование дополнительного шага даже приподанном стволе!!!
 '    'Запускаем анализ наличия пожарнных стволов
@@ -135,26 +135,26 @@ Dim cell As c_Cell
     Set matrix.keyCornerCells = New Collection
 
     'Атакуем всеми активными клетками (не внутренними)
-    For Each cell In matrix.activeFiredCells
-        Attack cell.x, cell.y
-    Next cell
+    For Each Cell In matrix.activeFiredCells
+        Attack Cell.x, Cell.y
+    Next Cell
     
     '--------------------
     'После атаки увеличиваем значения горения всех клеток в соответствии с полученным ими энергиями
-    For Each cell In matrix.chargedCells
-        RizeCellFire cell.x, cell.y
-    Next cell
+    For Each Cell In matrix.chargedCells
+        RizeCellFire Cell.x, Cell.y
+    Next Cell
     
     'Очищаем коллекцию клеток получивших заряд
     Set matrix.chargedCells = New Collection
     
     'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
-    For Each cell In matrix.activeFiredCells
-        If matrix.IsInner(cell.x, cell.y) Then
-            RemoveFromActiveCells cell.x, cell.y
-            RemoveFromFrontCells cell.x, cell.y
+    For Each Cell In matrix.activeFiredCells
+        If matrix.IsInner(Cell.x, Cell.y) Then
+            RemoveFromActiveCells Cell.x, Cell.y
+            RemoveFromFrontCells Cell.x, Cell.y
         End If
-    Next cell
+    Next Cell
 
     
     'Спрямляем горение у стен (проверяем все клетки, что получили энергию, но еще не горят полностью))
@@ -163,8 +163,8 @@ Dim cell As c_Cell
         Dim cornerDemon As c_CornerDemon
         Set cornerDemon = New c_CornerDemon
         cornerDemon.Init matrix, 0, 0
-        For Each cell In matrix.fireFrontCells
-            If matrix.IsTripleStateCell(cell.x, cell.y) Then
+        For Each Cell In matrix.fireFrontCells
+            If matrix.IsTripleStateCell(Cell.x, Cell.y) Then
             
             '!!!Отрисовываем квадрат если клетка является ключевой
     
@@ -175,7 +175,7 @@ Dim cell As c_Cell
     '            shp.Cells("FillForegnd").FormulaU = "3"
                 
                 'Запускаем демона отрисовщика
-                cornerDemon.SetStartPosition cell.x, cell.y
+                cornerDemon.SetStartPosition Cell.x, Cell.y
                 cornerDemon.SetDirection s
                 cornerDemon.RunDemon
     
@@ -183,22 +183,22 @@ Dim cell As c_Cell
                 cornerDemon.SetDirection s
                 cornerDemon.RunDemon
             End If
-        Next cell
+        Next Cell
 
     '    Debug.Print "Точек под заливку" & cornerDemon.lineFillDemon.cellsForFill.Count
-        For Each cell In cornerDemon.lineFillDemon.cellsForFill
-            RizeCellFireToMax cell.x, cell.y
-        Next cell
+        For Each Cell In cornerDemon.lineFillDemon.cellsForFill
+            RizeCellFireToMax Cell.x, Cell.y
+        Next Cell
     End If
     
     
     
-    For Each cell In matrix.activeFiredCells
-        If matrix.IsInner(cell.x, cell.y) Then
-            RemoveFromActiveCells cell.x, cell.y
-            RemoveFromFrontCells cell.x, cell.y
+    For Each Cell In matrix.activeFiredCells
+        If matrix.IsInner(Cell.x, Cell.y) Then
+            RemoveFromActiveCells Cell.x, Cell.y
+            RemoveFromFrontCells Cell.x, Cell.y
         End If
-    Next cell
+    Next Cell
     
     'Запускаем анализ наличия пожарнных стволов
 '    Dim nozzleDemon As c_FireNozzlesDemon
@@ -389,15 +389,15 @@ End Sub
 Public Sub RefreshFirePerimeter()
 'Переводим все клетки находящиеся на границе зоны горения в активное состояние
 'это позволяет возобновить расчет при появлении дыр или при изменении конфигурации открытого пространства
-Dim cell As c_Cell
+Dim Cell As c_Cell
     
     'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
-    For Each cell In matrix.firedCells
-        If Not matrix.IsInner(cell.x, cell.y) Then
-            AddToActiveCells cell.x, cell.y
-            AddToFrontCells cell.x, cell.y
+    For Each Cell In matrix.firedCells
+        If Not matrix.IsInner(Cell.x, Cell.y) Then
+            AddToActiveCells Cell.x, Cell.y
+            AddToFrontCells Cell.x, Cell.y
         End If
-    Next cell
+    Next Cell
 End Sub
 
 
@@ -430,14 +430,14 @@ Private Function CreateNewCell(ByVal x As Long, ByVal y As Long) As c_Cell
 'Создаем новую клетку
     On Error GoTo EX
 
-Dim cell As c_Cell
+Dim Cell As c_Cell
     
-    Set cell = New c_Cell
-    Set cell.ParentMatrix = matrix
-    cell.x = x
-    cell.y = y
+    Set Cell = New c_Cell
+    Set Cell.ParentMatrix = matrix
+    Cell.x = x
+    Cell.y = y
     
-Set CreateNewCell = cell
+Set CreateNewCell = Cell
 Exit Function
 EX:
      Debug.Print "err"

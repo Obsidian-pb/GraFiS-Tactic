@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} F_InsertFire
    ClientHeight    =   7290
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   8895
+   ClientWidth     =   8895.001
    OleObjectBlob   =   "F_InsertFire.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

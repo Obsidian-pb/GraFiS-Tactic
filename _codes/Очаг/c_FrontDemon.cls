@@ -33,9 +33,9 @@ End Sub
 Public Sub SetStartState(ByRef frontCellsCollection As Collection)
 'Устанавливаем стартовое состояние матрицы
     '1 Задаем стартовое состояние матрицы 5 - путь
-    For Each cell In frontCellsCollection
-        matrix(cell.x, cell.y) = CellType.fireFrontNotInBlock
-    Next cell
+    For Each Cell In frontCellsCollection
+        matrix(Cell.x, Cell.y) = CellType.fireFrontNotInBlock
+    Next Cell
 End Sub
 
 
@@ -102,54 +102,54 @@ Dim tmpColl As Collection
         
 End Sub
 
-Private Sub TryAddCell(ByRef thisColl As Collection, ByVal cell As c_Cell)
+Private Sub TryAddCell(ByRef thisColl As Collection, ByVal Cell As c_Cell)
 'Пытаемся добавить клетку в коллекцию (рекурсия)
     
     'Если указанная точка находится за пределами матрицы - выходим из процедуры
-    If cell.x < 0 Or cell.y < 0 Or cell.x > dimensionByX - 1 Or cell.y > dimensionByY - 1 Then Exit Sub
+    If Cell.x < 0 Or Cell.y < 0 Or Cell.x > dimensionByX - 1 Or Cell.y > dimensionByY - 1 Then Exit Sub
     
     'Проверяем является ли данная клетка клеткой фронта пожара
-    If matrix(cell.x, cell.y) = CellType.notFireFront Then Exit Sub
+    If matrix(Cell.x, Cell.y) = CellType.notFireFront Then Exit Sub
     
     'Если является проверяем, нет ли ее уже в коллекции
-    If matrix(cell.x, cell.y) = CellType.fireFrontInBlock Then Exit Sub
+    If matrix(Cell.x, Cell.y) = CellType.fireFrontInBlock Then Exit Sub
     
     'Добавляем клетку в коллецию
-    AddCellToCollection thisColl, cell
-    matrix(cell.x, cell.y) = CellType.fireFrontInBlock
+    AddCellToCollection thisColl, Cell
+    matrix(Cell.x, Cell.y) = CellType.fireFrontInBlock
     
     'Если нет - рекурсия на следующие клетки
-        TryAddCell thisColl, NextCell(cell, l)
-        TryAddCell thisColl, NextCell(cell, lu)
-        TryAddCell thisColl, NextCell(cell, u)
-        TryAddCell thisColl, NextCell(cell, ru)
-        TryAddCell thisColl, NextCell(cell, r)
-        TryAddCell thisColl, NextCell(cell, rd)
-        TryAddCell thisColl, NextCell(cell, d)
-        TryAddCell thisColl, NextCell(cell, ld)
+        TryAddCell thisColl, NextCell(Cell, l)
+        TryAddCell thisColl, NextCell(Cell, lu)
+        TryAddCell thisColl, NextCell(Cell, u)
+        TryAddCell thisColl, NextCell(Cell, ru)
+        TryAddCell thisColl, NextCell(Cell, r)
+        TryAddCell thisColl, NextCell(Cell, rd)
+        TryAddCell thisColl, NextCell(Cell, d)
+        TryAddCell thisColl, NextCell(Cell, ld)
    
 End Sub
 
-Private Sub AddCellToCollection(ByRef thisColl As Collection, ByVal cell As c_Cell)
+Private Sub AddCellToCollection(ByRef thisColl As Collection, ByVal Cell As c_Cell)
 'Добавляем в указанную коллекцию указанную клетку
-    thisColl.Add cell, cell.x & ":" & cell.y
+    thisColl.Add Cell, Cell.x & ":" & Cell.y
 End Sub
 
 Private Sub AddCellsToCollection(ByRef col1 As Collection, ByRef col2 As Collection)
 'Добавляем все клетки из коллекции 2 в коллекцию 1
-Dim cell As c_Cell
+Dim Cell As c_Cell
 
-    For Each cell In col2
-        col1.Add cell, cell.x & ":" & cell.y
-    Next cell
+    For Each Cell In col2
+        col1.Add Cell, Cell.x & ":" & Cell.y
+    Next Cell
 End Sub
 
-Private Function CheckBlockExists(ByRef extSquare As c_ExtinguishingSquare, ByRef cell As c_Cell) As c_ExtinguishingBlock
+Private Function CheckBlockExists(ByRef extSquare As c_ExtinguishingSquare, ByRef Cell As c_Cell) As c_ExtinguishingBlock
 'Пытаемся найти блок к которому может относиться пришедшая клетка. Еслитн аходим возвращаем ссылку на него, иначе - Nothing
 Dim blck As c_ExtinguishingBlock
 
     For Each blck In extSquare.extinguishingBlocks
-        If blck.IsCellInThisFront(cell) Then
+        If blck.IsCellInThisFront(Cell) Then
             Set CheckBlockExists = blck
             Exit Function
         End If
@@ -186,36 +186,36 @@ End Function
 
 
 
-Private Function NextCell(ByRef cell As c_Cell, ByVal dir As Directions) As c_Cell
+Private Function NextCell(ByRef Cell As c_Cell, ByVal dir As Directions) As c_Cell
 'Возвращает следующую клетку согласно указанного направления
     Select Case dir
         Case Is = Directions.l
-            Set NextCell = NewCell(cell.x - 1, cell.y)
+            Set NextCell = NewCell(Cell.x - 1, Cell.y)
         Case Is = Directions.lu
-            Set NextCell = NewCell(cell.x - 1, cell.y + 1)
+            Set NextCell = NewCell(Cell.x - 1, Cell.y + 1)
         Case Is = Directions.u
-            Set NextCell = NewCell(cell.x, cell.y + 1)
+            Set NextCell = NewCell(Cell.x, Cell.y + 1)
         Case Is = Directions.ru
-            Set NextCell = NewCell(cell.x + 1, cell.y + 1)
+            Set NextCell = NewCell(Cell.x + 1, Cell.y + 1)
         Case Is = Directions.r
-            Set NextCell = NewCell(cell.x + 1, cell.y)
+            Set NextCell = NewCell(Cell.x + 1, Cell.y)
         Case Is = Directions.rd
-            Set NextCell = NewCell(cell.x + 1, cell.y - 1)
+            Set NextCell = NewCell(Cell.x + 1, Cell.y - 1)
         Case Is = Directions.d
-            Set NextCell = NewCell(cell.x, cell.y - 1)
+            Set NextCell = NewCell(Cell.x, Cell.y - 1)
         Case Is = Directions.ld
-            Set NextCell = NewCell(cell.x - 1, cell.y - 1)
+            Set NextCell = NewCell(Cell.x - 1, Cell.y - 1)
     End Select
 End Function
 
 Private Function NewCell(ByVal x As Long, ByVal y As Long) As c_Cell
 'Создаем новую клетку
-Dim cell As c_Cell
-    Set cell = New c_Cell
-    cell.x = x
-    cell.y = y
+Dim Cell As c_Cell
+    Set Cell = New c_Cell
+    Cell.x = x
+    Cell.y = y
     
-    Set NewCell = cell
+    Set NewCell = Cell
 End Function
 
 Public Property Get GetMatrix() As Variant

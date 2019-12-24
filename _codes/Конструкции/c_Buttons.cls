@@ -91,21 +91,23 @@ Private Sub visApp_BeforeShapeDelete(ByVal Shape As IVShape)
 End Sub
 
 Public Sub PictureRefresh()
-'Dim ConstructionComBut As Office.CommandBarButton   'Маска
-'Dim ConstructionComBut2 As Office.CommandBarButton  'Рисование стен
+'Обновляем картинки на кнопках
+Dim cb As Office.CommandBarButton
 Dim DocPath As String
-
-'    Set ConstructionComBut = Application.CommandBars("Конструкции").Controls("Маска")
-'    Set ConstructionComBut2 = Application.CommandBars("Конструкции").Controls("Рисование стен")
     
-'---Iaiiaeyai ea?oeieo ia eiiieao - aey Visio 201o
+'---Обновляем иконки на кнопках
     DocPath = ThisDocument.path
-    With ConstructionComBut
+    Set cb = Application.CommandBars("Конструкции").Controls("Маска")
+    With cb
         .Picture = LoadPicture(DocPath & "Bitmaps\WallMask1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\WallMask2.bmp")
     End With
-    With ConstructionComBut2
+    
+    Set cb = Application.CommandBars("Конструкции").Controls("Рисование стен")
+    With cb
         .Picture = LoadPicture(DocPath & "Bitmaps\WallDrawTool1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\WallDrawTool2.bmp")
     End With
+    
+Set cb = Nothing
 End Sub

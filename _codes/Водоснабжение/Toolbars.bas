@@ -33,7 +33,7 @@ Sub AddButtons()
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Превращения")
-    DocPath = Application.ThisDocument.path
+    DocPath = ThisDocument.path
     
 '---Добавляем кнопки на панель управления "Превращения"--------------------------------
 '---Кнопка "Обратить в открытый водоисточник"-------------------------------------------------

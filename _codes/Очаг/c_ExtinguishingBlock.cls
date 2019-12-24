@@ -42,26 +42,26 @@ End Sub
 
 Public Sub AddToExtCellsCollection(ByRef coll As Collection)
 'Добавляем коллекцию входящих клеток в коллекцию горящих
-Dim cell As c_Cell
+Dim Cell As c_Cell
     
     AddCellsToCollection extinguishingCells, coll
     
     'Для всех входящих клеток устанавливаем значение "в зоне тушения"
-    For Each cell In coll
-        cellsMatrix(cell.x, cell.y) = ExtCellType.inExtSquare
-    Next cell
+    For Each Cell In coll
+        cellsMatrix(Cell.x, Cell.y) = ExtCellType.inExtSquare
+    Next Cell
 End Sub
 
 Public Sub AddToActiveCellsCollection(ByRef coll As Collection)
 'Добавляем коллекцию входящих клеток в коллекцию активных клеток (внешних, разгорающихся)
-Dim cell As c_Cell
+Dim Cell As c_Cell
     
     AddCellsToCollection activeCells, coll
     
     'Для всех входящих клеток устанавливаем значение "в зоне тушения"
-    For Each cell In coll
-        cellsMatrix(cell.x, cell.y) = ExtCellType.inExtSquare
-    Next cell
+    For Each Cell In coll
+        cellsMatrix(Cell.x, Cell.y) = ExtCellType.inExtSquare
+    Next Cell
 End Sub
 
 Public Function IsCellExtinguished(ByVal x As Long, ByVal y As Long) As Boolean
@@ -98,11 +98,11 @@ Dim expenseNeed As Single
 End Function
 
 
-Public Function IsCellInThisFront(ByRef cell As c_Cell) As Boolean
+Public Function IsCellInThisFront(ByRef Cell As c_Cell) As Boolean
 'Проверяем, относится ли пришедшая клетка к коллекции клеток периметра поажара данного ьлока
 Dim cll As c_Cell
     For Each cll In fireFrontCells
-        If cll.x = cell.x And cll.y = cell.y Then
+        If cll.x = Cell.x And cll.y = Cell.y Then
             IsCellInThisFront = True
             Exit Function
         End If
@@ -128,9 +128,9 @@ End Property
 '------------------------Инструменты-------------------------------------------------
 Private Sub AddCellsToCollection(ByRef col1 As Collection, ByRef col2 As Collection)
 'Добавляем все клетки из коллекции 2 в коллекцию 1
-Dim cell As c_Cell
+Dim Cell As c_Cell
 
-    For Each cell In col2
-        col1.Add cell, cell.x & ":" & cell.y
-    Next cell
+    For Each Cell In col2
+        col1.Add Cell, Cell.x & ":" & Cell.y
+    Next Cell
 End Sub

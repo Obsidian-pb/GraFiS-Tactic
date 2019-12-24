@@ -5,7 +5,7 @@ Sub InsertLabelName(ShpObj As Visio.Shape)
 Dim shpLabel As Visio.Shape
 Dim shpConnection As Visio.Shape
 Dim mstrConnection As Visio.Master
-Dim Cell1 As Visio.cell, Cell2 As Visio.cell
+Dim Cell1 As Visio.Cell, Cell2 As Visio.Cell
 Dim CellFormula As String
 'Dim pnt1 As Long, pnt2 As Long
 
@@ -19,7 +19,7 @@ Dim CellFormula As String
 
 '---Вбрасываем коннектор и соединяем фигуру водоисточника и подпись
     '---Вбрасываем коннектор и соединяем фигкуры водоисточника и подписи
-    Set mstrConnection = Application.ThisDocument.Masters("Коннектор")
+    Set mstrConnection = ThisDocument.Masters("Коннектор")
     
     Set shpConnection = Application.ActiveWindow.Page.Drop(mstrConnection, 2, 2)
     Set vsoCell1 = shpConnection.CellsU("BeginX")
@@ -60,7 +60,7 @@ Sub InsertLabelValue(ShpObj As Visio.Shape)
 Dim shpLabel As Visio.Shape
 Dim shpConnection As Visio.Shape
 Dim mstrConnection As Visio.Master
-Dim Cell1 As Visio.cell, Cell2 As Visio.cell
+Dim Cell1 As Visio.Cell, Cell2 As Visio.Cell
 Dim CellFormula As String
 'Dim pnt1 As Long, pnt2 As Long
 
@@ -73,7 +73,7 @@ Dim CellFormula As String
 
 '---Вбрасываем коннектор и соединяем фигуру водоисточника и подпись
     '---Вбрасываем коннектор и соединяем фигкуры водоисточника и подписи
-    Set mstrConnection = Application.ThisDocument.Masters("Коннектор")
+    Set mstrConnection = ThisDocument.Masters("Коннектор")
     
     Set shpConnection = Application.ActiveWindow.Page.Drop(mstrConnection, 2, 2)
     Set vsoCell1 = shpConnection.CellsU("BeginX")

@@ -69,3 +69,18 @@ EX:
     SaveLog Err, "MorphToFog"
 End Sub
 
+Public Sub PictureRefresh()
+'Обновляем картинки на кнопках
+Dim cb As Office.CommandBarButton
+Dim DocPath As String
+    
+'---Обновляем иконки на кнопках
+    DocPath = ThisDocument.path
+    Set cb = Application.CommandBars("Превращения").Controls("Задымление")
+    With cb
+        .Picture = LoadPicture(DocPath & "Bitmaps\Fog1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Fog2.bmp")
+    End With
+    
+Set cb = Nothing
+End Sub

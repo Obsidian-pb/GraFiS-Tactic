@@ -17,12 +17,12 @@ CD_MasterExists = False
 
 End Function
 
-Public Sub MasterImportSub(DocName As String, masterName As String)
+Public Sub MasterImportSub(masterName As String)
 'Процедура импорта мастера в соответствии с именем
 Dim mstr As Visio.Master
 
     If Not CD_MasterExists(masterName) Then
-        Set mstr = Application.Documents(DocName).Masters(masterName)
+        Set mstr = ThisDocument.Masters(masterName)
         Application.ActiveDocument.Masters.Drop mstr, 0, 0
     End If
 
