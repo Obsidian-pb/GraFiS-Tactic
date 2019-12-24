@@ -6,17 +6,20 @@ Option Explicit
 
 Public Sub PS_GlueToShape(ShpObj As Visio.Shape)
 'Процедура привязывает инициировавшую фигуру (Звено ГДЗС) к целевой фигуре, в случае если она является _
- фигурой ранцевой установки
+ фигурой ранцевой установки или рукавной линии
 Dim OtherShape As Visio.Shape
 Dim x As Double, y As Double
 Dim vS_ShapeName As String
 Dim shpSize As Double
 
+Dim curHoseShape As Visio.Shape
+
     On Error GoTo EX
 
-'---Определяем координаты активной фигуры
+'---Определяем координаты и радиус активной фигуры
     x = ShpObj.Cells("PinX").Result(visInches)
     y = ShpObj.Cells("Piny").Result(visInches)
+    shpSize = ShpObj.Cells("Height").Result(visInches) / 2
 
 '---Проверяем налOtherShapeичие фигуры на месте перемещения лафетного ствола
     '---Перебираем все фигуры на странице
@@ -52,9 +55,11 @@ Dim shpSize As Double
     End If
     '---Проверяем, является ли эта фигура фигурой напорной рукавной линии
     If GetTypeShape(OtherShape, 100) > 0 Then
-        '---Переводим координаты к координатам фигуры
-        shpSize = ShpObj.Cells("Height").Result(visInches) / 2
+        '---Если является, проверяем проходит ли она в радиусе shpSize от Pin фигуры звена ГДЗС
         If OtherShape.HitTest(x, y, shpSize) > 0 Then
+            Set curHoseShape = OtherShape
+            
+            
             OtherShape.BringToFront
         End If
     End If
@@ -67,6 +72,8 @@ EX:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "PS_GlueToShape"
 End Sub
+
+
 
 Private Function GetTypeShape(ByRef aO_TergetShape As Visio.Shape, ByVal aI_IndexPers As Integer) As Integer
 'Функция возвращает индехс целевой фигуры в случае если она является фигурой приемлемой _
