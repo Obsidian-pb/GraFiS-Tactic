@@ -36,7 +36,7 @@ Sub AddButtons()
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Конструкции")
-    DocPath = Application.Documents("Конструкции.vss").path
+    DocPath = ThisDocument.path
     
 '---Добавляем кнопки на панель управления "Конструкции"--------------------------------
 '---Кнопка "Маска"-------------------------------------------------

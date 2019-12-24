@@ -8,7 +8,23 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 
+Private WithEvents app As Visio.Application
+Attribute app.VB_VarHelpID = -1
+Private cellChangedCount As Integer
+Const cellChangedInterval = 1000
+
 Private ButEvent As c_Buttons
+
+
+Private Sub app_CellChanged(ByVal Cell As IVCell)
+    cellChangedCount = cellChangedCount + 1
+    Debug.Print cellChangedCount
+    If cellChangedCount > cellChangedInterval Then
+        ButEvent.PictureRefresh
+        cellChangedCount = 0
+        Debug.Print "changed"
+    End If
+End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     OpenDoc
@@ -34,6 +50,12 @@ Private Sub OpenDoc()
 '---Активируем объект отслеживания нажатия кнопок
     Set ButEvent = New c_Buttons
     
+'---Активируем объект отслеживания eciaiaiee a i?eei?aiee
+    If Application.version > 12 Then
+        Set app = Visio.Application
+        cellChangedCount = cellChangedInterval - 10
+    End If
+    
 '---Проверяем наличие обновлений
     fmsgCheckNewVersion.CheckUpdates
 End Sub
@@ -43,6 +65,9 @@ Private Sub CloseDoc()
 
 '---Деактивируем объект отслеживания нажатия кнопок
     Set ButEvent = Nothing
+    
+'---Деактивируем объект отслеживания eciaiaiee a i?eei?aiee
+    If Application.version > 12 Then Set app = Nothing
     
 '---Удаляем панель управления "СпецФункции"
     RemoveTB_Constructions
@@ -74,12 +99,3 @@ Private Sub sp_MastersImport()
 End Sub
 
 
-
-
-'Public Sub TestOpen()
-'    OpenDoc
-'End Sub
-'
-'Public Sub TestClose()
-'    CloseDoc
-'End Sub

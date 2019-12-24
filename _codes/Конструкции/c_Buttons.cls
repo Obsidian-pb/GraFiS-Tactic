@@ -10,12 +10,12 @@ Attribute VB_Exposed = False
 Option Explicit
 
 'Класс для обработки нажатий на кнопки
-Public WithEvents visApp As Visio.Application
+Private WithEvents visApp As Visio.Application
 Attribute visApp.VB_VarHelpID = -1
 
-Public WithEvents ConstructionComBut As Office.CommandBarButton   'Маска
+Private WithEvents ConstructionComBut As Office.CommandBarButton   'Маска
 Attribute ConstructionComBut.VB_VarHelpID = -1
-Public WithEvents ConstructionComBut2 As Office.CommandBarButton  'Рисование стен
+Private WithEvents ConstructionComBut2 As Office.CommandBarButton  'Рисование стен
 Attribute ConstructionComBut2.VB_VarHelpID = -1
 
 Private wallDrawer As c_WallDrawer
@@ -88,4 +88,24 @@ Private Sub visApp_BeforeShapeDelete(ByVal Shape As IVShape)
         Set wallDrawer = Nothing
         Set visApp = Nothing
     End If
+End Sub
+
+Public Sub PictureRefresh()
+'Dim ConstructionComBut As Office.CommandBarButton   'Маска
+'Dim ConstructionComBut2 As Office.CommandBarButton  'Рисование стен
+Dim DocPath As String
+
+'    Set ConstructionComBut = Application.CommandBars("Конструкции").Controls("Маска")
+'    Set ConstructionComBut2 = Application.CommandBars("Конструкции").Controls("Рисование стен")
+    
+'---Iaiiaeyai ea?oeieo ia eiiieao - aey Visio 201o
+    DocPath = ThisDocument.path
+    With ConstructionComBut
+        .Picture = LoadPicture(DocPath & "Bitmaps\WallMask1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\WallMask2.bmp")
+    End With
+    With ConstructionComBut2
+        .Picture = LoadPicture(DocPath & "Bitmaps\WallDrawTool1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\WallDrawTool2.bmp")
+    End With
 End Sub
