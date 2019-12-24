@@ -122,7 +122,7 @@ End Sub
 
 Private Sub WaterAppEvents_ShapeAdded(ByVal Shape As IVShape)
 'Событие добавления на лист фигуры
-Dim v_Cntrl As CommandBarControl
+Dim v_Ctrl As CommandBarControl
 
 '---Включаем обработку ошибок
     On Error GoTo Tail

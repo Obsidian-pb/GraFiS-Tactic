@@ -123,3 +123,38 @@ Exit Sub
 Tail:
     '---Выходим из процедуры обработки
 End Sub
+
+
+Public Sub PictureRefresh()
+'Обновляем картинки на кнопках
+Dim cb As Office.CommandBarButton
+Dim DocPath As String
+    
+'---Обновляем иконки на кнопках
+    DocPath = ThisDocument.path
+    Set cb = Application.CommandBars("Спецфункции").Controls("Экспорт в JPG")
+    With cb
+        .Picture = LoadPicture(DocPath & "Bitmaps\ExportJPG1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\ExportJPG2.bmp")
+    End With
+    
+    Set cb = Application.CommandBars("Спецфункции").Controls("Аспект")
+    With cb
+        .Picture = LoadPicture(DocPath & "Bitmaps\Aspect1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Aspect2.bmp")
+    End With
+    
+    Set cb = Application.CommandBars("Спецфункции").Controls("Исправить расположение")
+    With cb
+        .Picture = LoadPicture(DocPath & "Bitmaps\Fix1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Fix2.bmp")
+    End With
+    
+    Set cb = Application.CommandBars("Спецфункции").Controls("Количество фигур")
+    With cb
+        .Picture = LoadPicture(DocPath & "Bitmaps\Count1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Count2.bmp")
+    End With
+    
+Set cb = Nothing
+End Sub

@@ -46,7 +46,8 @@ Sub AddButtons()
         .Caption = "Экспорт в JPG"
         .Tag = "Export_JPG"
         .TooltipText = "Экспортировать все листы в JPG"
-        .FaceID = 684
+        .Picture = LoadPicture(DocPath & "Bitmaps\ExportJPG1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\ExportJPG2.bmp")
         .BeginGroup = True
     End With
 '---Кнопка "Аспект"-------------------------------------------------
@@ -55,7 +56,8 @@ Sub AddButtons()
         .Caption = "Аспект"
         .Tag = "Aspect"
         .TooltipText = "Изменить аспект"
-        .FaceID = 1648  ' 2589
+        .Picture = LoadPicture(DocPath & "Bitmaps\Aspect1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Aspect2.bmp")
     End With
 '---Кнопка "Исправить расположение"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
@@ -63,7 +65,8 @@ Sub AddButtons()
         .Caption = "Исправить расположение"
         .Tag = "Fix"
         .TooltipText = "Исправить расположение фигур на листе"
-        .FaceID = 1035  'возможно 578
+        .Picture = LoadPicture(DocPath & "Bitmaps\Fix1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Fix2.bmp")
     End With
 '---Кнопка "Количество фигур"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
@@ -71,7 +74,8 @@ Sub AddButtons()
         .Caption = "Количество фигур"
         .Tag = "Count"
         .TooltipText = "Показать количество фигур в выборке"
-        .FaceID = 127
+        .Picture = LoadPicture(DocPath & "Bitmaps\Count1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Count2.bmp")
     End With
 '---Кнопка "Панель таймера"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
