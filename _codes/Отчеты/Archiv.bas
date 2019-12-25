@@ -335,3 +335,4 @@ Attribute VB_Name = "Archiv"
 ''        vsO_ExtLine.CellsSRC(visSectionFirstComponent, i + 1, 0).FormulaU = vss_Formula
 ''
 ''    Next i
+'Проверка для GitHub desctop
