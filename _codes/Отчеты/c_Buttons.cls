@@ -32,7 +32,7 @@ Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As
     
 '---Запускаем основное событие
     MCheckForm.Show
-    Master_check_refresh
+    MasterCheckRefresh
 Tail:
     '---Выходим из процедуры обработки
 End Sub

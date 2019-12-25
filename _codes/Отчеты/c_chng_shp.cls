@@ -23,6 +23,6 @@ Private Sub Class_Terminate()
 End Sub
 
 Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
-   Master_check_refresh
+   MasterCheckRefresh
 End Sub
 

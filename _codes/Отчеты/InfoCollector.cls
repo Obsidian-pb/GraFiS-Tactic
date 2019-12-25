@@ -50,10 +50,12 @@ Public ps_GetedWaterValueMax As Single    'Забирается воды из внешних источников
 Public pi_GetingWaterCount As Integer   'Устройств забирающих воду кол-во
 
 
-Public pi_GDZSChainsCount As Integer 'Количество звеньев ГДЗС
+Public pi_GDZSChainsCount As Integer 'Количество рабочих звеньев ГДЗС
 Public pi_GDZSMansCount As Integer 'Количество газрдымозащитников
-Public ps_GDZSChainsRezCount As Single 'Количество резервных звеньев ГДЗС
+Public pi_GDZSChainsRezCount As Integer 'Количество резервных звеньев ГДЗС
 Public pi_GDZSMansRezCount As Integer 'Количество газодымозащитников для резервных звеньев ГДЗС
+Public ps_GDZSChainsRezNeed As Single 'Требуемое количество звеньев
+Public pb_GDZSDiscr As Boolean 'Несоотвествие количества газодымозащитников в звене сложным условиям
 Public pi_GDZSpbCount As Integer 'Kolichestvo PB
 Public pi_KPPCount As Integer 'Kolichestvo KPP
 
@@ -327,17 +329,17 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 25 'Самолет
-                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+                   'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 26 'Самолет-амфибия
-                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+                   'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 27 'Вертолет
-                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+                   'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
@@ -413,30 +415,39 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
     
             '---ГДЗС----------------------------
                 Case Is = 46 'Звено - ДАСВ
-                    pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                    pi_GDZSChainsCount = pi_GDZSChainsCount + 1
-                    pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
-                    If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
-                        ps_GDZSChainsRezCount = ps_GDZSChainsRezCount + 0.3333
-                        If fb_FirstChain(ps_GDZSChainsRezCount) Then
-                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + 3
-                        End If
-                    Else
-                        ps_GDZSChainsRezCount = ps_GDZSChainsRezCount + 1
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
+                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        pi_GDZSChainsCount = pi_GDZSChainsCount + 1
+                        pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
+                          If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
+                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 0.3334
+                          Else
+                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
+                              If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+                          End If
+                    End If
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
+                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
                         pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
                     End If
+                  
                     
                 Case Is = 90 'Звено - ДАСК
-                    pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                    pi_GDZSChainsCount = pi_GDZSChainsCount + 1
-                    pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
-                    If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
-                        ps_GDZSChainsRezCount = ps_GDZSChainsRezCount + 0.3333
-                        If fb_FirstChain(ps_GDZSChainsRezCount) Then
-                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + 3
-                        End If
-                    Else
-                        ps_GDZSChainsRezCount = ps_GDZSChainsRezCount + 1
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
+                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        pi_GDZSChainsCount = pi_GDZSChainsCount + 1
+                        pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
+                          If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
+                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 0.3334
+                          Else
+                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
+                              If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+                          End If
+                    End If
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
+                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
                         pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
                     End If
                     
@@ -897,7 +908,7 @@ Private Sub sc_SetPropertiesNull()
     ps_GetedWaterValueMax = 0     'Забирается воды из внешних источников Максимум
     pi_GetingWaterCount = 0       'Устройств забирающих воду кол-во
     pi_GDZSChainsCount = 0        'Количество звеньев ГДЗС
-    ps_GDZSChainsRezCount = 0     'Количество резервных звеньев ГДЗС
+    pi_GDZSChainsRezCount = 0     'Количество резервных звеньев ГДЗС
     pi_GDZSMansCount = 0          'Количество газрдымозащитников
     pi_GDZSMansRezCount = 0       'Количество газодымозащитников для резервных звеньев ГДЗС
     pi_GDZSpbCount = 0            'Kolichestvo PB
@@ -944,6 +955,8 @@ Private Sub sc_SetPropertiesNull()
     pi_SOCount = 0                'Stepen ognestoikosti
     pi_FireCount = 0              'Ploshad gorenia
     pi_OrientCount = 0            'Ориентиры
+    pb_GDZSDiscr = False          'Несоответствие человек сложным условиям
+    ps_GDZSChainsRezNeed = 0      'Требуется звеньев
    
     
     

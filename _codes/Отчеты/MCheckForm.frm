@@ -17,11 +17,11 @@ Attribute VB_Exposed = False
 Dim c As c_chng_shp
 
 Private Sub ListBox1_Click()
-Master_check_refresh
+MasterCheckRefresh
 End Sub
 
 Private Sub ListBox2_Click()
-Master_check_refresh
+MasterCheckRefresh
 End Sub
 
 Private Sub UserForm_Activate()
@@ -29,5 +29,5 @@ Set c = New c_chng_shp
 End Sub
 
 Private Sub UserForm_Click()
-Master_check_refresh
+MasterCheckRefresh
 End Sub
