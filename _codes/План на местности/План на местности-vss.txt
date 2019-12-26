@@ -337,7 +337,7 @@
   Section: User>>>
     User.IndexPers: 152; User.IndexPers.Prompt: ""; 
     User.IndexApp: 1; User.IndexApp.Prompt: ""; 
-    User.Version: 0; User.Version.Prompt: ""; 
+    User.Version: 1; User.Version.Prompt: ""; 
     User.ShapeTo: 0; User.ShapeTo.Prompt: ""; 
     User.Label: "ул."; User.Label.Prompt: ""; 
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
