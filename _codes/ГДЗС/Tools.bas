@@ -284,6 +284,27 @@ Public Function IsFirstDrop(ShpObj As Visio.Shape)
     End If
 End Function
 
+Public Function IsShapeGraFiSType(ByRef aO_TergetShape As Visio.Shape, ByRef arr As Variant) As Boolean
+'‘ункци€ возвращает True, если фигура €вл€етс€ фигурой √ра‘и— и при этом имеет индекс из указанного массива
+    IsShapeGraFiSType = False
+    
+    If aO_TergetShape.CellExists("User.IndexPers", 0) = True And aO_TergetShape.CellExists("User.Version", 0) = True Then
+        IsShapeGraFiSType = IsInArray(arr, aO_TergetShape.Cells("User.IndexPers"))
+    End If
+End Function
+
+Public Function IsInArray(ByRef arr As Variant, ByVal val As Integer) As Boolean
+'‘ункци€ возвращает True если значение имеетс€ в массиве, иначе False
+Dim i As Integer
+    For i = 0 To UBound(arr)
+        If arr(i) = val Then
+            IsInArray = True
+            Exit Function
+        End If
+    Next i
+IsInArray = False
+End Function
+
 '-----------------------------------------‘ункции проверки прив€зки данных----------------------------------------------
 Public Function IsShapeLinkedToDataAndDropFirst(ByRef shp As Visio.Shape) As Boolean
 IsShapeLinkedToDataAndDropFirst = False

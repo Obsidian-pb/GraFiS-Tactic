@@ -22,7 +22,7 @@ Dim x As Double, y As Double
 '    '---Если фигура является группой перебираем и все входящие в нее фигуры тоже
 '        PS_GlueToShape ShpObj
     '---Проверяем, является ли эта фигура фигурой ранцевой установки
-        If GetTypeShape(OtherShape, 104) > 0 Then
+        If IsShapeGraFiSType(OtherShape, Array(104)) Then
             If OtherShape.HitTest(x, y, 0.01) > 1 Then
                 '---Приклеиваем фигуру (прописываем формулы)
                 On Error Resume Next
@@ -74,6 +74,9 @@ Dim curHoseShapeID As Integer
 
     On Error GoTo EX
 
+'---Проверяем имеются ли у данной фигуры необходимые поля (для проверки фигур составленных ранее схем)
+    If ShpObj.CellExists("User.ShapeHoseID", 0) = False Then Exit Sub
+
 '---Определяем координаты и радиус активной фигуры
     x = ShpObj.Cells("PinX").Result(visInches)
     y = ShpObj.Cells("Piny").Result(visInches)
@@ -86,7 +89,7 @@ Dim curHoseShapeID As Integer
     '    '---Если фигура является группой перебираем и все входящие в нее фигуры тоже
     '        PS_GlueToHose ShpObj
         '---Проверяем, является ли эта фигура фигурой напорной рукавной линии
-        If GetTypeShape(OtherShape, 100) > 0 Then
+        If IsShapeGraFiSType(OtherShape, Array(100)) Then
             '---Если является, проверяем проходит ли она в радиусе shpSize от Pin фигуры звена ГДЗС
             If OtherShape.HitTest(x, y, shpSize) > 0 Then
                 newHoseDistance = OtherShape.DistanceFromPoint(x, y, 0)
@@ -100,21 +103,29 @@ Dim curHoseShapeID As Integer
 
 '---Если была найдена фигура рукавной линии, к которой нужно приклеить звено
     If Not curHoseShape Is Nothing Then
+        curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
     '---1 Проверяем было ли звено приклеено к линии
-        If curHoseShape.Cells("User.ShapeHoseID").Result(visNumber) = 0 Then    '---нет: 4
-            
-            
-        Else    '---да: 2
-        '---2 Проверяем было ли звено приклеено к этой линии
-'            if
-            '---да: очищаем сведения о фигуре рукавной линии к которой оно было приклеено, выход
-            '---нет: 3
+        If curHoseShapeID = 0 Then
+        '---нет
+            SetHoseLineGDZSStatus curHoseShape, ShpObj, True
+        Else
+        '---да
+        '---2 Проверяем было ли звено приклеено к другой линии
+            If curHoseShapeID <> curHoseShape.ID Then
+            '---Снимаем привязку к звену прежней линии и ставим привязку для текущей
+                SetHoseLineGDZSStatus Application.ActivePage.Shapes.ItemFromID(curHoseShapeID), ShpObj, False
+                SetHoseLineGDZSStatus curHoseShape, ShpObj, True
+            End If
         End If
-
-
-    '---3 устанавливаем для прежней рукавной линии работу без звена
-    '---4 указать для данного звена, что оно приклеено к новой рукавной линии
-    '---5 устанавливаем для новой рукавной линии состояние работы со звеном
+        ShpObj.Cells("User.ShapeHoseID").Formula = curHoseShape.ID
+    Else
+        curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
+        '---1 Проверяем было ли звено уже привязано к линии
+        If curHoseShapeID <> 0 Then
+            SetHoseLineGDZSStatus Application.ActivePage.Shapes.ItemFromID(curHoseShapeID), ShpObj, False
+        End If
+        '---Указываем, что звено больше не работает с линией
+        ShpObj.Cells("User.ShapeHoseID").Formula = 0
     End If
 
 
@@ -126,22 +137,32 @@ EX:
     SaveLog Err, "PS_GlueToHose"
 End Sub
 
+Private Sub SetHoseLineGDZSStatus(ByRef shp As Visio.Shape, ByRef shpGDZS As Visio.Shape, ByVal isGDZS As Boolean)
+'Устанавливаем статус рукавной илии и ствола присоединенного к ней (только для рабочей)
+Dim con As Visio.Connect
+Dim extShp As Visio.Shape
 
-Private Function GetTypeShape(ByRef aO_TergetShape As Visio.Shape, ByVal aI_IndexPers As Integer) As Integer
-'Функция возвращает индехс целевой фигуры в случае если она является фигурой приемлемой _
- для прикрепления звена, в противном случае возвращается 0
-Dim vi_TempIndex
-
-GetTypeShape = 0
-
-If aO_TergetShape.CellExists("User.IndexPers", 0) = True And aO_TergetShape.CellExists("User.Version", 0) = True Then
-    vi_TempIndex = aO_TergetShape.Cells("User.IndexPers")
-    If vi_TempIndex = aI_IndexPers Then
-        GetTypeShape = aO_TergetShape.Cells("User.IndexPers")
+    If isGDZS Then
+        For Each con In shp.Connects
+            Set extShp = con.ToSheet
+            If IsShapeGraFiSType(extShp, Array(34, 35, 36, 37, 38, 39)) Then
+                'Указываем сведения, что со стволом работает указанное звено ГДЗС
+                extShp.Cells("Prop.Personnel").Formula = 0
+                extShp.Cells("Prop.Unit").FormulaU = """" & shpGDZS.Cells("Prop.Unit").ResultStr(visUnitsString) & """"
+            End If
+        Next con
+    Else
+        For Each con In shp.Connects
+            Set extShp = con.ToSheet
+            If IsShapeGraFiSType(extShp, Array(34, 35, 36, 37, 38, 39)) Then
+                'Указываем сведения, что со стволом НЕ работает указанное звено ГДЗС
+                extShp.Cells("Prop.Personnel").FormulaU = "IF(STRSAME(Prop.TTHType," & Chr(34) & _
+                    "Стандартные" & Chr(34) & "),IF(Prop.DiameterInS>50,2,1),IF(Prop.DiameterIn>50,2,1))"
+            End If
+        Next con
     End If
-End If
 
-End Function
+End Sub
 
 
 Public Sub PS_ReleaseShape(ShpObj As Visio.Shape, ShapeID As Long)
@@ -176,6 +197,6 @@ Public Sub MoveMeFront(ShpObj As Visio.Shape)
     ShpObj.BringToFront
     
 '---Проверяем, не расположена ли фигура звена поверх рукавной линии
-'    PS_GlueToShape ShpObj
+    PS_GlueToHose ShpObj
 
 End Sub
