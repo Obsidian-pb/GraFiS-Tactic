@@ -83,6 +83,7 @@ Public pi_MZdravCount As Integer        'СМП
 Public pi_TechTotalCount As Integer     'Общее количество техники
 Public pi_FireTotalCount As Integer     'Пожарная
 Public pi_BUCount As Integer            'Боевых участков
+Public pi_SPRCount As Integer           'Секторов
 Public pi_ShtabCount As Integer         'Shtab
 Public pi_RNBDCount As Integer          'Reshaushee napravlenie
 Public pi_OchagCount As Integer         'Ochag
@@ -461,8 +462,11 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
     
             '---Управление силами и средствами--------
-                Case Is = 63 'БУ
-                    pi_BUCount = pi_BUCount + 1
+                Case Is = 63 'БУ и СПР
+                    If vsO_Shape.Cells("Prop.UTP_STP_Reserv").ResultStr(visUnitsString) = "Участок" _
+                        Then pi_BUCount = pi_BUCount + 1
+                    If vsO_Shape.Cells("Prop.UTP_STP_Reserv").ResultStr(visUnitsString) = "Сектор" _
+                        Then pi_SPRCount = pi_SPRCount + 1
                 Case Is = 62 'Штаб/РТП
                     pi_ShtabCount = pi_ShtabCount + 1
                     pi_PersonnelNeed = pi_PersonnelNeed + 1
@@ -940,6 +944,7 @@ Private Sub sc_SetPropertiesNull()
     pi_TechTotalCount = 0         'Общее количество техники
     pi_FireTotalCount = 0         'Пожарная
     pi_BUCount = 0                'Боевых участков
+    pi_SPRCount = 0               'Секторов
     pi_ShtabCount = 0             'Shtab
     pi_RNBDCount = 0              'Reshaushee napravlenie
     pi_OchagCount = 0             'Ochag

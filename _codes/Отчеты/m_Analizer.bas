@@ -247,6 +247,10 @@ Dim psi_TargetPageIndex As Integer
         MCheckForm.ListBox1.AddItem "Решающее напраление должно быть одним"
         comment = True
     End If
+    If vOC_InfoAnalizer.pi_BUCount >= 5 And vOC_InfoAnalizer.pi_SPRCount <= 1 Then
+        MCheckForm.ListBox1.AddItem "Не организованы секторы проведения работ"
+        comment = True
+    End If
     'GDZS
     If vOC_InfoAnalizer.pi_GDZSpbCount < vOC_InfoAnalizer.pi_GDZSChainsCount Then
         MCheckForm.ListBox1.AddItem "Не выставлены посты безопасности для каждого звена ГДЗС (" & vOC_InfoAnalizer.pi_GDZSpbCount & "/" & vOC_InfoAnalizer.pi_GDZSChainsCount & ")"
@@ -344,6 +348,10 @@ Dim psi_TargetPageIndex As Integer
     If vOC_InfoAnalizer.pi_BUCount <> 0 Then
          MCheckForm.ListBox2.AddItem "Боевых участков"
          MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_BUCount
+    End If
+    If vOC_InfoAnalizer.pi_SPRCount <> 0 Then
+         MCheckForm.ListBox2.AddItem "Секторов проведения работ"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_SPRCount
     End If
     If vOC_InfoAnalizer.pi_PersonnelHave <> 0 Then
          MCheckForm.ListBox2.AddItem "Личного состава (без водителей)"
