@@ -2,7 +2,14 @@ Attribute VB_Name = "m_WorkWithFigures"
 Option Explicit
 
 '--------------------Модуль для работы с фигурами-----------------------------------------
+Public Sub MoveMeFront(ShpObj As Visio.Shape)
+'Прока перемещает фигуру вперед
+    ShpObj.BringToFront
+    
+'---Проверяем, не расположена ли фигура звена поверх рукавной линии
+    PS_GlueToHose ShpObj
 
+End Sub
 
 Public Sub PS_GlueToShape(ShpObj As Visio.Shape)
 'Процедура привязывает инициировавшую фигуру (Звено ГДЗС) к целевой фигуре, в случае если она является _
@@ -192,11 +199,12 @@ On Error Resume Next
 Set OtherShape = Nothing
 End Sub
 
-Public Sub MoveMeFront(ShpObj As Visio.Shape)
-'Прока перемещает фигуру вперед
-    ShpObj.BringToFront
+Public Function FindNearestHoseLinePouin(ByRef curPoint As c_Vector, ByRef hoseLineShp As Visio.Shape) As c_Vector
+'Находим ближайшую точку рукавной линии
+    '1 Находим расстояние до рукавной линии
     
-'---Проверяем, не расположена ли фигура звена поверх рукавной линии
-    PS_GlueToHose ShpObj
+    '2 На найденном расстоянии находим точку
+    
+    
+End Function
 
-End Sub

@@ -352,4 +352,20 @@ Const d = " | "
 
 End Sub
 
-
+Public Function GetPointOnLineShape(ByRef center As c_Vector, ByRef lineShape As Visio.Shape, ByVal radiuss As Double) As c_Vector
+'Находим первую точку на линии
+Const pi = 3.1415                           'Число Пи
+Const oneOfHundredOfPerimeter = 0.06283     'угол - одна сотая окружности в радианах
+Dim pointTolerance As Double                'Точность поиска хита с линией для каждой из точек окружности
+Dim checkPoint As c_Vector
+Dim i As Byte
+    
+    pointTolerance = pi * radiuss / 100
+    
+    Set checkPoint = New c_Vector
+    
+    For i = 0 To 99
+'        checkPoint.x =
+    Next i
+    
+End Function
