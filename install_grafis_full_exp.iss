@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "АИГС ГраФиС-Тактик"
-#define MyAppVersion "11.2.00"
+#define MyAppVersion "12.0.00"
 #define MyAppPublisher "НТЦ ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России"
 #define MyAppURL "https://www.graphicalfiresets.ru/"
 
@@ -89,7 +89,6 @@ Source: "Шаблон плана эвакуации (500).vst"; DestDir: "{app}"; components: templa
 Source: "Шаблон плана эвакуации (1000).vst"; DestDir: "{app}"; components: templatesEvac
 Source: "Bitmaps\*"; DestDir: "{app}\Bitmaps\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "_installer\ico.ico"; DestDir: "{app}"; components: traf traf_nrs
-Source: "Дополнительно\DAO\dao360.dll"; DestDir: "{dao}"; Flags: uninsneveruninstall; Tasks: dao
 Source: "Отчеты\Конструктор отчетов.vsd"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "Отчеты\Детали отчетов.vss"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "Цветовые схемы\Белая школьная доска - ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
@@ -109,7 +108,6 @@ Source: "_source\OSM2Visio\v 2007\*"; DestDir: "{app}\v 2007\"; Flags: ignorever
 Source: "_source\OSM2Visio\v 2010, 2013, 2016\*"; DestDir: "{app}\v 2010, 2013, 2016\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: gr\visio10
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Tasks]
-Name: dao; Description: "Установить библиотеку dao360.dll (рекомендуется)"; GroupDescription: "Библиотеки:";
 Name: reg; Description: "Настроить политику безопасности MS Visio - включить все макросы"; GroupDescription: "Настройки MS Visio:";components: traf
 Name: desktopicon1; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 200"; GroupDescription: "Ярлыки:";components: traf
 Name: desktopicon2; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 500"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
