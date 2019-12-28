@@ -306,6 +306,30 @@ Dim psi_TargetPageIndex As Integer
         MCheckForm.ListBox1.AddItem "Недостаточно личного состава, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_PersonnelHave & "/" & vOC_InfoAnalizer.pi_PersonnelNeed & ")"
         comment = True
     End If
+    If vOC_InfoAnalizer.pi_Hoses51Have < vOC_InfoAnalizer.pi_Hoses51Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 51 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses51Have & "/" & vOC_InfoAnalizer.pi_Hoses51Count & ")"
+        comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses66Have < vOC_InfoAnalizer.pi_Hoses66Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 66 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses66Have & "/" & vOC_InfoAnalizer.pi_Hoses66Count & ")"
+        comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses77Have < vOC_InfoAnalizer.pi_Hoses77Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 77 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses77Have & "/" & vOC_InfoAnalizer.pi_Hoses77Count & ")"
+        comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses89Have < vOC_InfoAnalizer.pi_Hoses89Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 89 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses89Have & "/" & vOC_InfoAnalizer.pi_Hoses89Count & ")"
+        comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses110Have < vOC_InfoAnalizer.pi_Hoses110Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 110 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses110Have & "/" & vOC_InfoAnalizer.pi_Hoses110Count & ")"
+        comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses150Have < vOC_InfoAnalizer.pi_Hoses150Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 150 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses150Have & "/" & vOC_InfoAnalizer.pi_Hoses150Count & ")"
+        comment = True
+    End If
     If comment = False Then MCheckForm.ListBox1.AddItem "Замечаний не обнаружено"
 
     '============Вторая вкладка - Сводка тактических данных===========
@@ -407,27 +431,27 @@ Dim psi_TargetPageIndex As Integer
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_HosesLength & " м"
     End If
     If vOC_InfoAnalizer.pi_Hoses51Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Количество рукавов 51 мм"
+        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 51 мм"
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses51Count
     End If
     If vOC_InfoAnalizer.pi_Hoses66Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Количество рукавов 66 мм"
+        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 66 мм"
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses66Count
     End If
     If vOC_InfoAnalizer.pi_Hoses77Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Количество рукавов 77 мм"
+        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 77 мм"
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses77Count
     End If
     If vOC_InfoAnalizer.pi_Hoses89Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Количество рукавов 89 мм"
+        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 89 мм"
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses89Count
     End If
     If vOC_InfoAnalizer.pi_Hoses110Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Количество рукавов 110 мм"
+        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 110 мм"
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses110Count
     End If
     If vOC_InfoAnalizer.pi_Hoses150Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Количество рукавов 150 мм"
+        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 150 мм"
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses150Count
     End If
     If vOC_InfoAnalizer.ps_GetedWaterValue <> 0 Then
