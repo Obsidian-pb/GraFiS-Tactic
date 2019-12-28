@@ -1,6 +1,8 @@
 Attribute VB_Name = "m_WorkWithFigures"
 Option Explicit
 
+
+
 '--------------------ћодуль дл€ работы с фигурами-----------------------------------------
 Public Sub MoveMeFront(ShpObj As Visio.Shape)
 'ѕрока перемещает фигуру вперед
@@ -125,6 +127,11 @@ Dim curHoseShapeID As Integer
             End If
         End If
         ShpObj.Cells("User.ShapeHoseID").Formula = curHoseShape.ID
+        
+    '---3 ѕоворачиваем фигуру в соответствии с положением линии в ближаейшей ее точке
+        '#TEMP:
+        RotateAtHoseLine ShpObj, NewVectorXY(x, y), curHoseShape
+        '#END TEMP
     Else
         curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
         '---1 ѕровер€ем было ли звено уже прив€зано к линии
@@ -199,12 +206,48 @@ On Error Resume Next
 Set OtherShape = Nothing
 End Sub
 
-Public Function FindNearestHoseLinePouin(ByRef curPoint As c_Vector, ByRef hoseLineShp As Visio.Shape) As c_Vector
+
+'-----------------------------------------ѕоворот фигуры звена на рукавной линии----------------------------------------------
+Private Sub RotateAtHoseLine(ByRef gdzsShp As Visio.Shape, ByRef curPoint As c_Vector, ByRef hoseLineShp As Visio.Shape)
+'ќсновна€ процедура поворота фигуры на рукавной линии
+Dim newCenter As c_Vector
+Dim vector1 As c_Vector
+Dim vector2 As c_Vector
+Dim vector3 As c_Vector
+    
+    On Error GoTo EX
+    
+'    Application.EventsEnabled = False
+    
+    '1 находим ближайшую точку на рукавной линии
+    Set newCenter = FindNearestHoseLinePoint(curPoint, hoseLineShp)
+    If newCenter Is Nothing Then Exit Sub
+    
+    'ѕровер€ем, не находитс€ ли уже фигура в данной течке
+    If curPoint.IsSame(newCenter, 0.1) Then Exit Sub
+    
+    '2 размещаем фигуру в ближайшей точке
+    gdzsShp.Cells("PinX").Formula = str(newCenter.x)
+    gdzsShp.Cells("PinY").Formula = str(newCenter.y)
+    
+    '3 ищем две точки на линии
+    Set vector1 = GetPointOnLineShape(curPoint, hoseLineShp, gdzsShp.Cells("Height").Result(visInches) / 2, 0)
+    Set vector2 = GetPointOnLineShape(curPoint, hoseLineShp, gdzsShp.Cells("Height").Result(visInches) / 2, vector1.segmentNumber + 1)
+    Set vector3 = NewVectorXY(vector1.x - vector2.x, vector1.y - vector2.y)
+    gdzsShp.Cells("Angle").Formula = str(vector3.Angle) & "deg"
+EX:
+'    Application.EventsEnabled = True
+End Sub
+
+
+Public Function FindNearestHoseLinePoint(ByRef curPoint As c_Vector, ByRef hoseLineShp As Visio.Shape) As c_Vector
 'Ќаходим ближайшую точку рукавной линии
+Dim distance As Double
+
     '1 Ќаходим рассто€ние до рукавной линии
-    
+    distance = hoseLineShp.DistanceFromPoint(curPoint.x, curPoint.y, visSpatialIncludeDataGraphics)
     '2 Ќа найденном рассто€нии находим точку
-    
+    Set FindNearestHoseLinePoint = GetPointOnLineShape(curPoint, hoseLineShp, distance)
     
 End Function
 

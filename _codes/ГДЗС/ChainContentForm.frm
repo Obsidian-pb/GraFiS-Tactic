@@ -104,8 +104,8 @@ End Sub
 
 Private Sub ps_Models_ListFill()
 'Процедура получения данных по аппаратам и заполнения на их основе списка
-Dim dbs As DAO.Database
-Dim rst As DAO.Recordset
+Dim dbs As Object
+Dim rst As Object
 Dim vS_Path As String
 Dim i As Integer
     
@@ -114,14 +114,9 @@ Dim i As Integer
 '---Очищаем список от прежних значений
 LB_DeviceModel.Clear
 
-'!!!Потом удалить!!!
-'VS_DevceType = "ДАСВ"
-
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных в зависимости от типа аппаратов
         If VS_DevceType = "ДАСВ" Then
-'            SQLQuery = "SELECT ДАСВ.Модель, ДАСВ.[Объем баллонов], ДАСВ.[Давление редуктора], Баллоны.Ксж " _
-'            & "FROM Баллоны LEFT JOIN ДАСВ ON Баллоны.КодБаллона = ДАСВ.Баллон ORDER BY ДАСВ.Модель;"
             SQLQuery = "SELECT ДАСВ.Модель, ДАСВ.[Объем баллонов], ДАСВ.[Давление редуктора], Баллоны.Ксж " _
             & "FROM Баллоны RIGHT JOIN ДАСВ ON Баллоны.КодБаллона = ДАСВ.Баллон ORDER BY ДАСВ.Модель;"
         Else
@@ -131,8 +126,12 @@ LB_DeviceModel.Clear
         
     '---Создаем набор записей для получения списка
         pth = ThisDocument.path & "Signs.fdb"
-        Set dbs = GetDBEngine.OpenDatabase(pth)
-        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+        Set dbs = CreateObject("ADODB.Connection")
+        dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+        dbs.Open
+        Set rst = CreateObject("ADODB.Recordset")
+        rst.Open SQLQuery, dbs, 3, 1
+        
         
     '---Ищем необходимую запись в наборе данных и по ней создаем набор значений для списка для заданных параметров
     With rst
@@ -149,9 +148,7 @@ LB_DeviceModel.Clear
         Loop
     End With
     
-'    LB_DeviceModel.ListIndex = 0
     For i = 0 To Me.LB_DeviceModel.ListCount - 1
-'        Me.LB_DeviceModel.ListIndex = i
         If Me.LB_DeviceModel.Column(0, i) = VS_DeviceModel Then
             Me.LB_DeviceModel.Value = i
             Exit For
