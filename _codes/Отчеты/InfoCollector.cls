@@ -706,7 +706,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                             pi_WorklinesCount = pi_WorklinesCount + 1
                             'Проверяем имеет ли данная фигура подпись положения
 '                            Stop    'Реализовать!!!
-                            IsHoseShapeHavePos vsO_Shape
+'                            IsHoseShapeHavePos vsO_Shape
                         End If
                         Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
                             Case Is = 51
@@ -1107,7 +1107,7 @@ Dim tmpVal As Boolean
     
     For Each con In hoseShape.FromConnects
         If con.FromSheet.Cells("User.IndexPers").Result(visNumber) = 151 Then tmpVal = True
-        Debug.Print con.FromSheet.Name
+'        Debug.Print con.FromSheet.Name
     Next con
     
     If pb_AllHosesWithPos Then pb_AllHosesWithPos = tmpVal

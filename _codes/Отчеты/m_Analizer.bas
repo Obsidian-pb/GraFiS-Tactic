@@ -128,10 +128,10 @@ Select Case ass_PropertyName
         fp_SetValue = vOC_InfoAnalizer.pi_GDZSChainsCount
     Case Is = "Требуется резервных звеньев"
 '        fp_SetValue = PF_RoundUp(vOC_InfoAnalizer.pi_GDZSChainsCount / 3)
-        fp_SetValue = PF_RoundUp(vOC_InfoAnalizer.ps_GDZSChainsRezCount)
+        fp_SetValue = PF_RoundUp(vOC_InfoAnalizer.pi_GDZSChainsRezCount)
     Case Is = "Требуется звеньев ГДЗС"
 '        fp_SetValue = vOC_InfoAnalizer.pi_GDZSChainsCount + PF_RoundUp(vOC_InfoAnalizer.pi_GDZSChainsCount / 3)
-        fp_SetValue = vOC_InfoAnalizer.pi_GDZSChainsCount + PF_RoundUp(vOC_InfoAnalizer.ps_GDZSChainsRezCount)
+        fp_SetValue = vOC_InfoAnalizer.pi_GDZSChainsCount + PF_RoundUp(vOC_InfoAnalizer.pi_GDZSChainsRezCount)
     Case Is = "Фактическое количество газодымозащитников"
         fp_SetValue = vOC_InfoAnalizer.pi_GDZSMansCount
     Case Is = "Площадь пожара"
@@ -206,7 +206,7 @@ Dim i As Integer
 Dim psi_TargetPageIndex As Integer
 
     psi_TargetPageIndex = Application.ActivePage.Index
-
+    
 '---обнуляем имеющиеся значения свойств
 '    psi_TargetPageIndex = ActivePage.Index
     If vOC_InfoAnalizer Is Nothing Then
