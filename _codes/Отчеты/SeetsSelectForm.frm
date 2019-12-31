@@ -2,8 +2,8 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SeetsSelectForm 
    Caption         =   "Выбор страницы"
    ClientHeight    =   4770
-   ClientLeft      =   45
-   ClientTop       =   435
+   ClientLeft      =   48
+   ClientTop       =   432
    ClientWidth     =   7200
    OleObjectBlob   =   "SeetsSelectForm.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -52,7 +52,7 @@ Private Sub s_SheetsListCreate()
 Dim i As Integer
 
     LB_SheetsList.Clear
-    For i = 1 To Application.ActiveDocument.Pages.Count
+    For i = 1 To Application.ActiveDocument.Pages.count
         LB_SheetsList.AddItem Application.ActiveDocument.Pages(i).Name
     Next i
     LB_SheetsList.ListIndex = 0

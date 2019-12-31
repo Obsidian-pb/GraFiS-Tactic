@@ -46,7 +46,7 @@ Dim vsO_Shape As Visio.Shape
     Set vsO_BaseShape = Application.ActivePage.Shapes.ItemFromID(asi_ShpInd)
 
 '---Перебираем все фигуры в отчете
-    For i = 1 To vsO_BaseShape.Shapes.Count
+    For i = 1 To vsO_BaseShape.Shapes.count
         Set vsO_Shape = vsO_BaseShape.Shapes(i)
         If vsO_Shape.CellExists("Actions.ChangeValue", 0) = True Then '---Проверяем является ли фигура ОТЧЕТОМ!!!
             sP_ChangeValueMain vsO_Shape.ID, asi_TargetPage
@@ -275,12 +275,12 @@ Dim psi_TargetPageIndex As Integer
     End If
     'Hoses
 '    If vOC_InfoAnalizer.pb_AllHosesWithPos Then MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии"
-    If vOC_InfoAnalizer.pi_WorklinesCount > vOC_InfoAnalizer.pi_linesPosCount Then
-        MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount & ")"
+    If vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka > vOC_InfoAnalizer.pi_linesPosCount Then
+        MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka & ")"
         comment = True
     End If
-    If vOC_InfoAnalizer.pi_linesCount > vOC_InfoAnalizer.pi_linesLableCount Then
-        MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount & ")"
+    If vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka > vOC_InfoAnalizer.pi_linesLableCount Then
+        MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka & ")"
         comment = True
     End If
     'Plan na mestnosti
@@ -328,6 +328,18 @@ Dim psi_TargetPageIndex As Integer
     End If
     If vOC_InfoAnalizer.pi_Hoses150Have < vOC_InfoAnalizer.pi_Hoses150Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 150 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses150Have & "/" & vOC_InfoAnalizer.pi_Hoses150Count & ")"
+        comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses200Have < vOC_InfoAnalizer.pi_Hoses200Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 200 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses200Have & "/" & vOC_InfoAnalizer.pi_Hoses200Count & ")"
+        comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses250Have < vOC_InfoAnalizer.pi_Hoses250Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 250 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses250Have & "/" & vOC_InfoAnalizer.pi_Hoses250Count & ")"
+        comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses300Have < vOC_InfoAnalizer.pi_Hoses300Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 300 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses300Have & "/" & vOC_InfoAnalizer.pi_Hoses300Count & ")"
         comment = True
     End If
     If comment = False Then MCheckForm.ListBox1.AddItem "Замечаний не обнаружено"
@@ -394,8 +406,14 @@ Dim psi_TargetPageIndex As Integer
          MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.ps_FireSquare & " м кв. (плащадь тушения " & vOC_InfoAnalizer.ps_ExtSquare & " м кв.)"
     End If
     If vOC_InfoAnalizer.pi_StvolWHave <> 0 Then
-         MCheckForm.ListBox2.AddItem "Водяных стволов"
-         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_StvolWHave & " (" & vOC_InfoAnalizer.pi_StvolWBHave & " ств.Б, " & vOC_InfoAnalizer.pi_StvolWAHave & " ств.А, " & vOC_InfoAnalizer.pi_StvolWLHave & " лафетных)"
+        Dim strStvolCount As String
+        If vOC_InfoAnalizer.pi_StvolWBHave <> 0 Then strStvolCount = strStvolCount & vOC_InfoAnalizer.pi_StvolWBHave & " ств. ""Б"", "
+        If vOC_InfoAnalizer.pi_StvolWAHave <> 0 Then strStvolCount = strStvolCount & vOC_InfoAnalizer.pi_StvolWAHave & " ств. ""А"", "
+        If vOC_InfoAnalizer.pi_StvolWLHave <> 0 Then strStvolCount = strStvolCount & vOC_InfoAnalizer.pi_StvolWLHave & " лафетных, "
+        strStvolCount = Left(strStvolCount, Len(strStvolCount) - 2)
+        MCheckForm.ListBox2.AddItem "Водяных стволов"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_StvolWHave & " (" & strStvolCount & ")"
+        strStvolCount = ""
     End If
     If vOC_InfoAnalizer.pi_StvolFoamHave <> 0 Then
          MCheckForm.ListBox2.AddItem "Пенных стволов"
@@ -430,29 +448,22 @@ Dim psi_TargetPageIndex As Integer
         MCheckForm.ListBox2.AddItem "Общая длина напорных линий"
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_HosesLength & " м"
     End If
-    If vOC_InfoAnalizer.pi_Hoses51Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 51 мм"
-        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses51Count
-    End If
-    If vOC_InfoAnalizer.pi_Hoses66Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 66 мм"
-        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses66Count
-    End If
-    If vOC_InfoAnalizer.pi_Hoses77Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 77 мм"
-        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses77Count
-    End If
-    If vOC_InfoAnalizer.pi_Hoses89Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 89 мм"
-        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses89Count
-    End If
-    If vOC_InfoAnalizer.pi_Hoses110Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 110 мм"
-        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses110Count
-    End If
-    If vOC_InfoAnalizer.pi_Hoses150Count <> 0 Then
-        MCheckForm.ListBox2.AddItem "Проложено напорных рукавов 150 мм"
-        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_Hoses150Count
+    If vOC_InfoAnalizer.pi_HosesCount <> 0 Then
+        Dim strHoseCount As String
+        If vOC_InfoAnalizer.pi_Hoses38Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses38Count & " - 38 мм, "
+        If vOC_InfoAnalizer.pi_Hoses51Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses51Count & " - 51 мм, "
+        If vOC_InfoAnalizer.pi_Hoses77Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses77Count & " - 77 мм, "
+        If vOC_InfoAnalizer.pi_Hoses66Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses66Count & " - 66 мм, "
+        If vOC_InfoAnalizer.pi_Hoses89Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses89Count & " - 89 мм, "
+        If vOC_InfoAnalizer.pi_Hoses110Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses110Count & " - 110 мм, "
+        If vOC_InfoAnalizer.pi_Hoses150Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses150Count & " - 150 мм, "
+        If vOC_InfoAnalizer.pi_Hoses200Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses200Count & " - 200 мм, "
+        If vOC_InfoAnalizer.pi_Hoses250Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses250Count & " - 250 мм, "
+        If vOC_InfoAnalizer.pi_Hoses300Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses300Count & " - 300 мм, "
+        strHoseCount = Left(strHoseCount, Len(strHoseCount) - 2)
+        MCheckForm.ListBox2.AddItem "Задействовано напорных рукавов"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_HosesCount & " (" & strHoseCount & ")"
+        strHoseCount = ""
     End If
     If vOC_InfoAnalizer.ps_GetedWaterValue <> 0 Then
         MCheckForm.ListBox2.AddItem "Забирается воды"
@@ -466,5 +477,9 @@ Dim psi_TargetPageIndex As Integer
         MCheckForm.ListBox2.AddItem "Требуемый запас воды (по расходу, на 10 мин)"
         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = (vOC_InfoAnalizer.ps_FactStreemW * 600) / 1000 & " т"
     End If
+
+'    MCheckForm.ListBox2.AddItem "Имеется рукавов разных диаметров, с учетом прибывшей техники"
+'    MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_HosesHave
+
         
 End Sub

@@ -84,6 +84,9 @@ Public pi_Hoses200Have As Integer 'Количество рукавов диаметром 200мм в наличии
 Public pi_Hoses250Have As Integer 'Количество рукавов диаметром 250мм в наличии
 Public pi_Hoses300Have As Integer 'Количество рукавов диаметром 300мм в наличии
 Public pi_HosesHave As Integer    'Количество всех напорных рукавов в наличии
+Public pi_HoseSkatka As Integer   'Количество напорных в скатах
+Public pi_LineWorkSkatka As Integer 'Количество рабочих линий в скатках
+
 
 
 Public pi_WaterValueNeed As Long   'Требуемый запас воды
@@ -702,12 +705,14 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
                         And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
                           pi_linesCount = pi_linesCount + 1
-                                                If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then
+                        If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then
                             pi_WorklinesCount = pi_WorklinesCount + 1
+                            If vsO_Shape.CellExists("User.Skatka", 0) = True Then pi_LineWorkSkatka = pi_LineWorkSkatka + 1 'считаем сколько рукавов в скатках
                             'Проверяем имеет ли данная фигура подпись положения
 '                            Stop    'Реализовать!!!
 '                            IsHoseShapeHavePos vsO_Shape
                         End If
+                        If vsO_Shape.CellExists("User.Skatka", 0) = True Then pi_HoseSkatka = pi_HoseSkatka + 1 'считаем сколько рукавов в скатках
                         Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
                             Case Is = 51
                                 If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
@@ -755,6 +760,30 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                                     pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("User.HosesNeed")
                                 Else
                                     pi_Hoses150Count = pi_Hoses150Count + vsO_Shape.Cells("Prop.HoseNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
+                                End If
+                            Case Is = 200
+                                If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
+                                    pi_Hoses200Count = pi_Hoses200Count + vsO_Shape.Cells("User.HosesNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("User.HosesNeed")
+                                Else
+                                    pi_Hoses200Count = pi_Hoses200Count + vsO_Shape.Cells("Prop.HoseNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
+                                End If
+                            Case Is = 250
+                                If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
+                                    pi_Hoses250Count = pi_Hoses250Count + vsO_Shape.Cells("User.HosesNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("User.HosesNeed")
+                                Else
+                                    pi_Hoses250Count = pi_Hoses250Count + vsO_Shape.Cells("Prop.HoseNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
+                                End If
+                            Case Is = 300
+                                If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
+                                    pi_Hoses300Count = pi_Hoses300Count + vsO_Shape.Cells("User.HosesNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("User.HosesNeed")
+                                Else
+                                    pi_Hoses300Count = pi_Hoses300Count + vsO_Shape.Cells("Prop.HoseNeed")
                                     pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
                                 End If
                         End Select
@@ -968,7 +997,19 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
         End If
     End If
 Next vsO_Shape
-
+   'Суммируем имеющиеся рукава
+    pi_HosesHave = _
+    pi_Hoses38Have + _
+    pi_Hoses66Have + _
+    pi_Hoses51Have + _
+    pi_Hoses77Have + _
+    pi_Hoses89Have + _
+    pi_Hoses110Have + _
+    pi_Hoses150Have + _
+    pi_Hoses200Have + _
+    pi_Hoses250Have + _
+    pi_Hoses300Have
+    
 'Завершающий код - обобщает все полученные данные и по ним делат окончательный рассчет
 '---Например кол-во людей необходимых для прокладки линий
 
@@ -1037,6 +1078,8 @@ Private Sub sc_SetPropertiesNull()
     pi_Hoses200Have = 0           'Количество рукавов диаметром 200мм имеется
     pi_Hoses250Have = 0           'Количество рукавов диаметром 250мм имеется
     pi_Hoses300Have = 0           'Количество рукавов диаметром 300мм имеется
+    pi_HoseSkatka = 0             'Количество рукавов в скатках
+    pi_LineWorkSkatka = 0         'Количество рабочих линий в скатках
     pi_HosesCount = 0             'Количество рукавов общее
     pi_HosesLength = 0            'Общая длина рукавных линий
     pi_WaterValueNeed = 0         'Требуемый запас воды
