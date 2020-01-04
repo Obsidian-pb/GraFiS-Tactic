@@ -275,12 +275,16 @@ Dim psi_TargetPageIndex As Integer
     End If
     'Hoses
 '    If vOC_InfoAnalizer.pb_AllHosesWithPos Then MCheckForm.ListBox1.AddItem "Ќе указаны положени€ (этаж) дл€ каждой рабочей линии"
-    If vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka > vOC_InfoAnalizer.pi_linesPosCount Then
-        MCheckForm.ListBox1.AddItem "Ќе указаны положени€ (этаж) дл€ каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka & ")"
+'    If vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka > vOC_InfoAnalizer.pi_linesPosCount Then
+    If vOC_InfoAnalizer.pi_WorklinesCount > vOC_InfoAnalizer.pi_linesPosCount Then
+        'MCheckForm.ListBox1.AddItem "Ќе указаны положени€ (этаж) дл€ каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka & ")"
+        MCheckForm.ListBox1.AddItem "Ќе указаны положени€ (этаж) дл€ каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount & ")"
         comment = True
     End If
-    If vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka > vOC_InfoAnalizer.pi_linesLableCount Then
-        MCheckForm.ListBox1.AddItem "Ќе указаны диаметры дл€ каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka & ")"
+    'If vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka > vOC_InfoAnalizer.pi_linesLableCount Then
+    If vOC_InfoAnalizer.pi_linesCount > vOC_InfoAnalizer.pi_linesLableCount Then
+        'MCheckForm.ListBox1.AddItem "Ќе указаны диаметры дл€ каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka & ")"
+        MCheckForm.ListBox1.AddItem "Ќе указаны диаметры дл€ каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount & ")"
         comment = True
     End If
     'Plan na mestnosti
