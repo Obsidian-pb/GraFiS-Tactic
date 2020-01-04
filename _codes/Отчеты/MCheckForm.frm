@@ -16,6 +16,17 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Declare Sub mouse_event Lib "user32" (ByVal dwFlags As Long, ByVal dx As Long, _
+ByVal dy As Long, ByVal cButtons As Long, ByVal dwExtraInfo As Long)
+ Const MOUSEEVENTF_ABSOLUTE = &H8000
+ Const MOUSEEVENTF_LEFTDOWN = &H2
+ Const MOUSEEVENTF_LEFTUP = &H4
+ Const MOUSEEVENTF_MIDDLEDOWN = &H20
+ Const MOUSEEVENTF_MIDDLEUP = &H40
+ Const MOUSEEVENTF_MOVE = &H1
+ Const MOUSEEVENTF_RIGHTDOWN = &H8
+ Const MOUSEEVENTF_RIGHTUP = &H10
+
 #If VBA7 Then
     Public FormHandle As LongPtr
     Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" ( _
@@ -65,6 +76,20 @@ Private Const con_BorderHeightForList = 20
 Private Sub ListBox1_Click()
     MasterCheckRefresh
 End Sub
+
+
+ 
+Private Sub ListBox1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, _
+ ByVal x As Single, ByVal y As Single)
+    If Button = 2 Then
+        If y > 0 And x > 0 And y < ListBox1.Height And x < ListBox1.Width Then
+            mouse_event MOUSEEVENTF_LEFTDOWN, 0&, 0&, 0&, 0&
+            mouse_event MOUSEEVENTF_LEFTUP, 0&, 0&, 0&, 0&
+            DoEvents
+            CreateNewMenu
+        End If
+    End If
+ End Sub
 
 Private Sub ListBox2_Click()
     MasterCheckRefresh
@@ -117,3 +142,4 @@ End Sub
 Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
    MasterCheckRefresh
 End Sub
+
