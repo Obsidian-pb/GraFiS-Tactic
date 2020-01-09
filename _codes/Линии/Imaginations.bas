@@ -220,12 +220,9 @@ Sub ImportHoseInformation(ByRef ShapeTo As Visio.Shape)
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeFrom As Visio.Shape
 
+Const masterName = "Напорная линия"  'Ранее: "Рукав - скатка"
+
     On Error GoTo EX
-'    '---Проверяем выбран ли какой либо объект
-'    If Application.ActiveWindow.Selection.Count < 1 Then
-'        MsgBox "Не выбрана ни одна фигура!", vbInformation
-'        Exit Sub
-'    End If
     
     '---Проверяем, не является ли выбранная фигура уже рукавом или другой фигурой с назначенными свойствами
     If ShapeTo.RowCount(visSectionUser) > 0 Then
@@ -250,11 +247,9 @@ Dim ShapeFrom As Visio.Shape
     End If
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
-'    Set ShapeTo = Application.ActiveWindow.Selection(1)
-    Set ShapeFrom = ThisDocument.Masters("Рукав - скатка").Shapes(1)
-    IDTo = ShapeTo.ID   'Application.ActivePage.Shapes("Sheet.2").ID
-    'IDFrom = ShapeFrom.Index
-    IDFrom = ThisDocument.Masters("Рукав - скатка").Index
+    Set ShapeFrom = ThisDocument.Masters(masterName).Shapes(1)
+    IDTo = ShapeTo.ID
+    IDFrom = ThisDocument.Masters(masterName).Index
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
     CloneSectionUniverseNames 240, IDFrom, IDTo
@@ -276,21 +271,16 @@ Dim ShapeFrom As Visio.Shape
 
 '---Осуществляем соединение рукавной линии
     ReconnectHose ShapeTo
-
-''---Открываем окно свойств обращенной фигуры
-'On Error Resume Next
-'Application.DoCmd (1312)
-
+    
+'---Пересчитываем длину
     LenightSetInner (ShapeTo.Name)
 
 '---Очищаем объектные переменные
-'    Set ShapeTo = Nothing
     Set ShapeFrom = Nothing
     
 Exit Sub
 EX:
     '---Очищаем объектные переменные
-'    Set ShapeTo = Nothing
     Set ShapeFrom = Nothing
     SaveLog Err, "ImportHoseInformation"
 End Sub
@@ -350,9 +340,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 '---Осуществляем соединение рукавной линии
     ReconnectHose ShapeTo
 
-'---Открываем окно свойств обращенной фигуры
-    'Application.DoCmd (1312)
-
+'---Пересчитываем длину
     LenightSetInner (ShapeTo.Name)
     
 Exit Sub

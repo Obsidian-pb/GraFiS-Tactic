@@ -269,12 +269,12 @@ End Function
 
 
 
-Public Function CD_MasterExists(MasterName As String) As Boolean
+Public Function CD_MasterExists(masterName As String) As Boolean
 'Функция проверки наличия мастера в активном документе
 Dim i As Integer
 
 For i = 1 To Application.ActiveDocument.Masters.Count
-    If Application.ActiveDocument.Masters(i).Name = MasterName Then
+    If Application.ActiveDocument.Masters(i).Name = masterName Then
         CD_MasterExists = True
         Exit Function
     End If
@@ -284,12 +284,12 @@ CD_MasterExists = False
 
 End Function
 
-Public Sub MasterImportSub(MasterName As String)
+Public Sub MasterImportSub(masterName As String)
 'Процедура импорта мастера в соответствии с именем
 Dim mstr As Visio.Master
 
-    If Not CD_MasterExists(MasterName) Then
-        Set mstr = ThisDocument.Masters(MasterName)
+    If Not CD_MasterExists(masterName) Then
+        Set mstr = ThisDocument.Masters(masterName)
         Application.ActiveDocument.Masters.Drop mstr, 0, 0
     End If
 
