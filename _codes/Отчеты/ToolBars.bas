@@ -48,7 +48,7 @@ Sub AddButtons()
         .Tag = "show_m_chek_form"
         .TooltipText = "Мастер проверок"
         .FaceID = 1820
-        .BeginGroup = True
+        .beginGroup = True
     End With
     
     Set Button = Nothing

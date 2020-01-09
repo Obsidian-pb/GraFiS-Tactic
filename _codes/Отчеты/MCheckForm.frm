@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} MCheckForm
    Caption         =   " Мастер проверок схемы - Бета-версия"
    ClientHeight    =   3960
    ClientLeft      =   120
-   ClientTop       =   456
-   ClientWidth     =   8628
+   ClientTop       =   450
+   ClientWidth     =   8625
    OleObjectBlob   =   "MCheckForm.frx":0000
    ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
@@ -16,16 +16,16 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Declare Sub mouse_event Lib "user32" (ByVal dwFlags As Long, ByVal dx As Long, _
-ByVal dy As Long, ByVal cButtons As Long, ByVal dwExtraInfo As Long)
- Const MOUSEEVENTF_ABSOLUTE = &H8000
- Const MOUSEEVENTF_LEFTDOWN = &H2
- Const MOUSEEVENTF_LEFTUP = &H4
- Const MOUSEEVENTF_MIDDLEDOWN = &H20
- Const MOUSEEVENTF_MIDDLEUP = &H40
- Const MOUSEEVENTF_MOVE = &H1
- Const MOUSEEVENTF_RIGHTDOWN = &H8
- Const MOUSEEVENTF_RIGHTUP = &H10
+'Private Declare Sub mouse_event Lib "user32" (ByVal dwFlags As Long, ByVal dx As Long, _
+'ByVal dy As Long, ByVal cButtons As Long, ByVal dwExtraInfo As Long)
+' Const MOUSEEVENTF_ABSOLUTE = &H8000
+' Const MOUSEEVENTF_LEFTDOWN = &H2
+' Const MOUSEEVENTF_LEFTUP = &H4
+' Const MOUSEEVENTF_MIDDLEDOWN = &H20
+' Const MOUSEEVENTF_MIDDLEUP = &H40
+' Const MOUSEEVENTF_MOVE = &H1
+' Const MOUSEEVENTF_RIGHTDOWN = &H8
+' Const MOUSEEVENTF_RIGHTUP = &H10
 
 #If VBA7 Then
     Public FormHandle As LongPtr
@@ -71,11 +71,17 @@ Attribute wAddon.VB_VarHelpID = -1
 Private Const con_BorderWidth = 6
 Private Const con_BorderHeightForList = 20
 
+Public WithEvents menuButtonDelete As CommandBarButton
+Attribute menuButtonDelete.VB_VarHelpID = -1
+Public WithEvents menuButtonNew As CommandBarButton
+Attribute menuButtonNew.VB_VarHelpID = -1
+Public WithEvents menuButtonEdit As CommandBarButton
+Attribute menuButtonEdit.VB_VarHelpID = -1
 
 
-Private Sub ListBox1_Click()
-    MasterCheckRefresh
-End Sub
+'Private Sub ListBox1_Click()
+'    MasterCheckRefresh
+'End Sub
 
 
  
@@ -83,17 +89,17 @@ Private Sub ListBox1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, 
  ByVal x As Single, ByVal y As Single)
     If Button = 2 Then
         If y > 0 And x > 0 And y < ListBox1.Height And x < ListBox1.Width Then
-            mouse_event MOUSEEVENTF_LEFTDOWN, 0&, 0&, 0&, 0&
-            mouse_event MOUSEEVENTF_LEFTUP, 0&, 0&, 0&, 0&
+'            mouse_event MOUSEEVENTF_LEFTDOWN, 0&, 0&, 0&, 0&
+'            mouse_event MOUSEEVENTF_LEFTUP, 0&, 0&, 0&, 0&
             DoEvents
             CreateNewMenu
         End If
     End If
  End Sub
 
-Private Sub ListBox2_Click()
-    MasterCheckRefresh
-End Sub
+'Private Sub ListBox2_Click()
+'    MasterCheckRefresh
+'End Sub
 
 Private Sub UserForm_Activate()
     Set wAddon = ActiveWindow.Windows.Add("MCheck", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
@@ -109,9 +115,9 @@ Private Sub UserForm_Activate()
     Set app = Visio.Application
 End Sub
 
-Private Sub UserForm_Click()
-    MasterCheckRefresh
-End Sub
+'Private Sub UserForm_Click()
+'    MasterCheckRefresh
+'End Sub
 
 Private Sub pS_Stretch()
 'Устанавливаем размер содержимого окна
@@ -136,10 +142,77 @@ Public Sub CloseThis()
     wAddon.Close
 End Sub
 
-
-
-
 Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
    MasterCheckRefresh
 End Sub
+
+
+'------------------Работа с всплывающим меню------------------
+Private Function NewPopupItem(ByRef commBar As CommandBar, ByVal itemType As Integer, ByVal itemFace As Integer, _
+ByVal itemCaption As String, Optional ByVal beginGroup As Boolean = False, _
+Optional itemTag As String = "") As CommandBarControl
+'Функция создает элемент контекстного меню и возвращает на него ссылку
+Dim newControl As CommandBarControl
+
+'    On Error Resume Next
+    'Создаем новый контрол
+    Set newControl = commBar.Controls.Add(itemType)
+    
+    'Указываем свойства нового контрола
+    With newControl
+        If itemFace > 0 Then .FaceID = itemFace
+        .Tag = itemTag
+        .Caption = itemCaption
+        .beginGroup = beginGroup
+    End With
+    
+Set NewPopupItem = newControl
+End Function
+
+Private Sub CreateNewMenu()
+'Создаём всплывающее меню мастера проверок
+Dim popupMenuBar As CommandBar
+Dim ctrl As CommandBarControl
+    
+    'Получаем ссылку на всплывающее меню
+    GetToolBar popupMenuBar, "ContextMenuListBox", msoBarPopup
+    
+    'Очищаем имеющиеся пункты меню
+    For Each ctrl In popupMenuBar.Controls
+        ctrl.Delete
+    Next
+    
+    'Добавляем новые кнопки
+    Set menuButtonNew = NewPopupItem(popupMenuBar, 1, 213, "Создать новый")
+    Set menuButtonEdit = NewPopupItem(popupMenuBar, 1, 212, "Редактировать")
+    Set menuButtonDelete = NewPopupItem(popupMenuBar, 1, 214, "Удалить выделенное замечание")
+    
+    'Показываем меню
+    popupMenuBar.ShowPopup
+End Sub
+
+Private Sub GetToolBar(ByRef toolBar As CommandBar, ByVal toolBarName As String, ByVal barPosition As MsoBarPosition)
+    On Error Resume Next
+    'Пытаемся получить ссылку на всплывающее меню
+    Set toolBar = Application.CommandBars(toolBarName)
+
+    'Если такого меню нет, создаем его
+    If toolBar Is Nothing Then
+        Set toolBar = Application.CommandBars.Add(toolBarName, barPosition)
+    End If
+    
+End Sub
+
+Private Sub menuButtonNew_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    MsgBox "Новый"
+End Sub
+
+Private Sub menuButtonEdit_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    MsgBox "Редактирование"
+End Sub
+
+Private Sub menuButtonDelete_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    MsgBox "Удаление"
+End Sub
+
 

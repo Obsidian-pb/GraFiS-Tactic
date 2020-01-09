@@ -488,33 +488,42 @@ Dim psi_TargetPageIndex As Integer
         
 End Sub
 
-'Функция создания контекстного меню
-Function AddItemIntoPopup(ByRef Comm_Bar, ByVal CBar_Type As Integer, ByVal CBar_Face As Integer, _
-ByVal On_Action As String, ByVal CBar_Caption As String, Optional ByVal Begin_Group As Boolean = False, _
-Optional Tag As String = "") As CommandBarControl
-Dim Add_Control
-
-On Error Resume Next
-Set Add_Control = Comm_Bar.Controls.Add(Type:=CBar_Type)
- 
-    With Add_Control
-        If CBar_Face > 0 Then .FaceID = CBar_Face: .Tag = Tag: .OnAction = On_Action: .Caption = CBar_Caption: If Begin_Group Then .BeginGroup = True
-    End With
-End Function
-
-'Создаём контекстное меню мастера проверок
-Sub CreateNewMenu()
-On Error Resume Next: Application.CommandBars.Add "ContextMenuListBox", msoBarPopup
-Dim Cbar As CommandBar, Ctrl: Set Cbar = Application.CommandBars("ContextMenuListBox")
-
-For Each Ctrl In Cbar.Controls: Ctrl.Delete: Next
-'AddItemIntoPopup CBar, 1, 213, "Comand3", "Создать новый"
-'AddItemIntoPopup CBar, 1, 212, "Comand2", "Редактировать"
-AddItemIntoPopup Cbar, 1, 214, "DelComment", "Удалить выделенное замечание"
-
-Cbar.ShowPopup
-End Sub
-
-Sub DelComment()
-MsgBox 123
-End Sub
+''Функция создания контекстного меню
+'Function AddItemIntoPopup(ByRef Comm_Bar, ByVal CBar_Type As Integer, ByVal CBar_Face As Integer, _
+'ByVal On_Action As String, ByVal CBar_Caption As String, Optional ByVal Begin_Group As Boolean = False, _
+'Optional Tag As String = "") As CommandBarControl
+'Dim Add_Control
+'
+'    On Error Resume Next
+'    Set Add_Control = Comm_Bar.Controls.Add(Type:=CBar_Type)
+'
+'    With Add_Control
+'        If CBar_Face > 0 Then .FaceID = CBar_Face
+'        .Tag = Tag
+'        .OnAction = On_Action
+'        .Caption = CBar_Caption
+'        If Begin_Group Then .BeginGroup = True
+'    End With
+'
+'End Function
+'
+''Создаём контекстное меню мастера проверок
+'Sub CreateNewMenu()
+'On Error Resume Next: Application.CommandBars.Add "ContextMenuListBox", msoBarPopup
+'Dim Cbar As CommandBar, Ctrl
+'
+'    Set Cbar = Application.CommandBars("ContextMenuListBox")
+'
+'    For Each Ctrl In Cbar.Controls
+'        Ctrl.Delete
+'    Next
+'    'AddItemIntoPopup CBar, 1, 213, "Comand3", "Создать новый"
+'    'AddItemIntoPopup CBar, 1, 212, "Comand2", "Редактировать"
+'    AddItemIntoPopup Cbar, 1, 214, "DelComment", "Удалить выделенное замечание"
+'
+'    Cbar.ShowPopup
+'End Sub
+'
+'Sub DelComment()
+'MsgBox 123
+'End Sub

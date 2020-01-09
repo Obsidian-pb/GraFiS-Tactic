@@ -24,7 +24,7 @@ Private Sub Class_Terminate()
     Set ComBut = Nothing
 End Sub
 
-Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+Private Sub ComBut_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 'Отслеживаем событие нажатия кнопки
 
 '---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
