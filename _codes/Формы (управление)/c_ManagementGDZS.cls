@@ -9,11 +9,6 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'Класс-обертка для окна учета ГДЗС
 
-'Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
-'Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
-'Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long) As Long
-'Private Declare Function SetParent Lib "user32" (ByVal hWndChild As Long, ByVal hWndNewParent As Long) As Long
-
 #If VBA7 Then
     Public FormHandle As LongPtr
     Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" ( _
@@ -74,6 +69,10 @@ Private Sub Class_Terminate()
     Set app = Nothing
 End Sub
 
+Public Sub CloseWindow()
+    wAddon.Close
+End Sub
+
 Private Sub app_WindowTurnedToPage(ByVal Window As IVWindow)
 'Реагируем на переход между страницами
     ps_WindowRefresh v_ManagementGDZS
@@ -105,7 +104,7 @@ Dim vO_Shape As Visio.Shape
             Case Is = "Prop.Call"
                 vO_LV.ListItems(vO_Shape.Name).ListSubItems(2).Text = pf_GetCall(vO_Shape)
             Case Is = "Prop.FormingTime"
-                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.FormingTime").ResultStr(visString)
+                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = Format(vO_Shape.Cells("Prop.FormingTime").Result(visNumber), "hh:mm:ss")
             Case Is = "Prop.Personnel"
                 vO_LV.ListItems(vO_Shape.Name).ListSubItems(4).Text = pf_CellValue(vO_Shape, "Prop.Personnel")
             Case Is = "Prop.AirDevice"
@@ -345,7 +344,7 @@ Dim vO_LV As ListView
     
     vO_LV.ListItems(a_Row).ListSubItems.Add 1, "Prop.Type", pf_GetGDZSType(a_Shape.Cells("User.IndexPers"))
     vO_LV.ListItems(a_Row).ListSubItems.Add 2, "Prop.Call", CallToStr(a_Shape.Cells("Prop.Call").ResultStr(visString))
-    vO_LV.ListItems(a_Row).ListSubItems.Add 3, "Prop.FormingTime", a_Shape.Cells("Prop.FormingTime").ResultStr(visString)
+    vO_LV.ListItems(a_Row).ListSubItems.Add 3, "Prop.FormingTime", Format(a_Shape.Cells("Prop.FormingTime").Result(visNumber), "hh:mm:ss")
     vO_LV.ListItems(a_Row).ListSubItems.Add 4, "Prop.Personnel", pf_CellValue(a_Shape, "Prop.Personnel")
     vO_LV.ListItems(a_Row).ListSubItems.Add 5, "Prop.AirDevice", pf_GetSIZODModel(a_Shape)
 

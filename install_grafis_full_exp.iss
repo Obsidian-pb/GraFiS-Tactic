@@ -77,7 +77,6 @@ Source: "Справочник.accdb"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Техника прочее НРС.vss"; DestDir: "{app}"; components: traf_nrs
 Source: "Техника прочее.vss"; DestDir: "{app}"; components: traf
 Source: "Управление СиС.vss"; DestDir: "{app}"; components: traf
-Source: "Формы (управление) 2.vss"; DestDir: "{app}"; components: traf
 Source: "Формы (управление).vss"; DestDir: "{app}"; components: traf
 Source: "Сведения.xls"; DestDir: "{app}"; Flags: confirmoverwrite; components: traf
 Source: "Шаблон моделирование НРС с масштабом 200.vst"; DestDir: "{app}"; components: traf_nrs
@@ -102,8 +101,8 @@ Source: "Цветовые схемы\Сине-серая школьная доска - ГОСТ.vsd"; DestDir: "{app}\Ц
 Source: "Цветовые схемы\Черная школьная доска - ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "Цветовые схемы\Черная.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 
-Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile regserver 32bit
-Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile regserver 64bit; Check: IsWin64
+Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{sys}"; Flags: uninsneveruninstall regserver 32bit
+Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{sys}"; Flags: uninsneveruninstall regserver 64bit; Check: IsWin64
 
 Source: "Шрифты\*"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; components: fonts
 
@@ -126,10 +125,10 @@ Name: desktopicon4; Description: "Создать ярлык на рабочем столе Шаблон моделиро
 Name: "{group}\Шаблон с масштабом 200"; Filename: "{app}\Шаблон с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
 Name: "{group}\Шаблон с масштабом 500"; Filename: "{app}\Шаблон с масштабом 500.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
 Name: "{group}\Шаблон с масштабом 1000"; Filename: "{app}\Шаблон с масштабом 1000.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон моделирование НРС с масштабом 200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон плана эвакуации с масштабом 200"; Filename: "{app}\Шаблон плана эвакуации (200).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон плана эвакуации с масштабом 500"; Filename: "{app}\Шаблон плана эвакуации (500).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон плана эвакуации с масштабом 1000"; Filename: "{app}\Шаблон плана эвакуации (1000).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон моделирование НРС с масштабом 200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf_nrs
+Name: "{group}\Шаблон плана эвакуации с масштабом 200"; Filename: "{app}\Шаблон плана эвакуации (200).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: templatesEvac
+Name: "{group}\Шаблон плана эвакуации с масштабом 500"; Filename: "{app}\Шаблон плана эвакуации (500).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: templatesEvac
+Name: "{group}\Шаблон плана эвакуации с масштабом 1000"; Filename: "{app}\Шаблон плана эвакуации (1000).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: templatesEvac
 
 Name: "{group}\Сведения по подразделениям"; Filename: "{app}\Сведения.xls"; WorkingDir: "{app}"; components: traf
 

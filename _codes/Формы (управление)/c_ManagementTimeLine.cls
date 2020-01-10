@@ -9,11 +9,6 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'Класс-обертка для окна учета ГДЗС
 
-'Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
-'Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
-'Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long) As Long
-'Private Declare Function SetParent Lib "user32" (ByVal hWndChild As Long, ByVal hWndNewParent As Long) As Long
-
 #If VBA7 Then
     Public FormHandle As LongPtr
     Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" ( _
@@ -74,6 +69,10 @@ End Sub
 Private Sub Class_Terminate()
     Set v_ManagementTimeLine = Nothing
     Set app = Nothing
+End Sub
+
+Public Sub CloseWindow()
+    wAddon.Close
 End Sub
 
 Private Sub app_WindowTurnedToPage(ByVal Window As IVWindow)

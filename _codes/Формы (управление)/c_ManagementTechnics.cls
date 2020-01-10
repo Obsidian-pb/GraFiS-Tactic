@@ -9,11 +9,6 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'Класс-обертка для окна учета Пожарной техники
 
-'Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
-'Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
-'Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long) As Long
-'Private Declare Function SetParent Lib "user32" (ByVal hWndChild As Long, ByVal hWndNewParent As Long) As Long
-
 #If VBA7 Then
     Public FormHandle As LongPtr
     Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" ( _
@@ -73,6 +68,10 @@ Private Sub Class_Terminate()
     Set app = Nothing
 End Sub
 
+Public Sub CloseWindow()
+    wAddon.Close
+End Sub
+
 Private Sub app_WindowTurnedToPage(ByVal Window As IVWindow)
 'Реагируем на переход между страницами
     ps_WindowRefresh v_ManagementTechincs
@@ -104,7 +103,7 @@ Dim vO_Shape As Visio.Shape
             Case Is = "Prop.Model"
                 vO_LV.ListItems(vO_Shape.Name).ListSubItems(2).Text = vO_Shape.Cells("Prop.Model").ResultStr(visString)
             Case Is = "Prop.ArrivalTime"
-                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = vO_Shape.Cells("Prop.ArrivalTime").ResultStr(visString)
+                vO_LV.ListItems(vO_Shape.Name).ListSubItems(3).Text = Format(vO_Shape.Cells("Prop.ArrivalTime").Result(visNumber), "hh:mm:ss")
             Case Is = "Prop.PersonnelHave"
                 vO_LV.ListItems(vO_Shape.Name).ListSubItems(4).Text = pf_CellValue(vO_Shape, "Prop.PersonnelHave")
             Case Is = "Actions.MainManeure.Checked"
@@ -244,7 +243,8 @@ Private Function pf_IsMainTechnics(ByVal a_IndexPers As Integer) As Boolean
 'Если фигура является техникой - возвращается Истина, в противном случае - Ложь
     If a_IndexPers <= 20 Or a_IndexPers = 24 Or a_IndexPers = 25 Or a_IndexPers = 26 Or a_IndexPers = 27 Or _
         a_IndexPers = 28 Or a_IndexPers = 29 Or a_IndexPers = 30 Or a_IndexPers = 31 Or a_IndexPers = 32 Or _
-        a_IndexPers = 161 Or a_IndexPers = 162 Then
+        a_IndexPers = 73 Or a_IndexPers = 74 Or _
+        a_IndexPers = 160 Or a_IndexPers = 161 Or a_IndexPers = 162 Or a_IndexPers = 163 Then
         pf_IsMainTechnics = True
     Else
         pf_IsMainTechnics = False
@@ -313,8 +313,9 @@ Dim vO_LV As ListView
     vO_LV.ListItems.Add a_Row, a_Shape.Name, a_Shape.Cells("Prop.Unit").ResultStr(visString)
     
     vO_LV.ListItems(a_Row).ListSubItems.Add 1, "Prop.Call", CallToStr(a_Shape.Cells("Prop.Call").ResultStr(visString))
-    vO_LV.ListItems(a_Row).ListSubItems.Add 2, "Prop.Model", a_Shape.Cells("Prop.Model").ResultStr(visString)
-    vO_LV.ListItems(a_Row).ListSubItems.Add 3, "Prop.ArrivalTime", a_Shape.Cells("Prop.ArrivalTime").ResultStr(visString)
+    vO_LV.ListItems(a_Row).ListSubItems.Add 2, "Prop.Model", pf_CellValue(a_Shape, "Prop.Model")
+    vO_LV.ListItems(a_Row).ListSubItems.Add 3, "Prop.ArrivalTime", Format(a_Shape.Cells("Prop.ArrivalTime").Result(visNumber), "hh:mm:ss")
     vO_LV.ListItems(a_Row).ListSubItems.Add 4, "Prop.PersonnelHave", pf_CellValue(a_Shape, "Prop.PersonnelHave")
 
 End Sub
+

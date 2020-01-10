@@ -7,6 +7,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
+'---Пытаемся закрыть формы управления
+    TryCloseForms
+End Sub
+
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
