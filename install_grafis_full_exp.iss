@@ -102,7 +102,8 @@ Source: "Цветовые схемы\Сине-серая школьная доска - ГОСТ.vsd"; DestDir: "{app}\Ц
 Source: "Цветовые схемы\Черная школьная доска - ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "Цветовые схемы\Черная.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 
-Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{syswow64}"; Flags: onlyifdoesntexist
+Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile regserver 32bit
+Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{sys}"; Flags: onlyifdoesntexist sharedfile regserver 64bit; Check: IsWin64
 
 Source: "Шрифты\*"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; components: fonts
 
