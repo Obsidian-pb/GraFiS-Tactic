@@ -102,6 +102,8 @@ Source: "Цветовые схемы\Сине-серая школьная доска - ГОСТ.vsd"; DestDir: "{app}\Ц
 Source: "Цветовые схемы\Черная школьная доска - ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "Цветовые схемы\Черная.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 
+Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{syswow64}"; Flags: onlyifdoesntexist
+
 Source: "Шрифты\*"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; components: fonts
 
 Source: "_source\OSM2Visio\v 2007\*"; DestDir: "{app}\v 2007\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: gr\visio07
