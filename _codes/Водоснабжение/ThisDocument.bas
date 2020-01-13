@@ -129,7 +129,7 @@ Dim v_Ctrl As CommandBarControl
 
 '---Проверяем включена ли кнопка водоема и в зависмости от этого пытаемся обращатить вброшенную фигуру
     Set v_Ctrl = Application.CommandBars("Превращения").Controls("Естественный водоисточник")
-        If v_Ctrl.State = msoButtonDown Then
+        If v_Ctrl.state = msoButtonDown Then
             If IsSelectedOneShape(False) Then
             '---Если выбрана хоть одна фигура - пытаемся ее обратить
                 If IsHavingUserSection(False) And IsSquare(False) Then

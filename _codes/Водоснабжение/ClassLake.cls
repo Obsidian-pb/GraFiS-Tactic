@@ -26,12 +26,12 @@ Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As
 
     On Error GoTo EX
 '---Проверяем включена ли кнопка - если включена - отключаем
-    If Ctrl.State = msoButtonDown Then
-        Ctrl.State = msoButtonUp
+    If Ctrl.state = msoButtonDown Then
+        Ctrl.state = msoButtonUp
         Exit Sub
     End If
 
-    If Ctrl.State = msoButtonUp Then
+    If Ctrl.state = msoButtonUp Then
         If IsSelectedOneShape(False) Then
         '---Если выбрана хоть одна фигура - пытаемся ее обратить
             If IsHavingUserSection(True) And IsSquare(True) Then
