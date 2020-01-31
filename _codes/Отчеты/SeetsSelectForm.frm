@@ -52,7 +52,7 @@ Private Sub s_SheetsListCreate()
 Dim i As Integer
 
     LB_SheetsList.Clear
-    For i = 1 To Application.ActiveDocument.Pages.Count
+    For i = 1 To Application.ActiveDocument.Pages.count
         LB_SheetsList.AddItem Application.ActiveDocument.Pages(i).Name
     Next i
     LB_SheetsList.ListIndex = 0

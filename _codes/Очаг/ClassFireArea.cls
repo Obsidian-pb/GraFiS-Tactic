@@ -9,17 +9,17 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Public WithEvents ComBut As Office.CommandBarButton
-Attribute ComBut.VB_VarHelpID = -1
+Public WithEvents comBut As Office.CommandBarButton
+Attribute comBut.VB_VarHelpID = -1
 
 
 Private Sub Class_Initialize()
-    Set ComBut = Application.CommandBars("Превращения").Controls("Площадь")
+    Set comBut = Application.CommandBars("Превращения").Controls("Площадь")
 'MsgBox ComBut.Caption
 End Sub
 
 Private Sub Class_Terminate()
-    Set ComBut = Nothing
+    Set comBut = Nothing
 End Sub
 
 Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
@@ -67,4 +67,20 @@ Public Sub MorphToFireArea()
 Exit Sub
 EX:
     SaveLog Err, "MorphToFireArea"
+End Sub
+
+Public Sub PictureRefresh()
+'Обновляем картинки на кнопках
+Dim cb As Office.CommandBarButton
+Dim DocPath As String
+    
+'---Обновляем иконки на кнопках
+    DocPath = ThisDocument.path
+    Set cb = Application.CommandBars("Превращения").Controls("Площадь")
+    With cb
+        .Picture = LoadPicture(DocPath & "Bitmaps\Fire1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Fire2.bmp")
+    End With
+    
+Set cb = Nothing
 End Sub

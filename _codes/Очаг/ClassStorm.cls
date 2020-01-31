@@ -65,3 +65,19 @@ Exit Sub
 EX:
     SaveLog Err, "MorphToStorm"
 End Sub
+
+Public Sub PictureRefresh()
+'Обновляем картинки на кнопках
+Dim cb As Office.CommandBarButton
+Dim DocPath As String
+    
+'---Обновляем иконки на кнопках
+    DocPath = ThisDocument.path
+    Set cb = Application.CommandBars("Превращения").Controls("Шторм")
+    With cb
+        .Picture = LoadPicture(DocPath & "Bitmaps\Storm1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Storm2.bmp")
+    End With
+    
+Set cb = Nothing
+End Sub

@@ -7,9 +7,25 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+Option Explicit
+
+Private WithEvents app As Visio.Application
+Attribute app.VB_VarHelpID = -1
+Private cellChangedCount As Long
+Const cellChangedInterval = 100000
+
 Dim ButEventOpenWater As ClassLake
 Dim WithEvents WaterAppEvents As Visio.Application
 Attribute WaterAppEvents.VB_VarHelpID = -1
+
+Private Sub app_CellChanged(ByVal Cell As IVCell)
+'---Один раз в выполняем обновление иконок на кнопках
+    cellChangedCount = cellChangedCount + 1
+    If cellChangedCount > cellChangedInterval Then
+        ButEventOpenWater.PictureRefresh
+        cellChangedCount = 0
+    End If
+End Sub
 
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
@@ -20,13 +36,16 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     Set WaterAppEvents = Nothing
     DeleteButtons
     
+'---Деактивируем объект отслеживания изменений в приложении для 201х версий
+    If Application.version > 12 Then Set app = Nothing
+    
 '---В случае, если на панели "Превращения нет ни одной кнопки, удаляем её
     If Application.CommandBars("Превращения").Controls.Count = 0 Then RemoveTBImagination
 
 End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
-
+    
     On Error GoTo Tail
     
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
@@ -48,7 +67,13 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     AddTBImagination
     AddButtons
 
-'---ОБновляем/экспортируем в активный документ стили трафарета
+'---Активируем объект отслеживания изменений в приложении для 201х версий
+    If Application.version > 12 Then
+        Set app = Visio.Application
+        cellChangedCount = cellChangedInterval - 10
+    End If
+
+'---Обновляем/экспортируем в активный документ стили трафарета
     '---Проверяем не является ли активный документ документом цветовой схемы
     If Application.ActiveDocument.DocumentSheet.CellExists("User.GFSColorTheme", 0) = 0 Then
         StyleExport
@@ -68,14 +93,14 @@ Tail:
 End Sub
 
 
-Private Sub WaterAppEvents_CellChanged(ByVal cell As IVCell)
+Private Sub WaterAppEvents_CellChanged(ByVal Cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
 '---Проверяем имя ячейки
 '    ShpInd = Cell.Shape.ID
     
-    If cell.Name = "Prop.PipeType" Or cell.Name = "Prop.PipeDiameter" Or cell.Name = "Prop.Pressure" Then
-        ShpInd = cell.Shape.ID
+    If Cell.Name = "Prop.PipeType" Or Cell.Name = "Prop.PipeDiameter" Or Cell.Name = "Prop.Pressure" Then
+        ShpInd = Cell.Shape.ID
         '---Запускаем процедуру получения СПИСКА диаметров
 '        DiametersListImport (ShpInd)
         '---Запускаем процедуру получения СПИСКА напоров
@@ -89,38 +114,29 @@ End Sub
 
 Public Sub MastersImport()
 '---Импортируем мастера
-    MasterImportSub "Водоснабжение.vss", "Водоем1_Мелкий"
-    MasterImportSub "Водоснабжение.vss", "Водоем1_Средний"
-'    MasterImportSub "Водоснабжение.vss", "Водоем1_Средний" ВИ_Емкость
+    MasterImportSub "Водоем1_Мелкий"
+    MasterImportSub "Водоем1_Средний"
+'    MasterImportSub "Водоем1_Средний" ВИ_Емкость
     
 End Sub
 
 Private Sub WaterAppEvents_ShapeAdded(ByVal Shape As IVShape)
 'Событие добавления на лист фигуры
-Dim v_Cntrl As CommandBarControl
+Dim v_Ctrl As CommandBarControl
 
 '---Включаем обработку ошибок
     On Error GoTo Tail
 
 '---Проверяем включена ли кнопка водоема и в зависмости от этого пытаемся обращатить вброшенную фигуру
     Set v_Ctrl = Application.CommandBars("Превращения").Controls("Естественный водоисточник")
-        If v_Ctrl.State = msoButtonDown Then
-'            If v_Ctrl.State = msoButtonUp Then
-                If IsSelectedOneShape(False) Then
-                '---Если выбрана хоть одна фигура - пытаемся ее обратить
-                    If IsHavingUserSection(False) And IsSquare(False) Then
-                    '---Обращаем фигуру в фигуру зону горения
-                        ButEventOpenWater.MorphToLake
-                    End If
-'                Else
-'                    PS_CheckButtons v_Ctrl
+        If v_Ctrl.state = msoButtonDown Then
+            If IsSelectedOneShape(False) Then
+            '---Если выбрана хоть одна фигура - пытаемся ее обратить
+                If IsHavingUserSection(False) And IsSquare(False) Then
+                '---Обращаем фигуру в фигуру зону горения
+                    ButEventOpenWater.MorphToLake
                 End If
-'            End If
-        
-        
-        
-            '---Запускаем процедуру обращения в естественный водоем
-'            ButEventOpenWater.MorphToLake
+            End If
         End If
 
 Set v_Ctrl = Nothing
@@ -134,7 +150,7 @@ End Sub
 Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
-Dim cell As Visio.cell
+Dim Cell As Visio.Cell
 
     Set docSheet = Application.ActiveDocument.DocumentSheet
     

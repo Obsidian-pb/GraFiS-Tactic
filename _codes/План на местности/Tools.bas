@@ -26,7 +26,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке
@@ -43,7 +43,7 @@ Public Sub HideMaster(ByVal masterName As String, ByVal visible As Integer)
 Dim mstr As Visio.Master
 Dim doc As Visio.Document
 
-    Set doc = Application.Documents("План на местности.vss")
+    Set doc = ThisDocument
     Set mstr = doc.Masters(masterName)
     mstr.Hidden = Not visible
     

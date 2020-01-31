@@ -6,19 +6,6 @@ Private c_ManagementTL As c_ManagementTimeLine 'Переменная в которой хранитя ссы
 
 
 
-'-----------------------------------------Функции проверки----------------------------------------------
-'Public Function WindowCheck(ByRef a_WinCaption As String) As Boolean
-'Dim wnd As Window
-'    On Error GoTo Exc
-'
-'    Set wnd = Application.ActiveWindow.Windows.ItemEx("Внешние данные")
-'    WindowCheck = True
-'    Set wnd = Nothing
-'Exit Function
-'Exc:
-'    WindowCheck = False
-'End Function
-
 '------------------------------------------Процедуры работы с формами менеджмента-------------------------
 Public Sub MngmnWndwShow(ShpObj As Visio.Shape)
 'Процедура активирует форму ManagementTechnics
@@ -71,5 +58,26 @@ Public Sub MngmnGDZSWndwHide()
 End Sub
 Public Sub MngmnTimeLineWndwHide()
 'Процедура закрытия формы ManagementGDZS
-    Set c_ManagementTimeLine = Nothing
+    Set c_ManagementTL = Nothing
+End Sub
+
+Public Sub TryCloseForms()
+'Пытаемся закрывать окна (если они были открыты)
+On Error Resume Next
+    If Not c_ManagementTech Is Nothing Then
+        c_ManagementTech.CloseWindow
+        Set c_ManagementTech = Nothing
+    End If
+    If Not c_ManagementStvols Is Nothing Then
+        c_ManagementStvols.CloseWindow
+        Set c_ManagementStvols = Nothing
+    End If
+    If Not c_ManagementGDZS Is Nothing Then
+        c_ManagementGDZS.CloseWindow
+        Set c_ManagementGDZS = Nothing
+    End If
+    If Not c_ManagementTL Is Nothing Then
+        c_ManagementTL.CloseWindow
+        Set c_ManagementTL = Nothing
+    End If
 End Sub

@@ -23,7 +23,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-    Set ShapeFrom = Application.Documents("Очаг.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+    Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
     Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Проверяем наличие секции с указанным SectionIndex и в случае отсутствия создаем её
@@ -53,7 +53,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Очаг.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Запускаем цикл работы со строками Шейп-листа
@@ -106,9 +106,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
     Set ShapeTo = Application.ActiveWindow.Selection(1)
-    Set ShapeFrom = Application.Documents("Очаг.vss").Masters("Площадь прямоугольная").Shapes(1)
+    Set ShapeFrom = ThisDocument.Masters("Площадь прямоугольная").Shapes(1)
     IDTo = ShapeTo.ID
-    IDFrom = Application.Documents("Очаг.vss").Masters("Площадь прямоугольная").Index
+    IDFrom = ThisDocument.Masters("Площадь прямоугольная").Index
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
     CloneSectionUniverseNames 240, IDFrom, IDTo  'Action
@@ -150,7 +150,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-    Set ShapeFrom = Application.Documents("Очаг.vss").Masters(ShapeFromID).Shapes(1)
+    Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
     Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Создаем необхоимое количество строк
@@ -168,7 +168,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer   ', CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Очаг.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Сверяем наборы строк в обеих фигурах, и в случае отсутствия в них искомых - создаем их.
@@ -186,7 +186,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer   ', CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Очаг.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Сверяем наборы строк в обеих фигурах, и в случае отсутствия в них искомых - создаем их.
@@ -204,7 +204,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer   ', CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Очаг.vss").Masters(ShapeFromID).Shapes(1)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Сверяем наборы строк в обеих фигурах, и в случае отсутствия в них искомых - создаем их.
@@ -271,9 +271,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
     Set ShapeTo = Application.ActiveWindow.Selection(1)
-    Set ShapeFrom = Application.Documents("Очаг.vss").Masters("Огненный шторм").Shapes(1)
+    Set ShapeFrom = ThisDocument.Masters("Огненный шторм").Shapes(1)
     IDTo = ShapeTo.ID
-    IDFrom = Application.Documents("Очаг.vss").Masters("Огненный шторм").Index
+    IDFrom = ThisDocument.Masters("Огненный шторм").Index
 
 '---Создаем необходимый набор пользовательских ячеек для секций User и Actions
     CloneSectionUniverseNames 242, IDFrom, IDTo  'User
@@ -322,9 +322,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
     Set ShapeTo = Application.ActiveWindow.Selection(1)
-    Set ShapeFrom = Application.Documents("Очаг.vss").Masters("Задымление").Shapes(1)
+    Set ShapeFrom = ThisDocument.Masters("Задымление").Shapes(1)
     IDTo = ShapeTo.ID
-    IDFrom = Application.Documents("Очаг.vss").Masters("Задымление").Index
+    IDFrom = ThisDocument.Masters("Задымление").Index
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
     CloneSectionUniverseNames 242, IDFrom, IDTo  'User
@@ -374,9 +374,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
     Set ShapeTo = Application.ActiveWindow.Selection(1)
-    Set ShapeFrom = Application.Documents("Очаг.vss").Masters("Зона обрушения").Shapes(1)
+    Set ShapeFrom = ThisDocument.Masters("Зона обрушения").Shapes(1)
     IDTo = ShapeTo.ID
-    IDFrom = Application.Documents("Очаг.vss").Masters("Зона обрушения").Index
+    IDFrom = ThisDocument.Masters("Зона обрушения").Index
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
     CloneSectionUniverseNames 242, IDFrom, IDTo  'User
@@ -416,7 +416,7 @@ Dim Flag As Boolean
 Dim vsoLayer As Visio.layer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-    Set ShapeFrom = Application.Documents("Очаг.vss").Masters(ShapeFromID).Shapes(1)
+    Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
 
 '---Получаем название слоя соответственно номеру в исходном документе
     layerName = ShapeFrom.layer(1).Name

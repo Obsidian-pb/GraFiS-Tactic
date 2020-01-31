@@ -23,6 +23,9 @@ Dim psi_TargetPageIndex As Integer
 
 '---обнуляем имеющиеся значения свойств
 '    psi_TargetPageIndex = ActivePage.Index
+    If vOC_InfoAnalizer Is Nothing Then
+        Set vOC_InfoAnalizer = New InfoCollector
+    End If
     vOC_InfoAnalizer.sC_Refresh (psi_TargetPageIndex)
 
 '---Запускаем циклы обработки фигур отчета
@@ -43,7 +46,7 @@ Dim vsO_Shape As Visio.Shape
     Set vsO_BaseShape = Application.ActivePage.Shapes.ItemFromID(asi_ShpInd)
 
 '---Перебираем все фигуры в отчете
-    For i = 1 To vsO_BaseShape.Shapes.Count
+    For i = 1 To vsO_BaseShape.Shapes.count
         Set vsO_Shape = vsO_BaseShape.Shapes(i)
         If vsO_Shape.CellExists("Actions.ChangeValue", 0) = True Then '---Проверяем является ли фигура ОТЧЕТОМ!!!
             sP_ChangeValueMain vsO_Shape.ID, asi_TargetPage
@@ -125,10 +128,10 @@ Select Case ass_PropertyName
         fp_SetValue = vOC_InfoAnalizer.pi_GDZSChainsCount
     Case Is = "Требуется резервных звеньев"
 '        fp_SetValue = PF_RoundUp(vOC_InfoAnalizer.pi_GDZSChainsCount / 3)
-        fp_SetValue = PF_RoundUp(vOC_InfoAnalizer.ps_GDZSChainsRezCount)
+        fp_SetValue = PF_RoundUp(vOC_InfoAnalizer.pi_GDZSChainsRezCount)
     Case Is = "Требуется звеньев ГДЗС"
 '        fp_SetValue = vOC_InfoAnalizer.pi_GDZSChainsCount + PF_RoundUp(vOC_InfoAnalizer.pi_GDZSChainsCount / 3)
-        fp_SetValue = vOC_InfoAnalizer.pi_GDZSChainsCount + PF_RoundUp(vOC_InfoAnalizer.ps_GDZSChainsRezCount)
+        fp_SetValue = vOC_InfoAnalizer.pi_GDZSChainsCount + PF_RoundUp(vOC_InfoAnalizer.pi_GDZSChainsRezCount)
     Case Is = "Фактическое количество газодымозащитников"
         fp_SetValue = vOC_InfoAnalizer.pi_GDZSMansCount
     Case Is = "Площадь пожара"
@@ -196,3 +199,331 @@ End Select
 
 End Function
 
+'=================================== MASTER CHECK by Vasilchenko ================================================
+Public Sub MasterCheckRefresh()
+'Процедура реакции на действие пользователя
+Dim i As Integer
+Dim psi_TargetPageIndex As Integer
+
+    psi_TargetPageIndex = Application.ActivePage.Index
+    
+'---обнуляем имеющиеся значения свойств
+'    psi_TargetPageIndex = ActivePage.Index
+    If vOC_InfoAnalizer Is Nothing Then
+        Set vOC_InfoAnalizer = New InfoCollector
+    End If
+    vOC_InfoAnalizer.sC_Refresh (psi_TargetPageIndex)
+
+'---Запускаем условия обработки
+    MCheckForm.ListBox1.Clear
+    MCheckForm.ListBox2.Clear
+    Dim Comment As Boolean
+    Comment = False
+    'Ochag
+    If vOC_InfoAnalizer.pi_OchagCount = 0 Then
+        If vOC_InfoAnalizer.pi_SmokeCount > 0 Or vOC_InfoAnalizer.pi_DevelopCount > 0 Or vOC_InfoAnalizer.pi_FireCount Then
+            MCheckForm.ListBox1.AddItem "Не указан очаг пожара"
+            Comment = True
+        End If
+    End If
+    If vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 And vOC_InfoAnalizer.pi_SmokeCount = 0 Then
+        MCheckForm.ListBox1.AddItem "Не указаны зоны задымления"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 And vOC_InfoAnalizer.pi_DevelopCount = 0 Then
+        MCheckForm.ListBox1.AddItem "Не указаны пути распространения пожара"
+        Comment = True
+    End If
+    'Upravlenie
+    If vOC_InfoAnalizer.pi_BUCount >= 3 And vOC_InfoAnalizer.pi_ShtabCount = 0 Then
+        MCheckForm.ListBox1.AddItem "Не создан оперативный штаб"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_RNBDCount = 0 And vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 Then
+        MCheckForm.ListBox1.AddItem "Не указано решающее направление"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_RNBDCount > 1 Then
+        MCheckForm.ListBox1.AddItem "Решающее напраление должно быть одним"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_BUCount >= 5 And vOC_InfoAnalizer.pi_SPRCount <= 1 Then
+        MCheckForm.ListBox1.AddItem "Не организованы секторы проведения работ"
+        Comment = True
+    End If
+    'GDZS
+    If vOC_InfoAnalizer.pi_GDZSpbCount < vOC_InfoAnalizer.pi_GDZSChainsCount Then
+        MCheckForm.ListBox1.AddItem "Не выставлены посты безопасности для каждого звена ГДЗС (" & vOC_InfoAnalizer.pi_GDZSpbCount & "/" & vOC_InfoAnalizer.pi_GDZSChainsCount & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_GDZSChainsCount >= 3 And vOC_InfoAnalizer.pi_KPPCount = 0 Then
+        MCheckForm.ListBox1.AddItem "Не создан контрольно-пропускной пункт ГДЗС"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pb_GDZSDiscr = True Then
+        MCheckForm.ListBox1.AddItem "В сложных условиях звенья ГДЗС должны состоять не менее чем из пяти газодымозащитников"
+        Comment = True
+    End If
+    If Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) - vOC_InfoAnalizer.pi_GDZSChainsRezCount <> 0 Then
+        MCheckForm.ListBox1.AddItem "Недостаточно резервных звеньев ГДЗС (" & vOC_InfoAnalizer.pi_GDZSChainsRezCount & "/" & Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) & ")"
+        Comment = True
+    End If
+    'PPW
+    If vOC_InfoAnalizer.pi_WaterSourceCount > vOC_InfoAnalizer.pi_distanceCount Then
+        MCheckForm.ListBox1.AddItem "Не указаны расстояния от каждого водоисточника до места пожара (" & vOC_InfoAnalizer.pi_distanceCount & "/" & vOC_InfoAnalizer.pi_WaterSourceCount & ")"
+        Comment = True
+    End If
+    'Hoses
+'    If vOC_InfoAnalizer.pb_AllHosesWithPos Then MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии"
+'    If vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka > vOC_InfoAnalizer.pi_linesPosCount Then
+    If vOC_InfoAnalizer.pi_WorklinesCount > vOC_InfoAnalizer.pi_linesPosCount Then
+        'MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka & ")"
+        MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount & ")"
+        Comment = True
+    End If
+    'If vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka > vOC_InfoAnalizer.pi_linesLableCount Then
+    If vOC_InfoAnalizer.pi_linesCount > vOC_InfoAnalizer.pi_linesLableCount Then
+        'MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka & ")"
+        MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount & ")"
+        Comment = True
+    End If
+    'Plan na mestnosti
+    If vOC_InfoAnalizer.pi_BuildCount > vOC_InfoAnalizer.pi_SOCount Then
+        MCheckForm.ListBox1.AddItem "Не указаны подписи степени огнестойкости для каждого из зданий (" & vOC_InfoAnalizer.pi_SOCount & "/" & vOC_InfoAnalizer.pi_BuildCount & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_OrientCount = 0 And vOC_InfoAnalizer.pi_BuildCount > 0 Then
+        MCheckForm.ListBox1.AddItem "Не указаны ориентиры на местности, такие как роза ветров или подпись улицы"
+        Comment = True
+    End If
+            'показ расчетных данных
+         
+    If vOC_InfoAnalizer.ps_FactStreemW <> 0 And vOC_InfoAnalizer.ps_FactStreemW < vOC_InfoAnalizer.ps_NeedStreemW Then
+        MCheckForm.ListBox1.AddItem "Недостаточный фактический расход воды (" & vOC_InfoAnalizer.ps_FactStreemW & " л/c < " & vOC_InfoAnalizer.ps_NeedStreemW & " л/с)"
+        Comment = True
+    End If
+    If (vOC_InfoAnalizer.ps_FactStreemW * 600) > vOC_InfoAnalizer.pi_WaterValueHave Then
+        If PF_RoundUp(vOC_InfoAnalizer.ps_FactStreemW / 32) > vOC_InfoAnalizer.pi_GetingWaterCount Then MCheckForm.ListBox1.AddItem "Недостаточное водоснабжение боевых позиций" '& (" & vOC_InfoAnalizer.pi_GetingWaterCount & "/" & PF_RoundUp(vOC_InfoAnalizer.ps_FactStreemW / 32) & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_PersonnelHave < vOC_InfoAnalizer.pi_PersonnelNeed Then
+        MCheckForm.ListBox1.AddItem "Недостаточно личного состава, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_PersonnelHave & "/" & vOC_InfoAnalizer.pi_PersonnelNeed & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses51Have < vOC_InfoAnalizer.pi_Hoses51Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 51 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses51Have & "/" & vOC_InfoAnalizer.pi_Hoses51Count & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses66Have < vOC_InfoAnalizer.pi_Hoses66Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 66 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses66Have & "/" & vOC_InfoAnalizer.pi_Hoses66Count & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses77Have < vOC_InfoAnalizer.pi_Hoses77Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 77 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses77Have & "/" & vOC_InfoAnalizer.pi_Hoses77Count & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses89Have < vOC_InfoAnalizer.pi_Hoses89Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 89 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses89Have & "/" & vOC_InfoAnalizer.pi_Hoses89Count & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses110Have < vOC_InfoAnalizer.pi_Hoses110Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 110 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses110Have & "/" & vOC_InfoAnalizer.pi_Hoses110Count & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses150Have < vOC_InfoAnalizer.pi_Hoses150Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 150 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses150Have & "/" & vOC_InfoAnalizer.pi_Hoses150Count & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses200Have < vOC_InfoAnalizer.pi_Hoses200Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 200 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses200Have & "/" & vOC_InfoAnalizer.pi_Hoses200Count & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses250Have < vOC_InfoAnalizer.pi_Hoses250Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 250 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses250Have & "/" & vOC_InfoAnalizer.pi_Hoses250Count & ")"
+        Comment = True
+    End If
+    If vOC_InfoAnalizer.pi_Hoses300Have < vOC_InfoAnalizer.pi_Hoses300Count Then
+        MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 300 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses300Have & "/" & vOC_InfoAnalizer.pi_Hoses300Count & ")"
+        Comment = True
+    End If
+    If Comment = False Then MCheckForm.ListBox1.AddItem "Замечаний не обнаружено"
+
+    '============Вторая вкладка - Сводка тактических данных===========
+    If vOC_InfoAnalizer.pi_TechTotalCount <> 0 Then
+        MCheckForm.ListBox2.AddItem "Техники РСЧС"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_TechTotalCount
+    End If
+    If vOC_InfoAnalizer.pi_MVDCount <> 0 Then
+        MCheckForm.ListBox2.AddItem "Техники МВД"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_MVDCount
+    End If
+    If vOC_InfoAnalizer.pi_MZdravCount <> 0 Then
+        MCheckForm.ListBox2.AddItem "Техники Минздрав"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_MZdravCount
+    End If
+    If vOC_InfoAnalizer.pi_TechTotalCount - vOC_InfoAnalizer.pi_FireTotalCount - vOC_InfoAnalizer.pi_MVDCount - vOC_InfoAnalizer.pi_MZdravCount <> 0 Then
+        MCheckForm.ListBox2.AddItem "Техники иных ведомств"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_TechTotalCount - vOC_InfoAnalizer.pi_FireTotalCount - vOC_InfoAnalizer.pi_MVDCount - vOC_InfoAnalizer.pi_MZdravCount
+    End If
+    If vOC_InfoAnalizer.pi_FireTotalCount <> 0 Then
+         MCheckForm.ListBox2.AddItem "Техники пожарной охраны"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_FireTotalCount
+    End If
+    If vOC_InfoAnalizer.pi_TechTotalCount <> 0 Then
+         MCheckForm.ListBox2.AddItem "Основных ПА"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_MainPAHave + vOC_InfoAnalizer.pi_TargetedPAHave & " (" & vOC_InfoAnalizer.pi_TargetedPAHave & " цел.прим., " & vOC_InfoAnalizer.pi_MainPAHave & " общ.прим.)"
+    End If
+    If vOC_InfoAnalizer.pi_GetingWaterCount <> 0 Then
+         MCheckForm.ListBox2.AddItem "Задействовано водоисточников"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_GetingWaterCount
+    End If
+    If vOC_InfoAnalizer.pi_SpecialPAHave <> 0 Then
+         MCheckForm.ListBox2.AddItem "Специальных ПА"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_SpecialPAHave & " (" & vOC_InfoAnalizer.pi_ALCount + vOC_InfoAnalizer.pi_AKPCount & " высотных)"
+    End If
+    If vOC_InfoAnalizer.pi_OtherTechincsHave <> 0 Then
+         MCheckForm.ListBox2.AddItem "Прочей пож.техники"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_OtherTechincsHave
+    End If
+    If vOC_InfoAnalizer.pi_BUCount <> 0 Then
+         MCheckForm.ListBox2.AddItem "Боевых участков"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_BUCount
+    End If
+    If vOC_InfoAnalizer.pi_SPRCount <> 0 Then
+         MCheckForm.ListBox2.AddItem "Секторов проведения работ"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_SPRCount
+    End If
+    If vOC_InfoAnalizer.pi_PersonnelHave <> 0 Then
+         MCheckForm.ListBox2.AddItem "Личного состава (без водителей)"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_PersonnelHave
+    End If
+    If vOC_InfoAnalizer.pi_GDZSChainsCount <> 0 Then
+         MCheckForm.ListBox2.AddItem "Работает звеньев ГДЗС"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_GDZSChainsCount & " (" & vOC_InfoAnalizer.pi_GDZSMansCount & " газодымозащитников)"
+    End If
+    If vOC_InfoAnalizer.pi_GDZSChainsRezCount <> 0 Then
+         MCheckForm.ListBox2.AddItem "Звеньев ГДЗС в резерве"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_GDZSChainsRezCount & " (" & vOC_InfoAnalizer.pi_GDZSMansRezCount & " газодымозащитников)"
+    End If
+    If vOC_InfoAnalizer.ps_FireSquare <> 0 Then
+         MCheckForm.ListBox2.AddItem "Площадь пожара"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.ps_FireSquare & " м кв. (плащадь тушения " & vOC_InfoAnalizer.ps_ExtSquare & " м кв.)"
+    End If
+    If vOC_InfoAnalizer.pi_StvolWHave <> 0 Then
+        Dim strStvolCount As String
+        If vOC_InfoAnalizer.pi_StvolWBHave <> 0 Then strStvolCount = strStvolCount & vOC_InfoAnalizer.pi_StvolWBHave & " ств. ""Б"", "
+        If vOC_InfoAnalizer.pi_StvolWAHave <> 0 Then strStvolCount = strStvolCount & vOC_InfoAnalizer.pi_StvolWAHave & " ств. ""А"", "
+        If vOC_InfoAnalizer.pi_StvolWLHave <> 0 Then strStvolCount = strStvolCount & vOC_InfoAnalizer.pi_StvolWLHave & " лафетных, "
+        strStvolCount = Left(strStvolCount, Len(strStvolCount) - 2)
+        MCheckForm.ListBox2.AddItem "Водяных стволов"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_StvolWHave & " (" & strStvolCount & ")"
+        strStvolCount = ""
+    End If
+    If vOC_InfoAnalizer.pi_StvolFoamHave <> 0 Then
+         MCheckForm.ListBox2.AddItem "Пенных стволов"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_StvolFoamHave
+    End If
+    If vOC_InfoAnalizer.pi_StvolPowderHave <> 0 Then
+         MCheckForm.ListBox2.AddItem "Порошковых стволов"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_StvolPowderHave
+    End If
+    If vOC_InfoAnalizer.pi_StvolGasHave <> 0 Then
+         MCheckForm.ListBox2.AddItem "Подано газовых стволов"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_StvolGasHave
+    End If
+    If vOC_InfoAnalizer.ps_FactStreemW <> 0 Then
+         MCheckForm.ListBox2.AddItem "Фактический расход воды"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.ps_FactStreemW & " л/с"
+           
+    End If
+    If vOC_InfoAnalizer.ps_NeedStreemW <> 0 Then
+         MCheckForm.ListBox2.AddItem "Требуемый расход воды"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.ps_NeedStreemW & " л/с"
+    End If
+    If vOC_InfoAnalizer.pi_WaterValueHave <> 0 Then
+         MCheckForm.ListBox2.AddItem "Запас воды в емкостях ПА"
+         MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_WaterValueHave / 1000 & " т"
+    End If
+    If vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_WorklinesCount <> 0 Then
+        MCheckForm.ListBox2.AddItem "Магистральных линий"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_WorklinesCount
+    End If
+    If vOC_InfoAnalizer.pi_HosesLength <> 0 Then
+        MCheckForm.ListBox2.AddItem "Общая длина напорных линий"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_HosesLength & " м"
+    End If
+    If vOC_InfoAnalizer.pi_HosesCount <> 0 Then
+        Dim strHoseCount As String
+        If vOC_InfoAnalizer.pi_Hoses38Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses38Count & " - 38 мм, "
+        If vOC_InfoAnalizer.pi_Hoses51Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses51Count & " - 51 мм, "
+        If vOC_InfoAnalizer.pi_Hoses77Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses77Count & " - 77 мм, "
+        If vOC_InfoAnalizer.pi_Hoses66Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses66Count & " - 66 мм, "
+        If vOC_InfoAnalizer.pi_Hoses89Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses89Count & " - 89 мм, "
+        If vOC_InfoAnalizer.pi_Hoses110Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses110Count & " - 110 мм, "
+        If vOC_InfoAnalizer.pi_Hoses150Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses150Count & " - 150 мм, "
+        If vOC_InfoAnalizer.pi_Hoses200Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses200Count & " - 200 мм, "
+        If vOC_InfoAnalizer.pi_Hoses250Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses250Count & " - 250 мм, "
+        If vOC_InfoAnalizer.pi_Hoses300Count <> 0 Then strHoseCount = strHoseCount & vOC_InfoAnalizer.pi_Hoses300Count & " - 300 мм, "
+        strHoseCount = Left(strHoseCount, Len(strHoseCount) - 2)
+        MCheckForm.ListBox2.AddItem "Задействовано напорных рукавов"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_HosesCount & " (" & strHoseCount & ")"
+        strHoseCount = ""
+    End If
+    If vOC_InfoAnalizer.ps_GetedWaterValue <> 0 Then
+        MCheckForm.ListBox2.AddItem "Забирается воды"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.ps_GetedWaterValue & " л/с (" & "max = " & vOC_InfoAnalizer.ps_GetedWaterValueMax & " л/с)"
+    End If
+    If PF_RoundUp(vOC_InfoAnalizer.ps_FactStreemW / 32) <> 0 Then
+        MCheckForm.ListBox2.AddItem "Требуется установить ПН-40 на ИНППВ (по расходу)"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = PF_RoundUp(vOC_InfoAnalizer.ps_FactStreemW / 32)
+    End If
+    If vOC_InfoAnalizer.ps_FactStreemW * 600 <> 0 Then
+        MCheckForm.ListBox2.AddItem "Требуемый запас воды (по расходу, на 10 мин)"
+        MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = (vOC_InfoAnalizer.ps_FactStreemW * 600) / 1000 & " т"
+    End If
+
+'    MCheckForm.ListBox2.AddItem "Имеется рукавов разных диаметров, с учетом прибывшей техники"
+'    MCheckForm.ListBox2.List(MCheckForm.ListBox2.ListCount - 1, 1) = vOC_InfoAnalizer.pi_HosesHave
+
+        
+End Sub
+
+''Функция создания контекстного меню
+'Function AddItemIntoPopup(ByRef Comm_Bar, ByVal CBar_Type As Integer, ByVal CBar_Face As Integer, _
+'ByVal On_Action As String, ByVal CBar_Caption As String, Optional ByVal Begin_Group As Boolean = False, _
+'Optional Tag As String = "") As CommandBarControl
+'Dim Add_Control
+'
+'    On Error Resume Next
+'    Set Add_Control = Comm_Bar.Controls.Add(Type:=CBar_Type)
+'
+'    With Add_Control
+'        If CBar_Face > 0 Then .FaceID = CBar_Face
+'        .Tag = Tag
+'        .OnAction = On_Action
+'        .Caption = CBar_Caption
+'        If Begin_Group Then .BeginGroup = True
+'    End With
+'
+'End Function
+'
+''Создаём контекстное меню мастера проверок
+'Sub CreateNewMenu()
+'On Error Resume Next: Application.CommandBars.Add "ContextMenuListBox", msoBarPopup
+'Dim Cbar As CommandBar, Ctrl
+'
+'    Set Cbar = Application.CommandBars("ContextMenuListBox")
+'
+'    For Each Ctrl In Cbar.Controls
+'        Ctrl.Delete
+'    Next
+'    'AddItemIntoPopup CBar, 1, 213, "Comand3", "Создать новый"
+'    'AddItemIntoPopup CBar, 1, 212, "Comand2", "Редактировать"
+'    AddItemIntoPopup Cbar, 1, 214, "DelComment", "Удалить выделенное замечание"
+'
+'    Cbar.ShowPopup
+'End Sub
+'
+'Sub DelComment()
+'MsgBox 123
+'End Sub

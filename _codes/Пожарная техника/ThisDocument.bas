@@ -56,12 +56,12 @@ Dim ShpInd As Integer
         If cell.Name = "Prop.Set" Then
 '            Debug.Print cell.Name & " -> " & cell.Shape.Name
             '---Запускаем процедуру получения списков моделей
-            ShpInd = cell.Shape.ID
-            ModelsListImport (ShpInd)
+'            ShpInd = cell.Shape.ID
+            ModelsListImport cell.Shape
         ElseIf cell.Name = "Prop.Model" Then
             '---Процедура получения ТТХ - СДЕЛАТЬ
-            ShpInd = cell.Shape.ID
-            GetTTH (ShpInd)
+'            ShpInd = cell.Shape.ID
+            GetTTH cell.Shape
         End If
     End If
     

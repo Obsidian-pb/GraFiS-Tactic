@@ -13,8 +13,6 @@ Dim ShapeType As Integer
 On Error GoTo EX
 
 '---Определяем координаты активной фигуры
-'x = ShpObj.Cells("EndX").Result(visInches) - ShpObj.Cells("BeginX").Result(visInches)
-'y = ShpObj.Cells("Endy").Result(visInches) - ShpObj.Cells("BeginY").Result(visInches)
 x = ShpObj.Cells("EndX").Result(visInches)
 y = ShpObj.Cells("Endy").Result(visInches)
 '---Определяем тип активной фигуры
@@ -32,15 +30,12 @@ For Each OtherShape In Application.ActivePage.Shapes
                 ShpObj.Cells("User.ParentGraphHeight").FormulaU = "Sheet." & OtherShape.ID & "!Height"
                 ShpObj.Cells("User.WaterIntense").FormulaU = "Sheet." & OtherShape.ID & "!User.WaterIntense"
                 ShpObj.Cells("User.FontSizeCaption").FormulaU = "Sheet." & OtherShape.ID & "!User.FontSizeCaption"
-'                ShpObj.Cells("User.ArrowsSize").FormulaU = "Sheet." & OtherShape.ID & "!User.ArrowsSize"
                 ShpObj.Cells("User.LineWeightLines").FormulaU = "Sheet." & OtherShape.ID & "!User.LineWeightLines"
                 
                 ShpObj.Cells("User.X0").FormulaU = "Sheet." & OtherShape.ID & "!PinX-Sheet." & _
                         OtherShape.ID & "!LocPinX"
                 ShpObj.Cells("User.Y0").FormulaU = "Sheet." & OtherShape.ID & "!PinY-Sheet." & _
                         OtherShape.ID & "!LocPinY"
-
-'                OtherShape.SendToBack
 
             '---Для предотвращения дальнейшего исполнения выходим из процедуры
             Set OtherShape = Nothing
@@ -66,7 +61,6 @@ Next OtherShape
                 ShpObj.Cells("User.Y0").Formula = ShpObj.Cells("User.Y0")
 
                 
-'Application.ActiveWindow.Selection.BringToFront
 ShpObj.BringToFront
 
 

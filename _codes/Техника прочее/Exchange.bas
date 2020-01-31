@@ -16,9 +16,9 @@ Dim IndexPers As Integer
 '---Запускаем процедуру получения относительного списка Модели(Набор) для текущей фигуры
     Select Case IndexPers
         Case Is = 73 'Машины на гусеничном ходу
-            GetValuesOfCellsFromTable ShpIndex, "З_Гусеничные машины"
+            GetValuesOfCellsFromTable ShpIndex, "[З_Гусеничные машины]"
         Case Is = 74 'Танки
-            GetValuesOfCellsFromTable ShpIndex, "З_Гусеничные машины"
+            GetValuesOfCellsFromTable ShpIndex, "[З_Гусеничные машины]"
         Case Is = 30 'Корабль
             GetValuesOfCellsFromTableSea ShpIndex, "З_Суда"
         Case Is = 31 'Катер

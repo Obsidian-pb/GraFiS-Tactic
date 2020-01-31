@@ -29,9 +29,10 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
 Set ShapeTo = Application.ActiveWindow.Selection(1)
-Set ShapeFrom = Application.Documents("Водоснабжение.vss").Masters("Открытый водоисточник").Shapes(1)
+Set ShapeFrom = ThisDocument.Masters("Открытый водоисточник").Shapes(1)
+
 IDTo = ShapeTo.ID
-IDFrom = Application.Documents("Водоснабжение.vss").Masters("Открытый водоисточник").Index
+IDFrom = ThisDocument.Masters("Открытый водоисточник").Index
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
 CloneSectionUniverseNames 240, IDFrom, IDTo  'Action
@@ -70,7 +71,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Водоснабжение.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Создаем необхоимое количество строк
@@ -90,7 +91,7 @@ Dim RowNum As Integer   ', CellNum As Integer
     On erroro GoTo EX
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Водоснабжение.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Сверяем наборы строк в обеих фигурах, и в случае отсутствия в них искомых - создаем их.
@@ -110,7 +111,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer   ', CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Водоснабжение.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Сверяем наборы строк в обеих фигурах, и в случае отсутствия в них искомых - создаем их.
@@ -128,7 +129,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer   ', CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Водоснабжение.vss").Masters(ShapeFromID).Shapes(1)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Сверяем наборы строк в обеих фигурах, и в случае отсутствия в них искомых - создаем их.
@@ -150,10 +151,10 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Водоснабжение.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
-'MsgBox Application.Documents("Водоснабжение.vss").Masters(ShapeFromID).Name
+'MsgBox ThisDocument.Masters(ShapeFromID).Name
 
 '---Проверяем наличие секции с указанным SectionIndex и в случае отсутствия создаем её
     If (ShapeTo.SectionExists(SectionIndex, 0) = 0) And Not (ShapeFrom.SectionExists(SectionIndex, 0) = 0) Then
@@ -182,7 +183,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Водоснабжение.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Запускаем цикл работы со строками Шейп-листа
@@ -211,7 +212,7 @@ Dim vsoLayer As Visio.Layer
 
     On Error GoTo EX
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-    Set ShapeFrom = Application.Documents("Водоснабжение.vss").Masters(ShapeFromID).Shapes(1)
+    Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
 
 '---Получаем название слоя соответственно номеру в исходном документе
     LayerName = ShapeFrom.Layer(1).Name

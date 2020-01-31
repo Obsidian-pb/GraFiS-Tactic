@@ -7,7 +7,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-Private dbs As Database
+Option Explicit
+
+Private WithEvents app As Visio.Application
+Attribute app.VB_VarHelpID = -1
+Private cellChangedCount As Long
+Const cellChangedInterval = 100000
+
 Dim WithEvents SquareAppEvents As Visio.Application
 Attribute SquareAppEvents.VB_VarHelpID = -1
 
@@ -38,6 +44,12 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Создаем панель управления "Превращения" и добавляем на нее кнопку "Обратить в зону горения"
     AddTBImagination
     AddButtons
+    
+'---Активируем объект отслеживания изменений в приложении для 201х версий
+    If Application.version > 12 Then
+        Set app = Visio.Application
+        cellChangedCount = cellChangedInterval - 10
+    End If
 
 '---ОБновляем/экспортируем в активный документ стили трафарета
     '---Проверяем не является ли активный документ документом цветовой схемы
@@ -73,6 +85,9 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     Set ButEventRush = Nothing
     DeleteButtons
     
+'---Деактивируем объект отслеживания изменений в приложении для 201х версий
+    If Application.version > 12 Then Set app = Nothing
+    
 '---В случае, если на панели "Превращения нет ни одной кнопки, удаляем её
     If Application.CommandBars("Превращения").Controls.Count = 0 Then RemoveTBImagination
 '---Очищаем переменную приложения
@@ -81,20 +96,20 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
 End Sub
 
 
-Private Sub SquareAppEvents_CellChanged(ByVal cell As IVCell)
+Private Sub SquareAppEvents_CellChanged(ByVal Cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Long '(64) - Площадь пожара
 '---Проверяем имя ячейки
     
     
-    If cell.Name = "Prop.FireCategorie" Then
-        ShpInd = cell.Shape.ID
+    If Cell.Name = "Prop.FireCategorie" Then
+        ShpInd = Cell.Shape.ID
         '---Запускаем процедуру получения СПИСКОВ описаний объектов пожара для указанной категории
         DescriptionsListImport (ShpInd)
     End If
         
-    If cell.Name = "Prop.FireDescription" Then
-        ShpInd = cell.Shape.ID
+    If Cell.Name = "Prop.FireDescription" Then
+        ShpInd = Cell.Shape.ID
         '---Запускаем процедуру получения ЗНАЧЕНИЙ факторов пожара для данного описания
         GetFactorsByDescription (ShpInd)
     End If
@@ -124,38 +139,38 @@ Public Sub MastersImport()
 '---Импортируем мастера
 'Dim mstr As Visio.Master
 
-    MasterImportSub "Очаг.vss", "Задымление1_Мелкий"
-    MasterImportSub "Очаг.vss", "Задымление2_Мелкий"
-    MasterImportSub "Очаг.vss", "Задымление3_Мелкий"
-    MasterImportSub "Очаг.vss", "Задымление4_Мелкий"
-    MasterImportSub "Очаг.vss", "Задымление5_Мелкий"
-    MasterImportSub "Очаг.vss", "Задымление6_Мелкий"
-    MasterImportSub "Очаг.vss", "Задымление1_Средний"
-    MasterImportSub "Очаг.vss", "Задымление2_Средний"
-    MasterImportSub "Очаг.vss", "Задымление3_Средний"
-    MasterImportSub "Очаг.vss", "Задымление4_Средний"
-    MasterImportSub "Очаг.vss", "Задымление5_Средний"
-    MasterImportSub "Очаг.vss", "Задымление6_Средний"
-    MasterImportSub "Очаг.vss", "Задымление1_Крупный"
-    MasterImportSub "Очаг.vss", "Задымление2_Крупный"
-    MasterImportSub "Очаг.vss", "Задымление3_Крупный"
-    MasterImportSub "Очаг.vss", "Задымление4_Крупный"
-    MasterImportSub "Очаг.vss", "Задымление5_Крупный"
-    MasterImportSub "Очаг.vss", "Задымление6_Крупный"
-    MasterImportSub "Очаг.vss", "Очаг1_Мелкий"
-    MasterImportSub "Очаг.vss", "Очаг2_Мелкий"
-    MasterImportSub "Очаг.vss", "Очаг3_Мелкий"
-    MasterImportSub "Очаг.vss", "Очаг4_Мелкий"
-    MasterImportSub "Очаг.vss", "Очаг1_Средний"
-    MasterImportSub "Очаг.vss", "Очаг2_Средний"
-    MasterImportSub "Очаг.vss", "Очаг3_Средний"
-    MasterImportSub "Очаг.vss", "Очаг4_Средний"
-    MasterImportSub "Очаг.vss", "Очаг1_Крупный"
-    MasterImportSub "Очаг.vss", "Очаг2_Крупный"
-    MasterImportSub "Очаг.vss", "Очаг3_Крупный"
-    MasterImportSub "Очаг.vss", "Очаг4_Крупный"
-    MasterImportSub "Очаг.vss", "Огненный шторм"
-    MasterImportSub "Очаг.vss", "Обрушение"
+    MasterImportSub "Задымление1_Мелкий"
+    MasterImportSub "Задымление2_Мелкий"
+    MasterImportSub "Задымление3_Мелкий"
+    MasterImportSub "Задымление4_Мелкий"
+    MasterImportSub "Задымление5_Мелкий"
+    MasterImportSub "Задымление6_Мелкий"
+    MasterImportSub "Задымление1_Средний"
+    MasterImportSub "Задымление2_Средний"
+    MasterImportSub "Задымление3_Средний"
+    MasterImportSub "Задымление4_Средний"
+    MasterImportSub "Задымление5_Средний"
+    MasterImportSub "Задымление6_Средний"
+    MasterImportSub "Задымление1_Крупный"
+    MasterImportSub "Задымление2_Крупный"
+    MasterImportSub "Задымление3_Крупный"
+    MasterImportSub "Задымление4_Крупный"
+    MasterImportSub "Задымление5_Крупный"
+    MasterImportSub "Задымление6_Крупный"
+    MasterImportSub "Очаг1_Мелкий"
+    MasterImportSub "Очаг2_Мелкий"
+    MasterImportSub "Очаг3_Мелкий"
+    MasterImportSub "Очаг4_Мелкий"
+    MasterImportSub "Очаг1_Средний"
+    MasterImportSub "Очаг2_Средний"
+    MasterImportSub "Очаг3_Средний"
+    MasterImportSub "Очаг4_Средний"
+    MasterImportSub "Очаг1_Крупный"
+    MasterImportSub "Очаг2_Крупный"
+    MasterImportSub "Очаг3_Крупный"
+    MasterImportSub "Очаг4_Крупный"
+    MasterImportSub "Огненный шторм"
+    MasterImportSub "Обрушение"
 
 End Sub
 
@@ -173,15 +188,11 @@ End Sub
 
 Private Sub SquareAppEvents_ShapeAdded(ByVal Shape As IVShape)
 'Событие добавления на лист фигуры
-Dim v_Cntrl As CommandBarControl
+Dim v_Ctrl As CommandBarControl
 'Dim SecExists As Boolean
     
 '---Включаем обработку ошибок
     On Error GoTo Tail
-    
-'---Проверяем является ли добавленная фигура незамкнутой линией без свойств
-'    SecExists = Shape.SectionExists(visSectionProp, 0)
-'    If Shape.AreaIU > 0 Or SecExists Then Exit Sub
 
 '---Проверяем какая кнопка нажата и в зависимости от этого выполняем действие
     For Each v_Ctrl In Application.CommandBars("Превращения").Controls
@@ -225,7 +236,6 @@ Dim v_Cntrl As CommandBarControl
     
 Exit Sub
 Tail:
-'    MsgBox Err.Description
     MsgBox "В ходе работы программы возникла ошибка! Если она будет повторяться - обратитесь к разработчику."
     SaveLog Err, "Document_DocumentOpened"
 End Sub
@@ -233,7 +243,7 @@ End Sub
 Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
-Dim cell As Visio.cell
+Dim Cell As Visio.Cell
 
     Set docSheet = Application.ActiveDocument.DocumentSheet
     
@@ -246,6 +256,18 @@ Dim cell As Visio.cell
         docSheet.Cells("User.CurrentTime").FormulaU = "User.FireTime"
     End If
 
+End Sub
+
+Private Sub app_CellChanged(ByVal Cell As IVCell)
+'---Один раз в выполняем обновление иконок на кнопках
+    cellChangedCount = cellChangedCount + 1
+    If cellChangedCount > cellChangedInterval Then
+        ButEventFireArea.PictureRefresh
+        ButEventStorm.PictureRefresh
+        ButEventFog.PictureRefresh
+        ButEventRush.PictureRefresh
+        cellChangedCount = 0
+    End If
 End Sub
 
 

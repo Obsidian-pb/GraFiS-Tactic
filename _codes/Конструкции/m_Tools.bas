@@ -17,12 +17,12 @@ CD_MasterExists = False
 
 End Function
 
-Public Sub MasterImportSub(DocName As String, masterName As String)
+Public Sub MasterImportSub(masterName As String)
 'Процедура импорта мастера в соответствии с именем
 Dim mstr As Visio.Master
 
     If Not CD_MasterExists(masterName) Then
-        Set mstr = Application.Documents(DocName).Masters(masterName)
+        Set mstr = ThisDocument.Masters(masterName)
         Application.ActiveDocument.Masters.Drop mstr, 0, 0
     End If
 
@@ -109,7 +109,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке

@@ -37,7 +37,7 @@ Sub AddButtons()
     On Error GoTo EX
     
     Set Bar = Application.CommandBars("Превращения")
-    DocPath = Application.Documents("Очаг.vss").path
+    DocPath = ThisDocument.path
     
 '---Добавляем кнопки на панель управления "Превращения"--------------------------------
 '---Кнопка "Обратить в зону горения"-------------------------------------------------

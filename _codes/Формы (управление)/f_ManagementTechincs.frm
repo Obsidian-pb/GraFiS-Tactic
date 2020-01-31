@@ -13,11 +13,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Base 1
 
 
+
 Private Sub ListView1_Click()
+    If ListView1.ListItems.Count = 0 Then Exit Sub
+    
     Application.ActiveWindow.Select Application.ActivePage.Shapes(ListView1.SelectedItem.Key), visDeselectAll
     Application.ActiveWindow.Select Application.ActivePage.Shapes(ListView1.SelectedItem.Key), visSelect
 End Sub

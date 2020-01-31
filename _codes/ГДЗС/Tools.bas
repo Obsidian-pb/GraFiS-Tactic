@@ -1,12 +1,14 @@
 Attribute VB_Name = "Tools"
+Option Explicit
 
 Public Sub GetValuesOfCellsFromTable(ShpIndex As Long, TableName As String)
 'Процедура импорта данных о ТТХ любой фигуры c "Набором" из базы данных Signs
-Dim dbs As DAO.Database, rsAD As DAO.Recordset
+Dim dbs As Object, rsAD As Object
 Dim pth As String
 Dim ShpObj As Visio.Shape
-Dim Critria As String, AirDeviceModel As String
+Dim SQL As String, Criteria As String, AirDeviceModel As String
 Dim i, k As Integer 'Индексы итерации
+Dim fieldType As Integer
 
 '---Определяем действие в случае ошибки открытия слишком большого количества таблиц
     On Error GoTo Tail
@@ -16,23 +18,28 @@ Dim i, k As Integer 'Индексы итерации
 
 '---Определяем критерии поиска записи в наборе данных
     AirDeviceModel = ShpObj.Cells("Prop.AirDevice").ResultStr(visUnitsString)
-'    PASet = ShpObj.Cells("Prop.Set").ResultStr(visUnitsString)
         If ShpObj.Cells("Prop.AirDevice.Format").ResultStr(visUnitsString) = "" Then
-            'MsgBox "Модели в наборе " & PASet & " отсутствуют!", vbInformation
             Exit Sub 'Если в ячейке "Модель" пустое значение - процедура прекращается
         End If
     Criteria = "[Модель] = '" & AirDeviceModel & "'"
     
 '---Создаем соединение с БД Signs
+'    pth = ThisDocument.path & "Signs.fdb"
+''    Set dbs = DBEngine.OpenDatabase(pth)
+'    Set dbs = GetDBEngine.OpenDatabase(pth)
+'    Set rsAD = dbs.OpenRecordset(TableName, dbOpenDynaset) 'Создание набора записей
     pth = ThisDocument.path & "Signs.fdb"
-'    Set dbs = DBEngine.OpenDatabase(pth)
-    Set dbs = GetDBEngine.OpenDatabase(pth)
-    Set rsAD = dbs.OpenRecordset(TableName, dbOpenDynaset) 'Создание набора записей
+    Set dbs = CreateObject("ADODB.Connection")
+    dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+    dbs.Open
+    Set rsAD = CreateObject("ADODB.Recordset")
+    SQL = "SELECT * From " & TableName
+    rsAD.Open SQL, dbs, 3, 1
 
 '---Ищем необходимую запись в наборе данных и по ней определяем ТТХ ПА для заданных параметров
     With rsAD
-        .FindFirst Criteria
-'MsgBox .RecordCount
+        .Filter = Criteria
+        .MoveFirst
     '---Перебираем все строки фигуры
         For i = 0 To ShpObj.RowCount(visSectionProp) - 1
         '---Перебираем все поля набора записей
@@ -40,16 +47,14 @@ Dim i, k As Integer 'Индексы итерации
                 If ShpObj.CellsSRC(visSectionProp, i, visCustPropsLabel).ResultStr(Visio.visNone) = _
                     .Fields(k).Name Then
                     If .Fields(k).Value >= 0 Then
-                        '---Присваиеваем ячейкам активной фигуры значения в соответсвии с их ворматом в БД
-                        'MsgBox .Fields(k).Type & "? " & .Fields(k).Name
-                        If .Fields(k).Type = 10 Then _
+                        '---Присваиеваем ячейкам активной фигуры значения в соответсвии с их форматом в БД
+                        fieldType = .Fields(k).Type
+                        If fieldType = 202 Then _
                             ShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).FormulaU = """" & .Fields(k).Value & """"  'Текст
-                        If .Fields(k).Type = 6 Or .Fields(k).Type = 4 Then _
+                        If fieldType = 2 Or fieldType = 3 Or fieldType = 4 Or fieldType = 5 Then _
                             ShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).FormulaU = str(.Fields(k).Value)   'Число
-                        'ShpObj.CellsSRC(visSectionProp, i, visCustPropsInvis).FormulaU = False
                     Else
                         ShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).FormulaU = 0
-                        'ShpObj.CellsSRC(visSectionProp, i, visCustPropsInvis).FormulaU = True
                     End If
                     
                 End If
@@ -76,11 +81,12 @@ End Sub
 
 Public Sub FogRMKGetValuesOfCellsFromTable(ShpIndex As Long, TableName As String)
 'Процедура импорта данных о ТТХ дымососов
-Dim dbs As DAO.Database, rsAD As DAO.Recordset
+Dim dbs As Object, rsAD As Object
 Dim pth As String
 Dim ShpObj As Visio.Shape
-Dim Critria As String, FogRMKModel As String
+Dim SQL As String, Criteria As String, FogRMKModel As String
 Dim i, k As Integer 'Индексы итерации
+Dim fieldType As Integer
 
 '---Определяем действие в случае ошибки открытия слишком большого количества таблиц
     On Error GoTo Tail
@@ -90,23 +96,28 @@ Dim i, k As Integer 'Индексы итерации
 
 '---Определяем критерии поиска записи в наборе данных
     FogRMKModel = ShpObj.Cells("Prop.FogRMK").ResultStr(visUnitsString)
-'    PASet = ShpObj.Cells("Prop.Set").ResultStr(visUnitsString)
         If ShpObj.Cells("Prop.FogRMK.Format").ResultStr(visUnitsString) = "" Then
-            'MsgBox "Модели в наборе " & PASet & " отсутствуют!", vbInformation
             Exit Sub 'Если в ячейке "Модель" пустое значение - процедура прекращается
         End If
     Criteria = "[Модель] = '" & FogRMKModel & "'"
     
 '---Создаем соединение с БД Signs
+'    pth = ThisDocument.path & "Signs.fdb"
+''    Set dbs = DBEngine.OpenDatabase(pth)
+'    Set dbs = GetDBEngine.OpenDatabase(pth)
+'    Set rsAD = dbs.OpenRecordset(TableName, dbOpenDynaset) 'Создание набора записей
     pth = ThisDocument.path & "Signs.fdb"
-'    Set dbs = DBEngine.OpenDatabase(pth)
-    Set dbs = GetDBEngine.OpenDatabase(pth)
-    Set rsAD = dbs.OpenRecordset(TableName, dbOpenDynaset) 'Создание набора записей
+    Set dbs = CreateObject("ADODB.Connection")
+    dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+    dbs.Open
+    Set rsAD = CreateObject("ADODB.Recordset")
+    SQL = "SELECT * From " & TableName
+    rsAD.Open SQL, dbs, 3, 1
 
 '---Ищем необходимую запись в наборе данных и по ней определяем ТТХ ПА для заданных параметров
     With rsAD
-        .FindFirst Criteria
-'MsgBox .RecordCount
+        .Filter = Criteria
+        .MoveFirst
     '---Перебираем все строки фигуры
         For i = 0 To ShpObj.RowCount(visSectionProp) - 1
         '---Перебираем все поля набора записей
@@ -115,15 +126,13 @@ Dim i, k As Integer 'Индексы итерации
                     .Fields(k).Name Then
                     If .Fields(k).Value >= 0 Then
                         '---Присваиеваем ячейкам активной фигуры значения в соответсвии с их ворматом в БД
-                        'MsgBox .Fields(k).Type & "? " & .Fields(k).Name
-                        If .Fields(k).Type = 10 Then _
+                        fieldType = .Fields(k).Type
+                        If fieldType = 202 Then _
                             ShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).FormulaU = """" & .Fields(k).Value & """"  'Текст
-                        If .Fields(k).Type = 6 Or .Fields(k).Type = 4 Then _
+                        If fieldType = 2 Or fieldType = 3 Or fieldType = 4 Or fieldType = 5 Then _
                             ShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).FormulaU = str(.Fields(k).Value)   'Число
-                        'ShpObj.CellsSRC(visSectionProp, i, visCustPropsInvis).FormulaU = False
                     Else
                         ShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).FormulaU = 0
-                        'ShpObj.CellsSRC(visSectionProp, i, visCustPropsInvis).FormulaU = True
                     End If
                     
                 End If
@@ -149,13 +158,11 @@ End Sub
 
 Public Function ListImport(TableName As String, FieldName As String) As String
 'Функция получения независимого списка из базы данных
-Dim dbs As Database, rst As Recordset
+Dim dbs As Object, rst As Object
 Dim pth As String
 Dim SQLQuery As String
 Dim List As String
-Dim RSField As DAO.Field
-
-    On Error GoTo EX
+Dim RSField As Object
 
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
@@ -166,50 +173,51 @@ Dim RSField As DAO.Field
         
     '---Создаем набор записей для получения списка
         pth = ThisDocument.path & "Signs.fdb"
-    '    Set dbs = DBEngine.OpenDatabase(pth)
-        Set dbs = GetDBEngine.OpenDatabase(pth)
-        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+        Set dbs = CreateObject("ADODB.Connection")
+        dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+        dbs.Open
+        Set rst = CreateObject("ADODB.Recordset")
+        rst.Open SQLQuery, dbs, 3, 1
         Set RSField = rst.Fields(FieldName)
         
     '---Ищем необходимую запись в наборе данных и по ней создаем набор значений для списка для заданных параметров
     With rst
         .MoveFirst
         Do Until .EOF
-            List = List & Replace(RSField, Chr(34), "") & ";"
+            List = List & RSField & ";"
             .MoveNext
         Loop
     End With
     List = Chr(34) & Left(List, Len(List) - 1) & Chr(34)
-ListImport = List
+    ListImport = List
 
-Exit Function
-EX:
-    SaveLog Err, "ListImport", "Tablename: " & TableName
+Set dbs = Nothing
+Set rst = Nothing
 End Function
 
-Public Function ListImport2(TableName As String, FieldName As String, FieldName2 As String, Criteria As String) As String
+Public Function ListImport2(TableName As String, FieldName As String, Criteria As String) As String
 'Функция получения зависимого списка из базы данных
-Dim dbs As Database, rst As Recordset
+Dim dbs As Object, rst As Object
 Dim pth As String
 Dim SQLQuery As String
 Dim List As String
-Dim RSField As DAO.Field, RSField2 As DAO.Field
-
-On Error GoTo EX
+Dim RSField As Object, RSField2 As Object
 
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
-        SQLQuery = "SELECT [" & FieldName & "], [" & FieldName2 & "] " & _
+        SQLQuery = "SELECT [" & FieldName & "]" & _
         "FROM [" & TableName & "] " & _
-        "GROUP BY [" & FieldName & "], [" & FieldName2 & "] " & _
-        "HAVING (([" & FieldName & "]) Is Not Null Or Not ([" & FieldName & "])=' ') " & _
-            "AND (([" & FieldName2 & "])= '" & Criteria & "');"
+        "WHERE [" & FieldName & "] Is Not Null " & _
+            "And " & Criteria & _
+        "GROUP BY [" & FieldName & "]; "
         
     '---Создаем набор записей для получения списка
         pth = ThisDocument.path & "Signs.fdb"
-    '    Set dbs = DBEngine.OpenDatabase(pth)
-        Set dbs = GetDBEngine.OpenDatabase(pth)
-        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+        Set dbs = CreateObject("ADODB.Connection")
+        dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+        dbs.Open
+        Set rst = CreateObject("ADODB.Recordset")
+        rst.Open SQLQuery, dbs, 3, 1
         Set RSField = rst.Fields(FieldName)
         
     '---Проверяем количество записей в наборе и если их 0 возвращаем 0
@@ -218,31 +226,21 @@ On Error GoTo EX
             With rst
                 .MoveFirst
                 Do Until .EOF
-                    List = List & Replace(RSField, Chr(34), "") & ";"
+                    List = List & RSField & ";"
                     .MoveNext
                 Loop
             End With
         Else
-            'MsgBox "Модели в наборе " & PASet & " отсутствуют!", vbInformation
             List = "0"
         End If
         List = Chr(34) & Left(List, Len(List) - 1) & Chr(34)
 ListImport2 = List
 
-Exit Function
-EX:
-    SaveLog Err, "ListImport2", "Tablename: " & TableName
+Set dbs = Nothing
+Set rst = Nothing
 End Function
 
-Public Function GetDBEngine() As Object
-'Function returns DBEngine for current Office Engine Type (DAO.DBEngine.60 or DAO.DBEngine.120)
-Dim engine As Object
-    On Error GoTo EX
-    Set GetDBEngine = DBEngine
-Exit Function
-EX:
-    Set GetDBEngine = CreateObject("DAO.DBEngine.120")
-End Function
+
 
 '-----------------------------------------Процедуры работы с фигурами----------------------------------------------
 Public Sub SetCheckForAll(ShpObj As Visio.Shape, aS_CellName As String, aB_Value As Boolean)
@@ -272,11 +270,6 @@ Dim shp As Visio.Shape
     Next shp
 End Sub
 
-Public Sub MoveMeFront(ShpObj As Visio.Shape)
-'Прока перемещает фигуру вперед
-    ShpObj.BringToFront
-End Sub
-
 Public Function IsFirstDrop(ShpObj As Visio.Shape)
 'Функция проверяет вброшенали фигура впервые и если вброшена впервые добавляет строчку свойства User.InPage
     If ShpObj.CellExists("User.InPage", 0) = 0 Then
@@ -289,6 +282,27 @@ Public Function IsFirstDrop(ShpObj As Visio.Shape)
     Else
         IsFirstDrop = False
     End If
+End Function
+
+Public Function IsShapeGraFiSType(ByRef aO_TergetShape As Visio.Shape, ByRef arr As Variant) As Boolean
+'Функция возвращает True, если фигура является фигурой ГраФиС и при этом имеет индекс из указанного массива
+    IsShapeGraFiSType = False
+    
+    If aO_TergetShape.CellExists("User.IndexPers", 0) = True And aO_TergetShape.CellExists("User.Version", 0) = True Then
+        IsShapeGraFiSType = IsInArray(arr, aO_TergetShape.Cells("User.IndexPers"))
+    End If
+End Function
+
+Public Function IsInArray(ByRef arr As Variant, ByVal val As Integer) As Boolean
+'Функция возвращает True если значение имеется в массиве, иначе False
+Dim i As Integer
+    For i = 0 To UBound(arr)
+        If arr(i) = val Then
+            IsInArray = True
+            Exit Function
+        End If
+    Next i
+IsInArray = False
 End Function
 
 '-----------------------------------------Функции проверки привязки данных----------------------------------------------
@@ -327,7 +341,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке
@@ -338,4 +352,44 @@ Const d = " | "
 
 End Sub
 
+'-----------------------------------------Поиск точки----------------------------------------------
+Public Function GetPointOnLineShape(ByRef center As c_Vector, ByRef lineShape As Visio.Shape, _
+                                    ByVal radiuss As Double, Optional ByVal segmentNumber As Byte = 0) As c_Vector
+'Находим первую точку на линии
+Const pi = 3.1415                           'Число Пи
+Const oneOfHundredOfPerimeter = 0.06283     'угол - одна сотая окружности в радианах
+Dim pointTolerance As Double                'Точность поиска хита с линией для каждой из точек окружности
+Dim checkPoint As c_Vector
+Dim i As Byte
+    
+    Dim shp As Visio.Shape
+    
+    pointTolerance = pi * radiuss / 100
+    
+    Set checkPoint = New c_Vector
+    
+    For i = segmentNumber To 99
+        checkPoint.Angle = i * oneOfHundredOfPerimeter
+        checkPoint.x = checkPoint.x * radiuss + center.x
+        checkPoint.y = checkPoint.y * radiuss + center.y
+        If lineShape.HitTest(checkPoint.x, checkPoint.y, pointTolerance) Then
+'            Set shp = Application.ActivePage.DrawRectangle(checkPoint.x - 0.5, checkPoint.y - 0.5, checkPoint.x + 0.5, checkPoint.y + 0.5)
+            checkPoint.segmentNumber = i
+            Set GetPointOnLineShape = checkPoint
+            Exit Function
+        End If
+    Next i
+    
+End Function
 
+'-----------------------------------------Работа с векторами----------------------------------------------
+Public Function NewVectorXY(ByVal x As Double, ByVal y As Double) As c_Vector
+'Создает и возвращает новый вектор образованный от координат x,y
+Dim newVector As c_Vector
+
+    Set newVector = New c_Vector
+    newVector.x = x
+    newVector.y = y
+    
+Set NewVectorXY = newVector
+End Function

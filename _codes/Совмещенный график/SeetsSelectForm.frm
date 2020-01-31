@@ -26,7 +26,6 @@ Private Sub B_OK_Click()
     Else
         SelectedSheet = LB_SheetsList.Value
     End If
-'    MsgBox SelectedSheet
     
     Flag = True
     Me.Hide

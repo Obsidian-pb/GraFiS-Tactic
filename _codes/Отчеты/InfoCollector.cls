@@ -7,6 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 '---------------------Класс сбора, обобщения и обобщения информации имеющейся на листе------------------------------------------
 Option Explicit
 
@@ -49,20 +50,43 @@ Public ps_GetedWaterValueMax As Single    'Забирается воды из внешних источников
 Public pi_GetingWaterCount As Integer   'Устройств забирающих воду кол-во
 
 
-Public pi_GDZSChainsCount As Integer 'Количество звеньев ГДЗС
+Public pi_GDZSChainsCount As Integer 'Количество рабочих звеньев ГДЗС
 Public pi_GDZSMansCount As Integer 'Количество газрдымозащитников
-Public ps_GDZSChainsRezCount As Single 'Количество резервных звеньев ГДЗС
+Public pi_GDZSChainsRezCount As Integer 'Количество резервных звеньев ГДЗС
 Public pi_GDZSMansRezCount As Integer 'Количество газодымозащитников для резервных звеньев ГДЗС
+Public ps_GDZSChainsRezNeed As Single 'Требуемое количество звеньев
+Public pb_GDZSDiscr As Boolean 'Несоотвествие количества газодымозащитников в звене сложным условиям
+Public pi_GDZSpbCount As Integer 'Kolichestvo PB
+Public pi_KPPCount As Integer 'Kolichestvo KPP
 
 
+Public pi_Hoses38Count As Integer  'Количество рукавов диаметром 38мм
 Public pi_Hoses51Count As Integer  'Количество рукавов диаметром 51мм
 Public pi_Hoses66Count As Integer  'Количество рукавов диаметром 66мм
 Public pi_Hoses77Count As Integer  'Количество рукавов диаметром 77мм
 Public pi_Hoses89Count As Integer  'Количество рукавов диаметром 89мм
 Public pi_Hoses110Count As Integer 'Количество рукавов диаметром 110мм
 Public pi_Hoses150Count As Integer 'Количество рукавов диаметром 150мм
+Public pi_Hoses200Count As Integer 'Количество рукавов диаметром 200мм
+Public pi_Hoses250Count As Integer 'Количество рукавов диаметром 250мм
+Public pi_Hoses300Count As Integer 'Количество рукавов диаметром 300мм
 Public pi_HosesCount As Integer    'Количество всех напорных рукавов
 Public pi_HosesLength As Integer   'Общая длина рукавных линий
+
+Public pi_Hoses38Have As Integer  'Количество рукавов диаметром 38мм в наличии
+Public pi_Hoses51Have As Integer  'Количество рукавов диаметром 51мм в наличии
+Public pi_Hoses66Have As Integer  'Количество рукавов диаметром 66мм в наличии
+Public pi_Hoses77Have As Integer  'Количество рукавов диаметром 77мм в наличии
+Public pi_Hoses89Have As Integer  'Количество рукавов диаметром 89мм в наличии
+Public pi_Hoses110Have As Integer 'Количество рукавов диаметром 110мм в наличии
+Public pi_Hoses150Have As Integer 'Количество рукавов диаметром 150мм в наличии
+Public pi_Hoses200Have As Integer 'Количество рукавов диаметром 200мм в наличии
+Public pi_Hoses250Have As Integer 'Количество рукавов диаметром 250мм в наличии
+Public pi_Hoses300Have As Integer 'Количество рукавов диаметром 300мм в наличии
+Public pi_HosesHave As Integer    'Количество всех напорных рукавов в наличии
+Public pi_HoseSkatka As Integer   'Количество напорных в скатах
+Public pi_LineWorkSkatka As Integer 'Количество рабочих линий в скатках
+
 
 
 Public pi_WaterValueNeed As Long   'Требуемый запас воды
@@ -78,6 +102,26 @@ Public pi_MZdravCount As Integer        'СМП
 Public pi_TechTotalCount As Integer     'Общее количество техники
 Public pi_FireTotalCount As Integer     'Пожарная
 Public pi_BUCount As Integer            'Боевых участков
+Public pi_SPRCount As Integer           'Секторов
+Public pi_ShtabCount As Integer         'Shtab
+Public pi_RNBDCount As Integer          'Reshaushee napravlenie
+Public pi_OchagCount As Integer         'Ochag
+Public pi_DevelopCount As Integer       'Rasprostranenie
+Public pi_SmokeCount As Integer         'Zadimlenie
+Public pi_WaterSourceCount As Integer   'Vodoistochniki
+Public pi_distanceCount As Integer      'Rasstoyanie
+Public pi_linesCount As Integer         'Otdelnie linii
+Public pi_linesPosCount As Integer      'Polozenie linii
+Public pi_linesLableCount As Integer    'Podpisi linii
+Public pi_WorklinesCount As Integer     'Rabochie linii
+Public pi_BuildCount As Integer         'Zdania
+Public pi_SOCount As Integer            'Stepen ognestoikosti
+Public pi_FireCount As Integer          'Ploshad gorenia
+Public pi_OrientCount As Integer        'Ориентиры
+
+'---Новые2------------
+Public pb_AllHosesWithLabels As Boolean         'Все рукавные линии с подписями
+Public pb_AllHosesWithPos As Boolean            'Все рабочие рукавные линии сподписями положения
 
 
 
@@ -98,23 +142,23 @@ Public pi_BUCount As Integer            'Боевых участков
 
 '----------------------------------------Служебные процедуры------------------------------------------------------------
 Private Sub Class_Initialize()
-'MsgBox "Класс инициализирован"
-pi_TargetPageIndex = ActivePage.Index
-'Set vco_App = Visio.Application
-sC_Refresh (pi_TargetPageIndex)
+    pi_TargetPageIndex = ActivePage.Index
+    VarInit
+    'Set vco_App = Visio.Application
+    sC_Refresh (pi_TargetPageIndex)
 
-'MsgBox "Требуется личного состава: " & pi_PersonnelNeed
-'MsgBox "Требуется воды: " & ps_NeedStreemW
-'MsgBox "Рукавов 51мм: " & pi_Hoses51Count & "шт."
-'MsgBox "Рукавов 77мм: " & pi_Hoses77Count & "шт."
-'MsgBox "Длина рукавов: " & pi_HosesLength
-'MsgBox "Получается воды воды: " & ps_GetedWaterValue & "л/с"
 End Sub
 
 
 Private Sub Class_Terminate()
 'Set vco_App = Nothing
 'MsgBox "Класс уничтожен"
+End Sub
+
+Private Sub VarInit()
+'Инициируются переменные
+    pb_AllHosesWithLabels = True
+    pb_AllHosesWithPos = True
 End Sub
 
 
@@ -151,28 +195,47 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_ACCount = pi_ACCount + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 2 'АНР
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_MainPAHave = pi_MainPAHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 163 'АПП
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_MainPAHave = pi_MainPAHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 3 'АЛ
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_SpecialPAHave = pi_SpecialPAHave + 1
                     pi_ALCount = pi_ALCount + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 4 'АКП
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_SpecialPAHave = pi_SpecialPAHave + 1
                     pi_AKPCount = pi_AKPCount + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 5 'АСО
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -193,23 +256,45 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_TargetedPAHave = pi_TargetedPAHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
+                    pi_Hoses89Have = pi_Hoses89Have + vsO_Shape.Cells("Prop.Hose89")
+                    pi_Hoses110Have = pi_Hoses110Have + vsO_Shape.Cells("Prop.Hose110")
+                    pi_Hoses150Have = pi_Hoses150Have + vsO_Shape.Cells("Prop.Hose150")
+                    pi_Hoses200Have = pi_Hoses200Have + vsO_Shape.Cells("Prop.Hose200")
+                    pi_Hoses250Have = pi_Hoses250Have + vsO_Shape.Cells("Prop.Hose250")
+                    pi_Hoses300Have = pi_Hoses300Have + vsO_Shape.Cells("Prop.Hose300")
                 Case Is = 9 'AA
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_TargetedPAHave = pi_TargetedPAHave + 1
                     pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 10 'АВ
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_TargetedPAHave = pi_TargetedPAHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
+                    pi_Hoses89Have = pi_Hoses89Have + vsO_Shape.Cells("Prop.Hose89")
+                    pi_Hoses110Have = pi_Hoses110Have + vsO_Shape.Cells("Prop.Hose110")
+                    pi_Hoses150Have = pi_Hoses150Have + vsO_Shape.Cells("Prop.Hose150")
                 Case Is = 11 'АКТ
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_TargetedPAHave = pi_TargetedPAHave + 1
                     pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 12 'АП
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_TargetedPAHave = pi_TargetedPAHave + 1
@@ -231,6 +316,9 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_AGCount = pi_AGCount + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 16 'ПКС
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -256,10 +344,30 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_SpecialPAHave = pi_SpecialPAHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
+                    pi_Hoses89Have = pi_Hoses89Have + vsO_Shape.Cells("Prop.Hose89")
+                    pi_Hoses110Have = pi_Hoses110Have + vsO_Shape.Cells("Prop.Hose110")
+                    pi_Hoses150Have = pi_Hoses150Have + vsO_Shape.Cells("Prop.Hose150")
+                    pi_Hoses200Have = pi_Hoses200Have + vsO_Shape.Cells("Prop.Hose200")
+                    pi_Hoses250Have = pi_Hoses250Have + vsO_Shape.Cells("Prop.Hose250")
+                    pi_Hoses300Have = pi_Hoses300Have + vsO_Shape.Cells("Prop.Hose300")
                 Case Is = 160 'Общее обозначение
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
+                    pi_Hoses89Have = pi_Hoses89Have + vsO_Shape.Cells("Prop.Hose89")
+                    pi_Hoses110Have = pi_Hoses110Have + vsO_Shape.Cells("Prop.Hose110")
+                    pi_Hoses150Have = pi_Hoses150Have + vsO_Shape.Cells("Prop.Hose150")
+                    pi_Hoses200Have = pi_Hoses200Have + vsO_Shape.Cells("Prop.Hose200")
+                    pi_Hoses250Have = pi_Hoses250Have + vsO_Shape.Cells("Prop.Hose250")
+                    pi_Hoses300Have = pi_Hoses300Have + vsO_Shape.Cells("Prop.Hose300")
                     '>>>Учет возможности отсутствия ячеек "Prop.Dest" для старых фигур
                     On Error Resume Next
                     If vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString) = "Специальный" _
@@ -285,6 +393,11 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_ACCount = pi_ACCount + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 162 'АЦКП
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_MainPAHave = pi_MainPAHave + 1
@@ -292,11 +405,12 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_ACCount = pi_ACCount + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
-                Case Is = 163 'АПП
-                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                    pi_MainPAHave = pi_MainPAHave + 1
-                    pi_TechTotalCount = pi_TechTotalCount + 1
-                    pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+                    pi_Hoses38Have = pi_Hoses38Have + vsO_Shape.Cells("Prop.Hose38")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
+
             
             '---Прочая пожарная техника----------
                 Case Is = 24 'Поезда
@@ -305,18 +419,21 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
+                    pi_Hoses51Have = pi_Hoses51Have + vsO_Shape.Cells("Prop.Hose51")
+                    pi_Hoses66Have = pi_Hoses66Have + vsO_Shape.Cells("Prop.Hose66")
+                    pi_Hoses77Have = pi_Hoses77Have + vsO_Shape.Cells("Prop.Hose77")
                 Case Is = 25 'Самолет
-                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+                   'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 26 'Самолет-амфибия
-                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+                   'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 27 'Вертолет
-                    pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+                   'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
@@ -337,13 +454,13 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                 Case Is = 73 'Машины на гусеничном ходу
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+                    'pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 74 'Танки
                     pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
                     pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                    pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+                    'pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
                     pi_TechTotalCount = pi_TechTotalCount + 1
                     pi_FireTotalCount = pi_FireTotalCount + 1
                 Case Is = 3001 'МВД
@@ -355,6 +472,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     
             '---Объекты пожара-----------------
                 Case Is = 64 'Площадь пожара
+                      pi_FireCount = pi_FireCount + 1
                     If vsO_Shape.Cells("Prop.SquareTime") > pdt_LatestSquareTime Then 'Проверяем является ли данная фигура последней по времени
                         ps_FireSquare = vsO_Shape.Cells("User.FireSquare")
                         ps_ExtSquare = vsO_Shape.Cells("User.ExtSquare")
@@ -369,11 +487,16 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     End If
                     
                 Case Is = 71 'Задымление
+                    pi_SmokeCount = pi_SmokeCount + 1
                 Case Is = 70 'Очаг
+                    pi_OchagCount = pi_OchagCount + 1
                 Case Is = 92 'Гибель
                 Case Is = 84 'Распространение
+                    pi_DevelopCount = pi_DevelopCount + 1
                 Case Is = 86 'Огненный шторм
                 Case Is = 87 'Одиночный пожар
+                Case Is = 153 'stepen ognestoikosti
+                    pi_SOCount = pi_SOCount + 1
             
             '---СВязь и освещение------------------
                 Case Is = 57 'Прожектор
@@ -386,44 +509,59 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
     
             '---ГДЗС----------------------------
                 Case Is = 46 'Звено - ДАСВ
-                    pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                    pi_GDZSChainsCount = pi_GDZSChainsCount + 1
-                    pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
-                    If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
-                        ps_GDZSChainsRezCount = ps_GDZSChainsRezCount + 0.3333
-                        If fb_FirstChain(ps_GDZSChainsRezCount) Then
-                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + 3
-                        End If
-                    Else
-                        ps_GDZSChainsRezCount = ps_GDZSChainsRezCount + 1
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
+                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        pi_GDZSChainsCount = pi_GDZSChainsCount + 1
+                        pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
+                          If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
+                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 0.3334
+                          Else
+                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
+                              If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+                          End If
+                    End If
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
+                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
                         pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
                     End If
+                  
                     
                 Case Is = 90 'Звено - ДАСК
-                    pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                    pi_GDZSChainsCount = pi_GDZSChainsCount + 1
-                    pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
-                    If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
-                        ps_GDZSChainsRezCount = ps_GDZSChainsRezCount + 0.3333
-                        If fb_FirstChain(ps_GDZSChainsRezCount) Then
-                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + 3
-                        End If
-                    Else
-                        ps_GDZSChainsRezCount = ps_GDZSChainsRezCount + 1
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
+                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        pi_GDZSChainsCount = pi_GDZSChainsCount + 1
+                        pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
+                          If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
+                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 0.3334
+                          Else
+                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
+                              If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+                          End If
+                    End If
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
+                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
                         pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
                     End If
                     
                 Case Is = 47 'ПБ
+                    pi_GDZSpbCount = pi_GDZSpbCount + 1
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                 Case Is = 48 'КПП
+                    pi_KPPCount = pi_KPPCount + 1
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                 Case Is = 49 'Дымосос
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
     
             '---Управление силами и средствами--------
-                Case Is = 63 'БУ
-                    pi_BUCount = pi_BUCount + 1
+                Case Is = 63 'БУ и СПР
+                    If vsO_Shape.Cells("Prop.UTP_STP_Reserv").ResultStr(visUnitsString) = "Участок" _
+                        Then pi_BUCount = pi_BUCount + 1
+                    If vsO_Shape.Cells("Prop.UTP_STP_Reserv").ResultStr(visUnitsString) = "Сектор" _
+                        Then pi_SPRCount = pi_SPRCount + 1
                 Case Is = 62 'Штаб/РТП
+                    pi_ShtabCount = pi_ShtabCount + 1
                     pi_PersonnelNeed = pi_PersonnelNeed + 1
                     If Not vsO_Shape.Cells("Prop.NachStab").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
@@ -440,6 +578,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     If Not vsO_Shape.Cells("Prop.RTP5").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
                 Case Is = 83 'РНД
+                    pi_RNBDCount = pi_RNBDCount + 1
     
             '---ПТВ-----------------------------------
                 Case Is = 34 'Ручной водяной
@@ -545,18 +684,35 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
     
             '---Водоснабжение
                 Case Is = 50 'ПГ
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                 Case Is = 51 'ПВ
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                 Case Is = 52 'ПК
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                 Case Is = 53 'Водоем
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                     pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Value") * 1000
                 Case Is = 54 'Пирс
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                 Case Is = 56 'Башня
+                    pi_WaterSourceCount = pi_WaterSourceCount + 1
                     pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.WTValue") * 1000
+                Case Is = 75 'Rasstoyanie
+                    pi_distanceCount = pi_distanceCount + 1
                     
             '---Линии
                 Case Is = 100 'Напорная линия
                     If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
                         And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
+                          pi_linesCount = pi_linesCount + 1
+                        If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then
+                            pi_WorklinesCount = pi_WorklinesCount + 1
+                            If vsO_Shape.CellExists("User.Skatka", 0) = True Then pi_LineWorkSkatka = pi_LineWorkSkatka + 1 'считаем сколько рукавов в скатках
+                            'Проверяем имеет ли данная фигура подпись положения
+'                            Stop    'Реализовать!!!
+'                            IsHoseShapeHavePos vsO_Shape
+                        End If
+                        If vsO_Shape.CellExists("User.Skatka", 0) = True Then pi_HoseSkatka = pi_HoseSkatka + 1 'считаем сколько рукавов в скатках
                         Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
                             Case Is = 51
                                 If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
@@ -606,18 +762,65 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                                     pi_Hoses150Count = pi_Hoses150Count + vsO_Shape.Cells("Prop.HoseNeed")
                                     pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
                                 End If
+                            Case Is = 200
+                                If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
+                                    pi_Hoses200Count = pi_Hoses200Count + vsO_Shape.Cells("User.HosesNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("User.HosesNeed")
+                                Else
+                                    pi_Hoses200Count = pi_Hoses200Count + vsO_Shape.Cells("Prop.HoseNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
+                                End If
+                            Case Is = 250
+                                If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
+                                    pi_Hoses250Count = pi_Hoses250Count + vsO_Shape.Cells("User.HosesNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("User.HosesNeed")
+                                Else
+                                    pi_Hoses250Count = pi_Hoses250Count + vsO_Shape.Cells("Prop.HoseNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
+                                End If
+                            Case Is = 300
+                                If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
+                                    pi_Hoses300Count = pi_Hoses300Count + vsO_Shape.Cells("User.HosesNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("User.HosesNeed")
+                                Else
+                                    pi_Hoses300Count = pi_Hoses300Count + vsO_Shape.Cells("Prop.HoseNeed")
+                                    pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
+                                End If
                         End Select
-'                        pi_HosesCount = pi_HosesCount + vsO_Shape.Cells("Prop.HoseNeed")
                         If vsO_Shape.CellExists("User.TotalLenight", 0) = True Then 'Имеет ли фигура ячейку "User.TotalLenight"
                             pi_HosesLength = pi_HosesLength + vsO_Shape.Cells("User.TotalLenight")
                         Else
                             pi_HosesLength = pi_HosesLength + vsO_Shape.Cells("Prop.LineLenightHose")
                         End If
+                        'Проверяем имеет ли данная фигура подпись описания
+                        'Stop    'Реализовать!!!
+                        pb_AllHosesWithLabels = True
                     End If
                 Case Is = 101 'Всасывающая линия или напорно-всасывающая
+                Case Is = 151 'Polozenie linii
+                    pi_linesPosCount = pi_linesPosCount + 1
+                Case Is = 150 'Podpis linii
+                    pi_linesLableCount = pi_linesLableCount + 1
+                Case Is = 135 'Zdania
+                    pi_BuildCount = pi_BuildCount + 1
+                Case Is = 152 'Podis ulici
+                    pi_OrientCount = pi_OrientCount + 1
+                Case Is = 91 'Roza vetrov
+                    pi_OrientCount = pi_OrientCount + 1
+                    
                 Case Is = 195 'Index kolichestva izdeliy techniky
                     pi_PersonnelHave = pi_PersonnelHave + (vsO_Shape.Cells("Prop.PersonnelHave") - vsO_Shape.Cells("Prop.PersonnelHave") / vsO_Shape.Cells("Prop.Quantity")) - (vsO_Shape.Cells("Prop.Quantity") - 1)
                     pi_WaterValueHave = pi_WaterValueHave + (vsO_Shape.Cells("Prop.Water") - vsO_Shape.Cells("Prop.Water") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses38Have = pi_Hoses38Have + (vsO_Shape.Cells("Prop.Hoses38") - vsO_Shape.Cells("Prop.Hoses38") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses66Have = pi_Hoses66Have + (vsO_Shape.Cells("Prop.Hoses66") - vsO_Shape.Cells("Prop.Hoses66") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses51Have = pi_Hoses51Have + (vsO_Shape.Cells("Prop.Hoses51") - vsO_Shape.Cells("Prop.Hoses51") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses77Have = pi_Hoses77Have + (vsO_Shape.Cells("Prop.Hoses77") - vsO_Shape.Cells("Prop.Hoses77") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses89Have = pi_Hoses89Have + (vsO_Shape.Cells("Prop.Hoses89") - vsO_Shape.Cells("Prop.Hoses89") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses110Have = pi_Hoses110Have + (vsO_Shape.Cells("Prop.Hoses110") - vsO_Shape.Cells("Prop.Hoses110") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses150Have = pi_Hoses150Have + (vsO_Shape.Cells("Prop.Hoses150") - vsO_Shape.Cells("Prop.Hoses150") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses200Have = pi_Hoses200Have + (vsO_Shape.Cells("Prop.Hoses200") - vsO_Shape.Cells("Prop.Hoses200") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses250Have = pi_Hoses250Have + (vsO_Shape.Cells("Prop.Hoses250") - vsO_Shape.Cells("Prop.Hoses250") / vsO_Shape.Cells("Prop.Quantity"))
+                    pi_Hoses300Have = pi_Hoses300Have + (vsO_Shape.Cells("Prop.Hoses300") - vsO_Shape.Cells("Prop.Hoses300") / vsO_Shape.Cells("Prop.Quantity"))
                     
                 Select Case vsO_Shape.Cells("User.MotherIndexPers")
                           '---Пожарные автомобили-----------
@@ -794,7 +997,19 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
         End If
     End If
 Next vsO_Shape
-
+   'Суммируем имеющиеся рукава
+    pi_HosesHave = _
+    pi_Hoses38Have + _
+    pi_Hoses66Have + _
+    pi_Hoses51Have + _
+    pi_Hoses77Have + _
+    pi_Hoses89Have + _
+    pi_Hoses110Have + _
+    pi_Hoses150Have + _
+    pi_Hoses200Have + _
+    pi_Hoses250Have + _
+    pi_Hoses300Have
+    
 'Завершающий код - обобщает все полученные данные и по ним делат окончательный рассчет
 '---Например кол-во людей необходимых для прокладки линий
 
@@ -838,15 +1053,33 @@ Private Sub sc_SetPropertiesNull()
     ps_GetedWaterValueMax = 0     'Забирается воды из внешних источников Максимум
     pi_GetingWaterCount = 0       'Устройств забирающих воду кол-во
     pi_GDZSChainsCount = 0        'Количество звеньев ГДЗС
-    ps_GDZSChainsRezCount = 0     'Количество резервных звеньев ГДЗС
+    pi_GDZSChainsRezCount = 0     'Количество резервных звеньев ГДЗС
     pi_GDZSMansCount = 0          'Количество газрдымозащитников
     pi_GDZSMansRezCount = 0       'Количество газодымозащитников для резервных звеньев ГДЗС
+    pi_GDZSpbCount = 0            'Kolichestvo PB
+    pi_KPPCount = 0               'Kolichestvo KPP
     pi_Hoses51Count = 0           'Количество рукавов диаметром 51мм
     pi_Hoses66Count = 0           'Количество рукавов диаметром 66мм
     pi_Hoses77Count = 0           'Количество рукавов диаметром 77мм
     pi_Hoses89Count = 0           'Количество рукавов диаметром 89мм
     pi_Hoses110Count = 0          'Количество рукавов диаметром 110мм
     pi_Hoses150Count = 0          'Количество рукавов диаметром 150мм
+    pi_Hoses200Count = 0          'Количество рукавов диаметром 200мм
+    pi_Hoses250Count = 0          'Количество рукавов диаметром 250мм
+    pi_Hoses300Count = 0          'Количество рукавов диаметром 300мм
+    pi_HosesCount = 0             'Количество рукавов общее
+    pi_Hoses38Have = 0            'Количество рукавов диаметром 38мм имеется
+    pi_Hoses51Have = 0            'Количество рукавов диаметром 51мм имеется
+    pi_Hoses66Have = 0            'Количество рукавов диаметром 66мм имеется
+    pi_Hoses77Have = 0            'Количество рукавов диаметром 77мм имеется
+    pi_Hoses89Have = 0            'Количество рукавов диаметром 89мм имеется
+    pi_Hoses110Have = 0           'Количество рукавов диаметром 110мм имеется
+    pi_Hoses150Have = 0           'Количество рукавов диаметром 150мм имеется
+    pi_Hoses200Have = 0           'Количество рукавов диаметром 200мм имеется
+    pi_Hoses250Have = 0           'Количество рукавов диаметром 250мм имеется
+    pi_Hoses300Have = 0           'Количество рукавов диаметром 300мм имеется
+    pi_HoseSkatka = 0             'Количество рукавов в скатках
+    pi_LineWorkSkatka = 0         'Количество рабочих линий в скатках
     pi_HosesCount = 0             'Количество рукавов общее
     pi_HosesLength = 0            'Общая длина рукавных линий
     pi_WaterValueNeed = 0         'Требуемый запас воды
@@ -868,8 +1101,25 @@ Private Sub sc_SetPropertiesNull()
     pi_TechTotalCount = 0         'Общее количество техники
     pi_FireTotalCount = 0         'Пожарная
     pi_BUCount = 0                'Боевых участков
-    
-    
+    pi_SPRCount = 0               'Секторов
+    pi_ShtabCount = 0             'Shtab
+    pi_RNBDCount = 0              'Reshaushee napravlenie
+    pi_OchagCount = 0             'Ochag
+    pi_DevelopCount = 0           'Rasprostranenie
+    pi_SmokeCount = 0             'Zadimlenie
+    pi_WaterSourceCount = 0       'Vodoistochniki
+    pi_distanceCount = 0          'Rasstoyanie
+    pi_linesCount = 0             'Otdelnie linii
+    pi_linesPosCount = 0          'Polozenie linii
+    pi_linesLableCount = 0        'Podpisi linii
+    pi_WorklinesCount = 0         'Rabochie linii
+    pi_BuildCount = 0             'Zdania
+    pi_SOCount = 0                'Stepen ognestoikosti
+    pi_FireCount = 0              'Ploshad gorenia
+    pi_OrientCount = 0            'Ориентиры
+    pb_GDZSDiscr = False          'Несоответствие человек сложным условиям
+    ps_GDZSChainsRezNeed = 0      'Требуется звеньев
+   
     
     
     
@@ -891,5 +1141,18 @@ Private Function fb_FirstChain(as_Number As Single) As Boolean
     End If
 End Function
 
+Private Sub IsHoseShapeHavePos(ByRef hoseShape As Visio.Shape)
+'Проверяем наличие у рукавной линии подписи положения
+Dim con As Connect
+Dim tmpVal As Boolean
 
+    tmpVal = False
+    
+    For Each con In hoseShape.FromConnects
+        If con.FromSheet.Cells("User.IndexPers").Result(visNumber) = 151 Then tmpVal = True
+'        Debug.Print con.FromSheet.Name
+    Next con
+    
+    If pb_AllHosesWithPos Then pb_AllHosesWithPos = tmpVal
+End Sub
 

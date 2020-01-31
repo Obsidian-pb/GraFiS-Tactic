@@ -40,11 +40,7 @@ Private Sub Class_Initialize()
 End Sub
 
 Private Sub Class_Terminate()
-'    MsgBox "deleted"
-'    Set TB_Time = Nothing
-'    Set TB_Data = Nothing
-'    Set CB_Delete = Nothing
-'
+
     DataForm.Controls.Remove ("TB_Time_" & index)  '.Item("TB_Time_" & index).
     DataForm.Controls.Remove ("TB_Data_" & index)
     DataForm.Controls.Remove ("CB_Delete_" & index)
@@ -112,7 +108,6 @@ End Sub
 
 
 Private Sub TB_Data_Change()
-    'If IsNumeric(TB_Data) And InStr(1, TB_Data.Text, ",", vbTextCompare) = 0 And Len(TB_Data.Text) > 0 Then
     If IsNumeric(TB_Data) And Len(TB_Data.Text) > 0 Then
         DataForm.PS_ChangeDataValue index, TB_Data.Text
         TB_Data.ForeColor = vbBlack
@@ -124,7 +119,6 @@ End Sub
 
 
 Private Sub TB_Time_Change()
-    'If IsNumeric(TB_Time.Text) And InStr(1, TB_Time.Text, ",", vbTextCompare) = 0 And Len(TB_Time.Text) > 0 Then
     If IsNumeric(TB_Time.Text) And Len(TB_Time.Text) > 0 Then
         DataForm.PS_ChangeTimeValue index, TB_Time.Text
         TB_Time.ForeColor = vbBlack

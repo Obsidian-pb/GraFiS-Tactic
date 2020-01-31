@@ -9,29 +9,29 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Public WithEvents ComBut As Office.CommandBarButton
-Attribute ComBut.VB_VarHelpID = -1
+Public WithEvents comBut As Office.CommandBarButton
+Attribute comBut.VB_VarHelpID = -1
 
 
 Private Sub Class_Initialize()
-    Set ComBut = Application.CommandBars("Превращения").Controls("Естественный водоисточник")
+    Set comBut = Application.CommandBars("Превращения").Controls("Естественный водоисточник")
 'MsgBox ComBut.Caption
 End Sub
 
 Private Sub Class_Terminate()
-    Set ComBut = Nothing
+    Set comBut = Nothing
 End Sub
 
 Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 
-'    On Error GoTo EX
+    On Error GoTo EX
 '---Проверяем включена ли кнопка - если включена - отключаем
-    If Ctrl.State = msoButtonDown Then
-        Ctrl.State = msoButtonUp
+    If Ctrl.state = msoButtonDown Then
+        Ctrl.state = msoButtonUp
         Exit Sub
     End If
 
-    If Ctrl.State = msoButtonUp Then
+    If Ctrl.state = msoButtonUp Then
         If IsSelectedOneShape(False) Then
         '---Если выбрана хоть одна фигура - пытаемся ее обратить
             If IsHavingUserSection(True) And IsSquare(True) Then
@@ -39,13 +39,10 @@ Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As
                 MorphToLake
             End If
         Else
-'            MsgBox "Не выбрано ни одной фигуры! Будет включен режим автоматического обращения!"
             PS_CheckButtons Ctrl
         End If
     End If
     
-'            '---Обращаем фигуру в фигуру зону горения
-'                MorphToLake
     
 Exit Sub
 EX:
@@ -54,32 +51,6 @@ End Sub
 Public Sub MorphToLake()
 
     On Error GoTo EX
-'---Проверяем имеется ли возможность обращения фигуры
-'    If Not CheckSquareShape Then
-'    '---Отмечаем кнопку
-''        PS_CheckButtons ComBut
-'    '---Проверка - потом удалить или подтвердить
-'        ComBut.State = msoButtonUp
-'        Exit Sub
-'    End If
-    
-'---Проверяем включена ли кнопка - если включена - отключаем
-'    If ComBut.State = msoButtonDown Then
-'        ComBut.State = msoButtonUp
-'        Exit Sub
-'    End If
-
-'    If ComBut.State = msoButtonUp Then
-'        If IsSelectedOneShape(False) Then
-'        '---Если выбрана хоть одна фигура - пытаемся ее обратить
-'            If IsHavingUserSection(True) And IsSquare(True) Then
-'            '---Обращаем фигуру в фигуру зону горения
-'                ImportOpenWaterInformation
-'            End If
-'        Else
-'            PS_CheckButtons ComBut
-'        End If
-'    End If
 
 '---Запускаем процедуру обращения выбранной фигуры в естественный водоисточник
     ImportOpenWaterInformation
@@ -87,3 +58,20 @@ Public Sub MorphToLake()
 Exit Sub
 EX:
 End Sub
+
+Public Sub PictureRefresh()
+'Обновляем картинки на кнопках
+Dim cb As Office.CommandBarButton
+Dim DocPath As String
+    
+'---Обновляем иконки на кнопках
+    DocPath = ThisDocument.path
+    Set cb = Application.CommandBars("Превращения").Controls("Естественный водоисточник")
+    With cb
+        .Picture = LoadPicture(DocPath & "Bitmaps\Lake1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\Lake2.bmp")
+    End With
+    
+Set cb = Nothing
+End Sub
+

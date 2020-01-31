@@ -382,12 +382,12 @@ End Function
 '-----------------------------Инструменты-------------------------------------------
 Private Function CreateNewCell(ByVal x As Long, ByVal y As Long) As c_Cell
 'Создаем новую клетку
-Dim cell As c_Cell
+Dim Cell As c_Cell
     
-    Set cell = New c_Cell
-    Set cell.ParentMatrix = Me
-    cell.x = x
-    cell.y = y
+    Set Cell = New c_Cell
+    Set Cell.ParentMatrix = Me
+    Cell.x = x
+    Cell.y = y
     
-Set CreateNewCell = cell
+Set CreateNewCell = Cell
 End Function

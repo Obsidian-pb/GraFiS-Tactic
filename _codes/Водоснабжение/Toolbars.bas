@@ -33,7 +33,7 @@ Sub AddButtons()
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Превращения")
-    DocPath = Application.Documents("Водоснабжение.vss").path
+    DocPath = ThisDocument.path
     
 '---Добавляем кнопки на панель управления "Превращения"--------------------------------
 '---Кнопка "Обратить в открытый водоисточник"-------------------------------------------------
@@ -79,9 +79,9 @@ Dim v_Cntrl As CommandBarControl
     
     For Each v_Cntrl In Application.CommandBars("Превращения").Controls
         If v_Cntrl.Caption = a_MainBtn.Caption Then
-            v_Cntrl.State = Not a_MainBtn.State 'msoButtonDown
+            v_Cntrl.state = Not a_MainBtn.state 'msoButtonDown
         Else
-            v_Cntrl.State = False 'msoButtonUp
+            v_Cntrl.state = False 'msoButtonUp
         End If
     Next v_Cntrl
 End Sub

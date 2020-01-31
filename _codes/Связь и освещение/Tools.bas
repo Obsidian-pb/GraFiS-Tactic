@@ -1,12 +1,14 @@
 Attribute VB_Name = "Tools"
+Option Explicit
+
 
 Public Function ListImport(TableName As String, FieldName As String) As String
 'Функция получения независимого списка из базы данных
-Dim dbs As Database, rst As Recordset
+Dim dbs As Object, rst As Object
 Dim pth As String
 Dim SQLQuery As String
 Dim List As String
-Dim RSField As DAO.Field
+Dim RSField As Object
 
     On Error GoTo EX
 
@@ -19,8 +21,11 @@ Dim RSField As DAO.Field
         
     '---Создаем набор записей для получения списка
         pth = ThisDocument.path & "Signs.fdb"
-        Set dbs = GetDBEngine.OpenDatabase(pth)
-        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+        Set dbs = CreateObject("ADODB.Connection")
+        dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+        dbs.Open
+        Set rst = CreateObject("ADODB.Recordset")
+        rst.Open SQLQuery, dbs, 3, 1
         Set RSField = rst.Fields(FieldName)
         
     '---Ищем необходимую запись в наборе данных и по ней создаем набор значений для списка для заданных параметров
@@ -32,22 +37,26 @@ Dim RSField As DAO.Field
         Loop
     End With
     List = Chr(34) & Left(List, Len(List) - 1) & Chr(34)
-ListImport = List
+    ListImport = List
 
+Set dbs = Nothing
+Set rst = Nothing
 Exit Function
 EX:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "ListImport"
     ListImport = Chr(34) & " " & Chr(34)
+    Set dbs = Nothing
+    Set rst = Nothing
 End Function
 
 Public Function ListImport2(TableName As String, FieldName As String, FieldName2 As String, Criteria As String) As String
 'Функция получения зависимого списка из базы данных
-Dim dbs As Database, rst As Recordset
+Dim dbs As Object, rst As Object
 Dim pth As String
 Dim SQLQuery As String
 Dim List As String
-Dim RSField As DAO.Field, RSField2 As DAO.Field
+Dim RSField As Object, RSField2 As Object
 
     On Error GoTo EX
 
@@ -61,8 +70,11 @@ Dim RSField As DAO.Field, RSField2 As DAO.Field
         
     '---Создаем набор записей для получения списка
         pth = ThisDocument.path & "Signs.fdb"
-        Set dbs = GetDBEngine.OpenDatabase(pth)
-        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  'Создание набора записей
+        Set dbs = CreateObject("ADODB.Connection")
+        dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
+        dbs.Open
+        Set rst = CreateObject("ADODB.Recordset")
+        rst.Open SQLQuery, dbs, 3, 1
         Set RSField = rst.Fields(FieldName)
         
     '---Проверяем количество записей в наборе и если их 0 возвращаем 0
@@ -80,23 +92,19 @@ Dim RSField As DAO.Field, RSField2 As DAO.Field
             List = "0"
         End If
         List = Chr(34) & Left(List, Len(List) - 1) & Chr(34)
-ListImport2 = List
+    ListImport2 = List
+    
+Set dbs = Nothing
+Set rst = Nothing
 Exit Function
 EX:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "ListImport2"
     ListImport2 = Chr(34) & " " & Chr(34)
+    Set dbs = Nothing
+    Set rst = Nothing
 End Function
 
-Public Function GetDBEngine() As Object
-'Function returns DBEngine for current Office Engine Type (DAO.DBEngine.60 or DAO.DBEngine.120)
-Dim engine As Object
-    On Error GoTo EX
-    Set GetDBEngine = DBEngine
-Exit Function
-EX:
-    Set GetDBEngine = CreateObject("DAO.DBEngine.120")
-End Function
 
 
 
@@ -124,7 +132,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке

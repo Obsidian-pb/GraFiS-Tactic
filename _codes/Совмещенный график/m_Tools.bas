@@ -150,7 +150,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке
@@ -160,28 +160,3 @@ Const d = " | "
     Close #1
 
 End Sub
-
-
-'Public Function PF_StringCheck(ByVal a_String As String) As Boolean
-''Функция возвращает ИСТНИА, если строка является цифрой
-'
-'
-'End Function
-
-
-
-
-'Private Sub Tessst()
-'Dim ArrTest() As String
-'Dim shp As Visio.Shape
-'
-''StringToArray "12;5;32;;12;10;", ";", ArrTest()
-'
-'    Set shp = Application.ActivePage.Shapes.ItemFromID(182)
-'    PS_GraphicsFix shp
-'
-'End Sub
-
-
-
-

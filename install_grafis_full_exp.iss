@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "АИГС ГраФиС-Тактик"
-#define MyAppVersion "11.2.00"
+#define MyAppVersion "12.0.00"
 #define MyAppPublisher "НТЦ ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России"
 #define MyAppURL "https://www.graphicalfiresets.ru/"
 
@@ -77,7 +77,6 @@ Source: "Справочник.accdb"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Техника прочее НРС.vss"; DestDir: "{app}"; components: traf_nrs
 Source: "Техника прочее.vss"; DestDir: "{app}"; components: traf
 Source: "Управление СиС.vss"; DestDir: "{app}"; components: traf
-Source: "Формы (управление) 2.vss"; DestDir: "{app}"; components: traf
 Source: "Формы (управление).vss"; DestDir: "{app}"; components: traf
 Source: "Сведения.xls"; DestDir: "{app}"; Flags: confirmoverwrite; components: traf
 Source: "Шаблон моделирование НРС с масштабом 200.vst"; DestDir: "{app}"; components: traf_nrs
@@ -89,7 +88,6 @@ Source: "Шаблон плана эвакуации (500).vst"; DestDir: "{app}"; components: templa
 Source: "Шаблон плана эвакуации (1000).vst"; DestDir: "{app}"; components: templatesEvac
 Source: "Bitmaps\*"; DestDir: "{app}\Bitmaps\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "_installer\ico.ico"; DestDir: "{app}"; components: traf traf_nrs
-Source: "Дополнительно\DAO\dao360.dll"; DestDir: "{dao}"; Flags: uninsneveruninstall; Tasks: dao
 Source: "Отчеты\Конструктор отчетов.vsd"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "Отчеты\Детали отчетов.vss"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "Цветовые схемы\Белая школьная доска - ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
@@ -103,13 +101,15 @@ Source: "Цветовые схемы\Сине-серая школьная доска - ГОСТ.vsd"; DestDir: "{app}\Ц
 Source: "Цветовые схемы\Черная школьная доска - ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "Цветовые схемы\Черная.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 
+Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{sys}"; Flags: uninsneveruninstall regserver 32bit
+Source: "Дополнительно\COMCTL\mscomctl.ocx"; DestDir: "{sys}"; Flags: uninsneveruninstall regserver 64bit; Check: IsWin64
+
 Source: "Шрифты\*"; DestDir: "{fonts}"; Flags: onlyifdoesntexist uninsneveruninstall; components: fonts
 
 Source: "_source\OSM2Visio\v 2007\*"; DestDir: "{app}\v 2007\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: gr\visio07
 Source: "_source\OSM2Visio\v 2010, 2013, 2016\*"; DestDir: "{app}\v 2010, 2013, 2016\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: gr\visio10
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Tasks]
-Name: dao; Description: "Установить библиотеку dao360.dll (рекомендуется)"; GroupDescription: "Библиотеки:";
 Name: reg; Description: "Настроить политику безопасности MS Visio - включить все макросы"; GroupDescription: "Настройки MS Visio:";components: traf
 Name: desktopicon1; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 200"; GroupDescription: "Ярлыки:";components: traf
 Name: desktopicon2; Description: "Создать ярлык на рабочем столе Шаблон с масштабом 500"; GroupDescription: "Ярлыки:"; Flags: unchecked;components: traf
@@ -125,10 +125,10 @@ Name: desktopicon4; Description: "Создать ярлык на рабочем столе Шаблон моделиро
 Name: "{group}\Шаблон с масштабом 200"; Filename: "{app}\Шаблон с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
 Name: "{group}\Шаблон с масштабом 500"; Filename: "{app}\Шаблон с масштабом 500.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
 Name: "{group}\Шаблон с масштабом 1000"; Filename: "{app}\Шаблон с масштабом 1000.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон моделирование НРС с масштабом 200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон плана эвакуации с масштабом 200"; Filename: "{app}\Шаблон плана эвакуации (200).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон плана эвакуации с масштабом 500"; Filename: "{app}\Шаблон плана эвакуации (500).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
-Name: "{group}\Шаблон плана эвакуации с масштабом 1000"; Filename: "{app}\Шаблон плана эвакуации (1000).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf
+Name: "{group}\Шаблон моделирование НРС с масштабом 200"; Filename: "{app}\Шаблон моделирование НРС с масштабом 200.vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: traf_nrs
+Name: "{group}\Шаблон плана эвакуации с масштабом 200"; Filename: "{app}\Шаблон плана эвакуации (200).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: templatesEvac
+Name: "{group}\Шаблон плана эвакуации с масштабом 500"; Filename: "{app}\Шаблон плана эвакуации (500).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: templatesEvac
+Name: "{group}\Шаблон плана эвакуации с масштабом 1000"; Filename: "{app}\Шаблон плана эвакуации (1000).vst"; WorkingDir: "{app}"; IconFilename:"{app}\ico.ico";components: templatesEvac
 
 Name: "{group}\Сведения по подразделениям"; Filename: "{app}\Сведения.xls"; WorkingDir: "{app}"; components: traf
 

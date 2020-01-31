@@ -101,7 +101,7 @@ Public Sub tmrPrc(ByVal hwnd As Long, ByVal uMsg As Long, ByVal idEvent As Long,
 'Это обработчик таймера - "таймерная" процедура../
 Dim controlDate As CommandBarControl
 Dim controlTime As CommandBarControl
-Dim timeCell As Visio.cell
+Dim timeCell As Visio.Cell
 Dim curDateTime As Date
 
     On Error GoTo EX

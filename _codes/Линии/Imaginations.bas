@@ -35,7 +35,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Линии.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Проверяем наличие секции с указанным SectionIndex и в случае отсутствия создаем её
@@ -72,7 +72,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Линии.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Проверяем наличие секции с указанным SectionIndex и в случае отсутствия создаем её
@@ -103,7 +103,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Линии.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Запускаем цикл работы со строками Шейп-листа
@@ -134,7 +134,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-    Set ShapeFrom = Application.Documents("Линии.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+    Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
     Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Запускаем цикл работы со строками Шейп-листа
@@ -163,7 +163,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer, CellNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Линии.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Создаем необхоимое количество строк
@@ -181,7 +181,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 Dim RowNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Линии.vss").Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1) 'Application.ActivePage.Shapes.ItemFromID(ShapeFromID)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Сверяем наборы строк в обеих фигурах, и в случае отсутствия в них искомых - создаем их.
@@ -199,7 +199,7 @@ Dim RowCountFrom As Integer, RowCountTo As Integer
 'Dim RowNum As Integer
 
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-Set ShapeFrom = Application.Documents("Линии.vss").Masters(ShapeFromID).Shapes(1)
+Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
 Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 '---Присваиваем полю Comment новой фигуры значение из фигура эталона.
@@ -220,12 +220,9 @@ Sub ImportHoseInformation(ByRef ShapeTo As Visio.Shape)
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeFrom As Visio.Shape
 
+Const masterName = "Напорная линия"  'Ранее: "Рукав - скатка"
+
     On Error GoTo EX
-'    '---Проверяем выбран ли какой либо объект
-'    If Application.ActiveWindow.Selection.Count < 1 Then
-'        MsgBox "Не выбрана ни одна фигура!", vbInformation
-'        Exit Sub
-'    End If
     
     '---Проверяем, не является ли выбранная фигура уже рукавом или другой фигурой с назначенными свойствами
     If ShapeTo.RowCount(visSectionUser) > 0 Then
@@ -250,11 +247,9 @@ Dim ShapeFrom As Visio.Shape
     End If
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
-'    Set ShapeTo = Application.ActiveWindow.Selection(1)
-    Set ShapeFrom = Application.Documents("Линии.vss").Masters("Рукав - скатка").Shapes(1)
-    IDTo = ShapeTo.ID   'Application.ActivePage.Shapes("Sheet.2").ID
-    'IDFrom = ShapeFrom.Index
-    IDFrom = Application.Documents("Линии.vss").Masters("Рукав - скатка").Index
+    Set ShapeFrom = ThisDocument.Masters(masterName).Shapes(1)
+    IDTo = ShapeTo.ID
+    IDFrom = ThisDocument.Masters(masterName).Index
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
     CloneSectionUniverseNames 240, IDFrom, IDTo
@@ -276,21 +271,16 @@ Dim ShapeFrom As Visio.Shape
 
 '---Осуществляем соединение рукавной линии
     ReconnectHose ShapeTo
-
-''---Открываем окно свойств обращенной фигуры
-'On Error Resume Next
-'Application.DoCmd (1312)
-
+    
+'---Пересчитываем длину
     LenightSetInner (ShapeTo.Name)
 
 '---Очищаем объектные переменные
-'    Set ShapeTo = Nothing
     Set ShapeFrom = Nothing
     
 Exit Sub
 EX:
     '---Очищаем объектные переменные
-'    Set ShapeTo = Nothing
     Set ShapeFrom = Nothing
     SaveLog Err, "ImportHoseInformation"
 End Sub
@@ -325,10 +315,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 '---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
     Set ShapeTo = Application.ActiveWindow.Selection(1)
-    Set ShapeFrom = Application.Documents("Линии.vss").Masters("Всасывающая линия").Shapes(1)
+    Set ShapeFrom = ThisDocument.Masters("Всасывающая линия").Shapes(1)
     IDTo = ShapeTo.ID
-    'IDFrom = ShapeFrom.Index  'Application.Documents("Очаг.vss").Masters("Площадь прямоугольная").Index
-    IDFrom = Application.Documents("Линии.vss").Masters("Всасывающая линия").Index
+    IDFrom = ThisDocument.Masters("Всасывающая линия").Index
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
     CloneSectionUniverseNames 240, IDFrom, IDTo
@@ -351,9 +340,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 '---Осуществляем соединение рукавной линии
     ReconnectHose ShapeTo
 
-'---Открываем окно свойств обращенной фигуры
-    'Application.DoCmd (1312)
-
+'---Пересчитываем длину
     LenightSetInner (ShapeTo.Name)
     
 Exit Sub
@@ -372,8 +359,8 @@ Dim vsoLayer As Visio.Layer
 
     On erro GoTo EX
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
-    Set ShapeFrom = Application.Documents("Линии.vss").Masters(ShapeFromID).Shapes(1)
-'    MsgBox Application.Documents("Линии.vss").Masters(ShapeFromID)
+    Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
+'    MsgBox ThisDocument.Masters(ShapeFromID)
     
 '---Получаем название слоя соответственно номеру в исходном документе
     LayerName = ShapeFrom.Layer(1).Name

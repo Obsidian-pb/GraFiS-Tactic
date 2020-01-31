@@ -4,18 +4,6 @@ Option Explicit
 
 
 
-Public Function GetDBEngine() As Object
-'Function returns DBEngine for current Office Engine Type (DAO.DBEngine.60 or DAO.DBEngine.120)
-Dim engine As Object
-    On Error GoTo EX
-    Set GetDBEngine = DBEngine
-Exit Function
-EX:
-    Set GetDBEngine = CreateObject("DAO.DBEngine.120")
-End Function
-
-
-
 Public Function PF_RoundUp(afs_Value As Single) As Integer
 'Процедура округления ПОЛОЖИТЕЛЬНЫХ чисел в большую сторону
 Dim vfi_Temp As Integer
@@ -35,7 +23,7 @@ Const d = " | "
     Open ThisDocument.path & "/Log.txt" For Append As #1
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
-    errString = Now & d & Environ("OS") & d & Environ("HOMEPATH") & d & Environ("APPDATA") & d & eroorPosition & _
+    errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
         d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке

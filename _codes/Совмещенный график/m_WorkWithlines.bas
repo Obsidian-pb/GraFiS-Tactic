@@ -19,7 +19,6 @@ Dim FormulaString As String
     CurCtrlRowNumber = shp.Section(visSectionControls).Count + 1
     PreviosCtrlRowNumber = shp.Section(visSectionControls).Count
 
-    'shp.AddRow visSectionControls, PreviosCtrlRowNumber, visCtlX
     shp.AddNamedRow visSectionControls, "Row_" & CurCtrlRowNumber, visCtlX
     shp.CellsSRC(visSectionControls, PreviosCtrlRowNumber, visCtlX).FormulaForceU = "Width*0.95"
     shp.CellsSRC(visSectionControls, PreviosCtrlRowNumber, visCtlY).FormulaForceU = "Height*0"
@@ -53,14 +52,8 @@ Dim FormulaString As String
 
     'Блок добавления в массив данных о расходах привязки к новой точке
     '---Для расхода
-'    FormulaString = shp.CellsSRC(visSectionScratch, 0, visScratchA).FormulaU & _
-'        "&" & Chr(34) & ";" & Chr(34) & "&ROUND(User.MaxExpense*Controls.Row_" & CurCtrlRowNumber & ".Y/Height,2)"
-'    shp.CellsSRC(visSectionScratch, 0, visScratchA).FormulaU = FormulaString
     shp.CellsSRC(visSectionScratch, 0, visScratchA).FormulaU = pf_WaterExpenseString(shp.RowCount(visSectionControls))
     '---Для времени
-'    FormulaString = shp.CellsSRC(visSectionScratch, 0, visScratchB).FormulaU & _
-'        "&" & Chr(34) & ";" & Chr(34) & "&ROUND(User.TimeMax*Controls.Row_" & CurCtrlRowNumber & "/Width,2)"
-'    shp.CellsSRC(visSectionScratch, 0, visScratchB).FormulaU = FormulaString
     shp.CellsSRC(visSectionScratch, 0, visScratchB).FormulaU = pf_TimeString(shp.RowCount(visSectionControls))
     '---Добавляем всплывающую подсказку для контрола
     FormulaString = "Расход: " & Chr(34) & " & Index(" & PreviosCtrlRowNumber & ", Scratch.A1) & " & Chr(34) & "л/с; Время: " & Chr(34) & " & Index(" & PreviosCtrlRowNumber & ", Scratch.B1) & " & Chr(34) & "мин."
@@ -126,7 +119,6 @@ Dim FormulaString As String
     CurCtrlRowNumber = shp.Section(visSectionControls).Count + 1
     PreviosCtrlRowNumber = shp.Section(visSectionControls).Count
 
-'    shp.AddRow visSectionControls, PreviosCtrlRowNumber, visCtlX
     shp.AddNamedRow visSectionControls, "Row_" & CurCtrlRowNumber, visCtlX
     shp.CellsSRC(visSectionControls, PreviosCtrlRowNumber, visCtlX).FormulaForceU = "Width*(User.EndTime/User.TimeMax)*0.9"  '"Width*0.95"
     shp.CellsSRC(visSectionControls, PreviosCtrlRowNumber, visCtlY).FormulaForceU = "Height*0.1"
@@ -154,14 +146,8 @@ Dim FormulaString As String
 
     'Блок добавления в массив данных о расходах привязки к новой точке
     '---Для площади
-'    FormulaString = shp.CellsSRC(visSectionScratch, 0, visScratchA).FormulaU & _
-'        "&" & Chr(34) & ";" & Chr(34) & "&ROUND(User.FireMax*Controls.Row_" & CurCtrlRowNumber & ".Y/Height,2)"
-'    shp.CellsSRC(visSectionScratch, 0, visScratchA).FormulaU = FormulaString
     shp.CellsSRC(visSectionScratch, 0, visScratchA).FormulaU = pf_FireString(shp.RowCount(visSectionControls))
     '---Для времени
-'    FormulaString = shp.CellsSRC(visSectionScratch, 0, visScratchB).FormulaU & _
-'        "&" & Chr(34) & ";" & Chr(34) & "&ROUND(User.TimeMax*Controls.Row_" & CurCtrlRowNumber & "/Width,2)"
-'    shp.CellsSRC(visSectionScratch, 0, visScratchB).FormulaU = FormulaString
     shp.CellsSRC(visSectionScratch, 0, visScratchB).FormulaU = pf_TimeString(shp.RowCount(visSectionControls))
     '---Добавляем всплывающую подсказку для контрола
     FormulaString = "Площадь пожара: " & Chr(34) & " & Index(" & PreviosCtrlRowNumber & ", Scratch.A1) & " & Chr(34) & "м.кв.; Время: " & Chr(34) & " & Index(" & PreviosCtrlRowNumber & ", Scratch.B1) & " & Chr(34) & "мин."
@@ -221,7 +207,6 @@ Dim FormulaString As String
     CurCtrlRowNumber = shp.Section(visSectionControls).Count + 1
     PreviosCtrlRowNumber = shp.Section(visSectionControls).Count
 
-    'shp.AddRow visSectionControls, PreviosCtrlRowNumber, visCtlX
     shp.AddNamedRow visSectionControls, "Row_" & CurCtrlRowNumber, visCtlX
     shp.CellsSRC(visSectionControls, PreviosCtrlRowNumber, visCtlX).FormulaForceU = "Width*0.9"
     shp.CellsSRC(visSectionControls, PreviosCtrlRowNumber, visCtlY).FormulaForceU = "Controls.Row_" & PreviosCtrlRowNumber & ".Y"  'shp.CellsSRC(visSectionControls, PreviosCtrlRowNumber - 1, visCtlY).Result(visMeters)  '"Height*0.1"
@@ -335,7 +320,6 @@ For Each OtherShape In Application.ActivePage.Shapes
                 If ShpObj.CellExists("User.Intense", 0) = True Then
                     ShpObj.Cells("User.Intense").FormulaU = "Sheet." & OtherShape.ID & "!User.WaterIntense"
                 End If
-'                OtherShape.SendToBack
 
             '---Для предотвращения дальнейшего исполнения выходим из процедуры
             Set OtherShape = Nothing
@@ -357,7 +341,6 @@ Next OtherShape
             ShpObj.Cells("User.EndTime").FormulaU = ShpObj.Cells("User.EndTime")
         End If
                 
-'Application.ActiveWindow.Selection.BringToFront
 ShpObj.BringToFront
 
 

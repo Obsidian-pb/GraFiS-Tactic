@@ -14,8 +14,8 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
             ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
 
             '---Обновляем список моделей и их ТТХ
-                ModelsListImport (ShpObj.ID)
-                GetTTH (ShpObj.ID)
+                ModelsListImport ShpObj
+                GetTTH ShpObj
             '---Добавляем ссылку на текущее время страницы
                 ShpObj.Cells("Prop.ArrivalTime").Formula = _
                     Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
@@ -46,17 +46,15 @@ End Sub
 
 
 '------------------------Блок зависимых списков------------------------------
-Public Sub ModelsListImport(ShpIndex As Long)
+Public Sub ModelsListImport(shp As Visio.Shape)
 'Процедура импорта моделей
 '---Объявляем переменные
-Dim shp As Visio.Shape
 Dim IndexPers As Integer
 Dim Criteria As String
 
     On Error GoTo Tail
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     IndexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели(Набор) для текущей фигуры
@@ -116,8 +114,6 @@ Dim Criteria As String
     If shp.Cells("Prop.Model").ResultStr(Visio.visNone) = "" Or shp.Cells("Prop.Model.Format").ResultStr(Visio.visNone) = "" Then
         shp.Cells("Prop.Model").FormulaU = "INDEX(0,Prop.Model.Format)"
     End If
-    
-    Set shp = Nothing
     
 Exit Sub
 Tail:
