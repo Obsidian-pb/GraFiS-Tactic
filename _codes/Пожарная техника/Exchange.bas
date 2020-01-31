@@ -1,64 +1,62 @@
 Attribute VB_Name = "Exchange"
 '------------------------Модуль для процедур импорта ТТХ-------------------
 '-----------------------------------Управляющий блок-------------------------------------------------
-Public Sub GetTTH(ShpIndex As Long)
+Public Sub GetTTH(shp As Visio.Shape)
 'Управляющая процедура импорта ТТХ автомобилей
 '---Объявляем переменные
-Dim shp As Visio.Shape
 Dim IndexPers As Integer
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     IndexPers = shp.Cells("User.IndexPers")
     
 '---Запускаем процедуру получения относительного списка Модели(Набор) для текущей фигуры
 Select Case IndexPers
     Case Is = 1
-        GetValuesOfCellsFromTable ShpIndex, "З_Автоцистерны"
+        GetValuesOfCellsFromTable shp, "З_Автоцистерны"
     Case Is = 2
-        GetValuesOfCellsFromTable ShpIndex, "З_АНР"
+        GetValuesOfCellsFromTable shp, "З_АНР"
     Case Is = 3
-        GetValuesOfCellsFromTable ShpIndex, "З_АЛ"
+        GetValuesOfCellsFromTable shp, "З_АЛ"
     Case Is = 4
-        GetValuesOfCellsFromTable ShpIndex, "З_АКП"
+        GetValuesOfCellsFromTable shp, "З_АКП"
     Case Is = 5
-        GetValuesOfCellsFromTable ShpIndex, "З_АСО"
+        GetValuesOfCellsFromTable shp, "З_АСО"
     Case Is = 6
-        GetValuesOfCellsFromTable ShpIndex, "З_АТ"
+        GetValuesOfCellsFromTable shp, "З_АТ"
     Case Is = 7
-        GetValuesOfCellsFromTable ShpIndex, "З_АД"
+        GetValuesOfCellsFromTable shp, "З_АД"
     Case Is = 8
-        GetValuesOfCellsFromTable ShpIndex, "З_ПНС"
+        GetValuesOfCellsFromTable shp, "З_ПНС"
     Case Is = 9
-        GetValuesOfCellsFromTable ShpIndex, "З_АА"
+        GetValuesOfCellsFromTable shp, "З_АА"
     Case Is = 10
-        GetValuesOfCellsFromTable ShpIndex, "З_АВ"
+        GetValuesOfCellsFromTable shp, "З_АВ"
     Case Is = 11
-        GetValuesOfCellsFromTable ShpIndex, "З_АКТ"
+        GetValuesOfCellsFromTable shp, "З_АКТ"
     Case Is = 12
-        GetValuesOfCellsFromTable ShpIndex, "З_АП"
+        GetValuesOfCellsFromTable shp, "З_АП"
     Case Is = 13
-        GetValuesOfCellsFromTable ShpIndex, "З_АГВТ"
+        GetValuesOfCellsFromTable shp, "З_АГВТ"
     Case Is = 14
-        GetValuesOfCellsFromTable ShpIndex, "З_АГТ"
+        GetValuesOfCellsFromTable shp, "З_АГТ"
     Case Is = 15
-        GetValuesOfCellsFromTable ShpIndex, "З_АГДЗС"
+        GetValuesOfCellsFromTable shp, "З_АГДЗС"
     Case Is = 16
-        GetValuesOfCellsFromTable ShpIndex, "З_ПКС"
+        GetValuesOfCellsFromTable shp, "З_ПКС"
     Case Is = 17
-        GetValuesOfCellsFromTable ShpIndex, "З_ЛБ"
+        GetValuesOfCellsFromTable shp, "З_ЛБ"
     Case Is = 18
-        GetValuesOfCellsFromTable ShpIndex, "З_АСА"
+        GetValuesOfCellsFromTable shp, "З_АСА"
     Case Is = 19
-        GetValuesOfCellsFromTable ShpIndex, "З_АШ"
+        GetValuesOfCellsFromTable shp, "З_АШ"
     Case Is = 20
-        GetValuesOfCellsFromTable ShpIndex, "З_АР"
+        GetValuesOfCellsFromTable shp, "З_АР"
     Case Is = 161
-        GetValuesOfCellsFromTable ShpIndex, "З_АЦЛ"
+        GetValuesOfCellsFromTable shp, "З_АЦЛ"
     Case Is = 162
-        GetValuesOfCellsFromTable ShpIndex, "З_АЦКП"
+        GetValuesOfCellsFromTable shp, "З_АЦКП"
     Case Is = 163
-        GetValuesOfCellsFromTable ShpIndex, "З_АПП"
+        GetValuesOfCellsFromTable shp, "З_АПП"
         
         
         
