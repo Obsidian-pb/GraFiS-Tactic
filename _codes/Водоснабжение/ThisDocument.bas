@@ -104,9 +104,9 @@ Dim ShpInd As Integer
         '---Запускаем процедуру получения СПИСКА диаметров
 '        DiametersListImport (ShpInd)
         '---Запускаем процедуру получения СПИСКА напоров
-        PressuresListImport (ShpInd)
+        PressuresListImport Cell.Shape
         '---Запускаем процедуру пересчета водоотдачи
-        ProductionImport (ShpInd)
+        ProductionImport Cell.Shape
     End If
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие

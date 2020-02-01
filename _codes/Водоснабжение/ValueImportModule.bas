@@ -1,16 +1,16 @@
 Attribute VB_Name = "ValueImportModule"
 '------------------------Модуль для процедур импорта значений ячеек-------------------
 '------------------------Блок Значений ячеек------------------------------------------
-Public Sub ProductionImport(ShpIndex As Long)
+Public Sub ProductionImport(shp As Visio.Shape)
 'Процедура возвращающая и присваивающая ячейке Водоотдача в соответсвии с видом водовода и напором
 '---Объявляем переменные
-Dim shp As Visio.Shape
+'Dim shp As Visio.Shape
 Dim IndexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     IndexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения Типа струи при заданном Виде струи для текущей фигуры
@@ -23,7 +23,7 @@ Dim Criteria As String
     
     End Select
 
-Set shp = Nothing
+'Set shp = Nothing
 Exit Sub
 EX:
     SaveLog Err, "ProductionImport"

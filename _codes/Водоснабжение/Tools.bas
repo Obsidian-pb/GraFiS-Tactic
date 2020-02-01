@@ -352,7 +352,7 @@ Const d = " | "
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
     errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
-        d & error.number & d & error.description & d & error.Source & d & eroorPosition & d & addition
+        d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке
     Print #1, errString
