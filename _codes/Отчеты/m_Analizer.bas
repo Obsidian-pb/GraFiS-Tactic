@@ -2,6 +2,7 @@ Attribute VB_Name = "m_Analizer"
 Option Explicit
 '--------------------------------------------------Модуль для работы с классом InfoCollector----------------------------
 Dim vOC_InfoAnalizer As InfoCollector
+Dim n00, n01, n02, n03, n04, n05, n06, n07, n08, n09, n10, n11, n12, n13, n14, n15 As Boolean
 
 
 Public Sub sP_InfoCollectorActivate()
@@ -199,6 +200,7 @@ End Select
 
 End Function
 
+
 '=================================== MASTER CHECK by Vasilchenko ================================================
 Public Sub MasterCheckRefresh()
 'Процедура реакции на действие пользователя
@@ -220,82 +222,109 @@ Dim psi_TargetPageIndex As Integer
     Dim Comment As Boolean
     Comment = False
     'Ochag
+If n00 = False Then
     If vOC_InfoAnalizer.pi_OchagCount = 0 Then
         If vOC_InfoAnalizer.pi_SmokeCount > 0 Or vOC_InfoAnalizer.pi_DevelopCount > 0 Or vOC_InfoAnalizer.pi_FireCount Then
             MCheckForm.ListBox1.AddItem "Не указан очаг пожара"
             Comment = True
         End If
     End If
+End If
+If n01 = False Then
     If vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 And vOC_InfoAnalizer.pi_SmokeCount = 0 Then
         MCheckForm.ListBox1.AddItem "Не указаны зоны задымления"
         Comment = True
     End If
+End If
+If n02 = False Then
     If vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 And vOC_InfoAnalizer.pi_DevelopCount = 0 Then
         MCheckForm.ListBox1.AddItem "Не указаны пути распространения пожара"
         Comment = True
     End If
+End If
+If n03 = False Then
     'Upravlenie
     If vOC_InfoAnalizer.pi_BUCount >= 3 And vOC_InfoAnalizer.pi_ShtabCount = 0 Then
         MCheckForm.ListBox1.AddItem "Не создан оперативный штаб"
         Comment = True
     End If
+End If
+If n04 = False Then
     If vOC_InfoAnalizer.pi_RNBDCount = 0 And vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 Then
         MCheckForm.ListBox1.AddItem "Не указано решающее направление"
         Comment = True
     End If
+End If
+If n05 = False Then
     If vOC_InfoAnalizer.pi_RNBDCount > 1 Then
         MCheckForm.ListBox1.AddItem "Решающее напраление должно быть одним"
         Comment = True
     End If
+End If
+If n06 = False Then
     If vOC_InfoAnalizer.pi_BUCount >= 5 And vOC_InfoAnalizer.pi_SPRCount <= 1 Then
         MCheckForm.ListBox1.AddItem "Не организованы секторы проведения работ"
         Comment = True
     End If
+End If
+If n07 = False Then
     'GDZS
     If vOC_InfoAnalizer.pi_GDZSpbCount < vOC_InfoAnalizer.pi_GDZSChainsCount Then
         MCheckForm.ListBox1.AddItem "Не выставлены посты безопасности для каждого звена ГДЗС (" & vOC_InfoAnalizer.pi_GDZSpbCount & "/" & vOC_InfoAnalizer.pi_GDZSChainsCount & ")"
         Comment = True
     End If
+End If
+If n08 = False Then
     If vOC_InfoAnalizer.pi_GDZSChainsCount >= 3 And vOC_InfoAnalizer.pi_KPPCount = 0 Then
         MCheckForm.ListBox1.AddItem "Не создан контрольно-пропускной пункт ГДЗС"
         Comment = True
     End If
+End If
+If n09 = False Then
     If vOC_InfoAnalizer.pb_GDZSDiscr = True Then
         MCheckForm.ListBox1.AddItem "В сложных условиях звенья ГДЗС должны состоять не менее чем из пяти газодымозащитников"
         Comment = True
     End If
+End If
+If n10 = False Then
     If Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) - vOC_InfoAnalizer.pi_GDZSChainsRezCount <> 0 Then
         MCheckForm.ListBox1.AddItem "Недостаточно резервных звеньев ГДЗС (" & vOC_InfoAnalizer.pi_GDZSChainsRezCount & "/" & Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) & ")"
         Comment = True
     End If
+End If
+If n11 = False Then
     'PPW
     If vOC_InfoAnalizer.pi_WaterSourceCount > vOC_InfoAnalizer.pi_distanceCount Then
         MCheckForm.ListBox1.AddItem "Не указаны расстояния от каждого водоисточника до места пожара (" & vOC_InfoAnalizer.pi_distanceCount & "/" & vOC_InfoAnalizer.pi_WaterSourceCount & ")"
         Comment = True
     End If
+End If
+If n12 = False Then
     'Hoses
-'    If vOC_InfoAnalizer.pb_AllHosesWithPos Then MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии"
-'    If vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka > vOC_InfoAnalizer.pi_linesPosCount Then
     If vOC_InfoAnalizer.pi_WorklinesCount > vOC_InfoAnalizer.pi_linesPosCount Then
-        'MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount - vOC_InfoAnalizer.pi_LineWorkSkatka & ")"
         MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount & ")"
         Comment = True
     End If
-    'If vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka > vOC_InfoAnalizer.pi_linesLableCount Then
+End If
+If n13 = False Then
     If vOC_InfoAnalizer.pi_linesCount > vOC_InfoAnalizer.pi_linesLableCount Then
-        'MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount - vOC_InfoAnalizer.pi_HoseSkatka & ")"
         MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount & ")"
         Comment = True
     End If
+End If
+If n14 = False Then
     'Plan na mestnosti
     If vOC_InfoAnalizer.pi_BuildCount > vOC_InfoAnalizer.pi_SOCount Then
         MCheckForm.ListBox1.AddItem "Не указаны подписи степени огнестойкости для каждого из зданий (" & vOC_InfoAnalizer.pi_SOCount & "/" & vOC_InfoAnalizer.pi_BuildCount & ")"
         Comment = True
     End If
+End If
+If n15 = False Then
     If vOC_InfoAnalizer.pi_OrientCount = 0 And vOC_InfoAnalizer.pi_BuildCount > 0 Then
         MCheckForm.ListBox1.AddItem "Не указаны ориентиры на местности, такие как роза ветров или подпись улицы"
         Comment = True
     End If
+End If
             'показ расчетных данных
          
     If vOC_InfoAnalizer.ps_FactStreemW <> 0 And vOC_InfoAnalizer.ps_FactStreemW < vOC_InfoAnalizer.ps_NeedStreemW Then
@@ -488,42 +517,30 @@ Dim psi_TargetPageIndex As Integer
         
 End Sub
 
-''Функция создания контекстного меню
-'Function AddItemIntoPopup(ByRef Comm_Bar, ByVal CBar_Type As Integer, ByVal CBar_Face As Integer, _
-'ByVal On_Action As String, ByVal CBar_Caption As String, Optional ByVal Begin_Group As Boolean = False, _
-'Optional Tag As String = "") As CommandBarControl
-'Dim Add_Control
-'
-'    On Error Resume Next
-'    Set Add_Control = Comm_Bar.Controls.Add(Type:=CBar_Type)
-'
-'    With Add_Control
-'        If CBar_Face > 0 Then .FaceID = CBar_Face
-'        .Tag = Tag
-'        .OnAction = On_Action
-'        .Caption = CBar_Caption
-'        If Begin_Group Then .BeginGroup = True
-'    End With
-'
-'End Function
-'
-''Создаём контекстное меню мастера проверок
-'Sub CreateNewMenu()
-'On Error Resume Next: Application.CommandBars.Add "ContextMenuListBox", msoBarPopup
-'Dim Cbar As CommandBar, Ctrl
-'
-'    Set Cbar = Application.CommandBars("ContextMenuListBox")
-'
-'    For Each Ctrl In Cbar.Controls
-'        Ctrl.Delete
-'    Next
-'    'AddItemIntoPopup CBar, 1, 213, "Comand3", "Создать новый"
-'    'AddItemIntoPopup CBar, 1, 212, "Comand2", "Редактировать"
-'    AddItemIntoPopup Cbar, 1, 214, "DelComment", "Удалить выделенное замечание"
-'
-'    Cbar.ShowPopup
-'End Sub
-'
-'Sub DelComment()
-'MsgBox 123
-'End Sub
+Public Sub RestoreComment()
+n00 = False
+n01 = False
+n02 = False
+n03 = False
+n04 = False
+n05 = False
+n06 = False
+n07 = False
+n08 = False
+n09 = False
+n10 = False
+n11 = False
+n12 = False
+n13 = False
+n14 = False
+n15 = False
+MasterCheckRefresh
+End Sub
+
+Public Sub HideComment()
+On Error Resume Next
+If MCheckForm.ListBox1.Value = "Не указан очаг пожара" Then n00 = True
+On Error GoTo 0
+MasterCheckRefresh
+End Sub
+

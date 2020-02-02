@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} MCheckForm
    Caption         =   " Мастер проверок схемы - Бета-версия"
    ClientHeight    =   3960
    ClientLeft      =   120
-   ClientTop       =   450
-   ClientWidth     =   8625
+   ClientTop       =   456
+   ClientWidth     =   8628
    OleObjectBlob   =   "MCheckForm.frx":0000
    ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
@@ -71,12 +71,10 @@ Attribute wAddon.VB_VarHelpID = -1
 Private Const con_BorderWidth = 6
 Private Const con_BorderHeightForList = 20
 
-Public WithEvents menuButtonDelete As CommandBarButton
-Attribute menuButtonDelete.VB_VarHelpID = -1
-Public WithEvents menuButtonNew As CommandBarButton
-Attribute menuButtonNew.VB_VarHelpID = -1
-Public WithEvents menuButtonEdit As CommandBarButton
-Attribute menuButtonEdit.VB_VarHelpID = -1
+Public WithEvents menuButtonHide As CommandBarButton
+Attribute menuButtonHide.VB_VarHelpID = -1
+Public WithEvents menuButtonRestore As CommandBarButton
+Attribute menuButtonRestore.VB_VarHelpID = -1
 
 
 'Private Sub ListBox1_Click()
@@ -183,9 +181,8 @@ Dim ctrl As CommandBarControl
     Next
     
     'Добавляем новые кнопки
-    Set menuButtonNew = NewPopupItem(popupMenuBar, 1, 213, "Создать новый")
-    Set menuButtonEdit = NewPopupItem(popupMenuBar, 1, 212, "Редактировать")
-    Set menuButtonDelete = NewPopupItem(popupMenuBar, 1, 214, "Удалить выделенное замечание")
+    Set menuButtonHide = NewPopupItem(popupMenuBar, 1, 214, "Скрыть выделенное замечание")
+    Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все замечания")
     
     'Показываем меню
     popupMenuBar.ShowPopup
@@ -203,16 +200,12 @@ Private Sub GetToolBar(ByRef toolBar As CommandBar, ByVal toolBarName As String,
     
 End Sub
 
-Private Sub menuButtonNew_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
-    MsgBox "Новый"
+Private Sub menuButtonHide_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    HideComment
 End Sub
 
-Private Sub menuButtonEdit_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
-    MsgBox "Редактирование"
-End Sub
-
-Private Sub menuButtonDelete_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
-    MsgBox "Удаление"
+Private Sub menuButtonRestore_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    RestoreComment
 End Sub
 
 
