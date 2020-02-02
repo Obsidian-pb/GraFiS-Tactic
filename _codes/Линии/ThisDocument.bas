@@ -12,7 +12,7 @@ Option Explicit
 Private WithEvents app As Visio.Application
 Attribute app.VB_VarHelpID = -1
 Private cellChangedCount As Long
-Const cellChangedInterval = 100000
+Const cellChangedInterval = 1000
 
 Dim ButEvent As Class1
 Dim C_ConnectionsTrace As c_HoseConnector

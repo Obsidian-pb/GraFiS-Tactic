@@ -188,7 +188,7 @@
     User.Press: IF(STRSAME(Prop.ShowDirectProduction;"Явный");Prop.PressureR;IF(STRSAME(Prop.ShowDirectProduction;"Расчетный");Prop.PressureR;Prop.Pressure)); User.Press.Prompt: ""; 
     User.INPPWData: ""; User.INPPWData.Prompt: ""; 
   Section Object, row: visRowEvent>>>
-    TheText: CALLTHIS("GetStream";"ВодоснабжениеНовое"); EventDblClick: DOCMD(1312); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+    TheText: CALLTHIS("GetStream";"ВодоснабжениеНовое"); EventDblClick: DOCMD(1312); EventDrop: DOCMD(1312); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
     FillForegnd: Styles!ВИ_ПГ!FillForegnd; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>
