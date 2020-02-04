@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} MCheckForm
    Caption         =   " Мастер проверок схемы - Бета-версия"
    ClientHeight    =   3960
    ClientLeft      =   120
-   ClientTop       =   456
-   ClientWidth     =   8628
+   ClientTop       =   450
+   ClientWidth     =   8625
    OleObjectBlob   =   "MCheckForm.frx":0000
    ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner

@@ -63,6 +63,8 @@ Dim ShpInd As Integer
 '            ShpInd = cell.Shape.ID
             GetTTH cell.Shape
         End If
+    Else
+        cell.Shape.Cells("Prop.Set").FormulaU = "INDEX(0,Prop.Set.Format)"
     End If
     
 'В случае, если произошло изменение не нужной ячейки прекращаем событие

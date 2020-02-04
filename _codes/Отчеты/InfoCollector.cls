@@ -514,6 +514,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                         pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
                           If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
                               ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 0.3334
+                              ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
                           Else
                               ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
                               If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
