@@ -305,6 +305,15 @@ Dim i As Integer
 IsInArray = False
 End Function
 
+Public Function GetShapeByID(ByVal shpID As Long) As Visio.Shape
+'Возвращает ссылку на фигуру, если таковая имеется
+On Error GoTo EX
+    Set GetShapeByID = Application.ActivePage.Shapes.ItemFromID(shpID)
+Exit Function
+EX:
+    Set GetShapeByID = Nothing
+End Function
+
 '-----------------------------------------Функции проверки привязки данных----------------------------------------------
 Public Function IsShapeLinkedToDataAndDropFirst(ByRef shp As Visio.Shape) As Boolean
 IsShapeLinkedToDataAndDropFirst = False

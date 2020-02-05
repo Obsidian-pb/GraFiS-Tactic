@@ -92,7 +92,7 @@ Dim curHoseShapeID As Integer
     shpSize = ShpObj.Cells("Height").Result(visInches) / 2
     curHoseDistance = shpSize * 1.01
 
-'---Проверяем налOtherShapeичие фигуры на месте перемещения лафетного ствола
+'---Проверяем наличие фигуры на месте перемещения
     '---Перебираем все фигуры на странице
     For Each OtherShape In Application.ActivePage.Shapes
     '    '---Если фигура является группой перебираем и все входящие в нее фигуры тоже
@@ -136,7 +136,11 @@ Dim curHoseShapeID As Integer
         curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
         '---1 Проверяем было ли звено уже привязано к линии
         If curHoseShapeID <> 0 Then
-            SetHoseLineGDZSStatus Application.ActivePage.Shapes.ItemFromID(curHoseShapeID), ShpObj, False
+            Set curHoseShape = GetShapeByID(curHoseShapeID)
+            '---Если было привязано, и линия к которой она была привязана не удалена
+            If Not curHoseShape Is Nothing Then
+                SetHoseLineGDZSStatus curHoseShape, ShpObj, False
+            End If
         End If
         '---Указываем, что звено больше не работает с линией
         ShpObj.Cells("User.ShapeHoseID").Formula = 0
