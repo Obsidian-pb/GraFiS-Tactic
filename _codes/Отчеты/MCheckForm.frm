@@ -3,8 +3,8 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} MCheckForm
    Caption         =   " Мастер проверок схемы - Бета-версия"
    ClientHeight    =   3960
    ClientLeft      =   120
-   ClientTop       =   450
-   ClientWidth     =   8625
+   ClientTop       =   456
+   ClientWidth     =   8628
    OleObjectBlob   =   "MCheckForm.frx":0000
    ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
@@ -75,6 +75,8 @@ Public WithEvents menuButtonHide As CommandBarButton
 Attribute menuButtonHide.VB_VarHelpID = -1
 Public WithEvents menuButtonRestore As CommandBarButton
 Attribute menuButtonRestore.VB_VarHelpID = -1
+Public WithEvents menuButtonOptions As CommandBarButton
+Attribute menuButtonOptions.VB_VarHelpID = -1
 
 
 'Private Sub ListBox1_Click()
@@ -147,7 +149,7 @@ End Sub
 
 '------------------Работа с всплывающим меню------------------
 Private Function NewPopupItem(ByRef commBar As CommandBar, ByVal itemType As Integer, ByVal itemFace As Integer, _
-ByVal itemCaption As String, Optional ByVal beginGroup As Boolean = False, _
+ByVal itemCaption As String, Optional ByVal beginGroup As Boolean = False, Optional ByVal enableTab As Boolean = True, _
 Optional itemTag As String = "") As CommandBarControl
 'Функция создает элемент контекстного меню и возвращает на него ссылку
 Dim newControl As CommandBarControl
@@ -162,6 +164,7 @@ Dim newControl As CommandBarControl
         .Tag = itemTag
         .Caption = itemCaption
         .beginGroup = beginGroup
+        .Enabled = enableTab
     End With
     
 Set NewPopupItem = newControl
@@ -181,8 +184,9 @@ Dim ctrl As CommandBarControl
     Next
     
     'Добавляем новые кнопки
-    Set menuButtonHide = NewPopupItem(popupMenuBar, 1, 214, "Скрыть выделенное замечание")
-    Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все замечания")
+    Set menuButtonHide = NewPopupItem(popupMenuBar, 1, 214, "Не учитывать выделенное замечание")
+    Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все скрытые замечания" & " (" & nX & ")", , nX <> 0)
+    Set menuButtonOptions = NewPopupItem(popupMenuBar, 1, 212, "Настроить выделенное замечание", , False)
     
     'Показываем меню
     popupMenuBar.ShowPopup

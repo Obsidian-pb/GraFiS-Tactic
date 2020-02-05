@@ -2,7 +2,8 @@ Attribute VB_Name = "m_Analizer"
 Option Explicit
 '--------------------------------------------------Модуль для работы с классом InfoCollector----------------------------
 Dim vOC_InfoAnalizer As InfoCollector
-Dim n00, n01, n02, n03, n04, n05, n06, n07, n08, n09, n10, n11, n12, n13, n14, n15 As Boolean
+Dim n00, n01, n02, n03, n04, n05, n06, n07, n08, n09, n10, n11, n12, n13, n14, n15, n16, n17, n18, n19, n20, n21, n22, n23, n24, n25, n26, n27 As Boolean
+Public nX As Integer
 
 
 Public Sub sP_InfoCollectorActivate()
@@ -223,6 +224,7 @@ Dim psi_TargetPageIndex As Integer
     MCheckForm.ListBox2.Clear
     Dim Comment As Boolean
     Comment = False
+    nX = 0
     'Ochag
 If n00 = False Then
     If vOC_InfoAnalizer.pi_OchagCount = 0 Then
@@ -231,18 +233,24 @@ If n00 = False Then
             Comment = True
         End If
     End If
+Else
+nX = nX + 1
 End If
 If n01 = False Then
     If vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 And vOC_InfoAnalizer.pi_SmokeCount = 0 Then
         MCheckForm.ListBox1.AddItem "Не указаны зоны задымления"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n02 = False Then
     If vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 And vOC_InfoAnalizer.pi_DevelopCount = 0 Then
         MCheckForm.ListBox1.AddItem "Не указаны пути распространения пожара"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n03 = False Then
     'Upravlenie
@@ -250,24 +258,32 @@ If n03 = False Then
         MCheckForm.ListBox1.AddItem "Не создан оперативный штаб"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n04 = False Then
     If vOC_InfoAnalizer.pi_RNBDCount = 0 And vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 Then
         MCheckForm.ListBox1.AddItem "Не указано решающее направление"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n05 = False Then
     If vOC_InfoAnalizer.pi_RNBDCount > 1 Then
         MCheckForm.ListBox1.AddItem "Решающее напраление должно быть одним"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n06 = False Then
     If vOC_InfoAnalizer.pi_BUCount >= 5 And vOC_InfoAnalizer.pi_SPRCount <= 1 Then
         MCheckForm.ListBox1.AddItem "Не организованы секторы проведения работ"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n07 = False Then
     'GDZS
@@ -275,24 +291,32 @@ If n07 = False Then
         MCheckForm.ListBox1.AddItem "Не выставлены посты безопасности для каждого звена ГДЗС (" & vOC_InfoAnalizer.pi_GDZSpbCount & "/" & vOC_InfoAnalizer.pi_GDZSChainsCount & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n08 = False Then
     If vOC_InfoAnalizer.pi_GDZSChainsCount >= 3 And vOC_InfoAnalizer.pi_KPPCount = 0 Then
         MCheckForm.ListBox1.AddItem "Не создан контрольно-пропускной пункт ГДЗС"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n09 = False Then
     If vOC_InfoAnalizer.pb_GDZSDiscr = True Then
         MCheckForm.ListBox1.AddItem "В сложных условиях звенья ГДЗС должны состоять не менее чем из пяти газодымозащитников"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n10 = False Then
     If Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) - vOC_InfoAnalizer.pi_GDZSChainsRezCount <> 0 Then
         MCheckForm.ListBox1.AddItem "Недостаточно резервных звеньев ГДЗС (" & vOC_InfoAnalizer.pi_GDZSChainsRezCount & "/" & Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n11 = False Then
     'PPW
@@ -300,6 +324,8 @@ If n11 = False Then
         MCheckForm.ListBox1.AddItem "Не указаны расстояния от каждого водоисточника до места пожара (" & vOC_InfoAnalizer.pi_distanceCount & "/" & vOC_InfoAnalizer.pi_WaterSourceCount & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n12 = False Then
     'Hoses
@@ -307,12 +333,16 @@ If n12 = False Then
         MCheckForm.ListBox1.AddItem "Не указаны положения (этаж) для каждой рабочей линии (" & vOC_InfoAnalizer.pi_linesPosCount & "/" & vOC_InfoAnalizer.pi_WorklinesCount & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n13 = False Then
     If vOC_InfoAnalizer.pi_linesCount > vOC_InfoAnalizer.pi_linesLableCount Then
         MCheckForm.ListBox1.AddItem "Не указаны диаметры для каждой рукавной линии (" & vOC_InfoAnalizer.pi_linesLableCount & "/" & vOC_InfoAnalizer.pi_linesCount & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n14 = False Then
     'Plan na mestnosti
@@ -320,63 +350,115 @@ If n14 = False Then
         MCheckForm.ListBox1.AddItem "Не указаны подписи степени огнестойкости для каждого из зданий (" & vOC_InfoAnalizer.pi_SOCount & "/" & vOC_InfoAnalizer.pi_BuildCount & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
 If n15 = False Then
     If vOC_InfoAnalizer.pi_OrientCount = 0 And vOC_InfoAnalizer.pi_BuildCount > 0 Then
         MCheckForm.ListBox1.AddItem "Не указаны ориентиры на местности, такие как роза ветров или подпись улицы"
         Comment = True
     End If
+Else
+nX = nX + 1
 End If
+If n16 = False Then
             'показ расчетных данных
-         
     If vOC_InfoAnalizer.ps_FactStreemW <> 0 And vOC_InfoAnalizer.ps_FactStreemW < vOC_InfoAnalizer.ps_NeedStreemW Then
         MCheckForm.ListBox1.AddItem "Недостаточный фактический расход воды (" & vOC_InfoAnalizer.ps_FactStreemW & " л/c < " & vOC_InfoAnalizer.ps_NeedStreemW & " л/с)"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n17 = False Then
     If (vOC_InfoAnalizer.ps_FactStreemW * 600) > vOC_InfoAnalizer.pi_WaterValueHave Then
         If PF_RoundUp(vOC_InfoAnalizer.ps_FactStreemW / 32) > vOC_InfoAnalizer.pi_GetingWaterCount Then MCheckForm.ListBox1.AddItem "Недостаточное водоснабжение боевых позиций" '& (" & vOC_InfoAnalizer.pi_GetingWaterCount & "/" & PF_RoundUp(vOC_InfoAnalizer.ps_FactStreemW / 32) & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n18 = False Then
     If vOC_InfoAnalizer.pi_PersonnelHave < vOC_InfoAnalizer.pi_PersonnelNeed Then
         MCheckForm.ListBox1.AddItem "Недостаточно личного состава, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_PersonnelHave & "/" & vOC_InfoAnalizer.pi_PersonnelNeed & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n19 = False Then
     If vOC_InfoAnalizer.pi_Hoses51Have < vOC_InfoAnalizer.pi_Hoses51Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 51 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses51Have & "/" & vOC_InfoAnalizer.pi_Hoses51Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n20 = False Then
     If vOC_InfoAnalizer.pi_Hoses66Have < vOC_InfoAnalizer.pi_Hoses66Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 66 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses66Have & "/" & vOC_InfoAnalizer.pi_Hoses66Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n21 = False Then
     If vOC_InfoAnalizer.pi_Hoses77Have < vOC_InfoAnalizer.pi_Hoses77Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 77 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses77Have & "/" & vOC_InfoAnalizer.pi_Hoses77Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n22 = False Then
     If vOC_InfoAnalizer.pi_Hoses89Have < vOC_InfoAnalizer.pi_Hoses89Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 89 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses89Have & "/" & vOC_InfoAnalizer.pi_Hoses89Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n23 = False Then
     If vOC_InfoAnalizer.pi_Hoses110Have < vOC_InfoAnalizer.pi_Hoses110Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 110 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses110Have & "/" & vOC_InfoAnalizer.pi_Hoses110Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n24 = False Then
     If vOC_InfoAnalizer.pi_Hoses150Have < vOC_InfoAnalizer.pi_Hoses150Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 150 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses150Have & "/" & vOC_InfoAnalizer.pi_Hoses150Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n25 = False Then
     If vOC_InfoAnalizer.pi_Hoses200Have < vOC_InfoAnalizer.pi_Hoses200Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 200 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses200Have & "/" & vOC_InfoAnalizer.pi_Hoses200Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n26 = False Then
     If vOC_InfoAnalizer.pi_Hoses250Have < vOC_InfoAnalizer.pi_Hoses250Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 250 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses250Have & "/" & vOC_InfoAnalizer.pi_Hoses250Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+If n27 = False Then
     If vOC_InfoAnalizer.pi_Hoses300Have < vOC_InfoAnalizer.pi_Hoses300Count Then
         MCheckForm.ListBox1.AddItem "Недостаточно напорных рукавов 300 мм, с учетом прибывшей техники (" & vOC_InfoAnalizer.pi_Hoses300Have & "/" & vOC_InfoAnalizer.pi_Hoses300Count & ")"
         Comment = True
     End If
+Else
+nX = nX + 1
+End If
+
     If Comment = False Then MCheckForm.ListBox1.AddItem "Замечаний не обнаружено"
 
     '============Вторая вкладка - Сводка тактических данных===========
@@ -536,12 +618,52 @@ n12 = False
 n13 = False
 n14 = False
 n15 = False
+n16 = False
+n17 = False
+n18 = False
+n19 = False
+n20 = False
+n21 = False
+n22 = False
+n23 = False
+n24 = False
+n25 = False
+n26 = False
+n27 = False
+nX = 0
 MasterCheckRefresh
 End Sub
 
 Public Sub HideComment()
 On Error Resume Next
 If MCheckForm.ListBox1.Value = "Не указан очаг пожара" Then n00 = True
+If MCheckForm.ListBox1.Value = "Не указаны зоны задымления" Then n01 = True
+If MCheckForm.ListBox1.Value = "Не указаны пути распространения пожара" Then n02 = True
+If MCheckForm.ListBox1.Value = "Не создан оперативный штаб" Then n03 = True
+If MCheckForm.ListBox1.Value = "Не указано решающее направление" Then n04 = True
+If MCheckForm.ListBox1.Value = "Решающее напраление должно быть одним" Then n05 = True
+If MCheckForm.ListBox1.Value = "Не организованы секторы проведения работ" Then n06 = True
+If InStr(1, MCheckForm.ListBox1.Value, "Не выставлены посты безопасности") > 0 Then n07 = True
+If MCheckForm.ListBox1.Value = "Не создан контрольно-пропускной пункт ГДЗС" Then n08 = True
+If InStr(1, MCheckForm.ListBox1.Value, "В сложных условиях звенья ГДЗС") > 0 Then n09 = True
+If InStr(1, MCheckForm.ListBox1.Value, "резервных звеньев") > 0 Then n10 = True
+If InStr(1, MCheckForm.ListBox1.Value, "расстояния от каждого") > 0 Then n11 = True
+If InStr(1, MCheckForm.ListBox1.Value, "положения") > 0 Then n12 = True
+If InStr(1, MCheckForm.ListBox1.Value, "диаметры") > 0 Then n13 = True
+If InStr(1, MCheckForm.ListBox1.Value, "подписи степени огнестойкости") > 0 Then n14 = True
+If InStr(1, MCheckForm.ListBox1.Value, "ориентиры на местности") > 0 Then n15 = True
+If InStr(1, MCheckForm.ListBox1.Value, "Недостаточный фактический расход") > 0 Then n16 = True
+If InStr(1, MCheckForm.ListBox1.Value, "Недостаточное водоснабжение") > 0 Then n17 = True
+If InStr(1, MCheckForm.ListBox1.Value, "Недостаточно личного состава") > 0 Then n18 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 51 мм,") > 0 Then n19 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 66 мм") > 0 Then n20 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 77 мм") > 0 Then n21 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 89 мм") > 0 Then n22 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 110 мм") > 0 Then n23 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 150 мм") > 0 Then n24 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 200 мм") > 0 Then n25 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 250 мм") > 0 Then n26 = True
+If InStr(1, MCheckForm.ListBox1.Value, "рукавов 300 мм") > 0 Then n27 = True
 On Error GoTo 0
 MasterCheckRefresh
 End Sub
