@@ -20,7 +20,10 @@ Const CP_GrafisVersion = 1      'Версия набора
 '-----------------------общие сведения анализа-----------------------
 Public PA_Count As Integer
 Public MP_Count As Integer
+Public Ship_Count As Integer
+Public Train_Count As Integer
 
+Public Hose38_Count As Integer
 Public Hose51_Count As Integer
 Public Hose66_Count As Integer
 Public Hose77_Count As Integer
@@ -134,22 +137,29 @@ Dim totalStr As String
     If PodIn > 0 Then totalStr = totalStr & "Общий забор воды - " & PodIn & "л/с" & Chr(10)
     If HosesValue > 0 Then totalStr = totalStr & "Объем воды в рукавах - " & HosesValue & "л" & Chr(10)
     If WaterValue > 0 Then totalStr = totalStr & "Запас воды в емкостях - " & WaterValue & "л" & Chr(10)
-    
+
     If PodOut > PodIn Then
         Dim FlowOut As Double 'Скорость убывания жидкости
         Dim DischargeTime As Double
         FlowOut = PodOut - PodIn
         DischargeTime = ((WaterValue - HosesValue) / FlowOut) / 60
-        totalStr = totalStr & "Возможное время работы системы - " & _
-                 Int(DischargeTime) & ":" & Int((DischargeTime - Int(DischargeTime)) * 60) _
-                 & Chr(10)
+        If Int(DischargeTime) > 0 Then
+            totalStr = totalStr & "Возможное время работы системы - " & _
+                     Int(DischargeTime) & ":" & Int((DischargeTime - Int(DischargeTime)) * 60) _
+                     & Chr(10)
+        Else
+        totalStr = totalStr & "ОШИБКА РАСЧЕТА ВРЕМЕНИ РАБОТЫ СИСТЕМЫ!" & Chr(10)
+        End If
     Else
         totalStr = totalStr & "Возможное время работы системы - бесконечно" & Chr(10)
     End If
     
     If PA_Count > 0 Then totalStr = totalStr & "Пожарных автомобилей - " & PA_Count & Chr(10)
     If MP_Count > 0 Then totalStr = totalStr & "Пожарных мотопомп - " & MP_Count & Chr(10)
+    If Train_Count > 0 Then totalStr = totalStr & "Пожарных поездов - " & Train_Count & Chr(10)
+    If Ship_Count > 0 Then totalStr = totalStr & "Пожарных судов - " & Ship_Count & Chr(10)
     
+    If Hose38_Count > 0 Then totalStr = totalStr & "Напорные рукава 38мм - " & Hose38_Count & Chr(10)
     If Hose51_Count > 0 Then totalStr = totalStr & "Напорные рукава 51мм - " & Hose51_Count & Chr(10)
     If Hose66_Count > 0 Then totalStr = totalStr & "Напорные рукава 66мм - " & Hose66_Count & Chr(10)
     If Hose77_Count > 0 Then totalStr = totalStr & "Напорные рукава 77мм - " & Hose77_Count & Chr(10)
@@ -201,7 +211,10 @@ Public Sub ClearVaraibles()
 'Очищаем все переменные
      PA_Count = 0
      MP_Count = 0
+     Train_Count = 0
+     Ship_Count = 0
     
+     Hose38_Count = 0
      Hose51_Count = 0
      Hose66_Count = 0
      Hose77_Count = 0
@@ -322,10 +335,16 @@ Dim vsi_ShapeIndex As Integer
                     
                     '---Прочая пожарная техника----------
                         Case Is = 24 'Поезда
+                            Train_Count = Train_Count + 1
+                            WaterValue = WaterValue + vsO_Shape.Cells("Prop.Water").Result(visNumber)
                         Case Is = 28 'Мотопомпы
                             MP_Count = MP_Count + 1
                         Case Is = 30 'Корабль
+                            Ship_Count = Ship_Count + 1
+                            PodIn = PodIn + vsO_Shape.Cells("Prop.PodIn").Result(visNumber)
                         Case Is = 31 'Катер
+                            Ship_Count = Ship_Count + 1
+                            PodIn = PodIn + vsO_Shape.Cells("Prop.PodIn").Result(visNumber)
                         Case Is = 73 'Машины на гусеничном ходу
                         Case Is = 74 'Танки
             
@@ -388,12 +407,14 @@ Dim vsi_ShapeIndex As Integer
                             WaterContainers_Count = WaterContainers_Count + 1
                             WaterValue = WaterValue + vsO_Shape.Cells("Prop.WaterContainerValue").Result(visNumber) * _
                                     (1 - vsO_Shape.Cells("Prop.OstKoeff").Result(visNumber))
-                            
+                       
                     '---Линии
                         Case Is = 100 'Напорная линия
                             If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
                                 And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
                                 Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
+                                    Case Is = 38
+                                        Hose38_Count = Hose38_Count + vsO_Shape.Cells("User.HosesNeed").Result(visNumber)
                                     Case Is = 51
                                         Hose51_Count = Hose51_Count + vsO_Shape.Cells("User.HosesNeed").Result(visNumber)
                                     Case Is = 66
