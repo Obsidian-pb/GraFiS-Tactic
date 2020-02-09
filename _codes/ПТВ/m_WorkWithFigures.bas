@@ -49,8 +49,8 @@ Dim vS_ShapeName As String
             OtherShape.BringToFront
         End If
     End If
-    'дл€ поезда и судов
-    If GetTypeShape(OtherShape) = 24 Or GetTypeShape(OtherShape) = 30 Or GetTypeShape(OtherShape) = 31 Then
+    'дл€ поезда
+    If GetTypeShape(OtherShape) = 24 Then
         '---ѕереводим координаты к координатам фигуры
 '        OtherShape.XYFromPage x, y, x, y
         If OtherShape.HitTest(x, y, 0.01) > 1 Then
@@ -64,7 +64,37 @@ Dim vS_ShapeName As String
                 & OtherShape.ID & "!Angle+90 deg)*IF(Sheet." & OtherShape.ID & "!User.DownOrient=1,-1,1))"
             ShpObj.Cells("Angle").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Angle+IF(Sheet." _
                 & OtherShape.ID & "!User.DownOrient=1,-20 deg,20 deg))"
-            ShpObj.Cells("Width").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Width*0.575)"
+            ShpObj.Cells("Width").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Width*0.6)"
+            ShpObj.Cells("Height").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Height*0.4)"
+            ShpObj.Cells("Prop.Unit").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Unit)"
+            ShpObj.Cells("Prop.SetTime").FormulaU = "Sheet." & OtherShape.ID & "!Prop.ArrivalTime"
+            ShpObj.Cells("User.DownOrient").FormulaU = "Sheet." & OtherShape.ID & "!User.DownOrient"
+            ShpObj.Cells("User.ShapeFromID").FormulaU = OtherShape.ID
+            
+            OtherShape.Cells("User.GFS_OutLafet").FormulaU = "IF(ISERR(Sheet." & ShpObj.ID & "!User.PodOut),0," & _
+                "Sheet." & ShpObj.ID & "!User.PodOut)"
+            OtherShape.Cells("User.GFS_OutLafet.Prompt").FormulaU = "IF(ISERR(Sheet." & ShpObj.ID & "!User.Head),0," & _
+                "Sheet." & ShpObj.ID & "!User.Head)"
+            OtherShape.BringToFront
+        End If
+    End If
+    
+        'дл€ судов
+    If GetTypeShape(OtherShape) = 30 Or GetTypeShape(OtherShape) = 31 Then
+        '---ѕереводим координаты к координатам фигуры
+'        OtherShape.XYFromPage x, y, x, y
+        If OtherShape.HitTest(x, y, 0.01) > 1 Then
+            '---ѕриклеиваем фигуру (прописываем формулы)
+            On Error Resume Next
+            ShpObj.Cells("PinX").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!PinX-(Sheet." _
+                & OtherShape.ID & "!Width*0.7)*SIN(Sheet." _
+                & OtherShape.ID & "!Angle+90 deg)*IF(Sheet." & OtherShape.ID & "!User.DownOrient=1,-1,1))"
+            ShpObj.Cells("PinY").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!PinY+(Sheet." _
+                & OtherShape.ID & "!Width*0.7)*COS(Sheet." _
+                & OtherShape.ID & "!Angle+90 deg)*IF(Sheet." & OtherShape.ID & "!User.DownOrient=1,-1,1))"
+            ShpObj.Cells("Angle").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Angle+IF(Sheet." _
+                & OtherShape.ID & "!User.DownOrient=1,-20 deg,20 deg))"
+            ShpObj.Cells("Width").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Width*0.6)"
             ShpObj.Cells("Height").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Height*0.4)"
             ShpObj.Cells("Prop.Unit").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Unit)"
             ShpObj.Cells("Prop.SetTime").FormulaU = "Sheet." & OtherShape.ID & "!Prop.ArrivalTime"
@@ -100,7 +130,8 @@ GetTypeShape = 0
 If aO_TergetShape.CellExists("User.IndexPers", 0) = True And aO_TergetShape.CellExists("User.Version", 0) = True Then
     vi_TempIndex = aO_TergetShape.Cells("User.IndexPers")
     If vi_TempIndex = 1 Or vi_TempIndex = 2 Or vi_TempIndex = 9 Or vi_TempIndex = 10 Or _
-        vi_TempIndex = 11 Or vi_TempIndex = 20 Or vi_TempIndex = 24 Then
+        vi_TempIndex = 11 Or vi_TempIndex = 20 Or vi_TempIndex = 24 Or vi_TempIndex = 30 Or _
+        vi_TempIndex = 31 Then
         GetTypeShape = aO_TergetShape.Cells("User.IndexPers")
     End If
 End If
