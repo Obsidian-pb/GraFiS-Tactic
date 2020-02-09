@@ -259,5 +259,21 @@ Dim propIndex As Integer
         Next propIndex
     Next rst
 End Function
-
+Public Sub ShapeLinkRefresh(ByRef shp As Visio.Shape)
+'Refresh data from linked DataRecordset
+Dim rst As Visio.DataRecordset
+'Dim dataRowID As Integer
+Dim propIndex As Integer
+    
+'    IsShapeLinked = False
+    
+    For Each rst In Application.ActiveDocument.DataRecordsets
+        For propIndex = 0 To shp.RowCount(visSectionProp)
+            If shp.IsCustomPropertyLinked(rst.ID, propIndex) Then
+                shp.LinkToData rst.ID, shp.GetLinkedDataRow(rst.ID), False
+                Exit Sub
+            End If
+        Next propIndex
+    Next rst
+End Sub
 

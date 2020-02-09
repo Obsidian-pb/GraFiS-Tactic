@@ -64,7 +64,8 @@ Dim ShpInd As Integer
             GetTTH cell.Shape
         End If
     Else
-        cell.Shape.Cells("Prop.Set").FormulaU = "INDEX(0,Prop.Set.Format)"
+'        cell.Shape.Cells("Prop.Set").FormulaU = "INDEX(0,Prop.Set.Format)"
+'        ShapeLinkRefresh cell.Shape
     End If
     
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
