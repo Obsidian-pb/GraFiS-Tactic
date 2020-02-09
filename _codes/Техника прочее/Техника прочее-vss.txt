@@ -668,7 +668,7 @@
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.SpuCount: INDEX(1;Prop.SpuCount.Format); Prop.SpuCount.Prompt: "Количество одновременно работающих насосов, что влияет на максимальную производительность"; Prop.SpuCount.Label: "Количество работающих СПУ-40/100"; Prop.SpuCount.Format: "1;2"; Prop.SpuCount.SortKey: "33"; Prop.SpuCount.Type: 1; Prop.SpuCount.Invisible: FALSE; Prop.SpuCount.Verify: FALSE; Prop.SpuCount.LangID: 1049; Prop.SpuCount.Calendar: 0; 
     Prop.PodOut: GUARD(ROUND(Scratch.D1+Scratch.D2+Scratch.D4+Scratch.D6+User.GFS_OutLafet;2)); Prop.PodOut.Prompt: "Текущий объем воды, подаваемый насосами, л/с"; Prop.PodOut.Label: "Требуемая подача воды"; Prop.PodOut.Format: ""; Prop.PodOut.SortKey: ""; Prop.PodOut.Type: 2; Prop.PodOut.Invisible: FALSE; Prop.PodOut.Verify: FALSE; Prop.PodOut.LangID: 1049; Prop.PodOut.Calendar: 0; 
-    Prop.PumpPressureCur: GUARD(ROUND(MAX(Scratch.C1;Scratch.C2;Scratch.C4;Scratch.C6;User.GFS_OutLafet.Prompt);2)); Prop.PumpPressureCur.Prompt: "Текущий напор, создаваемый насосами, м"; Prop.PumpPressureCur.Label: "Требуемый напор"; Prop.PumpPressureCur.Format: ""; Prop.PumpPressureCur.SortKey: ""; Prop.PumpPressureCur.Type: 2; Prop.PumpPressureCur.Invisible: FALSE; Prop.PumpPressureCur.Verify: FALSE; Prop.PumpPressureCur.LangID: 1049; Prop.PumpPressureCur.Calendar: 0; 
+    Prop.PumpPressureCur: GUARD(ROUND(MAX(Scratch.C1;Scratch.C2;Scratch.C3;Scratch.C4;User.GFS_OutLafet.Prompt);2)); Prop.PumpPressureCur.Prompt: "Текущий напор, создаваемый насосами, м"; Prop.PumpPressureCur.Label: "Требуемый напор"; Prop.PumpPressureCur.Format: ""; Prop.PumpPressureCur.SortKey: ""; Prop.PumpPressureCur.Type: 2; Prop.PumpPressureCur.Invisible: FALSE; Prop.PumpPressureCur.Verify: FALSE; Prop.PumpPressureCur.LangID: 1049; Prop.PumpPressureCur.Calendar: 0; 
     Prop.Hose89: 0; Prop.Hose89.Prompt: "Запас пожарных рукавов диаметром 89мм"; Prop.Hose89.Label: "Рукава 89"; Prop.Hose89.Format: ""; Prop.Hose89.SortKey: "39"; Prop.Hose89.Type: 2; Prop.Hose89.Invisible: FALSE; Prop.Hose89.Verify: FALSE; Prop.Hose89.LangID: 1049; Prop.Hose89.Calendar: 0; 
     Prop.Hose110: 0; Prop.Hose110.Prompt: "Запас пожарных рукавов диаметром 110мм"; Prop.Hose110.Label: "Рукава 110"; Prop.Hose110.Format: ""; Prop.Hose110.SortKey: "39"; Prop.Hose110.Type: 2; Prop.Hose110.Invisible: FALSE; Prop.Hose110.Verify: FALSE; Prop.Hose110.LangID: 1049; Prop.Hose110.Calendar: 0; 
     Prop.Hose38: 0; Prop.Hose38.Prompt: "Запас пожарных рукавов диаметром 38мм"; Prop.Hose38.Label: "Рукава 38"; Prop.Hose38.Format: ""; Prop.Hose38.SortKey: "36"; Prop.Hose38.Type: 2; Prop.Hose38.Invisible: FALSE; Prop.Hose38.Verify: FALSE; Prop.Hose38.LangID: 1049; Prop.Hose38.Calendar: 0; 
@@ -690,16 +690,19 @@
     User.ShapeColor3: FillBkgnd; User.ShapeColor3.Prompt: "Цвет заливки"; 
     User.LabelBottom: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";"")&IF(AND(OR(Actions.UnitShow.Checked;Actions.CallShow.Checked);Actions.ArrivalTimeShow.Checked);CHAR(10);"")&IF(Actions.ArrivalTimeShow.Checked;FORMAT(Prop.ArrivalTime;"HH:mm");""); User.LabelBottom.Prompt: ""; 
     User.GFS_OutLafet: 0; User.GFS_OutLafet.Prompt: ""; 
+    User.ShapeColor4: Styles!Т_Патрубки!LineColor; User.ShapeColor4.Prompt: "Цвет патрубков"; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"Техника_прочее")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: Styles!Т_Прочая_Заполненная!FillForegnd; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>
-    SelectMode: 0; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: FALSE; IsTextEditTarget: FALSE; DontMoveChildren: TRUE; 
+    SelectMode: 0; DisplayMode: 0; IsDropTarget: FALSE; IsSnapTarget: FALSE; IsTextEditTarget: FALSE; DontMoveChildren: TRUE; 
   Section Object, row: visRowHelpCopyright>>>
     HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "5"; 
   Section Object, row: visRowLine>>>
     LineWeight: 0,72 пт; LineColor: Styles!Т_Прочая_Заполненная!LineColor; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
@@ -1348,6 +1351,8 @@
 =>sheet: Катер
   Section: Character>>>
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Layer>>>
+    Layers.Name: "Техника"; Layers.Password: ""; Layers.Color: 255; Layers.Status: 0; Layers.Visible: 1; Layers.Print: 1; Layers.Active: 0; Layers.Locked: 0; Layers.Snap: 1; Layers.Glue: 1; Layers.NameUniv: "Техника"; Layers.ColorTrans: 0%; 
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Tab>>>
@@ -1389,27 +1394,43 @@
     Actions.CallShow: "Показывать позывной"; Actions.CallShow._Unused1: ""; Actions.CallShow._Unused2: ""; Actions.CallShow.Action: CALLTHIS("SetCheckForAll";"Техника_прочее";"Actions.CallShow.Checked";NOT(Actions.CallShow.Checked)); Actions.CallShow.Checked: 0; Actions.CallShow.Disabled: 0; Actions.CallShow.ReadOnly: FALSE; Actions.CallShow.Invisible: FALSE; Actions.CallShow.BeginGroup: FALSE; Actions.CallShow.TagName: ""; Actions.CallShow.ButtonFace: ""; Actions.CallShow.SortKey: 21; 
     Actions.MainManeure: "Маневр"; Actions.MainManeure._Unused1: ""; Actions.MainManeure._Unused2: ""; Actions.MainManeure.Action: CALLTHIS("SetCheckForAll";"Техника_прочее";"Actions.MainManeure.Checked";NOT(Actions.MainManeure.Checked)); Actions.MainManeure.Checked: 0; Actions.MainManeure.Disabled: 0; Actions.MainManeure.ReadOnly: FALSE; Actions.MainManeure.Invisible: FALSE; Actions.MainManeure.BeginGroup: FALSE; Actions.MainManeure.TagName: ""; Actions.MainManeure.ButtonFace: 92; Actions.MainManeure.SortKey: 1; 
     Actions.ArrivalTimeShow: "Показывать время прибытия"; Actions.ArrivalTimeShow._Unused1: ""; Actions.ArrivalTimeShow._Unused2: ""; Actions.ArrivalTimeShow.Action: CALLTHIS("SetCheckForAll";"Техника_прочее";"Actions.ArrivalTimeShow.Checked";NOT(Actions.ArrivalTimeShow.Checked)); Actions.ArrivalTimeShow.Checked: 0; Actions.ArrivalTimeShow.Disabled: 0; Actions.ArrivalTimeShow.ReadOnly: FALSE; Actions.ArrivalTimeShow.Invisible: FALSE; Actions.ArrivalTimeShow.BeginGroup: FALSE; Actions.ArrivalTimeShow.TagName: ""; Actions.ArrivalTimeShow.ButtonFace: ""; Actions.ArrivalTimeShow.SortKey: 22; 
+    Actions.Patrub: "Показывать патрубки"; Actions.Patrub._Unused1: ""; Actions.Patrub._Unused2: ""; Actions.Patrub.Action: CALLTHIS("SetCheckForAll";"Техника_прочее";"Actions.Patrub.Checked";NOT(Actions.Patrub.Checked)); Actions.Patrub.Checked: 0; Actions.Patrub.Disabled: 0; Actions.Patrub.ReadOnly: FALSE; Actions.Patrub.Invisible: FALSE; Actions.Patrub.BeginGroup: TRUE; Actions.Patrub.TagName: ""; Actions.Patrub.ButtonFace: ""; Actions.Patrub.SortKey: "2"; 
   Section: Character>>>
     Char.Font: 4; Char.Color: Styles!Т_Позывные!Char.Color; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: ConnectionPts>>>
+    Connections.GFS_OutPatrLeft2.X: IF(Actions.Patrub.Checked;Width*1,135;Width*0); Connections.GFS_OutPatrLeft2.Y: Height*0,217; Connections.GFS_OutPatrLeft2.DirX: 0 м; Connections.GFS_OutPatrLeft2.DirY: 0 м; Connections.GFS_OutPatrLeft2.Type: 0; Connections.GFS_OutPatrLeft2.AutoGen: FALSE; 
+    Connections.GFS_OutPatrRight1.X: IF(Actions.Patrub.Checked;Width*-0,135;Width*1); Connections.GFS_OutPatrRight1.Y: Height*0,788; Connections.GFS_OutPatrRight1.DirX: 0 м; Connections.GFS_OutPatrRight1.DirY: 0 м; Connections.GFS_OutPatrRight1.Type: 0; Connections.GFS_OutPatrRight1.AutoGen: FALSE; 
+    Connections.GFS_OutPatrLeft1.X: IF(Actions.Patrub.Checked;Width*1,135;Width*0); Connections.GFS_OutPatrLeft1.Y: Height*0,788; Connections.GFS_OutPatrLeft1.DirX: 0 м; Connections.GFS_OutPatrLeft1.DirY: 0 м; Connections.GFS_OutPatrLeft1.Type: 0; Connections.GFS_OutPatrLeft1.AutoGen: FALSE; 
+    Connections.GFS_OutPatrRight2.X: IF(Actions.Patrub.Checked;Width*-0,135;Width*1); Connections.GFS_OutPatrRight2.Y: Height*0,217; Connections.GFS_OutPatrRight2.DirX: 0 м; Connections.GFS_OutPatrRight2.DirY: 0 м; Connections.GFS_OutPatrRight2.Type: 0; Connections.GFS_OutPatrRight2.AutoGen: FALSE; 
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
     Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Список подразделений гарнизона"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: "ПЧ-1;ПЧ-10;ПЧ-15;ПЧ-19;ПЧ-2;ПЧ-24;ПЧ-3;ПЧ-4;ПЧ-47;ПЧ-5;ПЧ-6;ПЧ-7;ПЧ-8;ПЧ-9;СПСЧ"; Prop.Unit.SortKey: 11; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
     Prop.Call: ""; Prop.Call.Prompt: "Название катера (корабля)"; Prop.Call.Label: "Название"; Prop.Call.Format: ""; Prop.Call.SortKey: 12; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
-    Prop.Model: "Вьюн"; Prop.Model.Prompt: "Проект катера (корабля)"; Prop.Model.Label: "Проект"; Prop.Model.Format: "1471;340П;376;Вьюн;КС-102-09"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Hose38: 0; Prop.Hose38.Prompt: "Запас пожарных рукавов диаметром 38мм"; Prop.Hose38.Label: "Рукава 38мм"; Prop.Hose38.Format: ""; Prop.Hose38.SortKey: "36"; Prop.Hose38.Type: 2; Prop.Hose38.Invisible: FALSE; Prop.Hose38.Verify: FALSE; Prop.Hose38.LangID: 1049; Prop.Hose38.Calendar: 0; 
+    Prop.Model: INDEX(3;Prop.Model.Format); Prop.Model.Prompt: "Проект катера (корабля)"; Prop.Model.Label: "Проект"; Prop.Model.Format: "1471;340П;376;Вьюн;КС-102-09"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
     Prop.PersonnelHave: 8; Prop.PersonnelHave.Prompt: "Количество экипажа"; Prop.PersonnelHave.Label: "Экипаж"; Prop.PersonnelHave.Format: ""; Prop.PersonnelHave.SortKey: 32; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.Foam: 2200; Prop.Foam.Prompt: "Запас пенообразователя (л)"; Prop.Foam.Label: "Запас пенообразователя"; Prop.Foam.Format: ""; Prop.Foam.SortKey: 34; Prop.Foam.Type: 2; Prop.Foam.Invisible: FALSE; Prop.Foam.Verify: FALSE; Prop.Foam.LangID: 1049; 
-    Prop.Hose51.Prompt: "Запас пожарных рукавов диаметром 51мм"; Prop.Hose51.Label: "Рукава 51мм"; Prop.Hose51.Format: ""; Prop.Hose51.SortKey: 37; Prop.Hose51.Type: 2; Prop.Hose51.Invisible: FALSE; Prop.Hose51.Verify: FALSE; Prop.Hose51.LangID: 1049; 
-    Prop.Hose66.Prompt: "Запас пожарных рукавов диаметром 66мм"; Prop.Hose66.Label: "Рукава 66мм"; Prop.Hose66.Format: ""; Prop.Hose66.SortKey: 38; Prop.Hose66.Type: 2; Prop.Hose66.Invisible: FALSE; Prop.Hose66.Verify: FALSE; Prop.Hose66.LangID: 1049; 
-    Prop.Hose77.Prompt: "Запас пожарных рукавов диаметром 77мм"; Prop.Hose77.Label: "Рукава 77мм"; Prop.Hose77.Format: ""; Prop.Hose77.SortKey: 39; Prop.Hose77.Type: 2; Prop.Hose77.Invisible: FALSE; Prop.Hose77.Verify: FALSE; Prop.Hose77.LangID: 1049; 
-    Prop.Hose150.Prompt: "Запас пожарных рукавов диаметром 150мм"; Prop.Hose150.Label: "Рукава 150мм"; Prop.Hose150.Format: ""; Prop.Hose150.SortKey: 40; Prop.Hose150.Type: 2; Prop.Hose150.Invisible: TRUE; Prop.Hose150.Verify: FALSE; Prop.Hose150.LangID: 1049; 
-    Prop.PumpLow: 60; Prop.PumpLow.Prompt: "Максимальная производительность пожарного насоса. При расчетах используется 0,8 ътой величины."; Prop.PumpLow.Label: "Производительность"; Prop.PumpLow.Format: ""; Prop.PumpLow.SortKey: 41; Prop.PumpLow.Type: 2; Prop.PumpLow.Invisible: TRUE; Prop.PumpLow.Verify: FALSE; Prop.PumpLow.LangID: 1049; 
-    Prop.PumpPresureLow: 0; Prop.PumpPresureLow.Prompt: "Максимальный напор создаваемый насосом."; Prop.PumpPresureLow.Label: "Напор"; Prop.PumpPresureLow.Format: ""; Prop.PumpPresureLow.SortKey: 43; Prop.PumpPresureLow.Type: 2; Prop.PumpPresureLow.Invisible: TRUE; Prop.PumpPresureLow.Verify: FALSE; Prop.PumpPresureLow.LangID: 1049; 
+    Prop.Hose51: 0; Prop.Hose51.Prompt: "Запас пожарных рукавов диаметром 51мм"; Prop.Hose51.Label: "Рукава 51мм"; Prop.Hose51.Format: ""; Prop.Hose51.SortKey: 37; Prop.Hose51.Type: 2; Prop.Hose51.Invisible: FALSE; Prop.Hose51.Verify: FALSE; Prop.Hose51.LangID: 1049; 
+    Prop.Hose66: 0; Prop.Hose66.Prompt: "Запас пожарных рукавов диаметром 66мм"; Prop.Hose66.Label: "Рукава 66мм"; Prop.Hose66.Format: ""; Prop.Hose66.SortKey: 38; Prop.Hose66.Type: 2; Prop.Hose66.Invisible: FALSE; Prop.Hose66.Verify: FALSE; Prop.Hose66.LangID: 1049; 
+    Prop.Hose77: 0; Prop.Hose77.Prompt: "Запас пожарных рукавов диаметром 77мм"; Prop.Hose77.Label: "Рукава 77мм"; Prop.Hose77.Format: ""; Prop.Hose77.SortKey: 39; Prop.Hose77.Type: 2; Prop.Hose77.Invisible: FALSE; Prop.Hose77.Verify: FALSE; Prop.Hose77.LangID: 1049; 
+    Prop.Hose150: 0; Prop.Hose150.Prompt: "Запас пожарных рукавов диаметром 150мм"; Prop.Hose150.Label: "Рукава 150мм"; Prop.Hose150.Format: ""; Prop.Hose150.SortKey: 40; Prop.Hose150.Type: 2; Prop.Hose150.Invisible: FALSE; Prop.Hose150.Verify: FALSE; Prop.Hose150.LangID: 1049; 
+    Prop.PumpLow: 60; Prop.PumpLow.Prompt: "Максимальная производительность пожарного насоса. При расчетах используется 0,8 ътой величины."; Prop.PumpLow.Label: "Производительность"; Prop.PumpLow.Format: ""; Prop.PumpLow.SortKey: "35"; Prop.PumpLow.Type: 2; Prop.PumpLow.Invisible: FALSE; Prop.PumpLow.Verify: FALSE; Prop.PumpLow.LangID: 1049; 
+    Prop.PumpPresureLow: 100; Prop.PumpPresureLow.Prompt: "Максимальный напор создаваемый насосом."; Prop.PumpPresureLow.Label: "Напор"; Prop.PumpPresureLow.Format: ""; Prop.PumpPresureLow.SortKey: "35"; Prop.PumpPresureLow.Type: 2; Prop.PumpPresureLow.Invisible: FALSE; Prop.PumpPresureLow.Verify: FALSE; Prop.PumpPresureLow.LangID: 1049; 
     Prop.Speed: 0; Prop.Speed.Prompt: "Максимальная скорость движения пожарного катера (корабля)"; Prop.Speed.Label: "Скорость"; Prop.Speed.Format: ""; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.ActionRadius.Prompt: "Дальность действия корабля (катера)"; Prop.ActionRadius.Label: "Дальность действия"; Prop.ActionRadius.Format: ""; Prop.ActionRadius.SortKey: 46; Prop.ActionRadius.Type: 2; Prop.ActionRadius.Invisible: TRUE; Prop.ActionRadius.Verify: FALSE; Prop.ActionRadius.LangID: 1049; 
     Prop.Set: INDEX(1;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Специфический;Стандартный"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
-    Prop.Powder: 450; Prop.Powder.Prompt: "Запас огнетушащего порошка, кг"; Prop.Powder.Label: "Запас порошка"; Prop.Powder.Format: ""; Prop.Powder.SortKey: 35; Prop.Powder.Type: 2; Prop.Powder.Invisible: FALSE; Prop.Powder.Verify: FALSE; Prop.Powder.LangID: 1049; Prop.Powder.Calendar: 0; 
+    Prop.Powder: 450; Prop.Powder.Prompt: "Запас огнетушащего порошка, кг"; Prop.Powder.Label: "Запас порошка"; Prop.Powder.Format: ""; Prop.Powder.SortKey: "34"; Prop.Powder.Type: 2; Prop.Powder.Invisible: FALSE; Prop.Powder.Verify: FALSE; Prop.Powder.LangID: 1049; Prop.Powder.Calendar: 0; 
+    Prop.Hose110: 0; Prop.Hose110.Prompt: "Запас пожарных рукавов диаметром 110мм"; Prop.Hose110.Label: "Рукава 110мм"; Prop.Hose110.Format: ""; Prop.Hose110.SortKey: "39"; Prop.Hose110.Type: 2; Prop.Hose110.Invisible: FALSE; Prop.Hose110.Verify: FALSE; Prop.Hose110.LangID: 1049; Prop.Hose110.Calendar: 0; 
+    Prop.PodOut: GUARD(ROUND(Scratch.D1+Scratch.D2+Scratch.D3+Scratch.D4+User.GFS_OutLafet;2)); Prop.PodOut.Prompt: "Текущий объем воды, подаваемый насосом, л/c"; Prop.PodOut.Label: "Требуемая подача воды"; Prop.PodOut.Format: ""; Prop.PodOut.SortKey: ""; Prop.PodOut.Type: 2; Prop.PodOut.Invisible: FALSE; Prop.PodOut.Verify: FALSE; Prop.PodOut.LangID: 1049; Prop.PodOut.Calendar: 0; 
+    Prop.PumpPressureCur: GUARD(ROUND(MAX(Scratch.C1;Scratch.C2;Scratch.C3;Scratch.C4;User.GFS_OutLafet.Prompt);2)); Prop.PumpPressureCur.Prompt: "Требуемый напор, создаваемый насосом, м"; Prop.PumpPressureCur.Label: "Требуемый напор"; Prop.PumpPressureCur.Format: ""; Prop.PumpPressureCur.SortKey: ""; Prop.PumpPressureCur.Type: 2; Prop.PumpPressureCur.Invisible: FALSE; Prop.PumpPressureCur.Verify: FALSE; Prop.PumpPressureCur.LangID: 1049; Prop.PumpPressureCur.Calendar: 0; 
+    Prop.PodIn: IF(Prop.PodOut<Prop.PumpLow;Prop.PodOut;Prop.PumpLow); Prop.PodIn.Prompt: ""; Prop.PodIn.Label: "Текущий забор воды"; Prop.PodIn.Format: ""; Prop.PodIn.SortKey: ""; Prop.PodIn.Type: 2; Prop.PodIn.Invisible: TRUE; Prop.PodIn.Verify: FALSE; Prop.PodIn.LangID: 1049; Prop.PodIn.Calendar: 0; 
+  Section: Scratch>>>
+    
+    
+    
+    
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -1421,6 +1442,8 @@
     User.ShapeColor3: FillForegnd; User.ShapeColor3.Prompt: "Цвет содержимого"; 
     User.ShapeColor4: FillBkgnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
     User.LabelBottom: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";"")&IF(AND(OR(Actions.UnitShow.Checked;Actions.CallShow.Checked);Actions.ArrivalTimeShow.Checked);CHAR(10);"")&IF(Actions.ArrivalTimeShow.Checked;FORMAT(Prop.ArrivalTime;"HH:mm");""); User.LabelBottom.Prompt: ""; 
+    User.GFS_OutLafet: 0; User.GFS_OutLafet.Prompt: ""; 
+    User.ShapeColor5: Styles!Т_Патрубки!LineColor; User.ShapeColor5.Prompt: "Цвет патрубков"; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"Техника_прочее")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
@@ -1431,6 +1454,8 @@
     HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "0"; 
   Section Object, row: visRowLine>>>
     LineWeight: 0,72 пт; LineColor: REF(); LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
