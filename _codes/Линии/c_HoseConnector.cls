@@ -622,7 +622,7 @@ End Function
 '----------------------------------------Служебные Функции-----------------------------------------------
 Private Function f_IdentShape(ByVal ai_ShapeIP As Integer) As Integer
 'Функция идентифициурет фигуру и возвращает значение её типа
-Dim Arr_PTVs(29, 1) As Integer
+Dim Arr_PTVs(32, 1) As Integer
 Dim i As Integer
 
 '---Указываем значения IndexPers и соответствующие им определения
@@ -686,6 +686,12 @@ Dim i As Integer
         Arr_PTVs(28, 1) = vb_ShapeType_Razv
     Arr_PTVs(29, 0) = 107 'Collector
         Arr_PTVs(29, 1) = vb_ShapeType_Razv
+    Arr_PTVs(30, 0) = 24 'Поезд
+        Arr_PTVs(30, 1) = vb_ShapeType_Tech
+    Arr_PTVs(31, 0) = 30 'Корабль
+        Arr_PTVs(31, 1) = vb_ShapeType_Tech
+    Arr_PTVs(32, 0) = 31 'Катер
+        Arr_PTVs(32, 1) = vb_ShapeType_Tech
         
         
         
@@ -693,7 +699,7 @@ Dim i As Integer
     f_IdentShape = vb_ShapeType_Other
 
 '---Проверяем является ли фигура
-        For i = 0 To 29
+        For i = 0 To 32
             If ai_ShapeIP = Arr_PTVs(i, 0) Then f_IdentShape = Arr_PTVs(i, 1): Exit Function
         Next i
 
