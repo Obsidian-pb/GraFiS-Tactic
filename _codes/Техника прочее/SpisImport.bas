@@ -13,8 +13,8 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
             ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
 
             '---Обновляем список моделей и их ТТХ
-            ModelsListImport (ShpObj.ID)
-            GetTTH (ShpObj.ID)
+            ModelsListImport ShpObj
+            GetTTH ShpObj
             '---Добавляем ссылку на текущее время страницы
             ShpObj.Cells("Prop.ArrivalTime").Formula = _
                 Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
@@ -28,17 +28,16 @@ Application.DoCmd (1312)
 End Sub
 
 '------------------------Блок зависимых списков------------------------------
-Public Sub ModelsListImport(ShpIndex As Long)
+Public Sub ModelsListImport(shp As Visio.Shape)
 'Процедура импорта моделей
 '---Объявляем переменные
-Dim shp As Visio.Shape
 Dim IndexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     IndexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели(Набор) для текущей фигуры
@@ -85,10 +84,10 @@ If shp.Cells("Prop.Model").ResultStr(Visio.visNone) = "" Or shp.Cells("Prop.Mode
     shp.Cells("Prop.Model").FormulaU = "INDEX(0,Prop.Model.Format)"
 End If
 
-Set shp = Nothing
+'Set shp = Nothing
 Exit Sub
 EX:
-    Set shp = Nothing
+'    Set shp = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "ModelsListImport"
 End Sub

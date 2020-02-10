@@ -1,20 +1,16 @@
 Attribute VB_Name = "Tools"
 Option Explicit
 
-Public Sub GetValuesOfCellsFromTable(ShpIndex As Long, TableName As String)
+Public Sub GetValuesOfCellsFromTable(ByRef ShpObj As Visio.Shape, TableName As String)
 'Процедура импорта данных о ТТХ любой фигуры c "Набором" из базы данных Signs
 Dim dbs As Object, rst As Object
 Dim pth As String
-Dim ShpObj As Visio.Shape
 Dim SQL As String, Criteria As String, PAModel As String, PASet As String
 Dim i, k As Integer 'Индексы итерации
 Dim fieldType As Integer
 
 '---Определяем действие в случае ошибки открытия слишком большого количества таблиц
 On Error GoTo Tail
-
-'---Определяем фигуру относительно которой выполняется действие
-    Set ShpObj = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
 
 '---Определяем критерии поиска записи в наборе данных
     PAModel = ShpObj.Cells("Prop.Model").ResultStr(visUnitsString)
@@ -78,11 +74,10 @@ Tail:
 End Sub
 
 
-Public Sub GetValuesOfCellsFromTableSea(ShpIndex As Long, TableName As String)
+Public Sub GetValuesOfCellsFromTableSea(ShpObj As Visio.Shape, TableName As String)
 'Процедура импорта данных о ТТХ любой фигуры c "Набором" из базы данных Signs
 Dim dbs As Object, rst As Object
 Dim pth As String
-Dim ShpObj As Visio.Shape
 Dim SQL As String, Criteria As String, PAModel As String, PASet As String
 Dim i, k As Integer 'Индексы итерации
 Dim fieldType As Integer
@@ -91,7 +86,7 @@ Dim fieldType As Integer
 On Error GoTo Tail
 
 '---Определяем фигуру относительно которой выполняется действие
-    Set ShpObj = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+'    Set ShpObj = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
 
 '---Определяем критерии поиска записи в наборе данных
     PAModel = ShpObj.Cells("Prop.Model").ResultStr(visUnitsString)
@@ -155,11 +150,10 @@ Tail:
 End Sub
 
 
-Public Sub GetValuesOfCellsFromTableTrain(ShpIndex As Long, TableName As String)
+Public Sub GetValuesOfCellsFromTableTrain(ShpObj As Visio.Shape, TableName As String)
 'Процедура импорта данных о ТТХ любой фигуры c "Набором" из базы данных Signs
 Dim dbs As Object, rst As Object
 Dim pth As String
-Dim ShpObj As Visio.Shape
 Dim SQL As String, Criteria As String, PAModel As String, PASet As String
 Dim i, k As Integer 'Индексы итерации
 Dim fieldType As Integer
@@ -168,7 +162,7 @@ Dim fieldType As Integer
 On Error GoTo Tail
 
 '---Определяем фигуру относительно которой выполняется действие
-    Set ShpObj = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+'    Set ShpObj = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
 
 '---Определяем критерии поиска записи в наборе данных
     PAModel = ShpObj.Cells("Prop.Model").ResultStr(visUnitsString)
