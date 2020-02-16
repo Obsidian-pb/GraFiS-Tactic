@@ -58,6 +58,7 @@ Public ps_GDZSChainsRezNeed As Single 'Требуемое количество звеньев
 Public pb_GDZSDiscr As Boolean 'Несоотвествие количества газодымозащитников в звене сложным условиям
 Public pi_GDZSpbCount As Integer 'Kolichestvo PB
 Public pi_KPPCount As Integer 'Kolichestvo KPP
+'Public bo_GDZSRezRoundUp As Boolean 'Округление рез.звеньев в большую сторону
 
 
 Public pi_Hoses38Count As Integer  'Количество рукавов диаметром 38мм
@@ -514,7 +515,6 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                         pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
                           If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
                               ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 0.3334
-                              ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
                           Else
                               ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
                               If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
