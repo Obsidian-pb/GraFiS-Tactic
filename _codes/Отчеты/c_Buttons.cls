@@ -31,7 +31,8 @@ Private Sub ComBut_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As
     On Error GoTo Tail
     
 '---Запускаем основное событие
-    MCheckForm.Show
+'    MCheckForm.Show
+    MCheckForm.Activate
     MasterCheckRefresh
 Tail:
     '---Выходим из процедуры обработки

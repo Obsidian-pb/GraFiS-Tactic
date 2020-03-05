@@ -121,7 +121,21 @@ Private Sub ListBox1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, 
  End Sub
 
 
-Private Sub UserForm_Activate()
+'Private Sub UserForm_Activate()
+'    Set wAddon = ActiveWindow.Windows.Add("MCheck", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
+'
+'    Me.Caption = "MCheck"
+'    FormHandle = FindWindow(vbNullString, "MCheck")
+'    SetWindowLong FormHandle, GWL_STYLE, WS_CHILD Or WS_VISIBLE
+'    SetParent FormHandle, wAddon.WindowHandle32
+'    wAddon.Caption = "Мастер проверок"
+'
+'
+'
+'    Set app = Visio.Application
+'End Sub
+
+Public Sub Activate()
     Set wAddon = ActiveWindow.Windows.Add("MCheck", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
 
     Me.Caption = "MCheck"
@@ -131,8 +145,11 @@ Private Sub UserForm_Activate()
     wAddon.Caption = "Мастер проверок"
     
 
-    
+    'Активируем экземпляр объекта приложения для отслеживания изменений ячеек
     Set app = Visio.Application
+    
+    'Показываем форму
+    Me.Show
 End Sub
 
 
@@ -146,9 +163,9 @@ Private Sub pS_Stretch()
     Me.ListBox2.Height = Me.MultiPage1.Height - con_BorderHeightForList
 End Sub
 
-Private Sub UserForm_Deactivate()
+'Private Sub UserForm_Deactivate()
 '    Set app = Nothing
-End Sub
+'End Sub
 
 Private Sub UserForm_Resize()
     pS_Stretch
@@ -203,7 +220,7 @@ Dim ctrl As CommandBarControl
     
     'Добавляем новые кнопки
     Set menuButtonHide = NewPopupItem(popupMenuBar, 1, 214, "Не учитывать выделенное замечание")
-    Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все скрытые замечания" & " (" & nX & ")", , nX <> 0)
+    Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все скрытые замечания" & " (" & remarksHided & ")", , remarksHided <> 0)
     Set menuButtonOptions = NewPopupItem(popupMenuBar, 1, 212, "Опции замечаний")
     
     'Показываем меню
@@ -228,6 +245,7 @@ End Sub
 
 Private Sub menuButtonRestore_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     RestoreComment
+    MasterCheckRefresh
 End Sub
 Private Sub menuButtonOptions_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     CommOptForm.Show

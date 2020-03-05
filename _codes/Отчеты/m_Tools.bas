@@ -13,6 +13,26 @@ PF_RoundUp = vfi_Temp
 
 End Function
 
+Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber) As Variant
+'Функция возвращает значение ячейки с указанным названием. Если такой ячейки нет, возвращает 0
+    
+    On Error GoTo EX
+    
+    Select Case dataType
+        Case Is = visNumber
+            CellVal = shp.Cells(cellName).Result(dataType)
+        Case Is = visUnitsString
+            CellVal = shp.Cells(cellName).ResultStr(dataType)
+    End Select
+    
+    
+    
+Exit Function
+EX:
+    CellVal = 0
+End Function
+
+
 '--------------------------------Сохранение лога ошибки-------------------------------------
 Public Sub SaveLog(ByRef error As ErrObject, ByVal eroorPosition As String, Optional ByVal addition As String)
 'Прока сохранения лога программы
