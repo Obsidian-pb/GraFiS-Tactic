@@ -13,13 +13,26 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private iCollector As InfoCollector
+
 Private Sub Apply_Click()
-CommOptForm.Hide
-bo_GDZSRezRoundUp = CommOptForm.OptionButton2.Value
-MasterCheckRefresh
+'    CommOptForm.Hide
+'    bo_GDZSRezRoundUp = CommOptForm.OptionButton2.Value
+'    MasterCheckRefresh
+    
+    iCollector.bo_GDZSRezRoundUp
+    Me.Hide
+    MasterCheckRefresh
 End Sub
 
-Private Sub UserForm_Activate()
-CommOptForm.OptionButton2.Value = bo_GDZSRezRoundUp
-End Sub
+'Private Sub UserForm_Activate()
+'    CommOptForm.OptionButton2.Value = bo_GDZSRezRoundUp
+'End Sub
 
+Public Sub ShowForm(ByRef a_iCollector As InfoCollector)
+    Set iCollector = a_iCollector
+    
+    CommOptForm.OptionButton2.Value = iCollector.bo_GDZSRezRoundUp
+    
+    Me.Show
+End Sub

@@ -1,7 +1,7 @@
 Attribute VB_Name = "m_Analizer"
 Option Explicit
 '--------------------------------------------------Модуль для работы с классом InfoCollector----------------------------
-Dim vOC_InfoAnalizer As InfoCollector
+Private vOC_InfoAnalizer As InfoCollector
 
 
 

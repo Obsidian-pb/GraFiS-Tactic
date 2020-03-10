@@ -104,12 +104,7 @@ Public WithEvents menuButtonOptions As CommandBarButton
 Attribute menuButtonOptions.VB_VarHelpID = -1
 
 
-'Private Sub ListBox1_Click()
-'    MasterCheckRefresh
-'End Sub
 
-
- 
 Private Sub ListBox1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, _
  ByVal x As Single, ByVal y As Single)
     If Button = 2 Then
@@ -120,20 +115,6 @@ Private Sub ListBox1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, 
     End If
  End Sub
 
-
-'Private Sub UserForm_Activate()
-'    Set wAddon = ActiveWindow.Windows.Add("MCheck", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
-'
-'    Me.Caption = "MCheck"
-'    FormHandle = FindWindow(vbNullString, "MCheck")
-'    SetWindowLong FormHandle, GWL_STYLE, WS_CHILD Or WS_VISIBLE
-'    SetParent FormHandle, wAddon.WindowHandle32
-'    wAddon.Caption = "Мастер проверок"
-'
-'
-'
-'    Set app = Visio.Application
-'End Sub
 
 Public Sub Activate()
     Set wAddon = ActiveWindow.Windows.Add("MCheck", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
@@ -162,10 +143,6 @@ Private Sub pS_Stretch()
     Me.ListBox2.Width = Me.MultiPage1.Width - con_BorderWidth
     Me.ListBox2.Height = Me.MultiPage1.Height - con_BorderHeightForList
 End Sub
-
-'Private Sub UserForm_Deactivate()
-'    Set app = Nothing
-'End Sub
 
 Private Sub UserForm_Resize()
     pS_Stretch
@@ -248,6 +225,6 @@ Private Sub menuButtonRestore_Click(ByVal ctrl As Office.CommandBarButton, Cance
     MasterCheckRefresh
 End Sub
 Private Sub menuButtonOptions_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
-    CommOptForm.Show
+    CommOptForm.ShowForm
 End Sub
 

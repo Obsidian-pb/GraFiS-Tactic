@@ -12,7 +12,8 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '----------------------------------------Служебные свойства----------------------------------------------------------
-Public pi_TargetPageIndex As Integer          'Целевой лист подсчета (0-все листы, 1-... - лист с указанным номером)
+Public pi_TargetPageIndex As Integer            'Целевой лист подсчета (0-все листы, 1-... - лист с указанным номером)
+Public bo_GDZSRezRoundUp As Boolean             'Округление резервных звеньев в большую сторону
 'Private WithEvents vco_App As Visio.Application
 
 '----------------------------------------Целевые свойства------------------------------------------------------------
@@ -527,12 +528,16 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_GDZSChainsCount = pi_GDZSChainsCount + 1
                         pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
-                          If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
-                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 0.3334
-                          Else
-                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
-                              If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
-                          End If
+                        If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
+                            If bo_GDZSRezRoundUp Then
+                                ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
+                            Else
+                                ps_GDZSChainsRezNeed = Fix(pi_GDZSChainsCount / 3)
+                            End If
+                        Else
+                            ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
+                            If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+                        End If
                     End If
                     If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
@@ -546,12 +551,16 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_GDZSChainsCount = pi_GDZSChainsCount + 1
                         pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
-                          If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
-                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 0.3334
-                          Else
-                              ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
-                              If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
-                          End If
+                        If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
+                            If bo_GDZSRezRoundUp Then
+                                ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
+                            Else
+                                ps_GDZSChainsRezNeed = Fix(pi_GDZSChainsCount / 3)
+                            End If
+                        Else
+                            ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
+                            If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+                        End If
                     End If
                     If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")

@@ -4,7 +4,7 @@ Option Explicit
 Dim remarks(27) As Boolean 'массив переменных для каждого из замечаний
 Dim vOC_InfoAnalizer As InfoCollector
 Public remarksHided As Integer 'переменная количества скрытых замечаний
-Public bo_GDZSRezRoundUp As Boolean 'округление резервных звеньев в большую сторону
+'Public bo_GDZSRezRoundUp As Boolean 'округление резервных звеньев в большую сторону
 '=================================== MASTER CHECK by Vasilchenko ================================================
 Public Sub MasterCheckRefresh()
 'Процедура реакции на действие пользователя
