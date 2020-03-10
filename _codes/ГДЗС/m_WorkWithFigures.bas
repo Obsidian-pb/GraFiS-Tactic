@@ -79,7 +79,7 @@ Dim curHoseShape As Visio.Shape
 Dim curHoseDistance As Double
 Dim newHoseDistance As Double
 
-Dim curHoseShapeID As Integer
+Dim prevHoseShapeID As Integer
 
     On Error GoTo EX
 
@@ -112,18 +112,18 @@ Dim curHoseShapeID As Integer
 
 '---≈сли была найдена фигура рукавной линии, к которой нужно приклеить звено
     If Not curHoseShape Is Nothing Then
-        curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
+        prevHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
     '---1 ѕровер€ем было ли звено приклеено к линии
-        If curHoseShapeID = 0 Then
+        If prevHoseShapeID = 0 Then
         '---нет
-            SetHoseLineGDZSStatus curHoseShape, ShpObj, True
+            SetHoseLineGDZSStatus curHoseShape.ID, ShpObj, True
         Else
         '---да
         '---2 ѕровер€ем было ли звено приклеено к другой линии
-            If curHoseShapeID <> curHoseShape.ID Then
+            If prevHoseShapeID <> curHoseShape.ID Then
             '---—нимаем прив€зку к звену прежней линии и ставим прив€зку дл€ текущей
-                SetHoseLineGDZSStatus Application.ActivePage.Shapes.ItemFromID(curHoseShapeID), ShpObj, False
-                SetHoseLineGDZSStatus curHoseShape, ShpObj, True
+                SetHoseLineGDZSStatus prevHoseShapeID, ShpObj, False
+                SetHoseLineGDZSStatus curHoseShape.ID, ShpObj, True
             End If
         End If
         ShpObj.Cells("User.ShapeHoseID").Formula = curHoseShape.ID
@@ -133,13 +133,13 @@ Dim curHoseShapeID As Integer
         RotateAtHoseLine ShpObj, NewVectorXY(x, y), curHoseShape
         '#END TEMP
     Else
-        curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
+        prevHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
         '---1 ѕровер€ем было ли звено уже прив€зано к линии
-        If curHoseShapeID <> 0 Then
-            Set curHoseShape = GetShapeByID(curHoseShapeID)
+        If prevHoseShapeID <> 0 Then
+            Set curHoseShape = GetShapeByID(prevHoseShapeID)
             '---≈сли было прив€зано, и лини€ к которой она была прив€зана не удалена
             If Not curHoseShape Is Nothing Then
-                SetHoseLineGDZSStatus curHoseShape, ShpObj, False
+                SetHoseLineGDZSStatus curHoseShape.ID, ShpObj, False
             End If
         End If
         '---”казываем, что звено больше не работает с линией
@@ -155,11 +155,18 @@ EX:
     SaveLog Err, "PS_GlueToHose"
 End Sub
 
-Private Sub SetHoseLineGDZSStatus(ByRef shp As Visio.Shape, ByRef shpGDZS As Visio.Shape, ByVal isGDZS As Boolean)
-'”станавливаем статус рукавной илии и ствола присоединенного к ней (только дл€ рабочей)
+Private Sub SetHoseLineGDZSStatus(ByVal shpID As Long, ByRef shpGDZS As Visio.Shape, ByVal isGDZS As Boolean)
+'”станавливаем статус рукавной линии и ствола присоединенного к ней (только дл€ рабочей)
 Dim con As Visio.Connect
+Dim shp As Visio.Shape
 Dim extShp As Visio.Shape
-
+    
+    On Error GoTo EX
+    
+    '---ѕытаемс€ обратитьс€ к фигуре с shpID
+    Set shp = Application.ActivePage.Shapes.ItemFromID(shpID)
+    
+    '---≈сли isGDZS указывает, что со стволом работает звено √ƒ«—
     If isGDZS Then
         For Each con In shp.Connects
             Set extShp = con.ToSheet
@@ -179,7 +186,10 @@ Dim extShp As Visio.Shape
             End If
         Next con
     End If
-
+    
+Exit Sub
+EX:
+    
 End Sub
 
 
