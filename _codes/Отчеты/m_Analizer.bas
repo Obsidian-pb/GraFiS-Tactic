@@ -47,7 +47,7 @@ Dim vsO_Shape As Visio.Shape
     Set vsO_BaseShape = Application.ActivePage.Shapes.ItemFromID(asi_ShpInd)
 
 '---Перебираем все фигуры в отчете
-    For i = 1 To vsO_BaseShape.Shapes.count
+    For i = 1 To vsO_BaseShape.Shapes.Count
         Set vsO_Shape = vsO_BaseShape.Shapes(i)
         If vsO_Shape.CellExists("Actions.ChangeValue", 0) = True Then '---Проверяем является ли фигура ОТЧЕТОМ!!!
             sP_ChangeValueMain vsO_Shape.ID, asi_TargetPage

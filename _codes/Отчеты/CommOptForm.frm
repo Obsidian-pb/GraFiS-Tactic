@@ -20,7 +20,7 @@ Private Sub Apply_Click()
 '    bo_GDZSRezRoundUp = CommOptForm.OptionButton2.Value
 '    MasterCheckRefresh
     
-    iCollector.bo_GDZSRezRoundUp
+'    iCollector.bo_GDZSRezRoundUp
     Me.Hide
     MasterCheckRefresh
 End Sub
@@ -29,10 +29,11 @@ End Sub
 '    CommOptForm.OptionButton2.Value = bo_GDZSRezRoundUp
 'End Sub
 
-Public Sub ShowForm(ByRef a_iCollector As InfoCollector)
+'Public Sub ShowForm(ByRef a_iCollector As InfoCollector)
+Public Sub ShowForm()
     Set iCollector = a_iCollector
     
-    CommOptForm.OptionButton2.Value = iCollector.bo_GDZSRezRoundUp
+    CommOptForm.OptionButton2.value = iCollector.bo_GDZSRezRoundUp
     
     Me.Show
 End Sub

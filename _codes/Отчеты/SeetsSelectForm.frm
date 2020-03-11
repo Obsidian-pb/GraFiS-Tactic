@@ -19,10 +19,10 @@ Public SelectedSheet As String
 
 Private Sub B_OK_Click()
     
-    If OB_CurrentSheet.Value = True Then
+    If OB_CurrentSheet.value = True Then
         SelectedSheet = Application.ActivePage.Name
     Else
-        SelectedSheet = LB_SheetsList.Value
+        SelectedSheet = LB_SheetsList.value
     End If
 '    MsgBox SelectedSheet
     
@@ -44,7 +44,7 @@ End Sub
 
 
 Private Sub UserForm_Activate()
-    If OB_CurrentSheet.Value = False Then s_SheetsListCreate
+    If OB_CurrentSheet.value = False Then s_SheetsListCreate
 End Sub
 
 Private Sub s_SheetsListCreate()
@@ -52,7 +52,7 @@ Private Sub s_SheetsListCreate()
 Dim i As Integer
 
     LB_SheetsList.Clear
-    For i = 1 To Application.ActiveDocument.Pages.count
+    For i = 1 To Application.ActiveDocument.Pages.Count
         LB_SheetsList.AddItem Application.ActiveDocument.Pages(i).Name
     Next i
     LB_SheetsList.ListIndex = 0

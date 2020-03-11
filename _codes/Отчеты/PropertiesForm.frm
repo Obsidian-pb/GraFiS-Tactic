@@ -97,8 +97,8 @@ Dim vpVS_DocShape As Visio.Shape
 Set vpVS_DocShape = Application.ActiveDocument.DocumentSheet
 
 '---Получаем данные из Шэйп-листа документа
-vpVS_DocShape.Cells("User.City").FormulaU = Chr(34) & Me.TB_City.Value & Chr(34)
-vpVS_DocShape.Cells("User.Adress").FormulaU = Chr(34) & Me.TB_Adress.Value & Chr(34)
-vpVS_DocShape.Cells("User.FireRating").FormulaU = Chr(34) & Me.CB_FireRating.Value & Chr(34)
-vpVS_DocShape.Cells("User.Object").FormulaU = Chr(34) & Me.CB_Object.Value & Chr(34)
+vpVS_DocShape.Cells("User.City").FormulaU = Chr(34) & Me.TB_City.value & Chr(34)
+vpVS_DocShape.Cells("User.Adress").FormulaU = Chr(34) & Me.TB_Adress.value & Chr(34)
+vpVS_DocShape.Cells("User.FireRating").FormulaU = Chr(34) & Me.CB_FireRating.value & Chr(34)
+vpVS_DocShape.Cells("User.Object").FormulaU = Chr(34) & Me.CB_Object.value & Chr(34)
 End Sub
