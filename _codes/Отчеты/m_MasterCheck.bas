@@ -402,34 +402,34 @@ Public Sub HideComment()
     On Error Resume Next
     
     'И все равно мне не нравится как это выглядит надо  что-то другое придумать. Такой код чреват ошибками
-    remarks(0) = MCheckForm.ListBox1.Value = "Не указан очаг пожара"
-    remarks(1) = MCheckForm.ListBox1.Value = "Не указаны зоны задымления"
-    remarks(2) = MCheckForm.ListBox1.Value = "Не указаны пути распространения пожара"
-    remarks(3) = MCheckForm.ListBox1.Value = "Не создан оперативный штаб"
-    remarks(4) = MCheckForm.ListBox1.Value = "Не указано решающее направление"
-    remarks(5) = MCheckForm.ListBox1.Value = "Решающее напраление должно быть одним"
-    remarks(6) = MCheckForm.ListBox1.Value = "Не организованы секторы проведения работ"
-    remarks(7) = InStr(1, MCheckForm.ListBox1.Value, "Не выставлены посты безопасности") > 0
-    remarks(8) = MCheckForm.ListBox1.Value = "Не создан контрольно-пропускной пункт ГДЗС"
-    remarks(9) = InStr(1, MCheckForm.ListBox1.Value, "В сложных условиях звенья ГДЗС") > 0
-    remarks(10) = InStr(1, MCheckForm.ListBox1.Value, "резервных звеньев") > 0
-    remarks(11) = InStr(1, MCheckForm.ListBox1.Value, "расстояния от каждого") > 0
-    remarks(12) = InStr(1, MCheckForm.ListBox1.Value, "положения") > 0
-    remarks(13) = InStr(1, MCheckForm.ListBox1.Value, "диаметры") > 0
-    remarks(14) = InStr(1, MCheckForm.ListBox1.Value, "подписи степени огнестойкости") > 0
-    remarks(15) = InStr(1, MCheckForm.ListBox1.Value, "ориентиры на местности") > 0
-    remarks(16) = InStr(1, MCheckForm.ListBox1.Value, "Недостаточный фактический расход") > 0
-    remarks(17) = InStr(1, MCheckForm.ListBox1.Value, "Недостаточное водоснабжение") > 0
-    remarks(18) = InStr(1, MCheckForm.ListBox1.Value, "Недостаточно личного состава") > 0
-    remarks(19) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 51 мм,") > 0
-    remarks(20) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 66 мм") > 0
-    remarks(21) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 77 мм") > 0
-    remarks(22) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 89 мм") > 0
-    remarks(23) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 110 мм") > 0
-    remarks(24) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 150 мм") > 0
-    remarks(25) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 200 мм") > 0
-    remarks(26) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 250 мм") > 0
-    remarks(27) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 300 мм") > 0
+    remarks(0) = MCheckForm.ListBox1.value = "Не указан очаг пожара"
+    remarks(1) = MCheckForm.ListBox1.value = "Не указаны зоны задымления"
+    remarks(2) = MCheckForm.ListBox1.value = "Не указаны пути распространения пожара"
+    remarks(3) = MCheckForm.ListBox1.value = "Не создан оперативный штаб"
+    remarks(4) = MCheckForm.ListBox1.value = "Не указано решающее направление"
+    remarks(5) = MCheckForm.ListBox1.value = "Решающее напраление должно быть одним"
+    remarks(6) = MCheckForm.ListBox1.value = "Не организованы секторы проведения работ"
+    remarks(7) = InStr(1, MCheckForm.ListBox1.value, "Не выставлены посты безопасности") > 0
+    remarks(8) = MCheckForm.ListBox1.value = "Не создан контрольно-пропускной пункт ГДЗС"
+    remarks(9) = InStr(1, MCheckForm.ListBox1.value, "В сложных условиях звенья ГДЗС") > 0
+    remarks(10) = InStr(1, MCheckForm.ListBox1.value, "резервных звеньев") > 0
+    remarks(11) = InStr(1, MCheckForm.ListBox1.value, "расстояния от каждого") > 0
+    remarks(12) = InStr(1, MCheckForm.ListBox1.value, "положения") > 0
+    remarks(13) = InStr(1, MCheckForm.ListBox1.value, "диаметры") > 0
+    remarks(14) = InStr(1, MCheckForm.ListBox1.value, "подписи степени огнестойкости") > 0
+    remarks(15) = InStr(1, MCheckForm.ListBox1.value, "ориентиры на местности") > 0
+    remarks(16) = InStr(1, MCheckForm.ListBox1.value, "Недостаточный фактический расход") > 0
+    remarks(17) = InStr(1, MCheckForm.ListBox1.value, "Недостаточное водоснабжение") > 0
+    remarks(18) = InStr(1, MCheckForm.ListBox1.value, "Недостаточно личного состава") > 0
+    remarks(19) = InStr(1, MCheckForm.ListBox1.value, "рукавов 51 мм,") > 0
+    remarks(20) = InStr(1, MCheckForm.ListBox1.value, "рукавов 66 мм") > 0
+    remarks(21) = InStr(1, MCheckForm.ListBox1.value, "рукавов 77 мм") > 0
+    remarks(22) = InStr(1, MCheckForm.ListBox1.value, "рукавов 89 мм") > 0
+    remarks(23) = InStr(1, MCheckForm.ListBox1.value, "рукавов 110 мм") > 0
+    remarks(24) = InStr(1, MCheckForm.ListBox1.value, "рукавов 150 мм") > 0
+    remarks(25) = InStr(1, MCheckForm.ListBox1.value, "рукавов 200 мм") > 0
+    remarks(26) = InStr(1, MCheckForm.ListBox1.value, "рукавов 250 мм") > 0
+    remarks(27) = InStr(1, MCheckForm.ListBox1.value, "рукавов 300 мм") > 0
 
 '    If MCheckForm.ListBox1.Value = "Не указан очаг пожара" Then remarks(0) = True
 '    If MCheckForm.ListBox1.Value = "Не указаны зоны задымления" Then remarks(1) = True

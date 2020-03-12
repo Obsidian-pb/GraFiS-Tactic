@@ -33,12 +33,12 @@ Public Enum indexPers
    ipKorabl = 30                               'Корабль
    ipKater = 31                                'Катер
    ipPrispAvto = 32                            'Приспособленный автомобиль
-   ipAvtoObschee = 33                          'Автомобиль общее обозначение УДАЛИТЬ!!!
+'   ipAvtoObschee = 33                          'Автомобиль общее обозначение УДАЛИТЬ!!!
    ipInjenerAndSpecAvto = 3000                 'Колесные инженерные и специальные машины
    ipMVD = 3001                                'МВД
    ipAmbulance = 3002                          'Скорая помощь
    ipStvolRuch = 34                            'Водяной ручной ствол
-   ipStvolRuchFPena = 35                       'Пенный ствол
+   ipStvolRuchPena = 35                       'Пенный ствол
    ipStvolLafVoda = 36                         'Лафетный водяной (Лафетный автомобильный – разновидность с предопределенными свойствами!)
    ipStvolLafPena = 37                         'Лафетный пенный
    ipStvolLafPoroshok = 38                        'Лафетный порошковый ствол
@@ -137,6 +137,7 @@ Public Enum indexPers
    ipPennayaVstavka = 191                      'Пенная вставка
    ipZazemlenie = 192                          'Заземление
    ipOgnetushitel = 193                        'Огнетушитель
+   ipKolichestvo = 195                         'Количество элементов
    ipZakrVodoistochnik = 240                   'Закрытый водоисточник
    ipStenaNesuchayaProstaya = 250              'Стена несущая простая
    ipStenaNesuchayaDvuhsloynaya = 251          'Стена несущая двухслойная
