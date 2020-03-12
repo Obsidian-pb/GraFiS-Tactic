@@ -10,9 +10,9 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '================Интерфейс калькулятора элемента оперативно-тактической обстановки================
-'Const p_ID As String                             'Идентификатор калькулятора
-'Const p_dataType As CalculatorResultTypes        'Тип данных используемый калькулятором
-'Const p_callName As String                       'Имя вызова (для использования в фигурах)
+'Const p_ID As String                               'Идентификатор калькулятора
+'Const p_dataType As CalculatorResultTypes          'Тип данных используемый калькулятором
+'Const p_callName As String                         'Имя вызова (для использования в фигурах)
 'Private p_reportPattern As String                  'Шаблон строки отчета места вставки данных указываются - {n}, где n - номер значения
 '
 'Private p_state As Boolean                         'Состояние объекта (активирован или нет)
@@ -36,8 +36,15 @@ End Property
 
 
 Public Sub RaiseValue(Optional ByVal diffValue As Variant = 1)
-'Для чисел
+'Увеличиваем текущее значение на diffValue
 End Sub
+Public Sub SetValue(ByVal newValue As Variant)
+'Устанавливаем новое значение
+End Sub
+Public Sub Clear()
+'Обнуляем калькулятор
+End Sub
+
 
 Public Sub Calculate(ByRef shp As Visio.Shape)
 'Процедура Пересчета калькулятора и передаем ему ссылку на рассматриваемую фигуру

@@ -32,6 +32,56 @@ EX:
     CellVal = 0
 End Function
 
+Public Function IsGFSShape(ByRef shp As Visio.Shape) As Boolean
+'Функция возвращает True, если фигура является фигурой ГраФиС
+Dim i As Integer
+    
+    'Проверяем, является ли фигура фигурой ГраФиС
+    If shp.CellExists("User.IndexPers", 0) = True Then
+        IsGFSShape = True
+        Exit Function
+    End If
+    
+IsGFSShape = False
+End Function
+
+Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPreses As Variant) As Boolean
+'Функция возвращает True, если фигура является фигурой ГраФиС и среди переданных типов фигур ГраФиС (gfsIndexPreses) присутствует IndexPers данной фигуры
+'Предполагается что переданная фигура уже проверена на то, относится ли она уже к фигурам ГраФиС. В случае, если у фигуры нет ячейки User.IndexPers _
+'обработчик ошибки указывает функции вернуть False
+'Пример использования: IsGFSShapeWithIP(shp, indexPers.ipPloschadPozhara)
+'                 или: IsGFSShapeWithIP(shp, Array(indexPers.ipPloschadPozhara, indexPers.ipAC))
+Dim i As Integer
+Dim indexPers As Integer
+    
+    On Error GoTo EX
+    
+    'Проверяем, является ли фигура фигурой указанного типа
+    indexPers = shp.Cells("User.IndexPers").Result(visNumber)
+    Select Case TypeName(gfsIndexPreses)
+        Case Is = "Long"    'Если передано единственное значение
+            If gfsIndexPreses = indexPers Then
+                IsGFSShapeWithIP = True
+                Exit Function
+            End If
+        Case Is = "Variant()"   'Если передан массив
+            For i = 0 To UBound(gfsIndexPreses)
+                If gfsIndexPreses(i) = indexPers Then
+                    IsGFSShapeWithIP = True
+                    Exit Function
+                End If
+            Next i
+        Case Else
+            IsGFSShapeWithIP = False
+    End Select
+
+IsGFSShapeWithIP = False
+Exit Function
+EX:
+    IsGFSShapeWithIP = False
+    SaveLog Err, "m_Tools.IsGFSShapeWithIP"
+End Function
+
 
 '--------------------------------Сохранение лога ошибки-------------------------------------
 Public Sub SaveLog(ByRef error As ErrObject, ByVal eroorPosition As String, Optional ByVal addition As String)

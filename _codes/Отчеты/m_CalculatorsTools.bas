@@ -15,7 +15,7 @@ Dim shp As Visio.Shape
         newAnalizer.Calculate shp
     Next shp
     
-    Debug.Print newAnalizer.CallNamesArray(";")
-    Debug.Print newAnalizer.GetCalculatorByID("test").Result
-    Debug.Print newAnalizer.GetCalculatorByID("gdzs").Result & "=>" & newAnalizer.GetCalculatorByID("gdzs").callName
+'    Debug.Print newAnalizer.CallNamesArray(";")
+    Debug.Print newAnalizer.GetCalculatorByID("FireSquare").Result
+'    Debug.Print newAnalizer.GetCalculatorByID("gdzs").Result & "=>" & newAnalizer.GetCalculatorByID("gdzs").callName
 End Sub

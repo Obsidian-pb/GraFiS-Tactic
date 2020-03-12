@@ -37,10 +37,10 @@ End Property
 Private Sub fillCalcCollection()
 'Заполняем коллекцию калькуляторов
 Dim calc As ICalculator
-    Set calc = New xCalcTest
+    Set calc = New xCalcFireSquare
         calcCollection.Add calc, calc.ID
-    Set calc = New xCalcGDZS
-        calcCollection.Add calc, calc.ID
+'    Set calc = New xCalcGDZS
+'        calcCollection.Add calc, calc.ID
     
     
     
@@ -52,10 +52,15 @@ End Sub
 Public Sub Calculate(ByRef shp As Visio.Shape)
 '!!!Основная процедура запускающая цикл расчета всех калькуляторов для данной фигуры
 Dim calc As ICalculator
+    
+    'Проверяем, является ли фигура фигурой ГраФиС
+    If IsGFSShape(shp) Then
+        'Всеми калькуляторами проводим анализ данной фигуры
+        For Each calc In calcCollection
+            calc.Calculate shp
+        Next calc
+    End If
 
-    For Each calc In calcCollection
-        calc.Calculate shp
-    Next calc
 End Sub
 
 '-------------------------------------Публичные функции классса----------------------------------------------
