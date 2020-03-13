@@ -102,6 +102,7 @@ Private elements As ElementsShell
 'Public pi_MZdravCount As Integer        'СМП
 'Public pi_TechTotalCount As Integer     'Общее количество техники
 'Public pi_FireTotalCount As Integer     'Пожарная
+
 'Public pi_BUCount As Integer            'Боевых участков
 'Public pi_SPRCount As Integer           'Секторов
 'Public pi_ShtabCount As Integer         'Shtab

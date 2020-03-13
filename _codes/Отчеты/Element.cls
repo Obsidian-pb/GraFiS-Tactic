@@ -11,9 +11,12 @@ Option Explicit
 '================Класс элемента оперативно-тактической обстановки для расчета=====================================================================================================================
 Private p_ID As String                               'Переменная для хранения ID объекта
 Private p_callName As String                         'Имя вызова (для использования в фигурах)
+Private p_cellID As String                          'Имя рассчетной ячейки
 Private p_value As Variant                          'Текущее значение калькулятора
 Private p_startValue As Variant                     'Стартовое значение калькулятора
 Private p_state As Boolean                          'Состояние объекта (активирован или нет)
+Private p_InShapes As Boolean                          'Отражать в списке свойств для фигур
+Private p_InMaster As Boolean                          'Отражать в мастере проверок
 
 '--------------------Свойства-------------------------
 Public Property Get ID() As String
@@ -28,6 +31,18 @@ Public Property Get callName() As String
 'Имя вызова
     callName = p_callName
 End Property
+Public Property Get cellID() As String
+'Имя рассчетной ячейки
+    cellID = p_cellID
+End Property
+Public Property Get inShapes() As String
+'Отображается ли в списке свойств в фигурах
+    inShapes = p_InShapes
+End Property
+Public Property Get inMaster() As String
+'Отображается ли в списке свойств в мастере
+    inMaster = p_InMaster
+End Property
 Public Property Get Result() As Variant
 'Текущее значение калькулятора
     Result = p_value
@@ -35,12 +50,20 @@ End Property
 
 
 '--------------------Публичные функции класса--------------------
-Public Function Activate(ByVal a_ID As String, ByVal a_CallName As String, ByVal a_startValue As Variant) As Element
+Public Function Activate(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
+                        Optional a_InShapes As Boolean = True, Optional a_InMaster As Boolean = True) As Element
 'Активируем объект
     p_ID = a_ID
     p_callName = a_CallName
+    p_value = a_startValue
     p_startValue = a_startValue
+    p_cellID = a_CellID
+    p_InShapes = a_InShapes
+    p_InMaster = a_InMaster
+    
     p_state = True
+    
+    Set Activate = Me
 End Function
 
 Public Function RaiseValue(Optional ByVal diffValue As Variant = 1) As Element

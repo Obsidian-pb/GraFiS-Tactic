@@ -498,7 +498,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                         ps_FireSquare = ps_FireSquare + vsO_Shape.Cells("User.FireSquare")
                         ps_ExtSquare = ps_ExtSquare + vsO_Shape.Cells("User.ExtSquare")
                         ps_NeedStreemW = ps_NeedStreemW + vsO_Shape.Cells("User.NeedStreamW")
-                                            
+                        
                     End If
                     
                 Case Is = 71 'Задымление
