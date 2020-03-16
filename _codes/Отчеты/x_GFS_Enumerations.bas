@@ -33,7 +33,7 @@ Public Enum indexPers
    ipKorabl = 30                               'Корабль
    ipKater = 31                                'Катер
    ipPrispAvto = 32                            'Приспособленный автомобиль
-'   ipAvtoObschee = 33                          'Автомобиль общее обозначение УДАЛИТЬ!!!
+   ipAvtoObschee = 33                          'Автомобиль общее обозначение (Вообще все - не только пожарные)
    ipInjenerAndSpecAvto = 3000                 'Колесные инженерные и специальные машины
    ipMVD = 3001                                'МВД
    ipAmbulance = 3002                          'Скорая помощь
@@ -91,7 +91,7 @@ Public Enum indexPers
    ipZhDPolotno = 85                           'Ж/д полотно
    ipStorm = 86                                'Огненный шторм
    ipOdinPozhar = 87                           'Одиночный пожар
-   ipVsasLine = 88                             'Всасывающая линия
+   ipVsasLineWithSetk = 88                             'Всасывающая линия с сеткой
    ipPodpisPloschadPozhara = 89                'Подпись площадь
    ipGDZSZvenoKisl = 90                        'Звено ГДЗС (ДАСК)
    ipRosaVetrov = 91                           'Роза ветров (76)

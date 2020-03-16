@@ -22,32 +22,50 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
         Case Is = visNumber
             CellVal = shp.Cells(cellName).Result(dataType)
         Case Is = visUnitsString
-            CellVal = shp.Cells(cellName).ResultStr(dataType)
+            CellVal = shp.Cells(cellName).resultstr(dataType)
     End Select
     
     
-    
+'CellVal = 0
 Exit Function
 EX:
     CellVal = 0
 End Function
 
-Public Function IsGFSShape(ByRef shp As Visio.Shape) As Boolean
+Public Function IsGFSShape(ByRef shp As Visio.Shape, Optional ByVal useManeure As Boolean = True) As Boolean
 '‘ункци€ возвращает True, если фигура €вл€етс€ фигурой √ра‘и—
 Dim i As Integer
     
+'    If shp.CellExists("User.IndexPers", 0) = True and shp.CellExists("User.Version", 0) = True Then        'ѕодумать - нужен ли вообще учет версии
     'ѕровер€ем, €вл€етс€ ли фигура фигурой √ра‘и—
-    If shp.CellExists("User.IndexPers", 0) = True Then
-        IsGFSShape = True
-        Exit Function
+    If useManeure Then      '≈сли нужно учитывать проверку на маневр
+        If shp.CellExists("User.IndexPers", 0) = True Then
+            '≈сли имеетс€ €чейка опции ћаневра и ее значение показывает, что
+            If shp.CellExists("Actions.MainManeure", 0) = True Then
+                If shp.Cells("Actions.MainManeure.Checked").Result(visNumber) = 0 Then
+                    IsGFSShape = True       '‘игура √ра‘и— и не маневренна€
+                Else
+                    IsGFSShape = False      '‘игура √ра‘и— и маневренна€
+                End If
+            Else
+                IsGFSShape = True       '‘игура √ра‘и— и не имеет €чейки ћаневр
+            End If
+        Else
+            IsGFSShape = False      '‘игура не √ра‘и—
+        End If
+    Else                    'если не нужно учитывать проверку на маневр
+        If shp.CellExists("User.IndexPers", 0) = True Then
+            IsGFSShape = True       '‘игура √ра‘и—
+        Else
+            IsGFSShape = False      '‘игура не √ра‘и—
+        End If
     End If
-    
-IsGFSShape = False
+
 End Function
 
 Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPreses As Variant) As Boolean
 '‘ункци€ возвращает True, если фигура €вл€етс€ фигурой √ра‘и— и среди переданных типов фигур √ра‘и— (gfsIndexPreses) присутствует IndexPers данной фигуры
-'ѕредполагаетс€ что переданна€ фигура уже проверена на то, относитс€ ли она уже к фигурам √ра‘и—. ¬ случае, если у фигуры нет €чейки User.IndexPers _
+'ѕредполагаетс€ что переданна€ фигура уже проверена на то, относитс€ ли она к фигурам √ра‘и—. ¬ случае, если у фигуры нет €чейки User.IndexPers _
 'обработчик ошибки указывает функции вернуть False
 'ѕример использовани€: IsGFSShapeWithIP(shp, indexPers.ipPloschadPozhara)
 '                 или: IsGFSShapeWithIP(shp, Array(indexPers.ipPloschadPozhara, indexPers.ipAC))
@@ -104,4 +122,35 @@ Const d = " | "
 
 End Sub
 
+
+'-------------------------------—ортировка массивов строк----------------------------------------------
+Public Function Sort(ByVal strIn As String, Optional ByVal delimiter As String = ";") As String
+'‘ункци€ возвращает отсортированную строку с массивом строковых значений разделенных delimiter
+Dim arrIn() As String
+Dim resultstr As String
+Dim arrSize As Integer
+Dim gapString As String
+Dim i As Integer
+Dim j As Integer
+
+    previousString = ""
+    arrIn = Split(strIn, delimiter)
+    arrSize = UBound(arrIn)
+    
+    For i = 0 To arrSize
+        For j = i + 1 To arrSize
+            If arrIn(j) < arrIn(i) Then
+                gapString = arrIn(i)
+                arrIn(i) = arrIn(j)
+                arrIn(j) = gapString
+            End If
+        Next j
+    Next i
+    
+    For i = 0 To arrSize
+        resultstr = resultstr & arrIn(i) & delimiter
+    Next i
+    
+Sort = Left(resultstr, Len(resultstr) - Len(delimiter))
+End Function
 

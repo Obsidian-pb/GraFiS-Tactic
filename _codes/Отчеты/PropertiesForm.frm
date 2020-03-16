@@ -30,10 +30,10 @@ Dim vpVS_DocShape As Visio.Shape
     Set vpVS_DocShape = Application.ActiveDocument.DocumentSheet
 
 '---Получаем данные из Шэйп-листа документа
-    Me.TB_City = vpVS_DocShape.Cells("User.City").ResultStr(Visio.visNone)
-    Me.TB_Adress = vpVS_DocShape.Cells("User.Adress").ResultStr(Visio.visNone)
-    Me.CB_FireRating = vpVS_DocShape.Cells("User.FireRating").ResultStr(Visio.visNone)
-    Me.CB_Object = vpVS_DocShape.Cells("User.Object").ResultStr(Visio.visNone)
+    Me.TB_City = vpVS_DocShape.Cells("User.City").resultstr(Visio.visNone)
+    Me.TB_Adress = vpVS_DocShape.Cells("User.Adress").resultstr(Visio.visNone)
+    Me.CB_FireRating = vpVS_DocShape.Cells("User.FireRating").resultstr(Visio.visNone)
+    Me.CB_Object = vpVS_DocShape.Cells("User.Object").resultstr(Visio.visNone)
 
 End Sub
 
@@ -97,8 +97,8 @@ Dim vpVS_DocShape As Visio.Shape
 Set vpVS_DocShape = Application.ActiveDocument.DocumentSheet
 
 '---Получаем данные из Шэйп-листа документа
-vpVS_DocShape.Cells("User.City").FormulaU = Chr(34) & Me.TB_City.value & Chr(34)
-vpVS_DocShape.Cells("User.Adress").FormulaU = Chr(34) & Me.TB_Adress.value & Chr(34)
-vpVS_DocShape.Cells("User.FireRating").FormulaU = Chr(34) & Me.CB_FireRating.value & Chr(34)
-vpVS_DocShape.Cells("User.Object").FormulaU = Chr(34) & Me.CB_Object.value & Chr(34)
+vpVS_DocShape.Cells("User.City").FormulaU = Chr(34) & Me.TB_City.Value & Chr(34)
+vpVS_DocShape.Cells("User.Adress").FormulaU = Chr(34) & Me.TB_Adress.Value & Chr(34)
+vpVS_DocShape.Cells("User.FireRating").FormulaU = Chr(34) & Me.CB_FireRating.Value & Chr(34)
+vpVS_DocShape.Cells("User.Object").FormulaU = Chr(34) & Me.CB_Object.Value & Chr(34)
 End Sub

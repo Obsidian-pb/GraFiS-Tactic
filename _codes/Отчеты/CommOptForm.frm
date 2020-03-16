@@ -33,7 +33,7 @@ End Sub
 Public Sub ShowForm()
     Set iCollector = a_iCollector
     
-    CommOptForm.OptionButton2.value = iCollector.bo_GDZSRezRoundUp
+    CommOptForm.OptionButton2.Value = iCollector.bo_GDZSRezRoundUp
     
     Me.Show
 End Sub

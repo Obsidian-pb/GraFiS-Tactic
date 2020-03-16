@@ -19,10 +19,10 @@ Public SelectedSheet As String
 
 Private Sub B_OK_Click()
     
-    If OB_CurrentSheet.value = True Then
+    If OB_CurrentSheet.Value = True Then
         SelectedSheet = Application.ActivePage.Name
     Else
-        SelectedSheet = LB_SheetsList.value
+        SelectedSheet = LB_SheetsList.Value
     End If
 '    MsgBox SelectedSheet
     
@@ -44,7 +44,7 @@ End Sub
 
 
 Private Sub UserForm_Activate()
-    If OB_CurrentSheet.value = False Then s_SheetsListCreate
+    If OB_CurrentSheet.Value = False Then s_SheetsListCreate
 End Sub
 
 Private Sub s_SheetsListCreate()

@@ -54,7 +54,7 @@ Dim vsO_Shape As Visio.Shape
         End If
         If vsO_Shape.CellExists("User.PropertyValue", 0) = True Then '---Проверяем является ли фигура полем отчета
             vsO_Shape.Cells("User.PropertyValue").FormulaU = _
-                str(fp_SetValue(vsO_Shape.Cells("Prop.PropertyName").ResultStr(visUnitsString)))
+                str(fp_SetValue(vsO_Shape.Cells("Prop.PropertyName").resultstr(visUnitsString)))
         End If
     Next i
 

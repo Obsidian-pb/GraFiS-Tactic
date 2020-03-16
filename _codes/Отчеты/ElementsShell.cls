@@ -42,7 +42,7 @@ Private Sub fillElemCollection()
 'Заполняем коллекцию элементов
     AddNewElement "FireSquare", "Площадь пожара"
     AddNewElement "ExtSquare", "Площадь тушения"
-    AddNewElement "FactStreamW", "Расход воды фактический"
+    AddNewElement "FactStreamW", "Расход воды фактический", , "User.PodOut"
     AddNewElement "IntenseWater", "Интенсивность подачи воды"
     AddNewElement "NeedStreamW", "Расход воды требуемый"
     
@@ -58,96 +58,87 @@ Private Sub fillElemCollection()
     AddNewElement "StvolGasHave", "Газовых стволов подано"
     AddNewElement "StvolPowderHave", "Порошковых стволов подано"
     
-    AddNewElement "MainPAHave", "Основных ПА общего применения имеется"
-    AddNewElement "TargetedPAHave", "Основных ПА целевого применения имеется"
-    AddNewElement "MainOverallCount", "Основных ПА имеется"
-    AddNewElement "SpecialPAHave", "Специальных ПА имеется"
-    AddNewElement "OtherTechincsHave", "Прочей техники имеется"
-    
-    AddNewElement "GetedWaterValue", "Забирается воды из внешних источников"
-    AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум"
-    AddNewElement "GetingWaterCount", "Устройств забирающих воду (кол-во)"
-    
-    AddNewElement "GDZSChainsCountHave", "Звеньев ГДЗС работает"
-    AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
-    AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется"
-    AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
-    AddNewElement "GDZSMansCountHave", "Газодымозащитников работает"
-    AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется"
-    AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резерве имеется"
-    AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется"
-    'AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", 0
-    AddNewElement "GDZSPBCount", "Количество ПБ ГДЗС"
-    AddNewElement "GDZSKPPCount", "Количество КПП ГДЗС"
-    
-    AddNewElement "Hoses38Count", "Рукавов 38мм используется"
-    AddNewElement "Hoses51Count", "Рукавов 51мм используется"
-    AddNewElement "Hoses66Count", "Рукавов 66мм используется"
-    AddNewElement "Hoses77Count", "Рукавов 77мм используется"
-    AddNewElement "Hoses89Count", "Рукавов 89мм используется"
-    AddNewElement "Hoses110Count", "Рукавов 110мм используется"
-    AddNewElement "Hoses150Count", "Рукавов 150мм используется"
-    AddNewElement "Hoses200Count", "Рукавов 200мм используется"
-    AddNewElement "Hoses250Count", "Рукавов 250мм используется"
-    AddNewElement "Hoses300Count", "Рукавов 300мм используется"
-    AddNewElement "HosesCount", "Рукавов используется всего"
-    AddNewElement "HosesLength", "Длина рукавных линий"
-    
-    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , "Prop.Hose38"
-    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , "Prop.Hose51"
-    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , "Prop.Hose66"
-    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , "Prop.Hose77"
-    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , "Prop.Hose89"
-    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , "Prop.Hose110"
-    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , "Prop.Hose150"
-    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , "Prop.Hose200"
-    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , "Prop.Hose250"
-    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , "Prop.Hose300"
-    AddNewElement "HosesHave", "Рукавов имеется всего"
-    AddNewElement "HoseSkatka", "Напорных рукавах в скатках"
-    
-    AddNewElement "WaterValueNeed", "Воды требуется"
-    AddNewElement "WaterValueHave", "Воды имеется"
-    
-    AddNewElement "ACCount", "АЦ имеется"
-    AddNewElement "AGCount", "АГ имеется"
-    AddNewElement "ALCount", "АЛ имеется"
-    AddNewElement "AKPCount", "АКП имеется"
-    AddNewElement "MVDCount", "Техники МВД имеется"
-    AddNewElement "SMPCount", "Техники СМП имеется"
-    AddNewElement "TotalTechCount", "Всего техники имеется"
-    AddNewElement "TotalFireCount", "Всего пожарной техники имеется"
-    
-    AddNewElement "BUCount", "БУ создано"
-    AddNewElement "SPRCount", "СПР создано"
-    AddNewElement "ShtabCount", "Количество штабов", 0, , False, False
-    AddNewElement "RNBDCount", "Количество решющих направления боевых действий", 0, , False, False
-    AddNewElement "OchagCount", "Количество очагов", 0, , False, False
-    AddNewElement "SpreadCount", "Количество направлдений распространения огня", 0, , False, False
-    AddNewElement "SmokeCount", "Задымление", 0, , False, False
-    AddNewElement "WaterSourceCount", "Водоисточники", 0, , False, False
-    AddNewElement "DistanceCount", "Расстояния", 0, , False, False
-    AddNewElement "LinesCount", "Отдельные рукавные линии", 0, , False, False
-    AddNewElement "LinesPosCount", "Подписи положения рукавных линий", 0, , False, False
-    AddNewElement "LinesLableCount", "Подписи рукавных линий", 0, , False, False
-    AddNewElement "WorklinesCount", "Количество рабочих линий", 0, , False, False
-    AddNewElement "BuildCount", "Количество зданий", 0, , False, False
-    AddNewElement "SOCount", "Количество степеней огнестойкости", 0, , False, False
-    AddNewElement "FireCount", "Количество площадей горения", 0, , False, False
-    AddNewElement "OrientCount", "Ориентиры", 0, , False, False
-    
-    AddNewElement "AllHosesWithLabels", "Все рукавные линии с подписями", True, , False, False
-    AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", True, , False, False
-    
-    
-    
-    
-    
-    '*Сделать инструментальную процедуру, которая будет искать Элемент по тексту и выдавать возможные варианты
-    
-    
+'    AddNewElement "MainPAHave", "Основных ПА общего применения имеется"
+'    AddNewElement "TargetedPAHave", "Основных ПА целевого применения имеется"
+'    AddNewElement "MainOverallCount", "Основных ПА имеется"
+'    AddNewElement "SpecialPAHave", "Специальных ПА имеется"
+'    AddNewElement "OtherTechincsHave", "Прочей техники имеется"
+'
+'    AddNewElement "GetedWaterValue", "Забирается воды из внешних источников"
+'    AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум"
+'    AddNewElement "GetingWaterCount", "Устройств забирающих воду (кол-во)"
+'
+'    AddNewElement "GDZSChainsCountHave", "Звеньев ГДЗС работает"
+'    AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
+'    AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется"
+'    AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
+'    AddNewElement "GDZSMansCountHave", "Газодымозащитников работает"
+'    AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется"
+'    AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резерве имеется"
+'    AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется"
+'    'AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", 0
+'    AddNewElement "GDZSPBCount", "Количество ПБ ГДЗС"
+'    AddNewElement "GDZSKPPCount", "Количество КПП ГДЗС"
+'
+'    AddNewElement "Hoses38Count", "Рукавов 38мм используется"
+'    AddNewElement "Hoses51Count", "Рукавов 51мм используется"
+'    AddNewElement "Hoses66Count", "Рукавов 66мм используется"
+'    AddNewElement "Hoses77Count", "Рукавов 77мм используется"
+'    AddNewElement "Hoses89Count", "Рукавов 89мм используется"
+'    AddNewElement "Hoses110Count", "Рукавов 110мм используется"
+'    AddNewElement "Hoses150Count", "Рукавов 150мм используется"
+'    AddNewElement "Hoses200Count", "Рукавов 200мм используется"
+'    AddNewElement "Hoses250Count", "Рукавов 250мм используется"
+'    AddNewElement "Hoses300Count", "Рукавов 300мм используется"
+'    AddNewElement "HosesCount", "Рукавов используется всего"
+'    AddNewElement "HosesLength", "Длина рукавных линий"
+'
+'    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , "Prop.Hose38"
+'    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , "Prop.Hose51"
+'    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , "Prop.Hose66"
+'    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , "Prop.Hose77"
+'    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , "Prop.Hose89"
+'    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , "Prop.Hose110"
+'    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , "Prop.Hose150"
+'    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , "Prop.Hose200"
+'    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , "Prop.Hose250"
+'    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , "Prop.Hose300"
+'    AddNewElement "HosesHave", "Рукавов имеется всего"
+'    AddNewElement "HoseSkatka", "Напорных рукавах в скатках"
+'
+'    AddNewElement "WaterValueNeed", "Воды требуется"
+'    AddNewElement "WaterValueHave", "Воды имеется"
+'
+'    AddNewElement "ACCount", "АЦ имеется"
+'    AddNewElement "AGCount", "АГ имеется"
+'    AddNewElement "ALCount", "АЛ имеется"
+'    AddNewElement "AKPCount", "АКП имеется"
+'    AddNewElement "MVDCount", "Техники МВД имеется"
+'    AddNewElement "SMPCount", "Техники СМП имеется"
+'    AddNewElement "TotalTechCount", "Всего техники имеется"
+'    AddNewElement "TotalFireCount", "Всего пожарной техники имеется"
+'
+'    AddNewElement "BUCount", "БУ создано"
+'    AddNewElement "SPRCount", "СПР создано"
+'    AddNewElement "ShtabCount", "Количество штабов", 0, , False, False
+'    AddNewElement "RNBDCount", "Количество решющих направления боевых действий", 0, , False, False
+'    AddNewElement "OchagCount", "Количество очагов", 0, , False, False
+'    AddNewElement "SpreadCount", "Количество направлдений распространения огня", 0, , False, False
+'    AddNewElement "SmokeCount", "Задымление", 0, , False, False
+'    AddNewElement "WaterSourceCount", "Водоисточники", 0, , False, False
+'    AddNewElement "DistanceCount", "Расстояния", 0, , False, False
+'    AddNewElement "LinesCount", "Отдельные рукавные линии", 0, , False, False
+'    AddNewElement "LinesPosCount", "Подписи положения рукавных линий", 0, , False, False
+'    AddNewElement "LinesLableCount", "Подписи рукавных линий", 0, , False, False
+'    AddNewElement "WorklinesCount", "Количество рабочих линий", 0, , False, False
+'    AddNewElement "BuildCount", "Количество зданий", 0, , False, False
+'    AddNewElement "SOCount", "Количество степеней огнестойкости", 0, , False, False
+'    AddNewElement "FireCount", "Количество площадей горения", 0, , False, False
+'    AddNewElement "OrientCount", "Ориентиры", 0, , False, False
+'
+'    AddNewElement "AllHosesWithLabels", "Все рукавные линии с подписями", True, , False, False
+'    AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", True, , False, False
 
-    
 End Sub
 
 Private Function AddNewElement(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
@@ -175,6 +166,7 @@ Private Function AddElement(ByRef elem As Element) As Element
     Set AddElement = elem
 End Function
 
+
 '-------------------------------------Публичные процедуры классса--------------------------------------------
 
 
@@ -188,6 +180,45 @@ Public Function ByID(ByVal a_elemID As String) As Element
 Exit Function
 EX:
     Set ByID = Nothing
+End Function
+
+Public Function ByCellID(ByVal a_elemCellID As String) As Element
+'Функция возвращает ссылку на Элемент с именем ячейки CellID = a_elemCellID
+    On Error GoTo EX
+    Set ByCellID = elemWithCellsCollection.Item(a_elemCellID)
+    
+Exit Function
+EX:
+    Set ByCellID = Nothing
+End Function
+
+Public Function GetElementsCollection(ByVal searchString As String, Optional ByRef searchByCallName As Boolean = False) As Collection
+'Функция возвращает коллекцию элементов отобранных по поисковой строке
+Dim coll As Collection
+Dim elem As Element
+Dim addFlag As Boolean
+    
+    Set coll = New Collection
+    
+    'перебираем все элементы и проверяем соответствие
+    For Each elem In elemCollection
+        addFlag = False
+        If InStr(1, elem.ID, searchString, vbTextCompare) > 0 Then
+            addFlag = True
+        End If
+        
+        If searchByCallName Then
+            If InStr(0, elem.callName, searchString) > 0 Then
+                addFlag = True
+            End If
+        End If
+        
+        If addFlag Then
+            coll.Add elem
+        End If
+    Next elem
+    
+Set GetElementsCollection = coll
 End Function
 
 'Public Function ByCallName(ByVal a_elemCallName As String) As Element
@@ -204,7 +235,7 @@ End Function
 'Set ByCallName = Nothing
 'End Function
 
-Public Function Clear(ByRef shp As Visio.Shape) As ElementsShell
+Public Function Clear() As ElementsShell
 'Обнуляем значения свойств и при водим значения элементов в начальное состояние
 Dim elem As Element
 
@@ -216,28 +247,97 @@ Dim elem As Element
     Set Clear = Me
 End Function
 
-Public Function CalculateByCellID(ByRef shp As Visio.Shape, ByVal a_CellID As String) As ElementsShell
-'Вычисляем элемент по имени ячейки
+Public Function RaiseByCellID(ByRef shp As Visio.Shape, ByVal a_CellIDs As String) As ElementsShell
+'Увеличиваем значение элемента по имени ячейки
+'a_CellIDs - перечисление через строчку с запятой имен ячеек в виде "User.IndexPers"
 Dim elem As Element
+Dim cellIDArray() As String
+Dim i As Integer
     
-    On Error GoTo NoSuchElement
-    Set elem = elemWithCellsCollection.Item(a_CellID)
-    elem.RaiseValue (CellVal(shp, "User.FireSquare"))
+    cellIDArray = Split(a_CellIDs, ";")
     
-    Set CalculateByCellID = Me
-Exit Function
-NoSuchElement:
-    Set CalculateByCellID = Me
+    For i = 0 To UBound(cellIDArray)
+        Set elem = ByCellID(cellIDArray(i))
+        If Not elem Is Nothing Then
+            elem.RaiseValue CellVal(shp, cellIDArray(i))
+        End If
+    Next i
+    
+Set RaiseByCellID = Me
+End Function
+
+Public Function SetValByCellID(ByRef shp As Visio.Shape, ByVal a_CellID As String) As ElementsShell
+''Устанавливаем значение элемента по имени ячейки
+'Dim elem As Element
+'
+'    On Error GoTo NoSuchElement
+'    Set elem = elemWithCellsCollection.Item(a_CellID)
+'    If elem Is Nothing Then
+'        Set SetByCellID = Me
+'        Exit Function
+'    End If
+'
+'    elem.RaiseValue (CellVal(shp, a_CellID))
+'
+'    Set SetByCellID = Me
+'Exit Function
+'NoSuchElement:
+'    Set SetByCellID = Me
+'Устанавливаем значение элемента по имени ячейки
+'a_CellIDs - перечисление через строчку с запятой имен ячеек в виде "User.IndexPers"
+Dim elem As Element
+Dim cellIDArray() As String
+Dim i As Integer
+    
+    cellIDArray = Split(a_CellIDs, ";")
+    
+    For i = 0 To UBound(cellIDArray)
+        Set elem = ByCellID(cellIDArray(i))
+        If Not elem Is Nothing Then
+            elem.SetValue CellVal(shp, cellIDArray(i))
+        End If
+    Next i
+    
+Set SetValByCellID = Me
+    
 End Function
 
 Public Function Raise(ByVal elemNames As String, Optional ByVal val As Variant = 1) As ElementsShell
 'Увеличиваем значение указанных ячеек. Список указывается через точку с запятой
-    Stop
+Dim elemArray() As String
+Dim elem As Element
+Dim i As Integer
+    
+    elemArray = Split(elemNames, ";")
+        
+    For i = 0 To UBound(elemArray)
+        Set elem = ByID(elemArray(i))
+        If elem Is Nothing Then
+            Debug.Print "!Внимание! Элемент с ID=" & elemArray(i) & " отсутствет!"
+        Else
+            elem.RaiseValue val
+        End If
+    Next i
+Set Raise = Me
 End Function
 
 Public Function SetVal(ByVal elemNames As String, Optional ByVal val As Variant = 1) As ElementsShell
 'Устанавливаем значения указанных ячеек. Список указывается через точку с запятой
-    Stop
+Dim elemArray() As String
+Dim elem As Element
+Dim i As Integer
+    
+    elemArray = Split(elemNames, ";")
+        
+    For i = 0 To UBound(elemArray)
+        Set elem = ByID(elemArray(i))
+        If elem Is Nothing Then
+            Debug.Print "!Внимание! Элемент с ID=" & elemArray(i) & " отсутствет!"
+        Else
+            elem.SetValue val
+        End If
+    Next i
+Set SetVal = Me
 End Function
 
 Public Function CallNames(ByVal delimiter As String) As String
@@ -260,7 +360,7 @@ Dim tmpStr As String
         CallNames = ""
         Exit Function
     End If
-CallNames = Left(tmpStr, Len(tmpStr) - Len(delimiter))
+CallNames = Sort(Left(tmpStr, Len(tmpStr) - Len(delimiter)))
 End Function
 
 
