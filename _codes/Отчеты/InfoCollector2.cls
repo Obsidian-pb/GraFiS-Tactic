@@ -27,11 +27,9 @@ Private latestSquareTime As Date
 
 '----------------------------------------Служебные процедуры------------------------------------------------------------
 Private Sub Class_Initialize()
-'    targetPageIndex = ActivePage.Index
     Set elements = New ElementsShell
 
 '    VarInit
-'    sC_Refresh (pi_TargetPageIndex)
 
 End Sub
 Private Sub Class_Terminate()
@@ -93,196 +91,274 @@ Dim targetPage As Visio.Page
 '                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
 '                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
                         
-                        
-                        .Raise "MainPAHave;ACCount;TotalTechCount;TotalFireCount"
+                        .Raise "MainOverallHave;MainPAHave;ACCount;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                         .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38,Prop.Hose51,Prop.Hose66,Prop.Hose77"
-                        
-                        
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipANR 'АНР
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_MainPAHave = pi_MainPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") 'vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
-                    Case Is = indexPers.ipAKP 'АПП
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_MainPAHave = pi_MainPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") 'vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_MainPAHave = pi_MainPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") 'vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "MainOverallHave;MainPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+'                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+                    Case Is = indexPers.ipAPP 'АПП
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_MainPAHave = pi_MainPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") 'vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "MainOverallHave;MainPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAL 'АЛ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_ALCount = pi_ALCount + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") 'vsO_Shape.Cells("Prop.Hose51")
-    '                    pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_ALCount = pi_ALCount + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") 'vsO_Shape.Cells("Prop.Hose51")
+'    '                    pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "SpecialPAHave;ALCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+'                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAKP 'АКП
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_AKPCount = pi_AKPCount + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") 'vsO_Shape.Cells("Prop.Hose51")
-    '                    pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_AKPCount = pi_AKPCount + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") 'vsO_Shape.Cells("Prop.Hose51")
+'    '                    pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") 'vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") 'vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "SpecialPAHave;AKPCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+'                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipASO 'АСО
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAT 'АТ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipADU 'АДУ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipPNS 'ПНС
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_TargetedPAHave = pi_TargetedPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
-                        pi_Hoses89Have = pi_Hoses89Have + CellVal(vsO_Shape, "Prop.Hose89") ' vsO_Shape.Cells("Prop.Hose89")
-                        pi_Hoses110Have = pi_Hoses110Have + CellVal(vsO_Shape, "Prop.Hose110") ' vsO_Shape.Cells("Prop.Hose110")
-                        pi_Hoses150Have = pi_Hoses150Have + CellVal(vsO_Shape, "Prop.Hose150") ' vsO_Shape.Cells("Prop.Hose150")
-                        pi_Hoses200Have = pi_Hoses200Have + CellVal(vsO_Shape, "Prop.Hose200") ' vsO_Shape.Cells("Prop.Hose200")
-                        pi_Hoses250Have = pi_Hoses250Have + CellVal(vsO_Shape, "Prop.Hose250") ' vsO_Shape.Cells("Prop.Hose250")
-                        pi_Hoses300Have = pi_Hoses300Have + CellVal(vsO_Shape, "Prop.Hose300") ' vsO_Shape.Cells("Prop.Hose300")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_TargetedPAHave = pi_TargetedPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_Hoses89Have = pi_Hoses89Have + CellVal(vsO_Shape, "Prop.Hose89") ' vsO_Shape.Cells("Prop.Hose89")
+'                        pi_Hoses110Have = pi_Hoses110Have + CellVal(vsO_Shape, "Prop.Hose110") ' vsO_Shape.Cells("Prop.Hose110")
+'                        pi_Hoses150Have = pi_Hoses150Have + CellVal(vsO_Shape, "Prop.Hose150") ' vsO_Shape.Cells("Prop.Hose150")
+'                        pi_Hoses200Have = pi_Hoses200Have + CellVal(vsO_Shape, "Prop.Hose200") ' vsO_Shape.Cells("Prop.Hose200")
+'                        pi_Hoses250Have = pi_Hoses250Have + CellVal(vsO_Shape, "Prop.Hose250") ' vsO_Shape.Cells("Prop.Hose250")
+'                        pi_Hoses300Have = pi_Hoses300Have + CellVal(vsO_Shape, "Prop.Hose300") ' vsO_Shape.Cells("Prop.Hose300")
+                        
+                        .Raise "TargetedPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
                     Case Is = indexPers.ipAA 'AA
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_TargetedPAHave = pi_TargetedPAHave + 1
-                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_TargetedPAHave = pi_TargetedPAHave + 1
+'                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAV 'АВ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_TargetedPAHave = pi_TargetedPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
-                        pi_Hoses89Have = pi_Hoses89Have + CellVal(vsO_Shape, "Prop.Hose89") ' vsO_Shape.Cells("Prop.Hose89")
-                        pi_Hoses110Have = pi_Hoses110Have + CellVal(vsO_Shape, "Prop.Hose110") ' vsO_Shape.Cells("Prop.Hose110")
-                        pi_Hoses150Have = pi_Hoses150Have + CellVal(vsO_Shape, "Prop.Hose150") ' vsO_Shape.Cells("Prop.Hose150")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_TargetedPAHave = pi_TargetedPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_Hoses89Have = pi_Hoses89Have + CellVal(vsO_Shape, "Prop.Hose89") ' vsO_Shape.Cells("Prop.Hose89")
+'                        pi_Hoses110Have = pi_Hoses110Have + CellVal(vsO_Shape, "Prop.Hose110") ' vsO_Shape.Cells("Prop.Hose110")
+'                        pi_Hoses150Have = pi_Hoses150Have + CellVal(vsO_Shape, "Prop.Hose150") ' vsO_Shape.Cells("Prop.Hose150")
+                        
+                        .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+'                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150"
                     Case Is = indexPers.ipAKT 'АКТ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_TargetedPAHave = pi_TargetedPAHave + 1
-                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_TargetedPAHave = pi_TargetedPAHave + 1
+'                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAP 'АП
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_TargetedPAHave = pi_TargetedPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_TargetedPAHave = pi_TargetedPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAGVT 'АГВТ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_TargetedPAHave = pi_TargetedPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_TargetedPAHave = pi_TargetedPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAG 'АГ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_TargetedPAHave = pi_TargetedPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_TargetedPAHave = pi_TargetedPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAGDZS 'АГДЗС
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_AGCount = pi_AGCount + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_AGCount = pi_AGCount + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipPNS 'ПКС
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipPozhLab 'ЛБ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipASA 'АСА
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipASH 'АШ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAR 'АР
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_SpecialPAHave = pi_SpecialPAHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
-                        pi_Hoses89Have = pi_Hoses89Have + CellVal(vsO_Shape, "Prop.Hose89") ' vsO_Shape.Cells("Prop.Hose89")
-                        pi_Hoses110Have = pi_Hoses110Have + CellVal(vsO_Shape, "Prop.Hose110") ' vsO_Shape.Cells("Prop.Hose110")
-                        pi_Hoses150Have = pi_Hoses150Have + CellVal(vsO_Shape, "Prop.Hose150") ' vsO_Shape.Cells("Prop.Hose150")
-                        pi_Hoses200Have = pi_Hoses200Have + CellVal(vsO_Shape, "Prop.Hose200") ' vsO_Shape.Cells("Prop.Hose200")
-                        pi_Hoses250Have = pi_Hoses250Have + CellVal(vsO_Shape, "Prop.Hose250") ' vsO_Shape.Cells("Prop.Hose250")
-                        pi_Hoses300Have = pi_Hoses300Have + CellVal(vsO_Shape, "Prop.Hose300") ' vsO_Shape.Cells("Prop.Hose300")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_SpecialPAHave = pi_SpecialPAHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_Hoses89Have = pi_Hoses89Have + CellVal(vsO_Shape, "Prop.Hose89") ' vsO_Shape.Cells("Prop.Hose89")
+'                        pi_Hoses110Have = pi_Hoses110Have + CellVal(vsO_Shape, "Prop.Hose110") ' vsO_Shape.Cells("Prop.Hose110")
+'                        pi_Hoses150Have = pi_Hoses150Have + CellVal(vsO_Shape, "Prop.Hose150") ' vsO_Shape.Cells("Prop.Hose150")
+'                        pi_Hoses200Have = pi_Hoses200Have + CellVal(vsO_Shape, "Prop.Hose200") ' vsO_Shape.Cells("Prop.Hose200")
+'                        pi_Hoses250Have = pi_Hoses250Have + CellVal(vsO_Shape, "Prop.Hose250") ' vsO_Shape.Cells("Prop.Hose250")
+'                        pi_Hoses300Have = pi_Hoses300Have + CellVal(vsO_Shape, "Prop.Hose300") ' vsO_Shape.Cells("Prop.Hose300")
+                        
+                        .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
                     Case Is = indexPers.ipPAObscheeOboznachenie 'Общее обозначение
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
-                        pi_Hoses89Have = pi_Hoses89Have + CellVal(vsO_Shape, "Prop.Hose89") ' vsO_Shape.Cells("Prop.Hose89")
-                        pi_Hoses110Have = pi_Hoses110Have + CellVal(vsO_Shape, "Prop.Hose110") ' vsO_Shape.Cells("Prop.Hose110")
-                        pi_Hoses150Have = pi_Hoses150Have + CellVal(vsO_Shape, "Prop.Hose150") ' vsO_Shape.Cells("Prop.Hose150")
-                        pi_Hoses200Have = pi_Hoses200Have + CellVal(vsO_Shape, "Prop.Hose200") ' vsO_Shape.Cells("Prop.Hose200")
-                        pi_Hoses250Have = pi_Hoses250Have + CellVal(vsO_Shape, "Prop.Hose250") ' vsO_Shape.Cells("Prop.Hose250")
-                        pi_Hoses300Have = pi_Hoses300Have + CellVal(vsO_Shape, "Prop.Hose300") ' vsO_Shape.Cells("Prop.Hose300")
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_Hoses89Have = pi_Hoses89Have + CellVal(vsO_Shape, "Prop.Hose89") ' vsO_Shape.Cells("Prop.Hose89")
+'                        pi_Hoses110Have = pi_Hoses110Have + CellVal(vsO_Shape, "Prop.Hose110") ' vsO_Shape.Cells("Prop.Hose110")
+'                        pi_Hoses150Have = pi_Hoses150Have + CellVal(vsO_Shape, "Prop.Hose150") ' vsO_Shape.Cells("Prop.Hose150")
+'                        pi_Hoses200Have = pi_Hoses200Have + CellVal(vsO_Shape, "Prop.Hose200") ' vsO_Shape.Cells("Prop.Hose200")
+'                        pi_Hoses250Have = pi_Hoses250Have + CellVal(vsO_Shape, "Prop.Hose250") ' vsO_Shape.Cells("Prop.Hose250")
+'                        pi_Hoses300Have = pi_Hoses300Have + CellVal(vsO_Shape, "Prop.Hose300") ' vsO_Shape.Cells("Prop.Hose300")
+                        
+                        .Raise "TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
                         '>>>Учет возможности отсутствия ячеек "Prop.Dest" для старых фигур
                         vs_Dest = CellVal(vsO_Shape, "Prop.Dest", visUnitsString)
                         If vs_Dest = "Специальный" _
-                            Then pi_SpecialPAHave = pi_SpecialPAHave + 1
+                            Then .Raise "SpecialPAHave" ' pi_SpecialPAHave = pi_SpecialPAHave + 1
                         If InStr(1, vs_Dest, "общ") <> 0 _
-                            Then pi_MainPAHave = pi_MainPAHave + 1
+                            Then .Raise "MainPAHave" ' pi_MainPAHave = pi_MainPAHave + 1
                         If InStr(1, vs_Dest, "целев") <> 0 _
-                            Then pi_TargetedPAHave = pi_TargetedPAHave + 1
+                            Then .Raise "TargetedPAHave" ' pi_TargetedPAHave = pi_TargetedPAHave + 1
                         If InStr(1, vs_Dest, "Основ") <> 0 _
-                            Then pi_MainOverallCount = pi_MainOverallCount + 1
+                            Then .Raise "MainOverallHave" 'pi_MainOverallCount = pi_MainOverallCount + 1
     '                    On Error Resume Next
     '                    If vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString) = "Специальный" _
     '                        Then pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -296,125 +372,174 @@ Dim targetPage As Visio.Page
                         '<<<Учет возможности отсутствия ячейки "Prop.Dest" для старых фигур
                     Case Is = indexPers.ipAvtoObschee 'Общее обозначение
                         If vsO_Shape.Cells("Actions.RSCHS.Checked").Result(visNumber) = 1 _
-                            Then pi_TechTotalCount = pi_TechTotalCount + 1
+                            Then .Raise "TotalTechCount" ' pi_TechTotalCount = pi_TechTotalCount + 1
                         
     
                         
                     Case Is = indexPers.ipACL 'АЦЛ
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_MainPAHave = pi_MainPAHave + 1
-                        pi_ALCount = pi_ALCount + 1
-                        pi_ACCount = pi_ACCount + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_MainPAHave = pi_MainPAHave + 1
+'                        pi_ALCount = pi_ALCount + 1
+'                        pi_ACCount = pi_ACCount + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "MainOverallHave;MainPAHave;ALCount;ACCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipACKP 'АЦКП
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_MainPAHave = pi_MainPAHave + 1
-                        pi_AKPCount = pi_AKPCount + 1
-                        pi_ACCount = pi_ACCount + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
-                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
-    
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_MainPAHave = pi_MainPAHave + 1
+'                        pi_AKPCount = pi_AKPCount + 1
+'                        pi_ACCount = pi_ACCount + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+'                        pi_Hoses38Have = pi_Hoses38Have + CellVal(vsO_Shape, "Prop.Hose38") ' vsO_Shape.Cells("Prop.Hose38")
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "MainOverallHave;MainPAHave;AKPCount;ACCount;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+                
                 
                 '---Прочая пожарная техника----------
                     Case Is = indexPers.ipPoezd 'Поезда
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
-                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
-                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
-                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_Hoses51Have = pi_Hoses51Have + CellVal(vsO_Shape, "Prop.Hose51") ' vsO_Shape.Cells("Prop.Hose51")
+'                        pi_Hoses66Have = pi_Hoses66Have + CellVal(vsO_Shape, "Prop.Hose66") ' vsO_Shape.Cells("Prop.Hose66")
+'                        pi_Hoses77Have = pi_Hoses77Have + CellVal(vsO_Shape, "Prop.Hose77") ' vsO_Shape.Cells("Prop.Hose77")
+                        
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .RaiseByCellID shp, "Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipSamolet 'Самолет
                        'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
                     Case Is = indexPers.ipHydroSamolet 'Самолет-амфибия
                        'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
                     Case Is = indexPers.ipVertolet 'Вертолет
                        'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
                     Case Is = indexPers.ipMotoPump 'Мотопомпы
-                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+                        
+                        .Raise "OtherTechincsHave;TotalFireCount"
+                        .Raise "PersonnelNeed", shp.Cells("Prop.Personnel")
                     Case Is = indexPers.ipKorabl 'Корабль
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipKater 'Катер
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipMashNaGusenicah 'Машины на гусеничном ходу
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        'pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        'pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipTank 'Танки
-                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
-                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
-                        'pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
-                        pi_TechTotalCount = pi_TechTotalCount + 1
-                        pi_FireTotalCount = pi_FireTotalCount + 1
+'                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
+'                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
+'                        'pi_WaterValueHave = pi_WaterValueHave + vsO_Shape.Cells("Prop.Water")
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_FireTotalCount = pi_FireTotalCount + 1
+                        
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipMVD 'МВД
-                        pi_MVDCount = pi_MVDCount + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_MVDCount = pi_MVDCount + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+                        
+                        .Raise "TotalTechCount;MVDCount"
                     Case Is = indexPers.ipMashiniMinzdrav 'Минздрав
-                        pi_MZdravCount = pi_MZdravCount + 1
-                        pi_TechTotalCount = pi_TechTotalCount + 1
+'                        pi_MZdravCount = pi_MZdravCount + 1
+'                        pi_TechTotalCount = pi_TechTotalCount + 1
+                        
+                        .Raise "TotalTechCount;SMPCount"
                         
                 '---Объекты пожара-----------------
                     Case Is = indexPers.ipPloschadPozhara 'Площадь пожара
-                          pi_FireCount = pi_FireCount + 1
-                        If vsO_Shape.Cells("Prop.SquareTime") > pdt_LatestSquareTime Then 'Проверяем является ли данная фигура последней по времени
-                            ps_FireSquare = vsO_Shape.Cells("User.FireSquare")
-                            ps_ExtSquare = vsO_Shape.Cells("User.ExtSquare")
-                            ps_NeedStreemW = vsO_Shape.Cells("User.NeedStreamW")
+'                          pi_FireCount = pi_FireCount + 1
+                        .Raise "FireCoun"
+'                        If vsO_Shape.Cells("Prop.SquareTime") > pdt_LatestSquareTime Then 'Проверяем является ли данная фигура последней по времени
+                        If CellVal(shp, "Prop.SquareTime", visDate) > latestSquareTime Then 'Проверяем является ли данная фигура последней по времени
+'                            ps_FireSquare = vsO_Shape.Cells("User.FireSquare")
+'                            ps_ExtSquare = vsO_Shape.Cells("User.ExtSquare")
+'                            ps_NeedStreemW = vsO_Shape.Cells("User.NeedStreamW")
+                            .SetValByCellID shp, "User.FireSquare;User.ExtSquare;User.NeedStreamW"
                                                 
-                            pdt_LatestSquareTime = vsO_Shape.Cells("Prop.SquareTime") 'Устанавливаем новое значение наибольшего времени учета для площади
+                            latestSquareTime = vsO_Shape.Cells("Prop.SquareTime") 'Устанавливаем новое значение наибольшего времени учета для площади
                         ElseIf vsO_Shape.Cells("Prop.SquareTime") = pdt_LatestSquareTime Then
-                            ps_FireSquare = ps_FireSquare + vsO_Shape.Cells("User.FireSquare")
-                            ps_ExtSquare = ps_ExtSquare + vsO_Shape.Cells("User.ExtSquare")
-                            ps_NeedStreemW = ps_NeedStreemW + vsO_Shape.Cells("User.NeedStreamW")
-                                                
+'                            ps_FireSquare = ps_FireSquare + vsO_Shape.Cells("User.FireSquare")
+'                            ps_ExtSquare = ps_ExtSquare + vsO_Shape.Cells("User.ExtSquare")
+'                            ps_NeedStreemW = ps_NeedStreemW + vsO_Shape.Cells("User.NeedStreamW")
+                            
+                            .RaiseByCellID shp, "User.FireSquare;User.ExtSquare;User.NeedStreamW"
                         End If
                         
                     Case Is = indexPers.ipZadiml 'Задымление
-                        pi_SmokeCount = pi_SmokeCount + 1
+'                        pi_SmokeCount = pi_SmokeCount + 1
+                        .Raise "SmokeCount"
                     Case Is = indexPers.ipOchag 'Очаг
                         pi_OchagCount = pi_OchagCount + 1
+                        .Raise "OchagCount"
                     Case Is = indexPers.ipPostradavshie 'Гибель
                     Case Is = indexPers.ipRasprostran 'Распространение
-                        pi_DevelopCount = pi_DevelopCount + 1
+'                        pi_DevelopCount = pi_DevelopCount + 1
+                        .Raise "SpreadCount"
                     Case Is = indexPers.ipStorm 'Огненный шторм
                     Case Is = indexPers.ipOdinPozhar 'Одиночный пожар
                     Case Is = indexPers.ipPodpisStepenOgnestoykosty 'stepen ognestoikosti
-                        pi_SOCount = pi_SOCount + 1
+'                        pi_SOCount = pi_SOCount + 1
+                        .Raise "SOCount"
                 
                 '---СВязь и освещение------------------
                     Case Is = indexPers.ipProzhektor 'Прожектор
-                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipNosimoeRadio 'Радиостанция носимая
                     Case Is = indexPers.ipAvtoRadio 'Радиостанция возимая
                     Case Is = indexPers.ipStacRadio 'Радиостанция стационарная
@@ -424,64 +549,112 @@ Dim targetPage As Visio.Page
                 '---ГДЗС----------------------------
                     Case Is = indexPers.ipGDZSZvenoVozd 'Звено - ДАСВ
                         If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "Работает" Then
-                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                            pi_GDZSChainsCount = pi_GDZSChainsCount + 1
-                            pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
+'                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                            pi_GDZSChainsCount = pi_GDZSChainsCount + 1
+'                            pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
+                            
+                            .Raise "GDZSChainsCountWork"
+                            .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
+                            
                             If vsO_Shape.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
-                                If bo_GDZSRezRoundUp Then
-                                    ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
+                                If GDZSRezRoundUp Then
+'                                    ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
+                                    .Raise "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result) / 3
+                                    .Raise "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 Else
-                                    ps_GDZSChainsRezNeed = Fix(pi_GDZSChainsCount / 3)
+'                                    ps_GDZSChainsRezNeed = Fix(pi_GDZSChainsCount / 3)
+                                    
+                                    .Raise "GDZSChainsRezCountNeed", Fix(.ByID("GDZSChainsCountWork").Result / 3)
+                                    .Raise "GDZSMansRezCountNeed", Fix(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 End If
                             Else
-                                ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
-                                If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+'                                ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
+                                .Raise "GDZSChainsRezCountNeed"
+                                
+'                                If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+                                If vsO_Shape.Cells("Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
                             End If
                         End If
                         If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
-                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                            pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
-                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
+'                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                            pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
+'                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
+                            
+                            'ПРОВЕРИТЬ!!! Получается, что дважды считается требуемое количество людей
+                            .Raise "PersonnelNeed;GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
+                            .Raise "GDZSChainsRezCountHave"
+                            .Raise "GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
                         End If
-                      
+                        
                         
                     Case Is = indexPers.ipGDZSZvenoKisl 'Звено - ДАСК
+'                        If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "Работает" Then
+'                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                            pi_GDZSChainsCount = pi_GDZSChainsCount + 1
+'                            pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
+'                            If vsO_Shape.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
+'                                If bo_GDZSRezRoundUp Then
+'                                    ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
+'                                Else
+'                                    ps_GDZSChainsRezNeed = Fix(pi_GDZSChainsCount / 3)
+'                                End If
+'                            Else
+'                                ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
+'                                If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+'                            End If
+'                        End If
+'                        If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
+'                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                            pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
+'                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
+'                        End If
+
                         If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "Работает" Then
-                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                            pi_GDZSChainsCount = pi_GDZSChainsCount + 1
-                            pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
+                            .Raise "GDZSChainsCountWork"
+                            .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             If vsO_Shape.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
-                                If bo_GDZSRezRoundUp Then
-                                    ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
+                                If GDZSRezRoundUp Then
+                                    .Raise "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result) / 3
+                                    .Raise "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 Else
-                                    ps_GDZSChainsRezNeed = Fix(pi_GDZSChainsCount / 3)
+                                    .Raise "GDZSChainsRezCountNeed", Fix(.ByID("GDZSChainsCountWork").Result / 3)
+                                    .Raise "GDZSMansRezCountNeed", Fix(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 End If
                             Else
-                                ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
-                                If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
+                                .Raise "GDZSChainsRezCountNeed"
+                                If vsO_Shape.Cells("Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
                             End If
                         End If
                         If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
-                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                            pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
-                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
+                            .Raise "PersonnelNeed;GDZSMansRezCountHave", shp.Cells("Prop.Personnel")
+                            .Raise "GDZSChainsRezCountHave"
+                            .Raise "GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
                         End If
-                        
                     Case Is = indexPers.ipGDZSPost 'ПБ
-                        pi_GDZSpbCount = pi_GDZSpbCount + 1
-                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                        pi_GDZSpbCount = pi_GDZSpbCount + 1
+'                        pi_PersonnelNeed = pi_PersonnelNeed + CellVal(shp, "Prop.Personnel")
+                        .Raise "GDZSPBCount"
+                        .Raise "PersonnelNeed", CellVal(shp, "Prop.Personnel")
                     Case Is = indexPers.ipKPP 'КПП
-                        pi_KPPCount = pi_KPPCount + 1
-                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                        pi_KPPCount = pi_KPPCount + 1
+'                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        .Raise "GDZSKPPCount"
+                        .Raise "PersonnelNeed", CellVal(shp, "Prop.Personnel")
                     Case Is = indexPers.ipDimosos 'Дымосос
-                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+'                        pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
+                        .Raise "PersonnelNeed", CellVal(shp, "Prop.Personnel")
         
                 '---Управление силами и средствами--------
                     Case Is = indexPers.ipBU 'БУ и СПР
-                        If vsO_Shape.Cells("Prop.UTP_STP_Reserv").resultstr(visUnitsString) = "Участок" _
-                            Then pi_BUCount = pi_BUCount + 1
-                        If vsO_Shape.Cells("Prop.UTP_STP_Reserv").resultstr(visUnitsString) = "Сектор" _
-                            Then pi_SPRCount = pi_SPRCount + 1
+'                        If vsO_Shape.Cells("Prop.UTP_STP_Reserv").resultstr(visUnitsString) = "Участок" _
+'                            Then pi_BUCount = pi_BUCount + 1
+'                        If vsO_Shape.Cells("Prop.UTP_STP_Reserv").resultstr(visUnitsString) = "Сектор" _
+'                            Then pi_SPRCount = pi_SPRCount + 1
+                        If CellVal(shp, "Prop.UTP_STP_Reserv", visUnitsString) = "Участок" _
+                            Then .Raise "BUCount"
+                        If CellVal(shp, "Prop.UTP_STP_Reserv", visUnitsString) = "Сектор" _
+                            Then .Raise "BUCount"
+'!!!Закончил здесь!
                     Case Is = indexPers.ipStab 'Штаб/РТП
                         pi_ShtabCount = pi_ShtabCount + 1
                         pi_PersonnelNeed = pi_PersonnelNeed + 1

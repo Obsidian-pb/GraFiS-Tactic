@@ -26,7 +26,6 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
     End Select
     
     
-'CellVal = 0
 Exit Function
 EX:
     CellVal = 0
@@ -54,11 +53,12 @@ Dim i As Integer
             IsGFSShape = False      '‘игура не √ра‘и—
         End If
     Else                    'если не нужно учитывать проверку на маневр
-        If shp.CellExists("User.IndexPers", 0) = True Then
-            IsGFSShape = True       '‘игура √ра‘и—
-        Else
-            IsGFSShape = False      '‘игура не √ра‘и—
-        End If
+'        If shp.CellExists("User.IndexPers", 0) = True Then
+'            IsGFSShape = True       '‘игура √ра‘и—
+'        Else
+'            IsGFSShape = False      '‘игура не √ра‘и—
+'        End If
+        IsGFSShape = shp.CellExists("User.IndexPers", 0)
     End If
 
 End Function
@@ -133,7 +133,7 @@ Dim gapString As String
 Dim i As Integer
 Dim j As Integer
 
-    previousString = ""
+'    previousString = ""
     arrIn = Split(strIn, delimiter)
     arrSize = UBound(arrIn)
     

@@ -26,6 +26,7 @@ Dim shpIndex As Integer
 '                    .Raise "WaterValueHave", shp.Cells("Prop.Water")
 '                    .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
             End Select
+            .RaiseByCellID shp, "User.FireSquare;User.PodOut;Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
             End With
         End If
     Next shp
@@ -42,9 +43,10 @@ Dim shpIndex As Integer
 '    Debug.Print "Рукавов 66мм: " & newAnalizer.ByCellID("Prop.Hose66").Result
 '    Debug.Print "Рукавов 77мм: " & newAnalizer.ByCellID("Prop.Hose77").Result
     
+'    Debug.Print "площадь пожара: " & newAnalizer.ByID("FireSquare").Result
+    Debug.Print "требуемый расход: " & newAnalizer.ByID("FactStreamW").Result
     
-    
-    Debug.Print newAnalizer.CallNames(";")
+'!    Debug.Print newAnalizer.CallNames(";")
 '    Debug.Print newAnalizer.ByID("FireSquare").Result
 '    Debug.Print newAnalizer.GetCalculatorByID("gdzs").Result & "=>" & newAnalizer.GetCalculatorByID("gdzs").callName
 End Sub

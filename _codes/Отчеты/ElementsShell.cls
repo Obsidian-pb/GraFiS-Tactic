@@ -40,14 +40,14 @@ End Property
 '-------------------------------------Внутренние процедуры и функции классса----------------------------------------------
 Private Sub fillElemCollection()
 'Заполняем коллекцию элементов
-    AddNewElement "FireSquare", "Площадь пожара"
-    AddNewElement "ExtSquare", "Площадь тушения"
+    AddNewElement "FireSquare", "Площадь пожара", , "User.FireSquare"
+    AddNewElement "ExtSquare", "Площадь тушения", , "User.ExtSquare"
     AddNewElement "FactStreamW", "Расход воды фактический", , "User.PodOut"
     AddNewElement "IntenseWater", "Интенсивность подачи воды"
     AddNewElement "NeedStreamW", "Расход воды требуемый"
     
     AddNewElement "PersonnelHave", "Имеется личного состава"
-    AddNewElement "PersonnelNeed", "Требуется личного состава"
+    AddNewElement "PersonnelNeed", "Требуется личного состава", , "Prop.Personnel"
     
     AddNewElement "StvolWHave", "Водяных стволов подано"
     AddNewElement "StvolWBHave", "Водяных стволов Б подано"
@@ -58,86 +58,86 @@ Private Sub fillElemCollection()
     AddNewElement "StvolGasHave", "Газовых стволов подано"
     AddNewElement "StvolPowderHave", "Порошковых стволов подано"
     
-'    AddNewElement "MainPAHave", "Основных ПА общего применения имеется"
-'    AddNewElement "TargetedPAHave", "Основных ПА целевого применения имеется"
-'    AddNewElement "MainOverallCount", "Основных ПА имеется"
-'    AddNewElement "SpecialPAHave", "Специальных ПА имеется"
-'    AddNewElement "OtherTechincsHave", "Прочей техники имеется"
-'
-'    AddNewElement "GetedWaterValue", "Забирается воды из внешних источников"
-'    AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум"
-'    AddNewElement "GetingWaterCount", "Устройств забирающих воду (кол-во)"
-'
-'    AddNewElement "GDZSChainsCountHave", "Звеньев ГДЗС работает"
-'    AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
-'    AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется"
-'    AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
-'    AddNewElement "GDZSMansCountHave", "Газодымозащитников работает"
-'    AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется"
-'    AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резерве имеется"
-'    AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется"
-'    'AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", 0
-'    AddNewElement "GDZSPBCount", "Количество ПБ ГДЗС"
-'    AddNewElement "GDZSKPPCount", "Количество КПП ГДЗС"
-'
-'    AddNewElement "Hoses38Count", "Рукавов 38мм используется"
-'    AddNewElement "Hoses51Count", "Рукавов 51мм используется"
-'    AddNewElement "Hoses66Count", "Рукавов 66мм используется"
-'    AddNewElement "Hoses77Count", "Рукавов 77мм используется"
-'    AddNewElement "Hoses89Count", "Рукавов 89мм используется"
-'    AddNewElement "Hoses110Count", "Рукавов 110мм используется"
-'    AddNewElement "Hoses150Count", "Рукавов 150мм используется"
-'    AddNewElement "Hoses200Count", "Рукавов 200мм используется"
-'    AddNewElement "Hoses250Count", "Рукавов 250мм используется"
-'    AddNewElement "Hoses300Count", "Рукавов 300мм используется"
-'    AddNewElement "HosesCount", "Рукавов используется всего"
-'    AddNewElement "HosesLength", "Длина рукавных линий"
-'
-'    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , "Prop.Hose38"
-'    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , "Prop.Hose51"
-'    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , "Prop.Hose66"
-'    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , "Prop.Hose77"
-'    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , "Prop.Hose89"
-'    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , "Prop.Hose110"
-'    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , "Prop.Hose150"
-'    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , "Prop.Hose200"
-'    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , "Prop.Hose250"
-'    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , "Prop.Hose300"
-'    AddNewElement "HosesHave", "Рукавов имеется всего"
-'    AddNewElement "HoseSkatka", "Напорных рукавах в скатках"
-'
-'    AddNewElement "WaterValueNeed", "Воды требуется"
-'    AddNewElement "WaterValueHave", "Воды имеется"
-'
-'    AddNewElement "ACCount", "АЦ имеется"
-'    AddNewElement "AGCount", "АГ имеется"
-'    AddNewElement "ALCount", "АЛ имеется"
-'    AddNewElement "AKPCount", "АКП имеется"
-'    AddNewElement "MVDCount", "Техники МВД имеется"
-'    AddNewElement "SMPCount", "Техники СМП имеется"
-'    AddNewElement "TotalTechCount", "Всего техники имеется"
-'    AddNewElement "TotalFireCount", "Всего пожарной техники имеется"
-'
-'    AddNewElement "BUCount", "БУ создано"
-'    AddNewElement "SPRCount", "СПР создано"
-'    AddNewElement "ShtabCount", "Количество штабов", 0, , False, False
-'    AddNewElement "RNBDCount", "Количество решющих направления боевых действий", 0, , False, False
-'    AddNewElement "OchagCount", "Количество очагов", 0, , False, False
-'    AddNewElement "SpreadCount", "Количество направлдений распространения огня", 0, , False, False
-'    AddNewElement "SmokeCount", "Задымление", 0, , False, False
-'    AddNewElement "WaterSourceCount", "Водоисточники", 0, , False, False
-'    AddNewElement "DistanceCount", "Расстояния", 0, , False, False
-'    AddNewElement "LinesCount", "Отдельные рукавные линии", 0, , False, False
-'    AddNewElement "LinesPosCount", "Подписи положения рукавных линий", 0, , False, False
-'    AddNewElement "LinesLableCount", "Подписи рукавных линий", 0, , False, False
-'    AddNewElement "WorklinesCount", "Количество рабочих линий", 0, , False, False
-'    AddNewElement "BuildCount", "Количество зданий", 0, , False, False
-'    AddNewElement "SOCount", "Количество степеней огнестойкости", 0, , False, False
-'    AddNewElement "FireCount", "Количество площадей горения", 0, , False, False
-'    AddNewElement "OrientCount", "Ориентиры", 0, , False, False
-'
-'    AddNewElement "AllHosesWithLabels", "Все рукавные линии с подписями", True, , False, False
-'    AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", True, , False, False
+    AddNewElement "MainPAHave", "Основных ПА общего применения имеется"
+    AddNewElement "TargetedPAHave", "Основных ПА целевого применения имеется"
+    AddNewElement "MainOverallHave", "Основных ПА имеется"
+    AddNewElement "SpecialPAHave", "Специальных ПА имеется"
+    AddNewElement "OtherTechincsHave", "Прочей техники имеется"
+
+    AddNewElement "GetedWaterValue", "Забирается воды из внешних источников"
+    AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум"
+    AddNewElement "GetingWaterCount", "Устройств забирающих воду (кол-во)"
+
+    AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает"
+    AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
+    AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется"
+    AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
+    AddNewElement "GDZSMansCountWork", "Газодымозащитников работает"
+    AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется"
+    AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резерве имеется"
+    AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется"
+    AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", False
+    AddNewElement "GDZSPBCount", "Количество ПБ ГДЗС"
+    AddNewElement "GDZSKPPCount", "Количество КПП ГДЗС"
+
+    AddNewElement "Hoses38Count", "Рукавов 38мм используется"
+    AddNewElement "Hoses51Count", "Рукавов 51мм используется"
+    AddNewElement "Hoses66Count", "Рукавов 66мм используется"
+    AddNewElement "Hoses77Count", "Рукавов 77мм используется"
+    AddNewElement "Hoses89Count", "Рукавов 89мм используется"
+    AddNewElement "Hoses110Count", "Рукавов 110мм используется"
+    AddNewElement "Hoses150Count", "Рукавов 150мм используется"
+    AddNewElement "Hoses200Count", "Рукавов 200мм используется"
+    AddNewElement "Hoses250Count", "Рукавов 250мм используется"
+    AddNewElement "Hoses300Count", "Рукавов 300мм используется"
+    AddNewElement "HosesCount", "Рукавов используется всего"
+    AddNewElement "HosesLength", "Длина рукавных линий"
+
+    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , "Prop.Hose38"
+    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , "Prop.Hose51"
+    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , "Prop.Hose66"
+    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , "Prop.Hose77"
+    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , "Prop.Hose89"
+    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , "Prop.Hose110"
+    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , "Prop.Hose150"
+    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , "Prop.Hose200"
+    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , "Prop.Hose250"
+    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , "Prop.Hose300"
+    AddNewElement "HosesHave", "Рукавов имеется всего"
+    AddNewElement "HoseSkatka", "Напорных рукавах в скатках"
+
+    AddNewElement "WaterValueNeed", "Воды требуется"
+    AddNewElement "WaterValueHave", "Воды имеется"
+
+    AddNewElement "ACCount", "АЦ имеется"
+    AddNewElement "AGCount", "АГ имеется"
+    AddNewElement "ALCount", "АЛ имеется"
+    AddNewElement "AKPCount", "АКП имеется"
+    AddNewElement "MVDCount", "Техники МВД имеется"
+    AddNewElement "SMPCount", "Техники СМП имеется"
+    AddNewElement "TotalTechCount", "Всего техники имеется"
+    AddNewElement "TotalFireCount", "Всего пожарной техники имеется"
+
+    AddNewElement "BUCount", "БУ создано"
+    AddNewElement "SPRCount", "СПР создано"
+    AddNewElement "ShtabCount", "Количество штабов", 0, , False, False
+    AddNewElement "RNBDCount", "Количество решющих направления боевых действий", 0, , False, False
+    AddNewElement "OchagCount", "Количество очагов", 0, , False, False
+    AddNewElement "SpreadCount", "Количество направлдений распространения огня", 0, , False, False
+    AddNewElement "SmokeCount", "Задымление", 0, , False, False
+    AddNewElement "WaterSourceCount", "Водоисточники", 0, , False, False
+    AddNewElement "DistanceCount", "Расстояния", 0, , False, False
+    AddNewElement "LinesCount", "Отдельные рукавные линии", 0, , False, False
+    AddNewElement "LinesPosCount", "Подписи положения рукавных линий", 0, , False, False
+    AddNewElement "LinesLableCount", "Подписи рукавных линий", 0, , False, False
+    AddNewElement "WorklinesCount", "Количество рабочих линий", 0, , False, False
+    AddNewElement "BuildCount", "Количество зданий", 0, , False, False
+    AddNewElement "SOCount", "Количество степеней огнестойкости", 0, , False, False
+    AddNewElement "FireCount", "Количество площадей горения", 0, , False, False
+    AddNewElement "OrientCount", "Ориентиры", 0, , False, False
+
+    AddNewElement "AllHosesWithLabels", "Все рукавные линии с подписями", True, , False, False
+    AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", True, , False, False
 
 End Sub
 
@@ -257,32 +257,23 @@ Dim i As Integer
     cellIDArray = Split(a_CellIDs, ";")
     
     For i = 0 To UBound(cellIDArray)
-        Set elem = ByCellID(cellIDArray(i))
-        If Not elem Is Nothing Then
-            elem.RaiseValue CellVal(shp, cellIDArray(i))
-        End If
+'Вариант с уникальным именем ячейки для каждого элемента - так быстрее, но нельзя считать для многих элементов
+'        Set elem = ByCellID(cellIDArray(i))
+'        If Not elem Is Nothing Then
+'            elem.RaiseValue CellVal(shp, cellIDArray(i))
+'        End If
+'Вариант с повторяющимися именами ячеек для разных элементов - так дольше, но можно считать для многих элементов
+        For Each elem In elemWithCellsCollection
+            If elem.cellID = cellIDArray(i) Then
+                elem.RaiseValue CellVal(shp, cellIDArray(i))
+            End If
+        Next elem
     Next i
     
 Set RaiseByCellID = Me
 End Function
 
-Public Function SetValByCellID(ByRef shp As Visio.Shape, ByVal a_CellID As String) As ElementsShell
-''Устанавливаем значение элемента по имени ячейки
-'Dim elem As Element
-'
-'    On Error GoTo NoSuchElement
-'    Set elem = elemWithCellsCollection.Item(a_CellID)
-'    If elem Is Nothing Then
-'        Set SetByCellID = Me
-'        Exit Function
-'    End If
-'
-'    elem.RaiseValue (CellVal(shp, a_CellID))
-'
-'    Set SetByCellID = Me
-'Exit Function
-'NoSuchElement:
-'    Set SetByCellID = Me
+Public Function SetValByCellID(ByRef shp As Visio.Shape, ByVal a_CellIDs As String) As ElementsShell
 'Устанавливаем значение элемента по имени ячейки
 'a_CellIDs - перечисление через строчку с запятой имен ячеек в виде "User.IndexPers"
 Dim elem As Element
@@ -292,10 +283,17 @@ Dim i As Integer
     cellIDArray = Split(a_CellIDs, ";")
     
     For i = 0 To UBound(cellIDArray)
-        Set elem = ByCellID(cellIDArray(i))
-        If Not elem Is Nothing Then
-            elem.SetValue CellVal(shp, cellIDArray(i))
-        End If
+'Вариант с уникальным именем ячейки для каждого элемента - так быстрее, но нельзя считать для многих элементов
+'        Set elem = ByCellID(cellIDArray(i))
+'        If Not elem Is Nothing Then
+'            elem.SetValue CellVal(shp, cellIDArray(i))
+'        End If
+'Вариант с повторяющимися именами ячеек для разных элементов - так дольше, но можно считать для многих элементов
+        For Each elem In elemWithCellsCollection
+            If elem.cellID = cellIDArray(i) Then
+                elem.SetValue CellVal(shp, cellIDArray(i))
+            End If
+        Next elem
     Next i
     
 Set SetValByCellID = Me
