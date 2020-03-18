@@ -18,12 +18,16 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
     
     On Error GoTo EX
     
-    Select Case dataType
-        Case Is = visNumber
-            CellVal = shp.Cells(cellName).Result(dataType)
-        Case Is = visUnitsString
-            CellVal = shp.Cells(cellName).resultstr(dataType)
-    End Select
+    If shp.CellExists(cellName, 0) Then
+        Select Case dataType
+            Case Is = visNumber
+                CellVal = shp.Cells(cellName).Result(dataType)
+            Case Is = visUnitsString
+                CellVal = shp.Cells(cellName).resultstr(dataType)
+        End Select
+    Else
+        CellVal = 0
+    End If
     
     
 Exit Function

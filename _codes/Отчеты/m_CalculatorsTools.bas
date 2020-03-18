@@ -53,7 +53,11 @@ End Sub
 
 
 
-'.Raise "MainPAHave;ACCount;TotalTechCount;TotalFireCount"
-'.Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-'.Raise "WaterValueHave", shp.Cells("Prop.Water")
-'.RaiseByCellID shp, "Prop.Hose38,Prop.Hose51,Prop.Hose66,Prop.Hose77"
+Public Sub TastInfoCollector()
+
+    A.Refresh(1).PrintState
+'    Debug.Print A.Result("FactStreamW")
+
+End Sub
+
+

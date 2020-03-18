@@ -168,7 +168,14 @@ End Function
 
 
 '-------------------------------------ѕубличные процедуры классса--------------------------------------------
-
+Public Sub PrintState()
+'ѕечатает в Debug все элементы и их значени€
+Dim elem As Element
+    
+    For Each elem In elemCollection
+        Debug.Print elem.callName & ": " & elem.Result
+    Next elem
+End Sub
 
 
 '-------------------------------------ѕубличные функции классса----------------------------------------------
@@ -258,16 +265,17 @@ Dim i As Integer
     
     For i = 0 To UBound(cellIDArray)
 '¬ариант с уникальным именем €чейки дл€ каждого элемента - так быстрее, но нельз€ считать дл€ многих элементов
-'        Set elem = ByCellID(cellIDArray(i))
-'        If Not elem Is Nothing Then
-'            elem.RaiseValue CellVal(shp, cellIDArray(i))
-'        End If
+        Set elem = ByCellID(cellIDArray(i))
+        If Not elem Is Nothing Then
+            elem.RaiseValue CellVal(shp, cellIDArray(i))
+        End If
 '¬ариант с повтор€ющимис€ именами €чеек дл€ разных элементов - так дольше, но можно считать дл€ многих элементов
-        For Each elem In elemWithCellsCollection
-            If elem.cellID = cellIDArray(i) Then
-                elem.RaiseValue CellVal(shp, cellIDArray(i))
-            End If
-        Next elem
+'в текущей реализации неосуществимо
+'        For Each elem In elemWithCellsCollection
+'            If elem.cellID = cellIDArray(i) Then
+'                elem.RaiseValue CellVal(shp, cellIDArray(i))
+'            End If
+'        Next elem
     Next i
     
 Set RaiseByCellID = Me
@@ -284,29 +292,30 @@ Dim i As Integer
     
     For i = 0 To UBound(cellIDArray)
 '¬ариант с уникальным именем €чейки дл€ каждого элемента - так быстрее, но нельз€ считать дл€ многих элементов
-'        Set elem = ByCellID(cellIDArray(i))
-'        If Not elem Is Nothing Then
-'            elem.SetValue CellVal(shp, cellIDArray(i))
-'        End If
+        Set elem = ByCellID(cellIDArray(i))
+        If Not elem Is Nothing Then
+            elem.SetValue CellVal(shp, cellIDArray(i))
+        End If
 '¬ариант с повтор€ющимис€ именами €чеек дл€ разных элементов - так дольше, но можно считать дл€ многих элементов
-        For Each elem In elemWithCellsCollection
-            If elem.cellID = cellIDArray(i) Then
-                elem.SetValue CellVal(shp, cellIDArray(i))
-            End If
-        Next elem
+'в текущей реализации неосуществимо
+'        For Each elem In elemWithCellsCollection
+'            If elem.cellID = cellIDArray(i) Then
+'                elem.SetValue CellVal(shp, cellIDArray(i))
+'            End If
+'        Next elem
     Next i
     
 Set SetValByCellID = Me
     
 End Function
 
-Public Function Raise(ByVal elemNames As String, Optional ByVal val As Variant = 1) As ElementsShell
+Public Function Raise(ByVal elemIDs As String, Optional ByVal val As Variant = 1) As ElementsShell
 '”величиваем значение указанных €чеек. —писок указываетс€ через точку с зап€той
 Dim elemArray() As String
 Dim elem As Element
 Dim i As Integer
     
-    elemArray = Split(elemNames, ";")
+    elemArray = Split(elemIDs, ";")
         
     For i = 0 To UBound(elemArray)
         Set elem = ByID(elemArray(i))
@@ -319,13 +328,13 @@ Dim i As Integer
 Set Raise = Me
 End Function
 
-Public Function SetVal(ByVal elemNames As String, Optional ByVal val As Variant = 1) As ElementsShell
+Public Function SetVal(ByVal elemIDs As String, Optional ByVal val As Variant = 1) As ElementsShell
 '”станавливаем значени€ указанных €чеек. —писок указываетс€ через точку с зап€той
 Dim elemArray() As String
 Dim elem As Element
 Dim i As Integer
     
-    elemArray = Split(elemNames, ";")
+    elemArray = Split(elemIDs, ";")
         
     For i = 0 To UBound(elemArray)
         Set elem = ByID(elemArray(i))
@@ -362,8 +371,37 @@ CallNames = Sort(Left(tmpStr, Len(tmpStr) - Len(delimiter)))
 End Function
 
 
+'------‘ункции возвращающие значени€ элементов-----------------
+Public Function Result(ByVal elemID As String) As Variant
+'ѕолучаем значение элемента с указанным elemID
+Dim elem As Element
+    Set elem = elemCollection.Item(elemID)
+    If Not elem Is Nothing Then
+        Result = elem.Result
+    Else
+        Result = 0
+    End If
+End Function
 
-
+Public Function Sum(ByVal elemIDs As String) As Variant
+'ѕолучаем сумму значений элементов с указанными через точку с зап€той именами элементов - elemIDs
+Dim elemArray() As String
+Dim elem As Element
+Dim i As Integer
+Dim tmp As Single
+    
+    elemArray = Split(elemIDs, ";")
+        
+    For i = 0 To UBound(elemArray)
+        Set elem = ByID(elemArray(i))
+        If elem Is Nothing Then
+            Debug.Print "!¬нимание! Ёлемент с ID=" & elemArray(i) & " отсутствет!"
+        Else
+            tmp = tmp + elem.Result
+        End If
+    Next i
+Sum = tmp
+End Function
 
 
 
