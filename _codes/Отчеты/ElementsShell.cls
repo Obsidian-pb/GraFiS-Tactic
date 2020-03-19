@@ -14,7 +14,7 @@ Private elemCollection As Collection            'Полная коллекция
 Private elemWithCellsCollection As Collection   'Коллекция элементов для которых заданы  имена расчетных ячеек
 
 '-------------------------------------Свойства---------------------------------
-Public bo_GDZSRezRoundUp As Boolean 'Округление рез.звеньев в большую сторону
+
 
 
 '-------------------------------------Базовые процедуры классса------------------------------------
@@ -44,29 +44,34 @@ Private Sub fillElemCollection()
     AddNewElement "ExtSquare", "Площадь тушения", , "User.ExtSquare"
     AddNewElement "FactStreamW", "Расход воды фактический", , "User.PodOut"
     AddNewElement "IntenseWater", "Интенсивность подачи воды"
-    AddNewElement "NeedStreamW", "Расход воды требуемый"
+    AddNewElement "NeedStreamW", "Расход воды требуемый", , "User.NeedStreamW"
     
     AddNewElement "PersonnelHave", "Имеется личного состава"
     AddNewElement "PersonnelNeed", "Требуется личного состава", , "Prop.Personnel"
     
-    AddNewElement "StvolWHave", "Водяных стволов подано"
-    AddNewElement "StvolWBHave", "Водяных стволов Б подано"
-    AddNewElement "StvolWAHave", "Водяных стволов А подано"
-    AddNewElement "StvolWLHave", "Водяных лафетных стволов подано"
+    AddNewElement "StvolWHave", "Стволов водяных подано"
+    AddNewElement "StvolWBHave", "Стволов Б подано"
+    AddNewElement "StvolWAHave", "Стволов А подано"
+    AddNewElement "StvolWLHave", "Стволов водяных лафетных подано"
+    AddNewElement "StvolWBNeed", "Стволов Б требуется"
+    AddNewElement "StvolWANeed", "Стволов А требуется"
+    AddNewElement "StvolWLNeed", "Стволов водяных лафетных требуется"
     
-    AddNewElement "StvolFoamHave", "Пенных стволов подано"
-    AddNewElement "StvolGasHave", "Газовых стволов подано"
-    AddNewElement "StvolPowderHave", "Порошковых стволов подано"
+    AddNewElement "StvolFoamHave", "Стволов пенных подано"
+    AddNewElement "StvolGasHave", "Стволов газовых подано"
+    AddNewElement "StvolPowderHave", "Стволов порошковых подано"
     
-    AddNewElement "MainPAHave", "Основных ПА общего применения имеется"
-    AddNewElement "TargetedPAHave", "Основных ПА целевого применения имеется"
-    AddNewElement "MainOverallHave", "Основных ПА имеется"
-    AddNewElement "SpecialPAHave", "Специальных ПА имеется"
+    AddNewElement "MainPAHave", "ПА общего применения имеется"
+    AddNewElement "TargetedPAHave", "ПА целевого применения имеется"
+    AddNewElement "MainOverallHave", "ПА основных имеется"
+    AddNewElement "PAHighHave", "ПА высотных имеется"
+    AddNewElement "SpecialPAHave", "ПА специальных имеется"
     AddNewElement "OtherTechincsHave", "Прочей техники имеется"
+    AddNewElement "RSCHSTechincsHave", "Техники РСЧС имеется"
 
     AddNewElement "GetedWaterValue", "Забирается воды из внешних источников"
     AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум"
-    AddNewElement "GetingWaterCount", "Устройств забирающих воду (кол-во)"
+    AddNewElement "GetingWaterCount", "Установлено на водоисточники"
 
     AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает"
     AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
@@ -74,11 +79,11 @@ Private Sub fillElemCollection()
     AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
     AddNewElement "GDZSMansCountWork", "Газодымозащитников работает"
     AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется"
-    AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резерве имеется"
+    AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резервных звеньях имеется"
     AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется"
     AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", False
-    AddNewElement "GDZSPBCount", "Количество ПБ ГДЗС"
-    AddNewElement "GDZSKPPCount", "Количество КПП ГДЗС"
+    AddNewElement "GDZSPBCount", "ПБ ГДЗС имеется"
+    AddNewElement "GDZSKPPCount", "КПП ГДЗС имеется"
 
     AddNewElement "Hoses38Count", "Рукавов 38мм используется"
     AddNewElement "Hoses51Count", "Рукавов 51мм используется"
@@ -91,7 +96,7 @@ Private Sub fillElemCollection()
     AddNewElement "Hoses250Count", "Рукавов 250мм используется"
     AddNewElement "Hoses300Count", "Рукавов 300мм используется"
     AddNewElement "HosesCount", "Рукавов используется всего"
-    AddNewElement "HosesLength", "Длина рукавных линий"
+    AddNewElement "HosesLength", "Рукавных линий длина"
 
     AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , "Prop.Hose38"
     AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , "Prop.Hose51"
@@ -104,19 +109,24 @@ Private Sub fillElemCollection()
     AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , "Prop.Hose250"
     AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , "Prop.Hose300"
     AddNewElement "HosesHave", "Рукавов имеется всего"
-    AddNewElement "HoseSkatka", "Напорных рукавах в скатках"
-
-    AddNewElement "WaterValueNeed", "Воды требуется"
+    AddNewElement "HoseSkatka", "Напорных рукавов в скатках"
+    
+    AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)"
     AddNewElement "WaterValueHave", "Воды имеется"
+    AddNewElement "PANeedOnWaterSource", "Требуется установить на водоисточники"
 
     AddNewElement "ACCount", "АЦ имеется"
-    AddNewElement "AGCount", "АГ имеется"
+    AddNewElement "ACNeed", "АЦ требуется"
+    AddNewElement "ANRNeed", "АНР требуется"
+    AddNewElement "AGCount", "АГДЗС имеется"
     AddNewElement "ALCount", "АЛ имеется"
     AddNewElement "AKPCount", "АКП имеется"
     AddNewElement "MVDCount", "Техники МВД имеется"
     AddNewElement "SMPCount", "Техники СМП имеется"
-    AddNewElement "TotalTechCount", "Всего техники имеется"
-    AddNewElement "TotalFireCount", "Всего пожарной техники имеется"
+    AddNewElement "TechnicsNotMchsHave", "Техники не МЧС имеется"
+    AddNewElement "TechnicsNotMchsOtherHave", "Техники не МЧС (прочей) имеется"
+    AddNewElement "TotalTechCount", "Техники всего имеется"
+    AddNewElement "TotalFireCount", "Пожарной техники всего имеется"
 
     AddNewElement "BUCount", "БУ создано"
     AddNewElement "SPRCount", "СПР создано"
@@ -158,23 +168,53 @@ End Function
 
 Private Function AddElement(ByRef elem As Element) As Element
 'Добавляет элемент в коллекцию элементов и возвращает на него ссылку
+Dim nextElem As Element
+    
+    Set nextElem = FindHigherElement(elem)
     'Основная коллекция
-    elemCollection.Add elem, elem.ID
+    If nextElem Is Nothing Then
+        elemCollection.Add elem, elem.ID
+    Else
+        elemCollection.Add elem, elem.ID, nextElem.ID
+    End If
+    
     'Коллекция элементов с расчетными ячейками
     If elem.cellID <> "" Then elemWithCellsCollection.Add elem, elem.cellID
     
     Set AddElement = elem
 End Function
 
-
-'-------------------------------------Публичные процедуры классса--------------------------------------------
-Public Sub PrintState()
-'Печатает в Debug все элементы и их значения
+Private Function FindHigherElement(ByRef elemIn As Element) As Element
+'Возвращает элемент в коллекции elemCollection с именем вызова больше чем у текущего (тот элемент перед которым нужно будет вставить новый)
 Dim elem As Element
     
     For Each elem In elemCollection
-        Debug.Print elem.callName & ": " & elem.Result
+        If elem.callName > elemIn.callName Then
+            Set FindHigherElement = elem
+            Exit Function
+        End If
     Next elem
+End Function
+
+'-------------------------------------Публичные процедуры классса--------------------------------------------
+Public Sub PrintState(Optional ByVal elemIDs As String = "")
+'Печатает в Debug все элементы и их значения
+Dim elem As Element
+Dim elemArray() As String
+Dim i As Integer
+    
+    If elemIDs = "" Then
+        For Each elem In elemCollection
+            elem.PrintState
+        Next elem
+    Else
+        elemArray = Split(elemIDs, ";")
+        For i = 0 To UBound(elemArray)
+            Set elem = ByID(elemArray(i))
+            If Not elem Is Nothing Then elem.PrintState
+        Next i
+    End If
+    
 End Sub
 
 
@@ -197,6 +237,20 @@ Public Function ByCellID(ByVal a_elemCellID As String) As Element
 Exit Function
 EX:
     Set ByCellID = Nothing
+End Function
+
+Public Function ByCallName(ByVal a_elemCallName As String) As Element
+'Функция возвращает ссылку на элемент с Именем вызова callName = a_elemCallName
+Dim elem As Element
+
+    For Each elem In elemCollection
+        If elem.callName = a_elemCallName Then
+            Set ByCallName = elem
+            Exit Function
+        End If
+    Next elem
+'Если ничего не найдено возвращаем Nothing
+Set ByCallName = Nothing
 End Function
 
 Public Function GetElementsCollection(ByVal searchString As String, Optional ByRef searchByCallName As Boolean = False) As Collection
@@ -228,20 +282,6 @@ Dim addFlag As Boolean
 Set GetElementsCollection = coll
 End Function
 
-'Public Function ByCallName(ByVal a_elemCallName As String) As Element
-''Функция возвращает ссылку на элемент с Именем вызова callName = a_elemCallName
-'Dim elem As Element
-'
-'    For Each elem In elemCollection
-'        If elem.callName = a_elemCallName Then
-'            Set ByCallName = elem
-'            Exit Function
-'        End If
-'    Next elem
-''Если ничего не найдено возвращаем Nothing
-'Set ByCallName = Nothing
-'End Function
-
 Public Function Clear() As ElementsShell
 'Обнуляем значения свойств и при водим значения элементов в начальное состояние
 Dim elem As Element
@@ -269,13 +309,6 @@ Dim i As Integer
         If Not elem Is Nothing Then
             elem.RaiseValue CellVal(shp, cellIDArray(i))
         End If
-'Вариант с повторяющимися именами ячеек для разных элементов - так дольше, но можно считать для многих элементов
-'в текущей реализации неосуществимо
-'        For Each elem In elemWithCellsCollection
-'            If elem.cellID = cellIDArray(i) Then
-'                elem.RaiseValue CellVal(shp, cellIDArray(i))
-'            End If
-'        Next elem
     Next i
     
 Set RaiseByCellID = Me
@@ -296,13 +329,6 @@ Dim i As Integer
         If Not elem Is Nothing Then
             elem.SetValue CellVal(shp, cellIDArray(i))
         End If
-'Вариант с повторяющимися именами ячеек для разных элементов - так дольше, но можно считать для многих элементов
-'в текущей реализации неосуществимо
-'        For Each elem In elemWithCellsCollection
-'            If elem.cellID = cellIDArray(i) Then
-'                elem.SetValue CellVal(shp, cellIDArray(i))
-'            End If
-'        Next elem
     Next i
     
 Set SetValByCellID = Me
@@ -347,7 +373,7 @@ Dim i As Integer
 Set SetVal = Me
 End Function
 
-Public Function CallNames(ByVal delimiter As String) As String
+Public Function CallNames(Optional ByVal delimiter As String = ";") As String
 'Функция возвращает строку имен элементов с указанным разделителем
 Dim elem As Element
 Dim tmpStr As String
@@ -367,7 +393,8 @@ Dim tmpStr As String
         CallNames = ""
         Exit Function
     End If
-CallNames = Sort(Left(tmpStr, Len(tmpStr) - Len(delimiter)))
+
+CallNames = Left(tmpStr, Len(tmpStr) - Len(delimiter))
 End Function
 
 
@@ -375,11 +402,23 @@ End Function
 Public Function Result(ByVal elemID As String) As Variant
 'Получаем значение элемента с указанным elemID
 Dim elem As Element
-    Set elem = elemCollection.Item(elemID)
+    Set elem = ByID(elemID)
     If Not elem Is Nothing Then
         Result = elem.Result
     Else
         Result = 0
+    End If
+End Function
+Public Function ResultByCN(ByVal callName As String) As Variant
+'Получаем значение элемента с указанным CallName
+Dim elem As Element
+    
+    Set elem = ByCallName(callName)
+    
+    If Not elem Is Nothing Then
+        ResultByCN = elem.Result
+    Else
+        ResultByCN = 0
     End If
 End Function
 
@@ -402,7 +441,6 @@ Dim tmp As Single
     Next i
 Sum = tmp
 End Function
-
 
 
 

@@ -13,14 +13,14 @@ Option Explicit
 
 
 '----------------------------------------Коллекция элементов---------------------------------------------------------
-Private elements As ElementsShell
+Public elements As ElementsShell
 '----------------------------------------Публичные свойства (настройки)----------------------------------------------
 'Public targetPageIndex As Integer            'Целевой лист подсчета (0-все листы, 1-... - лист с указанным номером)
-Public GDZSRezRoundUp As Boolean             'Округление резервных звеньев в большую сторону (True - для  каждого из блоков по три звена выставляется резерв, False - резерв выставляется при наличии очередных трех звеньев)
-
+'Public GDZSRezRoundUp As Boolean             'Округление резервных звеньев в большую сторону (True - для  каждого из блоков по три звена выставляется резерв, False - резерв выставляется при наличии очередных трех звеньев)
+Public options As InfoCollectorOptions          'Настройки расчета
 
 '----------------------------------------Внутренине свойства (служебные)---------------------------------------------
-Private latestSquareTime As Date
+'Private latestSquareTime As Date
 
 
 
@@ -28,26 +28,16 @@ Private latestSquareTime As Date
 '----------------------------------------Служебные процедуры------------------------------------------------------------
 Private Sub Class_Initialize()
     Set elements = New ElementsShell
-
+    Set options = New InfoCollectorOptions
 '    VarInit
 
 End Sub
 Private Sub Class_Terminate()
     Set elements = Nothing
+    Set options = Nothing
 End Sub
 
 
-
-
-
-
-
-
-'Private Sub VarInit()
-''Инициируются переменные
-'    pb_AllHosesWithLabels = True
-'    pb_AllHosesWithPos = True
-'End Sub
 
 
 Public Function Refresh(a_PageIndex As Integer) As InfoCollector2
@@ -59,6 +49,7 @@ Dim targetPage As Visio.Page
 'Dim vs_Dest As String
 'Dim tempTime1, tempTime2 As Date
 Dim tmp As Variant
+Dim latestSquareTime As Date
 
     On Error GoTo EX
 'Обнуляем количественные свойства
@@ -95,7 +86,7 @@ Dim tmp As Variant
                         .Raise "MainOverallHave;MainPAHave;ACCount;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                         .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipANR 'АНР
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_MainPAHave = pi_MainPAHave + 1
@@ -108,8 +99,7 @@ Dim tmp As Variant
                         
                         .Raise "MainOverallHave;MainPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-'                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAPP 'АПП
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_MainPAHave = pi_MainPAHave + 1
@@ -124,7 +114,7 @@ Dim tmp As Variant
                         .Raise "MainOverallHave;MainPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                         .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAL 'АЛ
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -138,8 +128,7 @@ Dim tmp As Variant
                         
                         .Raise "SpecialPAHave;ALCount;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-'                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAKP 'АКП
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -153,8 +142,7 @@ Dim tmp As Variant
                         
                         .Raise "SpecialPAHave;AKPCount;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-'                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipASO 'АСО
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -197,7 +185,7 @@ Dim tmp As Variant
                         
                         .Raise "TargetedPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
                     Case Is = indexPers.ipAA 'AA
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_TargetedPAHave = pi_TargetedPAHave + 1
@@ -212,7 +200,7 @@ Dim tmp As Variant
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                         .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAV 'АВ
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_TargetedPAHave = pi_TargetedPAHave + 1
@@ -227,8 +215,7 @@ Dim tmp As Variant
                         
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-'                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150"
                     Case Is = indexPers.ipAKT 'АКТ
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_TargetedPAHave = pi_TargetedPAHave + 1
@@ -242,7 +229,7 @@ Dim tmp As Variant
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                         .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipAP 'АП
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_TargetedPAHave = pi_TargetedPAHave + 1
@@ -280,7 +267,7 @@ Dim tmp As Variant
                         
                         .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipPNS 'ПКС
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_SpecialPAHave = pi_SpecialPAHave + 1
@@ -331,7 +318,7 @@ Dim tmp As Variant
                         
                         .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
                     Case Is = indexPers.ipPAObscheeOboznachenie 'Общее обозначение
 '                        pi_TechTotalCount = pi_TechTotalCount + 1
 '                        pi_FireTotalCount = pi_FireTotalCount + 1
@@ -349,7 +336,7 @@ Dim tmp As Variant
                         
                         .Raise "TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
                         '>>>Учет возможности отсутствия ячеек "Prop.Dest" для старых фигур
                         tmp = CellVal(shp, "Prop.Dest", visUnitsString)
                         If tmp = "Специальный" _
@@ -393,7 +380,7 @@ Dim tmp As Variant
                         .Raise "MainOverallHave;MainPAHave;ALCount;ACCount;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                         .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipACKP 'АЦКП
 '                        pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_MainPAHave = pi_MainPAHave + 1
@@ -410,7 +397,7 @@ Dim tmp As Variant
                         .Raise "MainOverallHave;MainPAHave;AKPCount;ACCount;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                         .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77"
                 
                 
                 '---Прочая пожарная техника----------
@@ -427,7 +414,7 @@ Dim tmp As Variant
                         .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                         .Raise "WaterValueHave", shp.Cells("Prop.Water")
-                        .RaiseByCellID shp, "Prop.Hose51;Prop.Hose66;Prop.Hose77"
+'                        .RaiseByCellID shp, "Prop.Hose51;Prop.Hose66;Prop.Hose77"
                     Case Is = indexPers.ipSamolet 'Самолет
                        'pi_PersonnelHave = pi_PersonnelHave + vsO_Shape.Cells("Prop.PersonnelHave") - 1
 '                        pi_OtherTechincsHave = pi_OtherTechincsHave + 1
@@ -558,15 +545,15 @@ Dim tmp As Variant
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             
                             If shp.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
-                                If GDZSRezRoundUp Then
+                                If options.GDZSRezRoundUp Then
 '                                    ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
-                                    .Raise "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result) / 3
-                                    .Raise "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
+                                    .SetVal "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
+                                    .SetVal "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 Else
 '                                    ps_GDZSChainsRezNeed = Fix(pi_GDZSChainsCount / 3)
                                     
-                                    .Raise "GDZSChainsRezCountNeed", Fix(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .Raise "GDZSMansRezCountNeed", Fix(.ByID("GDZSChainsCountWork").Result / 3) * 3
+                                    .Raise "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3)
+                                    .Raise "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 End If
                             Else
 '                                ps_GDZSChainsRezNeed = ps_GDZSChainsRezNeed + 1
@@ -575,6 +562,9 @@ Dim tmp As Variant
 '                                If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
                                 If shp.Cells("Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
                             End If
+                            'Вычисляем требуемое количество звеньев и людей
+                            .SetVal "GDZSChainsCountNeed", .ByID("GDZSChainsCountWork").Result + .ByID("GDZSChainsRezCountNeed").Result
+                            .SetVal "GDZSMansCountNeed", .ByID("GDZSMansCountWork").Result + .ByID("GDZSMansRezCountNeed").Result
                         End If
                         If shp.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
 '                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
@@ -582,9 +572,8 @@ Dim tmp As Variant
 '                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
                             
                             'ПРОВЕРИТЬ!!! Получается, что дважды считается требуемое количество людей
-                            .Raise "PersonnelNeed;GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
-                            .Raise "GDZSChainsRezCountHave"
                             .Raise "GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
+                            .Raise "GDZSChainsRezCountHave"
                         End If
                         
                         
@@ -614,20 +603,22 @@ Dim tmp As Variant
                             .Raise "GDZSChainsCountWork"
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             If shp.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
-                                If GDZSRezRoundUp Then
-                                    .Raise "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result) / 3
+                                If options.GDZSRezRoundUp Then
+                                    .Raise "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
                                     .Raise "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 Else
-                                    .Raise "GDZSChainsRezCountNeed", Fix(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .Raise "GDZSMansRezCountNeed", Fix(.ByID("GDZSChainsCountWork").Result / 3) * 3
+                                    .Raise "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3)
+                                    .Raise "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 End If
                             Else
                                 .Raise "GDZSChainsRezCountNeed"
                                 If shp.Cells("Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
                             End If
+                            'Вычисляем требуемое количество звеньев и людей
+                            .SetVal "GDZSChainsCountNeed", .ByID("GDZSChainsCountWork").Result + .ByID("GDZSChainsRezCountNeed").Result
+                            .SetVal "GDZSMansCountNeed", .ByID("GDZSMansCountWork").Result + .ByID("GDZSMansRezCountNeed").Result
                         End If
                         If shp.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
-                            .Raise "PersonnelNeed;GDZSMansRezCountHave", shp.Cells("Prop.Personnel")
                             .Raise "GDZSChainsRezCountHave"
                             .Raise "GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
                         End If
@@ -867,8 +858,7 @@ Dim tmp As Variant
 '                                pi_WorklinesCount = pi_WorklinesCount + 1
                                 .Raise "WorklinesCount"
                                 'Проверяем имеет ли данная фигура подпись положения
-    '                            Stop    'Реализовать!!!
-    '                            IsHoseShapeHavePos vsO_Shape
+                                IsHoseShapeHavePos shp
                             End If
                             'If vsO_Shape.CellExists("User.Skatka", 0) = True Then pi_HoseSkatka = pi_HoseSkatka + 1 'считаем сколько рукавов в скатках
 '                            Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
@@ -963,9 +953,9 @@ Dim tmp As Variant
                                 .Raise "HosesLength", CellVal(shp, "User.LineLenightHose")
                             End If
                             'Проверяем имеет ли данная фигура подпись описания
-                            'Stop    'Реализовать!!!
-'                            pb_AllHosesWithLabels = True
-                            .SetVal "AllHosesWithLabels", True
+                            IsHoseShapeHaveLabels shp
+
+'                            .SetVal "AllHosesWithLabels", True
                         End If
                     Case Is = indexPers.ipSkatka 'Рукавная скатка
 '                        pi_HoseSkatka = pi_HoseSkatka + 1
@@ -1395,6 +1385,8 @@ Dim tmp As Variant
         
                     
                 End Select
+                'Вычисляем некоторые элементы по CellName
+                .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
                 End With    'elements
                 
 '            End If
@@ -1406,19 +1398,23 @@ Dim tmp As Variant
 'Завершающий код - обобщает все полученные данные и по ним делат окончательный рассчет
 '---Например кол-во людей необходимых для прокладки линий
    'Суммируем имеющиеся рукава
-'    pi_HosesHave = _
-'    pi_Hoses38Have + _
-'    pi_Hoses66Have + _
-'    pi_Hoses51Have + _
-'    pi_Hoses77Have + _
-'    pi_Hoses89Have + _
-'    pi_Hoses110Have + _
-'    pi_Hoses150Have + _
-'    pi_Hoses200Have + _
-'    pi_Hoses250Have + _
-'    pi_Hoses300Have
-   elements.SetVal "HosesHave", elements.Sum("Hoses38Have;Hoses51Have;Hoses66Have;Hoses77Have;Hoses89Have;Hoses110Have;Hoses150Have;Hoses200Have;Hoses250Have;Hoses300Have")
-
+    With elements
+        .SetVal "HosesHave", .Sum("Hoses38Have;Hoses51Have;Hoses66Have;Hoses77Have;Hoses89Have;Hoses110Have;Hoses150Have;Hoses200Have;Hoses250Have;Hoses300Have")
+        .Raise "PersonnelNeed", .Result("GDZSMansRezCountNeed")
+        .SetVal "PAHighHave", .Sum("ALCount;AKPCount")
+        .SetVal "TechnicsNotMchsHave", .Result("TotalTechCount") - .Result("TotalFireCount")
+        .SetVal "TechnicsNotMchsOtherHave", .Result("TechnicsNotMchsHave") - .Result("MVDCount") - .Result("SMPCount")
+        .SetVal "ACNeed", PF_RoundUp(.Result("PersonnelNeed") / 4)
+        .SetVal "ANRNeed", PF_RoundUp(.Result("PersonnelNeed") / 5)
+        .SetVal "StvolWBNeed", PF_RoundUp(.Result("NeedStreamW") / 3.7)
+        .SetVal "StvolWANeed", PF_RoundUp(.Result("NeedStreamW") / 7.4)
+        .SetVal "StvolWLNeed", PF_RoundUp(.Result("NeedStreamW") / 12)
+        .SetVal "PANeedOnWaterSource", PF_RoundUp(.Result("NeedStreamW") / 32)
+        .SetVal "RSCHSTechincsHave", .Result("TotalTechCount")
+        .SetVal "WaterValueNeed10min", .Result("NeedStreamW") * 600
+    End With
+    
+    
 
 '---Устанавливаем разницу значений начала процедуры и конца
 'tempTime2 = Time()
@@ -1435,108 +1431,6 @@ End Function
 
 
 
-
-
-
-
-'Private Sub sc_SetPropertiesNull()
-''Процедура обнуления свойств класса
-''---ОБнуляем базовые свойства
-'    pdt_LatestSquareTime = 0      'Крайнее значение времени площади
-'    ps_FireSquare = 0             'Площадь пожара
-'    ps_ExtSquare = 0              'Площадь тушения
-'    ps_FactStreemW = 0            'Фактический расход воды
-'    ps_IntenseWater = 0           'ТРебуемая интенсивность поачи воды - в данный момент не используется
-'    ps_NeedStreemW = 0            'Требуемый расход воды
-'    pi_PersonnelHave = 0          'Имеется личного состава
-'    pi_PersonnelNeed = 0          'Требуется личного состава
-'    pi_StvolWHave = 0             'Водяных стволов имеется
-'    pi_MainPAHave = 0             'Основных ПА общего применения имеется
-'    pi_TargetedPAHave = 0         'Основных ПА целевого применения имеется
-'    pi_SpecialPAHave = 0          'Специальных ПА имеется
-'    pi_OtherTechincsHave = 0      'Прочей техники имеется
-'    ps_GetedWaterValue = 0        'Забирается воды из внешних источников
-'    ps_GetedWaterValueMax = 0     'Забирается воды из внешних источников Максимум
-'    pi_GetingWaterCount = 0       'Устройств забирающих воду кол-во
-'    pi_GDZSChainsCount = 0        'Количество звеньев ГДЗС
-'    pi_GDZSChainsRezCount = 0     'Количество резервных звеньев ГДЗС
-'    pi_GDZSMansCount = 0          'Количество газрдымозащитников
-'    pi_GDZSMansRezCount = 0       'Количество газодымозащитников для резервных звеньев ГДЗС
-'    pi_GDZSpbCount = 0            'Kolichestvo PB
-'    pi_KPPCount = 0               'Kolichestvo KPP
-'    pi_Hoses51Count = 0           'Количество рукавов диаметром 51мм
-'    pi_Hoses66Count = 0           'Количество рукавов диаметром 66мм
-'    pi_Hoses77Count = 0           'Количество рукавов диаметром 77мм
-'    pi_Hoses89Count = 0           'Количество рукавов диаметром 89мм
-'    pi_Hoses110Count = 0          'Количество рукавов диаметром 110мм
-'    pi_Hoses150Count = 0          'Количество рукавов диаметром 150мм
-'    pi_Hoses200Count = 0          'Количество рукавов диаметром 200мм
-'    pi_Hoses250Count = 0          'Количество рукавов диаметром 250мм
-'    pi_Hoses300Count = 0          'Количество рукавов диаметром 300мм
-'    pi_HosesCount = 0             'Количество рукавов общее
-'    pi_Hoses38Have = 0            'Количество рукавов диаметром 38мм имеется
-'    pi_Hoses51Have = 0            'Количество рукавов диаметром 51мм имеется
-'    pi_Hoses66Have = 0            'Количество рукавов диаметром 66мм имеется
-'    pi_Hoses77Have = 0            'Количество рукавов диаметром 77мм имеется
-'    pi_Hoses89Have = 0            'Количество рукавов диаметром 89мм имеется
-'    pi_Hoses110Have = 0           'Количество рукавов диаметром 110мм имеется
-'    pi_Hoses150Have = 0           'Количество рукавов диаметром 150мм имеется
-'    pi_Hoses200Have = 0           'Количество рукавов диаметром 200мм имеется
-'    pi_Hoses250Have = 0           'Количество рукавов диаметром 250мм имеется
-'    pi_Hoses300Have = 0           'Количество рукавов диаметром 300мм имеется
-'    pi_HoseSkatka = 0             'Количество рукавов в скатках
-'    pi_HosesCount = 0             'Количество рукавов общее
-'    pi_HosesLength = 0            'Общая длина рукавных линий
-'    pi_WaterValueNeed = 0         'Требуемый запас воды
-'    pi_WaterValueHave = 0         'Фактический запас воды
-'    pi_StvolWBHave = 0            'Водяных стволов Б подано
-'    pi_StvolWAHave = 0            'Водяных стволов А подано
-'    pi_StvolWLHave = 0            'Водяных лафетных стволов подано
-'    pi_StvolFoamHave = 0          'Пенных стволов подано
-'    pi_StvolGasHave = 0           'Газовых стволов подано
-'    pi_StvolPowderHave = 0        'Порошковых стволов подано
-'    pi_WaterValueHave = 0         'Требуемый запас воды
-'    pi_WaterValueHave = 0         'Фактический запас воды
-'    pi_ACCount = 0                'АЦ
-'    pi_AGCount = 0                'АГ
-'    pi_ALCount = 0                'АЛ
-'    pi_AKPCount = 0               'КП
-'    pi_MVDCount = 0               'МВД
-'    pi_MZdravCount = 0            'СМП
-'    pi_TechTotalCount = 0         'Общее количество техники
-'    pi_FireTotalCount = 0         'Пожарная
-'    pi_BUCount = 0                'Боевых участков
-'    pi_SPRCount = 0               'Секторов
-'    pi_ShtabCount = 0             'Shtab
-'    pi_RNBDCount = 0              'Reshaushee napravlenie
-'    pi_OchagCount = 0             'Ochag
-'    pi_DevelopCount = 0           'Rasprostranenie
-'    pi_SmokeCount = 0             'Zadimlenie
-'    pi_WaterSourceCount = 0       'Vodoistochniki
-'    pi_distanceCount = 0          'Rasstoyanie
-'    pi_linesCount = 0             'Otdelnie linii
-'    pi_linesPosCount = 0          'Polozenie linii
-'    pi_linesLableCount = 0        'Podpisi linii
-'    pi_WorklinesCount = 0         'Rabochie linii
-'    pi_BuildCount = 0             'Zdania
-'    pi_SOCount = 0                'Stepen ognestoikosti
-'    pi_FireCount = 0              'Ploshad gorenia
-'    pi_OrientCount = 0            'Ориентиры
-'    pb_GDZSDiscr = False          'Несоответствие человек сложным условиям
-'    ps_GDZSChainsRezNeed = 0      'Требуется звеньев
-'
-'
-'
-'
-''---Обнуляем расчетные свойства
-''    pi_StvolWNeed = 0        'Водяных стволов требуется
-''    pi_MainPANeed = 0      'Основных ПА общего применения требуется
-''    pi_GetingWaterNeedCount = 0    'Устройств забирающих воду кол-во - требуется
-''    pi_GDZSChainsNeedCount = 0  'Количество звеньев ГДЗС - требуется
-''    pi_RezGDZSChainsNeedCount = 0  'Количество резервных звеньев ГДЗС - требуется
-'
-'End Sub
-
 Private Function fb_FirstChain(as_Number As Single) As Boolean
 'Функция возвращает Истина, если звено первое, и Ложь, если нет
     If as_Number - Fix(as_Number) < 0.4 And as_Number - Fix(as_Number) > 0 Then
@@ -1546,27 +1440,51 @@ Private Function fb_FirstChain(as_Number As Single) As Boolean
     End If
 End Function
 
-Private Sub IsHoseShapeHavePos(ByRef hoseShape As Visio.Shape)
-'Проверяем наличие у рукавной линии подписи положения
+Private Function IsHoseShapeHaveLabels(ByRef hoseShape As Visio.Shape) As Boolean
+'Проверяем наличие у рукавной линии подписи положения и подписи
 Dim con As Connect
-Dim tmpVal As Boolean
+Dim haveLabel As Boolean
 
-    tmpVal = False
-    
+    haveLabel = False
+
     For Each con In hoseShape.FromConnects
-        If con.FromSheet.Cells("User.IndexPers").Result(visNumber) = 151 Then tmpVal = True
-'        Debug.Print con.FromSheet.Name
+        If IsGFSShapeWithIP(con.FromSheet, 150, True) Then
+'            If con.FromSheet.Cells("User.IndexPers").Result(visNumber) = 150 Then haveLabel = True
+            haveLabel = True
+        End If
     Next con
-    
-    If pb_AllHosesWithPos Then pb_AllHosesWithPos = tmpVal
-End Sub
 
+    If elements.Result("AllHosesWithLabels") Then elements.SetVal "AllHosesWithLabels", haveLabel
+    IsHoseShapeHaveLabels = haveLabel
+End Function
+
+Private Function IsHoseShapeHavePos(ByRef hoseShape As Visio.Shape) As Boolean
+'Проверяем наличие у рукавной линии подписи положения и подписи
+Dim con As Connect
+Dim havePos As Boolean
+
+    havePos = False
+
+    For Each con In hoseShape.FromConnects
+        If IsGFSShapeWithIP(con.FromSheet, 151, True) Then
+'            If con.FromSheet.Cells("User.IndexPers").Result(visNumber) = 151 Then havePos = True
+            havePos = True
+        End If
+    Next con
+
+    If elements.Result("AllHosesWithPos") Then elements.SetVal "AllHosesWithPos", havePos
+    IsHoseShapeHavePos = havePos
+End Function
 
 
 '---------------Функции получения данных-----------------------
-Public Function Result(ByVal elemID As String) As Variant
-'получаем значение элемента с указанным elemID
-    Result = elements.Result(elemID)
+Public Function Result(ByVal ID As String) As Variant
+'Получаем значение элемента с указанным ID
+    Result = elements.Result(ID)
+End Function
+Public Function ResultByCN(ByVal callName As String) As Variant
+'Получаем значение элемента с указанным ID
+    ResultByCN = elements.ResultByCN(callName)
 End Function
 
 Public Function Sum(ByVal elemIDs As String) As Variant
@@ -1574,7 +1492,7 @@ Public Function Sum(ByVal elemIDs As String) As Variant
     Sum = elements.Sum(elemIDs)
 End Function
 
-Public Sub PrintState()
-'Печатаем в Debug состояние всех элементов
-    elements.PrintState
+Public Sub PrintState(Optional ByVal elemIDs As String = "")
+'Печатаем в Debug состояние указанных или всех элементов
+    elements.PrintState elemIDs
 End Sub

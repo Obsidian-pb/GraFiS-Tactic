@@ -11,13 +11,12 @@ Dim WithEvents vmO_App As Visio.Application
 Attribute vmO_App.VB_VarHelpID = -1
 Dim ButEvent As c_Buttons
 Dim f_CheckForm As MCheckForm
-'Dim vOC_InfoAnalizer As InfoCollector
+
 
 
 
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
-'Set vOC_InfoAnalizer = Nothing
     
 '---Деактивируем объект отслеживания нажатия кнопок
     Set ButEvent = Nothing
@@ -28,7 +27,7 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
 '---Удаляем кнопки с панели управления "СпецФункции"
     DeleteButtons
     
-sP_InfoCollectorDeActivate 'Деактивируем класс InfoCollector через обращение к модулю m_Analize
+'sP_InfoCollectorDeActivate 'Деактивируем класс InfoCollector через обращение к модулю m_Analize
 End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
@@ -38,7 +37,7 @@ Set vmO_App = Visio.Application
     AddTimeUserCells
 
 '---Активируем класс InfoCollector через обращение к модулю m_Analize
-    sP_InfoCollectorActivate
+'    sP_InfoCollectorActivate
     
 '---Добавляем панель инструментов "Спецфункции"
     AddTB_SpecFunc

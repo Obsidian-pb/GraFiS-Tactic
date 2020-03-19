@@ -38,10 +38,10 @@ Public Enum indexPers
    ipMVD = 3001                                'МВД
    ipAmbulance = 3002                          'Скорая помощь
    ipStvolRuch = 34                            'Водяной ручной ствол
-   ipStvolRuchPena = 35                       'Пенный ствол
+   ipStvolRuchPena = 35                        'Пенный ствол
    ipStvolLafVoda = 36                         'Лафетный водяной (Лафетный автомобильный – разновидность с предопределенными свойствами!)
    ipStvolLafPena = 37                         'Лафетный пенный
-   ipStvolLafPoroshok = 38                        'Лафетный порошковый ствол
+   ipStvolLafPoroshok = 38                     'Лафетный порошковый ствол
    ipStvolLafVozimiy = 39                      'Возимый лафетный ствол
    ipHydroelevator = 40                        'Гидроэлеватор
    ipPenosmesitelPerenosn = 41                 'Пеносмеситель переносной
@@ -91,7 +91,7 @@ Public Enum indexPers
    ipZhDPolotno = 85                           'Ж/д полотно
    ipStorm = 86                                'Огненный шторм
    ipOdinPozhar = 87                           'Одиночный пожар
-   ipVsasLineWithSetk = 88                             'Всасывающая линия с сеткой
+   ipVsasLineWithSetk = 88                     'Всасывающая линия с сеткой
    ipPodpisPloschadPozhara = 89                'Подпись площадь
    ipGDZSZvenoKisl = 90                        'Звено ГДЗС (ДАСК)
    ipRosaVetrov = 91                           'Роза ветров (76)

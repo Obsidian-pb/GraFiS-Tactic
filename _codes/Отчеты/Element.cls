@@ -78,6 +78,12 @@ Public Function SetValue(ByVal newValue As Variant) As Element
     Set SetValue = Me
 End Function
 
+Public Function PrintState() As Element
+'Печатаем в Debug Имя вызова и значение элемента
+    Debug.Print p_callName & ": " & p_value
+    Set PrintState = Me
+End Function
+
 Public Function Clear() As Element
 'Обнуляем калькулятор
     p_value = p_startValue

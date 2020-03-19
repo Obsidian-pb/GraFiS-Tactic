@@ -24,6 +24,8 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
                 CellVal = shp.Cells(cellName).Result(dataType)
             Case Is = visUnitsString
                 CellVal = shp.Cells(cellName).resultstr(dataType)
+            Case Is = visDate
+                CellVal = shp.Cells(cellName).Result(dataType)
         End Select
     Else
         CellVal = 0
@@ -67,9 +69,9 @@ Dim i As Integer
 
 End Function
 
-Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPreses As Variant) As Boolean
+Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses As Variant, Optional needGFSChecj As Boolean = False) As Boolean
 'Функция возвращает True, если фигура является фигурой ГраФиС и среди переданных типов фигур ГраФиС (gfsIndexPreses) присутствует IndexPers данной фигуры
-'Предполагается что переданная фигура уже проверена на то, относится ли она к фигурам ГраФиС. В случае, если у фигуры нет ячейки User.IndexPers _
+'По умолчанию предполагается что переданная фигура уже проверена на то, относится ли она к фигурам ГраФиС. В случае, если у фигуры нет ячейки User.IndexPers _
 'обработчик ошибки указывает функции вернуть False
 'Пример использования: IsGFSShapeWithIP(shp, indexPers.ipPloschadPozhara)
 '                 или: IsGFSShapeWithIP(shp, Array(indexPers.ipPloschadPozhara, indexPers.ipAC))
@@ -78,17 +80,30 @@ Dim indexPers As Integer
     
     On Error GoTo EX
     
+    'Если необходима предварительная проверка на отношение фигуры к ГраФиС:
+    If needGFSChecj Then
+        If Not IsGFSShape(shp) Then
+            IsGFSShapeWithIP = False
+            Exit Function
+        End If
+    End If
+    
     'Проверяем, является ли фигура фигурой указанного типа
     indexPers = shp.Cells("User.IndexPers").Result(visNumber)
-    Select Case TypeName(gfsIndexPreses)
-        Case Is = "Long"    'Если передано единственное значение
-            If gfsIndexPreses = indexPers Then
+    Select Case TypeName(gfsIndexPerses)
+        Case Is = "Long"    'Если передано единственное значение Long
+            If gfsIndexPerses = indexPers Then
+                IsGFSShapeWithIP = True
+                Exit Function
+            End If
+        Case Is = "Integer"    'Если передано единственное значение Integer
+            If gfsIndexPerses = indexPers Then
                 IsGFSShapeWithIP = True
                 Exit Function
             End If
         Case Is = "Variant()"   'Если передан массив
-            For i = 0 To UBound(gfsIndexPreses)
-                If gfsIndexPreses(i) = indexPers Then
+            For i = 0 To UBound(gfsIndexPerses)
+                If gfsIndexPerses(i) = indexPers Then
                     IsGFSShapeWithIP = True
                     Exit Function
                 End If
@@ -137,7 +152,6 @@ Dim gapString As String
 Dim i As Integer
 Dim j As Integer
 
-'    previousString = ""
     arrIn = Split(strIn, delimiter)
     arrSize = UBound(arrIn)
     
