@@ -184,14 +184,14 @@ End Function
 Sub CreateNewMenu()
 'Создаём всплывающее меню мастера проверок
 Dim popupMenuBar As CommandBar
-Dim ctrl As CommandBarControl
+Dim Ctrl As CommandBarControl
     
     'Получаем ссылку на всплывающее меню
     GetToolBar popupMenuBar, "ContextMenuListBox", msoBarPopup
     
     'Очищаем имеющиеся пункты меню
-    For Each ctrl In popupMenuBar.Controls
-        ctrl.Delete
+    For Each Ctrl In popupMenuBar.Controls
+        Ctrl.Delete
     Next
     
     
@@ -216,15 +216,15 @@ Private Sub GetToolBar(ByRef toolBar As CommandBar, ByVal toolBarName As String,
     
 End Sub
 
-Private Sub menuButtonHide_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+Private Sub menuButtonHide_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     HideComment
 End Sub
 
-Private Sub menuButtonRestore_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+Private Sub menuButtonRestore_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     RestoreComment
     MasterCheckRefresh
 End Sub
-Private Sub menuButtonOptions_Click(ByVal ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+Private Sub menuButtonOptions_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     CommOptForm.ShowForm
 End Sub
 

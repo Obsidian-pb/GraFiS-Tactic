@@ -4,7 +4,7 @@ Option Explicit
 Dim remarks(27) As Boolean 'массив переменных для каждого из замечаний
 Dim vOC_InfoAnalizer As InfoCollector
 Public remarksHided As Integer 'переменная количества скрытых замечаний
-Public bo_GDZSRezRoundUp As Boolean 'округление резервных звеньев в большую сторону
+'Public bo_GDZSRezRoundUp As Boolean 'округление резервных звеньев в большую сторону
 '=================================== MASTER CHECK by Vasilchenko ================================================
 Public Sub MasterCheckRefresh()
 'Процедура реакции на действие пользователя
@@ -16,20 +16,21 @@ Dim strStvolCount As String
 Dim strHoseCount As String
 
     psi_TargetPageIndex = Application.ActivePage.Index
-    
+
 '---обнуляем имеющиеся значения свойств
     If vOC_InfoAnalizer Is Nothing Then
         Set vOC_InfoAnalizer = New InfoCollector
     End If
     vOC_InfoAnalizer.sC_Refresh (psi_TargetPageIndex)
 
-'---Запускаем условия обработки
+'---Очищаем форму и задаем стартовые условия
     MCheckForm.ListBox1.Clear
     MCheckForm.ListBox2.Clear
     
     Comment = False
     remarksHided = 0
     
+'---Запускаем условия обработки
     'Ochag
     If remarks(0) = False Then
         If vOC_InfoAnalizer.pi_OchagCount = 0 Then
@@ -106,17 +107,17 @@ Dim strHoseCount As String
     End If
     
     If remarks(10) = False Then
-        If Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) > vOC_InfoAnalizer.pi_GDZSChainsRezCount And bo_GDZSRezRoundUp = False Then
-                MCheckForm.ListBox1.AddItem "Недостаточно резервных звеньев ГДЗС с округлением в меньшую сторону (" & vOC_InfoAnalizer.pi_GDZSChainsRezCount & "/" & Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) & ")"
-                Comment = True
-        End If
+'        If Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) > vOC_InfoAnalizer.pi_GDZSChainsRezCount And bo_GDZSRezRoundUp = False Then
+'                MCheckForm.ListBox1.AddItem "Недостаточно резервных звеньев ГДЗС с округлением в меньшую сторону (" & vOC_InfoAnalizer.pi_GDZSChainsRezCount & "/" & Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) & ")"
+'                Comment = True
+'        End If
     End If
     
     If remarks(10) = False Then
-        If Fix((vOC_InfoAnalizer.ps_GDZSChainsRezNeed / 0.3334) * 0.3333) + 1 > vOC_InfoAnalizer.pi_GDZSChainsRezCount And bo_GDZSRezRoundUp = True And vOC_InfoAnalizer.pi_GDZSChainsCount <> 0 Then
-                MCheckForm.ListBox1.AddItem "Недостаточно резервных звеньев ГДЗС с округлением в большую сторону (" & vOC_InfoAnalizer.pi_GDZSChainsRezCount & "/" & Fix((vOC_InfoAnalizer.ps_GDZSChainsRezNeed / 0.3334) * 0.3333) + 1 & ")"
-                Comment = True
-        End If
+'        If Fix((vOC_InfoAnalizer.ps_GDZSChainsRezNeed / 0.3334) * 0.3333) + 1 > vOC_InfoAnalizer.pi_GDZSChainsRezCount And bo_GDZSRezRoundUp = True And vOC_InfoAnalizer.pi_GDZSChainsCount <> 0 Then
+'                MCheckForm.ListBox1.AddItem "Недостаточно резервных звеньев ГДЗС с округлением в большую сторону (" & vOC_InfoAnalizer.pi_GDZSChainsRezCount & "/" & Fix((vOC_InfoAnalizer.ps_GDZSChainsRezNeed / 0.3334) * 0.3333) + 1 & ")"
+'                Comment = True
+'        End If
     End If
     
     'PPW
@@ -430,35 +431,6 @@ Public Sub HideComment()
     remarks(25) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 200 мм") > 0
     remarks(26) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 250 мм") > 0
     remarks(27) = InStr(1, MCheckForm.ListBox1.Value, "рукавов 300 мм") > 0
-
-'    If MCheckForm.ListBox1.Value = "Не указан очаг пожара" Then remarks(0) = True
-'    If MCheckForm.ListBox1.Value = "Не указаны зоны задымления" Then remarks(1) = True
-'    If MCheckForm.ListBox1.Value = "Не указаны пути распространения пожара" Then remarks(2) = True
-'    If MCheckForm.ListBox1.Value = "Не создан оперативный штаб" Then remarks(3) = True
-'    If MCheckForm.ListBox1.Value = "Не указано решающее направление" Then remarks(4) = True
-'    If MCheckForm.ListBox1.Value = "Решающее напраление должно быть одним" Then remarks(5) = True
-'    If MCheckForm.ListBox1.Value = "Не организованы секторы проведения работ" Then remarks(6) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "Не выставлены посты безопасности") > 0 Then remarks(7) = True
-'    If MCheckForm.ListBox1.Value = "Не создан контрольно-пропускной пункт ГДЗС" Then remarks(8) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "В сложных условиях звенья ГДЗС") > 0 Then remarks(9) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "резервных звеньев") > 0 Then remarks(10) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "расстояния от каждого") > 0 Then remarks(11) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "положения") > 0 Then remarks(12) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "диаметры") > 0 Then remarks(13) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "подписи степени огнестойкости") > 0 Then remarks(14) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "ориентиры на местности") > 0 Then remarks(15) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "Недостаточный фактический расход") > 0 Then remarks(16) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "Недостаточное водоснабжение") > 0 Then remarks(17) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "Недостаточно личного состава") > 0 Then remarks(18) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 51 мм,") > 0 Then remarks(19) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 66 мм") > 0 Then remarks(20) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 77 мм") > 0 Then remarks(21) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 89 мм") > 0 Then remarks(22) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 110 мм") > 0 Then remarks(23) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 150 мм") > 0 Then remarks(24) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 200 мм") > 0 Then remarks(25) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 250 мм") > 0 Then remarks(26) = True
-'    If InStr(1, MCheckForm.ListBox1.Value, "рукавов 300 мм") > 0 Then remarks(27) = True
     
     On Error GoTo 0
 

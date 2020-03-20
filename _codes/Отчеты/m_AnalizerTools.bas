@@ -37,7 +37,7 @@ End Sub
 
 
 '-----------------Инструменты обновления сведений в фигурах отчетов---------------------------
-Public Sub ReportShapesStringsRefresh() '(ByVal block As Boolean)
+Public Sub ReportShapesStringsRefresh(ByVal block As Boolean)
 'Служебная процедура! Вызывается ТОЛЬКО при разработке функционала трафарета Отчеты
 Dim doc As Visio.Document
 Dim elements As ElementsShell

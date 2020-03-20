@@ -23,7 +23,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
             Case Is = visNumber
                 CellVal = shp.Cells(cellName).Result(dataType)
             Case Is = visUnitsString
-                CellVal = shp.Cells(cellName).resultstr(dataType)
+                CellVal = shp.Cells(cellName).ResultStr(dataType)
             Case Is = visDate
                 CellVal = shp.Cells(cellName).Result(dataType)
         End Select
@@ -146,7 +146,7 @@ End Sub
 Public Function Sort(ByVal strIn As String, Optional ByVal delimiter As String = ";") As String
 '‘ункци€ возвращает отсортированную строку с массивом строковых значений разделенных delimiter
 Dim arrIn() As String
-Dim resultstr As String
+Dim ResultStr As String
 Dim arrSize As Integer
 Dim gapString As String
 Dim i As Integer
@@ -166,9 +166,9 @@ Dim j As Integer
     Next i
     
     For i = 0 To arrSize
-        resultstr = resultstr & arrIn(i) & delimiter
+        ResultStr = ResultStr & arrIn(i) & delimiter
     Next i
     
-Sort = Left(resultstr, Len(resultstr) - Len(delimiter))
+Sort = Left(ResultStr, Len(ResultStr) - Len(delimiter))
 End Function
 

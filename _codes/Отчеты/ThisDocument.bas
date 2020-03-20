@@ -22,7 +22,8 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     Set ButEvent = Nothing
     
 '---Закрываем окно "Мастер проверок"
-    MCheckForm.CloseThis
+'    MCheckForm.CloseThis
+    WarningsForm.CloseThis
     
 '---Удаляем кнопки с панели управления "СпецФункции"
     DeleteButtons

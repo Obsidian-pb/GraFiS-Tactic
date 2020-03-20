@@ -30,10 +30,10 @@ Dim vpVS_DocShape As Visio.Shape
     Set vpVS_DocShape = Application.ActiveDocument.DocumentSheet
 
 '---Получаем данные из Шэйп-листа документа
-    Me.TB_City = vpVS_DocShape.Cells("User.City").resultstr(Visio.visNone)
-    Me.TB_Adress = vpVS_DocShape.Cells("User.Adress").resultstr(Visio.visNone)
-    Me.CB_FireRating = vpVS_DocShape.Cells("User.FireRating").resultstr(Visio.visNone)
-    Me.CB_Object = vpVS_DocShape.Cells("User.Object").resultstr(Visio.visNone)
+    Me.TB_City = vpVS_DocShape.Cells("User.City").ResultStr(Visio.visNone)
+    Me.TB_Adress = vpVS_DocShape.Cells("User.Adress").ResultStr(Visio.visNone)
+    Me.CB_FireRating = vpVS_DocShape.Cells("User.FireRating").ResultStr(Visio.visNone)
+    Me.CB_Object = vpVS_DocShape.Cells("User.Object").ResultStr(Visio.visNone)
 
 End Sub
 

@@ -41,7 +41,7 @@ Sub AddButtons()
     Set Bar = Application.CommandBars("Спецфункции")
     
 '---Добавляем кнопки на панель управления "Спецфункции"--------------------------------
-'---Кнопка "Экспорт в JPG"-------------------------------------------------
+'---Кнопка "Мастер проверок"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
         .Caption = "Мастер проверок"
@@ -49,6 +49,15 @@ Sub AddButtons()
         .TooltipText = "Мастер проверок"
         .FaceID = 1820
         .beginGroup = True
+    End With
+'---Кнопка "Тактические данные"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Тактические данные"
+        .Tag = "show_m_tactic_form"
+        .TooltipText = "Тактические данные"
+        .FaceID = 1090
+        .beginGroup = False
     End With
     
     Set Button = Nothing
@@ -64,18 +73,19 @@ EX:
 End Sub
 
 Sub DeleteButtons()
-'---Процедура удаления кнопки "Мастер проверок" из панели управления "Спецфункции"--------------
+'---Процедура удаления кнопок с панели управления "Спецфункции"--------------
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Спецфункции")
-'---Удаление кнопки "Рукав" из панели управления "Мастер проверок"------------------------
+'---Удаление кнопки "Мастер проверок" с панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Мастер проверок")
     Button.Delete
-    
+'---Удаление кнопки "Мастер проверок" с панели управления "Спецфункции"------------------------
+    Set Button = Bar.Controls("Тактические данные")
+    Button.Delete
     
 Set Button = Nothing
 Set Bar = Nothing
-
 End Sub

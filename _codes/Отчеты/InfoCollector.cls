@@ -524,11 +524,11 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
     
             '---ГДЗС----------------------------
                 Case Is = 46 'Звено - ДАСВ
-                    If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "Работает" Then
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_GDZSChainsCount = pi_GDZSChainsCount + 1
                         pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
-                        If vsO_Shape.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
+                        If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
                             If bo_GDZSRezRoundUp Then
                                 ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
                             Else
@@ -539,7 +539,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                             If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
                         End If
                     End If
-                    If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
                         pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
@@ -547,11 +547,11 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                   
                     
                 Case Is = 90 'Звено - ДАСК
-                    If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "Работает" Then
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_GDZSChainsCount = pi_GDZSChainsCount + 1
                         pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
-                        If vsO_Shape.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
+                        If vsO_Shape.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
                             If bo_GDZSRezRoundUp Then
                                 ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
                             Else
@@ -562,7 +562,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                             If vsO_Shape.Cells("Prop.Personnel") < 5 Then pb_GDZSDiscr = True
                         End If
                     End If
-                    If vsO_Shape.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
+                    If vsO_Shape.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
                         pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
@@ -579,33 +579,33 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
     
             '---Управление силами и средствами--------
                 Case Is = 63 'БУ и СПР
-                    If vsO_Shape.Cells("Prop.UTP_STP_Reserv").resultstr(visUnitsString) = "Участок" _
+                    If vsO_Shape.Cells("Prop.UTP_STP_Reserv").ResultStr(visUnitsString) = "Участок" _
                         Then pi_BUCount = pi_BUCount + 1
-                    If vsO_Shape.Cells("Prop.UTP_STP_Reserv").resultstr(visUnitsString) = "Сектор" _
+                    If vsO_Shape.Cells("Prop.UTP_STP_Reserv").ResultStr(visUnitsString) = "Сектор" _
                         Then pi_SPRCount = pi_SPRCount + 1
                 Case Is = 62 'Штаб/РТП
                     pi_ShtabCount = pi_ShtabCount + 1
                     pi_PersonnelNeed = pi_PersonnelNeed + 1
-                    If Not vsO_Shape.Cells("Prop.NachStab").resultstr(visUnitsString) = "" _
+                    If Not vsO_Shape.Cells("Prop.NachStab").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
-                    If Not vsO_Shape.Cells("Prop.NachTyl").resultstr(visUnitsString) = "" _
+                    If Not vsO_Shape.Cells("Prop.NachTyl").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
-                    If Not vsO_Shape.Cells("Prop.NachLabor").resultstr(visUnitsString) = "" _
+                    If Not vsO_Shape.Cells("Prop.NachLabor").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
-                    If Not vsO_Shape.Cells("Prop.RTP2").resultstr(visUnitsString) = "" _
+                    If Not vsO_Shape.Cells("Prop.RTP2").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
-                    If Not vsO_Shape.Cells("Prop.RTP3").resultstr(visUnitsString) = "" _
+                    If Not vsO_Shape.Cells("Prop.RTP3").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
-                    If Not vsO_Shape.Cells("Prop.RTP4").resultstr(visUnitsString) = "" _
+                    If Not vsO_Shape.Cells("Prop.RTP4").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
-                    If Not vsO_Shape.Cells("Prop.RTP5").resultstr(visUnitsString) = "" _
+                    If Not vsO_Shape.Cells("Prop.RTP5").ResultStr(visUnitsString) = "" _
                         Then pi_PersonnelNeed = pi_PersonnelNeed + 1
                 Case Is = 83 'РНД
                     pi_RNBDCount = pi_RNBDCount + 1
     
             '---ПТВ-----------------------------------
                 Case Is = 34 'Ручной водяной
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         ps_FactStreemW = ps_FactStreemW + vsO_Shape.Cells("User.PodOut")
                         pi_StvolWHave = pi_StvolWHave + 1
@@ -616,41 +616,41 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                         End If
                     End If
                 Case Is = 35 'Ручной пенный
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_StvolFoamHave = pi_StvolFoamHave + 1
                         ps_FactStreemW = ps_FactStreemW + vsO_Shape.Cells("Prop.PodOut") * (100 - vsO_Shape.Cells("Prop.FoamPerc")) / 100
                     End If
                 Case Is = 76 'Ручной газовый
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_StvolGasHave = pi_StvolGasHave + 1
                     End If
                 Case Is = 77 'Ручной порошковый
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_StvolPowderHave = pi_StvolPowderHave + 1
                     End If
                 Case Is = 36 'Лафетный водяной
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         ps_FactStreemW = ps_FactStreemW + vsO_Shape.Cells("User.PodOut")
                         pi_StvolWHave = pi_StvolWHave + 1
                         pi_StvolWLHave = pi_StvolWLHave + 1
                     End If
                 Case Is = 37 'Лафетный пенный
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_StvolFoamHave = pi_StvolFoamHave + 1
                         ps_FactStreemW = ps_FactStreemW + vsO_Shape.Cells("Prop.PodOut") * (100 - vsO_Shape.Cells("Prop.FoamPerc")) / 100
                     End If
                 Case Is = 38 'Лафетный порошковый
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         pi_StvolPowderHave = pi_StvolPowderHave + 1
                     End If
                 Case Is = 39 'Лафетный водяной возимый
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                         ps_FactStreemW = ps_FactStreemW + vsO_Shape.Cells("User.PodOut")
                         pi_StvolWHave = pi_StvolWHave + 1
@@ -658,7 +658,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     End If
                 Case Is = 40 'Гидроэлеватор
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                    If vsO_Shape.Cells("Prop.GetingWater").resultstr(visUnitsString) = "Да" Then
+                    If vsO_Shape.Cells("Prop.GetingWater").ResultStr(visUnitsString) = "Да" Then
                         pi_GetingWaterCount = pi_GetingWaterCount + 1
                         ps_GetedWaterValue = ps_GetedWaterValue + vsO_Shape.Cells("Prop.PodOut")
                         ps_GetedWaterValueMax = ps_GetedWaterValueMax + vsO_Shape.Cells("Prop.PodOut")
@@ -681,15 +681,15 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                     
                 Case Is = 45 'Пеноподъемник
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                     End If
                 Case Is = 22 'Гребенка
-                    If vsO_Shape.Cells("Prop.MainManeure").resultstr(visUnitsString) = "Основное положение" Then
+                    If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
                         pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
                     End If
                 Case Is = 72 'Колонка
-                    If vsO_Shape.Cells("Prop.GetingWater").resultstr(visUnitsString) = "Да" Then
+                    If vsO_Shape.Cells("Prop.GetingWater").ResultStr(visUnitsString) = "Да" Then
                         pi_GetingWaterCount = pi_GetingWaterCount + 1
                         ps_GetedWaterValue = ps_GetedWaterValue + vsO_Shape.Cells("Prop.FlowMax")
                         ps_GetedWaterValueMax = ps_GetedWaterValueMax + vsO_Shape.Cells("Prop.FlowMax")
@@ -697,7 +697,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     
                 Case Is = 88  'Всасывающая линия с сеткой
                     pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
-                    If vsO_Shape.Cells("Prop.GetingWater").resultstr(visUnitsString) = "Да" Then
+                    If vsO_Shape.Cells("Prop.GetingWater").ResultStr(visUnitsString) = "Да" Then
                         pi_GetingWaterCount = pi_GetingWaterCount + 1
                         ps_GetedWaterValue = ps_GetedWaterValue + vsO_Shape.Cells("Prop.PodIn")
                         ps_GetedWaterValueMax = ps_GetedWaterValueMax + vsO_Shape.Cells("Prop.PodIn")
@@ -725,10 +725,10 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     
             '---Линии
                 Case Is = 100 'Напорная линия
-                    If vsO_Shape.Cells("Prop.ManeverHose").resultstr(visUnitsString) = "Нет" _
-                        And Not vsO_Shape.Cells("Prop.LineType").resultstr(visUnitsString) = "Рукав(4м)" Then
+                    If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
+                        And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
                           pi_linesCount = pi_linesCount + 1
-                        If vsO_Shape.Cells("Prop.LineType").resultstr(visUnitsString) = "Рабочая" Then
+                        If vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рабочая" Then
                             pi_WorklinesCount = pi_WorklinesCount + 1
                             'Проверяем имеет ли данная фигура подпись положения
 '                            Stop    'Реализовать!!!
@@ -820,8 +820,8 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     End If
                 Case Is = 110 'Рукавная скатка
                     pi_HoseSkatka = pi_HoseSkatka + 1
-                    If vsO_Shape.Cells("Prop.ManeverHose").resultstr(visUnitsString) = "Нет" _
-                        And Not vsO_Shape.Cells("Prop.LineType").resultstr(visUnitsString) = "Рукав(4м)" Then
+                    If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
+                        And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
                         Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
                             Case Is = 51
                                 If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
@@ -899,8 +899,8 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                     End If
                 Case Is = 111 'Рукавная гармошка
                     pi_HoseSkatka = pi_HoseSkatka + 1
-                    If vsO_Shape.Cells("Prop.ManeverHose").resultstr(visUnitsString) = "Нет" _
-                        And Not vsO_Shape.Cells("Prop.LineType").resultstr(visUnitsString) = "Рукав(4м)" Then
+                    If vsO_Shape.Cells("Prop.ManeverHose").ResultStr(visUnitsString) = "Нет" _
+                        And Not vsO_Shape.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
                         Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
                             Case Is = 51
                                 If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
@@ -1154,19 +1154,19 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                             pi_MZdravCount = pi_MZdravCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
                             pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
                         Case Is = 33 'Общее обозначение
-                            If vsO_Shape.Cells("Prop.RSCHS").resultstr(visUnitsString) = "Входит" _
+                            If vsO_Shape.Cells("Prop.RSCHS").ResultStr(visUnitsString) = "Входит" _
                               Then pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
                         Case Is = 160 'Общее обозначение
                             pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
                             pi_FireTotalCount = pi_FireTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
                              On Error Resume Next
-                            If vsO_Shape.Cells("Prop.Dest").resultstr(visUnitsString) = "Специальный" _
+                            If vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString) = "Специальный" _
                                 Then pi_SpecialPAHave = pi_SpecialPAHave + (vsO_Shape.Cells("Prop.Quantity") - 1)
-                            If InStr(1, vsO_Shape.Cells("Prop.Dest").resultstr(visUnitsString), "общ") <> 0 _
+                            If InStr(1, vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString), "общ") <> 0 _
                                 Then pi_MainPAHave = pi_MainPAHave + (vsO_Shape.Cells("Prop.Quantity") - 1)
-                            If InStr(1, vsO_Shape.Cells("Prop.Dest").resultstr(visUnitsString), "целев") <> 0 _
+                            If InStr(1, vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString), "целев") <> 0 _
                                 Then pi_TargetedPAHave = pi_TargetedPAHave + (vsO_Shape.Cells("Prop.Quantity") - 1)
-                            If InStr(1, vsO_Shape.Cells("Prop.Dest").resultstr(visUnitsString), "Основ") <> 0 _
+                            If InStr(1, vsO_Shape.Cells("Prop.Dest").ResultStr(visUnitsString), "Основ") <> 0 _
                                 Then pi_MainOverallCount = pi_MainOverallCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
                             On Error GoTo EX
                     End Select

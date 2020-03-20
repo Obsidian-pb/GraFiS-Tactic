@@ -2,7 +2,13 @@ Attribute VB_Name = "m__Tests"
 Option Explicit
 
 
+Public Sub ActivateTactWin()
+    TacticDataForm.Activate.Refresh
+End Sub
 
+Public Sub k()
+    KillA
+End Sub
 
 
 Public Sub TastCalculator()
@@ -89,3 +95,55 @@ End Sub
 '        .SetVal "StvolWANeed", PF_RoundUp(.Result("NeedStreamW") / 7.4)
 '        .SetVal "StvolWLNeed", PF_RoundUp(.Result("NeedStreamW") / 12)
 '        .SetVal "PANeedOnWaterSource", PF_RoundUp(.Result("NeedStreamW") / 32)
+
+
+
+'Public Function Parse(ByVal str As String) As String
+''Возвращает массив имеющихся в шаблоне имен элементов
+'Dim char As String
+'Dim i As Integer
+'Dim s As Integer
+'Dim tmpStr As String
+'
+'    For i = 1 To Len(str)
+'        char = Mid(str, i, 1)
+'        If char = "{" Then
+'            s = i + 1
+'        ElseIf char = "}" Then
+'            tmpStr = tmpStr & Mid(str, s, i - s) & ";"
+'        End If
+'    Next i
+'Parse = Left(tmpStr, Len(tmpStr) - 1)
+'End Function
+
+Public Sub Parse()
+Dim arr() As String
+Dim i As Integer
+    arr = ParsePattern("1234 {g} 56 {f}7")
+    For i = 0 To UBound(arr)
+        Debug.Print arr(i)
+    Next i
+End Sub
+
+Public Function ParsePattern(ByVal str As String) As String()
+'Возвращает массив имеющихся в шаблоне имен элементов
+Dim char As String
+Dim i As Integer
+Dim j As Integer
+Dim s As Integer
+Dim tmpStr() As String
+    
+    j = 0
+    For i = 1 To Len(str)
+        char = Mid(str, i, 1)
+        If char = "{" Then
+            s = i + 1
+        ElseIf char = "}" Then
+'            tmpStr = tmpStr & Mid(str, s, i - s) & ";"
+            ReDim Preserve tmpStr(j)
+            tmpStr(j) = Mid(str, s, i - s)
+            j = j + 1
+        End If
+    Next i
+ParsePattern = tmpStr  ' Split(Left(tmpStr, Len(tmpStr) - 1), ";")
+End Function

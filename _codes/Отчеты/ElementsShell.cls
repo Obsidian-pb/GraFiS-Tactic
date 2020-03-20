@@ -40,16 +40,16 @@ End Property
 '-------------------------------------Внутренние процедуры и функции классса----------------------------------------------
 Private Sub fillElemCollection()
 'Заполняем коллекцию элементов
-    AddNewElement "FireSquare", "Площадь пожара", , "User.FireSquare"
-    AddNewElement "ExtSquare", "Площадь тушения", , "User.ExtSquare"
-    AddNewElement "FactStreamW", "Расход воды фактический", , "User.PodOut"
+    AddNewElement "FireSquare", "Площадь пожара", "{$} м.кв. (площадь тушения {ExtSquare} м.кв.)", , "User.FireSquare"
+    AddNewElement "ExtSquare", "Площадь тушения", , , "User.ExtSquare"
+    AddNewElement "FactStreamW", "Расход воды фактический", "{$} л/с", , "User.PodOut"
     AddNewElement "IntenseWater", "Интенсивность подачи воды"
-    AddNewElement "NeedStreamW", "Расход воды требуемый", , "User.NeedStreamW"
+    AddNewElement "NeedStreamW", "Расход воды требуемый", "{$} л/с", , "User.NeedStreamW"
     
-    AddNewElement "PersonnelHave", "Имеется личного состава"
-    AddNewElement "PersonnelNeed", "Требуется личного состава", , "Prop.Personnel"
+    AddNewElement "PersonnelHave", "Личного состава имеется"
+    AddNewElement "PersonnelNeed", "Личного состава требуется", , , "Prop.Personnel"
     
-    AddNewElement "StvolWHave", "Стволов водяных подано"
+    AddNewElement "StvolWHave", "Стволов водяных подано", "{$} ({StvolWBHave} - ств. 'Б', {StvolWAHave} - ств. 'А', {StvolWLHave} - ств. лаф.)"
     AddNewElement "StvolWBHave", "Стволов Б подано"
     AddNewElement "StvolWAHave", "Стволов А подано"
     AddNewElement "StvolWLHave", "Стволов водяных лафетных подано"
@@ -63,25 +63,25 @@ Private Sub fillElemCollection()
     
     AddNewElement "MainPAHave", "ПА общего применения имеется"
     AddNewElement "TargetedPAHave", "ПА целевого применения имеется"
-    AddNewElement "MainOverallHave", "ПА основных имеется"
+    AddNewElement "MainOverallHave", "ПА основных имеется", "{$} ({TargetedPAHave} цел.прим., {MainPAHave} общ.прим.)"
     AddNewElement "PAHighHave", "ПА высотных имеется"
-    AddNewElement "SpecialPAHave", "ПА специальных имеется"
+    AddNewElement "SpecialPAHave", "ПА специальных имеется", "{$} ({PAHighHave} высотных)"
     AddNewElement "OtherTechincsHave", "Прочей техники имеется"
     AddNewElement "RSCHSTechincsHave", "Техники РСЧС имеется"
 
-    AddNewElement "GetedWaterValue", "Забирается воды из внешних источников"
+    AddNewElement "GetedWaterValue", "Забирается воды из внешних источников", "{$} л/с (max = {GetedWaterValueMax} л/с )"
     AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум"
     AddNewElement "GetingWaterCount", "Установлено на водоисточники"
 
-    AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает"
+    AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает", "{$} ({GDZSMansCountWork} газодымозащитников)"
     AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
-    AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется"
+    AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется", "{$} ({GDZSMansRezCountHave} газодымозащитников)"
     AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
     AddNewElement "GDZSMansCountWork", "Газодымозащитников работает"
     AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется"
     AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резервных звеньях имеется"
     AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется"
-    AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", False
+    AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", , False
     AddNewElement "GDZSPBCount", "ПБ ГДЗС имеется"
     AddNewElement "GDZSKPPCount", "КПП ГДЗС имеется"
 
@@ -95,24 +95,27 @@ Private Sub fillElemCollection()
     AddNewElement "Hoses200Count", "Рукавов 200мм используется"
     AddNewElement "Hoses250Count", "Рукавов 250мм используется"
     AddNewElement "Hoses300Count", "Рукавов 300мм используется"
-    AddNewElement "HosesCount", "Рукавов используется всего"
-    AddNewElement "HosesLength", "Рукавных линий длина"
+    AddNewElement "HosesCount", "Рукавов используется всего", "{$} (" & _
+                                "{Hoses38Count} - 38мм, {Hoses51Count} - 51мм, {Hoses66Count} - 66мм, {Hoses77Count} - 77мм, {Hoses89Count} - 89мм," & _
+                                "{Hoses110Count} - 110мм, {Hoses150Count} - 150мм, {Hoses200Count} - 200мм, {Hoses250Count} - 250мм, {Hoses300Count} - 300мм," & _
+                                ")"
+    AddNewElement "HosesLength", "Рукавных линий длина", "{$} м."
 
-    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , "Prop.Hose38"
-    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , "Prop.Hose51"
-    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , "Prop.Hose66"
-    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , "Prop.Hose77"
-    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , "Prop.Hose89"
-    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , "Prop.Hose110"
-    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , "Prop.Hose150"
-    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , "Prop.Hose200"
-    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , "Prop.Hose250"
-    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , "Prop.Hose300"
+    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , , "Prop.Hose38"
+    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , , "Prop.Hose51"
+    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , , "Prop.Hose66"
+    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , , "Prop.Hose77"
+    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , , "Prop.Hose89"
+    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , , "Prop.Hose110"
+    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , , "Prop.Hose150"
+    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , , "Prop.Hose200"
+    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , , "Prop.Hose250"
+    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , , "Prop.Hose300"
     AddNewElement "HosesHave", "Рукавов имеется всего"
     AddNewElement "HoseSkatka", "Напорных рукавов в скатках"
     
-    AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)"
-    AddNewElement "WaterValueHave", "Воды имеется"
+    AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)", "{$} л."
+    AddNewElement "WaterValueHave", "Воды имеется", "{$} л."
     AddNewElement "PANeedOnWaterSource", "Требуется установить на водоисточники"
 
     AddNewElement "ACCount", "АЦ имеется"
@@ -130,40 +133,43 @@ Private Sub fillElemCollection()
 
     AddNewElement "BUCount", "БУ создано"
     AddNewElement "SPRCount", "СПР создано"
-    AddNewElement "ShtabCount", "Количество штабов", 0, , False, False
-    AddNewElement "RNBDCount", "Количество решющих направления боевых действий", 0, , False, False
-    AddNewElement "OchagCount", "Количество очагов", 0, , False, False
-    AddNewElement "SpreadCount", "Количество направлдений распространения огня", 0, , False, False
-    AddNewElement "SmokeCount", "Задымление", 0, , False, False
-    AddNewElement "WaterSourceCount", "Водоисточники", 0, , False, False
-    AddNewElement "DistanceCount", "Расстояния", 0, , False, False
-    AddNewElement "LinesCount", "Отдельные рукавные линии", 0, , False, False
-    AddNewElement "LinesPosCount", "Подписи положения рукавных линий", 0, , False, False
-    AddNewElement "LinesLableCount", "Подписи рукавных линий", 0, , False, False
-    AddNewElement "WorklinesCount", "Количество рабочих линий", 0, , False, False
-    AddNewElement "BuildCount", "Количество зданий", 0, , False, False
-    AddNewElement "SOCount", "Количество степеней огнестойкости", 0, , False, False
-    AddNewElement "FireCount", "Количество площадей горения", 0, , False, False
-    AddNewElement "OrientCount", "Ориентиры", 0, , False, False
+    AddNewElement "ShtabCount", "Количество штабов", , 0, , False, False
+    AddNewElement "RNBDCount", "Количество решающих направления боевых действий", , 0, , False, False
+    AddNewElement "OchagCount", "Количество очагов", , 0, , False, False
+    AddNewElement "SpreadCount", "Количество направлдений распространения огня", , 0, , False, False
+    AddNewElement "SmokeCount", "Задымление", , 0, , False, False
+    AddNewElement "WaterSourceCount", "Водоисточники", , 0, , False, False
+    AddNewElement "DistanceCount", "Расстояния", , 0, , False, False
+    AddNewElement "LinesCount", "Отдельные рукавные линии", , 0, , False, False
+    AddNewElement "LinesPosCount", "Подписи положения рукавных линий", , 0, , False, False
+    AddNewElement "LinesLableCount", "Подписи рукавных линий", , 0, , False, False
+    AddNewElement "WorklinesCount", "Количество рабочих линий", , 0, , False, False
+    AddNewElement "MaglinesCount", "Количество магистральных линий", , 0, , False, False
+    AddNewElement "BuildCount", "Количество зданий", , 0, , False, False
+    AddNewElement "SOCount", "Количество степеней огнестойкости", , 0, , False, False
+    AddNewElement "FireCount", "Количество площадей горения", , 0, , False, False
+    AddNewElement "OrientCount", "Ориентиры", , 0, , False, False
 
-    AddNewElement "AllHosesWithLabels", "Все рукавные линии с подписями", True, , False, False
-    AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", True, , False, False
+    AddNewElement "AllHosesWithLabels", "Все рукавные линии с подписями", , True, , False, False
+    AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", , True, , False, False
 
 End Sub
 
-Private Function AddNewElement(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
+Private Function AddNewElement(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_resultStrPattern As String = "", _
+                        Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
                         Optional a_InShapes As Boolean = True, Optional a_InMaster As Boolean = True) As Element
 'Создает новый элемент, добавляет его в коллекцию элементов и возвращает на него ссылку
-    Set AddNewElement = AddElement(NewElement(a_ID, a_CallName, a_startValue, a_CellID, a_InShapes, a_InMaster))
+    Set AddNewElement = AddElement(NewElement(a_ID, a_CallName, a_resultStrPattern, a_startValue, a_CellID, a_InShapes, a_InMaster))
 End Function
 
-Private Function NewElement(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
+Private Function NewElement(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_resultStrPattern As String = "", _
+                        Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
                         Optional a_InShapes As Boolean = True, Optional a_InMaster As Boolean = True) As Element
 'Создает новый элемент, задает ему свойства и возвращает на него ссылку
 Dim elem As Element
 
     Set elem = New Element
-    Set NewElement = elem.Activate(a_ID, a_CallName, a_startValue, a_CellID, a_InShapes, a_InMaster)
+    Set NewElement = elem.SetShell(Me).Activate(a_ID, a_CallName, a_resultStrPattern, a_startValue, a_CellID, a_InShapes, a_InMaster)
 End Function
 
 Private Function AddElement(ByRef elem As Element) As Element

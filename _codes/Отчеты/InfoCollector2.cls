@@ -15,14 +15,12 @@ Option Explicit
 '----------------------------------------Коллекция элементов---------------------------------------------------------
 Public elements As ElementsShell
 '----------------------------------------Публичные свойства (настройки)----------------------------------------------
-'Public targetPageIndex As Integer            'Целевой лист подсчета (0-все листы, 1-... - лист с указанным номером)
-'Public GDZSRezRoundUp As Boolean             'Округление резервных звеньев в большую сторону (True - для  каждого из блоков по три звена выставляется резерв, False - резерв выставляется при наличии очередных трех звеньев)
 Public options As InfoCollectorOptions          'Настройки расчета
 
 '----------------------------------------Внутренине свойства (служебные)---------------------------------------------
 'Private latestSquareTime As Date
-
-
+'----------------------------------------События класса---------------------------------------------------------
+Public Event AfterRefresh()
 
 
 '----------------------------------------Служебные процедуры------------------------------------------------------------
@@ -536,7 +534,7 @@ Dim latestSquareTime As Date
         
                 '---ГДЗС----------------------------
                     Case Is = indexPers.ipGDZSZvenoVozd 'Звено - ДАСВ
-                        If shp.Cells("Prop.WorkState").resultstr(visUnitsString) = "Работает" Then
+                        If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
 '                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
 '                            pi_GDZSChainsCount = pi_GDZSChainsCount + 1
 '                            pi_GDZSMansCount = pi_GDZSMansCount + vsO_Shape.Cells("Prop.Personnel")
@@ -544,7 +542,7 @@ Dim latestSquareTime As Date
                             .Raise "GDZSChainsCountWork"
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             
-                            If shp.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
+                            If shp.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
                                 If options.GDZSRezRoundUp Then
 '                                    ps_GDZSChainsRezNeed = PF_RoundUp(pi_GDZSChainsCount / 3)
                                     .SetVal "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
@@ -566,7 +564,7 @@ Dim latestSquareTime As Date
                             .SetVal "GDZSChainsCountNeed", .ByID("GDZSChainsCountWork").Result + .ByID("GDZSChainsRezCountNeed").Result
                             .SetVal "GDZSMansCountNeed", .ByID("GDZSMansCountWork").Result + .ByID("GDZSMansRezCountNeed").Result
                         End If
-                        If shp.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
+                        If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
 '                            pi_PersonnelNeed = pi_PersonnelNeed + vsO_Shape.Cells("Prop.Personnel")
 '                            pi_GDZSChainsRezCount = pi_GDZSChainsRezCount + 1
 '                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
@@ -599,10 +597,10 @@ Dim latestSquareTime As Date
 '                            pi_GDZSMansRezCount = pi_GDZSMansRezCount + vsO_Shape.Cells("Prop.Personnel")
 '                        End If
 
-                        If shp.Cells("Prop.WorkState").resultstr(visUnitsString) = "Работает" Then
+                        If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
                             .Raise "GDZSChainsCountWork"
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
-                            If shp.Cells("Prop.WorkPlace").resultstr(visUnitsString) = "Стандартные условия" Then
+                            If shp.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
                                 If options.GDZSRezRoundUp Then
                                     .Raise "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
                                     .Raise "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
@@ -618,7 +616,7 @@ Dim latestSquareTime As Date
                             .SetVal "GDZSChainsCountNeed", .ByID("GDZSChainsCountWork").Result + .ByID("GDZSChainsRezCountNeed").Result
                             .SetVal "GDZSMansCountNeed", .ByID("GDZSMansCountWork").Result + .ByID("GDZSMansRezCountNeed").Result
                         End If
-                        If shp.Cells("Prop.WorkState").resultstr(visUnitsString) = "В резерве" Then
+                        If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
                             .Raise "GDZSChainsRezCountHave"
                             .Raise "GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
                         End If
@@ -859,6 +857,8 @@ Dim latestSquareTime As Date
                                 .Raise "WorklinesCount"
                                 'Проверяем имеет ли данная фигура подпись положения
                                 IsHoseShapeHavePos shp
+                            ElseIf CellVal(shp, "Prop.LineType", visUnitsString) = "Магистральная" Then
+                                .Raise "MaglinesCount"
                             End If
                             'If vsO_Shape.CellExists("User.Skatka", 0) = True Then pi_HoseSkatka = pi_HoseSkatka + 1 'считаем сколько рукавов в скатках
 '                            Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
@@ -1050,7 +1050,7 @@ Dim latestSquareTime As Date
 '                        pi_HoseSkatka = pi_HoseSkatka + 1
                         .Raise "HoseSkatka"
                         If CellVal(shp, "Prop.ManeverHose", visUnitsString) = "Нет" _
-                            And Not shp.Cells("Prop.LineType").resultstr(visUnitsString) = "Рукав(4м)" Then
+                            And Not shp.Cells("Prop.LineType").ResultStr(visUnitsString) = "Рукав(4м)" Then
 '                            Select Case vsO_Shape.Cells("Prop.HoseDiameter")   '.ResultStr(visUnitsString)
 '                                Case Is = 51
 '                                    If vsO_Shape.CellExists("User.HosesNeed", 0) = True Then 'Имеет ли фигура ячейку "User.HosesNeed"
@@ -1421,6 +1421,8 @@ Dim latestSquareTime As Date
 'MsgBox tempTime2 - tempTime1
 'MsgBox "123"
 'Debug.Print tempTime2 - tempTime1
+'Конец функции
+RaiseEvent AfterRefresh
 Set Refresh = Me
 Exit Function
 EX:
@@ -1477,7 +1479,7 @@ Dim havePos As Boolean
 End Function
 
 
-'---------------Функции получения данных-----------------------
+'---------------Функции работы с элементами-----------------------
 Public Function Result(ByVal ID As String) As Variant
 'Получаем значение элемента с указанным ID
     Result = elements.Result(ID)
