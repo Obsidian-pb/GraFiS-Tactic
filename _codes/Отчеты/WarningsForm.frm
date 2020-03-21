@@ -95,20 +95,22 @@ Attribute app.VB_VarHelpID = -1
 Private WithEvents wAddon As Visio.Window
 Attribute wAddon.VB_VarHelpID = -1
 
-Private remarks(27) As Boolean 'массив переменных для флага отображения замечаний
-Private remarksHided As Integer 'переменная количества скрытых замечаний
+Private remarks() As String         'Массив сведений для отображения
+Const remarksItems = 28             'Верхний индекс предупреждений (от 0, т.е. количество равно remarksItems+1)
+Private remarksHided As Integer     'Переменная количества скрытых замечаний
 
 Public WithEvents menuButtonHide As CommandBarButton
 Attribute menuButtonHide.VB_VarHelpID = -1
 Public WithEvents menuButtonRestore As CommandBarButton
 Attribute menuButtonRestore.VB_VarHelpID = -1
-Public WithEvents menuButtonOptions As CommandBarButton
-Attribute menuButtonOptions.VB_VarHelpID = -1
+'Public WithEvents menuButtonOptions As CommandBarButton
 
 
 
 
 '--------------------------Основные процедуры и функции класса--------------------
+
+
 Public Function Activate() As WarningsForm
     Set wAddon = ActiveWindow.Windows.Add("WarningsForm", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
 
@@ -133,6 +135,14 @@ Private Sub Stretch()
     Me.lstWarnings.Height = Me.Height - con_BorderHeightForList
 End Sub
 
+Private Sub UserForm_Initialize()
+    ReDim remarks(remarksItems, 1)
+End Sub
+
+'Private Sub UserForm_Terminate()
+'    Set hidedRemarks = Nothing
+'End Sub
+
 Private Sub UserForm_Resize()
     Stretch
 End Sub
@@ -147,265 +157,441 @@ Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
     Refresh
 End Sub
 
+'------------Список предупреждений------------
+Private Sub lstWarnings_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    If Button = 2 Then
+        If Y > 0 And X > 0 And Y < lstWarnings.Height And X < lstWarnings.Width Then
+            DoEvents
+            CreateNewMenu
+        End If
+    End If
+End Sub
+
+
 
 
 '------------Процедуры обновления формы--------------------------
 Public Sub Refresh()
 'Обновляем содержимое списка предупреждений
-Dim Comment As Boolean
 Dim i As Integer
 
+    On Error GoTo EX
 '---Проводим расчет элементов
-'    Set elemCollection = A.Refresh(Application.ActivePage.Index).elements.GetElementsCollection("")
     A.Refresh Application.ActivePage.Index
     
 '---Очищаем форму и задаем условия по-умолчанию
     Me.lstWarnings.Clear
     
-    Comment = False
-    remarksHided = 0
-    
 '---Запускаем условия обработки
+    i = 0
     With A
         'Очаг
-        If remarks(0) = False Then
+        If remarks(i, 1) = "" Then
             If .Result("OchagCount") = 0 And (.Result("SmokeCount") > 0 Or .Result("SpreadCount") > 0 Or .Result("FireCount") > 0) Then
-                lstWarnings.AddItem "Не указан очаг пожара"
-                Comment = True
+                remarks(i, 0) = "Не указан очаг пожара"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
         
-        If remarks(1) = False Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Sum("OchagCount;FireCount") > 0 And .Result("SmokeCount") = 0 Then
-                lstWarnings.AddItem "Не указаны зоны задымления"
-                Comment = True
+                remarks(i, 0) = "Не указаны зоны задымления"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(2) = False Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Sum("OchagCount;FireCount") > 0 And .Result("SpreadCount") = 0 Then
-                lstWarnings.AddItem "Не указаны пути распространения пожара"
-                Comment = True
+                remarks(i, 0) = "Не указаны пути распространения пожара"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
+        
         'Управление
-        If remarks(3) = False Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("BUCount") >= 3 And .Result("ShtabCount") = 0 Then
-                lstWarnings.AddItem "Не создан оперативный штаб"
-                Comment = True
+                remarks(i, 0) = "Не создан оперативный штаб"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(4) = False Then
-'            If vOC_InfoAnalizer.pi_RNBDCount = 0 And vOC_InfoAnalizer.pi_OchagCount + vOC_InfoAnalizer.pi_FireCount > 0 Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("RNBDCount") = 0 And .Sum("OchagCount;FireCount") > 0 Then
-                lstWarnings.AddItem "Не указано решающее направление"
-                Comment = True
+                remarks(i, 0) = "Не указано решающее направление"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(5) = False Then
-'            If vOC_InfoAnalizer.pi_RNBDCount > 1 Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("RNBDCount") > 1 Then
-                lstWarnings.AddItem "Решающее напраление должно быть одним"
-                Comment = True
+                remarks(i, 0) = "Решающее напраление должно быть одним"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(6) = False Then
-'            If vOC_InfoAnalizer.pi_BUCount >= 5 And vOC_InfoAnalizer.pi_SPRCount <= 1 Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("BUCount") >= 5 And .Result("SPRCount") <= 1 Then
-                lstWarnings.AddItem "Не организованы секторы проведения работ"
-                Comment = True
+                remarks(i, 0) = "Не организованы секторы проведения работ"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
 
         'ГДЗС
-        If remarks(7) = False Then
-'            If vOC_InfoAnalizer.pi_GDZSpbCount < vOC_InfoAnalizer.pi_GDZSChainsCount Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("GDZSPBCount") < .Result("GDZSChainsCountWork") Then
-                lstWarnings.AddItem "Не выставлены посты безопасности для каждого звена ГДЗС (" & .Result("GDZSPBCount") & "/" & .Result("GDZSChainsCountWork") & ")"
-                Comment = True
+                remarks(i, 0) = "Не выставлены посты безопасности для каждого звена ГДЗС (" & .Result("GDZSPBCount") & "/" & .Result("GDZSChainsCountWork") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(8) = False Then
-'            If vOC_InfoAnalizer.pi_GDZSChainsCount >= 3 And vOC_InfoAnalizer.pi_KPPCount = 0 Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("GDZSChainsCountWork") >= 3 And .Result("GDZSKPPCount") Then
-                lstWarnings.AddItem "Не создан контрольно-пропускной пункт ГДЗС"
-                Comment = True
+                remarks(i, 0) = "Не создан контрольно-пропускной пункт ГДЗС"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(9) = False Then
-'            If vOC_InfoAnalizer.pb_GDZSDiscr = True Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("GDZSDiscr") = True Then
-                lstWarnings.AddItem "В сложных условиях звенья ГДЗС должны состоять не менее чем из пяти газодымозащитников"
-                Comment = True
+                remarks(i, 0) = "В сложных условиях звенья ГДЗС должны состоять не менее чем из пяти газодымозащитников"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(10) = False Then
-'            If Fix(vOC_InfoAnalizer.ps_GDZSChainsRezNeed) > vOC_InfoAnalizer.pi_GDZSChainsRezCount And bo_GDZSRezRoundUp = False Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("GDZSChainsRezCountNeed") > .Result("GDZSChainsRezCountHave") And Not .options.GDZSRezRoundUp Then
-                    lstWarnings.AddItem "Недостаточно резервных звеньев ГДЗС с округлением в меньшую сторону (" & .Result("GDZSChainsRezCountHave") & "/" & .Result("GDZSChainsRezCountNeed") & ")"
-                    Comment = True
+                remarks(i, 0) = "Недостаточно резервных звеньев ГДЗС с округлением в меньшую сторону (" & .Result("GDZSChainsRezCountHave") & "/" & .Result("GDZSChainsRezCountNeed") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(10) = False Then
-'            If Fix((vOC_InfoAnalizer.ps_GDZSChainsRezNeed / 0.3334) * 0.3333) + 1 > vOC_InfoAnalizer.pi_GDZSChainsRezCount And bo_GDZSRezRoundUp = True And vOC_InfoAnalizer.pi_GDZSChainsCount <> 0 Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("GDZSChainsRezCountNeed") > .Result("GDZSChainsRezCountHave") And .options.GDZSRezRoundUp Then
-                    lstWarnings.AddItem "Недостаточно резервных звеньев ГДЗС с округлением в большую сторону (" & .Result("GDZSChainsRezCountHave") & "/" & .Result("GDZSChainsRezCountNeed") & ")"
-                    Comment = True
+                remarks(i, 0) = "Недостаточно резервных звеньев ГДЗС с округлением в большую сторону (" & .Result("GDZSChainsRezCountHave") & "/" & .Result("GDZSChainsRezCountNeed") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
 
         'ППВ
-        If remarks(11) = False Then
-'            If vOC_InfoAnalizer.pi_WaterSourceCount > vOC_InfoAnalizer.pi_distanceCount Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("WaterSourceCount") > .Result("DistanceCount") Then
-                lstWarnings.AddItem "Не указаны расстояния от каждого водоисточника до места пожара (" & .Result("DistanceCount") & "/" & .Result("WaterSourceCount") & ")"
-                Comment = True
+                remarks(i, 0) = "Не указаны расстояния от каждого водоисточника до места пожара (" & .Result("DistanceCount") & "/" & .Result("WaterSourceCount") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
 
         'Рукава
-        If remarks(12) = False Then
-'            If vOC_InfoAnalizer.pi_WorklinesCount > vOC_InfoAnalizer.pi_linesPosCount Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("WorklinesCount") > .Result("LinesPosCount") Then
-                lstWarnings.AddItem "Не указаны положения (этаж) для каждой рабочей линии (" & .Result("LinesPosCount") & "/" & .Result("WorklinesCount") & ")"
-                Comment = True
+                remarks(i, 0) = "Не указаны положения (этаж) для каждой рабочей линии (" & .Result("LinesPosCount") & "/" & .Result("WorklinesCount") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(13) = False Then
-'            If vOC_InfoAnalizer.pi_linesCount > vOC_InfoAnalizer.pi_linesLableCount Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("LinesCount") > .Result("LinesLableCount") Then
-                lstWarnings.AddItem "Не указаны диаметры для каждой рукавной линии (" & .Result("LinesLableCount") & "/" & .Result("LinesCount") & ")"
-                Comment = True
+                remarks(i, 0) = "Не указаны подписи для каждой рукавной линии (" & .Result("LinesLableCount") & "/" & .Result("LinesCount") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
 
         'План на местности
-        If remarks(14) = False Then
-'            If vOC_InfoAnalizer.pi_BuildCount > vOC_InfoAnalizer.pi_SOCount Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("BuildCount") > .Result("SOCount") Then
-                lstWarnings.AddItem "Не указаны подписи степени огнестойкости для каждого из зданий (" & .Result("SOCount") & "/" & .Result("BuildCount") & ")"
-                Comment = True
+                remarks(i, 0) = "Не указаны подписи степени огнестойкости для каждого из зданий (" & .Result("SOCount") & "/" & .Result("BuildCount") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(15) = False Then
-'            If vOC_InfoAnalizer.pi_OrientCount = 0 And vOC_InfoAnalizer.pi_BuildCount > 0 Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("OrientCount") = 0 And .Result("BuildCount") > 0 Then
-                lstWarnings.AddItem "Не указаны ориентиры на местности, такие как роза ветров или подпись улицы"
-                Comment = True
+                remarks(i, 0) = "Не указаны ориентиры на местности, такие как роза ветров или подпись улицы"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
 
         'Показ расчетных данных
-        If remarks(16) = False Then
-'            If vOC_InfoAnalizer.ps_FactStreemW <> 0 And vOC_InfoAnalizer.ps_FactStreemW < vOC_InfoAnalizer.ps_NeedStreemW Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("FactStreamW") <> 0 And .Result("FactStreamW") < .Result("NeedStreamW") Then
-                lstWarnings.AddItem "Недостаточный фактический расход воды (" & .Result("FactStreamW") & " л/c < " & .Result("NeedStreamW") & " л/с)"
-                Comment = True
+                remarks(i, 0) = "Недостаточный фактический расход воды (" & .Result("FactStreamW") & " л/c < " & .Result("NeedStreamW") & " л/с)"
             End If
         End If
-
-        If remarks(17) = False Then
-'            If (vOC_InfoAnalizer.ps_FactStreemW * 600) > vOC_InfoAnalizer.pi_WaterValueHave Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("WaterValueNeed10min") > .Result("WaterValueHave") And PF_RoundUp(.Result("FactStreamW") / 32) > .Result("GetingWaterCount") Then
-'                If PF_RoundUp(vOC_InfoAnalizer.ps_FactStreemW / 32) > vOC_InfoAnalizer.pi_GetingWaterCount Then lstWarnings.AddItem "Недостаточное водоснабжение боевых позиций" '& (" & vOC_InfoAnalizer.pi_GetingWaterCount & "/" & PF_RoundUp(vOC_InfoAnalizer.ps_FactStreemW / 32) & ")"
-                lstWarnings.AddItem "Недостаточный запас воды или Недостаточное водоснабжение боевых позиций"
-                Comment = True
+                remarks(i, 0) = "Недостаточный запас воды или Недостаточное водоснабжение боевых позиций"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(18) = False Then
-'            If vOC_InfoAnalizer.pi_PersonnelHave < vOC_InfoAnalizer.pi_PersonnelNeed Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("PersonnelHave") < .Result("PersonnelNeed") Then
-                lstWarnings.AddItem "Недостаточно личного состава, с учетом прибывшей техники (" & .Result("PersonnelHave") & "/" & .Result("PersonnelNeed") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно личного состава, с учетом прибывшей техники (" & .Result("PersonnelHave") & "/" & .Result("PersonnelNeed") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(19) = False Then
-'            If vOC_InfoAnalizer.pi_Hoses51Have < vOC_InfoAnalizer.pi_Hoses51Count Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses51Have") < .Result("Hoses51Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 51 мм, с учетом прибывшей техники (" & .Result("Hoses51Have") & "/" & .Result("Hoses51Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 51 мм, с учетом прибывшей техники (" & .Result("Hoses51Have") & "/" & .Result("Hoses51Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(20) = False Then
-'            If vOC_InfoAnalizer.pi_Hoses66Have < vOC_InfoAnalizer.pi_Hoses66Count Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses66Have") < .Result("Hoses66Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 66 мм, с учетом прибывшей техники (" & .Result("Hoses66Have") & "/" & .Result("Hoses66Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 66 мм, с учетом прибывшей техники (" & .Result("Hoses66Have") & "/" & .Result("Hoses66Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(21) = False Then
-'            If vOC_InfoAnalizer.pi_Hoses77Have < vOC_InfoAnalizer.pi_Hoses77Count Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses77Have") < .Result("Hoses77Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 77 мм, с учетом прибывшей техники (" & .Result("Hoses77Have") & "/" & .Result("Hoses77Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 77 мм, с учетом прибывшей техники (" & .Result("Hoses77Have") & "/" & .Result("Hoses77Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(22) = False Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses89Have") < .Result("Hoses89Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 89 мм, с учетом прибывшей техники (" & .Result("Hoses89Have") & "/" & .Result("Hoses89Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 89 мм, с учетом прибывшей техники (" & .Result("Hoses89Have") & "/" & .Result("Hoses89Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(23) = False Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses110Have") < .Result("Hoses110Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 110 мм, с учетом прибывшей техники (" & .Result("Hoses110Have") & "/" & .Result("Hoses110Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 110 мм, с учетом прибывшей техники (" & .Result("Hoses110Have") & "/" & .Result("Hoses110Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
 
-        If remarks(24) = False Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses150Have") < .Result("Hoses150Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 150 мм, с учетом прибывшей техники (" & .Result("Hoses150Have") & "/" & .Result("Hoses150Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 150 мм, с учетом прибывшей техники (" & .Result("Hoses150Have") & "/" & .Result("Hoses150Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
 
-        If remarks(25) = False Then
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses200Have") < .Result("Hoses200Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 200 мм, с учетом прибывшей техники (" & .Result("Hoses200Have") & "/" & .Result("Hoses200Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 200 мм, с учетом прибывшей техники (" & .Result("Hoses200Have") & "/" & .Result("Hoses200Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(26) = False Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses250Have") < .Result("Hoses250Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 250 мм, с учетом прибывшей техники (" & .Result("Hoses250Have") & "/" & .Result("Hoses250Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 250 мм, с учетом прибывшей техники (" & .Result("Hoses250Have") & "/" & .Result("Hoses250Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
-
-        If remarks(27) = False Then
+        
+        i = i + 1
+        If remarks(i, 1) = "" Then
             If .Result("Hoses300Have") < .Result("Hoses300Count") Then
-                lstWarnings.AddItem "Недостаточно напорных рукавов 300 мм, с учетом прибывшей техники (" & .Result("Hoses300Have") & "/" & .Result("Hoses300Count") & ")"
-                Comment = True
+                remarks(i, 0) = "Недостаточно напорных рукавов 300 мм, с учетом прибывшей техники (" & .Result("Hoses300Have") & "/" & .Result("Hoses300Count") & ")"
+            Else
+                remarks(i, 0) = ""
             End If
         End If
+        
+        '!!!ПРИ ДОБАВЛЕНИИ НОВЫХ ПОЗИЦИЙ ДЛЯ РАСЧЕТА НЕ ЗАБЫТЬ УВЕЛИЧИТЬ РАЗМЕР МАССИВА - remarksItems!!!
     End With
-    If Comment = False Then lstWarnings.AddItem "Замечаний не обнаружено"
+    
+    
+    'Формируем список предупреждений
+    On Error Resume Next
+        lstWarnings.List = GetWarningsListArray
+    On Error GoTo EX
+    
+    'Если предупреждений не обнаружено, сообщаем об этом
+    If lstWarnings.ListCount = 0 Then lstWarnings.AddItem "Замечаний не обнаружено"
     
     'Добавляем в конце пустую строку, для корректного отображения больших списков
     lstWarnings.AddItem " "
 
-'Подсчет скрытых замечаний
-    For i = 0 To UBound(remarks)
-        If remarks(i) = True Then remarksHided = remarksHided + 1
+Exit Sub
+EX:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    SaveLog Err, "WarningForm.Refresh"
+End Sub
+
+Private Function GetWarningsListArray() As String()
+'Возвращаем массив замечаний для заполнения lstWarnings
+Dim i As Integer
+Dim tmpArr() As String
+Dim j As Integer
+Dim size As Integer
+
+    For i = 0 To UBound(remarks, 1)
+        ' Абсолютно идиотский код, но в VBA, нельзя множество раз объявлять размер двухмерных массивов с сохранением данных, поэтому приходится сначала узнавать размер будущего массива, а потом сразу весь его объявлять((( злюсь
+        If Not remarks(i, 0) = "" And remarks(i, 1) = "" Then
+            size = size + 1
+        End If
+    Next i
+    
+    If size > 0 Then
+        ReDim tmpArr(size - 1, 1)
+        
+        j = 0
+        For i = 0 To UBound(remarks, 1)
+            'Если имеется значение и при этом флаг скрытия не поставлен
+            If Not remarks(i, 0) = "" And remarks(i, 1) = "" Then
+                tmpArr(j, 0) = remarks(i, 0)
+                tmpArr(j, 1) = i
+                j = j + 1
+            End If
+        Next i
+    End If
+    
+GetWarningsListArray = tmpArr
+End Function
+
+'---------Функции работы с настройками отображения комментариев
+Private Sub RestoreComment()
+'Обнуляем значения переменных не учитываемых замечений
+Dim i As Integer
+    
+    For i = 0 To UBound(remarks, 1)
+        remarks(i, 1) = ""
     Next
     
+    remarksHided = 0
 End Sub
+
+Private Sub HideComment()
+'Скрываем замечания по желанию пользователя
+    If lstWarnings.Column(0, 0) = "Замечаний не обнаружено" Then Exit Sub
+    
+    If lstWarnings.ListIndex > -1 Then
+        remarks(lstWarnings.Column(1, lstWarnings.ListIndex), 1) = "h"
+        remarksHided = remarksHided + 1
+    End If
+End Sub
+
+
+'------------------Работа с всплывающим меню------------------
+Private Sub CreateNewMenu()
+'Создаём всплывающее меню мастера проверок
+Dim popupMenuBar As CommandBar
+Dim Ctrl As CommandBarControl
+    
+    'Получаем ссылку на всплывающее меню
+    GetToolBar popupMenuBar, "ContextMenuListBox", msoBarPopup
+    
+    'Очищаем имеющиеся пункты меню
+    For Each Ctrl In popupMenuBar.Controls
+        Ctrl.Delete
+    Next
+    
+    'Добавляем новые кнопки
+    Set menuButtonHide = NewPopupItem(popupMenuBar, 1, 214, "Не учитывать выделенное замечание")
+    Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все скрытые замечания" & " (" & remarksHided & ")", , remarksHided <> 0)
+'    Set menuButtonOptions = NewPopupItem(popupMenuBar, 1, 212, "Опции замечаний")
+    
+    'Показываем меню
+    popupMenuBar.ShowPopup
+End Sub
+
+Private Function NewPopupItem(ByRef commBar As CommandBar, ByVal itemType As Integer, ByVal itemFace As Integer, _
+ByVal itemCaption As String, Optional ByVal beginGroup As Boolean = False, Optional ByVal enableTab As Boolean = True, _
+Optional itemTag As String = "") As CommandBarControl
+'Функция создает элемент контекстного меню и возвращает на него ссылку
+Dim newControl As CommandBarControl
+
+'    On Error Resume Next
+    'Создаем новый контрол
+    Set newControl = commBar.Controls.Add(itemType)
+    
+    'Указываем свойства нового контрола
+    With newControl
+        If itemFace > 0 Then .FaceID = itemFace
+        .Tag = itemTag
+        .Caption = itemCaption
+        .beginGroup = beginGroup
+        .Enabled = enableTab
+    End With
+    
+Set NewPopupItem = newControl
+End Function
+
+Private Sub GetToolBar(ByRef toolBar As CommandBar, ByVal toolBarName As String, ByVal barPosition As MsoBarPosition)
+    On Error Resume Next
+    'Пытаемся получить ссылку на всплывающее меню
+    Set toolBar = Application.CommandBars(toolBarName)
+
+    'Если такого меню нет, создаем его
+    If toolBar Is Nothing Then
+        Set toolBar = Application.CommandBars.Add(toolBarName, barPosition)
+    End If
+    
+End Sub
+
+Private Sub menuButtonHide_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    HideComment
+    Refresh
+End Sub
+
+Private Sub menuButtonRestore_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    RestoreComment
+    Refresh
+End Sub
+
+
+
 

@@ -106,9 +106,9 @@ Attribute menuButtonOptions.VB_VarHelpID = -1
 
 
 Private Sub ListBox1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, _
- ByVal x As Single, ByVal y As Single)
+ ByVal X As Single, ByVal Y As Single)
     If Button = 2 Then
-        If y > 0 And x > 0 And y < ListBox1.Height And x < ListBox1.Width Then
+        If Y > 0 And X > 0 And Y < ListBox1.Height And X < ListBox1.Width Then
             DoEvents
             CreateNewMenu
         End If
