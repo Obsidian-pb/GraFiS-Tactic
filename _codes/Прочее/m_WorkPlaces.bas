@@ -9,7 +9,7 @@ Public Sub PS_AddWorkPlaces(ShpObj As Visio.Shape)
 Dim WorkPlaceBuilder As c_WorkPlaces
 
 '---Проверяем наличие трафарета WALL_M.VSS
-     If PF_DocumentOpened("WALL_M.VSS") = False And PF_DocumentOpened("WALL_M.VSSX") = False Then
+     If PF_DocumentOpened("WALL_M.VSS") = False Then ' And PF_DocumentOpened("WALL_M.VSSX") = False Then
         ShpObj.Delete
         MsgBox "Трафарет 'Структурные элементы' не подключен! Выполнение функции невозможно!'", vbCritical
         Exit Sub

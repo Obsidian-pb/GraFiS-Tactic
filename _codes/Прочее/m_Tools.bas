@@ -56,7 +56,7 @@ Public Function PF_DocumentOpened(ByVal DocName As String) As Boolean
 Dim vO_Doc As Visio.Document
 
     For Each vO_Doc In Application.Documents
-        If vO_Doc.Name = DocName Then
+        If InStr(1, vO_Doc.Name, DocName, vbTextCompare) Then
             PF_DocumentOpened = True
             Exit Function
         End If
