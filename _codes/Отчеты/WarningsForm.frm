@@ -114,9 +114,9 @@ Attribute menuButtonRestore.VB_VarHelpID = -1
 Public Function Activate() As WarningsForm
     'ѕотом переписать по человечески! ≈сли другие формы анализа не показаны, то дл€ новой указываетс€ высота, иначе - нет. Ќужно чтоб корректно отображались формы
     If TacticDataForm.Visible = True Then
-        Set wAddon = ActiveWindow.Windows.Add("WarningsForm", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 600)
+        Set wAddon = ActiveWindow.Windows.Add("WarningsForm", visWSVisible + visWSAnchorMerged + visWSDockedBottom, visAnchorBarAddon, , , 600, , "MC", "MC")
     Else
-        Set wAddon = ActiveWindow.Windows.Add("WarningsForm", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 600, 210)
+        Set wAddon = ActiveWindow.Windows.Add("WarningsForm", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 600, 210, "MC", "MC")
     End If
     
     Me.Caption = "WarningsForm"
