@@ -104,11 +104,15 @@ Attribute menuButtonOptions.VB_VarHelpID = -1
 
 'Private elemCollection As Collection
 
-
 '--------------------------Основные процедуры и функции класса--------------------
 Public Function Activate() As TacticDataForm
-    Set wAddon = ActiveWindow.Windows.Add("WarningsForm", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
-
+    'Потом переписать по человечески! Если другие формы анализа не показаны, то для новой указывается высота, иначе - нет. Нужно чтоб корректно отображались формы
+    If WarningsForm.Visible = True Then
+        Set wAddon = ActiveWindow.Windows.Add("TacticDataForm", visWSVisible + visWSAnchorMerged + visWSDockedBottom, visAnchorBarAddon, , , 600)
+    Else
+        Set wAddon = ActiveWindow.Windows.Add("TacticDataForm", visWSVisible + visWSAnchorMerged + visWSDockedBottom, visAnchorBarAddon, , , 600, 210)
+    End If
+    
     Me.Caption = "TacticDataForm"
     FormHandle = FindWindow(vbNullString, "TacticDataForm")
     SetWindowLong FormHandle, GWL_STYLE, WS_CHILD Or WS_VISIBLE
@@ -163,7 +167,7 @@ Dim elem As Element
     Set elemCollection = A.elements.GetElementsCollection("")
     
     i = 0
-    With A
+'    With A
     For Each elem In elemCollection
         If elem.inTacticForm Then
             If elem.Result > 0 Then
@@ -173,7 +177,7 @@ Dim elem As Element
             End If
         End If
     Next elem
-    End With
+'    End With
     
     'Добавляем в конце пустую строку, для корректного отображения больших списков
     lstTacticData.AddItem " "
