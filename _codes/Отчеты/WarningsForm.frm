@@ -103,7 +103,8 @@ Public WithEvents menuButtonHide As CommandBarButton
 Attribute menuButtonHide.VB_VarHelpID = -1
 Public WithEvents menuButtonRestore As CommandBarButton
 Attribute menuButtonRestore.VB_VarHelpID = -1
-'Public WithEvents menuButtonOptions As CommandBarButton
+Public WithEvents menuButtonOptions As CommandBarButton
+Attribute menuButtonOptions.VB_VarHelpID = -1
 
 
 
@@ -547,7 +548,7 @@ Dim Ctrl As CommandBarControl
     'Добавляем новые кнопки
     Set menuButtonHide = NewPopupItem(popupMenuBar, 1, 214, "Не учитывать выделенное замечание")
     Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все скрытые замечания" & " (" & remarksHided & ")", , remarksHided <> 0)
-'    Set menuButtonOptions = NewPopupItem(popupMenuBar, 1, 212, "Опции замечаний")
+    Set menuButtonOptions = NewPopupItem(popupMenuBar, 1, 212, "Опции замечаний")
     
     'Показываем меню
     popupMenuBar.ShowPopup
@@ -597,6 +598,9 @@ Private Sub menuButtonRestore_Click(ByVal Ctrl As Office.CommandBarButton, Cance
     Refresh
 End Sub
 
-
+Private Sub menuButtonOptions_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    CommOptForm.ShowForm
+    Refresh
+End Sub
 
 

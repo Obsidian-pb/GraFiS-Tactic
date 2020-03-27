@@ -12,12 +12,7 @@ Public Sub k()
 End Sub
 
 Public Sub SSS()
-Dim FFF() As String
     
-    ReDim Preserve FFF(0, 1)
-    FFF(0, 1) = "341254"
-    ReDim Preserve FFF(2, 1)
-    Debug.Print FFF(1, 1)
 End Sub
 
 Public Sub TastCalculator()

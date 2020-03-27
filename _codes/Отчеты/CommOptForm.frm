@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} CommOptForm 
    Caption         =   "Опции замечаний"
-   ClientHeight    =   1500
+   ClientHeight    =   1512
    ClientLeft      =   30
    ClientTop       =   390
    ClientWidth     =   4410
@@ -21,8 +21,8 @@ Private Sub Apply_Click()
 '    MasterCheckRefresh
     
 '    iCollector.bo_GDZSRezRoundUp
+    A.options.GDZSRezRoundUp = CommOptForm.OptionButton2.Value
     Me.Hide
-    MasterCheckRefresh
 End Sub
 
 'Private Sub UserForm_Activate()
@@ -31,9 +31,8 @@ End Sub
 
 'Public Sub ShowForm(ByRef a_iCollector As InfoCollector)
 Public Sub ShowForm()
-    Set iCollector = a_iCollector
+'    CommOptForm.OptionButton2.Value = iCollector.bo_GDZSRezRoundUp
+    CommOptForm.OptionButton2.Value = A.options.GDZSRezRoundUp
     
-    CommOptForm.OptionButton2.Value = iCollector.bo_GDZSRezRoundUp
-    
-    Me.Show
+    Me.Show modal
 End Sub
