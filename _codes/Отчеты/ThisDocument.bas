@@ -9,8 +9,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Dim WithEvents vmO_App As Visio.Application
 Attribute vmO_App.VB_VarHelpID = -1
-Dim ButEvent As c_Buttons
-Dim f_CheckForm As MCheckForm
 
 
 
@@ -22,13 +20,14 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     Set ButEvent = Nothing
     
 '---Закрываем окно "Мастер проверок"
-'    MCheckForm.CloseThis
+    TacticDataForm.CloseThis
     WarningsForm.CloseThis
     
 '---Удаляем кнопки с панели управления "СпецФункции"
     DeleteButtons
     
-'sP_InfoCollectorDeActivate 'Деактивируем класс InfoCollector через обращение к модулю m_Analize
+'---Уничтожаем InfoCollector
+    KillA
 End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
@@ -36,10 +35,7 @@ Set vmO_App = Visio.Application
     
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
-
-'---Активируем класс InfoCollector через обращение к модулю m_Analize
-'    sP_InfoCollectorActivate
-    
+   
 '---Добавляем панель инструментов "Спецфункции"
     AddTB_SpecFunc
     AddButtons
@@ -47,10 +43,7 @@ Set vmO_App = Visio.Application
 '---Активируем и показываем окно "Мастер проверок" и запускаем предварительный анализ (Включить для показа формы по-умолчанию)
 '    MCheckForm.Show
 '    MasterCheckRefresh
-    
-'---Активируем объект отслеживания нажатия кнопок
-    Set ButEvent = New c_Buttons
-    
+       
 '---Проверяем наличие обновлений
     fmsgCheckNewVersion.CheckUpdates
     

@@ -15,6 +15,14 @@ Public GDZSRezRoundUp As Boolean             'Округление резервных звеньев в бол
 
 
 Private Sub Class_Initialize()
-    'Устанавливаем стартовые свойства
-    GDZSRezRoundUp = True
+    'Загружаем стартовые свойства из реестар Windows
+    GDZSRezRoundUp = GetSetting("GraFiS", "GFS_CalcOptions", "GDZSRezRoundUp", 1)
 End Sub
+
+Private Sub Class_Terminate()
+    'Сохраняем свойства в реестре Windows
+    SaveSetting "GraFiS", "GFS_CalcOptions", "GDZSRezRoundUp", GDZSRezRoundUp
+End Sub
+
+
+'Путь в реестре: \HKEY_CURRENT_USER\Software\VB and VBA Program Settings\GraFiS\GFS_CalcOptions

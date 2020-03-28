@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} CommOptForm 
-   Caption         =   "Опции замечаний"
-   ClientHeight    =   1512
+   Caption         =   "Настройки расчетов"
+   ClientHeight    =   1500
    ClientLeft      =   30
    ClientTop       =   390
    ClientWidth     =   4410
@@ -13,26 +13,30 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private iCollector As InfoCollector
+Option Explicit
 
 Private Sub Apply_Click()
-'    CommOptForm.Hide
-'    bo_GDZSRezRoundUp = CommOptForm.OptionButton2.Value
-'    MasterCheckRefresh
-    
-'    iCollector.bo_GDZSRezRoundUp
     A.options.GDZSRezRoundUp = CommOptForm.OptionButton2.Value
+    A.Refresh Application.ActivePage.Index
+    
+    'Обновляем показываемые формы
+    RefreshOpenedForms
+    
     Me.Hide
 End Sub
 
-'Private Sub UserForm_Activate()
-'    CommOptForm.OptionButton2.Value = bo_GDZSRezRoundUp
-'End Sub
 
-'Public Sub ShowForm(ByRef a_iCollector As InfoCollector)
 Public Sub ShowForm()
-'    CommOptForm.OptionButton2.Value = iCollector.bo_GDZSRezRoundUp
     CommOptForm.OptionButton2.Value = A.options.GDZSRezRoundUp
     
-    Me.Show modal
+    Me.Show
 End Sub
+
+Public Sub RefreshOpenedForms()
+'Обновляем показываемые формы
+
+    If WarningsForm.Visible = True Then WarningsForm.Refresh
+    If TacticDataForm.Visible = True Then TacticDataForm.Refresh
+    
+End Sub
+

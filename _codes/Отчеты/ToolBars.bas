@@ -1,6 +1,7 @@
 Attribute VB_Name = "ToolBars"
+Option Explicit
 
-
+Private btns As c_Buttons
 
 Sub AddTB_SpecFunc()
 'Процедура добавления панели управления "Спецфункции"-------------------------------
@@ -59,6 +60,16 @@ Sub AddButtons()
         .FaceID = 1090
         .beginGroup = False
     End With
+'---Кнопка "Настройки"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Настройки"
+        .Tag = "calculationSettings"
+        .TooltipText = "Настройки"
+        .FaceID = 642
+        .beginGroup = False
+    End With
+    
     
     Set Button = Nothing
     
@@ -76,15 +87,20 @@ Sub DeleteButtons()
 '---Процедура удаления кнопок с панели управления "Спецфункции"--------------
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
-    Dim DocPath As String
 
     Set Bar = Application.CommandBars("Спецфункции")
 '---Удаление кнопки "Мастер проверок" с панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Мастер проверок")
     Button.Delete
-'---Удаление кнопки "Мастер проверок" с панели управления "Спецфункции"------------------------
+'---Удаление кнопки "Тактические данные" с панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Тактические данные")
     Button.Delete
+'---Удаление кнопки "Настройки" с панели управления "Спецфункции"------------------------
+    Set Button = Bar.Controls("Настройки")
+    Button.Delete
+    
+'---Активируем класс отслеживающий кнопку
+    Set btns = Nothing
     
 Set Button = Nothing
 Set Bar = Nothing
