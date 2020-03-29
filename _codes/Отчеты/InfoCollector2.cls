@@ -232,11 +232,12 @@ Dim latestSquareTime As Date
                                     .SetVal "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
                                     .SetVal "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 Else
-                                    .Raise "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .Raise "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3) * 3
+                                    .SetVal "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3)
+                                    .SetVal "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 End If
                             Else
                                 .Raise "GDZSChainsRezCountNeed"
+                                .SetVal "GDZSMansRezCountNeed", .ByID("GDZSChainsRezCountNeed").Result * 5
                                 
                                 If shp.Cells("Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
                             End If
@@ -257,14 +258,16 @@ Dim latestSquareTime As Date
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             If shp.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
                                 If options.GDZSRezRoundUp Then
-                                    .Raise "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .Raise "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
+                                    .SetVal "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
+                                    .SetVal "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
                                 Else
-                                    .Raise "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .Raise "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3) * 3
+                                    .SetVal "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3)
+                                    .SetVal "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3) * 5
                                 End If
                             Else
                                 .Raise "GDZSChainsRezCountNeed"
+                                .SetVal "GDZSMansRezCountNeed", .ByID("GDZSChainsRezCountNeed").Result * 3
+                                
                                 If shp.Cells("Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
                             End If
                             'Вычисляем требуемое количество звеньев и людей

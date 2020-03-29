@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} CommOptForm 
    Caption         =   "Настройки расчетов"
    ClientHeight    =   1500
-   ClientLeft      =   36
-   ClientTop       =   396
-   ClientWidth     =   4404
+   ClientLeft      =   30
+   ClientTop       =   390
+   ClientWidth     =   4410
    OleObjectBlob   =   "CommOptForm.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
