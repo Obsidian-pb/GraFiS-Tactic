@@ -74,6 +74,8 @@ Private Sub fillElemCollection()
     AddNewElement "GetingWaterCount", "Установлено на водоисточники"
 
     AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает", "{$} ({GDZSMansCountWork} газодымозащитников)"
+    AddNewElement "GDZSChainsCountWorkSoft", "Звеньев ГДЗС работает в стандартных условиях", , , , , False
+    AddNewElement "GDZSChainsCountWorkHard", "Звеньев ГДЗС работает в сложных условиях", , , , , False
     AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
     AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется", "{$} ({GDZSMansRezCountHave} газодымозащитников)"
     AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
@@ -157,19 +159,19 @@ End Sub
 
 Private Function AddNewElement(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_resultStrPattern As String = "", _
                         Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
-                        Optional a_InShapes As Boolean = True, Optional a_InMaster As Boolean = True) As Element
+                        Optional a_InShapes As Boolean = True, Optional a_InTacticDataForm As Boolean = True) As Element
 'Создает новый элемент, добавляет его в коллекцию элементов и возвращает на него ссылку
-    Set AddNewElement = AddElement(NewElement(a_ID, a_CallName, a_resultStrPattern, a_startValue, a_CellID, a_InShapes, a_InMaster))
+    Set AddNewElement = AddElement(NewElement(a_ID, a_CallName, a_resultStrPattern, a_startValue, a_CellID, a_InShapes, a_InTacticDataForm))
 End Function
 
 Private Function NewElement(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_resultStrPattern As String = "", _
                         Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
-                        Optional a_InShapes As Boolean = True, Optional a_InMaster As Boolean = True) As Element
+                        Optional a_InShapes As Boolean = True, Optional a_InTacticDataForm As Boolean = True) As Element
 'Создает новый элемент, задает ему свойства и возвращает на него ссылку
 Dim elem As Element
 
     Set elem = New Element
-    Set NewElement = elem.SetShell(Me).Activate(a_ID, a_CallName, a_resultStrPattern, a_startValue, a_CellID, a_InShapes, a_InMaster)
+    Set NewElement = elem.SetShell(Me).Activate(a_ID, a_CallName, a_resultStrPattern, a_startValue, a_CellID, a_InShapes, a_InTacticDataForm)
 End Function
 
 Private Function AddElement(ByRef elem As Element) As Element

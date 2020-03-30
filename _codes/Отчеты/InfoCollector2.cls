@@ -224,22 +224,14 @@ Dim latestSquareTime As Date
                 '---ГДЗС----------------------------
                     Case Is = indexPers.ipGDZSZvenoVozd 'Звено - ДАСВ
                         If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
-                            .Raise "GDZSChainsCountWork"
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             
                             If shp.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
-                                If options.GDZSRezRoundUp Then
-                                    .SetVal "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .SetVal "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
-                                Else
-                                    .SetVal "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .SetVal "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3) * 3
-                                End If
+                                .Raise "GDZSChainsCountWorkSoft"
                             Else
-                                .Raise "GDZSChainsRezCountNeed"
-                                .SetVal "GDZSMansRezCountNeed", .ByID("GDZSChainsRezCountNeed").Result * 5
+                                .Raise "GDZSChainsCountWorkHard"
                                 
-                                If shp.Cells("Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
+                                If CellVal(shp, "Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
                             End If
                             'Вычисляем требуемое количество звеньев и людей
                             .SetVal "GDZSChainsCountNeed", .ByID("GDZSChainsCountWork").Result + .ByID("GDZSChainsRezCountNeed").Result
@@ -254,21 +246,13 @@ Dim latestSquareTime As Date
                         
                     Case Is = indexPers.ipGDZSZvenoKisl 'Звено - ДАСК
                         If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
-                            .Raise "GDZSChainsCountWork"
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             If shp.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
-                                If options.GDZSRezRoundUp Then
-                                    .SetVal "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .SetVal "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWork").Result / 3) * 3
-                                Else
-                                    .SetVal "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3)
-                                    .SetVal "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWork").Result / 3) * 5
-                                End If
+                                .Raise "GDZSChainsCountWorkSoft"
                             Else
-                                .Raise "GDZSChainsRezCountNeed"
-                                .SetVal "GDZSMansRezCountNeed", .ByID("GDZSChainsRezCountNeed").Result * 3
+                                .Raise "GDZSChainsCountWorkHard"
                                 
-                                If shp.Cells("Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
+                                If CellVal(shp, "Prop.Personnel") < 5 Then .SetVal "GDZSDiscr", True
                             End If
                             'Вычисляем требуемое количество звеньев и людей
                             .SetVal "GDZSChainsCountNeed", .ByID("GDZSChainsCountWork").Result + .ByID("GDZSChainsRezCountNeed").Result
@@ -619,9 +603,10 @@ Dim latestSquareTime As Date
     
 'Завершающий код - обобщает все полученные данные и по ним делат окончательный рассчет
 '---Например кол-во людей необходимых для прокладки линий
-   'Суммируем имеющиеся рукава
     With elements
+        'Суммируем имеющиеся рукава
         .SetVal "HosesHave", .Sum("Hoses38Have;Hoses51Have;Hoses66Have;Hoses77Have;Hoses89Have;Hoses110Have;Hoses150Have;Hoses200Have;Hoses250Have;Hoses300Have")
+        'Прочие
         .Raise "PersonnelNeed", .Result("GDZSMansRezCountNeed")
         .SetVal "PAHighHave", .Sum("ALCount;AKPCount")
         .SetVal "TechnicsNotMchsHave", .Result("TotalTechCount") - .Result("TotalFireCount")
@@ -634,6 +619,20 @@ Dim latestSquareTime As Date
         .SetVal "PANeedOnWaterSource", PF_RoundUp(.Result("NeedStreamW") / 32)
         .SetVal "RSCHSTechincsHave", .Result("TotalTechCount")
         .SetVal "WaterValueNeed10min", .Result("NeedStreamW") * 600
+        
+        'ГДЗС
+        .SetVal "GDZSChainsCountWork", .Sum("GDZSChainsCountWorkSoft;GDZSChainsCountWorkHard")
+        '---расчет требуемого кол-ва резервных ввеньев для работы в простых условиях
+        If options.GDZSRezRoundUp Then
+            .SetVal "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWorkSoft").Result / 3)
+            .SetVal "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWorkSoft").Result / 3) * 3
+        Else
+            .SetVal "GDZSChainsRezCountNeed", Int(.ByID("GDZSChainsCountWorkSoft").Result / 3)
+            .SetVal "GDZSMansRezCountNeed", Int(.ByID("GDZSChainsCountWorkSoft").Result / 3) * 3
+        End If
+        '---расчет требуемого кол-ва резервных ввеньев для работы в сложных условиях
+        .Raise "GDZSChainsRezCountNeed", .Result("GDZSChainsCountWorkHard")
+        .Raise "GDZSMansRezCountNeed", .Result("GDZSChainsCountWorkHard") * 5
     End With
     
     

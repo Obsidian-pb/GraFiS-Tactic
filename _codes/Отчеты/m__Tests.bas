@@ -3,8 +3,8 @@ Option Explicit
 
 
 Public Sub ActivateTactWin()
-'    TacticDataForm.Activate.Refresh
-    WarningsForm.Activate.Refresh
+    TacticDataForm.Activate.Refresh
+'    WarningsForm.Activate.Refresh
 End Sub
 
 Public Sub k()
