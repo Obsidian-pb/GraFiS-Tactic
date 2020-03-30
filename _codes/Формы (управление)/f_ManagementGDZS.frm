@@ -6,6 +6,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} f_ManagementGDZS
    ClientTop       =   375
    ClientWidth     =   13170
    OleObjectBlob   =   "f_ManagementGDZS.frx":0000
+   ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
 End
 Attribute VB_Name = "f_ManagementGDZS"
@@ -33,7 +34,7 @@ Private Sub ListView1_DblClick()
     Application.ActiveWindow.ScrollViewTo Application.ActivePage.Shapes(ListView1.SelectedItem.Key).Cells("PinX"), Application.ActivePage.Shapes(ListView1.SelectedItem.Key).Cells("PinY")
 End Sub
 
-Private Sub pS_Stretch()
+Public Sub pS_Stretch()
     Me.ListView1.Width = Me.InsideWidth - 6
     Me.ListView1.Height = Me.InsideHeight - 6
 End Sub
