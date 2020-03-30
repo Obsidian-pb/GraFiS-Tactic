@@ -27,6 +27,8 @@ Public WithEvents ComButLastTime As Office.CommandBarButton  'Самое позднее врем
 Attribute ComButLastTime.VB_VarHelpID = -1
 Public WithEvents ComButShapeTime As Office.CommandBarButton  'Время выбранной фигуры
 Attribute ComButShapeTime.VB_VarHelpID = -1
+Public WithEvents ComButTimeToShape As Office.CommandBarButton  'Установить текущее время
+Attribute ComButTimeToShape.VB_VarHelpID = -1
 
 Public CurrentTimerActive As Boolean
 '----------------------------------------------------------------------------------------
@@ -42,6 +44,7 @@ Private Sub Class_Initialize()
     Set ComButFireTime = Application.CommandBars("Таймер").Controls("Время начала пожара")
     Set ComButLastTime = Application.CommandBars("Таймер").Controls("Самое позднее время")
     Set ComButShapeTime = Application.CommandBars("Таймер").Controls("Время выбранной фигуры")
+    Set ComButTimeToShape = Application.CommandBars("Таймер").Controls("Установить текущее время")
     '---Ассоциируем поля
     Set TB_Date = Application.CommandBars("Таймер").Controls("Дата")
     Set TB_Time = Application.CommandBars("Таймер").Controls("Время")
@@ -129,7 +132,6 @@ Public Sub AddTBTimerButtons()
         .TooltipText = "Уменьшить текущее время схемы на 1 минуту"
         .FaceID = 2944
         .BeginGroup = True
-'        .OnAction = "OnDelMinuteAction"
     End With
     Set Button = Nothing
 '---Контрол "Дата"
@@ -139,7 +141,6 @@ Public Sub AddTBTimerButtons()
         .Tag = "CurrentTime"
         .TooltipText = "Текущее время схемы"
         .Width = 45
-'        .OnAction = "OnCurrentTimeAction"
     End With
     PS_LoadFromSheetTime control
     Set control = Nothing
@@ -150,7 +151,6 @@ Public Sub AddTBTimerButtons()
         .Tag = "Rise1min"
         .TooltipText = "Увеличить текущее время схемы на 1 минуту"
         .FaceID = 2945
-'        .OnAction = "OnAddMinuteAction"
     End With
     Set Button = Nothing
 '---Кнопка "Системное время"-------------------------------------------------
@@ -171,7 +171,6 @@ Public Sub AddTBTimerButtons()
         .Tag = "CurrentTimeContinous"
         .TooltipText = "Переключиться на текущее системеное время (таймер с интервалом 10с.)"
         .FaceID = 2146
-'        .OnAction = "OnCurrentTimeComtinousAction"
     End With
     Set Button = Nothing
 '---Кнопка "Время начала пожара"-------------------------------------------------
@@ -181,7 +180,6 @@ Public Sub AddTBTimerButtons()
         .Tag = "FireTime"
         .TooltipText = "Переключиться на время начала пожара"
         .FaceID = 1885
-'        .OnAction = "OnFireTimeAction"
     End With
     Set Button = Nothing
 '---Кнопка "Самое позднее время"-------------------------------------------------
@@ -199,7 +197,17 @@ Public Sub AddTBTimerButtons()
         .Caption = "Время выбранной фигуры"
         .Tag = "ShapeTime"
         .TooltipText = "Переключиться на время выбранной фигуры"
-        .FaceID = 2694
+        .FaceID = 110
+    End With
+    Set Button = Nothing
+'---Кнопка "Установить текущее время"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Установить текущее время"
+        .Tag = "TimeToShape"
+        .TooltipText = "Установить для выбранной фигуры текущее время схемы"
+        .FaceID = 111
+        .BeginGroup = True
     End With
     Set Button = Nothing
 
@@ -241,7 +249,9 @@ End Sub
 Private Sub ComButShapeTime_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     OnShapeTimeAction
 End Sub
-
+Private Sub ComButTimeToShape_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    OnShapeTimeToShapeAction
+End Sub
 
 
 
@@ -440,6 +450,26 @@ Private Sub OnShapeTimeAction()
 EX:
 End Sub
 
+Private Sub OnShapeTimeToShapeAction()
+'Прока запускается при нажатии на кнопку "TimeToShape" - Установить для выбранной фигуры (фигур) текущее время схемы
+Dim shp As Visio.Shape
+Dim curTime As Double
+
+    On Error GoTo EX
+    
+'---Если ни одна фигура не выделена - выходим
+    If Application.ActiveWindow.Selection.Count = 0 Then Exit Sub
+    
+'---Получаем текущее время схемы
+    curTime = Application.ActiveDocument.DocumentSheet.Cells("TheDoc!User.CurrentTime").Result(visDate)
+    
+'---Перебираем все фигуры в выделении
+    For Each shp In Application.ActiveWindow.Selection
+        SetCurrentShapeTime shp, curTime
+    Next shp
+    
+EX:
+End Sub
 
 
 '---------------Служебные проки------------------------------------------------------------------
@@ -545,6 +575,24 @@ Exit Function
 EX:
     GetCurrentShapeTime = "User.FireTime"
 End Function
+
+Private Sub SetCurrentShapeTime(ByRef shp As Visio.Shape, ByRef dateVal As Double)
+'Процедура устанавливает значение времени для выбранной фигуры
+    On Error Resume Next
+    With shp
+        .Cells("Prop.ArrivalTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.LineTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.SetTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.SquareTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.StabCreationTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.UTPCreationTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.FormingTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.FindTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.RushTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.FireTime").Formula = "DATETIME(" & dateVal & ")"
+    End With
+ 
+End Sub
 
 Private Function GetGDZSChainCorrectTime(ByRef shp As Visio.Shape, ByVal testVal As Double) As Double
 'Функция возвращае ткорректное значение для фигур звеньев ГДЗС
@@ -664,3 +712,4 @@ End Sub
 'EX:
 '    Debug.Print Err.Description
 'End Sub
+
