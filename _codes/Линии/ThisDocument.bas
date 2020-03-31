@@ -28,6 +28,7 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     DeleteButtonLine
     DeleteButtonMLine
     DeleteButtonVHose
+    DeleteButtonHoseDrop
     
 '---Деактивируем объект отслеживания изменений в приложении для 201х версий
     If Application.version > 12 Then Set app = Nothing
@@ -73,8 +74,9 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Создаем панель управления "Превращения" и добавляем на нее кнопку "Обратить в линию"
     AddTBImagination   'Добавляем тулбокс Обрашщения
     AddButtonLine      'Добавляем кнопку рабочей линии
-    AddButtonMLine     'Добавляем фигуру магистральной линии
+    AddButtonMLine     'Добавляем кнопку магистральной линии
     AddButtonVHose     'Добавляем кнопку всасывающей линии
+    AddButtonHoseDrop  'Добавляем кнопку обращения в проброс
 
 '---Активируем объект отслеживания нажатия кнопок
     Set ButEvent = New Class1

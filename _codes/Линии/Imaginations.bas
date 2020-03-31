@@ -656,6 +656,67 @@ Tail:
     Application.EventsEnabled = True
 End Sub
 
+Public Sub MakeHoseDrop(ByRef ShpObj As Visio.Shape, ByVal hoseDiameterIndex As Integer, ByVal lineType As Byte)
+'Метод обращения в проброс рукавной линии
+Dim ShpInd As Integer
+Dim diameter As Integer
+
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+'    On Error GoTo Tail
+
+'---Идентифицируем активную фигуру
+    ShpInd = ShpObj.ID
+    '---Отключаем обработку событий приложением, обращаем фигуру и вновь включаем обработку событий
+    Application.EventsEnabled = False
+    ImportHoseInformation ShpObj
+    Application.EventsEnabled = True
+
+
+    
+'---Получаем списки для фигуры
+    '---Запускаем процедуру получения списка Подразделений
+    ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
+    '---Запускаем процедуру получения СПИСКОВ Материалов рукавов
+    ShpObj.Cells("Prop.HoseMaterial.Format").FormulaU = ListImport("З_Рукава", "Материал рукава")
+    '---Запускаем процедуру получения СПИСКОВ диаметров рукавов
+    HoseDiametersListImport (ShpInd)
+    '---Запускаем процедуру получения ЗНАЧЕНИЙ Сопротивлений рукавов
+    HoseResistanceValueImport (ShpInd)
+    '---Запускаем процедуру получения ЗНАЧЕНИЙ Пропускной способности рукавов
+    HoseMaxFlowValueImport (ShpInd)
+    '---Запускаем процедуру получения ЗНАЧЕНИЙ Массы рукавов
+    HoseWeightValueImport (ShpInd)
+        
+'---Устнавливаем значения для проброса
+'    Stop
+    diameter = Index(hoseDiameterIndex, ShpObj.Cells("Prop.HoseDiameter.Format").Formula, ";")
+    ShpObj.Cells("Prop.HoseDiameter").FormulaU = "INDEX(" & diameter & ",Prop.HoseDiameter.Format)"
+    ShpObj.Cells("Prop.LineType").FormulaU = "INDEX(" & lineType & ",Prop.LineType.Format)"
+    'Свойства проброса
+    ShpObj.Cells("LinePattern").Formula = 16                                                            'Пунктир
+    ShpObj.Cells("LineWeight").Formula = "0.24 pt"                                                      'Тонкая линия
+    ShpObj.Cells("LineColor").FormulaU = "THEMEGUARD(TINT(RGB(0,0,0),120))"                          'Цвет линии 50%серого (пока - потом нужно будет добавить стили)
+    ShpObj.Cells("Prop.ShowLenightDirect").FormulaU = "INDEX(1,Prop.ShowLenightDirect.Format)"         'Явное указание длины линии
+    ShpObj.Cells("Prop.LineLenightS").Formula = "0"                                                  'Явная длина линии
+    
+    
+        
+'---Устанавливаем значение текущего времени без ссылки
+    ShpObj.Cells("Prop.LineTime").FormulaU = _
+        "DATETIME(" & str(ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)) & ")"
+        
+'---Открываем окно свойств обращенной фигуры
+    On Error Resume Next
+    Application.ActiveWindow.DeselectAll
+    Application.ActiveWindow.Select ShpObj, visSelect
+    Application.DoCmd (1312)
+    
+Exit Sub
+Tail:
+    '---Выходим из процедуры обработки
+    Application.EventsEnabled = True
+End Sub
+
 'Public Sub MakeShortHoseLine()
 ''Метод обращения в Напорную линию из полурукавчиков рукавную линию
 'Dim ShpObj As Visio.Shape
