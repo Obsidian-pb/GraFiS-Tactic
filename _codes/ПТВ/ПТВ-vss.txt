@@ -1204,8 +1204,9 @@
     User.ShapeColor3: Char.Color; User.ShapeColor3.Prompt: "Цвет позывного"; 
     User.TotalParts_PodKoeff: Prop.PodKoeff+1; User.TotalParts_PodKoeff.Prompt: "Общая пропорция потока для коэффициента эжекции"; 
     User.WaterForWorkNeed: 1; User.WaterForWorkNeed.Prompt: DEPENDSON(Prop.PodOut)+CALLTHIS("GetTotalWaterValueForWork";"ПТВ"); 
+    User.WSShapeID: 0; User.WSShapeID.Prompt: "ID фигуры водоема (если 0, то не подключено)"; 
   Section Object, row: visRowEvent>>>
-    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"ПТВ")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+    EventDblClick: DOCMD(1312); EventXFMod: CALLTHIS("SearchWSShape";"ПТВ";PinX;PinY); EventDrop: CALLTHIS("BaseListsRefresh";"ПТВ")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
     FillForegnd: Styles!ПТВ_ГидрПодпись!Char.Color; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>

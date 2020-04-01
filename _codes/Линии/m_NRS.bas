@@ -404,7 +404,8 @@ Dim vsi_ShapeIndex As Integer
                     '---Забор воды
                         Case Is = indexPers.ipHydroelevator 'Гидроэлеватор
                             GE_Count = GE_Count + 1
-                            PodIn = PodIn + vsO_Shape.Cells("Prop.PodFromOuter").Result(visNumber)
+'                            PodIn = PodIn + vsO_Shape.Cells("Prop.PodFromOuter").Result(visNumber)
+                            GetWaterSourceData vsO_Shape
                         Case Is = indexPers.ipPenosmesitelPerenosn 'Пеносмеситель
                             PS_Count = PS_Count + 1
                         Case Is = indexPers.ipVsasLineWithSetk  'Всасывающая линия с сеткой
@@ -524,21 +525,16 @@ Dim tmpVal As Long
             
             tmpVal = CellVal(shpWS, "Prop.WaterValue") * 1000
             PW_Value = PW_Value + tmpVal
-'            WaterValue = WaterValue + tmpVal
         End If
         If IsGFSShapeWithIP(shpWS, indexPers.ipOtkritiyVodoistochnik) Then
             If CellVal(shpWS, "Prop.Type", visUnitsString) = "Неограниченный запас" Then
-                PodIn = PodIn + shp.Cells("Prop.PodIn").Result(visNumber)
+                PodIn = PodIn + CellVal(shp, "Prop.PodIn")
+                PodIn = PodIn + CellVal(shp, "Prop.PodFromOuter")
             Else
                 tmpVal = CellVal(shpWS, "Prop.Value") * 1000 * 0.9  'С учетом коэффициента использования
                 WaterOpen_Value = WaterOpen_Value + tmpVal
-'                WaterValue = WaterValue + tmpVal
             End If
         End If
-        
-        
-        
-
     End If
     
 End Sub
