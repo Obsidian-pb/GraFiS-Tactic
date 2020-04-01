@@ -281,7 +281,7 @@ Dim mstr As Visio.Master
 
     If Not CD_MasterExists(MasterName) Then
         Set mstr = ThisDocument.Masters(MasterName)
-        Application.ActiveDocument.Masters.Drop mstr, 0, 0
+        Application.ActiveDocument.Masters.drop mstr, 0, 0
     End If
 
 End Sub
