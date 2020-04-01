@@ -2606,8 +2606,9 @@
     User.ShapeColor3: Char.Color; User.ShapeColor3.Prompt: "Цвет верхней подписи"; 
     User.LabelTop: IF(Actions.LabelShow.Checked;Prop.WFType;""); User.LabelTop.Prompt: ""; 
     User.IsCorrect: IF(Scratch.D1>Prop.PodIn;0;1); User.IsCorrect.Prompt: "1 - корректно, 0 - не работоспособно"; 
+    User.WSShapeID: 0; User.WSShapeID.Prompt: "ID фигуры водоема (если 0, то не подключено)"; 
   Section Object, row: visRowEvent>>>
-    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("WFListsRefresh";"ПТВ")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+    EventDblClick: DOCMD(1312); EventXFMod: CALLTHIS("SearchWSShape";"ПТВ";0;PinY); EventDrop: CALLTHIS("WFListsRefresh";"ПТВ")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
     FillForegnd: Styles!ПТВ_ГидрОбор!LineColor; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>

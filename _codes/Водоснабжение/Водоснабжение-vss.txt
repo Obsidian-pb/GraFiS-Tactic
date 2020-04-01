@@ -251,7 +251,7 @@
   Section Object, row: visRowPageLayout>>>
     ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
-    PageWidth: 4,5 м; PageHeight: 4,0909090909091 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+    PageWidth: 4,5 м; PageHeight: 4,0909 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -261,7 +261,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
-=>sheet: Водоем.65
+=>sheet: ПВ.332
   Section: Action>>>
     Actions.AddressShow: "Показывать адрес"; Actions.AddressShow._Unused1: ""; Actions.AddressShow._Unused2: ""; Actions.AddressShow.Action: CALLTHIS("SetCheckForAll";"ВодоснабжениеНовое";"Actions.AddressShow.Checked";NOT(Actions.AddressShow.Checked)); Actions.AddressShow.Checked: 1; Actions.AddressShow.Disabled: 0; Actions.AddressShow.ReadOnly: FALSE; Actions.AddressShow.Invisible: FALSE; Actions.AddressShow.BeginGroup: FALSE; Actions.AddressShow.TagName: ""; Actions.AddressShow.ButtonFace: ""; Actions.AddressShow.SortKey: 10; 
     Actions.CommonDataShow: "Показать дополнительные сведения"; Actions.CommonDataShow._Unused1: ""; Actions.CommonDataShow._Unused2: ""; Actions.CommonDataShow.Action: CALLTHIS("ShowCommonData";"ВодоснабжениеНовое"); Actions.CommonDataShow.Checked: 0; Actions.CommonDataShow.Disabled: 0; Actions.CommonDataShow.ReadOnly: FALSE; Actions.CommonDataShow.Invisible: Prop.Common.Invisible; Actions.CommonDataShow.BeginGroup: TRUE; Actions.CommonDataShow.TagName: ""; Actions.CommonDataShow.ButtonFace: 172; Actions.CommonDataShow.SortKey: 20; 
@@ -281,6 +281,10 @@
     Prop.SetsCount: 2; Prop.SetsCount.Prompt: "Количествово мест для установки пожарных автомобилей"; Prop.SetsCount.Label: "Кол-во мест для установки ПА"; Prop.SetsCount.Format: ""; Prop.SetsCount.SortKey: 31; Prop.SetsCount.Type: 2; Prop.SetsCount.Invisible: FALSE; Prop.SetsCount.Verify: FALSE; Prop.SetsCount.LangID: 1049; 
     Prop.Radius: 200 м; Prop.Radius.Prompt: "Расстояние от водоисточника"; Prop.Radius.Label: "Радиус"; Prop.Radius.Format: ""; Prop.Radius.SortKey: 51; Prop.Radius.Type: 2; Prop.Radius.Invisible: FALSE; Prop.Radius.Verify: FALSE; Prop.Radius.LangID: 1049; Prop.Radius.Calendar: 0; 
     Prop.Coordinates: 0; Prop.Coordinates.Prompt: "Координаты водоема (широта, долгота)"; Prop.Coordinates.Label: "Координаты (широта, долгота)"; Prop.Coordinates.Format: ""; Prop.Coordinates.SortKey: 50; Prop.Coordinates.Type: 0; Prop.Coordinates.Invisible: FALSE; Prop.Coordinates.Verify: FALSE; Prop.Coordinates.LangID: 1049; Prop.Coordinates.Calendar: 0; 
+    Prop.OstKoeff: 0,9; Prop.OstKoeff.Prompt: "Объемная доля воды, которую возможно забрать"; Prop.OstKoeff.Label: "Коэффициент использования"; Prop.OstKoeff.Format: ""; Prop.OstKoeff.SortKey: 32; Prop.OstKoeff.Type: 2; Prop.OstKoeff.Invisible: FALSE; Prop.OstKoeff.Verify: FALSE; Prop.OstKoeff.LangID: 1049; Prop.OstKoeff.Calendar: 0; 
+    Prop.DischargingTime: 0; Prop.DischargingTime.Prompt: "Время опорожнения (м:сс)"; Prop.DischargingTime.Label: "Время опорожнения (м:сс)"; Prop.DischargingTime.Format: ""; Prop.DischargingTime.SortKey: 34; Prop.DischargingTime.Type: 2; Prop.DischargingTime.Invisible: User.DischargeTime.Prompt; Prop.DischargingTime.Verify: FALSE; Prop.DischargingTime.LangID: 1049; Prop.DischargingTime.Calendar: 0; 
+    Prop.PodOut: GUARD(User.GettingFlow); Prop.PodOut.Prompt: "Воды забирается (л/с)"; Prop.PodOut.Label: "Скорость опрожнения (л/с)"; Prop.PodOut.Format: ""; Prop.PodOut.SortKey: 35; Prop.PodOut.Type: 2; Prop.PodOut.Invisible: NOT(Prop.PodOut); Prop.PodOut.Verify: FALSE; Prop.PodOut.LangID: 1049; Prop.PodOut.Calendar: 0; 
+    Prop.WaterValue: Prop.PWValue*Prop.OstKoeff; Prop.WaterValue.Prompt: "Объем доступной для забора воды"; Prop.WaterValue.Label: "Доступно воды (м.куб.)"; Prop.WaterValue.Format: ""; Prop.WaterValue.SortKey: 33; Prop.WaterValue.Type: 2; Prop.WaterValue.Invisible: FALSE; Prop.WaterValue.Verify: FALSE; Prop.WaterValue.LangID: 1049; Prop.WaterValue.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -291,6 +295,8 @@
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
     User.ShapeColor3: FillBkgnd; User.ShapeColor3.Prompt: "Цвет содержимого"; 
     User.ShapeColor4: FillForegnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
+    User.DischargeTime: (Prop.WaterValue*1000)/(User.GettingFlow)/60; User.DischargeTime.Prompt: ISERR(User.DischargeTime); 
+    User.GettingFlow: 0; User.GettingFlow.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventDrop: DOCMD(1312)+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
@@ -320,7 +326,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXFormOut>>>
-    PinX: 2,25 м; PinY: 2,0454545454546 м; Width: 4,5 м*Страница!User.GFS_Aspect; Height: 4,0909 м*Страница!User.GFS_Aspect; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: 2,25 м; PinY: 2,04545 м; Width: 4,5 м*Страница!User.GFS_Aspect; Height: 4,0909 м*Страница!User.GFS_Aspect; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: ПК
   Section: Character>>>
@@ -3579,7 +3585,7 @@
     Prop.WaterContainerValue: 500; Prop.WaterContainerValue.Prompt: "Объем емкости (л)"; Prop.WaterContainerValue.Label: "Объем (л)"; Prop.WaterContainerValue.Format: ""; Prop.WaterContainerValue.SortKey: 10; Prop.WaterContainerValue.Type: 2; Prop.WaterContainerValue.Invisible: FALSE; Prop.WaterContainerValue.Verify: FALSE; Prop.WaterContainerValue.LangID: 1049; Prop.WaterContainerValue.Calendar: 0; 
     Prop.PodOut: GUARD(Scratch.D5+Scratch.D6+Scratch.D7+Scratch.D8); Prop.PodOut.Prompt: "Воды забирается (л/с)"; Prop.PodOut.Label: "Скорость опорожнения (л/с)"; Prop.PodOut.Format: ""; Prop.PodOut.SortKey: 20; Prop.PodOut.Type: 2; Prop.PodOut.Invisible: FALSE; Prop.PodOut.Verify: FALSE; Prop.PodOut.LangID: 1049; Prop.PodOut.Calendar: 0; 
     Prop.PodIn: GUARD(Scratch.D1+Scratch.D2+Scratch.D3+Scratch.D4); Prop.PodIn.Prompt: "Воды получается (л/с)"; Prop.PodIn.Label: "Скорость наполненеия (л/с)"; Prop.PodIn.Format: ""; Prop.PodIn.SortKey: 21; Prop.PodIn.Type: 2; Prop.PodIn.Invisible: FALSE; Prop.PodIn.Verify: FALSE; Prop.PodIn.LangID: 1049; Prop.PodIn.Calendar: 0; 
-    Prop.OstKoeff: 0,1; Prop.OstKoeff.Prompt: "Объемная доля ОТВ, забрать которую не представляется возможным"; Prop.OstKoeff.Label: "Коэффициент остатка"; Prop.OstKoeff.Format: ""; Prop.OstKoeff.SortKey: 31; Prop.OstKoeff.Type: 2; Prop.OstKoeff.Invisible: FALSE; Prop.OstKoeff.Verify: FALSE; Prop.OstKoeff.LangID: 1049; Prop.OstKoeff.Calendar: 0; 
+    Prop.OstKoeff: 0,9; Prop.OstKoeff.Prompt: "Объемная доля воды, которую возможно забрать"; Prop.OstKoeff.Label: "Коэффициент использования"; Prop.OstKoeff.Format: ""; Prop.OstKoeff.SortKey: 31; Prop.OstKoeff.Type: 2; Prop.OstKoeff.Invisible: FALSE; Prop.OstKoeff.Verify: FALSE; Prop.OstKoeff.LangID: 1049; Prop.OstKoeff.Calendar: 0; 
     Prop.DischargeTime: IF(User.DischargeTime.Prompt;"";INT(User.DischargeTime)&":"&INT((User.DischargeTime-INT(User.DischargeTime))*60)); Prop.DischargeTime.Prompt: "Время опорожнения (м:сс)"; Prop.DischargeTime.Label: "Время опорожнения (м:сс)"; Prop.DischargeTime.Format: ""; Prop.DischargeTime.SortKey: 40; Prop.DischargeTime.Type: 2; Prop.DischargeTime.Invisible: User.DischargeTime.Prompt; Prop.DischargeTime.Verify: FALSE; Prop.DischargeTime.LangID: 1049; Prop.DischargeTime.Calendar: 0; 
   Section: Scratch>>>
     Scratch.A1: 0; Scratch.B1: 0; Scratch.C1: 4; Scratch.D1: IF(Scratch.A1=0;0;(Scratch.D5+Scratch.D6+Scratch.D7+Scratch.D8)/(Scratch.A1+Scratch.A2+Scratch.A3+Scratch.A4)); 
@@ -3603,7 +3609,7 @@
     User.Dist2: 0,63; User.Dist2.Prompt: ""; 
     User.ShapeColor2: Styles!ВИ_Емкость!Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
     User.PageScale: (Страница!DrawingScale/Страница!PageScale)/200; User.PageScale.Prompt: ""; 
-    User.DischargeTime: (Prop.WaterContainerValue*Prop.OstKoeff)/(User.GettingFlow); User.DischargeTime.Prompt: ISERR(User.DischargeTime); 
+    User.DischargeTime: (Prop.WaterContainerValue*Prop.OstKoeff)/(User.GettingFlow)/60; User.DischargeTime.Prompt: ISERR(User.DischargeTime); 
     User.GettingFlow: Prop.PodOut-Prop.PodIn; User.GettingFlow.Prompt: ""; 
     User.ShapeColor3: Styles!ВИ_Емкость!FillForegnd; User.ShapeColor3.Prompt: "Цвет Заливки"; 
   Section Object, row: visRowEvent>>>

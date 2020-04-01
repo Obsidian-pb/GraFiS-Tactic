@@ -192,3 +192,35 @@ Public Sub DirectVS(shp As Visio.Shape, AsRazv As Boolean)
   
 End Sub
 
+Public Sub SearchWSShape(shp As Visio.Shape, x As Double, y As Double)
+'ѕроцедура ищет фигуры водоисточников и провер€ет не оказалс€ ли конец всасывающей линии в них. ≈сли оказалс€, то дл€ €чейки "User.WSShapeID" устанавливает ее ID
+Dim curShp As Visio.Shape
+Dim corX As Double
+Dim corY As Double
+        
+    'ѕреобразуем локальные координаты фигуры в коорджинаты страницы
+    shp.XYToPage corX, corY, x, y
+    
+    'перебираем все страницы на листе и провер€ем, €вл€ютс€ ли они фигурой ¬одоема
+    For Each curShp In Application.ActivePage.Shapes
+        '≈сли пожарный водоем
+        If IsGFSShapeWithIP(curShp, 51, True) Then
+            'ѕровер€ем находитс€ ли указанна€ точка внутри фигуры водоема
+            If curShp.HitTest(x, y, 0) > 0 Then
+                shp.Cells("User.WSShapeID").Formula = curShp.ID
+                Exit Sub
+            End If
+        End If
+        '≈сли открытый водоисточник
+        If IsGFSShapeWithIP(curShp, 53, True) Then
+            'ѕровер€ем находитс€ ли указанна€ точка внутри фигуры открытого водоисточника
+            If curShp.HitTest(x, y, 0) > 0 Then
+                shp.Cells("User.WSShapeID").Formula = curShp.ID
+                Exit Sub
+            End If
+        End If
+    Next curShp
+    
+'≈сли ничего не было найдено, указываем, что всасывающа€ лини€ ни откуда не забирает воду
+shp.Cells("User.WSShapeID").Formula = 0
+End Sub

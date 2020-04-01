@@ -407,7 +407,7 @@ Dim vO_Conn As Visio.Connect
 Dim ConIndent1 As String
 Dim ConIndent2 As String
 Dim ShpVS As Visio.Shape
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 Dim Shp2 As Visio.Shape
 Dim Con As Visio.Connect
 Dim Con2 As Visio.Connect

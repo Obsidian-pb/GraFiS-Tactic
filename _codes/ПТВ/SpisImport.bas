@@ -83,18 +83,18 @@ Public Sub StvolModelsListImport(ShpIndex As Long)
 'Процедура импорта моделей стволов
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели стволов для текущей фигуры
 'Criteria = shp.Cells("Prop.Set").ResultStr(visUnitsString)
-    Select Case IndexPers
+    Select Case indexPers
         Case Is = 34 'Водяной ручной ствол
             shp.Cells("Prop.StvolType.Format").FormulaU = ListImport("ЗапросВодяныхСтволов", "Модель ствола")
         Case Is = 36 'Лафетный водяной ствол
@@ -127,14 +127,14 @@ Public Sub WEModelsListImport(ShpIndex As Long)
 'Процедура импорта моделей стволов
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели стволов для текущей фигуры
     shp.Cells("Prop.WEType.Format").FormulaU = ListImport("ЗапросГЭ", "Модель")
@@ -156,14 +156,14 @@ Public Sub WFModelsListImport(ShpIndex As Long)
 'Процедура импорта моделей всасывающих сеток
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели стволов для текущей фигуры
     shp.Cells("Prop.WFType.Format").FormulaU = ListImport("Сетки всасывающие", "Модель")
@@ -185,18 +185,18 @@ Public Sub StvolFoamCreatorListImport(ShpIndex As Long)
 'Процедура импорта моделей стволов
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели стволов для текущей фигуры
 'Criteria = shp.Cells("Prop.Set").ResultStr(visUnitsString)
-Select Case IndexPers
+Select Case indexPers
     Case Is = 35 'Пенный ручной ствол
         shp.Cells("Prop.FoamCreator.Format").FormulaU = ListImport("Пенообразователи", "Пенообразователь")
     Case Is = 37 'Пенный лафетный ствол
@@ -229,17 +229,17 @@ Public Sub StvolVariantsListImport(ShpIndex As Long)
 'Процедура импорта Вариантов стволов
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели стволов для текущей фигуры
-Select Case IndexPers
+Select Case indexPers
     Case Is = 34
         Criteria = "[Модель ствола] = '" & shp.Cells("Prop.StvolType").ResultStr(visUnitsString) & "' "
         shp.Cells("Prop.Variant.Format").FormulaU = ListImport2("ЗапросВодяныхСтволов", "Вариант ствола", Criteria)
@@ -280,17 +280,17 @@ Public Sub StvolStreamTypesListImport(ShpIndex As Long)
 'Процедура импорта списка возможных струй для данного ствола
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка возможных струй стволов для текущей фигуры
-Select Case IndexPers
+Select Case indexPers
     Case Is = 34
         Criteria = "[Модель ствола] = '" & shp.Cells("Prop.StvolType").ResultStr(visUnitsString) & "' And " & _
             "[Вариант ствола] = '" & shp.Cells("Prop.Variant").ResultStr(visUnitsString) & "'"
@@ -335,17 +335,17 @@ Public Sub StvolHeadListImport(ShpIndex As Long)
 'Процедура импорта списка возможных напоров для данного вида струи и ствола
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка возможных Напоров для текущей фигуры
-Select Case IndexPers
+Select Case indexPers
     Case Is = 34
         Criteria = "[Модель ствола] = '" & shp.Cells("Prop.StvolType").ResultStr(visUnitsString) & "' And " & _
             "[Вариант ствола] = '" & shp.Cells("Prop.Variant").ResultStr(visUnitsString) & "' And " & _

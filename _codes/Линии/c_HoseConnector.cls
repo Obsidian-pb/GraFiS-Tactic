@@ -826,19 +826,19 @@ EndSub:
     SaveLog Err, "GetHoseShape"
 End Function
 
-Private Function GetShapeType(ByRef Shp As Visio.Shape) As Integer
+Private Function GetShapeType(ByRef shp As Visio.Shape) As Integer
 '‘ункци€ возвращает тип фигуры - если фигура не фигура √ра‘и— - возвращаетс€ vb_ShapeType_Other
-    If Shp.CellExists("User.IndexPers", 0) Then
-        GetShapeType = f_IdentShape(Shp.Cells("User.IndexPers").Result(visNumber))
+    If shp.CellExists("User.IndexPers", 0) Then
+        GetShapeType = f_IdentShape(shp.Cells("User.IndexPers").Result(visNumber))
     Else
         GetShapeType = vb_ShapeType_Other
     End If
 End Function
 
-Private Function IsSpecificShape(ByRef Shp As Visio.Shape, ByVal indexPers As Integer) As Boolean
+Private Function IsSpecificShape(ByRef shp As Visio.Shape, ByVal indexPers As Integer) As Boolean
 '‘ункци€ возвращает истина, если указанна€ фигура имеет указанный IndexPers - если не √ра‘и—, возвращаетс€ Ћожь
-    If Shp.CellExists("User.IndexPers", 0) Then
-        IsSpecificShape = (Shp.Cells("User.IndexPers").Result(visNumber) = indexPers)
+    If shp.CellExists("User.IndexPers", 0) Then
+        IsSpecificShape = (shp.Cells("User.IndexPers").Result(visNumber) = indexPers)
     Else
         IsSpecificShape = False
     End If

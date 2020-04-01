@@ -136,8 +136,6 @@ Private Sub ComBut4_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault A
         '---Если выбрана хоть одна фигура - пытаемся ее обратить
             If Not IsHavingUserSection(True) And Not IsSquare(True) Then
             '---Обращаем фигуру в фигуру проброса
-'                MsgBox "Обращаем в проброс"
-'                MakeHoseLine Application.ActiveWindow.Selection(1), 77, 1
                 MakeHoseDrop Application.ActiveWindow.Selection(1), 51, 1
             End If
         Else

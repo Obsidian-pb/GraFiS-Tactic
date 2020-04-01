@@ -105,7 +105,7 @@ End Sub
 Private Sub LineAppEvents_CellChanged(ByVal Cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 Dim Con As Visio.Connect
 Dim Shp2 As Visio.Shape
 Dim Con2 As Visio.Connect
@@ -127,9 +127,9 @@ Dim Con2 As Visio.Connect
     If Cell.Name = "User.UseAsRazv" Then
         '---Запускаем процедуру обновления рукавных соединений для Водосборника
         
-        Set Shp = Cell.Shape
+        Set shp = Cell.Shape
         
-        For Each Con In Shp.FromConnects
+        For Each Con In shp.FromConnects
             Set Shp2 = Con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
             For Each Con2 In Shp2.Connects
                 C_ConnectionsTrace.Ps_ConnectionAdd Con2
