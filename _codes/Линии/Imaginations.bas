@@ -692,12 +692,25 @@ Dim diameter As Integer
     diameter = Index(hoseDiameterIndex, ShpObj.Cells("Prop.HoseDiameter.Format").Formula, ";")
     ShpObj.Cells("Prop.HoseDiameter").FormulaU = "INDEX(" & diameter & ",Prop.HoseDiameter.Format)"
     ShpObj.Cells("Prop.LineType").FormulaU = "INDEX(" & lineType & ",Prop.LineType.Format)"
+    
     'Свойства проброса
-    ShpObj.Cells("LinePattern").Formula = 16                                                            'Пунктир
-    ShpObj.Cells("LineWeight").Formula = "0.24 pt"                                                      'Тонкая линия
-    ShpObj.Cells("LineColor").FormulaU = "THEMEGUARD(TINT(RGB(0,0,0),120))"                          'Цвет линии 50%серого (пока - потом нужно будет добавить стили)
-    ShpObj.Cells("Prop.ShowLenightDirect").FormulaU = "INDEX(1,Prop.ShowLenightDirect.Format)"         'Явное указание длины линии
-    ShpObj.Cells("Prop.LineLenightS").Formula = "0"                                                  'Явная длина линии
+    '---Свойства линии
+        ShpObj.Cells("LinePattern").Formula = 16                                                            'Пунктир
+        ShpObj.Cells("LineWeight").Formula = "0.24 pt"                                                      'Тонкая линия
+    '---Стили
+        ShpObj.Cells("LinePattern").FormulaU = "Styles!Р_Пробр!LinePattern"
+        ShpObj.Cells("LineWeight").FormulaU = "Styles!Р_Пробр!LineWeight"
+        ShpObj.Cells("LineColor").FormulaU = "Styles!Р_Пробр!LineColor"
+        ShpObj.Cells("LineCap").FormulaU = "Styles!Р_Пробр!LineCap"
+        ShpObj.Cells("BeginArrow").FormulaU = "Styles!Р_Пробр!BeginArrow"
+        ShpObj.Cells("EndArrow").FormulaU = "Styles!Р_Пробр!EndArrow"
+        ShpObj.Cells("LineColorTrans").FormulaU = "Styles!Р_Пробр!LineColorTrans"
+        ShpObj.Cells("BeginArrowSize").FormulaU = "Styles!Р_Пробр!BeginArrowSize"
+        ShpObj.Cells("EndArrowSize").FormulaU = "Styles!Р_Пробр!EndArrowSize"
+        ShpObj.Cells("Rounding").FormulaU = "Styles!Р_Пробр!Rounding"
+    '---Свойстварукавной линии характерные для проброса
+    ShpObj.Cells("Prop.ShowLenightDirect").FormulaU = "INDEX(1,Prop.ShowLenightDirect.Format)"          'Явное указание длины линии
+    ShpObj.Cells("Prop.LineLenightS").Formula = "0"                                                     'Явная длина линии
     
     
         

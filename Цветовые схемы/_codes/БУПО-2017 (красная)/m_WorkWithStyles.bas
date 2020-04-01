@@ -238,6 +238,7 @@ Dim Line_StyleSet(7) As String 'Линии
     Line_StyleSet(4) = "Р_Свищ"
     Line_StyleSet(5) = "Р_Мостик"
     Line_StyleSet(6) = "Т_Позывные"
+    Line_StyleSet(7) = "Р_Пробр"
 
     '---Открываем для записи трафарет
         DocOpenClose "Линии.vss", 1
@@ -246,7 +247,7 @@ Dim Line_StyleSet(7) As String 'Линии
         Set vO_Stenc = Application.Documents("Линии.vss")
     
     '---Перебираем все стили трафарета
-        For i = 0 To UBound(Line_StyleSet()) - 1
+        For i = 0 To UBound(Line_StyleSet()) '- 1
         '---Выбираем очередной стиль трафарета
             Set vO_Stl = ThisDocument.Styles(Line_StyleSet(i))
         '---Проверяем есть ли указаный стиль vs_StyleName в трафарете vs_StencName
