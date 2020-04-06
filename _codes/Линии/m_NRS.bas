@@ -403,18 +403,23 @@ Dim vsi_ShapeIndex As Integer
                             
                     '---Забор воды
                         Case Is = indexPers.ipHydroelevator 'Гидроэлеватор
-                            GE_Count = GE_Count + 1
-'                            PodIn = PodIn + vsO_Shape.Cells("Prop.PodFromOuter").Result(visNumber)
-                            GetWaterSourceData vsO_Shape
+                            If CellVal(vsO_Shape, "Prop.GetingWater", visUnitsString) = "Да" Then
+                                GE_Count = GE_Count + 1
+                                GetWaterSourceData vsO_Shape
+                            End If
                         Case Is = indexPers.ipPenosmesitelPerenosn 'Пеносмеситель
                             PS_Count = PS_Count + 1
                         Case Is = indexPers.ipVsasLineWithSetk  'Всасывающая линия с сеткой
-                            VsasSetc_Count = VsasSetc_Count + 1
-'                            PodIn = PodIn + vsO_Shape.Cells("Prop.PodIn").Result(visNumber)
-                            GetWaterSourceData vsO_Shape
+                            If CellVal(vsO_Shape, "Prop.GetingWater", visUnitsString) = "Да" Then
+                                VsasSetc_Count = VsasSetc_Count + 1
+    '                            PodIn = PodIn + vsO_Shape.Cells("Prop.PodIn").Result(visNumber)
+                                GetWaterSourceData vsO_Shape
+                            End If
                         Case Is = indexPers.ipKolonka 'Колонка
-                            Kol_Count = Kol_Count + 1
-                            PodIn = PodIn + vsO_Shape.Cells("Prop.FlowCurrent").Result(visNumber)
+                            If CellVal(vsO_Shape, "Prop.GetingWater", visUnitsString) = "Да" Then
+                                Kol_Count = Kol_Count + 1
+                                PodIn = PodIn + vsO_Shape.Cells("Prop.FlowCurrent").Result(visNumber)
+                            End If
                         Case Is = indexPers.ipEmkost 'Емкости для воды
                             WaterContainers_Count = WaterContainers_Count + 1
                             WaterValue = WaterValue + vsO_Shape.Cells("Prop.WaterContainerValue").Result(visNumber) * _
@@ -512,7 +517,7 @@ IsNotManeuwer = True
 End Function
 
 Private Sub GetWaterSourceData(ByRef shp As Visio.Shape)
-'Получаем сведения о задействованном водоеме от фигуры всасывающей линии с сеткой
+'Получаем сведения о задействованном водоеме от фигур всасывающей линии с сеткой или гидроэлеватора
 Dim shpWS As Visio.Shape
 Dim shpWSIndex As Long
 Dim tmpVal As Long
@@ -538,6 +543,8 @@ Dim tmpVal As Long
     End If
     
 End Sub
+
+
 
 
 

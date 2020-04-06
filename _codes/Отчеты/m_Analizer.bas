@@ -43,3 +43,37 @@ EX:
     SaveLog Err, "sP_ChangeValueMain"
 End Sub
 
+
+'------------------------Для радиальной диаграммы-----------------------------------------
+Public Sub sP_ChangeRDValue(ShpObj As Visio.Shape)
+'Процедура запуска обновления данных в радиальной диаграмме
+Dim targetPage As Visio.Page
+'Dim tmp As Variant
+
+'---Предлагаем пользователю указать страницу для анализа
+    SeetsSelectForm.Show
+    Set targetPage = Application.ActiveDocument.Pages(SeetsSelectForm.SelectedSheet)
+
+'---обновляем имеющиеся значения свойств
+    A.Refresh targetPage.Index
+
+'---Запускаем устанавливаем данные для полей радиальной диаграммы
+    '---Личного состава
+    ShpObj.Cells("Prop.Personnel").Formula = """" & A.Result("PersonnelHave") & "/" & A.Result("PersonnelNeed") & """"
+    '---Основных ПА
+    ShpObj.Cells("Prop.MainPA").Formula = """" & A.Result("MainPAHave") & "/" & A.Result("ACNeed") & """"
+    '---Расход воды
+    ShpObj.Cells("Prop.WaterExpense").Formula = """" & A.Result("FactStreamW") & "/" & A.Result("NeedStreamW") & """"
+    '---Запас воды (Если воды бесконечное количство, то значение имеющегося запаса воды должно указываться равным фактическому)
+'    tmp = A.Result("WaterValueNeed10min")
+    If A.Result("WaterEternal") Then
+        ShpObj.Cells("Prop.WaterValue").Formula = """" & A.Result("WaterValueHave") & "/" & A.Result("WaterValueHave") & """"
+    Else
+        ShpObj.Cells("Prop.WaterValue").Formula = """" & A.Result("WaterValueHave") & "/" & A.Result("WaterValueNeed10min") & """"
+    End If
+    '---Звеньев ГДЗС
+    ShpObj.Cells("Prop.GDZS").Formula = """" & A.Sum("GDZSChainsCountWork;GDZSChainsRezCountHave") & "/" & A.Result("GDZSChainsCountNeed") & """"
+    '---Стволов
+    ShpObj.Cells("Prop.Stv").Formula = """" & A.Result("StvolWHave") & "/" & PF_RoundUp(A.Result("NeedStreamW") / ShpObj.Cells("Prop.StvWaterExpense").Result(visNumber)) & """"
+
+End Sub

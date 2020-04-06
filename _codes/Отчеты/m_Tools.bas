@@ -8,8 +8,14 @@ Public Function PF_RoundUp(afs_Value As Single) As Integer
 'Процедура округления ПОЛОЖИТЕЛЬНЫХ чисел в большую сторону
 Dim vfi_Temp As Integer
 
-vfi_Temp = Int(afs_Value * (-1)) * (-1)
-PF_RoundUp = vfi_Temp
+'vfi_Temp = Int(afs_Value * (-1)) * (-1)
+'PF_RoundUp = vfi_Temp
+    vfi_Temp = Int(afs_Value)
+    If vfi_Temp = afs_Value Then
+        PF_RoundUp = vfi_Temp
+    ElseIf vfi_Temp < afs_Value Then
+        PF_RoundUp = vfi_Temp + 1
+    End If
 
 End Function
 

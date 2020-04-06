@@ -212,7 +212,7 @@ Dim latestSquareTime As Date
                     Case Is = indexPers.ipPodpisStepenOgnestoykosty 'stepen ognestoikosti
                         .Raise "SOCount"
                 
-                '---СВязь и освещение------------------
+                '---Связь и освещение------------------
                     Case Is = indexPers.ipProzhektor 'Прожектор
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipNosimoeRadio 'Радиостанция носимая
@@ -351,6 +351,7 @@ Dim latestSquareTime As Date
                             .Raise "GetingWaterCount"
                             .Raise "GetedWaterValue", CellVal(shp, "User.PodOut")
                             .Raise "GetedWaterValueMax", CellVal(shp, "User.PodOut")
+                            If IsEternalSource(shp) And .Result("WaterEternal") = False Then .SetVal "WaterEternal", True
                         End If
                         
                     Case Is = indexPers.ipPenosmesitelPerenosn 'Пеносмеситель
@@ -382,6 +383,7 @@ Dim latestSquareTime As Date
                             .Raise "GetingWaterCount"
                             .Raise "GetedWaterValue", CellVal(shp, "Prop.FlowMax")
                             .Raise "GetedWaterValueMax", CellVal(shp, "Prop.FlowMax")
+                            .SetVal "WaterEternal", True
                         End If
                         
                     Case Is = indexPers.ipVsasLineWithSetk 'Всасывающая линия с сеткой
@@ -390,6 +392,7 @@ Dim latestSquareTime As Date
                             .Raise "GetingWaterCount"
                             .Raise "GetedWaterValue", CellVal(shp, "Prop.PodIn")
                             .Raise "GetedWaterValueMax", CellVal(shp, "Prop.PodIn")
+                            If IsEternalSource(shp) And .Result("WaterEternal") = False Then .SetVal "WaterEternal", True
                         End If
                         
                         
@@ -607,7 +610,6 @@ Dim latestSquareTime As Date
         'Суммируем имеющиеся рукава
         .SetVal "HosesHave", .Sum("Hoses38Have;Hoses51Have;Hoses66Have;Hoses77Have;Hoses89Have;Hoses110Have;Hoses150Have;Hoses200Have;Hoses250Have;Hoses300Have")
         'Прочие
-        .Raise "PersonnelNeed", .Result("GDZSMansRezCountNeed")
         .SetVal "PAHighHave", .Sum("ALCount;AKPCount")
         .SetVal "TechnicsNotMchsHave", .Result("TotalTechCount") - .Result("TotalFireCount")
         .SetVal "TechnicsNotMchsOtherHave", .Result("TechnicsNotMchsHave") - .Result("MVDCount") - .Result("SMPCount")
@@ -633,6 +635,12 @@ Dim latestSquareTime As Date
         '---расчет требуемого кол-ва резервных ввеньев для работы в сложных условиях
         .Raise "GDZSChainsRezCountNeed", .Result("GDZSChainsCountWorkHard")
         .Raise "GDZSMansRezCountNeed", .Result("GDZSChainsCountWorkHard") * 5
+        '---Общее количесатво требуемых звеноьев
+        .SetVal "GDZSChainsCountNeed", .Sum("GDZSChainsCountWork;GDZSChainsRezCountNeed")
+        
+        
+        'Итог
+        .Raise "PersonnelNeed", .Result("GDZSMansRezCountNeed")
     End With
     
     
@@ -693,6 +701,25 @@ Dim havePos As Boolean
     IsHoseShapeHavePos = havePos
 End Function
 
+Private Function IsEternalSource(ByRef shp As Visio.Shape) As Boolean
+'Проверяем, звбирает ли воду гидроэлеватор или всасывающая сетка из открытого водоема с бесконечным запасом
+Dim shpWS As Visio.Shape
+Dim shpWSIndex As Long
+    
+    On Error GoTo EX
+    
+    shpWSIndex = CellVal(shp, "User.WSShapeID")
+    If shpWSIndex > 0 Then
+        Set shpWS = Application.ActivePage.Shapes.ItemFromID(shpWSIndex)
+        If IsGFSShapeWithIP(shpWS, indexPers.ipOtkritiyVodoistochnik) Then
+            IsEternalSource = CellVal(shpWS, "Prop.Type", visUnitsString) = "Неограниченный запас"
+        End If
+    End If
+    
+Exit Function
+EX:
+    IsEternalSource = False
+End Function
 
 '---------------Функции работы с элементами-----------------------
 Public Function Result(ByVal ID As String) As Variant

@@ -72,6 +72,7 @@ Private Sub fillElemCollection()
     AddNewElement "GetedWaterValue", "Забирается воды из внешних источников", "{$} л/с (max = {GetedWaterValueMax} л/с )"
     AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум"
     AddNewElement "GetingWaterCount", "Установлено на водоисточники"
+    AddNewElement "WaterEternal", "Бесконечный запас воды", , False, , False, False
 
     AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает", "{$} ({GDZSMansCountWork} газодымозащитников)"
     AddNewElement "GDZSChainsCountWorkSoft", "Звеньев ГДЗС работает в стандартных условиях", , , , , False
@@ -79,6 +80,7 @@ Private Sub fillElemCollection()
     AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
     AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется", "{$} ({GDZSMansRezCountHave} газодымозащитников)"
     AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
+'    AddNewElement "GDZSChainsCanBeFormed", "Звеньев ГДЗС Может быть сформировано"
     AddNewElement "GDZSMansCountWork", "Газодымозащитников работает"
     AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется"
     AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резервных звеньях имеется"

@@ -224,3 +224,10 @@ Dim corY As Double
 'Если ничего не было найдено, указываем, что всасывающая линия ни откуда не забирает воду
 shp.Cells("User.WSShapeID").Formula = 0
 End Sub
+
+
+
+
+
+
+

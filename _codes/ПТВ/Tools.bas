@@ -6,8 +6,9 @@ Public Sub GetValuesOfCellsFromTable(ShpIndex As Long, TableName As String)
 Dim dbs As Object, rst As Object
 Dim pth As String
 Dim ShpObj As Visio.Shape
-Dim SQL As String, Critria As String, PAModel As String, PASet As String
+Dim SQL As String, Criteria As String, PAModel As String, PASet As String
 Dim i, k As Integer 'Индексы итерации
+Dim fieldType As Long
 
 '---Определяем действие в случае ошибки открытия слишком большого количества таблиц
 On Error GoTo Tail
