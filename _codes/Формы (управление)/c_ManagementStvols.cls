@@ -177,11 +177,17 @@ Private Sub ShowWindow()
 'ѕроцедура показывает окно "”правление силами и средствами" и ассоциирует его с формой Base
 Dim otherForm As Object
 
+'    If AnyFormsShowed(otherForm) Then
+'        Set wAddon = ActiveWindow.Windows.Add("Stvols", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , , "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+'    Else
+'        Set wAddon = ActiveWindow.Windows.Add("Stvols", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , 210, "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+'    End If
     If AnyFormsShowed(otherForm) Then
-        Set wAddon = ActiveWindow.Windows.Add("Stvols", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , , "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+        Set wAddon = ActiveWindow.Windows.Add("Stvols", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, , "”пр", "”пр")
     Else
-        Set wAddon = ActiveWindow.Windows.Add("Stvols", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , 210, "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+        Set wAddon = ActiveWindow.Windows.Add("Stvols", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, 210, "”пр", "”пр")
     End If
+    
     
     Set v_ManagementStvols = f_ManagementStvols
     v_ManagementStvols.Caption = "Stvols"

@@ -2,8 +2,8 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} f_HTMLDataRedact 
    Caption         =   "Общие данные"
    ClientHeight    =   5175
-   ClientLeft      =   48
-   ClientTop       =   372
+   ClientLeft      =   45
+   ClientTop       =   375
    ClientWidth     =   8580
    OleObjectBlob   =   "f_HTMLDataRedact.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -37,7 +37,7 @@ Private Sub cb_Cancel_Click()
 End Sub
 
 Private Sub cb_Save_Click()
-    targetShape.Cells("Prop.Common").FormulaU = """" & Me.tb_HTMLText & """"
+    targetShape.Cells("Prop.Common").FormulaU = """" & Replace(Me.tb_HTMLText, Chr(34), "'") & """"
     
     Me.Hide
 End Sub

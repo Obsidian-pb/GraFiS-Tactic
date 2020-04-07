@@ -173,12 +173,24 @@ Private Sub ShowWindow()
 'ѕроцедура показывает окно "”правление силами и средствами" и ассоциирует его с формой Base
 Dim otherForm As Object
 
+'    If AnyFormsShowed(otherForm) Then
+'        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , , "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+'    Else
+'        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , 210, "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+'    End If
     If AnyFormsShowed(otherForm) Then
-        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , , "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, , "”пр", "”пр")
     Else
-        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , 210, "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, 210, "”пр", "”пр")
     End If
-    
+
+'If WarningsForm.Visible = True Then
+'       Set wAddon = ActiveWindow.Windows.Add("TacticDataForm", visWSVisible + visWSAnchorMerged + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, , "MC", "MC")
+'Else
+'       Set wAddon = ActiveWindow.Windows.Add("TacticDataForm", visWSVisible + visWSAnchorMerged + visWSDockedBottom, visAnchorBarAddon, , , 600, 210, "MC", "MC")
+'End If
+
+
     Set v_ManagementGDZS = f_ManagementGDZS
     v_ManagementGDZS.Caption = "GDZS"
 
