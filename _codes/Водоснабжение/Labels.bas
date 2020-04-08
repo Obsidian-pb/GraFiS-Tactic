@@ -120,6 +120,7 @@ On Error GoTo EX
     CellsVal(3) = ShpObj.Cells("EndTrigger").Result(visUnitsString)
     
     If CellsVal(0) = CellsVal(1) Or CellsVal(2) = CellsVal(3) Then
+        ShpObj.Cells("GlueType").FormulaU = 4
         ShpObj.Delete
     End If
 Exit Sub
@@ -165,19 +166,19 @@ vsi_ShapeIndex = 0
 '---Вбрасываем коннектор и соединяем фигуру водоисточника и ochag
     Set mstrConnection = ThisDocument.Masters("Distance")
     Set shpConnection = Application.ActiveWindow.Page.drop(mstrConnection, 2, 2)
-    
-    If vsi_ShapeIndex = 0 And Contex = 1 Then
-        pntX = ShpObj.CellsU("pinX") + 300
-        pntY = ShpObj.CellsU("pinY") + 300
-        Set shpTarget = Application.ActiveWindow.Page.drop(Application.Documents.Item("Водоснабжение.vss").Masters.ItemU("Объем открытого водоисточника"), pntX, pntY)
-    End If
-        
+  
     Set vsoCell1 = shpConnection.CellsU("BeginX")
     Set vsoCell2 = ShpObj.CellsSRC(1, 1, 0)
         vsoCell1.GlueTo vsoCell2
-    Set vsoCell1 = shpConnection.CellsU("EndX")
-    Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
+    
+    If vsi_ShapeIndex = 0 And Contex = 1 Then
+        shpConnection.CellsU("EndX") = ShpObj.CellsU("pinX") + 300
+        shpConnection.CellsU("EndY") = ShpObj.CellsU("pinY") + 300
+    Else
+        Set vsoCell1 = shpConnection.CellsU("EndX")
+        Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
         vsoCell1.GlueTo vsoCell2
+    End If
 
 '---Определяем свойства фигуры коннектора i strelki
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLOLineRouteExt).FormulaU = 1
@@ -189,11 +190,7 @@ vsi_ShapeIndex = 0
         ShpObj.ID & "!PinY+Sheet." & ShpObj.ID & "!Height*0.5,EndY>Sheet." & _
         ShpObj.ID & "!PinY-Sheet." & ShpObj.ID & "!Height*0.5)"
     shpConnection.CellsSRC(visSectionFirstComponent, 0, 1).FormulaU = CellFormula
-        
-'        If vsi_ShapeIndex = 0 Then
-'            shpTarget.Delete
-'        End If
-   
+      
 '---Ставим фокус
     Application.ActiveWindow.DeselectAll
     Application.ActiveWindow.Select ShpObj, visSelect
