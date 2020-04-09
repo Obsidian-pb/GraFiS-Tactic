@@ -237,11 +237,11 @@ Public Sub ConnectedShapesLostCheck(ShpObj As Visio.Shape)
 'Процедура проверяет, не была ли удалена одна из фигур соединенных коннектором, и если была, то удаляет сам коннектор
 Dim CellsVal(4) As String
     
-    If ShpObj Is Nothing Then MsgBox "12"
+'    If ShpObj Is Nothing Then MsgBox "12"
     
 On Error GoTo EX
     
-    
+'    Debug.Print ShpObj.Name
     
     CellsVal(0) = ShpObj.Cells("BegTrigger").FormulaU
     CellsVal(1) = ShpObj.Cells("BegTrigger").Result(visUnitsString)
@@ -257,7 +257,5 @@ Exit Sub
 EX:
     'Ошибка
 End Sub
-
-
 
 
