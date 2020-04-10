@@ -411,6 +411,21 @@ Public Function IsFirstDrop(ShpObj As Visio.Shape)
     End If
 End Function
 
+'--------------------------------Работа со слоями-------------------------------------
+Public Function GetLayerNumber(ByRef layerName As String) As Integer
+'Получаем номер слоя по его названию. Если слоя нет - он будет создан
+Dim layer As Visio.layer
+
+    For Each layer In Application.ActivePage.Layers
+        If layer.Name = layerName Then
+            GetLayerNumber = layer.Index - 1
+            Exit Function
+        End If
+    Next layer
+    
+    Set layer = Application.ActivePage.Layers.Add(layerName)
+    GetLayerNumber = layer.Index - 1
+End Function
 
 
 '--------------------------------Сохранение лога ошибки-------------------------------------

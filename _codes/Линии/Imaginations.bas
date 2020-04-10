@@ -250,6 +250,7 @@ Const masterName = "Напорная линия"  'Ранее: "Рукав - скатка"
     Set ShapeFrom = ThisDocument.Masters(masterName).Shapes(1)
     IDTo = ShapeTo.ID
     IDFrom = ThisDocument.Masters(masterName).Index
+    Debug.Print ShapeFrom.Name
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
     CloneSectionUniverseNames 240, IDFrom, IDTo
@@ -353,9 +354,9 @@ End Sub
 Function LayerImport(ShapeFromID As Long, ShapeToID As Long) As String
 'Функция возвращает номер слоя в текущем документе соответствующего слою в документе мастера
 Dim ShapeFrom As Visio.Shape
-Dim LayerNumber As Integer, LayerName As String
+Dim LayerNumber As Integer, layerName As String
 Dim Flag As Boolean
-Dim vsoLayer As Visio.Layer
+Dim vsoLayer As Visio.layer
 
     On erro GoTo EX
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
@@ -363,22 +364,22 @@ Dim vsoLayer As Visio.Layer
 '    MsgBox ThisDocument.Masters(ShapeFromID)
     
 '---Получаем название слоя соответственно номеру в исходном документе
-    LayerName = ShapeFrom.Layer(1).Name
+    layerName = ShapeFrom.layer(1).Name
 
 '---Проверяем есть ли в текущем документе слой с таким именем
     For i = 1 To Application.ActivePage.Layers.Count
-        If Application.ActivePage.Layers(i).Name = LayerName Then
+        If Application.ActivePage.Layers(i).Name = layerName Then
             Flag = True
         End If
     Next i
 
 '---В соответствии с полученным названием определяем номер слоя в текущем документе
     If Flag = True Then
-        LayerNumber = Application.ActivePage.Layers(LayerName).Index
+        LayerNumber = Application.ActivePage.Layers(layerName).Index
     Else
     '---Создаем новый слой с именем слоя к которому принадлежит исходная фигура
-        Set vsoLayer = Application.ActiveWindow.Page.Layers.Add(LayerName)
-        vsoLayer.NameU = LayerName
+        Set vsoLayer = Application.ActiveWindow.Page.Layers.Add(layerName)
+        vsoLayer.NameU = layerName
         vsoLayer.CellsC(visLayerColor).FormulaU = "255"
         vsoLayer.CellsC(visLayerStatus).FormulaU = "0"
         vsoLayer.CellsC(visLayerVisible).FormulaU = "1"
@@ -389,7 +390,7 @@ Dim vsoLayer As Visio.Layer
         vsoLayer.CellsC(visLayerGlue).FormulaU = "1"
         vsoLayer.CellsC(visLayerColorTrans).FormulaU = "0%"
     '---Присваиваем номер нового слоя
-        LayerNumber = Application.ActivePage.Layers(LayerName).Index
+        LayerNumber = Application.ActivePage.Layers(layerName).Index
     End If
         
 LayerImport = Chr(34) & LayerNumber - 1 & Chr(34)
@@ -695,8 +696,9 @@ Dim diameter As Integer
     
     'Свойства проброса
     '---Свойства линии
-        ShpObj.Cells("LinePattern").Formula = 16                                                            'Пунктир
-        ShpObj.Cells("LineWeight").Formula = "0.24 pt"                                                      'Тонкая линия
+        ShpObj.Cells("LinePattern").Formula = 16                                                                                'Пунктир
+        ShpObj.Cells("LineWeight").Formula = "0.24 pt"                                                                          'Тонкая линия
+        ShpObj.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пробросы рукавов")    'Добавляем в слой пробросов
     '---Стили
         ShpObj.Cells("LinePattern").FormulaU = "Styles!Р_Пробр!LinePattern"
         ShpObj.Cells("LineWeight").FormulaU = "Styles!Р_Пробр!LineWeight"
