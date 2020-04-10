@@ -550,4 +550,32 @@ EX:
     SaveLog Err, "m_Tools.IsGFSShapeWithIP"
 End Function
 
-
+'-----------------------------------------Поиск точки----------------------------------------------
+Public Function GetPointOnLineShape(ByRef center As c_Vector, ByRef lineShape As Visio.Shape, _
+                                    ByVal radiuss As Double, Optional ByVal segmentNumber As Byte = 0) As c_Vector
+'Находим первую точку на линии
+Const pi = 3.1415                           'Число Пи
+Const oneOfHundredOfPerimeter = 0.06283     'угол - одна сотая окружности в радианах
+Dim pointTolerance As Double                'Точность поиска хита с линией для каждой из точек окружности
+Dim checkPoint As c_Vector
+Dim i As Byte
+    
+    Dim shp As Visio.Shape
+    
+    pointTolerance = pi * radiuss / 100
+    
+    Set checkPoint = New c_Vector
+    
+    For i = segmentNumber To 99
+        checkPoint.Angle = i * oneOfHundredOfPerimeter
+        checkPoint.x = checkPoint.x * radiuss + center.x
+        checkPoint.y = checkPoint.y * radiuss + center.y
+        If lineShape.HitTest(checkPoint.x, checkPoint.y, pointTolerance) Then
+'            Set shp = Application.ActivePage.DrawRectangle(checkPoint.x - 0.5, checkPoint.y - 0.5, checkPoint.x + 0.5, checkPoint.y + 0.5)
+            checkPoint.segmentNumber = i
+            Set GetPointOnLineShape = checkPoint
+            Exit Function
+        End If
+    Next i
+    
+End Function
