@@ -52,8 +52,9 @@ Dim targetPage As Visio.Page
 
 '---ѕредлагаем пользователю указать страницу дл€ анализа
     SeetsSelectForm.Show
+    If SeetsSelectForm.SelectedSheet = "" Then Exit Sub
     Set targetPage = Application.ActiveDocument.Pages(SeetsSelectForm.SelectedSheet)
-
+    
 '---обновл€ем имеющиес€ значени€ свойств
     A.Refresh targetPage.Index
 
