@@ -142,23 +142,20 @@ Dim pnt1 As Long, pnt2 As Long
         Cell1.GlueTo Cell2
         
         
-    '---Задаем привязку к ConnectionPoints фигуры подпси
-    CellFormula = "IF(BeginX<Sheet." & ShpFROM.ID & "!PinX,PAR(PNT(Sheet." & ShpFROM.ID & _
-        "!Connections.LeftConPoint.X,Sheet." & ShpFROM.ID & "!Connections.LeftConPoint.Y)),PAR(PNT(Sheet." & ShpFROM.ID & _
-        "!Connections.RIghtConPoint.X,Sheet." & ShpFROM.ID & "!Connections.RIghtConPoint.Y)))"
+    '---Задаем привязку к ConnectionPoints фигуры подписи
+    CellFormula = "PAR(PNT(Sheet." & ShpFROM.ID & "!Connections.ConPoint.X," & _
+                          "Sheet." & ShpFROM.ID & "!Connections.ConPoint.Y))"
         shpConnection.CellsU("EndX").FormulaU = CellFormula
         shpConnection.CellsU("EndY").FormulaU = CellFormula
+    
+    '---Задаем настройку поведения привязки для подписи
+    CellFormula = "IF(Sheet." & shpConnection.ID & "!BeginX<PinX,Width*0,Width*1)"
+        ShpFROM.CellsU("Connections.ConPoint.X").FormulaU = CellFormula
     
 '---Определяем свойства фигуры коннектора
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLOLineRouteExt).FormulaU = 1
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLORouteStyle).FormulaU = 16
-    
-    CellFormula = "AND(EndX>Sheet." & ShpTO.ID & "!PinX-Sheet." & ShpTO.ID & "!Width*0.5,EndX<Sheet." & _
-        ShpTO.ID & "!PinX+Sheet." & ShpTO.ID & "!Width*0.5,EndY<Sheet." & _
-        ShpTO.ID & "!PinY+Sheet." & ShpTO.ID & "!Height*0.5,EndY>Sheet." & _
-        ShpTO.ID & "!PinY-Sheet." & ShpTO.ID & "!Height*0.5)"
-    shpConnection.CellsSRC(visSectionFirstComponent, 0, 1).FormulaU = CellFormula
-   
+      
    CellFormula = "Sheet." & ShpFROM.ID & "!LineColor"
     shpConnection.Cells("LineColor").FormulaU = CellFormula
    
@@ -170,7 +167,6 @@ Dim pnt1 As Long, pnt2 As Long
     
 Exit Sub
 EX:
-'    MsgBox "В ходе выполнения произошла ошибка, если она будет повторяться - свяжитесь с разработчиком!"
     SaveLog Err, "InsertLabelSquare"
 '---Ставим фокус на подписи
     Application.ActiveWindow.DeselectAll
@@ -237,11 +233,7 @@ Public Sub ConnectedShapesLostCheck(ShpObj As Visio.Shape)
 'Процедура проверяет, не была ли удалена одна из фигур соединенных коннектором, и если была, то удаляет сам коннектор
 Dim CellsVal(4) As String
     
-'    If ShpObj Is Nothing Then MsgBox "12"
-    
-On Error GoTo EX
-    
-'    Debug.Print ShpObj.Name
+    On Error GoTo EX
     
     CellsVal(0) = ShpObj.Cells("BegTrigger").FormulaU
     CellsVal(1) = ShpObj.Cells("BegTrigger").Result(visUnitsString)
@@ -249,6 +241,7 @@ On Error GoTo EX
     CellsVal(3) = ShpObj.Cells("EndTrigger").Result(visUnitsString)
     
     If CellsVal(0) = CellsVal(1) Or CellsVal(2) = CellsVal(3) Then
+        FindAndDeleteLabels ShpObj
         ShpObj.Delete
     End If
     
@@ -258,4 +251,16 @@ EX:
     'Ошибка
 End Sub
 
+Private Sub FindAndDeleteLabels(ByRef shp As Visio.Shape)
+'Ищем и удаляем подписи к которым привязана данная фигура коннектора
+Dim con As Visio.Connect
 
+    For Each con In shp.FromConnects
+        If IsGFSShapeWithIP(con.ToSheet, 152) Then con.ToSheet.Delete
+        If IsGFSShapeWithIP(con.FromSheet, 152) Then con.FromSheet.Delete
+    Next con
+    For Each con In shp.Connects
+        If IsGFSShapeWithIP(con.ToSheet, 152) Then con.ToSheet.Delete
+        If IsGFSShapeWithIP(con.FromSheet, 152) Then con.FromSheet.Delete
+    Next con
+End Sub

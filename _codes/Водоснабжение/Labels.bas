@@ -120,13 +120,29 @@ On Error GoTo EX
     CellsVal(3) = ShpObj.Cells("EndTrigger").Result(visUnitsString)
     
     If CellsVal(0) = CellsVal(1) Or CellsVal(2) = CellsVal(3) Then
-        ShpObj.Cells("GlueType").FormulaU = 4
+'        ShpObj.Cells("GlueType").FormulaU = 4
+        FindAndDeleteLabels ShpObj
         ShpObj.Delete
     End If
 Exit Sub
 EX:
     'Ошибка
 End Sub
+
+Private Sub FindAndDeleteLabels(ByRef shp As Visio.Shape)
+'Ищем и удаляем подписи к которым привязана данная фигура коннектора
+Dim con As Visio.Connect
+
+    For Each con In shp.FromConnects
+        If IsGFSShapeWithIP(con.ToSheet, 152) Then con.ToSheet.Delete
+        If IsGFSShapeWithIP(con.FromSheet, 152) Then con.FromSheet.Delete
+    Next con
+    For Each con In shp.Connects
+        If IsGFSShapeWithIP(con.ToSheet, 152) Then con.ToSheet.Delete
+        If IsGFSShapeWithIP(con.FromSheet, 152) Then con.FromSheet.Delete
+    Next con
+End Sub
+
 
 
 Function InsertDistance(ShpObj As Visio.Shape, Optional Contex As Integer = 0)

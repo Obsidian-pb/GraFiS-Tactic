@@ -5,16 +5,16 @@ Public Sub ProductionImport(shp As Visio.Shape)
 'Процедура возвращающая и присваивающая ячейке Водоотдача в соответсвии с видом водовода и напором
 '---Объявляем переменные
 'Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 '---Проверяем к какой именно фигуре относится данная ячейка
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения Типа струи при заданном Виде струи для текущей фигуры
-    Select Case IndexPers
+    Select Case indexPers
         Case Is = 50 'Пожарный гидрант
             Criteria = "[Вид водовода] = '" & shp.Cells("Prop.PipeType").ResultStr(visUnitsString) & "' And " & _
                 "[Диаметр водовода] = " & shp.Cells("Prop.PipeDiameter").ResultStr(visUnitsString) & " And " & _

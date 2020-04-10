@@ -964,6 +964,7 @@
     Fields.Value: "оз. Малое"; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
     User.Version: 1; User.Version.Prompt: ""; 
+    User.IndexPers: 152; User.IndexPers.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventDblClick: OPENTEXTWIN(); 
   Section Object, row: visRowFill>>>
@@ -1058,6 +1059,7 @@
     Fields.Value: "1000"; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 0; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
     User.Version: 1; User.Version.Prompt: ""; 
+    User.IndexPers: 152; User.IndexPers.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventDblClick: OPENTEXTWIN(); 
   Section Object, row: visRowFill>>>
@@ -3610,7 +3612,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.Check: CALLTHIS("ConnectedShapesLostCheck";"ВодоснабжениеНовое")+DEPENDSON(BeginX;EndX); User.Check.Prompt: ""; 
+    User.Check: CALLTHIS("ConnectedShapesLostCheck";"ВодоснабжениеНовое")+DEPENDSON(EndX); User.Check.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     
   Section Object, row: visRowFill>>>

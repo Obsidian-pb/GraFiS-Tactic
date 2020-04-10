@@ -129,35 +129,35 @@ Dim item As c_Point
 IsInCollection = False
 End Function
 
-Public Sub NormalizeCollection(ByRef col As Collection)
-'Нормализуем коллекцию координат точек для отрисовки
-Dim pnt1 As c_Point
-Dim pnt2 As c_Point
-Dim pnt3 As c_Point
-Dim vector1 As c_Point
-Dim vector2 As c_Point
-Dim i As Long
-Dim angle1 As Double
-Dim angle2 As Double
-    
-    i = 1
-    Do While i < col.Count - 1
-        Set pnt1 = col.item(i)
-        Set pnt2 = col.item(i + 1)
-        Set pnt3 = col.item(i + 2)
-        Set vector1 = New c_Point
-            vector1.SetData (pnt2.x - pnt1.x), (pnt2.y - pnt1.y)
-        Set vector2 = New c_Point
-            vector2.SetData (pnt3.x - pnt2.x), (pnt3.y - pnt2.y)
-        
-        If vector1.GetTan = vector2.GetTan Then
-            col.Remove i + 1
-        Else
-            i = i + 1
-        End If
-    Loop
-    
-End Sub
+'Public Sub NormalizeCollection(ByRef col As Collection)
+''Нормализуем коллекцию координат точек для отрисовки
+'Dim pnt1 As c_Point
+'Dim pnt2 As c_Point
+'Dim pnt3 As c_Point
+'Dim vector1 As c_Point
+'Dim vector2 As c_Point
+'Dim i As Long
+'Dim angle1 As Double
+'Dim angle2 As Double
+'
+'    i = 1
+'    Do While i < col.Count - 1
+'        Set pnt1 = col.item(i)
+'        Set pnt2 = col.item(i + 1)
+'        Set pnt3 = col.item(i + 2)
+'        Set vector1 = New c_Point
+'            vector1.SetData (pnt2.x - pnt1.x), (pnt2.y - pnt1.y)
+'        Set vector2 = New c_Point
+'            vector2.SetData (pnt3.x - pnt2.x), (pnt3.y - pnt2.y)
+'
+'        If vector1.GetTan = vector2.GetTan Then
+'            col.Remove i + 1
+'        Else
+'            i = i + 1
+'        End If
+'    Loop
+'
+'End Sub
 
 '--------------------------------Работа со слоями-------------------------------------
 Public Function GetLayerNumber(ByRef layerName As String) As Integer

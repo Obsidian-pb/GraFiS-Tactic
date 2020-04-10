@@ -683,8 +683,7 @@
   Section: Character>>>
     Char.Font: Styles!Пр_Подписи!Char.Font; Char.Color: Styles!Пр_Подписи!Char.Color; Char.Style: Styles!Пр_Подписи!Char.Style; Char.Case: Styles!Пр_Подписи!Char.Case; Char.Pos: Styles!Пр_Подписи!Char.Pos; Char.FontScale: Styles!Пр_Подписи!Char.FontScale; Char._Unused6: 0; Char.Size: 8 пт*200/User.PageScale; Char.DblUnderline: Styles!Пр_Подписи!Char.DblUnderline; Char.Overline: Styles!Пр_Подписи!Char.Overline; Char.Strikethru: Styles!Пр_Подписи!Char.Strikethru; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: Styles!Пр_Подписи!Char.DoubleStrikethrough; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: Styles!Пр_Подписи!Char.Letterspace; Char.ColorTrans: Styles!Пр_Подписи!Char.ColorTrans; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: ConnectionPts>>>
-    Connections.LeftConPoint.X: Width*0; Connections.LeftConPoint.Y: 0 м; Connections.LeftConPoint.DirX: 0 м; Connections.LeftConPoint.DirY: 0 м; Connections.LeftConPoint.Type: 0; Connections.LeftConPoint.AutoGen: FALSE; 
-    Connections.RIghtConPoint.X: Width*1; Connections.RIghtConPoint.Y: 0 м; Connections.RIghtConPoint.DirX: 0 м; Connections.RIghtConPoint.DirY: 0 м; Connections.RIghtConPoint.Type: 0; Connections.RIghtConPoint.AutoGen: FALSE; 
+    Connections.ConPoint.X: Width*0; Connections.ConPoint.Y: 0 м; Connections.ConPoint.DirX: 0 м; Connections.ConPoint.DirY: 0 м; Connections.ConPoint.Type: 0; Connections.ConPoint.AutoGen: FALSE; 
   Section: FirstComponent>>>
     Geometry1.NoFill: TRUE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
     Geometry1.X1: Width*0; Geometry1.Y1: 0 м; 

@@ -4787,7 +4787,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.Check: CALLTHIS("ConnectedShapesLostCheck";"Очаг")+DEPENDSON(BeginX;EndX); User.Check.Prompt: ""; 
+    User.Check: CALLTHIS("ConnectedShapesLostCheck";"Очаг")+DEPENDSON(EndX); User.Check.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     
   Section Object, row: visRowFill>>>
