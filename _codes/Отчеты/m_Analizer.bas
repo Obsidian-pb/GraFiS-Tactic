@@ -74,7 +74,7 @@ Dim targetPage As Visio.Page
     End If
     '---Звеньев ГДЗС
     ShpObj.Cells("Prop.GDZS").Formula = """" & A.Sum("GDZSChainsCountWork;GDZSChainsRezCountHave") & "/" & A.Result("GDZSChainsCountNeed") & """"
-    '---Стволов
-    ShpObj.Cells("Prop.Stv").Formula = """" & A.Result("StvolWHave") & "/" & PF_RoundUp(A.Result("NeedStreamW") / ShpObj.Cells("Prop.StvWaterExpense").Result(visNumber)) & """"
+    '---ПА на водоисточниках
+    ShpObj.Cells("Prop.PAOnWS").Formula = """" & A.Result("GetingWaterCount") & "/" & A.Result("PANeedOnWaterSource") & """"
 
 End Sub

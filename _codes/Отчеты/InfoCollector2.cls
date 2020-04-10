@@ -66,8 +66,8 @@ Dim latestSquareTime As Date
                 '---Пожарные автомобили-----------
                     Case Is = ipAC   'Автоцистерны
                         .Raise "MainOverallHave;MainPAHave;ACCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                     Case Is = indexPers.ipANR 'АНР
                         .Raise "MainOverallHave;MainPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
@@ -595,7 +595,8 @@ Dim latestSquareTime As Date
                     
                 End Select
                 'Вычисляем некоторые элементы по CellName
-                .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300"
+                .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300;" & _
+                                    "Prop.Foam"
                 End With    'elements
                 
 '            End If
@@ -613,8 +614,6 @@ Dim latestSquareTime As Date
         .SetVal "PAHighHave", .Sum("ALCount;AKPCount")
         .SetVal "TechnicsNotMchsHave", .Result("TotalTechCount") - .Result("TotalFireCount")
         .SetVal "TechnicsNotMchsOtherHave", .Result("TechnicsNotMchsHave") - .Result("MVDCount") - .Result("SMPCount")
-        .SetVal "ACNeed", PF_RoundUp(.Result("PersonnelNeed") / 4)
-        .SetVal "ANRNeed", PF_RoundUp(.Result("PersonnelNeed") / 5)
         .SetVal "StvolWBNeed", PF_RoundUp(.Result("NeedStreamW") / 3.7)
         .SetVal "StvolWANeed", PF_RoundUp(.Result("NeedStreamW") / 7.4)
         .SetVal "StvolWLNeed", PF_RoundUp(.Result("NeedStreamW") / 12)
@@ -635,12 +634,16 @@ Dim latestSquareTime As Date
         '---расчет требуемого кол-ва резервных ввеньев для работы в сложных условиях
         .Raise "GDZSChainsRezCountNeed", .Result("GDZSChainsCountWorkHard")
         .Raise "GDZSMansRezCountNeed", .Result("GDZSChainsCountWorkHard") * 5
-        '---Общее количесатво требуемых звеноьев
+        '---Общее количесатво требуемых газодымозащитников
+        .SetVal "GDZSMansCountNeed", .Sum("GDZSMansCountWork;GDZSMansRezCountNeed")
+        '---Общее количесатво требуемых звеньев
         .SetVal "GDZSChainsCountNeed", .Sum("GDZSChainsCountWork;GDZSChainsRezCountNeed")
         
         
         'Итог
         .Raise "PersonnelNeed", .Result("GDZSMansRezCountNeed")
+        .SetVal "ACNeed", PF_RoundUp(.Result("PersonnelNeed") / 4)
+        .SetVal "ANRNeed", PF_RoundUp(.Result("PersonnelNeed") / 5)
     End With
     
     

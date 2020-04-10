@@ -69,9 +69,10 @@ Private Sub fillElemCollection()
     AddNewElement "OtherTechincsHave", "Прочей техники имеется"
     AddNewElement "RSCHSTechincsHave", "Техники РСЧС имеется"
 
-    AddNewElement "GetedWaterValue", "Забирается воды из внешних источников", "{$} л/с (max = {GetedWaterValueMax} л/с )"
-    AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум"
+    AddNewElement "GetedWaterValue", "Забирается воды из внешних источников", "{$} л/с (max = {GetedWaterValueMax} л/с )", , , , False
+    AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум", , , , , False
     AddNewElement "GetingWaterCount", "Установлено на водоисточники"
+    AddNewElement "PANeedOnWaterSource", "Требуется установить на водоисточники"
     AddNewElement "WaterEternal", "Бесконечный запас воды", , False, , False, False
 
     AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает", "{$} ({GDZSMansCountWork} газодымозащитников)"
@@ -120,7 +121,7 @@ Private Sub fillElemCollection()
     
     AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)", "{$} л."
     AddNewElement "WaterValueHave", "Воды имеется", "{$} л."
-    AddNewElement "PANeedOnWaterSource", "Требуется установить на водоисточники"
+    AddNewElement "FoamValueeHave", "Пенообразователя имеется", "{$} л.", , "Prop.Foam"
 
     AddNewElement "ACCount", "АЦ имеется"
     AddNewElement "ACNeed", "АЦ требуется"
@@ -279,7 +280,7 @@ Dim addFlag As Boolean
         End If
         
         If searchByCallName Then
-            If InStr(0, elem.callName, searchString) > 0 Then
+            If InStr(1, elem.callName, searchString) > 0 Then
                 addFlag = True
             End If
         End If
