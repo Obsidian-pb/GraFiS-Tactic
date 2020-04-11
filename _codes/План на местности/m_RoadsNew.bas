@@ -21,8 +21,8 @@ On Error GoTo EX
 '2 Присваиваем новой фигуре требуемые для нее свойства
     BckRoad.Cells("LineColor").FormulaForce = "GUARD(0)"
 '    BckRoad.Cells("EventXFMod").FormulaForce = "CALLTHIS(" & Chr(34) & "PS_SendMeBack" & Chr(34) & ";" & Chr(34) & "План_на_местности" & Chr(34) & ")"
-    BckRoad.Cells("Scratch.A1").Formula = "ISERR(" & FaceRoad.NameID & "!PinX)"
-    BckRoad.Cells("Scratch.B1").Formula = "DEPENDSON(Scratch.A1)+CALLTHIS(" & Chr(34) & "PS_CheckDeletion" & Chr(34) & ";" & Chr(34) & "План_на_местности" & Chr(34) & ")"
+    BckRoad.Cells("Scratch.A1").formula = "ISERR(" & FaceRoad.NameID & "!PinX)"
+    BckRoad.Cells("Scratch.B1").formula = "DEPENDSON(Scratch.A1)+CALLTHIS(" & Chr(34) & "PS_CheckDeletion" & Chr(34) & ";" & Chr(34) & "План_на_местности" & Chr(34) & ")"
     
 '3 связываем фигуру фона с лицевой
     BckRoad.Cells("BeginX").FormulaForce = "GUARD(" & FaceRoad.NameID & "!BeginX)"
@@ -58,8 +58,8 @@ Dim str As String
 '2 Присваиваем новой фигуре требуемые для нее свойства
     BckRoad.Cells("LineColor").FormulaForce = "GUARD(0)"
     BckRoad.Cells("EventXFMod").FormulaForce = "CALLTHIS(" & Chr(34) & "PS_SendMeBack" & Chr(34) & ";" & Chr(34) & "План_на_местности" & Chr(34) & ")"
-    BckRoad.Cells("Scratch.A1").Formula = "ISERR(" & FaceRoad.NameID & "!PinX)"
-    BckRoad.Cells("Scratch.B1").Formula = "DEPENDSON(Scratch.A1)+CALLTHIS(" & Chr(34) & "PS_CheckDeletion" & Chr(34) & ";" & Chr(34) & "План_на_местности" & Chr(34) & ")"
+    BckRoad.Cells("Scratch.A1").formula = "ISERR(" & FaceRoad.NameID & "!PinX)"
+    BckRoad.Cells("Scratch.B1").formula = "DEPENDSON(Scratch.A1)+CALLTHIS(" & Chr(34) & "PS_CheckDeletion" & Chr(34) & ";" & Chr(34) & "План_на_местности" & Chr(34) & ")"
     
 '3 связываем фигуру фона с лицевой
     BckRoad.Cells("Width").FormulaForce = "GUARD(" & FaceRoad.NameID & "!Width)"

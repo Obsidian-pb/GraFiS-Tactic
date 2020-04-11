@@ -10,7 +10,7 @@ Dim shp As Visio.Shape
     'ѕеребираем все фигуры в выделении и если очередна€ фигура имеет такую же €чейку - присваиваем ей новое значение
     For Each shp In Application.ActiveWindow.Selection
         If shp.CellExists(aS_CellName, 0) = True Then
-            shp.Cells(aS_CellName).Formula = aB_Value
+            shp.Cells(aS_CellName).formula = aB_Value
         End If
     Next shp
     

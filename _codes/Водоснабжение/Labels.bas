@@ -195,11 +195,14 @@ vsi_ShapeIndex = 0
         Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
         vsoCell1.GlueTo vsoCell2
     End If
+    
+''---ѕередаем водоисточнику значение рассто€ни€
+'    If ShpObj.CellExists("Prop.Distance", 0) = True Then ShpObj.Cells("Prop.Distance").FormulaU = "Sheet." & shpConnection.ID & "!Width"
 
 '---ќпредел€ем свойства фигуры коннектора i strelki
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLOLineRouteExt).FormulaU = 1
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLORouteStyle).FormulaU = 16
-    shpConnection.CellsSRC(visSectionObject, visRowLine, visLineColor).FormulaU = "THEMEGUARD(RGB(80,123,175))"
+    shpConnection.CellsSRC(visSectionObject, visRowLine, visLineColor).FormulaU = "THEMEGUARD(RGB(0,176,240))"
 
     CellFormula = "AND(EndX>Sheet." & ShpObj.ID & "!PinX-Sheet." & ShpObj.ID & "!Width*0.5,EndX<Sheet." & _
         ShpObj.ID & "!PinX+Sheet." & ShpObj.ID & "!Width*0.5,EndY<Sheet." & _
