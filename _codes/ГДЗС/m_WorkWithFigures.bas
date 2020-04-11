@@ -79,7 +79,7 @@ Dim curHoseShape As Visio.Shape
 Dim curHoseDistance As Double
 Dim newHoseDistance As Double
 
-Dim prevHoseShapeID As Integer
+Dim curHoseShapeID As Integer
 
     On Error GoTo EX
 
@@ -112,18 +112,18 @@ Dim prevHoseShapeID As Integer
 
 '---Если была найдена фигура рукавной линии, к которой нужно приклеить звено
     If Not curHoseShape Is Nothing Then
-        prevHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
+        curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
     '---1 Проверяем было ли звено приклеено к линии
-        If prevHoseShapeID = 0 Then
+        If curHoseShapeID = 0 Then
         '---нет
-            SetHoseLineGDZSStatus curHoseShape.ID, ShpObj, True
+            SetHoseLineGDZSStatus curHoseShape, ShpObj, True
         Else
         '---да
         '---2 Проверяем было ли звено приклеено к другой линии
-            If prevHoseShapeID <> curHoseShape.ID Then
+            If curHoseShapeID <> curHoseShape.ID Then
             '---Снимаем привязку к звену прежней линии и ставим привязку для текущей
-                SetHoseLineGDZSStatus prevHoseShapeID, ShpObj, False
-                SetHoseLineGDZSStatus curHoseShape.ID, ShpObj, True
+                SetHoseLineGDZSStatus Application.ActivePage.Shapes.ItemFromID(curHoseShapeID), ShpObj, False
+                SetHoseLineGDZSStatus curHoseShape, ShpObj, True
             End If
         End If
         ShpObj.Cells("User.ShapeHoseID").Formula = curHoseShape.ID
@@ -133,13 +133,13 @@ Dim prevHoseShapeID As Integer
         RotateAtHoseLine ShpObj, NewVectorXY(x, y), curHoseShape
         '#END TEMP
     Else
-        prevHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
+        curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
         '---1 Проверяем было ли звено уже привязано к линии
-        If prevHoseShapeID <> 0 Then
-            Set curHoseShape = GetShapeByID(prevHoseShapeID)
+        If curHoseShapeID <> 0 Then
+            Set curHoseShape = GetShapeByID(curHoseShapeID)
             '---Если было привязано, и линия к которой она была привязана не удалена
             If Not curHoseShape Is Nothing Then
-                SetHoseLineGDZSStatus curHoseShape.ID, ShpObj, False
+                SetHoseLineGDZSStatus curHoseShape, ShpObj, False
             End If
         End If
         '---Указываем, что звено больше не работает с линией
@@ -155,18 +155,11 @@ EX:
     SaveLog Err, "PS_GlueToHose"
 End Sub
 
-Private Sub SetHoseLineGDZSStatus(ByVal shpID As Long, ByRef shpGDZS As Visio.Shape, ByVal isGDZS As Boolean)
-'Устанавливаем статус рукавной линии и ствола присоединенного к ней (только для рабочей)
+Private Sub SetHoseLineGDZSStatus(ByRef shp As Visio.Shape, ByRef shpGDZS As Visio.Shape, ByVal isGDZS As Boolean)
+'Устанавливаем статус рукавной илии и ствола присоединенного к ней (только для рабочей)
 Dim con As Visio.Connect
-Dim shp As Visio.Shape
 Dim extShp As Visio.Shape
-    
-    On Error GoTo EX
-    
-    '---Пытаемся обратиться к фигуре с shpID
-    Set shp = Application.ActivePage.Shapes.ItemFromID(shpID)
-    
-    '---Если isGDZS указывает, что со стволом работает звено ГДЗС
+
     If isGDZS Then
         For Each con In shp.Connects
             Set extShp = con.ToSheet
@@ -186,10 +179,7 @@ Dim extShp As Visio.Shape
             End If
         Next con
     End If
-    
-Exit Sub
-EX:
-    
+
 End Sub
 
 
@@ -228,6 +218,7 @@ Dim newCenter As c_Vector
 Dim vector1 As c_Vector
 Dim vector2 As c_Vector
 Dim vector3 As c_Vector
+Dim frml As String
     
     On Error GoTo EX
     
@@ -241,14 +232,20 @@ Dim vector3 As c_Vector
     If curPoint.IsSame(newCenter, 0.1) Then Exit Sub
     
     '2 размещаем фигуру в ближайшей точке
-    gdzsShp.Cells("PinX").Formula = str(newCenter.x)
-    gdzsShp.Cells("PinY").Formula = str(newCenter.y)
+'    gdzsShp.Cells("PinX").Formula = str(newCenter.x)
+'    gdzsShp.Cells("PinY").Formula = str(newCenter.y)
+    frml = GetGlueGDZSToHoseFormula(newCenter, hoseLineShp)
+    gdzsShp.Cells("PinX").FormulaU = frml
+    gdzsShp.Cells("PinY").FormulaU = frml
     
     '3 ищем две точки на линии
     Set vector1 = GetPointOnLineShape(curPoint, hoseLineShp, gdzsShp.Cells("Height").Result(visInches) / 2, 0)
     Set vector2 = GetPointOnLineShape(curPoint, hoseLineShp, gdzsShp.Cells("Height").Result(visInches) / 2, vector1.segmentNumber + 1)
     Set vector3 = NewVectorXY(vector1.x - vector2.x, vector1.y - vector2.y)
-    gdzsShp.Cells("Angle").Formula = str(vector3.Angle) & "deg"
+'    gdzsShp.Cells("Angle").Formula = str(vector3.Angle) & "deg"
+    frml = "Sheet." & hoseLineShp.ID & "!Angle+(" & str(vector3.Angle - hoseLineShp.Cells("Angle").Result(visDegrees)) & "deg)"
+    gdzsShp.Cells("Angle").FormulaU = frml
+    
 EX:
 '    Application.EventsEnabled = True
 End Sub
@@ -264,4 +261,19 @@ Dim distance As Double
     Set FindNearestHoseLinePoint = GetPointOnLineShape(curPoint, hoseLineShp, distance)
     
 End Function
+
+'-----------------------------------------Приклеивание фигуры звена к рукавной линии----------------------------------------------
+Private Function GetGlueGDZSToHoseFormula(ByRef curPoint As c_Vector, ByRef hoseLineShp As Visio.Shape) As String
+'Возвращает формулу приклеивания звена ГДЗС к рукавной линии
+Dim x As Double
+Dim y As Double
+
+    '1 переводим координаты в систему рукавной линии
+    hoseLineShp.XYFromPage curPoint.x, curPoint.y, x, y
+    
+    '2 формируем формулу
+    GetGlueGDZSToHoseFormula = "PAR(PNT(Sheet." & hoseLineShp.ID & "!Width*" & Replace(CStr(x / hoseLineShp.Cells("Width")), ",", ".") & _
+                               ",Sheet." & hoseLineShp.ID & "!Height*" & Replace(CStr(y / hoseLineShp.Cells("Height")), ",", ".") & "))"
+End Function
+
 
