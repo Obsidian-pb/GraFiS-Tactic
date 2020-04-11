@@ -619,7 +619,7 @@ Dim latestSquareTime As Date
         .SetVal "StvolWLNeed", PF_RoundUp(.Result("NeedStreamW") / 12)
         .SetVal "PANeedOnWaterSource", PF_RoundUp(.Result("NeedStreamW") / 32)
         .SetVal "RSCHSTechincsHave", .Result("TotalTechCount")
-        .SetVal "WaterValueNeed10min", .Result("NeedStreamW") * 600
+        .SetVal "WaterValueNeed10min", .Result("FactStreamW") * 600
         
         'ÃÄÇÑ
         .SetVal "GDZSChainsCountWork", .Sum("GDZSChainsCountWorkSoft;GDZSChainsCountWorkHard")

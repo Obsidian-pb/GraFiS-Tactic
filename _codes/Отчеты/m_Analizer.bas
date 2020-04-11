@@ -68,7 +68,8 @@ Dim targetPage As Visio.Page
     '---Запас воды (Если воды бесконечное количство, то значение имеющегося запаса воды должно указываться равным фактическому)
 '    tmp = A.Result("WaterValueNeed10min")
     If A.Result("WaterEternal") Then
-        ShpObj.Cells("Prop.WaterValue").Formula = """" & A.Result("WaterValueHave") & "/" & A.Result("WaterValueHave") & """"
+'        ShpObj.Cells("Prop.WaterValue").Formula = """" & A.Result("WaterValueHave") & "/" & A.Result("WaterValueHave") & """"
+        ShpObj.Cells("Prop.WaterValue").Formula = """" & A.Result("WaterValueNeed10min") & "/" & A.Result("WaterValueNeed10min") & """"     'Используем именно требуемое количество
     Else
         ShpObj.Cells("Prop.WaterValue").Formula = """" & A.Result("WaterValueHave") & "/" & A.Result("WaterValueNeed10min") & """"
     End If
