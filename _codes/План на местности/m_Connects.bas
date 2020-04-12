@@ -50,3 +50,80 @@ Dim FBeg As String, FEnd As String
         ShpObj.Cells("LineColor").FormulaU = "THEMEGUARD(RGB(112, 48, 160))"
   
 End Sub
+
+
+
+Function InsertDistance(ShpObj As Visio.Shape, Optional Contex As Integer = 0)
+'Процедура добавления strelki rasstoiania от соседних зданий
+'---Объявляем переменные
+Dim shpTarget As Visio.Shape
+Dim shpConnection As Visio.Shape, vsO_Shape As Visio.Shape
+Dim mstrConnection As Visio.Master, mstrSrelka As Visio.Master
+Dim vsoCell1 As Visio.cell, vsoCell2 As Visio.cell
+Dim CellFormula As String
+Dim vsi_ShapeIndex As Integer
+Dim lmax As Integer
+Dim inppw As Boolean
+
+vsi_ShapeIndex = 0
+
+'    On Error GoTo EX
+    InputDistanceForm.Show
+    If InputDistanceForm.Flag = False Then Exit Function  'Если был нажат кэнсел - выходим не обновляя
+    lmax = InputDistanceForm.lmax
+    inppw = InputDistanceForm.inppw
+    
+    '---Перебираем все фигуры и находим здания
+    For Each shpTarget In Application.ActivePage.Shapes
+        If shpTarget.CellExists("User.IndexPers", 0) = True And shpTarget.CellExists("User.Version", 0) = True Then 'Является ли фигура фигурой ГраФиС
+'            If shpTarget.Cells("User.Version") >= CP_GrafisVersion Then  'Проверяем версию фигуры
+                vsi_ShapeIndex = shpTarget.Cells("User.IndexPers")   'Определяем индекс фигуры ГраФиС
+                If vsi_ShapeIndex = 135 Then
+                '---Вбрасываем коннектор и соединяем фигуру нашего здания и соседнего
+                    Set mstrConnection = ThisDocument.Masters("Distance")
+                    Set shpConnection = Application.ActiveWindow.Page.Drop(mstrConnection, 2, 2)
+                  
+                    Set vsoCell1 = shpConnection.CellsU("EndX")
+                    Set vsoCell2 = ShpObj.CellsSRC(1, 1, 0)
+                        vsoCell1.GlueTo vsoCell2
+                    Set vsoCell1 = shpConnection.CellsU("BeginX")
+                    Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
+                        vsoCell1.GlueTo vsoCell2
+                    End If
+                    
+                ''---Проверяем длину линии и если она не подходит, удаляем
+                     If shpConnection.Cells("Width").ResultIU = 0 Then shpConnection.Delete
+                     If shpConnection.Cells("Width").ResultInt(visNumber) > lmax Then shpConnection.Delete
+'
+'                '---Определяем свойства фигуры коннектора i strelki
+'                    shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLOLineRouteExt).FormulaU = 1
+'                    shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLORouteStyle).FormulaU = 16
+'                    shpConnection.CellsSRC(visSectionObject, visRowLine, visLineColor).FormulaU = "THEMEGUARD(RGB(0,176,240))"
+'
+'                    CellFormula = "AND(EndX>Sheet." & ShpObj.ID & "!PinX-Sheet." & ShpObj.ID & "!Width*0.5,EndX<Sheet." & _
+'                        ShpObj.ID & "!PinX+Sheet." & ShpObj.ID & "!Width*0.5,EndY<Sheet." & _
+'                        ShpObj.ID & "!PinY+Sheet." & ShpObj.ID & "!Height*0.5,EndY>Sheet." & _
+'                        ShpObj.ID & "!PinY-Sheet." & ShpObj.ID & "!Height*0.5)"
+'                    shpConnection.CellsSRC(visSectionFirstComponent, 0, 1).FormulaU = CellFormula
+                Else
+                vsi_ShapeIndex = 0
+'                End If
+'            End If
+        End If
+     Next
+     
+'     If Contex = 0 And vsi_ShapeIndex = 0 Then Exit Function
+    
+      
+'---Ставим фокус
+    Application.ActiveWindow.DeselectAll
+    Application.ActiveWindow.Select ShpObj, visSelect
+
+Exit Function
+EX:
+    SaveLog Err, "InsertDistance"
+End Function
+
+
+
+
