@@ -215,6 +215,8 @@
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
 =>sheet: Sheet.5
+  Section: Action>>>
+    Actions.Reverse: "Реверс направления"; Actions.Reverse._Unused1: ""; Actions.Reverse._Unused2: ""; Actions.Reverse.Action: SETF(GetRef(Scratch.X1);GetVal(BeginX))+SETF(GetRef(Scratch.Y1);GetVal(BeginY))+SETF(GetRef(Scratch.A1);GetVal(EndX))+SETF(GetRef(Scratch.B1);GetVal(EndY))+SETF(GetRef(BeginX);GetVal(Scratch.A1))+SETF(GetRef(BeginY);GetVal(Scratch.B1))+SETF(GetRef(EndX);GetVal(Scratch.X1))+SETF(GetRef(EndY);GetVal(Scratch.Y1)); Actions.Reverse.Checked: 0; Actions.Reverse.Disabled: IF(STRSAME(Prop.ArrowStyle;"Двунаправленная");1;0); Actions.Reverse.ReadOnly: FALSE; Actions.Reverse.Invisible: FALSE; Actions.Reverse.BeginGroup: FALSE; Actions.Reverse.TagName: ""; Actions.Reverse.ButtonFace: "1146"; Actions.Reverse.SortKey: "10"; 
   Section: Character>>>
     Char.Font: 4; Char.Color: LineColor; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 8 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1033; 
   Section: Controls>>>
@@ -233,6 +235,8 @@
     Prop.Input: INDEX(0;Prop.Input.Format); Prop.Input.Prompt: "Способ определения значения длины"; Prop.Input.Label: "Способ определения"; Prop.Input.Format: "По масштабу;Вручную"; Prop.Input.SortKey: "30"; Prop.Input.Type: 1; Prop.Input.Invisible: FALSE; Prop.Input.Verify: FALSE; Prop.Input.LangID: 1049; Prop.Input.Calendar: 0; 
     Prop.Glue: INDEX(0;Prop.Glue.Format); Prop.Glue.Prompt: "'Приклеивание' концов линии к объектам"; Prop.Glue.Label: "Привязка к объектам"; Prop.Glue.Format: "Включена;Отключена"; Prop.Glue.SortKey: "40"; Prop.Glue.Type: 1; Prop.Glue.Invisible: FALSE; Prop.Glue.Verify: FALSE; Prop.Glue.LangID: 1049; Prop.Glue.Calendar: 0; 
     Prop.ArrowStyle: INDEX(1;Prop.ArrowStyle.Format); Prop.ArrowStyle.Prompt: "Направление стрелок"; Prop.ArrowStyle.Label: "Вид линии"; Prop.ArrowStyle.Format: "Однонаправленная;Двунаправленная;Однонаправленная сокращенная"; Prop.ArrowStyle.SortKey: "50"; Prop.ArrowStyle.Type: 1; Prop.ArrowStyle.Invisible: FALSE; Prop.ArrowStyle.Verify: FALSE; Prop.ArrowStyle.LangID: 1049; Prop.ArrowStyle.Calendar: 0; 
+  Section: Scratch>>>
+    Scratch.X1: 2 м; Scratch.Y1: 0 м; Scratch.A1: 0 м; Scratch.B1: 2 м; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: TextField>>>
