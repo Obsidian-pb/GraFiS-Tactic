@@ -196,9 +196,10 @@ vsi_ShapeIndex = 0
         vsoCell1.GlueTo vsoCell2
     End If
     
-''---Передаем водоисточнику значение расстояния
-'    If ShpObj.CellExists("Prop.Distance", 0) = True Then ShpObj.Cells("Prop.Distance").FormulaU = "Sheet." & shpConnection.ID & "!Width"
-
+''---Передаем водоисточнику значение длины для маркирования фигур с указанным расстоянием
+    If ShpObj.CellExists("User.Distance", 0) = False Then ShpObj.AddNamedRow visSectionUser, "Distance", 0
+    ShpObj.Cells("User.Distance").FormulaU = "Sheet." & shpConnection.ID & "!Width"
+        
 '---Определяем свойства фигуры коннектора i strelki
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLOLineRouteExt).FormulaU = 1
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLORouteStyle).FormulaU = 16

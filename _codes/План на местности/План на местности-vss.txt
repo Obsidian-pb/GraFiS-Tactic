@@ -280,6 +280,147 @@
   Section Object, row: visRowXFormOut>>>
     PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
+=>sheet: Размер
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Layer>>>
+    Layers.Name: "Размеры"; Layers.Password: ""; Layers.Color: 255; Layers.Status: 0; Layers.Visible: 1; Layers.Print: 1; Layers.Active: 0; Layers.Locked: 0; Layers.Snap: 1; Layers.Glue: 1; Layers.NameUniv: "Dimensions"; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.LPrec: 2; 
+    User.LUnits: 0; 
+    User.ShowUnits: 0; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: "параллельные,равные,вертикальный,размер,техника,показатель,измерение"; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 100 мм; PageHeight: 100 мм; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 1 мм; DrawingScale: 1 мм; DrawingSizeType: 4; DrawingScaleType: 0; _Unused5F: 0; _Unused60: 0; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 0; PaperKind: 0; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Sheet.5
+  Section: Action>>>
+    Actions.Row_1: "Точность и &единицы..."; Actions.Row_1._Unused1: ""; Actions.Row_1._Unused2: ""; Actions.Row_1.Action: SETF("Prop.LPrec.Invisible";0)+DOCMD(1312); 
+    Actions.Row_2: "&Установить для страницы по умолчанию"; Actions.Row_2._Unused1: ""; Actions.Row_2._Unused2: ""; Actions.Row_2.Action: SETF("ThePage!User.LPrec";User.LPrecInd)+SETF("Prop.LPrec";"User.LPrecVal")+SETF("ThePage!User.LUnits";User.LUnitsInd)+SETF("Prop.LUnits";"User.LUnitsVal")+SETF("ThePage!User.ShowUnits";User.ShowUnitsInd)+SETF("Prop.ShowUnits";"User.ShowUnitsVal"); 
+    Actions.Row_3: "&Восстановить для страницы по умолчанию"; Actions.Row_3._Unused1: ""; Actions.Row_3._Unused2: ""; Actions.Row_3.Action: SETF("Prop.LPrec";"User.LPrecVal")+SETF("Prop.LUnits";"User.LUnitsVal")+SETF("Prop.ShowUnits";"User.ShowUnitsVal"); 
+    Actions.Row_4: "_Восстановить поло&жение текста"; Actions.Row_4._Unused1: ""; Actions.Row_4._Unused2: ""; Actions.Row_4.Action: SETF("Controls.X2";"Scratch.X1")+SETF("Controls.Y2";"Height"); 
+    Actions.Row_5: "Выносные &линии..."; Actions.Row_5._Unused1: ""; Actions.Row_5._Unused2: ""; Actions.Row_5.Action: SETF("Prop.LPrec.Invisible";1)+DOCMD(1312); 
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 8 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Controls>>>
+    Controls.Row_1: Width; Controls.Row_1.Y: 7 мм*User.AntiScale; Controls.Row_1.XDyn: Controls.Row_1; Controls.Row_1.YDyn: 0 м; Controls.Row_1.XCon: 1; Controls.Row_1.YCon: 2; Controls.Row_1.CanGlue: FALSE; Controls.Row_1.Type: 0; Controls.Row_1.Prompt: "Изменить высоту размера"; 
+    Controls.Row_2: Scratch.X1; Controls.Row_2.Y: Height; Controls.Row_2.XDyn: Width/2; Controls.Row_2.YDyn: Height; Controls.Row_2.XCon: IF(Controls.Row_2<0;2;IF(Controls.Row_2<Width;0;4)); Controls.Row_2.YCon: 4; Controls.Row_2.CanGlue: FALSE; Controls.Row_2.Type: 0; Controls.Row_2.Prompt: "Изменить положение текста"; 
+  Section: FirstComponent>>>
+    Geometry1.NoFill: FALSE; Geometry1.NoLine: FALSE; Geometry1.NoShow: OR(Scratch.B11=2;Scratch.B11=4); 
+    Geometry1.X1: 0 м; Geometry1.Y1: Height+Scratch.B3*Scratch.B6; 
+    Geometry1.X2: Geometry1.X1; Geometry1.Y2: Scratch.B4*Scratch.B6; 
+    Geometry1.X3: Geometry1.X1; Geometry1.Y3: Geometry1.Y1; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 1; 
+  Section: Prop>>>
+    Prop.LPrec: User.LPrecVal; Prop.LPrec.Label: "Точность"; Prop.LPrec.Format: "0;"&User.visLocalFormat&";"&User.visLocalFormat&"0;"&User.visLocalFormat&"00;"&User.visLocalFormat&"000"; Prop.LPrec.Type: 1; Prop.LPrec.Invisible: FALSE; Prop.LPrec.LangID: 1049; 
+    Prop.LUnits: User.LUnitsVal; Prop.LUnits.Label: "Единицы"; Prop.LUnits.Format: "Использовать единицы страницы документа;Футы-дюймы (1'-0"");Футы (1,00');Дюймы;Футы (1,00 фт);Мили;Миллиметры;Сантиметры;Метры;Километры"; Prop.LUnits.Type: 1; Prop.LUnits.Invisible: Prop.LPrec.Invisible; Prop.LUnits.LangID: 1049; 
+    Prop.ShowUnits: User.ShowUnitsVal; Prop.ShowUnits.Label: "Вывод единиц"; Prop.ShowUnits.Format: "Не показывать единицы;Показывать единицы"; Prop.ShowUnits.Type: 1; Prop.ShowUnits.Invisible: Prop.LPrec.Invisible; Prop.ShowUnits.LangID: 1049; 
+    Prop.Extensions: "Все"; Prop.Extensions.Label: "Выносные линии"; Prop.Extensions.Format: "Все;Только конец;Только начало;Нет"; Prop.Extensions.Type: 1; Prop.Extensions.Invisible: NOT(Prop.LPrec.Invisible); Prop.Extensions.LangID: 1049; 
+  Section: Scratch>>>
+    Scratch.X1: IF(Scratch.B9=2;-Scratch.B8-TxtWidth/2;Width/2); Scratch.A1: "Anti-scale value"; Scratch.B1: Страница!DrawingScale/Страница!PageScale; 
+    Scratch.A2: "Arrow size"; Scratch.B2: Scratch.B1*(0,0033*EndArrowSize^3+0,08); 
+    Scratch.A3: "Ext. line extension"; Scratch.B3: Scratch.C3*Scratch.B1; Scratch.C3: Char.Size; 
+    Scratch.A4: "Ext. line offset"; Scratch.B4: Scratch.C4*Scratch.B1; Scratch.C4: Char.Size/2; 
+    Scratch.A5: "Ext. #2 diff."; 
+    Scratch.A6: "Sign ext. #1"; Scratch.B6: SIGN(Height); 
+    Scratch.A7: "Sign ext. #2"; 
+    Scratch.A8: "Dim. line ext."; Scratch.B8: 2*Scratch.B2; 
+    Scratch.A9: "Text outside ext.?"; Scratch.B9: IF(Width>(2*Scratch.B2+TxtWidth);0;IF(Width>TxtWidth;1;2)); Scratch.C9: (Width<2*Scratch.B2); 
+    Scratch.A10: "Dim. callout state"; Scratch.B10: IF(ABS(Controls.Row_2.Y-Height)<ABS(2*Scratch.B3);IF(AND(Controls.Row_2>0;Controls.Row_2<Width);2;0);1); 
+    Scratch.A11: "Visible ext. lines"; Scratch.B11: LOOKUP(Prop.Extensions;Prop.Extensions.Format)+1; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: TextField>>>
+    Fields.Value: User.LengthText; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(37); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 0; Fields.UIFmt: 37; 
+  Section: User>>>
+    User.AntiScale: Scratch.B1; 
+    User.LUnitsFactor: IF(User.LUnitsInd=0;User.DrawingUnitFactor;INDEX(User.LUnitsInd;"0;0FT 0IN;0.0FT;0IN;0FT;0MI;0 MM;0 CM;0 M;0 KM")); 
+    User.FormatString: User.LPFString&IF(User.LUnitsInd=2;"\'";IF(User.ShowUnitsInd=1;"u";"")); 
+    User.LengthText: IF(User.LUnitsInd=1;User.FeetInch;FORMAT(User.Length;User.FormatString)); 
+    User.Length: User.LUnitsFactor+Width; 
+    User.LPFString: INDEX(User.LPrecInd;"0;0.0;0.00;0.000;0.0000"); User.LPFString.Prompt: "Linear Precision Formatting String"; 
+    User.LPrec: Страница!User.LPrec; 
+    User.LPrecInd: LOOKUP(Prop.LPrec;Prop.LPrec.Format); 
+    User.LPrecVal: INDEX(User.LPrec;Prop.LPrec.Format); 
+    User.LUnits: Страница!User.LUnits; 
+    User.LUnitsInd: LOOKUP(Prop.LUnits;Prop.LUnits.Format); User.LUnitsInd.Prompt: "0=Dwg, 1=Arch, 2=Dec Ft, 3+ = other"; 
+    User.LUnitsVal: INDEX(User.LUnits;Prop.LUnits.Format); 
+    User.ShowUnits: Страница!User.ShowUnits; 
+    User.ShowUnitsInd: LOOKUP(Prop.ShowUnits;Prop.ShowUnits.Format); 
+    User.ShowUnitsVal: INDEX(User.ShowUnits;Prop.ShowUnits.Format); 
+    User.FeetInch: IF(User.LUnitsInd=1;IF(User.Length>=1 фт;FORMAT(User.Feet;"#\'\-");"")&FORMAT(User.Inch;IF(User.Inch<1 дюйм;"0/#"&User.InchPrec&"\""";"0 #/#"&User.InchPrec&"\"""));0); 
+    User.Feet: IF(User.LUnitsInd=1;INT(User.Length/1 фт)*1 фт;0); 
+    User.Inch: IF(User.LUnitsInd=1;0 дюйм+INT(User.InchPrec*(User.Length-User.Feet)+1/2)/User.InchPrec;0); 
+    User.InchPrec: 16; 
+    User.visObjectType: 105; 
+    User.DrawingUnitFactor: Страница!DrawingScale-Страница!DrawingScale; 
+    User.visVersion: 12; 
+    User.visLocalFormat: FORMAT(0;"0.0"); 
+  Section Object, row: visRowEvent>>>
+    EventDblClick: OPENTEXTWIN(); 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: "Vis_PE.chm!#45553"; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLayerMem>>>
+    LayerMember: "0"; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,24 пт; LineColor: 0; LinePattern: 1; Rounding: Scratch.B3; EndArrowSize: 1; BeginArrow: 0; EndArrow: 13; LineCap: 0; BeginArrowSize: 1; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 1; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 1; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 1; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 1; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: TRUE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: TRUE; EnableFillProps: TRUE; EnableTextProps: TRUE; HideForApply: FALSE; 
+  Section Object, row: visRowTextXForm>>>
+    TxtPinX: Controls.Row_2; TxtPinY: Controls.Row_2.Y; TxtWidth: TEXTWIDTH(TheText); TxtHeight: TEXTHEIGHT(TheText;TxtWidth); TxtLocPinX: TxtWidth*0,5; TxtLocPinY: IF(Scratch.B10<>2;TxtHeight/2;-Scratch.B3/4); TxtAngle: GRAVITY(Angle;-60 град;120 град); 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 пт; RightMargin: 0 пт; TopMargin: 0 пт; BottomMargin: 0 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  Section Object, row: visRowXForm1D>>>
+    BeginX: 0,041161165235168 м; BeginY: 0,041161165235168 м; EndX: 0,058838834764832 м; EndY: 0,058838834764832 м; 
+  Section Object, row: visRowXFormOut>>>
+    PinX: BeginX; PinY: BeginY; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: GUARD(Controls.Row_1.Y); LocPinX: 0 м; LocPinY: 0 м; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: GUARD(0); FlipY: GUARD(0); ResizeMode: 0; 
+
 =>sheet: Здание
   Section: Character>>>
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
@@ -5942,3 +6083,17 @@
     LineWeight: 0 пт; LineColor: 4; LinePattern: 23; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 0 пт; BottomMargin: 0 пт; VerticalAlign: 2; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Размер
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 8 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 1; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,24 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 1; BeginArrow: 0; EndArrow: 13; LineCap: 0; BeginArrowSize: 1; LineColorTrans: 0%; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 пт; RightMargin: 0 пт; TopMargin: 0 пт; BottomMargin: 0 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
