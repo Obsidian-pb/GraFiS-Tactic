@@ -89,25 +89,23 @@ vsi_ShapeIndex = 0
                     Set vsoCell1 = shpConnection.CellsU("BeginX")
                     Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
                         vsoCell1.GlueTo vsoCell2
-                    End If
-                    
                 ''---ѕровер€ем длину линии и если она не подходит, удал€ем
-                     If shpConnection.Cells("Width").ResultIU = 0 Then shpConnection.Delete
-                     If shpConnection.Cells("Width").ResultInt(visNumber) > lmax Then shpConnection.Delete
-'
-'                '---ќпредел€ем свойства фигуры коннектора i strelki
-'                    shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLOLineRouteExt).FormulaU = 1
-'                    shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLORouteStyle).FormulaU = 16
-'                    shpConnection.CellsSRC(visSectionObject, visRowLine, visLineColor).FormulaU = "THEMEGUARD(RGB(0,176,240))"
-'
-'                    CellFormula = "AND(EndX>Sheet." & ShpObj.ID & "!PinX-Sheet." & ShpObj.ID & "!Width*0.5,EndX<Sheet." & _
-'                        ShpObj.ID & "!PinX+Sheet." & ShpObj.ID & "!Width*0.5,EndY<Sheet." & _
-'                        ShpObj.ID & "!PinY+Sheet." & ShpObj.ID & "!Height*0.5,EndY>Sheet." & _
-'                        ShpObj.ID & "!PinY-Sheet." & ShpObj.ID & "!Height*0.5)"
-'                    shpConnection.CellsSRC(visSectionFirstComponent, 0, 1).FormulaU = CellFormula
-                Else
-                vsi_ShapeIndex = 0
-'                End If
+                    If shpConnection.Cells("Width").ResultIU = 0 Or shpConnection.Cells("Width").Result(visMeters) > lmax Then shpConnection.Delete
+                End If
+
+                If inppw = True And vsi_ShapeIndex = 50 Then
+                     '---¬брасываем коннектор и соедин€ем фигуру нашего здани€ и водоисточника
+                    Set mstrConnection = ThisDocument.Masters("Distance")
+                    Set shpConnection = Application.ActiveWindow.Page.Drop(mstrConnection, 2, 2)
+                  
+                    Set vsoCell1 = shpConnection.CellsU("EndX")
+                    Set vsoCell2 = ShpObj.CellsSRC(1, 1, 0)
+                        vsoCell1.GlueTo vsoCell2
+                    Set vsoCell1 = shpConnection.CellsU("BeginX")
+                    Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
+                        vsoCell1.GlueTo vsoCell2
+                    shpConnection.Cells("Prop.ArrowStyle").FormulaU = "INDEX(2,Prop.ArrowStyle.Format)"
+                End If
 '            End If
         End If
      Next
