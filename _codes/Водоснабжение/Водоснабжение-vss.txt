@@ -3715,8 +3715,9 @@
     Fields.Value: IF(STRSAME(Prop.Input;"По масштабу");Prop.Distance;FORMAT(Prop.DistanceManual;"0")&" м"); Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
-    User.Pers: 75; User.Pers.Prompt: ""; 
+    User.IndexPers: 75; User.IndexPers.Prompt: ""; 
     User.Version: 2; User.Version.Prompt: ""; 
+    User.length: IF(STRSAME(Prop.Input;"По масштабу");Width;Prop.DistanceManual*1 м); User.length.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventDrop: SETF(GetRef(Char.Size);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BottomMargin);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(LineWeight);1 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BeginArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(EndArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>

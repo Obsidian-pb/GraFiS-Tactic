@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} NewPropSelectForm 
    Caption         =   "Выберите новое название свойства"
-   ClientHeight    =   4428
+   ClientHeight    =   4425
    ClientLeft      =   48
    ClientTop       =   372
    ClientWidth     =   7884

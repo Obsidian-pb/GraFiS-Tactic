@@ -243,8 +243,9 @@
     Fields.Value: IF(STRSAME(Prop.Input;"По масштабу");Prop.Distance;FORMAT(Prop.DistanceManual;"0")&" м"); Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
-    User.Pers: 75; User.Pers.Prompt: ""; 
+    User.IndexPers: 75; User.IndexPers.Prompt: ""; 
     User.Version: 2; User.Version.Prompt: ""; 
+    User.length: IF(STRSAME(Prop.Input;"По масштабу");Width;Prop.DistanceManual*1 м); User.length.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventXFMod: CALLTHIS("DistBuild";"План_на_местности"); EventDrop: SETF(GetRef(Char.Size);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BottomMargin);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(LineWeight);1 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BeginArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(EndArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
@@ -366,8 +367,8 @@
     User.AntiScale: Scratch.B1; 
     User.LUnitsFactor: IF(User.LUnitsInd=0;User.DrawingUnitFactor;INDEX(User.LUnitsInd;"0;0FT 0IN;0.0FT;0IN;0FT;0MI;0 MM;0 CM;0 M;0 KM")); 
     User.FormatString: User.LPFString&IF(User.LUnitsInd=2;"\'";IF(User.ShowUnitsInd=1;"u";"")); 
-    User.LengthText: IF(User.LUnitsInd=1;User.FeetInch;FORMAT(User.Length;User.FormatString)); 
-    User.Length: User.LUnitsFactor+Width; 
+    User.LengthText: IF(User.LUnitsInd=1;User.FeetInch;FORMAT(User.length;User.FormatString)); 
+    User.length: User.LUnitsFactor+Width; 
     User.LPFString: INDEX(User.LPrecInd;"0;0.0;0.00;0.000;0.0000"); User.LPFString.Prompt: "Linear Precision Formatting String"; 
     User.LPrec: Страница!User.LPrec; 
     User.LPrecInd: LOOKUP(Prop.LPrec;Prop.LPrec.Format); 
@@ -378,9 +379,9 @@
     User.ShowUnits: Страница!User.ShowUnits; 
     User.ShowUnitsInd: LOOKUP(Prop.ShowUnits;Prop.ShowUnits.Format); 
     User.ShowUnitsVal: INDEX(User.ShowUnits;Prop.ShowUnits.Format); 
-    User.FeetInch: IF(User.LUnitsInd=1;IF(User.Length>=1 фт;FORMAT(User.Feet;"#\'\-");"")&FORMAT(User.Inch;IF(User.Inch<1 дюйм;"0/#"&User.InchPrec&"\""";"0 #/#"&User.InchPrec&"\"""));0); 
-    User.Feet: IF(User.LUnitsInd=1;INT(User.Length/1 фт)*1 фт;0); 
-    User.Inch: IF(User.LUnitsInd=1;0 дюйм+INT(User.InchPrec*(User.Length-User.Feet)+1/2)/User.InchPrec;0); 
+    User.FeetInch: IF(User.LUnitsInd=1;IF(User.length>=1 фт;FORMAT(User.Feet;"#\'\-");"")&FORMAT(User.Inch;IF(User.Inch<1 дюйм;"0/#"&User.InchPrec&"\""";"0 #/#"&User.InchPrec&"\"""));0); 
+    User.Feet: IF(User.LUnitsInd=1;INT(User.length/1 фт)*1 фт;0); 
+    User.Inch: IF(User.LUnitsInd=1;0 дюйм+INT(User.InchPrec*(User.length-User.Feet)+1/2)/User.InchPrec;0); 
     User.InchPrec: 16; 
     User.visObjectType: 105; 
     User.DrawingUnitFactor: Страница!DrawingScale-Страница!DrawingScale; 
@@ -5977,8 +5978,9 @@
     Fields.Value: IF(STRSAME(Prop.Input;"По масштабу");Prop.Distance;FORMAT(Prop.DistanceManual;"0")&" м"); Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
-    User.Pers: 75; User.Pers.Prompt: ""; 
+    User.IndexPers: 75; User.IndexPers.Prompt: ""; 
     User.Version: 2; User.Version.Prompt: ""; 
+    User.length: IF(STRSAME(Prop.Input;"По масштабу");Width;Prop.DistanceManual*1 м); User.length.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventXFMod: CALLTHIS("DistBuild";"План_на_местности"); EventDrop: SETF(GetRef(Char.Size);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BottomMargin);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(LineWeight);1 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BeginArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(EndArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>

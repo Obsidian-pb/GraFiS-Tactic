@@ -72,11 +72,11 @@ SubjDistance:
     ''---ѕередаем субъекту значение длины дл€ маркировани€ фигур с указанным рассто€нием
     Set ShpSubj = ActivePage.Shapes(Replace(Replace(FBeg, "_XFTRIGGER(", ""), "!EventXFMod)", ""))
     If ShpSubj.CellExists("User.Distance", 0) = False Then ShpSubj.AddNamedRow visSectionUser, "Distance", 0
-    ShpSubj.Cells("User.Distance").FormulaU = "Sheet." & ShpObj.ID & "!Width"
+    ShpSubj.Cells("User.Distance").FormulaU = "Sheet." & ShpObj.ID & "!User.Length"
     
     Set ShpSubj = ActivePage.Shapes(Replace(Replace(FEnd, "_XFTRIGGER(", ""), "!EventXFMod)", ""))
     If ShpSubj.CellExists("User.Distance", 0) = False Then ShpSubj.AddNamedRow visSectionUser, "Distance", 0
-    ShpSubj.Cells("User.Distance").FormulaU = "Sheet." & ShpObj.ID & "!Width"
+    ShpSubj.Cells("User.Distance").FormulaU = "Sheet." & ShpObj.ID & "!User.Length"
   
 End Sub
 
@@ -107,7 +107,7 @@ vsi_ShapeIndex = 0
         If shpTarget.CellExists("User.IndexPers", 0) = True And shpTarget.CellExists("User.Version", 0) = True Then 'явл€етс€ ли фигура фигурой √ра‘и—
            'ѕровер€ем не указано ли рассто€ние до фигуры уже
             If shpTarget.CellExists("User.Distance", 0) = False Then shpTarget.AddNamedRow visSectionUser, "Distance", 0
-               If InStr(1, shpTarget.Cells("User.Distance").FormulaU, "!Width") = 0 Then
+               If InStr(1, shpTarget.Cells("User.Distance").FormulaU, "!User.Length") = 0 Then
                 vsi_ShapeIndex = shpTarget.Cells("User.IndexPers")   'ќпредел€ем индекс фигуры √ра‘и—
                 If vsi_ShapeIndex = 135 Then
                 '---¬брасываем коннектор и соедин€ем фигуру нашего здани€ и соседнего

@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} WarningsForm 
    Caption         =   "Предупреждения"
-   ClientHeight    =   2985
+   ClientHeight    =   2988
    ClientLeft      =   48
    ClientTop       =   372
    ClientWidth     =   7608

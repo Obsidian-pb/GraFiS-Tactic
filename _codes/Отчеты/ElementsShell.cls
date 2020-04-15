@@ -40,101 +40,102 @@ End Property
 '-------------------------------------Внутренние процедуры и функции классса----------------------------------------------
 Private Sub fillElemCollection()
 'Заполняем коллекцию элементов
-    AddNewElement "FireSquare", "Площадь пожара", "{$} м.кв. (площадь тушения {ExtSquare} м.кв.)", , "User.FireSquare"
-    AddNewElement "ExtSquare", "Площадь тушения", , , "User.ExtSquare"
-    AddNewElement "FactStreamW", "Расход воды фактический", "{$} л/с", , "User.PodOut"
-    AddNewElement "IntenseWater", "Интенсивность подачи воды"
-    AddNewElement "NeedStreamW", "Расход воды требуемый", "{$} л/с", , "User.NeedStreamW"
+
+    AddNewElement "RSCHSTechincsHave", "Техники РСЧС имеется", "{$} ({TotalFireCount} - пожарной и АС)"
+    AddNewElement "MainPAHave", "ПА общего применения имеется", , , , , 0
+    AddNewElement "TargetedPAHave", "ПА целевого применения имеется", , , , , 0
+    AddNewElement "MainOverallHave", "ПА основных имеется", "{$} ({TargetedPAHave} - цел.прим., {MainPAHave} - общ.прим.)"
+    AddNewElement "PAHighHave", "ПА высотных имеется", , , , , 0
+    AddNewElement "SpecialPAHave", "ПА специальных имеется", "{$} ({PAHighHave} - высотных)"
+    AddNewElement "OtherTechincsHave", "Прочей пожарной и аварийно-спасательной техники имеется"
     
-    AddNewElement "PersonnelHave", "Личного состава имеется"
-    AddNewElement "PersonnelNeed", "Личного состава требуется", , , "Prop.Personnel"
+    AddNewElement "ACCount", "АЦ имеется", , , , , 0
+    AddNewElement "ACNeed", "АЦ требуется", , , , , 0
+    AddNewElement "ANRNeed", "АНР требуется", , , , , 0
+    AddNewElement "AGCount", "АГДЗС имеется", , , , , 0
+    AddNewElement "ALCount", "АЛ имеется", , , , , 0
+    AddNewElement "AKPCount", "АКП имеется", , , , , 0
+    AddNewElement "MVDCount", "Техники МВД имеется", , , , , 0
+    AddNewElement "SMPCount", "Техники СМП имеется", , , , , 0
+    AddNewElement "TechnicsNotMchsHave", "Техники прочих служб имеется", "{$} ({MVDCount} - МВД, {SMPCount} - СМП)"
+    AddNewElement "TechnicsNotMchsOtherHave", "Прочей техники имеется", , , , , 0
+    AddNewElement "TotalTechCount", "Техники всего имеется", , , , , 0
+    AddNewElement "TotalFireCount", "Пожарной и аварийно-спасательной техники всего имеется", , , , , 0
+    
+    AddNewElement "FireSquare", "Площадь пожара", "{$} м.кв. ({ExtSquare} м.кв. - площадь тушения)", , "User.FireSquare"
+    AddNewElement "ExtSquare", "Площадь тушения", , , "User.ExtSquare", , 0
+    AddNewElement "FactStreamW", "Расход воды фактический", "{$} л/с ({NeedStreamW} - л/с требуемый)", , "User.PodOut"
+    AddNewElement "IntenseWater", "Интенсивность подачи воды"
+    AddNewElement "NeedStreamW", "Расход воды требуемый", "{$} л/с", , "User.NeedStreamW", , 0
+    
+    AddNewElement "PersonnelHave", "Личного состава имеется", "{$} чел. ({PersonnelNeed} чел. - требуется)"
+    AddNewElement "PersonnelNeed", "Личного состава требуется", , , "Prop.Personnel", , 0
     
     AddNewElement "StvolWHave", "Стволов водяных подано", "{$} ({StvolWBHave} - ств. 'Б', {StvolWAHave} - ств. 'А', {StvolWLHave} - ств. лаф.)"
-    AddNewElement "StvolWBHave", "Стволов Б подано"
-    AddNewElement "StvolWAHave", "Стволов А подано"
-    AddNewElement "StvolWLHave", "Стволов водяных лафетных подано"
-    AddNewElement "StvolWBNeed", "Стволов Б требуется"
-    AddNewElement "StvolWANeed", "Стволов А требуется"
-    AddNewElement "StvolWLNeed", "Стволов водяных лафетных требуется"
+    AddNewElement "StvolWBHave", "Стволов Б подано", , , , , 0
+    AddNewElement "StvolWAHave", "Стволов А подано", , , , , 0
+    AddNewElement "StvolWLHave", "Стволов водяных лафетных подано", , , , , 0
+    AddNewElement "StvolWBNeed", "Стволов Б требуется", , , , , 0
+    AddNewElement "StvolWANeed", "Стволов А требуется", , , , , 0
+    AddNewElement "StvolWLNeed", "Стволов водяных лафетных требуется", , , , , 0
     
     AddNewElement "StvolFoamHave", "Стволов пенных подано"
     AddNewElement "StvolGasHave", "Стволов газовых подано"
     AddNewElement "StvolPowderHave", "Стволов порошковых подано"
-    
-    AddNewElement "MainPAHave", "ПА общего применения имеется"
-    AddNewElement "TargetedPAHave", "ПА целевого применения имеется"
-    AddNewElement "MainOverallHave", "ПА основных имеется", "{$} ({TargetedPAHave} цел.прим., {MainPAHave} общ.прим.)"
-    AddNewElement "PAHighHave", "ПА высотных имеется"
-    AddNewElement "SpecialPAHave", "ПА специальных имеется", "{$} ({PAHighHave} высотных)"
-    AddNewElement "OtherTechincsHave", "Прочей техники имеется"
-    AddNewElement "RSCHSTechincsHave", "Техники РСЧС имеется"
 
     AddNewElement "GetedWaterValue", "Забирается воды из внешних источников", "{$} л/с (max = {GetedWaterValueMax} л/с )", , , , False
     AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум", , , , , False
-    AddNewElement "GetingWaterCount", "Установлено на водоисточники"
-    AddNewElement "PANeedOnWaterSource", "Требуется установить на водоисточники"
+    AddNewElement "GetingWaterCount", "Установлено на водоисточники", "{$} ({PANeedOnWaterSource} - требуется установить)"
+    AddNewElement "PANeedOnWaterSource", "Требуется установить на водоисточники", , , , , 0
     AddNewElement "WaterEternal", "Бесконечный запас воды", , False, , False, False
 
     AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает", "{$} ({GDZSMansCountWork} газодымозащитников)"
     AddNewElement "GDZSChainsCountWorkSoft", "Звеньев ГДЗС работает в стандартных условиях", , , , , False
     AddNewElement "GDZSChainsCountWorkHard", "Звеньев ГДЗС работает в сложных условиях", , , , , False
-    AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
-    AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется", "{$} ({GDZSMansRezCountHave} газодымозащитников)"
-    AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется"
+    AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется", , , , , 0
+    AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется", "{$} ({GDZSMansRezCountHave} газодымозащитников)", , , , 0
+    AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется", , , , , 0
 '    AddNewElement "GDZSChainsCanBeFormed", "Звеньев ГДЗС Может быть сформировано"
-    AddNewElement "GDZSMansCountWork", "Газодымозащитников работает"
-    AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется"
-    AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резервных звеньях имеется"
-    AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется"
+    AddNewElement "GDZSMansCountWork", "Газодымозащитников работает", , , , , 0
+    AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется", , , , , 0
+    AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резервных звеньях имеется", , , , , 0
+    AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется", , , , , 0
     AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", , False
-    AddNewElement "GDZSPBCount", "ПБ ГДЗС имеется"
-    AddNewElement "GDZSKPPCount", "КПП ГДЗС имеется"
+    AddNewElement "GDZSPBCount", "ПБ ГДЗС имеется", , , , , 0
+    AddNewElement "GDZSKPPCount", "КПП ГДЗС имеется", , , , , 0
 
-    AddNewElement "Hoses38Count", "Рукавов 38мм используется"
-    AddNewElement "Hoses51Count", "Рукавов 51мм используется"
-    AddNewElement "Hoses66Count", "Рукавов 66мм используется"
-    AddNewElement "Hoses77Count", "Рукавов 77мм используется"
-    AddNewElement "Hoses89Count", "Рукавов 89мм используется"
-    AddNewElement "Hoses110Count", "Рукавов 110мм используется"
-    AddNewElement "Hoses150Count", "Рукавов 150мм используется"
-    AddNewElement "Hoses200Count", "Рукавов 200мм используется"
-    AddNewElement "Hoses250Count", "Рукавов 250мм используется"
-    AddNewElement "Hoses300Count", "Рукавов 300мм используется"
+    AddNewElement "Hoses38Count", "Рукавов 38мм используется", , , , , 0
+    AddNewElement "Hoses51Count", "Рукавов 51мм используется", , , , , 0
+    AddNewElement "Hoses66Count", "Рукавов 66мм используется", , , , , 0
+    AddNewElement "Hoses77Count", "Рукавов 77мм используется", , , , , 0
+    AddNewElement "Hoses89Count", "Рукавов 89мм используется", , , , , 0
+    AddNewElement "Hoses110Count", "Рукавов 110мм используется", , , , , 0
+    AddNewElement "Hoses150Count", "Рукавов 150мм используется", , , , , 0
+    AddNewElement "Hoses200Count", "Рукавов 200мм используется", , , , , 0
+    AddNewElement "Hoses250Count", "Рукавов 250мм используется", , , , , 0
+    AddNewElement "Hoses300Count", "Рукавов 300мм используется", , , , , 0
     AddNewElement "HosesCount", "Рукавов используется всего", "{$} (" & _
                                 "{Hoses38Count} - 38мм, {Hoses51Count} - 51мм, {Hoses66Count} - 66мм, {Hoses77Count} - 77мм, {Hoses89Count} - 89мм," & _
-                                "{Hoses110Count} - 110мм, {Hoses150Count} - 150мм, {Hoses200Count} - 200мм, {Hoses250Count} - 250мм, {Hoses300Count} - 300мм," & _
+                                "{Hoses110Count} - 110мм, {Hoses150Count} - 150мм, {Hoses200Count} - 200мм, {Hoses250Count} - 250мм, {Hoses300Count} - 300мм" & _
                                 ")"
-    AddNewElement "HosesLength", "Рукавных линий длина", "{$} м."
+    AddNewElement "HosesLength", "Рукавных линий длина", "{$} м"
 
-    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , , "Prop.Hose38"
-    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , , "Prop.Hose51"
-    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , , "Prop.Hose66"
-    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , , "Prop.Hose77"
-    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , , "Prop.Hose89"
-    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , , "Prop.Hose110"
-    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , , "Prop.Hose150"
-    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , , "Prop.Hose200"
-    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , , "Prop.Hose250"
-    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , , "Prop.Hose300"
-    AddNewElement "HosesHave", "Рукавов имеется всего"
-    AddNewElement "HoseSkatka", "Напорных рукавов в скатках"
+    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , , "Prop.Hose38", , 0
+    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , , "Prop.Hose51", , 0
+    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , , "Prop.Hose66", , 0
+    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , , "Prop.Hose77", , 0
+    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , , "Prop.Hose89", , 0
+    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , , "Prop.Hose110", , 0
+    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , , "Prop.Hose150", , 0
+    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , , "Prop.Hose200", , 0
+    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , , "Prop.Hose250", , 0
+    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , , "Prop.Hose300", , 0
+    AddNewElement "HosesHave", "Рукавов имеется всего", , , , , 0
+    AddNewElement "HoseSkatka", "Напорных рукавов в скатках", , , , , 0
     
-    AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)", "{$} л."
+    AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)", "{$} л.", , , , 0
     AddNewElement "WaterValueHave", "Воды имеется", "{$} л."
     AddNewElement "FoamValueeHave", "Пенообразователя имеется", "{$} л.", , "Prop.Foam"
-
-    AddNewElement "ACCount", "АЦ имеется"
-    AddNewElement "ACNeed", "АЦ требуется"
-    AddNewElement "ANRNeed", "АНР требуется"
-    AddNewElement "AGCount", "АГДЗС имеется"
-    AddNewElement "ALCount", "АЛ имеется"
-    AddNewElement "AKPCount", "АКП имеется"
-    AddNewElement "MVDCount", "Техники МВД имеется"
-    AddNewElement "SMPCount", "Техники СМП имеется"
-    AddNewElement "TechnicsNotMchsHave", "Техники не МЧС имеется"
-    AddNewElement "TechnicsNotMchsOtherHave", "Техники не МЧС (прочей) имеется"
-    AddNewElement "TotalTechCount", "Техники всего имеется"
-    AddNewElement "TotalFireCount", "Пожарной техники всего имеется"
 
     AddNewElement "BUCount", "БУ создано"
     AddNewElement "SPRCount", "СПР создано"
@@ -145,6 +146,7 @@ Private Sub fillElemCollection()
     AddNewElement "SmokeCount", "Задымление", , 0, , False, False
     AddNewElement "WaterSourceCount", "Водоисточники", , 0, , False, False
     AddNewElement "DistanceCount", "Расстояния", , 0, , False, False
+    AddNewElement "DistanceMin", "Расстояние до ближайшего водоисточника", "{$} м"
     AddNewElement "LinesCount", "Отдельные рукавные линии", , 0, , False, False
     AddNewElement "LinesPosCount", "Подписи положения рукавных линий", , 0, , False, False
     AddNewElement "LinesLableCount", "Подписи рукавных линий", , 0, , False, False
@@ -154,6 +156,9 @@ Private Sub fillElemCollection()
     AddNewElement "SOCount", "Количество степеней огнестойкости", , 0, , False, False
     AddNewElement "FireCount", "Количество площадей горения", , 0, , False, False
     AddNewElement "OrientCount", "Ориентиры", , 0, , False, False
+    
+    AddNewElement "InjuredCount", "Пострадавших", "{$} чел. ({DeadCount} чел. - погибших)"
+    AddNewElement "DeadCount", "Погибших", , , , , 0
 
     AddNewElement "AllHosesWithLabels", "Все рукавные линии с подписями", , True, , False, False
     AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", , True, , False, False
