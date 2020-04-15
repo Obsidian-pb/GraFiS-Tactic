@@ -22,7 +22,7 @@ Dim vO_Doc As Visio.Document
 Dim vO_Stl As Visio.style
 Dim i As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Создаем набор названий стилей
     s_StyleSetsDeclare
@@ -49,7 +49,7 @@ Dim i As Integer
     Set vO_Stl = Nothing
 
 Exit Sub
-EX:
+ex:
 '---Очищаем объекты
     Set vO_Stenc = Nothing
     Set vO_Stl = Nothing
@@ -63,7 +63,7 @@ Dim vO_StyleFrom As Visio.style
 Dim vO_StyleTo As Visio.style
 Dim vs_RowName As String
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Создвем необходимый набор объектов
     Set vO_StyleFrom = ThisDocument.Styles(as_StyleName)
@@ -118,7 +118,7 @@ Dim vs_RowName As String
     Set vO_Stenc = Nothing
     
 Exit Sub
-EX:
+ex:
 '---Очищаем объекты
     Set vO_StyleFrom = Nothing
     Set vO_StyleTo = Nothing

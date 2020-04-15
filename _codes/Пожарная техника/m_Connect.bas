@@ -40,7 +40,7 @@ End Function
 
 Public Sub GESystemTest(ShpObj As Visio.Shape)
 
-On Error GoTo EX
+On Error GoTo ex
     If IsWorkWithGidroelevator(ShpObj) Then
         ShpObj.Cells("User.GESystemCheck").FormulaU = 1
     Else
@@ -48,7 +48,7 @@ On Error GoTo EX
     End If
     
 Exit Sub
-EX:
+ex:
 
 End Sub
 
@@ -60,19 +60,19 @@ End Sub
 
 Public Function IsWorkWithGidroelevator(ByRef shp As Visio.Shape) As Boolean
 '‘ункци€ возвращает True если это гидроэлеваторна€ система, False, если нет.
-    On Error GoTo EX
+    On Error GoTo ex
     
     Debug.Print GetTechShapeForGESystem(shp, shp)
     IsWorkWithGidroelevator = True
     
 Exit Function
-EX:
+ex:
     IsWorkWithGidroelevator = False
 End Function
 
 Private Sub SetWorkWithGidroelevatroOption(ByRef shp As Visio.Shape, ByVal value As Integer)
 'ѕытаемс€ присвоить €чейке "User.WorkWithGE" фигуры значение, если ошибка - ничего не делаем
-    On Error GoTo EX
+    On Error GoTo ex
     shp.Cells("User.WorkWithGE").FormulaU = value
-EX:
+ex:
 End Sub

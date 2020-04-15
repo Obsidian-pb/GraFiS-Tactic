@@ -19,7 +19,7 @@ Public Sub PS_GlueToShape(ShpObj As Visio.Shape)
 Dim OtherShape As Visio.Shape
 Dim x As Double, y As Double
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Определяем координаты и радиус активной фигуры
     x = ShpObj.Cells("PinX").Result(visInches)
@@ -61,7 +61,7 @@ Dim x As Double, y As Double
 
 Set OtherShape = Nothing
 Exit Sub
-EX:
+ex:
     Set OtherShape = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "PS_GlueToShape"
@@ -81,7 +81,7 @@ Dim newHoseDistance As Double
 
 Dim curHoseShapeID As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Проверяем имеются ли у данной фигуры необходимые поля (для проверки фигур составленных ранее схем)
     If ShpObj.CellExists("User.ShapeHoseID", 0) = False Then Exit Sub
@@ -149,7 +149,7 @@ Dim curHoseShapeID As Integer
 
 Set OtherShape = Nothing
 Exit Sub
-EX:
+ex:
     Set OtherShape = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "PS_GlueToHose"
@@ -220,7 +220,7 @@ Dim vector2 As c_Vector
 Dim vector3 As c_Vector
 Dim frml As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '    Application.EventsEnabled = False
     
@@ -246,7 +246,7 @@ Dim frml As String
     frml = "Sheet." & hoseLineShp.ID & "!Angle+(" & str(vector3.Angle - hoseLineShp.Cells("Angle").Result(visDegrees)) & "deg)"
     gdzsShp.Cells("Angle").FormulaU = frml
     
-EX:
+ex:
 '    Application.EventsEnabled = True
 End Sub
 

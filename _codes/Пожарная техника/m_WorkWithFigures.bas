@@ -10,7 +10,7 @@ Dim x As Double, y As Double
 Dim vS_ShapeName As String
 Dim TrueShape As Boolean
 
-    On Error GoTo EX
+    On Error GoTo ex
 TrueShape = False
 '---Определяем координаты активной фигуры
     x = ShpObj.Cells("PinX").Result(visInches)
@@ -65,7 +65,7 @@ Next OtherShape
 If TrueShape = False Then ShpObj.Delete
 Set OtherShape = Nothing
 Exit Sub
-EX:
+ex:
     Set OtherShape = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "PS_GlueToShape"

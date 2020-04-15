@@ -29,7 +29,7 @@ On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИКИ
 Application.DoCmd (1312)
 
 Exit Sub
-EX:
+ex:
     Application.EventsEnabled = True
     SaveLog Err, "BaseListsRefresh", "Пожарная техника"
 End Sub

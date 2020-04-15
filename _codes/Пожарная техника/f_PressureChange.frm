@@ -59,24 +59,24 @@ End Sub
 Private Sub SetTBData(ByRef tb As textBox, ByVal cellName As String)
 'Прока ставит для текстового поля значение содержащееся в указанной ячейке текущией фигуры
 'Если такой ячейки нет - поле блокируется
-    On Error GoTo EX
+    On Error GoTo ex
     
     tb.value = currentShp.Cells(cellName).Result(visNumber)
     tb.Visible = True
     
 Exit Sub
-EX:
+ex:
     tb.value = ""
     tb.Visible = False
 End Sub
 
 Private Sub RefreshTBData(ByRef tb As textBox, ByVal cellName As String)
 'Прока обновляет данные в секции Scratch согласно указанным названиям ячеек
-    On Error GoTo EX
+    On Error GoTo ex
     
     currentShp.Cells(cellName).FormulaU = Chr(34) & tb.value & Chr(34)
 
-EX:
+ex:
 End Sub
 
 Private Function GetCellName(ByVal connecionCellName) As String
@@ -91,7 +91,7 @@ Dim cll As Visio.cell
         End If
     Next i
     
-EX:
+ex:
 End Function
 
 

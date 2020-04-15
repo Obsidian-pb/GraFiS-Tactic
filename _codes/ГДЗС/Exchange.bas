@@ -7,7 +7,7 @@ Public Sub GetTTH(ShpIndex As Long)
 Dim shp As Visio.Shape
 Dim IndexPers As Integer
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
@@ -25,7 +25,7 @@ On Error GoTo EX
     End Select
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "GetTTH", CStr(ShpIndex)
 End Sub
 

@@ -33,17 +33,17 @@ End Sub
 
 
 Private Sub TB_DirectExpense_Change()
-    On Error GoTo EX
+    On Error GoTo ex
     TB_DirectExpense.Value = CInt(TB_DirectExpense.Value)
 '    If Not (TB_DirectExpense = "" Or TB_DirectExpense = 0) Then ps_ResultsRecalc
     ps_ResultsRecalc
-EX:
+ex:
     Exit Sub
 End Sub
 
 Private Sub TB_MainTimeEnter_Change()
 Dim vDt_Time As Date
-    On Error GoTo EX
+    On Error GoTo ex
     Me.VB_TimeChange = True
     vDt_Time = _
         DateAdd("s", CDbl(TB_TimeTotal.Value) * 60, TimeValue(Me.TB_MainTimeEnter))
@@ -51,14 +51,14 @@ Dim vDt_Time As Date
         IIf(Hour(vDt_Time) < 10, "0", "") & Hour(vDt_Time) & ":" _
         & IIf(Minute(vDt_Time) < 10, "0", "") & Minute(vDt_Time) & ":" _
         & IIf(Second(vDt_Time) < 10, "0", "") & Second(vDt_Time)
-EX:
+ex:
     Exit Sub
 End Sub
 
 Private Sub TB_TimeArrival_Change()
 'Процедура события изменения времени прибытия к очагу
 Dim vDt_Time As Date
-    On Error GoTo EX
+    On Error GoTo ex
     Me.VB_TimeArrivalChange = True
     '---Вычисляем время подачи команды в случае, если очаг обнаружен
         vDt_Time = _
@@ -67,7 +67,7 @@ Dim vDt_Time As Date
             IIf(Hour(vDt_Time) < 10, "0", "") & Hour(vDt_Time) & ":" _
             & IIf(Minute(vDt_Time) < 10, "0", "") & Minute(vDt_Time) & ":" _
             & IIf(Second(vDt_Time) < 10, "0", "") & Second(vDt_Time)
-EX:
+ex:
     Exit Sub
 
 End Sub
@@ -109,7 +109,7 @@ Dim rst As Object
 Dim vS_Path As String
 Dim i As Integer
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Очищаем список от прежних значений
 LB_DeviceModel.Clear
@@ -161,7 +161,7 @@ LB_DeviceModel.Clear
     Set rst = Nothing
    
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ps_Models_ListFill"
 End Sub
 
@@ -448,7 +448,7 @@ Dim vDt_Time As Date
     Min_P2
     Max_PFall
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     '---Вычисляем время работы при НЕ обнаруженном очаге
     TB_MaxFall = _
@@ -497,7 +497,7 @@ Dim vDt_Time As Date
             & IIf(Second(vDt_Time) < 10, "0", "") & Second(vDt_Time)
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ps_ResultsRecalc"
 End Sub
 
@@ -509,7 +509,7 @@ Dim vD_TimeTemp As Date
 Dim vL_Interval As Long
 Dim vdbl_TimeTemp As Double
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 Set vO_IntShape = Application.ActivePage.Shapes.ItemFromID(VL_InitShapeID)
 
@@ -586,7 +586,7 @@ Set vO_IntShape = Application.ActivePage.Shapes.ItemFromID(VL_InitShapeID)
     End If
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ps_ValuesBack"
 End Sub
 

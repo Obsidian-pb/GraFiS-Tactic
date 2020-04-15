@@ -250,6 +250,8 @@ Dim propIndex As Integer
     
     IsShapeLinked = False
     
+    On Error GoTo ex
+    
     For Each rst In Application.ActiveDocument.DataRecordsets
         For propIndex = 0 To shp.RowCount(visSectionProp)
             If shp.IsCustomPropertyLinked(rst.ID, propIndex) Then
@@ -258,6 +260,10 @@ Dim propIndex As Integer
             End If
         Next propIndex
     Next rst
+Exit Function
+ex:
+    IsShapeLinked = False
+    SaveLog Err, "IsShapeLinked", "Error in 201x version during test of dsts link"
 End Function
 Public Sub ShapeLinkRefresh(ByRef shp As Visio.Shape)
 'Refresh data from linked DataRecordset
