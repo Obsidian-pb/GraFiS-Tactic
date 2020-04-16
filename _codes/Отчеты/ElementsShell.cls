@@ -41,13 +41,13 @@ End Property
 Private Sub fillElemCollection()
 'Заполняем коллекцию элементов
 
-    AddNewElement "RSCHSTechincsHave", "Техники РСЧС имеется", "{$} ({TotalFireCount} - пожарной и аварийно-спасательной)"
+    AddNewElement "RSCHSTechincsHave", "Техники РСЧС имеется", "{$} ({TotalFireCount} - пожарно-спасательной)"
     AddNewElement "MainPAHave", "ПА общего применения имеется", , , , , False
     AddNewElement "TargetedPAHave", "ПА целевого применения имеется", , , , , False
     AddNewElement "MainOverallHave", "ПА основных имеется", "{$} ({TargetedPAHave} - цел.прим., {MainPAHave} - общ.прим.)"
     AddNewElement "PAHighHave", "ПА высотных имеется", , , , , False
     AddNewElement "SpecialPAHave", "ПА специальных имеется", "{$} ({PAHighHave} - высотных)"
-    AddNewElement "OtherTechincsHave", "Прочей пожарной и аварийно-спасательной техники имеется"
+    AddNewElement "OtherTechincsHave", "Прочей пожарно-спасательной техники имеется"
     
     AddNewElement "ACCount", "АЦ имеется", , , , , False
     AddNewElement "ACNeed", "АЦ требуется", , , , , False
@@ -207,12 +207,12 @@ Private Function FindHigherElement(ByRef elemIn As Element) As Element
 'Возвращает элемент в коллекции elemCollection с именем вызова больше чем у текущего (тот элемент перед которым нужно будет вставить новый)
 Dim elem As Element
     
-    For Each elem In elemCollection
-        If elem.callName > elemIn.callName Then
-            Set FindHigherElement = elem
-            Exit Function
-        End If
-    Next elem
+'    For Each elem In elemCollection
+'        If elem.callName > elemIn.callName Then
+'            Set FindHigherElement = elem
+'            Exit Function
+'        End If
+'    Next elem
 End Function
 
 '-------------------------------------Публичные процедуры классса--------------------------------------------
