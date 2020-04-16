@@ -153,11 +153,11 @@ Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
     If curShapeID <> Cell.Shape.ID Then
         Refresh
         curShapeID = Cell.Shape.ID
-        Debug.Print Cell.Shape.Name
+        'Debug.Print Cell.Shape.Name
     Else
         If lastCalcTime + recalcInterval < Now() Then
             Refresh
-            Debug.Print Cell.Shape.Name
+            'Debug.Print Cell.Shape.Name
         End If
     End If
     

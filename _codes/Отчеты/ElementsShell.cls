@@ -58,7 +58,7 @@ Private Sub fillElemCollection()
     AddNewElement "MVDCount", "Техники МВД имеется", , , , , False
     AddNewElement "SMPCount", "Техники СМП имеется", , , , , False
     AddNewElement "TechnicsNotMchsHave", "Техники прочих служб имеется", "{$} ({MVDCount} - МВД, {SMPCount} - СМП)"
-    AddNewElement "TechnicsNotMchsOtherHave", "Прочей техники имеется", , , , , False
+    AddNewElement "TechnicsNotMchsOtherHave", "Прочей техники имеется"
     AddNewElement "TotalTechCount", "Техники всего имеется", , , , , False
     AddNewElement "TotalFireCount", "Пожарной и аварийно-спасательной техники всего имеется", , , , , False
     

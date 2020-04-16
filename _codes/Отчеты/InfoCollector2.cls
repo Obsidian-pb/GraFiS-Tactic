@@ -146,8 +146,17 @@ Dim latestSquareTime As Date
                             Then .Raise "MainOverallHave" 'pi_MainOverallCount = pi_MainOverallCount + 1
                         '<<<Учет возможности отсутствия ячейки "Prop.Dest" для старых фигур
                     Case Is = indexPers.ipAvtoObschee 'Общее обозначение
+                        .Raise "TotalTechCount"
                         If CellVal(shp, "Actions.RSCHS.Checked") = 1 _
-                            Then .Raise "TotalTechCount" ' pi_TechTotalCount = pi_TechTotalCount + 1
+                            Then .Raise "RSCHSTechincsHave"
+                    Case Is = indexPers.ipPrispAvto 'Приспособленная техника
+                        .Raise "TotalTechCount"
+                        If CellVal(shp, "Actions.RSCHS.Checked") = 1 _
+                            Then .Raise "RSCHSTechincsHave"
+                    Case Is = indexPers.ipInjenerAndSpecAvto 'Инженерная техника
+                        .Raise "TotalTechCount"
+                        If CellVal(shp, "Actions.RSCHS.Checked") = 1 _
+                            Then .Raise "RSCHSTechincsHave"
                     Case Is = indexPers.ipACL 'АЦЛ
                         .Raise "MainOverallHave;MainPAHave;ALCount;ACCount;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
@@ -613,6 +622,12 @@ Dim latestSquareTime As Date
                                 .Raise "MVDCount;TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipMashiniMinzdrav 'Минздрав
                                 .Raise "SMPCount;TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
+                            Case Is = indexPers.ipPrispAvto 'Приспособленная техника
+                                If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" _
+                                  Then .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
+                            Case Is = indexPers.ipInjenerAndSpecAvto 'Инженерная техника
+                                If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" _
+                                  Then .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAvtoObschee 'Общее обозначение
                                 If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" _
                                   Then .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1 ' pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
@@ -650,14 +665,14 @@ Dim latestSquareTime As Date
         .SetVal "HosesHave", .Sum("Hoses38Have;Hoses51Have;Hoses66Have;Hoses77Have;Hoses89Have;Hoses110Have;Hoses150Have;Hoses200Have;Hoses250Have;Hoses300Have")
         'Прочие
         .SetVal "PAHighHave", .Sum("ALCount;AKPCount")
-        .SetVal "TechnicsNotMchsHave", .Result("TotalTechCount") - .Result("TotalFireCount")
-        .SetVal "TechnicsNotMchsOtherHave", .Result("TechnicsNotMchsHave") - .Result("MVDCount") - .Result("SMPCount")
         .SetVal "StvolWBNeed", PF_RoundUp(.Result("NeedStreamW") / 3.7)
         .SetVal "StvolWANeed", PF_RoundUp(.Result("NeedStreamW") / 7.4)
         .SetVal "StvolWLNeed", PF_RoundUp(.Result("NeedStreamW") / 12)
         .SetVal "PANeedOnWaterSource", PF_RoundUp(.Result("NeedStreamW") / 32)
-        .SetVal "RSCHSTechincsHave", .Result("TotalTechCount")
+        .SetVal "RSCHSTechincsHave", .Result("RSCHSTechincsHave") + .Result("TotalFireCount") + .Result("MVDCount") + .Result("SMPCount")
+        .SetVal "TechnicsNotMchsHave", .Result("RSCHSTechincsHave") - .Result("TotalFireCount")
         .SetVal "WaterValueNeed10min", .Result("FactStreamW") * 600
+        .SetVal "TechnicsNotMchsOtherHave", .Result("TotalTechCount") - .Result("RSCHSTechincsHave")
         
         'ГДЗС
         .SetVal "GDZSChainsCountWork", .Sum("GDZSChainsCountWorkSoft;GDZSChainsCountWorkHard")
