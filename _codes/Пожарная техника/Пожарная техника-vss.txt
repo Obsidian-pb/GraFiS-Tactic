@@ -3250,7 +3250,7 @@
     User.IndexPers: 195; User.IndexPers.Prompt: "Фигура Индекс количества технических изделий"; 
     User.Version: 1; User.Version.Prompt: ""; 
   Section Object, row: visRowEvent>>>
-    EventDblClick: OPENTEXTWIN(); EventDrop: CALLTHIS("PS_GlueToShape";"ПожТехникаНовая2"); 
+    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("PS_GlueToShape";"ПожТехникаНовая2"); 
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: THEMEGUARD(0); ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: THEMEGUARD(0); FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>

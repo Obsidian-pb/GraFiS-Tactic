@@ -623,8 +623,11 @@ Dim latestSquareTime As Date
                             Case Is = indexPers.ipMashiniMinzdrav 'Минздрав
                                 .Raise "SMPCount;TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipPrispAvto 'Приспособленная техника
-                                If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" _
-                                  Then .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
+                                If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" Then
+                                  .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
+                                Else
+                                  .Raise "TotalTechCount;RSCHSTechincsHave", CellVal(shp, "Prop.Quantity") - 1
+                                End If
                             Case Is = indexPers.ipInjenerAndSpecAvto 'Инженерная техника
                                 If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" _
                                   Then .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
