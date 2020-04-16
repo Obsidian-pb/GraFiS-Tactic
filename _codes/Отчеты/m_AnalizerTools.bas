@@ -48,7 +48,7 @@ Dim shp As Visio.Shape
     'Активируем коллекцию принятых ответов
     Set changedNames = New Collection
     
-    'Полуаем строку с именами вызова всех элементов
+    'Получаем строку с именами вызова всех элементов
     Set elements = New ElementsShell
     CallNames = elements.CallNames(";")
 

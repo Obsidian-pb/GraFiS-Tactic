@@ -2,8 +2,8 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} TacticDataForm 
    Caption         =   "Тактические данные"
    ClientHeight    =   3000
-   ClientLeft      =   48
-   ClientTop       =   372
+   ClientLeft      =   45
+   ClientTop       =   375
    ClientWidth     =   8160
    OleObjectBlob   =   "TacticDataForm.frx":0000
    ShowModal       =   0   'False
@@ -102,6 +102,10 @@ Attribute menuButtonRestore.VB_VarHelpID = -1
 Public WithEvents menuButtonOptions As CommandBarButton
 Attribute menuButtonOptions.VB_VarHelpID = -1
 
+Private curShapeID As Long
+Private lastCalcTime As Double
+Const recalcInterval = 0.0000116
+
 'Private elemCollection As Collection
 
 '--------------------------Основные процедуры и функции класса--------------------
@@ -145,7 +149,19 @@ Public Sub CloseThis()
 End Sub
 
 Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
-    Refresh
+    
+    If curShapeID <> Cell.Shape.ID Then
+        Refresh
+        curShapeID = Cell.Shape.ID
+        Debug.Print Cell.Shape.Name
+    Else
+        If lastCalcTime + recalcInterval < Now() Then
+            Refresh
+            Debug.Print Cell.Shape.Name
+        End If
+    End If
+    
+    lastCalcTime = Now()
 End Sub
 
 

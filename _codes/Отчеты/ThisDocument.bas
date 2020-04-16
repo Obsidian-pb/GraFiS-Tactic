@@ -16,6 +16,8 @@ Attribute vmO_App.VB_VarHelpID = -1
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     
+    On Error Resume Next
+    
 '---Деактивируем объект отслеживания нажатия кнопок
     Set ButEvent = Nothing
     
