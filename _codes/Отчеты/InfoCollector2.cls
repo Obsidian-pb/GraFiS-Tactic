@@ -59,7 +59,7 @@ Dim latestSquareTime As Date
     For Each shp In targetPage.Shapes
         If IsGFSShape(shp) Then         'Является ли фигура фигурой ГраФиС
 '            If vsO_Shape.Cells("User.Version") >= CP_GrafisVersion Then  'Проверяем версию фигуры
-                shpIndex = shp.Cells("User.IndexPers")   'Определяем индекс фигуры ГраФиС
+                shpIndex = CellVal(shp, "User.IndexPers")  'Определяем индекс фигуры ГраФиС
                 
                 With elements
                 Select Case shpIndex
@@ -70,70 +70,70 @@ Dim latestSquareTime As Date
                         .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                     Case Is = indexPers.ipANR 'АНР
                         .Raise "MainOverallHave;MainPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAPP 'АПП
                         .Raise "MainOverallHave;MainPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                     Case Is = indexPers.ipAL 'АЛ
                         .Raise "SpecialPAHave;ALCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAKP 'АКП
                         .Raise "SpecialPAHave;AKPCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipASO 'АСО
                         .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAT 'АТ
                         .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipADU 'АДУ
                         .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipPNS 'ПНС
                         .Raise "TargetedPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAA 'AA
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                     Case Is = indexPers.ipAV 'АВ
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAKT 'АКТ
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                     Case Is = indexPers.ipAP 'АП
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAGVT 'АГВТ
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAG 'АГ
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAGDZS 'АГДЗС
                         .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipPNS 'ПКС
                         .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipPozhLab 'ЛБ
                         .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipASA 'АСА
                         .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipASH 'АШ
                         .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAR 'АР
                         .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipPAObscheeOboznachenie 'Общее обозначение
                         .Raise "TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                         '>>>Учет возможности отсутствия ячеек "Prop.Dest" для старых фигур
                         tmp = CellVal(shp, "Prop.Dest", visUnitsString)
                         If tmp = "Специальный" _
@@ -159,19 +159,19 @@ Dim latestSquareTime As Date
                             Then .Raise "RSCHSTechincsHave"
                     Case Is = indexPers.ipACL 'АЦЛ
                         .Raise "MainOverallHave;MainPAHave;ALCount;ACCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                     Case Is = indexPers.ipACKP 'АЦКП
                         .Raise "MainOverallHave;MainPAHave;AKPCount;ACCount;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                 
                 
                 '---Прочая пожарная техника----------
                     Case Is = indexPers.ipPoezd 'Поезда
                         .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
-                        .Raise "WaterValueHave", shp.Cells("Prop.Water")
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                     Case Is = indexPers.ipSamolet 'Самолет
                         .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
                     Case Is = indexPers.ipHydroSamolet 'Самолет-амфибия
@@ -180,19 +180,19 @@ Dim latestSquareTime As Date
                         .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
                     Case Is = indexPers.ipMotoPump 'Мотопомпы
                         .Raise "OtherTechincsHave;TotalFireCount"
-                        .Raise "PersonnelNeed", shp.Cells("Prop.Personnel")
+                        .Raise "PersonnelNeed", CellVal(shp, "Prop.Personnel")
                     Case Is = indexPers.ipKorabl 'Корабль
                         .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipKater 'Катер
                         .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipMashNaGusenicah 'Машины на гусеничном ходу
                         .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipTank 'Танки
                         .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipMVD 'МВД
                         .Raise "TotalTechCount;MVDCount"
                     Case Is = indexPers.ipMashiniMinzdrav 'Минздрав
@@ -204,8 +204,8 @@ Dim latestSquareTime As Date
                         If CellVal(shp, "Prop.SquareTime", visDate) > latestSquareTime Then 'Проверяем является ли данная фигура последней по времени
                             .SetValByCellID shp, "User.FireSquare;User.ExtSquare;User.NeedStreamW"
                                                 
-                            latestSquareTime = shp.Cells("Prop.SquareTime") 'Устанавливаем новое значение наибольшего времени учета для площади
-                        ElseIf shp.Cells("Prop.SquareTime") = latestSquareTime Then
+                            latestSquareTime = CellVal(shp, "Prop.SquareTime", visDate) 'Устанавливаем новое значение наибольшего времени учета для площади
+                        ElseIf CellVal(shp, "Prop.SquareTime", visDate) = latestSquareTime Then
                             .RaiseByCellID shp, "User.FireSquare;User.ExtSquare;User.NeedStreamW"
                         End If
                         
@@ -214,8 +214,8 @@ Dim latestSquareTime As Date
                     Case Is = indexPers.ipOchag 'Очаг
                         .Raise "OchagCount"
                     Case Is = indexPers.ipPostradavshie 'Пострадавшие
-                        .Raise "InjuredCount", shp.Cells("User.CasCount")
-                        .Raise "DeadCount", shp.Cells("User.DiedCount")
+                        .Raise "InjuredCount", CellVal(shp, "User.CasCount")
+                        .Raise "DeadCount", CellVal(shp, "User.DiedCount")
                     Case Is = indexPers.ipRasprostran 'Распространение
                         .Raise "SpreadCount"
                     Case Is = indexPers.ipStorm 'Огненный шторм
@@ -225,7 +225,7 @@ Dim latestSquareTime As Date
                 
                 '---Связь и освещение------------------
                     Case Is = indexPers.ipProzhektor 'Прожектор
-                        .Raise "PersonnelHave", shp.Cells("Prop.PersonnelHave") - 1
+                        .Raise "PersonnelNeed", CellVal(shp, "Prop.Personnel")
                     Case Is = indexPers.ipNosimoeRadio 'Радиостанция носимая
                     Case Is = indexPers.ipAvtoRadio 'Радиостанция возимая
                     Case Is = indexPers.ipStacRadio 'Радиостанция стационарная
@@ -234,7 +234,7 @@ Dim latestSquareTime As Date
         
                 '---ГДЗС----------------------------
                     Case Is = indexPers.ipGDZSZvenoVozd 'Звено - ДАСВ
-                        If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
+                        If CellVal(shp, "Prop.WorkState", visUnitsString) = "Работает" Or CellVal(shp, "Prop.WorkState", visUnitsString) = 0 Then
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             
                             If shp.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
@@ -248,7 +248,7 @@ Dim latestSquareTime As Date
                             .SetVal "GDZSChainsCountNeed", .ByID("GDZSChainsCountWork").Result + .ByID("GDZSChainsRezCountNeed").Result
                             .SetVal "GDZSMansCountNeed", .ByID("GDZSMansCountWork").Result + .ByID("GDZSMansRezCountNeed").Result
                         End If
-                        If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
+                        If CellVal(shp, "Prop.WorkState", visUnitsString) = "В резерве" Then
                             'ПРОВЕРИТЬ!!! Получается, что дважды считается требуемое количество людей
                             .Raise "GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
                             .Raise "GDZSChainsRezCountHave"
@@ -256,7 +256,7 @@ Dim latestSquareTime As Date
                         
                         
                     Case Is = indexPers.ipGDZSZvenoKisl 'Звено - ДАСК
-                        If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "Работает" Then
+                        If CellVal(shp, "Prop.WorkState", visUnitsString) = "Работает" Or CellVal(shp, "Prop.WorkState", visUnitsString) = 0 Then
                             .Raise "PersonnelNeed;GDZSMansCountWork", CellVal(shp, "Prop.Personnel")
                             If shp.Cells("Prop.WorkPlace").ResultStr(visUnitsString) = "Стандартные условия" Then
                                 .Raise "GDZSChainsCountWorkSoft"
@@ -269,7 +269,7 @@ Dim latestSquareTime As Date
                             .SetVal "GDZSChainsCountNeed", .ByID("GDZSChainsCountWork").Result + .ByID("GDZSChainsRezCountNeed").Result
                             .SetVal "GDZSMansCountNeed", .ByID("GDZSMansCountWork").Result + .ByID("GDZSMansRezCountNeed").Result
                         End If
-                        If shp.Cells("Prop.WorkState").ResultStr(visUnitsString) = "В резерве" Then
+                        If CellVal(shp, "Prop.WorkState", visUnitsString) = "В резерве" Then
                             .Raise "GDZSChainsRezCountHave"
                             .Raise "GDZSMansRezCountHave", CellVal(shp, "Prop.Personnel")
                         End If
@@ -313,9 +313,9 @@ Dim latestSquareTime As Date
                             .RaiseByCellID shp, "Prop.Personnel;User.PodOut"
                             .Raise "StvolWHave"
                             
-                            If shp.Cells("User.DiameterIn") = 50 Then
+                            If CellVal(shp, "User.DiameterIn") = 50 Then
                                 .Raise "StvolWBHave"
-                            ElseIf shp.Cells("User.DiameterIn") = 70 Then
+                            ElseIf CellVal(shp, "User.DiameterIn") = 70 Then
                                 .Raise "StvolWAHave"
                             End If
                         End If
@@ -408,7 +408,7 @@ Dim latestSquareTime As Date
                         
                         
         
-                '---Водоснабжение
+                '---Водоснабжение   -!!!REWRITE ALL shp.Cells to CellVal
                     Case Is = indexPers.ipPG 'ПГ
                         .Raise "WaterSourceCount"
                         If shp.CellExists("User.Distance", 0) = True Then
