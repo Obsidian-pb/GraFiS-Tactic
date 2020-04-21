@@ -34,7 +34,10 @@ Dim progressWidthStep As Double
 
     curPath = Application.ActiveDocument.path
     
-'    ExportProgress.Max = Application.ActiveDocument.Pages.Count
+    If curPath = "" Then
+        MsgBox "Сначала необходимо сохранить текущий документ"
+        Exit Sub
+    End If
     
     'Задаем стартовые значения для полосы заливки
     progressWidthStep = Me.ProgressFrame.Width / Application.ActiveDocument.Pages.Count
