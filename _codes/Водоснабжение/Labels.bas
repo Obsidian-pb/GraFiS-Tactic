@@ -188,8 +188,8 @@ vsi_ShapeIndex = 0
         vsoCell1.GlueTo vsoCell2
     
     If vsi_ShapeIndex = 0 And Contex = 1 Then
-        shpConnection.CellsU("EndX") = ShpObj.CellsU("pinX") + 300
-        shpConnection.CellsU("EndY") = ShpObj.CellsU("pinY") + 300
+        shpConnection.CellsU("EndX") = ShpObj.CellsU("pinX") + 550
+        shpConnection.CellsU("EndY") = ShpObj.CellsU("pinY") + 550
     Else
         Set vsoCell1 = shpConnection.CellsU("EndX")
         Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
@@ -204,6 +204,9 @@ vsi_ShapeIndex = 0
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLOLineRouteExt).FormulaU = 1
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLORouteStyle).FormulaU = 16
     shpConnection.CellsSRC(visSectionObject, visRowLine, visLineColor).FormulaU = "THEMEGUARD(RGB(0,176,240))"
+    shpConnection.Cells("Controls.ArrowPos").FormulaU = "IF(Width<6 m,Width*0.7*ThePage!User.GFS_Aspect,5 m*ThePage!User.GFS_Aspect)"
+    shpConnection.Cells("Controls.TxtPos").FormulaU = "IF(STRSAME(Prop.ArrowStyle,""Однонаправленная сокращенная""),IF(Width<6 m,Width*0.5*ThePage!User.GFS_Aspect,2.5 m*ThePage!User.GFS_Aspect),Width*0.5*ThePage!User.GFS_Aspect)"
+    shpConnection.Cells("Controls.Ident").FormulaU = "IF(Width<6 m,Width*0.3*ThePage!User.GFS_Aspect,2 m *ThePage!User.GFS_Aspect)"
 
     CellFormula = "AND(EndX>Sheet." & ShpObj.ID & "!PinX-Sheet." & ShpObj.ID & "!Width*0.5,EndX<Sheet." & _
         ShpObj.ID & "!PinX+Sheet." & ShpObj.ID & "!Width*0.5,EndY<Sheet." & _

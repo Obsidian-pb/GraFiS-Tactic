@@ -111,7 +111,7 @@ vsi_ShapeIndex = 0
                 vsi_ShapeIndex = shpTarget.Cells("User.IndexPers")   'Определяем индекс фигуры ГраФиС
                 If vsi_ShapeIndex = 135 Then
                 '---Вбрасываем коннектор и соединяем фигуру нашего здания и соседнего
-                    Set mstrConnection = ThisDocument.Masters("Distance")
+                    Set mstrConnection = ThisDocument.Masters("Distance2")
                     Set shpConnection = Application.ActiveWindow.Page.Drop(mstrConnection, 2, 2)
                   
                     Set vsoCell1 = shpConnection.CellsU("EndX")
@@ -121,7 +121,9 @@ vsi_ShapeIndex = 0
                     Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
                         vsoCell1.GlueTo vsoCell2
                 ''---Проверяем длину линии и если она не подходит, удаляем
-                    If shpConnection.Cells("Width").ResultIU = 0 Or shpConnection.Cells("Width").Result(visMeters) > lmax Then shpConnection.Delete
+DoEvents 'без этого длина линии высчитывается с запозданием
+                    If shpConnection.Cells("User.Length").Result(visMeters) = 0 Or _
+                    shpConnection.Cells("User.Length").Result(visMeters) > lmax Then shpConnection.Delete
                 End If
 
                 If inppw = True And (vsi_ShapeIndex = 50 Or vsi_ShapeIndex = 51 Or vsi_ShapeIndex = 53 _
@@ -137,6 +139,9 @@ vsi_ShapeIndex = 0
                     Set vsoCell2 = shpTarget.CellsSRC(1, 1, 0)
                         vsoCell1.GlueTo vsoCell2
                     shpConnection.Cells("Prop.ArrowStyle").FormulaU = "INDEX(2,Prop.ArrowStyle.Format)"
+                    shpConnection.Cells("Controls.ArrowPos").FormulaU = "IF(Width<6 m,Width*0.7*ThePage!User.GFS_Aspect,5 m*ThePage!User.GFS_Aspect)"
+                    shpConnection.Cells("Controls.TxtPos").FormulaU = "IF(STRSAME(Prop.ArrowStyle,""Однонаправленная сокращенная""),IF(Width<6 m,Width*0.5*ThePage!User.GFS_Aspect,2.5 m*ThePage!User.GFS_Aspect),Width*0.5*ThePage!User.GFS_Aspect)"
+                    shpConnection.Cells("Controls.Ident").FormulaU = "IF(Width<6 m,Width*0.3*ThePage!User.GFS_Aspect,2 m *ThePage!User.GFS_Aspect)"
                 End If
                End If
         End If

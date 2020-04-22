@@ -3704,9 +3704,9 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.Distance: IF(STRSAME(FORMAT(Width;"u");"мм");FORMAT(Width/1000;"0")&" м";FORMAT(Width;"0")&" м"); Prop.Distance.Prompt: "Расстояние между объектами по масштабу"; Prop.Distance.Label: "Расстояние"; Prop.Distance.Format: "#,#### u"; Prop.Distance.SortKey: "10"; Prop.Distance.Type: 2; Prop.Distance.Invisible: STRSAME(Prop.Input;"Вручную"); Prop.Distance.Verify: FALSE; Prop.Distance.LangID: 1049; Prop.Distance.Calendar: 0; 
+    Prop.Distance: IF(STRSAME(FORMAT(Width;"u");"мм");FORMAT(Width/1000;"0")&" м";FORMAT(Width;"0")&" м"); Prop.Distance.Prompt: "Расстояние между объектами по масштабу"; Prop.Distance.Label: "Расстояние"; Prop.Distance.Format: "#,#### u"; Prop.Distance.SortKey: "10"; Prop.Distance.Type: 2; Prop.Distance.Invisible: STRSAME(Prop.Input;"Явный"); Prop.Distance.Verify: FALSE; Prop.Distance.LangID: 1049; Prop.Distance.Calendar: 0; 
     Prop.DistanceManual: 30; Prop.DistanceManual.Prompt: "Расстояние между объектами явным образом"; Prop.DistanceManual.Label: "Расстояние, м"; Prop.DistanceManual.Format: "#,#### u"; Prop.DistanceManual.SortKey: "20"; Prop.DistanceManual.Type: 2; Prop.DistanceManual.Invisible: STRSAME(Prop.Input;"По масштабу"); Prop.DistanceManual.Verify: FALSE; Prop.DistanceManual.LangID: 1049; Prop.DistanceManual.Calendar: 0; 
-    Prop.Input: INDEX(0;Prop.Input.Format); Prop.Input.Prompt: "Способ определения значения длины"; Prop.Input.Label: "Способ определения"; Prop.Input.Format: "По масштабу;Вручную"; Prop.Input.SortKey: "30"; Prop.Input.Type: 1; Prop.Input.Invisible: FALSE; Prop.Input.Verify: FALSE; Prop.Input.LangID: 1049; Prop.Input.Calendar: 0; 
+    Prop.Input: INDEX(0;Prop.Input.Format); Prop.Input.Prompt: "Способ определения значения длины"; Prop.Input.Label: "Способ определения"; Prop.Input.Format: "По масштабу;Явный"; Prop.Input.SortKey: "30"; Prop.Input.Type: 1; Prop.Input.Invisible: FALSE; Prop.Input.Verify: FALSE; Prop.Input.LangID: 1049; Prop.Input.Calendar: 0; 
     Prop.Glue: INDEX(0;Prop.Glue.Format); Prop.Glue.Prompt: "'Приклеивание' концов линии к объектам"; Prop.Glue.Label: "Привязка к объектам"; Prop.Glue.Format: "Включена;Отключена"; Prop.Glue.SortKey: "40"; Prop.Glue.Type: 1; Prop.Glue.Invisible: FALSE; Prop.Glue.Verify: FALSE; Prop.Glue.LangID: 1049; Prop.Glue.Calendar: 0; 
     Prop.ArrowStyle: INDEX(2;Prop.ArrowStyle.Format); Prop.ArrowStyle.Prompt: "Направление стрелок"; Prop.ArrowStyle.Label: "Вид линии"; Prop.ArrowStyle.Format: "Однонаправленная;Двунаправленная;Однонаправленная сокращенная"; Prop.ArrowStyle.SortKey: "50"; Prop.ArrowStyle.Type: 1; Prop.ArrowStyle.Invisible: FALSE; Prop.ArrowStyle.Verify: FALSE; Prop.ArrowStyle.LangID: 1049; Prop.ArrowStyle.Calendar: 0; 
   Section: Tab>>>
@@ -3719,7 +3719,7 @@
     User.Version: 2; User.Version.Prompt: ""; 
     User.length: IF(STRSAME(Prop.Input;"По масштабу");Width;Prop.DistanceManual*1 м); User.length.Prompt: ""; 
   Section Object, row: visRowEvent>>>
-    EventDrop: SETF(GetRef(Char.Size);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BottomMargin);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(LineWeight);1 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BeginArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(EndArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect"); 
+    EventDrop: SETF(GetRef(Char.Size);8 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(LineWeight);1 пт*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(BeginArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(EndArrowSize);3*User.Size200&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Controls.ArrowPos);"IF(Width<6 m,Width*0.7*ThePage!User.GFS_Aspect,5 m*ThePage!User.GFS_Aspect)"); 
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>
@@ -3747,7 +3747,7 @@
   Section Object, row: visRowTextXForm>>>
     TxtPinX: Controls.TxtPos; TxtPinY: Controls.TxtPos.Y; TxtWidth: Width*1; TxtHeight: Height*1; TxtLocPinX: TxtWidth*0,5; TxtLocPinY: TxtHeight*0,5; TxtAngle: IF(OR(Angle>89 град;Angle<-90 град);3,1;0); 
   Section Object, row: visRowText>>>
-    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 0 пт; BottomMargin: 6 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 0 пт; BottomMargin: Char.Size; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
     BeginX: 2 м; BeginY: 0 м; EndX: 0 м; EndY: 2 м; 
   Section Object, row: visRowXFormOut>>>
