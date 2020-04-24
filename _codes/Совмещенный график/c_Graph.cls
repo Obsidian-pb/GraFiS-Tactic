@@ -52,10 +52,6 @@ Private Sub Class_Initialize()
 End Sub
 
 
-Private Sub Class_Terminate()
-
-End Sub
-
 '----------------------------------------Внешние команды (процедуры и функции к ним)-------------------------------
 Public Sub sC_ColRefresh() '(as_PageIndex As Integer)
 'Процедура обновления коллекций класса
@@ -115,6 +111,8 @@ Public Sub PS_GetFireSquares(ByRef MainArray())
 'Процедура получает динамический массив и заполняет его данными о площадах пожара
 'Первая цифра (0-абс.время; 1-значение площади), Вторая значение соответсвующего атрибута точки
 Dim CurShape As Visio.Shape
+Dim curTime As Date
+Dim curSquare As Double
 Dim i As Integer
 
     On Error GoTo EX
@@ -130,12 +128,35 @@ Dim i As Integer
     End If
 
 '---Перебираем все фигуры в коллекции
+'    i = 0
+'    For Each CurShape In ColP_Fires
+'        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
+'        MainArray(1, i) = CurShape.Cells("User.FireSquare")
+'        i = i + 1
+'    Next CurShape
     i = 0
     For Each CurShape In ColP_Fires
-        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
-        MainArray(1, i) = CurShape.Cells("User.FireSquare")
-        i = i + 1
+        If curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate)) Then
+            curSquare = curSquare + CurShape.Cells("User.FireSquare")
+            MainArray(0, i) = curTime
+            MainArray(1, i) = curSquare
+        Else
+            curSquare = CurShape.Cells("User.FireSquare")
+            curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
+            MainArray(0, i) = curTime
+            MainArray(1, i) = curSquare
+            i = i + 1
+        End If
+'        MainArray(0, i) = curTime
+'        MainArray(1, i) = curSquare
+        
     Next CurShape
+    
+'---Удаляем пустые строки из конца массива (если таковые имеются)
+    For i = UBound(MainArray, 2) To 1 Step -1
+        If Not IsEmpty(MainArray(1, i)) Then Exit For
+    Next i
+    ReDim Preserve MainArray(1, i)
 
 Exit Sub
 EX:
@@ -147,6 +168,8 @@ Public Sub PS_GetExtSquares(ByRef MainArray())
 'Процедура получает динамический массив и заполняет его данными о площадах ТУШЕНИЯ пожара
 'Первая цифра (0-абс.время; 1-значение площади), Вторая значение соответсвующего атрибута точки
 Dim CurShape As Visio.Shape
+Dim curTime As Date
+Dim curSquare As Double
 Dim i As Integer
 
     On Error GoTo EX
@@ -162,12 +185,34 @@ Dim i As Integer
     End If
 
 '---Перебираем все фигуры в коллекции
+'    i = 0
+'    For Each CurShape In ColP_Fires
+'        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
+'        MainArray(1, i) = CurShape.Cells("User.ExtSquare")
+'        i = i + 1
+'    Next CurShape
     i = 0
     For Each CurShape In ColP_Fires
-        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
-        MainArray(1, i) = CurShape.Cells("User.ExtSquare")
-        i = i + 1
+        If curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate)) Then
+            curSquare = curSquare + CurShape.Cells("User.ExtSquare")
+            MainArray(0, i) = curTime
+            MainArray(1, i) = curSquare
+        Else
+            curSquare = CurShape.Cells("User.ExtSquare")
+            curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
+            MainArray(0, i) = curTime
+            MainArray(1, i) = curSquare
+            i = i + 1
+        End If
+        
+        
     Next CurShape
+    
+'---Удаляем пустые строки из конца массива (если таковые имеются)
+    For i = UBound(MainArray, 2) To 1 Step -1
+        If Not IsEmpty(MainArray(1, i)) Then Exit For
+    Next i
+    ReDim Preserve MainArray(1, i)
 
 Exit Sub
 EX:
@@ -277,6 +322,20 @@ Public Function PF_CheckFireBeginExist() As Boolean
     PF_CheckFireBeginExist = fC_FireCheck(pi_TargetPageIndex)
 End Function
 
+Public Function GetMaxGraphSize(ByVal ShpPos) As Single
+Dim maxSquare As Single
+Dim exp As Single
+    
+    maxSquare = PF_GetMaxSquare(ShpPos)
+    exp = PF_GetExpence
+        
+    If exp > maxSquare Then
+        GetMaxGraphSize = exp * PF_GetIntence(ShpPos)
+    Else
+        GetMaxGraphSize = maxSquare
+    End If
+End Function
+
 Public Function PF_GetMaxSquare(ByVal ShpPos) As Single
 'Функция возвращает значение максимальной площади пожара
 Dim i As Integer
@@ -293,6 +352,27 @@ EX:
     MsgBox Err.description
     SaveLog Err, "PF_GetMaxSquare"
     PF_GetMaxSquare = 320
+End Function
+
+Public Function PF_GetExpence() As Single
+'Функция возвращает значение максимального расхода воды
+Dim i As Integer
+Dim shp As Visio.Shape
+Dim val As Double
+    
+On Error GoTo EX
+
+'---Получаем данные
+    For Each shp In ColP_WStvols
+        val = shp.Cells("User.PodOut").Result(visNumber)
+    Next shp
+    PF_GetExpence = val
+
+Exit Function
+EX:
+    MsgBox Err.description
+    SaveLog Err, "PF_GetExpence"
+    PF_GetExpence = 32
 End Function
 
 

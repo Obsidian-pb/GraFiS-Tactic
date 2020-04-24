@@ -366,7 +366,8 @@ Dim PageIndex As Integer
 '    shp.Cells("Prop.TimeBegin").FormulaU = """" & GraphAnalizer.PF_GetBeginDateTime & """"
     shp.Cells("Prop.TimeBegin").FormulaU = "TheDoc!User.FireTime"
     'максимальна€ площдь
-    shp.Cells("Prop.FireMax").FormulaForceU = "Guard(" & GraphAnalizer.PF_GetMaxSquare(GraphAnalizer.ColP_Fires.Count) & ")"
+'    shp.Cells("Prop.FireMax").FormulaForceU = "Guard(" & GraphAnalizer.PF_GetMaxSquare(GraphAnalizer.ColP_Fires.Count) & ")"
+    shp.Cells("Prop.FireMax").FormulaForceU = "Guard(" & GraphAnalizer.GetMaxGraphSize(GraphAnalizer.ColP_Fires.Count) & ")"
     'максимальное врем€
     shp.Cells("Prop.TimeMax").FormulaForceU = "Guard(" & GraphAnalizer.PF_GetTimeEnd(5, "s") / 60 & ")"
     'врем€ окончани€
