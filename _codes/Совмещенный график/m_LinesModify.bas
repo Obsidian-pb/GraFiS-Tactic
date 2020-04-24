@@ -147,7 +147,8 @@ Dim PageIndex As Integer
     
 '---Оцищаем все точки графика кроме первой (чтоб не исчез вообще)
     For i = 1 To shp.RowCount(visSectionControls) - 1
-        PS_FireGraph_DeleteKnot shp
+'        PS_FireGraph_DeleteKnot shp
+        PS_FireTGraph_DeleteKnot shp
     Next i
     
     '---Получаем массив данных

@@ -124,7 +124,7 @@ Dim i As Integer
     If ColP_Fires.Count = 0 Then
         Exit Sub
     Else
-        ReDim MainArray(1, ColP_Fires.Count - 1)
+        ReDim MainArray(1, ColP_Fires.Count)
     End If
 
 '---Перебираем все фигуры в коллекции
@@ -138,17 +138,13 @@ Dim i As Integer
     For Each CurShape In ColP_Fires
         If curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate)) Then
             curSquare = curSquare + CurShape.Cells("User.FireSquare")
-            MainArray(0, i) = curTime
-            MainArray(1, i) = curSquare
         Else
             curSquare = CurShape.Cells("User.FireSquare")
             curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
-            MainArray(0, i) = curTime
-            MainArray(1, i) = curSquare
             i = i + 1
         End If
-'        MainArray(0, i) = curTime
-'        MainArray(1, i) = curSquare
+        MainArray(0, i) = curTime
+        MainArray(1, i) = curSquare
         
     Next CurShape
     
@@ -181,7 +177,7 @@ Dim i As Integer
     If ColP_Fires.Count = 0 Then
         Exit Sub
     Else
-        ReDim MainArray(1, ColP_Fires.Count - 1)
+        ReDim MainArray(1, ColP_Fires.Count)
     End If
 
 '---Перебираем все фигуры в коллекции
@@ -195,16 +191,13 @@ Dim i As Integer
     For Each CurShape In ColP_Fires
         If curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate)) Then
             curSquare = curSquare + CurShape.Cells("User.ExtSquare")
-            MainArray(0, i) = curTime
-            MainArray(1, i) = curSquare
         Else
             curSquare = CurShape.Cells("User.ExtSquare")
             curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
-            MainArray(0, i) = curTime
-            MainArray(1, i) = curSquare
             i = i + 1
         End If
-        
+        MainArray(0, i) = curTime
+        MainArray(1, i) = curSquare
         
     Next CurShape
     
