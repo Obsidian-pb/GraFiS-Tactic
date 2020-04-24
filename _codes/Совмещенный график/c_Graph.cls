@@ -327,10 +327,10 @@ Dim maxSquare As Single
 Dim exp As Single
     
     maxSquare = PF_GetMaxSquare(ShpPos)
-    exp = PF_GetExpence
+    exp = PF_GetExpence / PF_GetIntence(ShpPos)
         
     If exp > maxSquare Then
-        GetMaxGraphSize = exp * PF_GetIntence(ShpPos)
+        GetMaxGraphSize = exp
     Else
         GetMaxGraphSize = maxSquare
     End If
@@ -364,7 +364,7 @@ On Error GoTo EX
 
 '---Получаем данные
     For Each shp In ColP_WStvols
-        val = shp.Cells("User.PodOut").Result(visNumber)
+        val = val + shp.Cells("User.PodOut").Result(visNumber)
     Next shp
     PF_GetExpence = val
 
