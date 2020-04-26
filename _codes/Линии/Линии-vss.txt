@@ -32,13 +32,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     
   Section Object, row: visRowPrintProperties>>>
@@ -70,13 +70,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 1; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 1; 
   Section Object, row: visRowPage>>>
     PageWidth: 210 мм; PageHeight: 297 мм; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 1 мм; DrawingScale: 1 мм; DrawingSizeType: 0; DrawingScaleType: 0; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -87,8 +87,6 @@
     EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-  Section Object, row: visRowXFormOut>>>
-    PinX: 0 дюйм; PinY: 0 дюйм; Width: 1 дюйм; Height: 1 дюйм; LocPinX: Width*0; LocPinY: Height*0; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Рукав - скатка
   Section: Character>>>
@@ -112,13 +110,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 1,3500000000001 м; PageHeight: 1,4000000000001 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -224,7 +222,7 @@
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: IF(Prop.Flow>Prop.FlowS;"РАСХОД ЧЕРЕЗ РУКАВ ПРЕВЫШАЕТ ПРОПУСКНУЮ СПОСОБНОСТЬ!!!"&CHAR(13);"")&"Тип линии: "&Prop.LineType&", "&CHAR(13)&"Диаметр рукавов: "&Prop.HoseDiameter&"мм.,"&CHAR(13)&"Длина линии: "&Prop.LineLenightHose&", "&CHAR(13)&"Кол-во рукавов: "&Prop.HoseNeed&"шт.,"&CHAR(13)&"Перепад местности: "&Prop.Different&"м.,"&", "&CHAR(13)&"Потери напора: "&Prop.HeadLost&"м."; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -234,7 +232,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: THEMEGUARD(THEME("BackgroundColor")+1); DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXFormOut>>>
-    PinX: 26,574803149608 дюйм; PinY: 27,559055118111 дюйм; Width: 53,149606299216 дюйм; Height: 55,118110236223 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: 0,67500000000004 м; PinY: 0,70000000000003 м; Width: 1,3500000000001 м; Height: 1,4000000000001 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Рукав-гармошка
   Section: Character>>>
@@ -258,13 +256,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 1,4 м; PageHeight: 1,282 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -373,7 +371,7 @@
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: IF(Prop.Flow>Prop.FlowS;"РАСХОД ЧЕРЕЗ РУКАВ ПРЕВЫШАЕТ ПРОПУСКНУЮ СПОСОБНОСТЬ!!!"&CHAR(13);"")&"Тип линии: "&Prop.LineType&", "&CHAR(13)&"Диаметр рукавов: "&Prop.HoseDiameter&"мм.,"&CHAR(13)&"Длина линии: "&Prop.LineLenightHose&", "&CHAR(13)&"Кол-во рукавов: "&Prop.HoseNeed&"шт.,"&CHAR(13)&"Перепад местности: "&Prop.Different&"м.,"&", "&CHAR(13)&"Потери напора: "&Prop.HeadLost&"м."; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -383,7 +381,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: THEMEGUARD(THEME("BackgroundColor")+1); DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXFormOut>>>
-    PinX: 27,55905511811 дюйм; PinY: 25,236220472441 дюйм; Width: 55,118110236221 дюйм; Height: 50,472440944882 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: 0,7 м; PinY: 0,641 м; Width: 1,4 м; Height: 1,282 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Напорная линия
   Section: Character>>>
@@ -407,13 +405,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 1,9 м; PageHeight: 0,0254 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -498,13 +496,13 @@
   Section Object, row: visRowLayerMem>>>
     LayerMember: "0"; 
   Section Object, row: visRowLine>>>
-    LineWeight: IF(STRSAME(Prop.LineType;"Магистральная");2 пт;1 пт)*IF(User.IsScaleOneToOne;1;User.Size200)*Страница!User.GFS_Aspect; LineColor: IF(Prop.Flow>Prop.FlowS;2;Styles!Р_Нап!LineColor); LinePattern: IF(STRSAME(Prop.ManeverHose;"Да");2;1); Rounding: 31,496062992126 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: IF(STRSAME(Prop.LineType;"Магистральная");2 пт;1 пт)*IF(User.IsScaleOneToOne;1;User.Size200)*Страница!User.GFS_Aspect; LineColor: IF(Prop.Flow>Prop.FlowS;2;Styles!Р_Нап!LineColor); LinePattern: IF(STRSAME(Prop.ManeverHose;"Да");2;1); Rounding: 0,8 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: IF(Prop.Flow>Prop.FlowS;"РАСХОД ЧЕРЕЗ РУКАВ ПРЕВЫШАЕТ ПРОПУСКНУЮ СПОСОБНОСТЬ!!!"&CHAR(13);"")&"Тип линии: "&Prop.LineType&", "&CHAR(13)&"Диаметр рукавов: "&Prop.HoseDiameter&"мм.,"&CHAR(13)&"Длина линии: "&Prop.LineLenightHose&", "&CHAR(13)&"Кол-во рукавов: "&Prop.HoseNeed&"шт.,"&CHAR(13)&"Перепад местности: "&Prop.Different&"м.,"&", "&CHAR(13)&"Потери напора: "&Prop.HeadLost&"м."; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -514,9 +512,9 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: -5,6843418860808e-14 дюйм; BeginY: 0,5 дюйм; EndX: 74,8031496063 дюйм; EndY: 0,5 дюйм; 
+    BeginX: -1,4438228390645e-15 м; BeginY: 0,0127 м; EndX: 1,9 м; EndY: 0,0127 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 6,5952066140131 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,26049444561798; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0,16751824799593 м; LocPinX: Width*0,5; LocPinY: Height*0,26049444561798; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Подпись линии
   Section: Character>>>
@@ -540,13 +538,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 0,0050940467909224 м; PageHeight: 0,00092189608026597 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -604,13 +602,13 @@
   Section Object, row: visRowLayerMem>>>
     LayerMember: "0"; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: THEMEGUARD(0); Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: THEMEGUARD(0); Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 1; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: TRUE; NoAlignBox: TRUE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 4; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -622,9 +620,9 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 0 пт; BottomMargin: 0 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 100%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0 дюйм; BeginY: -2,2737367544323e-13 дюйм; EndX: 0,20055302326466 дюйм; EndY: 0,036295121270086 дюйм; 
+    BeginX: 0 м; BeginY: -5,7752913562581e-15 м; EndX: 0,0050940467909224 м; EndY: 0,00092189608026019 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: 1e-4 м; Height: 39,370078740157 дюйм; LocPinX: Width*0,5; LocPinY: 0 дюйм; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: 1e-4 м; Height: 0,99999999999999 м; LocPinX: Width*0,5; LocPinY: 0 м; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Подпись положения
   Section: Character>>>
@@ -648,13 +646,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 0,0029142798307734 м; PageHeight: 9,1999544173905e-5 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -702,13 +700,13 @@
   Section Object, row: visRowLayerMem>>>
     LayerMember: "0"; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: THEMEGUARD(0); Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: THEMEGUARD(0); Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 1; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: TRUE; NoAlignBox: TRUE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 4; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -720,7 +718,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0 дюйм; BeginY: 0,0036220292981852 дюйм; EndX: 0,1147354264084 дюйм; EndY: 0 дюйм; 
+    BeginX: 0 м; BeginY: 9,1999544173905e-5 м; EndX: 0,0029142798307734 м; EndY: 0 м; 
   Section Object, row: visRowXFormOut>>>
     PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: 1e-4 м; Height: 0,1 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
@@ -746,13 +744,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 0,0254 м; PageHeight: 0,0254 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; Sect1.AB11: FALSE; Sect1.AC11: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -800,13 +798,13 @@
   Section Object, row: visRowLayerMem>>>
     LayerMember: "0"; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: Styles!Р_Мостик!LineColor; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: Styles!Р_Мостик!LineColor; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 1; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 4; _Unused78: 0; _Unused79: 0; Comment: Prop.Label&CHAR(10)&"Давление: "&Prop.Pressure&" "&Prop.Unit; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -816,7 +814,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0,5 дюйм; BeginY: 0,5 дюйм; EndX: 0,012702 м; EndY: 0,5 дюйм; 
+    BeginX: 0,0127 м; BeginY: 0,0127 м; EndX: 0,012702 м; EndY: 0,0127 м; 
   Section Object, row: visRowXFormOut>>>
     PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
@@ -842,13 +840,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 1,9 м; PageHeight: 0,0254 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -927,13 +925,13 @@
   Section Object, row: visRowLayerMem>>>
     LayerMember: "0"; 
   Section Object, row: visRowLine>>>
-    LineWeight: IF(STRSAME(Prop.LineType;"Всасывающий");3 пт;2 пт)*IF(User.IsScaleOneToOne;1;User.Size200)*Страница!User.GFS_Aspect; LineColor: IF(STRSAME(Prop.LineType;"Всасывающие");Styles!Р_НВ!LineColor;Styles!Р_Вс!LineColor); LinePattern: IF(STRSAME(Prop.ManeverHose;"Да");USE(IF(User.Size200<0,5;"ВсасывающийРукав1000";"ВсасывающийРукав"));USE(IF(User.Size200<0,5;"ВсасывающийРукав1000";"ВсасывающийРукав"))); Rounding: 31,496062992126 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: IF(STRSAME(Prop.LineType;"Всасывающий");3 пт;2 пт)*IF(User.IsScaleOneToOne;1;User.Size200)*Страница!User.GFS_Aspect; LineColor: IF(STRSAME(Prop.LineType;"Всасывающие");Styles!Р_НВ!LineColor;Styles!Р_Вс!LineColor); LinePattern: IF(STRSAME(Prop.ManeverHose;"Да");USE(IF(User.Size200<0,5;"ВсасывающийРукав1000";"ВсасывающийРукав"));USE(IF(User.Size200<0,5;"ВсасывающийРукав1000";"ВсасывающийРукав"))); Rounding: 0,8 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: IF(Prop.Flow>Prop.FlowS;"РАСХОД ЧЕРЕЗ РУКАВ ПРЕВЫШАЕТ ПРОПУСКНУЮ СПОСОБНОСТЬ!!!"&CHAR(13);"")&"Тип линии: "&Prop.LineType&", "&CHAR(13)&"Диаметр рукавов: "&Prop.HoseDiameter&"мм.,"&CHAR(13)&"Длина линии: "&Prop.LineLenightHose&", "&CHAR(13)&"Кол-во рукавов: "&Prop.HoseNeed&"шт.,"&CHAR(13)&"Перепад местности: "&Prop.Different&"м.,"&", "&CHAR(13)&"Потери напора: "&Prop.HeadLost&"м."; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -943,9 +941,9 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: -5,6843418860808e-14 дюйм; BeginY: 0,5 дюйм; EndX: 74,8031496063 дюйм; EndY: 0,5 дюйм; 
+    BeginX: -1,4438228390645e-15 м; BeginY: 0,0127 м; EndX: 1,9 м; EndY: 0,0127 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 6,5952066140131 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,26049444561798; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0,16751824799593 м; LocPinX: Width*0,5; LocPinY: Height*0,26049444561798; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Свищ
   Section: Character>>>
@@ -969,13 +967,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 0,00019109023880615 м; PageHeight: 2,2946425156078e-6 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -1021,13 +1019,13 @@
   Section Object, row: visRowLayerMem>>>
     LayerMember: "0"; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: Styles!Р_Свищ!LineColor; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: Styles!Р_Свищ!LineColor; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 1; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 4; _Unused78: 0; _Unused79: 0; Comment: Prop.BreakeupType&IF(NOT(STRSAME(Prop.HoseNumber;""));" на рукаве №"&Prop.HoseNumber;"")&CHAR(13)&IF(NOT(STRSAME(Prop.BreakeupPlace;""));Prop.BreakeupPlace&CHAR(13);"")&"Время возникновения: "&FORMAT(Prop.BreakeupTime;"HH:mm")&", "&CHAR(13)&IF(STRSAME(Prop.Grip;"Да");"В "&FORMAT(Prop.FixTime;"HH:mm")&" на рукаве установлен зажим";""); IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -1037,7 +1035,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0 дюйм; BeginY: 0 дюйм; EndX: 0,0075232377482735 дюйм; EndY: 9,0340256519994e-5 дюйм; 
+    BeginX: 0 м; BeginY: 0 м; EndX: 0,00019109023880615 м; EndY: 2,2946425156078e-6 м; 
   Section Object, row: visRowXFormOut>>>
     PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
@@ -1063,13 +1061,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 0,00019109023880615 м; PageHeight: 2,2946425156078e-6 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -1111,13 +1109,13 @@
   Section Object, row: visRowLayerMem>>>
     LayerMember: "0"; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: Styles!Р_Мостик!LineColor; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: Styles!Р_Мостик!LineColor; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 1; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 4; _Unused78: 0; _Unused79: 0; Comment: "Время установки: "&FORMAT(Prop.SetTime;"HH:mm"); IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -1127,7 +1125,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0 дюйм; BeginY: -4,5474735088646e-13 дюйм; EndX: 0,0075232377482735 дюйм; EndY: 9,0340256065247e-5 дюйм; 
+    BeginX: 0 м; BeginY: -1,1550582712516e-14 м; EndX: 0,00019109023880615 м; EndY: 2,2946425040573e-6 м; 
   Section Object, row: visRowXFormOut>>>
     PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
@@ -1149,13 +1147,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 6 мм; PageHeight: 3 мм; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 1 мм; DrawingScale: 1 мм; DrawingSizeType: 0; DrawingScaleType: 0; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -1172,8 +1170,8 @@
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: FirstComponent>>>
     Geometry1.NoFill: TRUE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: 0 дюйм; 
-    Geometry1.X2: Width*1; Geometry1.Y2: 0 дюйм; 
+    Geometry1.X1: Width*0; Geometry1.Y1: 0 м; 
+    Geometry1.X2: Width*1; Geometry1.Y2: 0 м; 
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Tab>>>
@@ -1189,13 +1187,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -1205,17 +1203,17 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0 дюйм; BeginY: 0,059055118110236 дюйм; EndX: 0,23622047244094 дюйм; EndY: 0,059055118110236 дюйм; 
+    BeginX: 0 м; BeginY: 0,0015 м; EndX: 0,006 м; EndY: 0,0015 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Sheet.6
   Section: Character>>>
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: FirstComponent>>>
     Geometry1.NoFill: TRUE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: 0 дюйм; 
-    Geometry1.X2: Width*1; Geometry1.Y2: 0 дюйм; 
+    Geometry1.X1: Width*0; Geometry1.Y1: 0 м; 
+    Geometry1.X2: Width*1; Geometry1.Y2: 0 м; 
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Tab>>>
@@ -1231,13 +1229,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -1247,9 +1245,9 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0,11811023622047 дюйм; BeginY: 0,11811023622047 дюйм; EndX: 0,11811023622047 дюйм; EndY: -1,3877787807814e-17 дюйм; 
+    BeginX: 0,003 м; BeginY: 0,003 м; EndX: 0,003 м; EndY: -3,5249581031849e-19 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: ВсасывающийРукав
   Section: Character>>>
@@ -1269,13 +1267,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 6 мм; PageHeight: 3 мм; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 1 мм; DrawingScale: 1 мм; DrawingSizeType: 0; DrawingScaleType: 0; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -1292,8 +1290,8 @@
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: FirstComponent>>>
     Geometry1.NoFill: TRUE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: 0 дюйм; 
-    Geometry1.X2: Width*1; Geometry1.Y2: 0 дюйм; 
+    Geometry1.X1: Width*0; Geometry1.Y1: 0 м; 
+    Geometry1.X2: Width*1; Geometry1.Y2: 0 м; 
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Tab>>>
@@ -1309,13 +1307,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 1,2 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 1,2 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -1325,17 +1323,17 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0 дюйм; BeginY: 0,059055118110236 дюйм; EndX: 0,23622047244094 дюйм; EndY: 0,059055118110236 дюйм; 
+    BeginX: 0 м; BeginY: 0,0015 м; EndX: 0,006 м; EndY: 0,0015 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Sheet.6
   Section: Character>>>
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: FirstComponent>>>
     Geometry1.NoFill: TRUE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: 0 дюйм; 
-    Geometry1.X2: Width*1; Geometry1.Y2: 0 дюйм; 
+    Geometry1.X1: Width*0; Geometry1.Y1: 0 м; 
+    Geometry1.X2: Width*1; Geometry1.Y2: 0 м; 
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Tab>>>
@@ -1351,13 +1349,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 1,2 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 1,2 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -1367,9 +1365,9 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0,11811023622047 дюйм; BeginY: 0,11811023622047 дюйм; EndX: 0,11811023622047 дюйм; EndY: -1,3877787807814e-17 дюйм; 
+    BeginX: 0,003 м; BeginY: 0,003 м; EndX: 0,003 м; EndY: -3,5249581031849e-19 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: ВсасывающийРукав1000
   Section: Character>>>
@@ -1389,13 +1387,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
     PageWidth: 12 мм; PageHeight: 6 мм; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 1 мм; DrawingScale: 1 мм; DrawingSizeType: 0; DrawingScaleType: 0; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
@@ -1412,8 +1410,8 @@
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: FirstComponent>>>
     Geometry1.NoFill: TRUE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: 0 дюйм; 
-    Geometry1.X2: Width*1; Geometry1.Y2: 0 дюйм; 
+    Geometry1.X1: Width*0; Geometry1.Y1: 0 м; 
+    Geometry1.X2: Width*1; Geometry1.Y2: 0 м; 
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Tab>>>
@@ -1429,13 +1427,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,24 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,24 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -1445,17 +1443,17 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0 дюйм; BeginY: 0,11811023622047 дюйм; EndX: 0,47244094488189 дюйм; EndY: 0,11811023622047 дюйм; 
+    BeginX: 0 м; BeginY: 0,003 м; EndX: 0,012 м; EndY: 0,003 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Sheet.6
   Section: Character>>>
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: FirstComponent>>>
     Geometry1.NoFill: TRUE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: 0 дюйм; 
-    Geometry1.X2: Width*1; Geometry1.Y2: 0 дюйм; 
+    Geometry1.X1: Width*0; Geometry1.Y1: 0 м; 
+    Geometry1.X2: Width*1; Geometry1.Y2: 0 м; 
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Tab>>>
@@ -1471,13 +1469,13 @@
   Section Object, row: visRowImage>>>
     Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,24 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,24 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
     NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,098425196850394 дюйм; LineToNodeY: 0,098425196850394 дюйм; BlockSizeX: 0,19685039370079 дюйм; BlockSizeY: 0,19685039370079 дюйм; AvenueSizeX: 0,29527559055118 дюйм; AvenueSizeY: 0,29527559055118 дюйм; LineToLineX: 0,098425196850394 дюйм; LineToLineY: 0,098425196850394 дюйм; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -1487,9 +1485,9 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 2; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXForm1D>>>
-    BeginX: 0,23622047244094 дюйм; BeginY: 0,23622047244094 дюйм; EndX: 0,23622047244094 дюйм; EndY: -1,3877787807814e-17 дюйм; 
+    BeginX: 0,006 м; BeginY: 0,006 м; EndX: 0,006 м; EndY: -3,5249581031849e-19 м; 
   Section Object, row: visRowXFormOut>>>
-    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 дюйм; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: (BeginX+EndX)/2; PinY: (BeginY+EndY)/2; Width: SQRT((EndX-BeginX)^2+(EndY-BeginY)^2); Height: 0 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: ATAN2(EndY-BeginY;EndX-BeginX); FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Нет стиля
   Section: Character>>>
@@ -1501,7 +1499,7 @@
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
@@ -1515,7 +1513,7 @@
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 0; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 0; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 0; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 0; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
@@ -1529,7 +1527,7 @@
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 0; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 0; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 0; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
@@ -1543,7 +1541,7 @@
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
@@ -1557,7 +1555,7 @@
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 0; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0 пт; LineColor: 4; LinePattern: 23; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0 пт; LineColor: 4; LinePattern: 23; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 0 пт; BottomMargin: 0 пт; VerticalAlign: 2; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
@@ -1613,7 +1611,7 @@
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 
@@ -1655,7 +1653,7 @@
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 дюйм; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
 

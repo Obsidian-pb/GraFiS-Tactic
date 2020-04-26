@@ -40,7 +40,6 @@ End Property
 '-------------------------------------Внутренние процедуры и функции классса----------------------------------------------
 Private Sub fillElemCollection()
 'Заполняем коллекцию элементов
-
     AddNewElement "RSCHSTechincsHave", "Техники РСЧС имеется", "{$} ({TotalFireCount} - пожарно-спасательной)"
     AddNewElement "MainPAHave", "ПА общего применения имеется", , , , , False
     AddNewElement "TargetedPAHave", "ПА целевого применения имеется", , , , , False
@@ -104,41 +103,41 @@ Private Sub fillElemCollection()
     AddNewElement "GDZSPBCount", "ПБ ГДЗС имеется", , , , , False
     AddNewElement "GDZSKPPCount", "КПП ГДЗС имеется", , , , , False
 
-    AddNewElement "Hoses38Count", "Рукавов 38мм используется", , , , , False
-    AddNewElement "Hoses51Count", "Рукавов 51мм используется", , , , , False
-    AddNewElement "Hoses66Count", "Рукавов 66мм используется", , , , , False
-    AddNewElement "Hoses77Count", "Рукавов 77мм используется", , , , , False
-    AddNewElement "Hoses89Count", "Рукавов 89мм используется", , , , , False
-    AddNewElement "Hoses110Count", "Рукавов 110мм используется", , , , , False
-    AddNewElement "Hoses150Count", "Рукавов 150мм используется", , , , , False
-    AddNewElement "Hoses200Count", "Рукавов 200мм используется", , , , , False
-    AddNewElement "Hoses250Count", "Рукавов 250мм используется", , , , , False
-    AddNewElement "Hoses300Count", "Рукавов 300мм используется", , , , , False
+    AddNewElement "Hoses38Count", "Рукавов 38 мм используется", , , , , False
+    AddNewElement "Hoses51Count", "Рукавов 51 мм используется", , , , , False
+    AddNewElement "Hoses66Count", "Рукавов 66 мм используется", , , , , False
+    AddNewElement "Hoses77Count", "Рукавов 77 мм используется", , , , , False
+    AddNewElement "Hoses89Count", "Рукавов 89 мм используется", , , , , False
+    AddNewElement "Hoses110Count", "Рукавов 110 мм используется", , , , , False
+    AddNewElement "Hoses150Count", "Рукавов 150 мм используется", , , , , False
+    AddNewElement "Hoses200Count", "Рукавов 200 мм используется", , , , , False
+    AddNewElement "Hoses250Count", "Рукавов 250 мм используется", , , , , False
+    AddNewElement "Hoses300Count", "Рукавов 300 мм используется", , , , , False
     AddNewElement "HosesCount", "Рукавов используется всего", "{$} (" & _
-                                "{Hoses38Count} - 38мм, {Hoses51Count} - 51мм, {Hoses66Count} - 66мм, {Hoses77Count} - 77мм, {Hoses89Count} - 89мм," & _
-                                "{Hoses110Count} - 110мм, {Hoses150Count} - 150мм, {Hoses200Count} - 200мм, {Hoses250Count} - 250мм, {Hoses300Count} - 300мм" & _
+                                "{Hoses38Count} - 38 мм, {Hoses51Count} - 51 мм, {Hoses66Count} - 66 мм, {Hoses77Count} - 77 мм, {Hoses89Count} - 89 мм," & _
+                                "{Hoses110Count} - 110 мм, {Hoses150Count} - 150 мм, {Hoses200Count} - 200 мм, {Hoses250Count} - 250 мм, {Hoses300Count} - 300 мм" & _
                                 ")"
     AddNewElement "HosesLength", "Рукавных линий длина", "{$} м"
 
-    AddNewElement "Hoses38Have", "Рукавов 38мм имеется", , , "Prop.Hose38", , False
-    AddNewElement "Hoses51Have", "Рукавов 51мм имеется", , , "Prop.Hose51", , False
-    AddNewElement "Hoses66Have", "Рукавов 66мм имеется", , , "Prop.Hose66", , False
-    AddNewElement "Hoses77Have", "Рукавов 77мм имеется", , , "Prop.Hose77", , False
-    AddNewElement "Hoses89Have", "Рукавов 89мм имеется", , , "Prop.Hose89", , False
-    AddNewElement "Hoses110Have", "Рукавов 110мм имеется", , , "Prop.Hose110", , False
-    AddNewElement "Hoses150Have", "Рукавов 150мм имеется", , , "Prop.Hose150", , False
-    AddNewElement "Hoses200Have", "Рукавов 200мм имеется", , , "Prop.Hose200", , False
-    AddNewElement "Hoses250Have", "Рукавов 250мм имеется", , , "Prop.Hose250", , False
-    AddNewElement "Hoses300Have", "Рукавов 300мм имеется", , , "Prop.Hose300", , False
+    AddNewElement "Hoses38Have", "Рукавов 38 мм имеется", , , "Prop.Hose38", , False
+    AddNewElement "Hoses51Have", "Рукавов 51 мм имеется", , , "Prop.Hose51", , False
+    AddNewElement "Hoses66Have", "Рукавов 66 мм имеется", , , "Prop.Hose66", , False
+    AddNewElement "Hoses77Have", "Рукавов 77 мм имеется", , , "Prop.Hose77", , False
+    AddNewElement "Hoses89Have", "Рукавов 89 мм имеется", , , "Prop.Hose89", , False
+    AddNewElement "Hoses110Have", "Рукавов 110 мм имеется", , , "Prop.Hose110", , False
+    AddNewElement "Hoses150Have", "Рукавов 150 мм имеется", , , "Prop.Hose150", , False
+    AddNewElement "Hoses200Have", "Рукавов 200 мм имеется", , , "Prop.Hose200", , False
+    AddNewElement "Hoses250Have", "Рукавов 250 мм имеется", , , "Prop.Hose250", , False
+    AddNewElement "Hoses300Have", "Рукавов 300 мм имеется", , , "Prop.Hose300", , False
     AddNewElement "HosesHave", "Рукавов имеется всего", "{$} (" & _
-                                "{Hoses38Have} - 38мм, {Hoses51Have} - 51мм, {Hoses66Have} - 66мм, {Hoses77Have} - 77мм, {Hoses89Have} - 89мм," & _
-                                "{Hoses110Have} - 110мм, {Hoses150Have} - 150мм, {Hoses200Have} - 200мм, {Hoses250Have} - 250мм, {Hoses300Have} - 300мм" & _
+                                "{Hoses38Have} - 38 мм, {Hoses51Have} - 51 мм, {Hoses66Have} - 66 мм, {Hoses77Have} - 77 мм, {Hoses89Have} - 89 мм," & _
+                                "{Hoses110Have} - 110 мм, {Hoses150Have} - 150 мм, {Hoses200Have} - 200 мм, {Hoses250Have} - 250 мм, {Hoses300Have} - 300 мм" & _
                                 ")", , , , False
     AddNewElement "HoseSkatka", "Напорных рукавов в скатках", , , , , False
     
-    AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)", "{$} л."
-    AddNewElement "WaterValueHave", "Воды имеется", "{$} л."
-    AddNewElement "FoamValueeHave", "Пенообразователя имеется", "{$} л.", , "Prop.Foam"
+    AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)", "{$} л"
+    AddNewElement "WaterValueHave", "Воды в ёмкостях МСП имеется", "{$} л"
+    AddNewElement "FoamValueeHave", "Пенообразователя имеется", "{$} л", , "Prop.Foam"
 
     AddNewElement "BUCount", "БУ создано"
     AddNewElement "SPRCount", "СПР создано"
