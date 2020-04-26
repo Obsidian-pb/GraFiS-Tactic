@@ -6069,7 +6069,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.Distance: GUARD(ROUND(SQRT(POW(EndX-BeginX;2)+POW(EndY-BeginY;2));0)); Prop.Distance.Prompt: "Расстояние между объектами по масштабу"; Prop.Distance.Label: "Расстояние"; Prop.Distance.Format: "#,#### u"; Prop.Distance.SortKey: "10"; Prop.Distance.Type: 2; Prop.Distance.Invisible: STRSAME(Prop.Input;"Явный"); Prop.Distance.Verify: FALSE; Prop.Distance.LangID: 1049; Prop.Distance.Calendar: 0; 
+    Prop.Distance: GUARD(IF(STRSAME(FORMAT(SQRT(POW(EndX-BeginX;2)+POW(EndY-BeginY;2));"u");"мм");FORMAT(SQRT(POW(EndX-BeginX;2)+POW(EndY-BeginY;2))/1000;"0")&" м";FORMAT(SQRT(POW(EndX-BeginX;2)+POW(EndY-BeginY;2));"0")&" м")); Prop.Distance.Prompt: "Расстояние между объектами по масштабу"; Prop.Distance.Label: "Расстояние"; Prop.Distance.Format: "#,#### u"; Prop.Distance.SortKey: "10"; Prop.Distance.Type: 2; Prop.Distance.Invisible: STRSAME(Prop.Input;"Явный"); Prop.Distance.Verify: FALSE; Prop.Distance.LangID: 1049; Prop.Distance.Calendar: 0; 
     Prop.DistanceManual: 30; Prop.DistanceManual.Prompt: "Расстояние между объектами явным образом"; Prop.DistanceManual.Label: "Расстояние, м"; Prop.DistanceManual.Format: "#,#### u"; Prop.DistanceManual.SortKey: "20"; Prop.DistanceManual.Type: 2; Prop.DistanceManual.Invisible: STRSAME(Prop.Input;"По масштабу"); Prop.DistanceManual.Verify: FALSE; Prop.DistanceManual.LangID: 1049; Prop.DistanceManual.Calendar: 0; 
     Prop.Input: INDEX(0;Prop.Input.Format); Prop.Input.Prompt: "Способ определения значения длины"; Prop.Input.Label: "Способ определения"; Prop.Input.Format: "По масштабу;Явный"; Prop.Input.SortKey: "30"; Prop.Input.Type: 1; Prop.Input.Invisible: FALSE; Prop.Input.Verify: FALSE; Prop.Input.LangID: 1049; Prop.Input.Calendar: 0; 
     Prop.Glue: INDEX(0;Prop.Glue.Format); Prop.Glue.Prompt: "'Приклеивание' концов линии к объектам"; Prop.Glue.Label: "Привязка к объектам"; Prop.Glue.Format: "Включена;Отключена"; Prop.Glue.SortKey: "40"; Prop.Glue.Type: 1; Prop.Glue.Invisible: FALSE; Prop.Glue.Verify: FALSE; Prop.Glue.LangID: 1049; Prop.Glue.Calendar: 0; 
@@ -6079,7 +6079,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: TextField>>>
-    Fields.Value: FORMAT(ROUND(User.Length;0);"0")&" м"; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
+    Fields.Value: IF(STRSAME(Prop.Input;"По масштабу");Prop.Distance;Prop.DistanceManual&" м"); Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
     User.IndexPers: 75; User.IndexPers.Prompt: ""; 
