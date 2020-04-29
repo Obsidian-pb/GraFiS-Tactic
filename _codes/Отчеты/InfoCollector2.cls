@@ -287,7 +287,7 @@ Dim latestSquareTime As Date
                         If CellVal(shp, "Prop.UTP_STP_Reserv", visUnitsString) = "Участок" _
                             Then .Raise "BUCount"
                         If CellVal(shp, "Prop.UTP_STP_Reserv", visUnitsString) = "Сектор" _
-                            Then .Raise "BUCount"
+                            Then .Raise "SPRCount"
                     Case Is = indexPers.ipStab 'Штаб/РТП
                         .Raise "ShtabCount;PersonnelNeed"
                         If Not CellVal(shp, "Prop.NachStab", visUnitsString) = "" _
