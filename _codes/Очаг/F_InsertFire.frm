@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} F_InsertFire 
    Caption         =   "Укажите исходные данные"
-   ClientHeight    =   7290
+   ClientHeight    =   7620
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   8895
@@ -136,7 +136,7 @@ Private Sub btnRunFireModelling_Click()
     Dim vsD_TimeCur As Date
     If Me.OB_ByTime = True Then
         vsD_TimeCur = DateValue(Me.TB_Time) + TimeValue(Me.TB_Time)
-        timeElapsed = DateDiff("s", VmD_TimeStart, vsD_TimeCur) / 60 ' В МИНУТАХ!!!!!!
+        timeElapsed = DateDiff("s", VmD_TimeStart, vsD_TimeCur) / 60 - timeElapsedMain ' В МИНУТАХ!!!!!!
     End If
     If Me.OB_ByDuration = True Then
         timeElapsed = Me.TB_Duration

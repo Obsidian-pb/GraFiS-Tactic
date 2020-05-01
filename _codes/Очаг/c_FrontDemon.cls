@@ -73,7 +73,7 @@ Dim tmpColl As Collection
     'Перебираем все клетки в коллекции стартовых клеток
 '    For Each cell In startCellsCollection
         
-        'если клетка еще не распределена по блокам, начинаем от нее рекурсивный поиск всех клеток плоащди тушения данного блока
+        'если клетка еще не распределена по блокам, начинаем от нее рекурсивный поиск всех клеток площади тушения данного блока
 '        If matrix(startCell.x, startCell.y) = CellType.fireFrontNotInBlock Then
             'создаем новую коллекцию
             Set tmpColl = New Collection

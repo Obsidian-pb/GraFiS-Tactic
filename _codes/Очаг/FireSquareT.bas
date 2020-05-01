@@ -161,9 +161,10 @@ Dim modelledFireShape As Visio.Shape
         '---Печатаем сколько потребовалось времени
         F_InsertFire.lblCurrentStatus.Caption = "Шаг: " & i & "(" & fireModeller.CurrentStep & "), " & _
                                                 " пройденный путь: " & Round(realDiffDistance, 2) & "(" & Round(realCurrentDistance, 2) & ")м.," & _
-                                                " время: " & Round(diffTime, 2) & "(" & Round(currentTime, 2) & ")мин " & _
-                                                "Площадь пожара: " & fireModeller.GetFireSquare & "м.кв." ' & _
-                                                "Площадь тушения: " & fireModeller.GetExtSquare & "м.кв."
+                                                " время: " & Round(diffTime, 2) & "(" & Round(currentTime, 2) & ")мин, " & _
+                                                "Площадь пожара: " & fireModeller.GetFireSquare & "м.кв., " & _
+                                                "Площадь тушения: " & fireModeller.GetExtSquare & "м.кв., " & _
+                                                "Требуемый расход: " & fireModeller.GetExtSquare * fireModeller.intenseNeed & "л/с"
         'Указываем форме настроек время прошедшее с начала моделирования
         F_InsertFire.timeElapsedMain = currentTime
         'Указываем форме настроек путь пройденный с начала моделирования
@@ -195,6 +196,11 @@ Dim modelledFireShape As Visio.Shape
     
     '---Собственно обращение
     ImportAreaInformation
+    '---Указываем для фигуры фактическую площадь тушения
+    If fireModeller.GetExtSquare > 0 Then
+        newFireShape.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
+        newFireShape.Cells("Prop.ExtSquareT").Formula = CLng(fireModeller.GetExtSquare)
+    End If
     'Перемещаем полученные фигуры на задний план
     newFireShape.SendToBack
     modelledFireShape.SendToBack

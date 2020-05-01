@@ -478,7 +478,13 @@ End Function
 
 Public Function GetExtSquare() As Single
 'Возвращает площадь тушения
-    GetExtSquare = extSquare.GetSquare
+Dim tmpVal As Single
+    tmpVal = extSquare.GetSquare
+'    If tmpVal = 0 Then
+'        GetExtSquare = GetFireSquare
+'    Else
+        GetExtSquare = tmpVal
+'    End If
 End Function
 
 '----------------------------Расчет площадей тушения--------------------------

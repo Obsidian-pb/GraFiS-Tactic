@@ -11,7 +11,7 @@ ShpObj.Cells("User.FireSquareP").FormulaForceU = SquareCalc
 End Sub
 
 
-Sub s_SetFireTime(ShpObj As Visio.Shape)
+Sub s_SetFireTime(ShpObj As Visio.Shape, Optional showDoCmd As Boolean = True)
 'Процедура присвоения ячейке документа User.FireTime значения времени указанного при вбрасывании фигуры "Очаг"
 Dim vD_CurDateTime As Double
 
@@ -25,7 +25,7 @@ On Error Resume Next
                 "DATETIME(" & str(vD_CurDateTime) & ")"
         
         '---Показываем окно свойств фигуры
-            Application.DoCmd (1312)
+            If showDoCmd Then Application.DoCmd (1312)
             
         '---Если в Шэйп-листе документа отсутствует строка "User.FireTime", создаем её
             If Application.ActiveDocument.DocumentSheet.CellExists("User.FireTime", 0) = False Then
@@ -37,7 +37,7 @@ On Error Resume Next
                 "DATETIME(" & str(CDbl(ShpObj.Cells("Prop.FireTime").Result(visDate))) & ")"
     Else
         '---Показываем окно свойств фигуры
-            Application.DoCmd (1312)
+            If showDoCmd Then Application.DoCmd (1312)
     End If
 
 End Sub

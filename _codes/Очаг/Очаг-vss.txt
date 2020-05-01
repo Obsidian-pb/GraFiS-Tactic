@@ -17,9 +17,9 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.Ifc__CustomPropsLevel: 0; 
-    User.FireTime: NOW(); User.FireTime.Prompt: ""; 
+    User.FireTime: DATETIME(43952,933981482); User.FireTime.Prompt: ""; 
     
-    User.CurrentTime: NOW(); User.CurrentTime.Prompt: ""; 
+    User.CurrentTime: DATETIME(43952,933298611); User.CurrentTime.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     
   Section Object, row: visRowDoc>>>
@@ -947,10 +947,10 @@
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
     Prop.FireDate: DATETIME(40544); Prop.FireDate.Prompt: "Дата возникновения пожара"; Prop.FireDate.Label: "Дата возникновения"; Prop.FireDate.Format: "{{dd.MM.yyyy}}"; Prop.FireDate.SortKey: 10; Prop.FireDate.Type: 5; Prop.FireDate.Invisible: TRUE; Prop.FireDate.Verify: FALSE; Prop.FireDate.LangID: 1049; 
-    Prop.FireTime: NOW(); Prop.FireTime.Prompt: "Полное географическое время возникновения пожара"; Prop.FireTime.Label: "Время возникновения"; Prop.FireTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FireTime.SortKey: 12; Prop.FireTime.Type: 5; Prop.FireTime.Invisible: FALSE; Prop.FireTime.Verify: FALSE; Prop.FireTime.LangID: 1049; 
+    Prop.FireTime: DATETIME(43952,933981482); Prop.FireTime.Prompt: "Полное географическое время возникновения пожара"; Prop.FireTime.Label: "Время возникновения"; Prop.FireTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FireTime.SortKey: 12; Prop.FireTime.Type: 5; Prop.FireTime.Invisible: FALSE; Prop.FireTime.Verify: FALSE; Prop.FireTime.LangID: 1049; 
     Prop.FireCause: ""; Prop.FireCause.Prompt: "Причина пожара"; Prop.FireCause.Label: "Причина пожара"; Prop.FireCause.Format: ""; Prop.FireCause.SortKey: 11; Prop.FireCause.Type: 0; Prop.FireCause.Invisible: FALSE; Prop.FireCause.Verify: FALSE; Prop.FireCause.LangID: 1049; 
     Prop.FireGuilty: ""; Prop.FireGuilty.Prompt: "Лицо виновное в возникновении пожара"; Prop.FireGuilty.Label: "Виновный"; Prop.FireGuilty.Format: ""; Prop.FireGuilty.SortKey: 13; Prop.FireGuilty.Type: 0; Prop.FireGuilty.Invisible: FALSE; Prop.FireGuilty.Verify: FALSE; Prop.FireGuilty.LangID: 1049; 
-    Prop.FireObject: ""; Prop.FireObject.Prompt: "Объект пожара"; Prop.FireObject.Label: "Объект пожара"; Prop.FireObject.SortKey: 20; Prop.FireObject.Type: 1; Prop.FireObject.Invisible: TRUE; Prop.FireObject.Verify: FALSE; Prop.FireObject.LangID: 1049; 
+    Prop.FireObject: ""; Prop.FireObject.Prompt: "Объект пожара"; Prop.FireObject.Label: "Объект пожара"; Prop.FireObject.Format: ""; Prop.FireObject.SortKey: 20; Prop.FireObject.Type: 1; Prop.FireObject.Invisible: TRUE; Prop.FireObject.Verify: FALSE; Prop.FireObject.LangID: 1049; 
     Prop.FireOther: 0; Prop.FireOther.Prompt: "Прочие сведения"; Prop.FireOther.Label: "Прочие сведения"; Prop.FireOther.Format: ""; Prop.FireOther.SortKey: 30; Prop.FireOther.Type: 0; Prop.FireOther.Invisible: FALSE; Prop.FireOther.Verify: FALSE; Prop.FireOther.LangID: 1049; Prop.FireOther.Calendar: 0; 
     Prop.RadiusShow: INDEX(Actions.RadiussShow.Checked;Prop.RadiusShow.Format); Prop.RadiusShow.Prompt: "Показать радиус от очага пожара"; Prop.RadiusShow.Label: "Показать радиус"; Prop.RadiusShow.Format: "Нет;Да"; Prop.RadiusShow.SortKey: "40"; Prop.RadiusShow.Type: 1; Prop.RadiusShow.Invisible: TRUE; Prop.RadiusShow.Verify: FALSE; Prop.RadiusShow.LangID: 1049; Prop.RadiusShow.Calendar: 0; 
   Section: Tab>>>
@@ -959,6 +959,7 @@
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 70; User.IndexPers.Prompt: "Очаг пожара"; 
     User.Version: 1; User.Version.Prompt: ""; 
+    User.FireTime: Prop.FireTime; User.FireTime.Prompt: CALLTHIS("s_SetFireTimeInner";"Очаг")+DEPENDSON(User.FireTime); 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("s_SetFireTime";"Очаг")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
