@@ -136,7 +136,7 @@ Private Sub fillElemCollection()
     AddNewElement "HoseSkatka", "Напорных рукавов в скатках", , , , , False
     
     AddNewElement "WaterValueNeed10min", "Воды требуется (на 10мин)", "{$} л"
-    AddNewElement "WaterValueHave", "Воды в ёмкостях МСП имеется", "{$} л"
+    AddNewElement "WaterValueHave", "Воды имеется", "{$} л"
     AddNewElement "FoamValueeHave", "Пенообразователя имеется", "{$} л", , "Prop.Foam"
 
     AddNewElement "BUCount", "БУ создано"

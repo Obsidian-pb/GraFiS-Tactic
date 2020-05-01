@@ -136,14 +136,17 @@ Dim latestSquareTime As Date
                         .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                         '>>>”чет возможности отсутстви€ €чеек "Prop.Dest" дл€ старых фигур
                         tmp = CellVal(shp, "Prop.Dest", visUnitsString)
-                        If tmp = "—пециальный" _
+                        If InStr(1, tmp, "—пец") <> 0 _
                             Then .Raise "SpecialPAHave" ' pi_SpecialPAHave = pi_SpecialPAHave + 1
+                        If InStr(1, tmp, "высот") <> 0 _
+                            Then .Raise "AKPCount" ' pi_AKPCount = pi_AKPCount + 1
                         If InStr(1, tmp, "общ") <> 0 _
                             Then .Raise "MainPAHave" ' pi_MainPAHave = pi_MainPAHave + 1
                         If InStr(1, tmp, "целев") <> 0 _
                             Then .Raise "TargetedPAHave" ' pi_TargetedPAHave = pi_TargetedPAHave + 1
                         If InStr(1, tmp, "ќснов") <> 0 _
                             Then .Raise "MainOverallHave" 'pi_MainOverallCount = pi_MainOverallCount + 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                         '<<<”чет возможности отсутстви€ €чейки "Prop.Dest" дл€ старых фигур
                     Case Is = indexPers.ipAvtoObschee 'ќбщее обозначение
                         .Raise "TotalTechCount"
