@@ -547,6 +547,7 @@ Dim latestSquareTime As Date
                         .Raise "Hoses200Have", (CellVal(shp, "Prop.Hoses200") - CellVal(shp, "Prop.Hoses200") / CellVal(shp, "Prop.Quantity"))
                         .Raise "Hoses250Have", (CellVal(shp, "Prop.Hoses250") - CellVal(shp, "Prop.Hoses250") / CellVal(shp, "Prop.Quantity"))
                         .Raise "Hoses300Have", (CellVal(shp, "Prop.Hoses300") - CellVal(shp, "Prop.Hoses300") / CellVal(shp, "Prop.Quantity"))
+                        .Raise "FoamValueeHave", (CellVal(shp, "Prop.FoamX") - CellVal(shp, "Prop.FoamX") / CellVal(shp, "Prop.Quantity"))
                         
                         
 'Количество
@@ -654,7 +655,7 @@ Dim latestSquareTime As Date
                     
                 End Select
                 'Вычисляем некоторые элементы по CellName
-                .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300;" & _
+                .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300;" & _
                                     "Prop.Foam"
                 End With    'elements
                 

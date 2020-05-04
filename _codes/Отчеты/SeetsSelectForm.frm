@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SeetsSelectForm 
    Caption         =   "Выбор страницы"
-   ClientHeight    =   4776
+   ClientHeight    =   4770
    ClientLeft      =   48
    ClientTop       =   432
    ClientWidth     =   7200

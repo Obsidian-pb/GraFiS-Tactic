@@ -114,7 +114,7 @@ Private Sub fillElemCollection()
     AddNewElement "Hoses250Count", "Рукавов 250 мм используется", , , , , False
     AddNewElement "Hoses300Count", "Рукавов 300 мм используется", , , , , False
     AddNewElement "HosesCount", "Рукавов используется всего", "{$} (" & _
-                                "{Hoses38Count} - 38 мм, {Hoses51Count} - 51 мм, {Hoses66Count} - 66 мм, {Hoses77Count} - 77 мм, {Hoses89Count} - 89 мм," & _
+                                "{Hoses38Count} - 38 мм, {Hoses51Count} - 51 мм, {Hoses66Count} - 66 мм, {Hoses77Count} - 77 мм, {Hoses89Count} - 89 мм, " & _
                                 "{Hoses110Count} - 110 мм, {Hoses150Count} - 150 мм, {Hoses200Count} - 200 мм, {Hoses250Count} - 250 мм, {Hoses300Count} - 300 мм" & _
                                 ")"
     AddNewElement "HosesLength", "Рукавных линий длина", "{$} м"
@@ -130,7 +130,7 @@ Private Sub fillElemCollection()
     AddNewElement "Hoses250Have", "Рукавов 250 мм имеется", , , "Prop.Hose250", , False
     AddNewElement "Hoses300Have", "Рукавов 300 мм имеется", , , "Prop.Hose300", , False
     AddNewElement "HosesHave", "Рукавов имеется всего", "{$} (" & _
-                                "{Hoses38Have} - 38 мм, {Hoses51Have} - 51 мм, {Hoses66Have} - 66 мм, {Hoses77Have} - 77 мм, {Hoses89Have} - 89 мм," & _
+                                "{Hoses38Have} - 38 мм, {Hoses51Have} - 51 мм, {Hoses66Have} - 66 мм, {Hoses77Have} - 77 мм, {Hoses89Have} - 89 мм, " & _
                                 "{Hoses110Have} - 110 мм, {Hoses150Have} - 150 мм, {Hoses200Have} - 200 мм, {Hoses250Have} - 250 мм, {Hoses300Have} - 300 мм" & _
                                 ")", , , , False
     AddNewElement "HoseSkatka", "Напорных рукавов в скатках", , , , , False

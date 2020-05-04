@@ -54,7 +54,7 @@ TrueShape = False
             ShpObj.Cells("Prop.Hoses300").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Hose300*Prop.Quantity)"
             ShpObj.Cells("Prop.Powder").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Powder*Prop.Quantity)"
             ShpObj.Cells("Prop.Water").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Water*Prop.Quantity)"
-            ShpObj.Cells("Prop.Foam").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Foam*Prop.Quantity)"
+            ShpObj.Cells("Prop.FoamX").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Foam*Prop.Quantity)"
             ShpObj.Cells("Prop.Dest").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Dest)"
             ShpObj.Cells("Prop.RSCHS").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.RSCHS)"
             
