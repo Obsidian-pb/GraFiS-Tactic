@@ -383,7 +383,7 @@ End Sub
 Private Sub s_CutBlind(ByRef aO_ActiveShape As Visio.Shape, ByVal a_R As Double)
 'ѕроцедура обрезки лишних секторов полученного круга с основани€ми в точках изменени€ геометрии (вторичных очагах)
 Dim vO_Shape As Visio.Shape
-Dim X0 As Double, Y0 As Double, x1 As Double, y1 As Double, x2 As Double, y2 As Double
+Dim x0 As Double, y0 As Double, x1 As Double, y1 As Double, x2 As Double, y2 As Double
 Dim vs_Angle As Single
 Dim col_AddedShapes As Collection 'коллекци€ обрабатываемых фигур
 Dim i As Integer, j As Integer
@@ -400,8 +400,8 @@ On Error GoTo Tail
     VD_ShapeArea = aO_ActiveShape.AreaIU
     
 '--- определ€ем смещение координат
-    X0 = x
-    Y0 = y
+    x0 = x
+    y0 = y
     
     j = 0
     Do While aO_ActiveShape.CellsSRCExists(visSectionFirstComponent + j, i, 0, 0) = True
@@ -414,14 +414,14 @@ On Error GoTo Tail
 '                Y1 = aO_ActiveShape.Cells("PinY").Result(visInches) - (aO_ActiveShape.Cells("LocPinY").Result(visInches) - aO_ActiveShape.CellsSRC(visSectionFirstComponent + j, i, 1).Result(visInches))
                 ps_GetFirstPnt aO_ActiveShape, x1, y1, i, j
                 
-                vD_Distance = Sqr((X0 - x1) ^ 2 + (Y0 - y1) ^ 2)
+                vD_Distance = Sqr((x0 - x1) ^ 2 + (y0 - y1) ^ 2)
                 '---в случае, если дистанци€ до точки меньше чем 0,99 радиуса и больше 0,05, то строим линию отсечени€
                 If vD_Distance < a_R * 0.99 And vD_Distance > a_R * 0.05 Then
                 '--- определить угол линии
-                    vs_Angle = CalculateAngle(x1 - X0, y1 - Y0)
+                    vs_Angle = CalculateAngle(x1 - x0, y1 - y0)
                 '--- определить вторую координату линии
-                    x2 = a_R * 1.05 * Cos(vs_Angle * (3.14159265358979 / 180)) + X0
-                    y2 = a_R * 1.05 * Sin(vs_Angle * (3.14159265358979 / 180)) + Y0
+                    x2 = a_R * 1.05 * Cos(vs_Angle * (3.14159265358979 / 180)) + x0
+                    y2 = a_R * 1.05 * Sin(vs_Angle * (3.14159265358979 / 180)) + y0
                 '--- построить по имеющимс€ координатам линию и добавл€ем ее в коллекцию обрабатываемых фигур
                     col_AddedShapes.Add Application.ActiveWindow.Page.DrawLine(x1, y1, x2, y2)
                 End If
@@ -522,7 +522,7 @@ Dim vO_Door As Visio.Shape
 Dim vS_ProtectedRadiussByDoor As Single '–адиус защищенный дверью
 Dim vS_LeftRadiuss As Single 'ќстаточный радиус распространени€ огн€ от двери
 Dim v_Distance As Double
-Dim X0 As Double, Y0 As Double
+Dim x0 As Double, y0 As Double
     
     On Error GoTo EX
     For Each vO_Door In col_DoorsShapes
@@ -531,8 +531,8 @@ Dim X0 As Double, Y0 As Double
         '---ѕровер€ем, касаетс€ ли фигура двери фигуры данного сегмента очага...
         If fB_DoorTouchTest(vO_Door.Shapes(1), aL_FireShape) Then
             '...и если касаетс€ провер€ем ее остаток огнестойкости, если он < REI то...
-            vO_Door.XYFromPage a_X, a_Y, X0, Y0
-            v_Distance = vO_Door.Shapes(1).DistanceFromPoint(X0, Y0, visSpatialIncludeDataGraphics) + _
+            vO_Door.XYFromPage a_X, a_Y, x0, y0
+            v_Distance = vO_Door.Shapes(1).DistanceFromPoint(x0, y0, visSpatialIncludeDataGraphics) + _
                          Sqr(vO_Door.Cells("Height").Result(visInches) ^ 2 + (vO_Door.Cells("Width").Result(visInches) / 2) ^ 2)
 '            v_Distance = Sqr((X0 - X1) ^ 2 + (Y0 - Y1) ^ 2)
             '---≈сли дистанци€ от двери + «ащищенный дверью радиус, меньше радиуса пожара от указанной точки сегмента очага, то..

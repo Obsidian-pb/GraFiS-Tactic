@@ -1,5 +1,5 @@
 Attribute VB_Name = "FireSquareT"
-Dim fireModeller As c_Modeller
+Public fireModeller As c_Modeller
 Dim frmF_InsertFire As F_InsertFire
 Public grain As Integer
 
@@ -32,7 +32,7 @@ Dim matrixBuilder As c_MatrixBuilder
 
     'Активируем модельера
     Set fireModeller = New c_Modeller
-    fireModeller.setMatrix matrixObj
+    fireModeller.SetMatrix matrixObj
     
     'Указываем модельеру значение зерна
     fireModeller.grain = grain
@@ -205,6 +205,8 @@ Dim modelledFireShape As Visio.Shape
     newFireShape.SendToBack
     modelledFireShape.SendToBack
         
+    
+        
     Debug.Print "Всего затрачено " & tmr2.GetElapsedTime & "с."
     
     Set tmr = Nothing
@@ -346,3 +348,16 @@ Private Function IsEven(ByVal number As Integer) As Boolean
 'Проверяем, четное ли число
     IsEven = Int(number / 2) = number / 2
 End Function
+
+
+'------------------------------------РАсчет и построение площади тушения------------------------------
+Public Sub TestExtSquareCalculation()
+'Проверяем работоспособность расчета площади тушения
+Dim extSquareCalculator As c_ExtSquareCalculator
+    
+    Set extSquareCalculator = New c_ExtSquareCalculator
+    extSquareCalculator.grain = grain
+    extSquareCalculator.SetOpenSpaceLayer fireModeller
+    extSquareCalculator.RunDemon
+    
+End Sub

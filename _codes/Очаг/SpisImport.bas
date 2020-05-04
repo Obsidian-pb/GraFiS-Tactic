@@ -71,7 +71,7 @@ End Sub
 
 
 
-Private Sub ToZeroListIndex(Cell As String, ShpIndex As Long) '!!!¬ременно не используетс€ в св€зи с отсутствием необхоимости
+Private Sub ToZeroListIndex(cell As String, ShpIndex As Long) '!!!¬ременно не используетс€ в св€зи с отсутствием необхоимости
 '---¬ случае, если значение пол€ дл€ нового списка равно "", переводим фокус в €чейке на 0-е положение.
 Dim CellName As String, CellContent As String
 
@@ -79,8 +79,8 @@ Dim CellName As String, CellContent As String
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     
 '---ќпредел€ем названи€ €чеек которым будут мен€тьс€ значени€
-    CellName = "Prop." & Cell
-    CellContent = "INDEX(0,Prop." & Cell & ".Format)"
+    CellName = "Prop." & cell
+    CellContent = "INDEX(0,Prop." & cell & ".Format)"
     If shp.Cells(CellName).ResultStr(Visio.visNone) = "" Then
         shp.Cells(CellName).FormulaU = CellContent
     End If

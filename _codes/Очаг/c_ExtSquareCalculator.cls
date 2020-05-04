@@ -2,102 +2,149 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "c_Modeller"
+Attribute VB_Name = "c_ExtSquareCalculator"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-'------------------------------------Класс моделирующий поведение пожара----------------------------------------------
-Const diag As Double = 0.1                                  ' Коэффициент мощности по диагонали
-Const orto As Double = 0.14142135623731                     ' Коэффициент мощности по вертикали и горизонтали
+
+'Const diag As Double = 0.1                                  ' Коэффициент мощности по диагонали
+'Const orto As Double = 0.14142135623731                     ' Коэффициент мощности по вертикали и горизонтали
 Const mmInInch As Double = 25.4
 
-Private matrix As c_Matrix
+'Private matrix As c_MatrixExtSquare                         'Матрица окружающего пространства (упрощенная для расчета площади тушения)
+Private matrix As c_Matrix                                  'Матрица окружающего пространства
 Private extSquare As c_ExtinguishingSquare                  'Объект площади тушения
 
 Public grain As Double              'размер зерна расчета (клетки)
-Private step As Integer             'Счетчик количества шагов (общий, без моделирвоания и с моделирвоанием)
-Private calcStep As Integer         'Счетчик количества раелизованных (ТОЛЬКО с моделированием) шагов
-Public distance As Single           'общая дистанция пройденная при моделирвоании (условная для идеального случая)
-Public time As Single               'общее время прошедшее при моделирвоании (условная для идеального случая)
-Public intenseNeed As Single        'Требуемая интенсивность подачи воды л/(с*м.кв.)
+'Private step As Integer             'Счетчик количества шагов (общий, без моделирвоания и с моделирвоанием)
+'Private calcStep As Integer         'Счетчик количества раелизованных (ТОЛЬКО с моделированием) шагов
+'Public distance As Single           'общая дистанция пройденная при моделирвоании (условная для идеального случая)
+'Public time As Single               'общее время прошедшее при моделирвоании (условная для идеального случая)
+'Public intenseNeed As Single        'Требуемая интенсивность подачи воды л/(с*м.кв.)
 
 Private nozzleDemon As c_FireNozzlesDemon
     
 
+'------------------------------------Класс демона рассчитывающего площадь тушения----------------------------------------------
 
-Public Sub SetMatrix(ByRef m As c_Matrix)
-'Устанавливаем ссылку на матрицу
-    Set matrix = m
+
+
+
+
+
+
+
+
+
+
+
+
+
+Public Sub SetOpenSpaceLayer(ByRef modeller As c_Modeller)
+'Устанавливаем ссылку на матрицу окружающего пространства
+Dim openSpaceLayer As Variant
+    
+    openSpaceLayer = modeller.GetOpenSpaceLayer
+    
+    Set matrix = New c_Matrix
+    matrix.CreateMatrix UBound(openSpaceLayer, 1), UBound(openSpaceLayer, 2)
+    matrix.SetOpenSpace openSpaceLayer
+    
 End Sub
 
-Public Sub refreshOpenSpaces(ByRef outerMatrix() As Variant)
-'Обновляем матрицу открытых пространств
-    matrix.SetOpenSpace outerMatrix
+
+
+
+Public Sub RunDemon()
+'Запускаем демона
+Dim fireShapeDemon As c_FireShapeDemon
+
+'    Set matrix = New c_MatrixExtSquare
+    
+    
+    Set fireShapeDemon = New c_FireShapeDemon
+    fireShapeDemon.SetGrain(grain).SetFireShape(Application.ActivePage.Shapes.ItemFromID(35)).RunDemon matrix
+    
+    
 End Sub
 
-Public Sub SetFireCell(ByVal x As Long, ByVal y As Long, Optional value As Double)
-'Создаем новую точку горения
-    matrix.SetFireCell x, y, value
-    
-    'Добавляем запись о горящей точке в коллекцию активных клеток
-    AddToActiveCells x, y
-    
-    'Insert Firepoint as Visio Shape
-        Dim shp As Visio.Shape
-        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-        shp.Cells("LinePattern").FormulaU = "0"
-        shp.Cells("FillForegnd").FormulaU = "2"
-End Sub
 
-Public Sub SetStartFireCell(ByVal x As Long, ByVal y As Long, Optional value As Double)
-'Создаем стартовую точку горения
-    matrix.SetFireCell x, y, value
-    'добавляем точки распространения горения
-    matrix.SetFireCell x - 2, y - 2, 3.4
-    matrix.SetFireCell x - 1, y - 2, 9.61
-    matrix.SetFireCell x, y - 2, 13.59
-    matrix.SetFireCell x + 1, y - 2, 9.61
-    matrix.SetFireCell x + 2, y - 2, 3.4
 
-    matrix.SetFireCell x - 2, y - 1, 9.61
-    matrix.SetFireCell x - 1, y - 1, 43.58
-    matrix.SetFireCell x, y - 1, 61.64
-    matrix.SetFireCell x + 1, y - 1, 43.58
-    matrix.SetFireCell x + 2, y - 1, 9.61
 
-    matrix.SetFireCell x - 2, y, 13.59
-    matrix.SetFireCell x - 1, y, 61.64
-    matrix.SetFireCell x + 1, y, 61.64
-    matrix.SetFireCell x + 2, y, 13.59
 
-    matrix.SetFireCell x - 2, y + 1, 9.61
-    matrix.SetFireCell x - 1, y + 1, 43.58
-    matrix.SetFireCell x, y + 1, 61.64
-    matrix.SetFireCell x + 1, y + 1, 43.58
-    matrix.SetFireCell x + 2, y + 1, 9.61
 
-    matrix.SetFireCell x - 2, y + 2, 3.4
-    matrix.SetFireCell x - 1, y + 2, 9.61
-    matrix.SetFireCell x, y + 2, 13.59
-    matrix.SetFireCell x + 1, y + 2, 9.61
-    matrix.SetFireCell x + 2, y + 2, 3.4
-    
-    'Добавляем запись о горящей точке в коллекцию активных клеток
-    AddToActiveCells x, y
-    
-    'Insert Firepoint as Visio Shape
-        Dim shp As Visio.Shape
-        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-        shp.Cells("LinePattern").FormulaU = "0"
-        shp.Cells("FillForegnd").FormulaU = "2"
-End Sub
+
+
+
+
+'Public Sub refreshOpenSpaces(ByRef outerMatrix() As Variant)
+''Обновляем матрицу открытых пространств
+'    matrix.SetOpenSpace outerMatrix
+'End Sub
+
+'Public Sub SetFireCell(ByVal x As Long, ByVal y As Long, Optional value As Double)
+''Создаем новую точку горения
+'    matrix.SetFireCell x, y, value
+'
+'    'Добавляем запись о горящей точке в коллекцию активных клеток
+'    AddToActiveCells x, y
+'
+'    'Insert Firepoint as Visio Shape
+'        Dim shp As Visio.Shape
+'        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
+'                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+'        shp.Cells("LinePattern").FormulaU = "0"
+'        shp.Cells("FillForegnd").FormulaU = "2"
+'End Sub
+
+'Public Sub SetStartFireCell(ByVal x As Long, ByVal y As Long, Optional value As Double)
+''Создаем стартовую точку горения
+'    matrix.SetFireCell x, y, value
+'    'добавляем точки распространения горения
+'    matrix.SetFireCell x - 2, y - 2, 3.4
+'    matrix.SetFireCell x - 1, y - 2, 9.61
+'    matrix.SetFireCell x, y - 2, 13.59
+'    matrix.SetFireCell x + 1, y - 2, 9.61
+'    matrix.SetFireCell x + 2, y - 2, 3.4
+'
+'    matrix.SetFireCell x - 2, y - 1, 9.61
+'    matrix.SetFireCell x - 1, y - 1, 43.58
+'    matrix.SetFireCell x, y - 1, 61.64
+'    matrix.SetFireCell x + 1, y - 1, 43.58
+'    matrix.SetFireCell x + 2, y - 1, 9.61
+'
+'    matrix.SetFireCell x - 2, y, 13.59
+'    matrix.SetFireCell x - 1, y, 61.64
+'    matrix.SetFireCell x + 1, y, 61.64
+'    matrix.SetFireCell x + 2, y, 13.59
+'
+'    matrix.SetFireCell x - 2, y + 1, 9.61
+'    matrix.SetFireCell x - 1, y + 1, 43.58
+'    matrix.SetFireCell x, y + 1, 61.64
+'    matrix.SetFireCell x + 1, y + 1, 43.58
+'    matrix.SetFireCell x + 2, y + 1, 9.61
+'
+'    matrix.SetFireCell x - 2, y + 2, 3.4
+'    matrix.SetFireCell x - 1, y + 2, 9.61
+'    matrix.SetFireCell x, y + 2, 13.59
+'    matrix.SetFireCell x + 1, y + 2, 9.61
+'    matrix.SetFireCell x + 2, y + 2, 3.4
+'
+'    'Добавляем запись о горящей точке в коллекцию активных клеток
+'    AddToActiveCells x, y
+'
+'    'Insert Firepoint as Visio Shape
+'        Dim shp As Visio.Shape
+'        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
+'                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+'        shp.Cells("LinePattern").FormulaU = "0"
+'        shp.Cells("FillForegnd").FormulaU = "2"
+'End Sub
 
 Public Sub ActivateNozzles()
     Set nozzleDemon = New c_FireNozzlesDemon
@@ -487,10 +534,6 @@ Dim tmpVal As Single
 '    End If
 End Function
 
-Public Function GetOpenSpaceLayer() As Variant
-    GetOpenSpaceLayer = matrix.GetOpenSpaceLayer
-End Function
-
 '----------------------------Расчет площадей тушения--------------------------
 Public Sub FireSquareCalculate(ByRef nozzleCollection As Collection)
 'Процедура получения блоков площади тушения
@@ -609,3 +652,5 @@ End Sub
 '        End If
 '    Next cell
 'End Sub
+
+

@@ -96,20 +96,20 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
 End Sub
 
 
-Private Sub SquareAppEvents_CellChanged(ByVal Cell As IVCell)
+Private Sub SquareAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Long '(64) - Площадь пожара
 '---Проверяем имя ячейки
     
     
-    If Cell.Name = "Prop.FireCategorie" Then
-        ShpInd = Cell.Shape.ID
+    If cell.Name = "Prop.FireCategorie" Then
+        ShpInd = cell.Shape.ID
         '---Запускаем процедуру получения СПИСКОВ описаний объектов пожара для указанной категории
         DescriptionsListImport (ShpInd)
     End If
         
-    If Cell.Name = "Prop.FireDescription" Then
-        ShpInd = Cell.Shape.ID
+    If cell.Name = "Prop.FireDescription" Then
+        ShpInd = cell.Shape.ID
         '---Запускаем процедуру получения ЗНАЧЕНИЙ факторов пожара для данного описания
         GetFactorsByDescription (ShpInd)
     End If
@@ -243,7 +243,7 @@ End Sub
 Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
-Dim Cell As Visio.Cell
+Dim cell As Visio.cell
 
     Set docSheet = Application.ActiveDocument.DocumentSheet
     
@@ -258,7 +258,7 @@ Dim Cell As Visio.Cell
 
 End Sub
 
-Private Sub app_CellChanged(ByVal Cell As IVCell)
+Private Sub app_CellChanged(ByVal cell As IVCell)
 '---Один раз в выполняем обновление иконок на кнопках
     cellChangedCount = cellChangedCount + 1
     If cellChangedCount > cellChangedInterval Then

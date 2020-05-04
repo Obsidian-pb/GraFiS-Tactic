@@ -5,7 +5,7 @@ Sub InsertLabelSquare(ShpObj As Visio.Shape)
 Dim shpLabel As Visio.Shape
 Dim shpConnection As Visio.Shape
 Dim mstrConnection As Visio.Master
-Dim Cell1 As Visio.Cell, Cell2 As Visio.Cell
+Dim Cell1 As Visio.cell, Cell2 As Visio.cell
 Dim CellFormula As String
 Dim pnt1 As Long, pnt2 As Long
 

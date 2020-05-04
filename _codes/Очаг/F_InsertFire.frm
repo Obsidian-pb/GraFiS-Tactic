@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} F_InsertFire 
-   Caption         =   "Укажите исходные данные"
+   Caption         =   "Исходные данные"
    ClientHeight    =   7620
    ClientLeft      =   45
    ClientTop       =   435
@@ -17,7 +17,7 @@ Option Explicit
 
 Public Vfl_TargetShapeID As Long
 Public VmD_TimeStart As Date
-Private VfB_NotShowPropertiesWindow As Boolean
+Private VfB_NotShowPropertiesWindow As Boolean      'Возможно стоит удалить
 Private vfStr_ObjList() As String
 
 
@@ -180,7 +180,9 @@ Private Sub btnRunFireModelling_Click()
     Dim actTime As Date
     actTime = DateAdd("n", timeElapsedMain, VmD_TimeStart)
     vsO_FireShape.Cells("Prop.SquareTime").FormulaU = "DateTime(" & str(CDbl(actTime)) & ")"
-    
+        
+    '---Отрисовываем площадь тушения
+    fireModeller.DrawExtSquareByDemon
 Exit Sub
 EX:
     MsgBox "Не все данные корректно указаны!", vbCritical
@@ -224,7 +226,7 @@ Public Sub AddCheckedSize(ByVal size As Long)
 'Добавляем кол-во проверенных клеток
     matrixChecked = matrixChecked + size
     
-    'Обновляем статусную строку с количество проверенных клеток
+    'Обновляем статусную строку с количеством проверенных клеток
     lblMatrixIsBaked.Caption = GetMatrixCheckedStatus
     lblMatrixIsBaked.ForeColor = vbBlack
 '    Me.Repaint

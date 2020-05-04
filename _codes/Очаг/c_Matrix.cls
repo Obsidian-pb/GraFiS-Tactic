@@ -15,17 +15,17 @@ Private dimensionByX As Long                                        'Размерность
 Private dimensionByY As Long                                        'Размерность матрицы по высоте (y)
 
 Private openSpaceLayer As Variant                               'Матрица ограждающих конструкций
-Private currentgPowerLayer As Variant                        'Текущая мощность горнеия (в пределе от 0 до maximumBurnPower) запас горючего
+Private currentgPowerLayer As Variant                        'Текущая мощность горения (в пределе от 0 до maximumBurnPower) запас горючего
 Private gettedPowerInOneStepLayer As Variant                 'Энергия полученная клеткой за один шаг расчета (в конце шага суммируется с текущей мощностью)
 
 
 Const cellPowerModificator As Double = 1
-Const lowerBurnBound As Double = 7                          'Нижняя граница при которой клетка начинает распространять горение на соседние (а так же вообще брабатывается)
+Const lowerBurnBound As Double = 7                          'Нижняя граница при которой клетка начинает распространять горение на соседние (а так же вообще обрабатывается)
 Const maximumBurnPower As Double = 100                      'Максимальная мощность горения (после которой увеличение мощности прекращается)
 
 Public firedCells As Collection                             'Коллекция горящих клеток
 Public fireMaxCells As Collection                           'Коллекция горящих на максимум клеток (собственно зона горения)
-Public chargedCells As Collection                           'Коллекция клеток получившех в данном шаге энергию
+Public chargedCells As Collection                           'Коллекция клеток получивших в данном шаге энергию
 Public startedFireCells As Collection                       'Коллекция клеток, которые только загораются, но их мощность еще не максимальна
 Public activeFiredCells As Collection                       'Коллекция активных горящих клеток - тех, что участвуют в расчете - позволяет ускорить расчет в тактической модели, но в физической неприменимо, т.к. не позволяет уитывать гаснущие при тушении клетки
 Public fireFrontCells As Collection                         'Коллекция клеток фронта пожара - клеток горящих по максимуму и находящихся на границе зоны распространения огня
@@ -53,7 +53,7 @@ Public Sub CreateMatrix(ByVal dimX As Long, dimY As Long)
     Set keyCornerCells = New Collection
 End Sub
 
-Public Sub SetOpenSpace(ByRef outerMatrix() As Variant)
+Public Sub SetOpenSpace(ByRef outerMatrix As Variant)
 'Заполняем слой ограждающих конструкций
 Dim i As Long
 Dim j As Long
@@ -116,7 +116,34 @@ Public Sub SetFireCell(ByVal x As Long, ByVal y As Long, Optional value As Doubl
     firedCells.Add CreateNewCell(x, y)
 End Sub
 
-
+Public Sub SetFiredCell(ByVal x As Long, ByVal y As Long, Optional value As Double)
+'Создаем новую горящую клетку (площадь пожара)
+    
+    'Если указанная точка находится за пределами матрицы - выходим из процедуры
+    If x < 0 Or y < 0 Or x > DimensionX Or y > DimensionY Then Exit Sub
+    
+    'Если указанная точка является стеной - выходим из процедуры
+    If openSpaceLayer(x, y) = CellState.csWall Then Exit Sub
+    
+    On Error Resume Next
+    'Указываем данные новой точки
+    If value = 0 Then
+        currentgPowerLayer(x, y) = maximumBurnPower
+'        'добавляем в коллекцию фронта пожара
+'        fireFrontCells.Add CreateNewCell(x, y), x & ":" & y
+        'добавляем в коллекцию площади пожара
+        fireMaxCells.Add CreateNewCell(x, y), x & ":" & y
+    Else
+        currentgPowerLayer(x, y) = value
+        activeFiredCells.Add CreateNewCell(x, y), x & ":" & y
+    End If
+    
+    'Указываем, что данная клетка горит
+    openSpaceLayer(x, y) = CellState.csFire
+    
+    'Добавляем запись о горящей точке в коллекцию
+    firedCells.Add CreateNewCell(x, y)
+End Sub
 
 
 
@@ -162,6 +189,10 @@ End Function
 
 Public Function GetOpenSpaceLayerValue(ByVal x As Long, ByVal y As Long) As Byte
     GetOpenSpaceLayerValue = openSpaceLayer(x, y)
+End Function
+Public Function GetOpenSpaceLayer() As Variant
+'Возвращаем матрицу ограждающих конструкций
+    GetOpenSpaceLayer = openSpaceLayer
 End Function
 
 
@@ -221,7 +252,7 @@ Dim havingOpenSpace As Boolean
 End Function
 
 
-Private Function IsCellsAroundExists(ByVal x As Long, ByVal y As Long, ByVal value As Integer) As Boolean
+Public Function IsCellsAroundExists(ByVal x As Long, ByVal y As Long, ByVal value As Integer) As Boolean
 'Возвращаем Истина, если клетки вокруг, в слое ограждающих конструкций имеют указанное значение (хоть одна), иначе, Ложь
     'по диагонали
     If IsCellsAreType(x - 1, y - 1, value) Then
@@ -382,12 +413,12 @@ End Function
 '-----------------------------Инструменты-------------------------------------------
 Private Function CreateNewCell(ByVal x As Long, ByVal y As Long) As c_Cell
 'Создаем новую клетку
-Dim Cell As c_Cell
+Dim cell As c_Cell
     
-    Set Cell = New c_Cell
-    Set Cell.ParentMatrix = Me
-    Cell.x = x
-    Cell.y = y
+    Set cell = New c_Cell
+    Set cell.ParentMatrix = Me
+    cell.x = x
+    cell.y = y
     
-Set CreateNewCell = Cell
+Set CreateNewCell = cell
 End Function
