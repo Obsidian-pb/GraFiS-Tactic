@@ -153,9 +153,9 @@ Dim latestSquareTime As Date
                         If CellVal(shp, "Actions.RSCHS.Checked") = 1 _
                             Then .Raise "RSCHSTechincsHave"
                     Case Is = indexPers.ipPrispAvto 'Приспособленная техника
-                        .Raise "TotalTechCount"
-                        If CellVal(shp, "Actions.RSCHS.Checked") = 1 _
-                            Then .Raise "RSCHSTechincsHave"
+                        .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount"
+                        .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
+                        .Raise "WaterValueHave", CellVal(shp, "Prop.Water")
                     Case Is = indexPers.ipInjenerAndSpecAvto 'Инженерная техника
                         .Raise "TotalTechCount"
                         If CellVal(shp, "Actions.RSCHS.Checked") = 1 _
@@ -627,17 +627,15 @@ Dim latestSquareTime As Date
                             Case Is = indexPers.ipMashiniMinzdrav 'Минздрав
                                 .Raise "SMPCount;TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipPrispAvto 'Приспособленная техника
-                                If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" Then
-                                  .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
-                                Else
-                                  .Raise "TotalTechCount;RSCHSTechincsHave", CellVal(shp, "Prop.Quantity") - 1
-                                End If
+                                .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount", CellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipInjenerAndSpecAvto 'Инженерная техника
+                                .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
                                 If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" _
-                                  Then .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
-                            Case Is = indexPers.ipAvtoObschee 'Общее обозначение
+                                  Then .Raise "RSCHSTechincsHave", CellVal(shp, "Prop.Quantity") - 1
+                            Case Is = indexPers.ipAvtoObschee 'Общее авто
+                                .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1
                                 If CellVal(shp, "Prop.RSCHS", visUnitsString) = "Входит" _
-                                  Then .Raise "TotalTechCount", CellVal(shp, "Prop.Quantity") - 1 ' pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
+                                  Then .Raise "RSCHSTechincsHave", CellVal(shp, "Prop.Quantity") - 1 ' pi_TechTotalCount = pi_TechTotalCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
                             Case Is = indexPers.ipPAObscheeOboznachenie 'Общее обозначение
                                 .Raise "TotalTechCount;TotalFireCount", CellVal(shp, "Prop.Quantity") - 1
                                  On Error Resume Next
