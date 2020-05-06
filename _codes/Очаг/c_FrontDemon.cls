@@ -43,7 +43,7 @@ End Sub
 
 Public Sub RunDemon(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
                     ByRef nozzle As c_FireNozzleModel)
-'Разбиваем площадь пожара на блоки
+'Разбиваем фронт пожара на блоки
 Dim block As c_ExtinguishingBlock
 
     '1 проверяем, не входит ли точка контакта зоны работы ствола в фрагмент фронта пожара, который уже распределен
@@ -60,7 +60,24 @@ Dim block As c_ExtinguishingBlock
 
 End Sub
 
+Public Sub RunDemon2(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
+                    ByRef frontCells As Collection)
+'Разбиваем фронт пожара на блоки для расчета требуемой площади тушения
+'Dim block As c_ExtinguishingBlock
+'
+'    '1 проверяем, не входит ли точка контакта зоны работы ствола в фрагмент фронта пожара, который уже распределен
+'    Set block = CheckBlockExists(extSquare, nozzle.fireContactCell)
+'    If block Is Nothing Then
+'        '2 разбить коллекцию фронта на участки не связанные между собой
+'        BreakFront extSquare, frontCellsCollection, nozzle
+'    Else
+'        '3 Добавляем данные в существующий блок
+'        block.expenseFact = block.expenseFact + nozzle.waterExpense
+'    End If
+    
+    BreakFront2 extSquare, frontCellsCollection, frontCells
 
+End Sub
 
 
 Private Sub BreakFront(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
@@ -99,6 +116,47 @@ Dim tmpColl As Collection
             extSquare.AddExtinguishingBlock extBlock
 '        End If
 '    Next cell
+        
+End Sub
+
+Private Sub BreakFront2(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
+                    ByRef frontCells As Collection)
+'Разбиваем фронт пожара на участки для расчета требуемой площади тушения
+Dim cell As c_Cell
+Dim extBlock As c_ExtinguishingBlock
+Dim tmpColl As Collection
+
+    'Перебираем все клетки в коллекции стартовых клеток
+    For Each cell In frontCells
+        
+        'если клетка еще не распределена по блокам, начинаем от нее рекурсивный поиск всех клеток площади тушения данного блока
+        If matrix(startCell.x, startCell.y) = CellType.fireFrontNotInBlock Then
+            'создаем новую коллекцию
+            Set tmpColl = New Collection
+            'Для новой коллекции выполняем рекурсивное наполнение от текущей ячейки
+'            TryAddCell tmpColl, nozzle.fireContactCell
+            TryAddCell tmpColl, cell
+            
+            'Создаем новый блок и передаем ему временную коллекцию клеток фронта
+            Set extBlock = New c_ExtinguishingBlock
+            Set extBlock.fireFrontCells = tmpColl
+            extBlock.CreateMatrix UBound(matrix, 1), UBound(matrix, 2)
+            extBlock.AddToExtCellsCollection tmpColl
+'            AddCellsToCollection extBlock.extinguishingCells, tmpColl
+            '---Устанавливаем глубину тушения
+                extBlock.fireWay = 5000     'Для ручных стволов
+'                If nozzle.nozzleType = waterHand Then
+'                    extBlock.fireWay = 5000     'Для ручных стволов
+'                Else
+'                    extBlock.fireWay = 10000     'Для лафетных стволов
+'                End If
+'                extBlock.expenseFact = extBlock.expenseFact + nozzle.waterExpense
+                extBlock.grain = grain
+            
+            'Добавляем созданный блок в коллекцию блоков модели площади тушения
+            extSquare.AddExtinguishingBlock extBlock
+        End If
+    Next cell
         
 End Sub
 

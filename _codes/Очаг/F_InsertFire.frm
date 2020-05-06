@@ -76,7 +76,7 @@ End Sub
 
 Private Sub btnBakeMatrix_Click()
     If IsAcceptableMatrixSize(1200000) = False Then
-        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы."
+        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы.", vbInformation, "ГраФиС-Тактик"
         Exit Sub
     End If
 
@@ -104,7 +104,7 @@ End Sub
 
 Private Sub btnRefreshMatrix_Click()
     If IsAcceptableMatrixSize(1200000) = False Then
-        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы."
+        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы.", vbInformation, "ГраФиС-Тактик"
         Exit Sub
     End If
     
