@@ -61,14 +61,17 @@ End Sub
 Public Sub RunDemon()
 'Запускаем демона
 Dim fireShapeDemon As c_FireShapeDemon
-
+Dim shp As Visio.Shape
 '    Set matrix = New c_MatrixExtSquare
-    
+    Set shp = Application.ActivePage.Shapes.ItemFromID(35)
     
     Set fireShapeDemon = New c_FireShapeDemon
-    fireShapeDemon.SetGrain(grain).SetFireShape(Application.ActivePage.Shapes.ItemFromID(6)).RunDemon matrix
+    fireShapeDemon.SetGrain(grain).SetFireShape(shp).RunDemon matrix
     
     FireSquareCalculate
+    
+    DrawExtSquareByDemon
+    
 End Sub
 
 
@@ -96,6 +99,15 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
     extinguishingSquareDemon.SetGrain = grain
     
     frontDemonImpl.RunDemon2 extSquare, matrix.fireFrontCells, matrix.fireFrontCells
+    extinguishingSquareDemon.RunDemon extSquare
+    
+    
+'    Dim cell As c_Cell
+'    for each cell
+    
+    
+    
+    
     
 '    Dim i As Integer
 '    i = 0

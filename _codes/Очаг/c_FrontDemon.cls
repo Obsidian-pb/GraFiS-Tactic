@@ -127,10 +127,10 @@ Dim extBlock As c_ExtinguishingBlock
 Dim tmpColl As Collection
 
     'ѕеребираем все клетки в коллекции стартовых клеток
-    For Each cell In frontCells
+    For Each cell In frontCellsCollection
         
         'если клетка еще не распределена по блокам, начинаем от нее рекурсивный поиск всех клеток площади тушени€ данного блока
-        If matrix(startCell.x, startCell.y) = CellType.fireFrontNotInBlock Then
+        If matrix(cell.x, cell.y) = CellType.fireFrontNotInBlock Then
             'создаем новую коллекцию
             Set tmpColl = New Collection
             'ƒл€ новой коллекции выполн€ем рекурсивное наполнение от текущей €чейки

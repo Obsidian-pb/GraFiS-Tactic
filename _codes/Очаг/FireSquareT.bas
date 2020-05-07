@@ -205,7 +205,8 @@ Dim modelledFireShape As Visio.Shape
     newFireShape.SendToBack
     modelledFireShape.SendToBack
         
-    
+''TEST:
+'fireModeller.DrawExtSquareByDemon
         
     Debug.Print "Всего затрачено " & tmr2.GetElapsedTime & "с."
     

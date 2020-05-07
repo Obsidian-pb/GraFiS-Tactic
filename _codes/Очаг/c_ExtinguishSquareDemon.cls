@@ -187,6 +187,9 @@ Private Sub AddCellToColl(ByRef coll As Collection, ByRef cell As c_Cell, ByVal 
     'Проверяем, горит ли ячейка на максимум
     If Not fireMatrixObject.IsCellMaxFire(cell.x, cell.y) Then Exit Sub
     
+'Проверяем не является ли клетка клеткой стены
+If fireMatrixObject.IsWall(cell.x, cell.y) Then Exit Sub
+    
     'Если путь превышает предельное значение - не учитываем его
     If wayLen > maxWay Or calculatedCells(cell.x, cell.y) = 1 Then Exit Sub
     
