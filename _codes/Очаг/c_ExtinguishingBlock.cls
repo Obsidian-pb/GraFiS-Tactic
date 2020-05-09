@@ -99,7 +99,7 @@ End Function
 
 
 Public Function IsCellInThisFront(ByRef cell As c_Cell) As Boolean
-'Проверяем, относится ли пришедшая клетка к коллекции клеток периметра поажара данного ьлока
+'Проверяем, относится ли пришедшая клетка к коллекции клеток фронта пожара данного блока
 Dim cll As c_Cell
     For Each cll In fireFrontCells
         If cll.x = cell.x And cll.y = cell.y Then
@@ -110,8 +110,33 @@ Dim cll As c_Cell
 IsCellInThisFront = False
 End Function
 
+Public Function IsCellInThisPerimeter(ByRef cell As c_Cell) As Boolean
+'Проверяем, относится ли пришедшая клетка к коллекции клеток периметра пожара данного блока
+Dim cll As c_Cell
+    
+    IsCellInThisPerimeter = Not (IsCellInThisBlock(cell.NCell(d)) And _
+                            IsCellInThisBlock(cell.NCell(l)) And _
+                            IsCellInThisBlock(cell.NCell(ld)) And _
+                            IsCellInThisBlock(cell.NCell(lu)) And _
+                            IsCellInThisBlock(cell.NCell(r)) And _
+                            IsCellInThisBlock(cell.NCell(rd)) And _
+                            IsCellInThisBlock(cell.NCell(ru)) And _
+                            IsCellInThisBlock(cell.NCell(u)))
+End Function
 
-
+Public Function IsCellInThisBlock(ByRef cell As c_Cell) As Boolean
+'Проверяем, относится ли пришедшая клетка к коллекции клеток данного блока
+Dim tmpCell As c_Cell
+    On Error GoTo EX
+    'Добавить проверку на выход из матрицы!!!
+    
+    Set tmpCell = extinguishingCells.item(cell.x & ":" & cell.y)
+    IsCellInThisBlock = True
+Exit Function
+EX:
+    Debug.Print cell.x * grain & ":" & cell.y * grain
+    IsCellInThisBlock = False
+End Function
 
 
 '--------------------------Свойства---------------------------------------------------

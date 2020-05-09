@@ -46,12 +46,27 @@ Private nozzleDemon As c_FireNozzlesDemon
 Public Sub SetOpenSpaceLayer(ByRef modeller As c_Modeller)
 'Устанавливаем ссылку на матрицу окружающего пространства
 Dim openSpaceLayer As Variant
+Dim shp As Visio.Shape
     
     openSpaceLayer = modeller.GetOpenSpaceLayer
     
     Set matrix = New c_Matrix
     matrix.CreateMatrix UBound(openSpaceLayer, 1), UBound(openSpaceLayer, 2)
     matrix.SetOpenSpace openSpaceLayer
+    
+Dim i As Long
+Dim j As Long
+    
+    For i = 0 To UBound(openSpaceLayer, 1)
+        For j = 0 To UBound(openSpaceLayer, 2)
+            If openSpaceLayer(i, j) = 0 Then
+'                Set shp = Application.ActivePage.DrawRectangle((i * grain) / mmInInch, (j * grain) / mmInInch, _
+'                                                     (i * grain + grain) / mmInInch, (j * grain + grain) / mmInInch)
+'                                                     shp.Cells("FillForegnd").Formula = 3
+'                                                     shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("OpenSpace")
+            End If
+        Next j
+    Next i
     
 End Sub
 
@@ -63,7 +78,8 @@ Public Sub RunDemon()
 Dim fireShapeDemon As c_FireShapeDemon
 Dim shp As Visio.Shape
 '    Set matrix = New c_MatrixExtSquare
-    Set shp = Application.ActivePage.Shapes.ItemFromID(35)
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(35)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(36)
     
     Set fireShapeDemon = New c_FireShapeDemon
     fireShapeDemon.SetGrain(grain).SetFireShape(shp).RunDemon matrix
@@ -71,6 +87,10 @@ Dim shp As Visio.Shape
     FireSquareCalculate
     
     DrawExtSquareByDemon
+    
+    
+    
+
     
 End Sub
 

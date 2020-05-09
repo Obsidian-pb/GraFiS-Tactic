@@ -352,6 +352,10 @@ End Function
 
 
 '------------------------------------РАсчет и построение площади тушения------------------------------
+Public Sub TestExtSquareCalculationRun(ByRef shp As Visio.Shape)
+    TestExtSquareCalculation
+End Sub
+
 Public Sub TestExtSquareCalculation()
 'Проверяем работоспособность расчета площади тушения
 Dim extSquareCalculator As c_ExtSquareCalculator

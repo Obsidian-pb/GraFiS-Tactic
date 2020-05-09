@@ -62,25 +62,29 @@ Dim shp As Visio.Shape
             y = (j * grain + offsetY + 0.5 * grain) / mmInInch
             
             If fireShp.HitTest(x, y, 0) > 0 Then
-                fireMatrixObject.SetCellValue offsetXC + i + 1, offsetYC + j + 1, mtrCurrentgPowerLayer, 100 ' CellState.csFire
-                fireMatrixObject.SetFiredCell offsetXC + i + 1, offsetYC + j + 1
+'                fireMatrixObject.SetCellValue offsetXC + i + 1, offsetYC + j + 1, mtrCurrentgPowerLayer, 100 ' CellState.csFire
+'                fireMatrixObject.SetFiredCell offsetXC + i + 1, offsetYC + j + 1
+                fireMatrixObject.SetCellValue offsetXC + i, offsetYC + j, mtrCurrentgPowerLayer, 100   ' CellState.csFire
+                fireMatrixObject.SetFiredCell offsetXC + i, offsetYC + j
+                
 '                Set shp = Application.ActivePage.DrawRectangle(((offsetXC + i) * grain) / mmInInch, ((offsetYC + j) * grain) / mmInInch, _
 '                                                     ((offsetXC + i) * grain + grain) / mmInInch, ((offsetYC + j) * grain + grain) / mmInInch)
 '                                                     shp.Cells("FillForegnd").Formula = 2
+'                                                     shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("FireSpace")
             End If
         Next j
     Next i
     
-    '4 - Определяем клетки периметра фигуры
+    '4 - Определяем клетки фронта фигуры
     For Each cell In fireMatrixObject.firedCells
         If Not fireMatrixObject.IsInner(cell.x, cell.y) Then
             AddToFrontCells fireMatrixObject, cell          'Добавляем клетку в коллекцию клеток фронта пожара
 
-                Set shp = Application.ActivePage.DrawRectangle((cell.x * grain - grain) / mmInInch, (cell.y * grain - grain) / mmInInch, _
-                                                     (cell.x * grain) / mmInInch, (cell.y * grain) / mmInInch)
-                                                     shp.Cells("LinePattern").Formula = 0
-                                                     shp.Cells("FillForegnd").Formula = 2
-
+'                Set shp = Application.ActivePage.DrawRectangle((cell.x * grain) / mmInInch, (cell.y * grain) / mmInInch, _
+'                                                     (cell.x * grain + grain) / mmInInch, (cell.y * grain + grain) / mmInInch)
+'                                                     shp.Cells("LinePattern").Formula = 0
+'                                                     shp.Cells("FillForegnd").Formula = 2
+'                                                     shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("FireFront")
         End If
     Next cell
     

@@ -58,22 +58,51 @@ End Sub
 
 Public Sub DrawFireSquare(ByRef extSquare As c_ExtinguishingSquare)
 'Отрисовываем площадь тушения
+Dim block As c_ExtinguishingBlock
 Dim cell As c_Cell
 Dim shp As Visio.Shape
+Dim mainShp As Visio.Shape
 Const mmInInch As Double = 25.4
+Dim tmpColl As Collection
 
+    
+    
     'Перебираем все блоки и для каждого из них строим зоны горения
     For Each block In extSquare.extinguishingBlocks
-'        FillExtSquare block
-
+        Set tmpColl = New Collection
+        Application.ActiveWindow.DeselectAll
+        
         For Each cell In block.extinguishingCells
+            If block.IsCellInThisPerimeter(cell) Then
+'            If block.IsCellInThisBlock(cell) Then
+                Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, _
+                        (cell.x + 1) * grain / mmInInch, (cell.y + 1) * grain / mmInInch)
+'                tmpColl.Add shp
+            End If
+            
+            
+            
+'            shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
+'            shp.Cells("LinePattern").FormulaU = "0"
+'            shp.Cells("FillForegnd").FormulaU = "4"
 
-            Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, _
-                    (cell.x + 1) * grain / mmInInch, (cell.y + 1) * grain / mmInInch)
-            shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
-            shp.Cells("LinePattern").FormulaU = "0"
-            shp.Cells("FillForegnd").FormulaU = "4"
+'            If mainShp Is Nothing Then Set mainShp = shp
+'            Application.ActiveWindow.Select mainShp, visSelect
+'            Application.ActiveWindow.Selection.Union
+'            Set mainShp = Application.ActiveWindow.Selection(1)
+'            DoEvents
+            
         Next cell
+        
+'        'Объединяем все фигуры клеток текущего блока в единую фигуру
+'        For Each shp In tmpColl
+'            Application.ActiveWindow.Select shp, visSelect
+'        Next shp
+'        Application.ActiveWindow.Selection.Union
+'        Set shp = Application.ActiveWindow.Selection(1)
+'        'Указываем полученной фигуре свойство площади тушения
+'        shp.AddNamedRow visSectionProp, "ExtSquare", visTagDefault
+'        shp.CellsSRC(visSectionProp, 0, visCustPropsValue).FormulaU = str(block.GetSquare)
     Next block
 
 End Sub
