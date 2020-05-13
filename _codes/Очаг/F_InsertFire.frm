@@ -17,7 +17,7 @@ Option Explicit
 
 Public Vfl_TargetShapeID As Long
 Public VmD_TimeStart As Date
-Private VfB_NotShowPropertiesWindow As Boolean      'Возможно стоит удалить
+'Private VfB_NotShowPropertiesWindow As Boolean      'Возможно стоит удалить
 Private vfStr_ObjList() As String
 
 
@@ -182,7 +182,7 @@ Private Sub btnRunFireModelling_Click()
     vsO_FireShape.Cells("Prop.SquareTime").FormulaU = "DateTime(" & str(CDbl(actTime)) & ")"
         
     '---Отрисовываем площадь тушения
-    fireModeller.DrawExtSquareByDemon
+'    fireModeller.DrawExtSquareByDemon
 Exit Sub
 EX:
     MsgBox "Не все данные корректно указаны!", vbCritical

@@ -59,6 +59,7 @@ Dim cell As c_Cell
     AddCellsToCollection activeCells, coll
     
     'Для всех входящих клеток устанавливаем значение "в зоне тушения"
+    On Error Resume Next
     For Each cell In coll
         cellsMatrix(cell.x, cell.y) = ExtCellType.inExtSquare
     Next cell
@@ -134,7 +135,7 @@ Dim tmpCell As c_Cell
     IsCellInThisBlock = True
 Exit Function
 EX:
-    Debug.Print cell.x * grain & ":" & cell.y * grain
+'    Debug.Print cell.x * grain & ":" & cell.y * grain
     IsCellInThisBlock = False
 End Function
 
@@ -154,7 +155,8 @@ End Property
 Private Sub AddCellsToCollection(ByRef col1 As Collection, ByRef col2 As Collection)
 'Добавляем все клетки из коллекции 2 в коллекцию 1
 Dim cell As c_Cell
-
+    
+    On Error Resume Next
     For Each cell In col2
         col1.Add cell, cell.x & ":" & cell.y
     Next cell

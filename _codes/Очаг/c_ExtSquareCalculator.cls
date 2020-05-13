@@ -79,7 +79,12 @@ Dim fireShapeDemon As c_FireShapeDemon
 Dim shp As Visio.Shape
 '    Set matrix = New c_MatrixExtSquare
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(35)
-    Set shp = Application.ActivePage.Shapes.ItemFromID(36)
+
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(326)
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(189)
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(187)
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(351)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(6)
     
     Set fireShapeDemon = New c_FireShapeDemon
     fireShapeDemon.SetGrain(grain).SetFireShape(shp).RunDemon matrix
