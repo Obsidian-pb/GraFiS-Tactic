@@ -172,10 +172,18 @@ Dim extShp As Visio.Shape
     Else
         For Each con In shp.Connects
             Set extShp = con.ToSheet
-            If IsShapeGraFiSType(extShp, Array(34, 35, 36, 37, 38, 39)) Then
+            If IsShapeGraFiSType(extShp, Array(34)) Then
                 'Указываем сведения, что со стволом НЕ работает указанное звено ГДЗС
                 extShp.Cells("Prop.Personnel").FormulaU = "IF(STRSAME(Prop.TTHType," & Chr(34) & _
                     "Стандартные" & Chr(34) & "),IF(Prop.DiameterInS>50,2,1),IF(Prop.DiameterIn>50,2,1))"
+            End If
+            If IsShapeGraFiSType(extShp, Array(35)) Then
+                'Указываем сведения, что со стволом НЕ работает указанное звено ГДЗС
+                extShp.Cells("Prop.Personnel").FormulaU = 1
+            End If
+            If IsShapeGraFiSType(extShp, Array(36, 37, 38, 39)) Then
+                'Указываем сведения, что со стволом НЕ работает указанное звено ГДЗС
+                extShp.Cells("Prop.Personnel").FormulaU = 3
             End If
         Next con
     End If
