@@ -67,7 +67,7 @@ Application.EndUndoScope UndoScopeID, True
 Exit Sub
 
 EX:
-MsgBox "Введеное вами значение не может быть установлено в качестве Аспекта! Проверьте правильно ли вы его указали! В качестве значений могут быть использованы только числа от 0,1 до 100!", vbCritical
+MsgBox "Введеное вами значение не может быть установлено в качестве Аспекта! Проверьте правильно ли вы его указали! В качестве значений могут быть использованы только числа от 0,1 до 100!", vbCritical, ThisDocument.Name
 Set vO_Sheet = Nothing
 Application.EndUndoScope UndoScopeID, True
 

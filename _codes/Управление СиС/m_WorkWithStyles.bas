@@ -48,7 +48,7 @@ Dim i As Integer
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StyleExport"
 End Sub
 
@@ -119,7 +119,7 @@ EX:
     Set vO_StyleFrom = Nothing
     Set vO_StyleTo = Nothing
     Set vO_Stenc = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StyleRefresh"
 End Sub
 

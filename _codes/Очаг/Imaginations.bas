@@ -288,7 +288,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     CloneSecFill IDFrom, IDTo
 
 '---Присваиваем номер слоя
-ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
+    ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
 
 End Sub
 
@@ -509,7 +509,7 @@ Set PF_GeometryCopy = ReplicaShape
 
 Exit Function
 EX:
-    MsgBox "Возникла непредвиденная ошибка! Если она будет повторяться - обратитесь к разработчику"
+    MsgBox "Возникла непредвиденная ошибка! Если она будет повторяться - обратитесь к разработчику", , ThisDocument.Name
     SaveLog Err, "Document_DocumentOpened"
 End Function
 

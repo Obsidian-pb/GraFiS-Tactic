@@ -63,7 +63,7 @@ Set OtherShape = Nothing
 Exit Sub
 ex:
     Set OtherShape = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GlueToShape"
 End Sub
 
@@ -151,7 +151,7 @@ Set OtherShape = Nothing
 Exit Sub
 ex:
     Set OtherShape = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GlueToHose"
 End Sub
 

@@ -216,7 +216,9 @@ Set Bar = Nothing
 Exit Sub
 EX:
 '    Debug.Print Err.Description
-    
+    Set Bar = Nothing
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "AddTBTimerButtons"
 End Sub
 
 Public Sub RemooveTBTimer()

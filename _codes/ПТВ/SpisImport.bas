@@ -5,6 +5,8 @@ Attribute VB_Name = "SpisImport"
 Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
 'Процедура обновления данных фигуры (всех списков)
 
+    On Error GoTo Tail
+
 '---Проверяем вбрасывается ли данная фигура впервые
     If IsFirstDrop(ShpObj) Then
         '---Обновляем общие списки
@@ -53,6 +55,10 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
 On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИБКИ
 Application.DoCmd (1312)
 
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "BaseListsRefresh"
 End Sub
 
 Public Sub UnitsListsRefresh(ShpObj As Visio.Shape)
@@ -119,7 +125,7 @@ Dim Criteria As String
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolModelsListImport"
 End Sub
 
@@ -148,7 +154,7 @@ Dim Criteria As String
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "WEModelsListImport"
 End Sub
 
@@ -177,7 +183,7 @@ Dim Criteria As String
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "WFModelsListImport"
 End Sub
 
@@ -217,7 +223,7 @@ End Select
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolFoamCreatorListImport"
 End Sub
 
@@ -271,7 +277,7 @@ End Select
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolVariantsListImport"
 End Sub
 
@@ -325,7 +331,7 @@ End Select
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolStreamTypesListImport"
 End Sub
 
@@ -386,7 +392,7 @@ End Select
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolHeadListImport"
 End Sub
 

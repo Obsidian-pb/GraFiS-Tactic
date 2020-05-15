@@ -36,7 +36,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolStreamValueImport"
 End Sub
 
@@ -78,7 +78,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolDiameterInImport"
 End Sub
 
@@ -144,7 +144,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolProductionImport"
 End Sub
 
@@ -170,7 +170,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolWFLinkImport"
 End Sub
 
@@ -193,7 +193,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolWFLinkImport"
 End Sub
 
@@ -219,7 +219,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolWFLinkImport"
 End Sub
 
@@ -257,7 +257,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolRFImport"
 End Sub
 
@@ -289,7 +289,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ColFlowMaxImport"
 End Sub
 
@@ -320,7 +320,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "FoamDiffKoeffImport"
 End Sub
 
@@ -344,6 +344,6 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "NozzleProvKoeffImport"
 End Sub

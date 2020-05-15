@@ -93,13 +93,15 @@ Sub AddButtons()
 Set Bar = Nothing
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons"
 End Sub
 
 
 Sub DeleteButtons()
 '---Процедура удаления кнопки "Мастер проверок" из панели управления "Спецфункции"--------------
+
+    On Error GoTo EX
 
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
@@ -125,7 +127,13 @@ Sub DeleteButtons()
     
 Set Button = Nothing
 Set Bar = Nothing
+Exit Sub
 
+EX:
+    Set Button = Nothing
+    Set Bar = Nothing
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "DeleteButtons"
 End Sub
 
 

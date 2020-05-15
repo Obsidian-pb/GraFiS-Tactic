@@ -73,7 +73,7 @@ Exit Sub
 
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
-    MsgBox Err.description
+    MsgBox Err.description, , ThisDocument.Name
     Set rst = Nothing
     Set dbs = Nothing
     SaveLog Err, "GetValuesOfCellsFromTable"
@@ -183,7 +183,7 @@ Dim RSField As Object, RSField2 As Object
 ListImport2 = List
 Exit Function
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport2"
 End Function
 

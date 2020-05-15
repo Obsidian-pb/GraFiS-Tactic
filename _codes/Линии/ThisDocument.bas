@@ -215,7 +215,7 @@ Dim SecExists As Boolean
     
 Exit Sub
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчику."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчику.", , ThisDocument.Name
     SaveLog Err, "Document_DocumentOpened"
 End Sub
 

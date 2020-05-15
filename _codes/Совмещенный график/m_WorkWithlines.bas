@@ -61,7 +61,7 @@ Dim FormulaString As String
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_WaterGraph_AddKnot"
 End Sub
 
@@ -100,7 +100,7 @@ Dim FormulaString As String
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_WaterGraph_DeleteKnot"
 End Sub
 
@@ -155,7 +155,7 @@ Dim FormulaString As String
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_FireGraph_AddKnot"
 End Sub
 
@@ -191,7 +191,7 @@ Dim FormulaString As String
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_FireGraph_DeleteKnot"
 End Sub
 
@@ -246,7 +246,7 @@ Dim FormulaString As String
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_FireTGraph_AddKnot"
 End Sub
 
@@ -282,7 +282,7 @@ Dim FormulaString As String
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_FireTGraph_DeleteKnot"
 End Sub
 

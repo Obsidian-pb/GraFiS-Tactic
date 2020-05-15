@@ -72,7 +72,7 @@ Exit Sub
 
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
-    MsgBox Err.description
+    MsgBox Err.description, , ThisDocument.Name
     Set rsAD = Nothing
     Set dbs = Nothing
     SaveLog Err, "GetValuesOfCellsFromTable", "Tablename: " & TableName
@@ -150,7 +150,7 @@ Exit Sub
 
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
-    MsgBox Err.description
+    MsgBox Err.description, , ThisDocument.Name
     Set rsAD = Nothing
     Set dbs = Nothing
     SaveLog Err, "FogRMKGetValuesOfCellsFromTable", "Tablename: " & TableName

@@ -2,8 +2,8 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} fmsgCheckNewVersion 
    Caption         =   "Сведения об обновлении"
    ClientHeight    =   3360
-   ClientLeft      =   48
-   ClientTop       =   372
+   ClientLeft      =   45
+   ClientTop       =   375
    ClientWidth     =   8100
    OleObjectBlob   =   "fmsgCheckNewVersion.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -39,6 +39,8 @@ Public Sub CheckUpdates()
 Dim lastCheckDate As Date
 Dim currentVersion As Integer
 
+    On Error GoTo Tail
+
     'Проверяем дату последней проверки - если прошло меньше суток выходим
     lastCheckDate = CDate(GetSetting("GraFiS", "GFS_Version", "LastCheckDate", Now()))
     If DateDiff("d", lastCheckDate, Now()) >= 1 Then
@@ -52,7 +54,10 @@ Dim currentVersion As Integer
         SaveSetting "GraFiS", "GFS_Version", "LastCheckDate", CStr(Now())
     End If
     
-
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "CheckUpdates"
 End Sub
 
 Private Function GetData(ByVal a_version As Integer) As Boolean

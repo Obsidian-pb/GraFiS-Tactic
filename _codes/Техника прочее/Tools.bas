@@ -67,7 +67,7 @@ Set dbs = Nothing
 Exit Sub
     '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetValuesOfCellsFromTable"
     Set rst = Nothing
     Set dbs = Nothing
@@ -142,7 +142,7 @@ Exit Sub
 
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetValuesOfCellsFromTableSea"
     Set rst = Nothing
     Set dbs = Nothing
@@ -220,7 +220,7 @@ Exit Sub
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
 '    MsgBox Err.Description
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetValuesOfCellsFromTableTrain"
     Set rst = Nothing
     Set dbs = Nothing
@@ -267,7 +267,7 @@ Set dbs = Nothing
 Set rst = Nothing
 Exit Function
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport"
     ListImport = Chr(34) & " " & Chr(34)
     Set dbs = Nothing
@@ -321,7 +321,7 @@ Dim RSField As Object, RSField2 As Object
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport2"
     ListImport2 = Chr(34) & " " & Chr(34)
 End Function
@@ -373,7 +373,7 @@ Set dbs = Nothing
 Set rst = Nothing
 Exit Function
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport2"
     ListImport3 = Chr(34) & " " & Chr(34)
     Set dbs = Nothing

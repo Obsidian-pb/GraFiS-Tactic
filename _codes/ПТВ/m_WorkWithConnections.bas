@@ -136,7 +136,7 @@ Exit Sub
 EndSub:
     Resume Next
 '    Debug.Print Err.Description
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "Ps_ConnectionAdd"
     Set cpO_InShape = Nothing
     Set cpO_OutShape = Nothing
@@ -247,7 +247,7 @@ On Error GoTo ExitSub
 Exit Sub
 ExitSub:
 '    Debug.Print Err.Description
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ps_LinkShapes"
 
 End Sub
@@ -261,7 +261,9 @@ Private Function f_IdentShape(ByVal ai_ShapeIP As Integer) As Integer
 'Функция идентифициурет фигуру и возвращает значение её типа
 Dim Arr_PTVs(29, 1) As Integer
 Dim i As Integer
-
+    
+    On Error GoTo Tail
+    
 '---Указываем значения IndexPers и соответствующие им определения
     Arr_PTVs(0, 0) = 34  'Водяной ручной ствол
         Arr_PTVs(0, 1) = vb_ShapeType_PTV
@@ -333,6 +335,10 @@ Dim i As Integer
             If ai_ShapeIP = Arr_PTVs(i, 0) Then f_IdentShape = Arr_PTVs(i, 1): Exit Function
         Next i
 
+Exit Function
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "f_IdentShape"
 End Function
 
 

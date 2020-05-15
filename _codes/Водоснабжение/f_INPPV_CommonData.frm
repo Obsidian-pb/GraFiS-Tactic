@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} f_INPPV_CommonData 
    Caption         =   "Общие сведения (ЭСУ ППВ)"
    ClientHeight    =   6435
-   ClientLeft      =   48
-   ClientTop       =   372
-   ClientWidth     =   5364
+   ClientLeft      =   45
+   ClientTop       =   375
+   ClientWidth     =   5370
    OleObjectBlob   =   "f_INPPV_CommonData.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -19,6 +19,8 @@ Public Sub ShowData(ByVal htmlText As String)
 'Прока показывает окно с браузером и загружает содержимое
 Dim mDoc As MSHTML.IHTMLDocument
     
+    On Error GoTo Tail
+    
     htmlText = Replace(htmlText, Asc(34), "'")
     
     'Открываем пустую страницу
@@ -30,4 +32,9 @@ Dim mDoc As MSHTML.IHTMLDocument
     Set mDoc = Nothing
     
     Me.Show
+    
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "ShowData"
 End Sub

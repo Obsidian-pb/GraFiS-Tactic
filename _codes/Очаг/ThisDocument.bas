@@ -236,7 +236,7 @@ Dim v_Ctrl As CommandBarControl
     
 Exit Sub
 Tail:
-    MsgBox "В ходе работы программы возникла ошибка! Если она будет повторяться - обратитесь к разработчику."
+    MsgBox "В ходе работы программы возникла ошибка! Если она будет повторяться - обратитесь к разработчику.", , ThisDocument.Name
     SaveLog Err, "Document_DocumentOpened"
 End Sub
 

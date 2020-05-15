@@ -53,7 +53,7 @@ Exit Sub
 EX:
     Set vO_Stenc = Nothing
     Set vO_Stl = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StyleExport"
 End Sub
 

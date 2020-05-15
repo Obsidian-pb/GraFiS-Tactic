@@ -25,6 +25,8 @@ Dim vO_Doc As Visio.Document
 Dim vO_Stl As Visio.style
 Dim i As Integer
 
+    On Error GoTo Tail
+
 '---Создаем набор названий стилей
     s_StyleSetsDeclare
 
@@ -49,6 +51,10 @@ Dim i As Integer
     Set vO_Stenc = Nothing
     Set vO_Stl = Nothing
 
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "StyleExport"
 End Sub
 
 
@@ -117,7 +123,7 @@ EX:
     Set vO_StyleFrom = Nothing
     Set vO_StyleTo = Nothing
     Set vO_Stenc = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StyleRefresh"
 End Sub
 

@@ -156,7 +156,7 @@ ShapeIsLine = True
 Exit Function
 
 EX:
-ShapeIsLine = False
+    ShapeIsLine = False
 End Function
 
 '--------------------------------------Работа с тулбарами-------------------------------------------------------------

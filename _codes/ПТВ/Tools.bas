@@ -74,7 +74,7 @@ Tail:
 'MsgBox Err.Description
     Set rst = Nothing
     Set dbs = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetValuesOfCellsFromTable"
 
 End Sub
@@ -87,6 +87,8 @@ Dim pth As String
 Dim SQLQuery As String
 Dim List As String
 Dim RSField As Object
+
+    On Error GoTo Tail
 
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
@@ -117,6 +119,12 @@ Dim RSField As Object
 
 Set dbs = Nothing
 Set rst = Nothing
+Exit Function
+Tail:
+    Set dbs = Nothing
+    Set rst = Nothing
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "ListImport"
 End Function
 
 
@@ -167,7 +175,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImportInt"
 End Function
 
@@ -221,7 +229,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport2"
 End Function
 
@@ -271,7 +279,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ValueImportStr"
 End Function
 
@@ -323,7 +331,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ValueImportSng"
 End Function
 
@@ -374,7 +382,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ValueImportSngStr"
 End Function
 
@@ -394,8 +402,10 @@ Dim shp As Visio.Shape
     
 End Sub
 
-Public Function IsFirstDrop(ShpObj As Visio.Shape)
+Public Function IsFirstDrop(ShpObj As Visio.Shape) As Boolean
 'Функция проверяет вброшенали фигура впервые и если вброшена впервые добавляет строчку свойства User.InPage
+    On Error GoTo Tail
+    
     If ShpObj.CellExists("User.InPage", 0) = 0 Then
         Dim newRowIndex As Integer
         newRowIndex = ShpObj.AddNamedRow(visSectionUser, "InPage", visRowUser)
@@ -406,6 +416,12 @@ Public Function IsFirstDrop(ShpObj As Visio.Shape)
     Else
         IsFirstDrop = False
     End If
+    
+Exit Function
+Tail:
+    IsFirstDrop = False
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "IsFirstDrop"
 End Function
 
 
@@ -480,6 +496,11 @@ Dim i As Integer
         IsGFSShape = shp.CellExists("User.IndexPers", 0)
     End If
 
+Exit Function
+Tail:
+    IsGFSShape = False
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "IsGFSShape"
 End Function
 
 Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses As Variant, Optional needGFSChecj As Boolean = False) As Boolean

@@ -38,7 +38,7 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 Exit Sub
 Tail:
     SaveLog Err, "Document_DocumentOpened"
-    MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком."
+    MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком.", , ThisDocument.Name
 End Sub
 
 

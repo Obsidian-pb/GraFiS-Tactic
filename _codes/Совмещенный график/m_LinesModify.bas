@@ -57,7 +57,7 @@ Dim PageIndex As Integer
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetFireSquareDataFromAnalize"
 End Sub
 
@@ -82,7 +82,7 @@ Dim i As Integer
     ps_FireGraphicBuild shp, MainArray
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetFireSquareDataFromTable"
 End Sub
 
@@ -106,7 +106,7 @@ On Error GoTo EX
     
 Exit Sub
 EX:
-    MsgBox "Фигуры зоны горения на указанной схеме отсутствуют!", vbCritical
+    MsgBox "Фигуры зоны горения на указанной схеме отсутствуют!", vbCritical, ThisDocument.Name
     shp.Delete
 End Sub
 
@@ -162,7 +162,7 @@ Dim PageIndex As Integer
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetFireTSquareDataFromAnalize"
 End Sub
 
@@ -187,7 +187,7 @@ Dim i As Integer
     ps_FireTGraphicBuild shp, MainArray
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetFireTSquareDataFromTable"
 End Sub
 
@@ -211,7 +211,7 @@ On Error GoTo EX
     
 Exit Sub
 EX:
-    MsgBox "Фигуры зоны горения на указанной схеме отсутствуют!", vbCritical
+    MsgBox "Фигуры зоны горения на указанной схеме отсутствуют!", vbCritical, ThisDocument.Name
     shp.Delete
 End Sub
 
@@ -271,7 +271,7 @@ Dim PageIndex As Integer
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetExpenceDataFromAnalize"
 End Sub
 
@@ -297,7 +297,7 @@ Dim i As Integer
     ps_ExpenceGraphicBuild shp, MainArray, False
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetExpenceDataFromTable"
 End Sub
 
@@ -329,7 +329,7 @@ On Error GoTo EX
 Exit Sub
 EX:
    'Exit
-   MsgBox "Приборы подачи огнетушащих веществ на указанной схеме отсутствуют!", vbCritical
+   MsgBox "Приборы подачи огнетушащих веществ на указанной схеме отсутствуют!", vbCritical, ThisDocument.Name
    shp.Delete
 End Sub
 
@@ -380,7 +380,7 @@ Dim PageIndex As Integer
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetCommonDataFromAnalize"
 End Sub
 
@@ -408,7 +408,7 @@ Dim CurShape As Visio.Shape
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ChangeMaxValues"
 End Sub
 

@@ -52,7 +52,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ModelsListImport"
 End Sub
 

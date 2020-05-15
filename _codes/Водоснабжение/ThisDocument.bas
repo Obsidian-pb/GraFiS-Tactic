@@ -31,6 +31,8 @@ End Sub
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
 'Процедура закрытия документа и удаления его рабочих элементов
 
+    On Error GoTo Tail
+
 '---Очищаем объекты ButEvent и WaterAppEvents и удаляем кнопку "Обратить в естественный водоисточник" с панели управления "Превращения"
     Set ButEventOpenWater = Nothing
     Set WaterAppEvents = Nothing
@@ -41,6 +43,11 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     
 '---В случае, если на панели "Превращения нет ни одной кнопки, удаляем её
     If Application.CommandBars("Превращения").Controls.Count = 0 Then RemoveTBImagination
+    
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "Document_BeforeDocumentClose"
 
 End Sub
 
@@ -89,13 +96,16 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 Exit Sub
 Tail:
     SaveLog Err, "Document_DocumentOpened"
-    MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком."
+    MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком.", , ThisDocument.Name
 End Sub
 
 
 Private Sub WaterAppEvents_CellChanged(ByVal Cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
+
+    On Error GoTo Tail
+
 '---Проверяем имя ячейки
 '    ShpInd = Cell.Shape.ID
     
@@ -110,6 +120,11 @@ Dim ShpInd As Integer
     End If
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
+
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "WaterAppEvents_CellChanged"
 End Sub
 
 Public Sub MastersImport()
@@ -143,7 +158,7 @@ Set v_Ctrl = Nothing
 Exit Sub
 Tail:
     SaveLog Err, "WaterAppEvents_ShapeAdded"
-    MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком."
+    MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком.", , ThisDocument.Name
     Set v_Ctrl = Nothing
 End Sub
 
@@ -151,6 +166,8 @@ Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
 Dim Cell As Visio.Cell
+
+    On Error GoTo Tail
 
     Set docSheet = Application.ActiveDocument.DocumentSheet
     
@@ -163,6 +180,10 @@ Dim Cell As Visio.Cell
         docSheet.Cells("User.CurrentTime").FormulaU = "User.FireTime"
     End If
 
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "AddTimeUserCells"
 End Sub
 
 

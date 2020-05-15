@@ -8,6 +8,8 @@ Public Sub ImportOpenWaterInformation()
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
+    On Error GoTo Tail
+
 ''---Проверяем выбран ли какой либо объект
 'If Application.ActiveWindow.Selection.Count < 1 Then
 '    MsgBox "Не выбрана ни одна фигура!", vbInformation
@@ -60,6 +62,10 @@ Application.DoCmd (1312)
 Set ShapeTo = Nothing
 Set ShapeFrom = Nothing
 
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "ImportOpenWaterInformation"
 End Sub
 
 Private Sub CloneSectionLine(ShapeFromID As Long, ShapeToID As Long)

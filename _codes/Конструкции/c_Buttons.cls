@@ -51,7 +51,7 @@ Dim ShpInd As Integer
 Exit Sub
 Tail:
     '---Выходим из процедуры обработки
-    MsgBox Err.description
+    MsgBox Err.description, , ThisDocument.Name
 End Sub
 
 Private Sub ConstructionComBut2_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)

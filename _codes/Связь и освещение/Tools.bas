@@ -43,7 +43,7 @@ Set dbs = Nothing
 Set rst = Nothing
 Exit Function
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport"
     ListImport = Chr(34) & " " & Chr(34)
     Set dbs = Nothing
@@ -98,7 +98,7 @@ Set dbs = Nothing
 Set rst = Nothing
 Exit Function
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport2"
     ListImport2 = Chr(34) & " " & Chr(34)
     Set dbs = Nothing

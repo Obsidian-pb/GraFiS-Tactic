@@ -38,7 +38,9 @@ Public Sub CheckUpdates()
     
 Dim lastCheckDate As Date
 Dim currentVersion As Integer
-
+    
+    On Error GoTo Tail
+    
     'Проверяем дату последней проверки - если прошло меньше суток выходим
     lastCheckDate = CDate(GetSetting("GraFiS", "GFS_Version", "LastCheckDate", Now()))
     If DateDiff("d", lastCheckDate, Now()) >= 1 Then
@@ -52,7 +54,10 @@ Dim currentVersion As Integer
         SaveSetting "GraFiS", "GFS_Version", "LastCheckDate", CStr(Now())
     End If
     
-
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "CheckUpdates"
 End Sub
 
 Private Function GetData(ByVal a_version As Integer) As Boolean
@@ -123,8 +128,8 @@ On Error GoTo Tail
 Exit Function
 
 Tail:
-MsgBox "Что-то пошло не так! Проверьте наличие файла Version.txt (Файл должен находиться в том же каталоге, что и текущий файл.", vbCritical
-GetVersion = False
+    MsgBox "Что-то пошло не так! Проверьте наличие файла Version.txt (Файл должен находиться в том же каталоге, что и текущий файл.", vbCritical, ThisDocument.Name
+    GetVersion = False
 End Function
 
 
