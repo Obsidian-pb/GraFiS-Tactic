@@ -30,7 +30,7 @@ Dim curPage As String
 Dim i As Integer
 Dim progressWidthStep As Double
 
-
+    On Error GoTo EX
 
     curPath = Application.ActiveDocument.path
     
@@ -47,6 +47,7 @@ Dim progressWidthStep As Double
     For i = 1 To Application.ActiveDocument.Pages.Count
         Application.ActiveWindow.Page = Application.ActiveDocument.Pages(i)
         curPage = Application.ActivePage.Name
+        
         Application.ActiveWindow.Page.Export curPath & curPage & ".jpg"
     
 '        ExportProgress.Value = i
@@ -56,7 +57,18 @@ Dim progressWidthStep As Double
 
 Label2.Visible = True
 CBClose.Enabled = True
-
+Exit Sub
+EX:
+    Label2.Visible = True
+    CBClose.Enabled = True
+    If Err.Number = -2032466048 Then
+        MsgBox "Схема " & Chr(34) & curPage & Chr(34) & " не может быть сохранена! Скорее всего она слишком велика. Попробуйте уменьшить ее размер. Убедитесь, что никакие ее элементы не выходят слишком далеко за пределы рабочего листа.", vbCritical, ThisDocument.Name
+        Resume Next
+    Else
+        MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+        SaveLog Err, "AddButtons"
+    End If
+    
 End Sub
 
 Private Sub TryToHideExportBar()
