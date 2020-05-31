@@ -122,6 +122,7 @@ vsi_ShapeIndex = 0
                         vsoCell1.GlueTo vsoCell2
                 ''---Проверяем длину линии и если она не подходит, удаляем
 DoEvents 'без этого длина линии высчитывается с запозданием
+                    DistBuild shpConnection
                     If shpConnection.Cells("User.Length").Result(visMeters) = 0 Or _
                     shpConnection.Cells("User.Length").Result(visMeters) > lmax Then shpConnection.Delete
                 End If
@@ -142,6 +143,7 @@ DoEvents 'без этого длина линии высчитывается с запозданием
                     shpConnection.Cells("Controls.ArrowPos").FormulaU = "IF(Width<6 m,Width*0.7*ThePage!User.GFS_Aspect,5 m*ThePage!User.GFS_Aspect)"
                     shpConnection.Cells("Controls.TxtPos").FormulaU = "IF(STRSAME(Prop.ArrowStyle,""Однонаправленная сокращенная""),IF(Width<6 m,Width*0.5*ThePage!User.GFS_Aspect,2.5 m*ThePage!User.GFS_Aspect),Width*0.5*ThePage!User.GFS_Aspect)"
                     shpConnection.Cells("Controls.Ident").FormulaU = "IF(Width<6 m,Width*0.3*ThePage!User.GFS_Aspect,2 m *ThePage!User.GFS_Aspect)"
+                    DistBuild shpConnection
                 End If
                End If
         End If
