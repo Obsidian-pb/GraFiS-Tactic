@@ -33,7 +33,7 @@ Public Sub CreateMatrix(ByRef fireMatrix As c_Matrix)
     Set fireMatrixObject = fireMatrix
 End Sub
 
-Public Property Let SetGrain(ByVal grainValue)
+Public Property Let setGrain(ByVal grainValue)
     grain = grainValue
 End Property
 

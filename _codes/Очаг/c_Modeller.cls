@@ -101,7 +101,7 @@ End Sub
 
 Public Sub ActivateNozzles()
     Set nozzleDemon = New c_FireNozzlesDemon
-    nozzleDemon.SetGrain = grain
+    nozzleDemon.setGrain = grain
     Set nozzleDemon.SetMatrix = matrix
     nozzleDemon.FindNozzles
 End Sub
@@ -112,7 +112,7 @@ Public Sub OneRound()
 'один шаг моделирования
 Dim cell As c_Cell
     
-    'РАЗОБРАТЬСЯ С ЭТИМ - рисование дополнительного шага даже приподанном стволе!!!
+    'РАЗОБРАТЬСЯ С ЭТИМ - рисование дополнительного шага даже при поданном стволе!!!
 '    'Запускаем анализ наличия пожарнных стволов
 '    Dim nozzleDemon As c_FireNozzlesDemon
 '    Set nozzleDemon = New c_FireNozzlesDemon
@@ -148,13 +148,17 @@ Dim cell As c_Cell
     'Очищаем коллекцию клеток получивших заряд
     Set matrix.chargedCells = New Collection
     
-    'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
-    For Each cell In matrix.activeFiredCells
-        If matrix.IsInner(cell.x, cell.y) Then
-            RemoveFromActiveCells cell.x, cell.y
-            RemoveFromFrontCells cell.x, cell.y
-        End If
-    Next cell
+    'Пока не удалять - этот блок здесь не спроста был...
+'    'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
+'    For Each cell In matrix.activeFiredCells
+'        If matrix.IsInner(cell.x, cell.y) Then
+'            RemoveFromActiveCells cell.x, cell.y
+'            RemoveFromFrontCells cell.x, cell.y
+'        End If
+'        If matrix.IsNotPerimeter(cell.x, cell.y) Then
+'            RemoveFromPerimeterCells cell.x, cell.y
+'        End If
+'    Next cell
 
     
     'Спрямляем горение у стен (проверяем все клетки, что получили энергию, но еще не горят полностью))
@@ -192,11 +196,14 @@ Dim cell As c_Cell
     End If
     
     
-    
+    'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
     For Each cell In matrix.activeFiredCells
         If matrix.IsInner(cell.x, cell.y) Then
             RemoveFromActiveCells cell.x, cell.y
             RemoveFromFrontCells cell.x, cell.y
+        End If
+        If matrix.IsNotPerimeter(cell.x, cell.y) Then
+            RemoveFromPerimeterCells cell.x, cell.y
         End If
     Next cell
     
@@ -304,9 +311,10 @@ Dim startFirePower As Double
         matrix.startedFireCells.Add CreateNewCell(x, y)
     End If
     
-    'Добавляем клетку в коллекцию клеток периметра, если мощность горения клетки максимальна
+    'Добавляем клетку в коллекцию клеток фронта и периметра, если мощность горения клетки максимальна
     If startFirePower < matrix.GetMaximumBurnPower And matrix.GetFirePower(x, y) = matrix.GetMaximumBurnPower Then
         AddToFrontCells x, y
+        AddToPerimeterCells x, y
         
         'Добавляем в коллекцию максимально горящих клеток
         matrix.fireMaxCells.Add CreateNewCell(x, y), x & ":" & y
@@ -339,10 +347,11 @@ Private Sub RizeCellFireToMax(ByVal x As Long, ByVal y As Long)
     'Увеличиваем текущую мощность горения данной клетки
     matrix.SetFireCell x, y
        
-    'Добавляем клетку в коллекцию клеток периметра, если мощность горения клетки максимальна
+    'Добавляем клетку в коллекцию клеток фронта и периметра, если мощность горения клетки максимальна
 '    If startFirePower < matrix.GetMaximumBurnPower And matrix.GetFirePower(x, y) = matrix.GetMaximumBurnPower Then
         
         AddToFrontCells x, y
+        AddToPerimeterCells x, y
         AddToActiveCells x, y
             
         'Отрисовываем квадрат
@@ -376,14 +385,25 @@ Private Sub RemoveFromActiveCells(ByVal x As Long, ByVal y As Long)
 End Sub
 
 Private Sub AddToFrontCells(ByVal x As Long, ByVal y As Long)
-'Добавляем клетку в коллекцию клеток периметра. Если же клетка с указанным ключем уже имеется - выходим
+'Добавляем клетку в коллекцию клеток фронта. Если же клетка с указанным ключем уже имеется - выходим
     On Error Resume Next
     matrix.fireFrontCells.Add CreateNewCell(x, y), x & ":" & y
 End Sub
 Private Sub RemoveFromFrontCells(ByVal x As Long, ByVal y As Long)
-'Удаляем клетку из коллекции клеток периметра. Если же клетка с указанным ключем отсутствует - выходим
+'Удаляем клетку из коллекции клеток фронта. Если же клетка с указанным ключем отсутствует - выходим
     On Error Resume Next
     matrix.fireFrontCells.Remove x & ":" & y
+End Sub
+
+Private Sub AddToPerimeterCells(ByVal x As Long, ByVal y As Long)
+'Добавляем клетку в коллекцию клеток периметра. Если же клетка с указанным ключем уже имеется - выходим
+    On Error Resume Next
+    matrix.firePerimeterCells.Add CreateNewCell(x, y), x & ":" & y
+End Sub
+Private Sub RemoveFromPerimeterCells(ByVal x As Long, ByVal y As Long)
+'Удаляем клетку из коллекции клеток периметра. Если же клетка с указанным ключем отсутствует - выходим
+    On Error Resume Next
+    matrix.firePerimeterCells.Remove x & ":" & y
 End Sub
 
 Public Sub RefreshFirePerimeter()
@@ -509,7 +529,7 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
     frontDemonImpl.SetStartState matrix.fireFrontCells
     
     extinguishingSquareDemon.CreateMatrix matrix
-    extinguishingSquareDemon.SetGrain = grain
+    extinguishingSquareDemon.setGrain = grain
     
     
     Dim i As Integer
@@ -565,7 +585,7 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
 
     Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
     
-    extinguishingSquareDemon.SetGrain = grain
+    extinguishingSquareDemon.setGrain = grain
     extinguishingSquareDemon.DrawFireSquare extSquare
 End Sub
 
@@ -609,3 +629,24 @@ End Sub
 '        End If
 '    Next cell
 'End Sub
+
+Public Sub DrawPerimeterCells()
+'Отрисовываем квадрат
+'Dim cell As c_Cell
+'
+'    For Each cell In matrix.firePerimeterCells
+'        Dim shp As Visio.Shape
+'        Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, _
+'                (cell.x + 1) * grain / mmInInch, (cell.y + 1) * grain / mmInInch)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Периметр")
+'        shp.Cells("LinePattern").FormulaU = "0"
+'        shp.Cells("FillForegnd").FormulaU = "2"
+'    Next cell
+
+Dim perimterDemon As c_PerimeterDemon
+    
+    Set perimterDemon = New c_PerimeterDemon
+    perimterDemon.setGrain(grain).CreateMatrix(matrix.DimensionX, matrix.DimensionY).RunDemon matrix.firePerimeterCells
+    perimterDemon.DrawSquare
+    
+End Sub

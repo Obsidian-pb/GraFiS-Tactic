@@ -84,10 +84,11 @@ Dim shp As Visio.Shape
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(189)
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(187)
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(351)
-    Set shp = Application.ActivePage.Shapes.ItemFromID(6)
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(8)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(15)
     
     Set fireShapeDemon = New c_FireShapeDemon
-    fireShapeDemon.SetGrain(grain).SetFireShape(shp).RunDemon matrix
+    fireShapeDemon.setGrain(grain).SetFireShape(shp).RunDemon matrix
     
     FireSquareCalculate
     
@@ -121,7 +122,7 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
     frontDemonImpl.SetStartState matrix.fireFrontCells
     
     extinguishingSquareDemon.CreateMatrix matrix
-    extinguishingSquareDemon.SetGrain = grain
+    extinguishingSquareDemon.setGrain = grain
     
     frontDemonImpl.RunDemon2 extSquare, matrix.fireFrontCells, matrix.fireFrontCells
     extinguishingSquareDemon.RunDemon extSquare
@@ -187,7 +188,7 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
 
     Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
     
-    extinguishingSquareDemon.SetGrain = grain
+    extinguishingSquareDemon.setGrain = grain
     extinguishingSquareDemon.DrawFireSquare extSquare
 End Sub
 

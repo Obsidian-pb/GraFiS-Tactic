@@ -32,7 +32,7 @@ Private Sub Class_Initialize()
     Set nozzles = New Collection
 End Sub
 
-Public Property Let SetGrain(ByVal grainValue)
+Public Property Let setGrain(ByVal grainValue)
     grain = grainValue
 End Property
 

@@ -30,6 +30,7 @@ Public startedFireCells As Collection                       'Коллекция клеток, к
 Public activeFiredCells As Collection                       'Коллекция активных горящих клеток - тех, что участвуют в расчете - позволяет ускорить расчет в тактической модели, но в физической неприменимо, т.к. не позволяет уитывать гаснущие при тушении клетки
 Public fireFrontCells As Collection                         'Коллекция клеток фронта пожара - клеток горящих по максимуму и находящихся на границе зоны распространения огня
 Public keyCornerCells As Collection                         'Коллекция ключевых клеток - клеток в которых есть и огонь и стена и не поностью горящие клетки
+Public firePerimeterCells As Collection                     'Коллекция клеток периметра
 
 
 '---------------------процедуры создания матрицы------------------------------
@@ -51,6 +52,7 @@ Public Sub CreateMatrix(ByVal dimX As Long, dimY As Long)
     Set activeFiredCells = New Collection
     Set fireFrontCells = New Collection
     Set keyCornerCells = New Collection
+    Set firePerimeterCells = New Collection
 End Sub
 
 Public Sub SetOpenSpace(ByRef outerMatrix As Variant)
@@ -233,6 +235,24 @@ Public Function IsInner(ByVal x As Long, ByVal y As Long) As Boolean
         IsInner = False
         Exit Function
     End If
+End Function
+
+Public Function IsNotPerimeter(ByVal x As Long, ByVal y As Long) As Boolean
+'Возвращет Истина, если вокруг клетки только горящие, Ложь, если есть хоть одна не полностью горящая
+    IsNotPerimeter = False
+    'по диагонали 'по ортогонали
+    If IsCellMaxFire(x - 1, y - 1) And _
+            IsCellMaxFire(x + 1, y - 1) And _
+            IsCellMaxFire(x - 1, y + 1) And _
+            IsCellMaxFire(x + 1, y + 1) And _
+            IsCellMaxFire(x, y - 1) And _
+            IsCellMaxFire(x, y + 1) And _
+            IsCellMaxFire(x - 1, y) And _
+            IsCellMaxFire(x + 1, y) Then
+        
+        IsNotPerimeter = True
+    End If
+    
 End Function
 
 Public Function IsTripleStateCell(ByVal x As Long, ByVal y As Long) As Boolean

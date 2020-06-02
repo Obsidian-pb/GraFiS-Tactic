@@ -17,9 +17,9 @@ Const mmInInch As Double = 25.4
 '1 - ѕолучает на вход фигуру площади горени€ и анализирует ее, заполн€€ fireMatrixObject соответствующими значени€ми
 
 
-Public Function SetGrain(ByVal gr As Integer) As c_FireShapeDemon
+Public Function setGrain(ByVal gr As Integer) As c_FireShapeDemon
     grain = gr
-    Set SetGrain = Me
+    Set setGrain = Me
 End Function
 
 Public Function SetFireShape(ByRef shp As Visio.Shape) As c_FireShapeDemon
