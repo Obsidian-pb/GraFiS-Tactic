@@ -7,44 +7,20 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-Dim matrix As Variant
-Private dimensionByX As Long                                        'Размерность матрицы по ширине (x)
-Private dimensionByY As Long                                        'Размерность матрицы по высоте (y)
+Private conturPoints As Collection                                  'Коллекция точек периметра
 
 Public grain As Integer
-
-Private perimeterCells As Collection                                'Коллекция точек периметра
-
-'Const diag As Double = 1.4142135623731         'модификатор распространения вверх и вниз
-'Const orto As Double = 1                      'модификатор распротсранения по диагонали
 Const mmInInch As Double = 25.4
 
 '--------------------------------Демон построитель периметра (площади пожара)-------------------------------------------
 
-Private Enum CellType
-    notFirePrimeter = 0
-    firePerimeterNotInBlock = 1
-    firePerimeterInBlock = 2
-End Enum
 
-Public Function CreateMatrix(ByVal x As Integer, ByVal y As Integer) As c_PerimeterDemon
-'Активируем матрицу в соответсвии с переданными размерами
-    dimensionByX = x
-    dimensionByY = y
-    ReDim matrix(x, y)
-    
-    Set CreateMatrix = Me
-End Function
 
-Public Function SetStartState(ByRef perimeterCellsCollection As Collection) As c_PerimeterDemon
-'Устанавливаем стартовое состояние матрицы
-    '1 Задаем стартовое состояние матрицы
-    For Each cell In perimeterCellsCollection
-        matrix(cell.x, cell.y) = CellType.firePerimeterNotInBlock
-    Next cell
-    
-    Set SetStartState = Me
-End Function
+Private Sub Class_Initialize()
+    Set conturPoints = New Collection
+    Set perimeterCells = New Collection
+End Sub
+
 
 Public Function setGrain(ByVal gr As Integer) As c_PerimeterDemon
     grain = gr
@@ -68,217 +44,199 @@ Public Sub RunDemon(ByRef perimeterCellsCollection As Collection)
 '    End If
     
     
-'Строим последовательность клеток
+    'Строим последовательность клеток
+    BuildConturLine perimeterCellsCollection
+    
+    
+    
+    
+
+End Sub
+
+
+
+Private Sub BuildConturLine(ByRef perimeterCellsCollection As Collection)
+'Формируем контур фигуры периметра
 Dim cell As c_Cell
     
-    SetStartState perimeterCellsCollection
-    
-    Set perimeterCells = New Collection
-    Set cell = perimeterCellsCollection(1)
-    
-    TryAddCell perimeterCells, cell
-'    For Each cell In perimeterCellsCollection
-    
-    
-
-End Sub
-
-
-
-
-'Private Sub BreakFront(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
-'                    ByRef nozzle As c_FireNozzleModel)
-''Разбиваем фронт пожара на участки
-''Dim cell As c_Cell
-'Dim extBlock As c_ExtinguishingBlock
-'Dim tmpColl As Collection
-'
-'    'Перебираем все клетки в коллекции стартовых клеток
-''    For Each cell In startCellsCollection
-'
-'        'если клетка еще не распределена по блокам, начинаем от нее рекурсивный поиск всех клеток площади тушения данного блока
-''        If matrix(startCell.x, startCell.y) = CellType.fireFrontNotInBlock Then
-'            'создаем новую коллекцию
-'            Set tmpColl = New Collection
-'            'Для новой коллекции выполняем рекурсивное наполнение от текущей ячейки
-'            TryAddCell tmpColl, nozzle.fireContactCell
-'
-'            'Создаем новый блок и передаем ему временную коллекцию клеток фронта
-'            Set extBlock = New c_ExtinguishingBlock
-'            Set extBlock.fireFrontCells = tmpColl
-'            extBlock.CreateMatrix UBound(matrix, 1), UBound(matrix, 2)
-'            extBlock.AddToExtCellsCollection tmpColl
-''            AddCellsToCollection extBlock.extinguishingCells, tmpColl
-'            '---Устанавливаем глубину тушения
-'                If nozzle.nozzleType = waterHand Then
-'                    extBlock.fireWay = 5000     'Для ручных стволов
-'                Else
-'                    extBlock.fireWay = 10000     'Для лафетных стволов
-'                End If
-'                extBlock.expenseFact = extBlock.expenseFact + nozzle.waterExpense
-'                extBlock.grain = grain
-'
-'            'Добавляем созданный блок в коллекцию блоков модели площади тушения
-'            extSquare.AddExtinguishingBlock extBlock
-''        End If
-''    Next cell
-'
-'End Sub
-
-
-
-Private Sub TryAddCell(ByRef thisColl As Collection, ByVal cell As c_Cell)
-'Пытаемся добавить клетку в коллекцию (рекурсия)
-    
-    'Если указанная точка находится за пределами матрицы - выходим из процедуры
-    If cell.x < 0 Or cell.y < 0 Or cell.x > dimensionByX - 1 Or cell.y > dimensionByY - 1 Then Exit Sub
-    
-    'Проверяем является ли данная клетка клеткой периметра пожара
-    If matrix(cell.x, cell.y) = CellType.notFirePrimeter Then Exit Sub
-    
-    'Проверяем, нет ли клетки уже в коллекции
-    If matrix(cell.x, cell.y) = CellType.firePerimeterInBlock Then Exit Sub
-    
-    'Добавляем клетку в коллецию
-    AddCellToCollection thisColl, cell
-    matrix(cell.x, cell.y) = CellType.firePerimeterInBlock
-    
-    'Если нет - рекурсия на следующие клетки
-        TryAddCell thisColl, NextCell(cell, l)
-'        TryAddCell thisColl, NextCell(cell, lu)
-        TryAddCell thisColl, NextCell(cell, u)
-'        TryAddCell thisColl, NextCell(cell, ru)
-        TryAddCell thisColl, NextCell(cell, r)
-'        TryAddCell thisColl, NextCell(cell, rd)
-        TryAddCell thisColl, NextCell(cell, d)
-'        TryAddCell thisColl, NextCell(cell, ld)
-   
-End Sub
-
-Private Sub AddCellToCollection(ByRef thisColl As Collection, ByVal cell As c_Cell)
-'Добавляем в указанную коллекцию указанную клетку
-    thisColl.Add cell, cell.x & ":" & cell.y
-End Sub
-
-Private Sub AddCellsToCollection(ByRef col1 As Collection, ByRef col2 As Collection)
-'Добавляем все клетки из коллекции 2 в коллекцию 1
-Dim cell As c_Cell
-
-    For Each cell In col2
-        col1.Add cell, cell.x & ":" & cell.y
+    For Each cell In perimeterCellsCollection
+        BuildConturElement cell
     Next cell
 End Sub
 
-'Private Function CheckBlockExists(ByRef extSquare As c_ExtinguishingSquare, ByRef cell As c_Cell) As c_ExtinguishingBlock
-''Пытаемся найти блок к которому может относиться пришедшая клетка. Еслитн аходим возвращаем ссылку на него, иначе - Nothing
-'Dim blck As c_ExtinguishingBlock
-'
-'    For Each blck In extSquare.extinguishingBlocks
-'        If blck.IsCellInThisFront(cell) Then
-'            Set CheckBlockExists = blck
-'            Exit Function
-'        End If
-'    Next blck
-'Set CheckBlockExists = Nothing
-'End Function
+Private Sub BuildConturElement(ByRef cell As c_Cell)
 
-
-
-
-
-Private Function NextCell(ByRef cell As c_Cell, ByVal dir As Directions) As c_Cell
-'Возвращает следующую клетку согласно указанного направления
-    Select Case dir
-        Case Is = Directions.l
-            Set NextCell = NewCell(cell.x - 1, cell.y)
-        Case Is = Directions.lu
-            Set NextCell = NewCell(cell.x - 1, cell.y + 1)
-        Case Is = Directions.u
-            Set NextCell = NewCell(cell.x, cell.y + 1)
-        Case Is = Directions.ru
-            Set NextCell = NewCell(cell.x + 1, cell.y + 1)
-        Case Is = Directions.r
-            Set NextCell = NewCell(cell.x + 1, cell.y)
-        Case Is = Directions.rd
-            Set NextCell = NewCell(cell.x + 1, cell.y - 1)
-        Case Is = Directions.d
-            Set NextCell = NewCell(cell.x, cell.y - 1)
-        Case Is = Directions.ld
-            Set NextCell = NewCell(cell.x - 1, cell.y - 1)
-    End Select
-End Function
-
-Private Function NewCell(ByVal x As Long, ByVal y As Long) As c_Cell
-'Создаем новую клетку
-Dim cell As c_Cell
-    Set cell = New c_Cell
-    cell.x = x
-    cell.y = y
+Dim neighbour(0 To 3) As Boolean
+Dim pnt As c_Point
+Dim pnt2 As c_Point
     
-    Set NewCell = cell
+    'Определяем ортогональных соседей клетки
+    neighbour(0) = cell.NCell(l).IsCellMaxFire
+    neighbour(1) = cell.NCell(u).IsCellMaxFire
+    neighbour(2) = cell.NCell(r).IsCellMaxFire
+    neighbour(3) = cell.NCell(d).IsCellMaxFire
+    
+    'Проверяем все четыре ортогональных смежных клетки и для каждой из них при необходимости добавляем точку
+    '---Проверяем каждую из соседних клеток, на то, горит ли она по максимуму
+    If Not neighbour(0) Then
+        Set pnt = GetConturPoint(cell.x, cell.y)
+        AddPointToCollection conturPoints, pnt
+        pnt.SetNextPoint GetConturPoint(cell.x, cell.y + 1)
+    End If
+    If Not neighbour(1) Then
+        Set pnt = GetConturPoint(cell.x, cell.y + 1)
+        AddPointToCollection conturPoints, pnt
+        pnt.SetNextPoint GetConturPoint(cell.x + 1, cell.y + 1)
+    End If
+    If Not neighbour(2) Then
+        Set pnt = GetConturPoint(cell.x + 1, cell.y + 1)
+        AddPointToCollection conturPoints, pnt
+        pnt.SetNextPoint GetConturPoint(cell.x + 1, cell.y)
+    End If
+    If Not neighbour(3) Then
+        Set pnt = GetConturPoint(cell.x + 1, cell.y)
+        AddPointToCollection conturPoints, pnt
+        pnt.SetNextPoint GetConturPoint(cell.x, cell.y)
+    End If
+
+End Sub
+
+
+Private Sub AddPointToCollection(ByRef thisColl As Collection, ByVal pnt As c_Point)
+'Добавляем в указанную коллекцию указанную точку
+    On Error Resume Next
+    thisColl.Add pnt, pnt.x & ":" & pnt.y
+End Sub
+
+Private Function GetConturPoint(ByVal x As Long, ByVal y As Long) As c_Point
+Dim pnt As c_Point
+    On Error GoTo EX
+    Set GetConturPoint = conturPoints.item(x & ":" & y)
+Exit Function
+EX:
+    Set pnt = New c_Point
+    pnt.SetData x, y
+    AddPointToCollection conturPoints, pnt
+    Set GetConturPoint = pnt
 End Function
 
 
 
 
 '-----------Собственно отрисовка площади------------
-Public Sub DrawSquare()
+Public Function DrawSquare() As Visio.Shape
 'Отрисовываем площадь используя для этого построение DrawPoiyLine
-Dim cell As c_Cell
-'Dim arr As Variant
-    
+Dim pnt As c_Point
+Dim pntStart As c_Point
+
 Dim shp As Visio.Shape
-Dim perimterPntsStr As String
 Dim perimterPnts() As Double
-Dim intCounter As Integer
-Dim i As Long
+'Dim i As Long
 
-'    'Инициализируем массив с координатами периметра
-'    For Each cell In perimeterCells
-'        perimterPntsStr = perimterPntsStr & str(cell.x / 25.4) & ";" & str(cell.y / 25.4) & ";"
-'    Next cell
-'    perimterPntsStr = Left(perimterPntsStr, Len(perimterPntsStr) - 1)
-'    perimterPnts = Split(perimterPntsStr, ";")
+
+''#Без PerimeterCellsFix
+'    i = 0
+'    ReDim perimterPnts(conturPoints.Count * 2 + 1)
 '
-'    Set shp = ActivePage.DrawPolyline(perimterPnts, 0)
-    
-    
+'    Set pnt = conturPoints(1)
+'    Set pntStart = New c_Point
+'    pntStart.SetData pnt.x, pnt.y
+'
+'    perimterPnts(i) = (pnt.x * grain) / mmInInch
+'    i = i + 1
+'    perimterPnts(i) = (pnt.y * grain) / mmInInch
+'    i = i + 1
+'
+'    Do
+'        Set pnt = pnt.GetNextPoint
+'        perimterPnts(i) = (pnt.x * grain) / mmInInch
+'        i = i + 1
+'        perimterPnts(i) = (pnt.y * grain) / mmInInch
+'        i = i + 1
+'
+'        If i > 10000 Then
+'            MsgBox "Переполнение в стеке отрисовки периметра", vbCritical, "Служебное сообщение"
+'            Exit Do
+'        End If
+'    Loop Until pnt.isEqual(pntStart)
+
+'#С PerimeterCellsFix
+    'Исправляем последовательность точек
+    PerimeterCellsFix
+
     i = 0
-    ReDim perimterPnts(perimeterCells.Count * 2 - 1)
+    ReDim perimterPnts(conturPoints.Count * 2 + 1)
+
     'Инициализируем массив с координатами периметра
-    For Each cell In perimeterCells
-        perimterPnts(i) = cell.x * grain / 25.4
+    For Each pnt In conturPoints
+        perimterPnts(i) = (pnt.x * grain) / mmInInch
         i = i + 1
-        perimterPnts(i) = cell.y * grain / 25.4
+        perimterPnts(i) = (pnt.y * grain) / mmInInch
         i = i + 1
-    Next cell
+    Next pnt
+    '---Заключительная точка, замыкающая фигуру
+    Set pnt = conturPoints(1)
+    perimterPnts(i) = (pnt.x * grain) / mmInInch
+    i = i + 1
+    perimterPnts(i) = (pnt.y * grain) / mmInInch
     
+    
+
+    'Рисуем фигуру по массиву точек и придаем ей определенные свойства
     Set shp = ActivePage.DrawPolyline(perimterPnts, 0)
-    
-    
-    
-'    adblXYPoints(1) = 100
-'    adblXYPoints(2) = 100
-'    adblXYPoints(3) = 300
-'    adblXYPoints(4) = 300
-'    adblXYPoints(5) = 500
-'    adblXYPoints(6) = 100
-'    adblXYPoints(7) = 100
-'    adblXYPoints(8) = 200
-'
-'    'Use the DrawPolyline method to draw a shape that has 2-D behavior.
-'    Set vsoShape = ActivePage.DrawPolyline(adblXYPoints, 0)
+        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+        shp.Cells("LinePattern").FormulaU = "0"
+        shp.Cells("FillForegnd").FormulaU = "2"
+        shp.Cells("FillForegndTrans").FormulaU = "50%"
+        shp.Cells("FillBkgndTrans").FormulaU = "50%"
 
-''Increase the Y-coordinate of the array by 4 to separate
-''the next shape drawn from the first.
-'For intCounter = 2 To UBound(adblXYPoints) Step 2
-'    adblXYPoints(intCounter) = adblXYPoints(intCounter) + 4
-'Next intCounter
-'
-''Use the DrawPolyline method to draw a shape that has 1-D behavior.
-'Set vsoShape = ActivePage.DrawPolyline(adblXYPoints, visPolyline1D)
 
+Set DrawSquare = shp
+End Function
+
+Private Sub PerimeterCellsFix()
+'Исправляем последовательность точек
+Dim pnt As c_Point
+Dim tmpPnt As c_Point
+Dim curDir As Directions
+Dim newPerimeterPoints As Collection
+
+    Set newPerimeterPoints = New Collection
+    curDir = s
+
+'    For Each pnt In conturPoints
+'        If Not pnt.Dir = curDir Then
+'            AddPointToCollection newPerimeterPoints, pnt
+'
+'            curDir = pnt.Dir
+'
+'        End If
+'    Next pnt
     
+    Set pnt = conturPoints(1)
+    Set tmpPnt = New c_Point
+    tmpPnt.SetData pnt.x, pnt.y
+    
+    Do
+        Set pnt = pnt.GetNextPoint
+        'Проверяем в како направлении сейчас двигается линия контура
+        If Not pnt.Dir = curDir Then    'Если направление поменялось - добавляем новую точку в коллекцию и меняем текущее напарвление
+            AddPointToCollection newPerimeterPoints, pnt
+
+            curDir = pnt.Dir
+        End If
+
+'        If i > 10000 Then
+'            MsgBox "Переполнение в стеке отрисовки периметра", vbCritical, "Служебное сообщение"
+'            Exit Do
+'        End If
+    Loop Until pnt.isEqual(tmpPnt)
+    
+    
+
+    'Обновляем коллекцию
+    Set conturPoints = newPerimeterPoints
 End Sub
+
 
 

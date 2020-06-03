@@ -207,7 +207,7 @@ Dim modelledFireShape As Visio.Shape
         
 ''TEST:
 'fireModeller.DrawExtSquareByDemon
-fireModeller.DrawPerimeterCells
+'fireModeller.DrawPerimeterCells
 
         
     Debug.Print "Всего затрачено " & tmr2.GetElapsedTime & "с."
@@ -298,15 +298,20 @@ End Sub
 
 Private Sub MakeShape()
 
-    On Error Resume Next
-
-    Dim vsoSelection As Visio.Selection
-    Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
-
-    vsoSelection.Union
-
-    Application.ActiveWindow.Selection(1).CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-'    Application.ActiveWindow.Selection(1).SendToBack
+'    On Error Resume Next
+'
+'    Dim vsoSelection As Visio.Selection
+'    Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
+'
+'    vsoSelection.Union
+'
+'    Application.ActiveWindow.Selection(1).CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+''    Application.ActiveWindow.Selection(1).SendToBack
+    
+'Отрисовываем фигуру хоны горения при помощи демона
+    fireModeller.DrawPerimeterCells
+    
+    
 End Sub
 
 Public Function GetStepsCount(ByVal grain As Integer, ByVal speed As Single, ByVal elapsedTime As Single) As Integer

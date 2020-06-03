@@ -430,9 +430,9 @@ End Sub
 
 
 
-Private Function NextCell(ByRef cell As c_Cell, ByVal dir As Directions) As c_Cell
+Private Function NextCell(ByRef cell As c_Cell, ByVal Dir As Directions) As c_Cell
 'Возвращает следующую клетку согласно указанного направления
-    Select Case dir
+    Select Case Dir
         Case Is = Directions.l
             Set NextCell = NewCell(cell.x - 1, cell.y)
         Case Is = Directions.lu
