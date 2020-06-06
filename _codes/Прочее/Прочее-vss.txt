@@ -443,6 +443,7 @@
     Prop.PropertyValue: INDEX(LOOKUP(Prop.Property;Prop.Property.Format);Prop.PropertyValue.Format); Prop.PropertyValue.Prompt: "Значение свойства"; Prop.PropertyValue.Label: "Значение"; Prop.PropertyValue.Format: Prop.Property.Prompt&";"&Prop.UserLabel.Prompt; Prop.PropertyValue.SortKey: 12; Prop.PropertyValue.Type: 1; Prop.PropertyValue.Invisible: STRSAME("Пользовательская";Prop.Property); Prop.PropertyValue.Verify: FALSE; Prop.PropertyValue.LangID: 1049; Prop.PropertyValue.Calendar: 0; 
     Prop.Prefix: ""; Prop.Prefix.Prompt: "Часть строки которая будет выведена До основного значения"; Prop.Prefix.Label: "Префикс"; Prop.Prefix.Format: ""; Prop.Prefix.SortKey: 13; Prop.Prefix.Type: 0; Prop.Prefix.Invisible: FALSE; Prop.Prefix.Verify: FALSE; Prop.Prefix.LangID: 1049; Prop.Prefix.Calendar: 0; 
     Prop.Postfix: ""; Prop.Postfix.Prompt: "Часть строки которая будет выведена ПОСЛЕ основного значения"; Prop.Postfix.Label: "Постфикс"; Prop.Postfix.Format: ""; Prop.Postfix.SortKey: 14; Prop.Postfix.Type: 0; Prop.Postfix.Invisible: FALSE; Prop.Postfix.Verify: FALSE; Prop.Postfix.LangID: 1049; Prop.Postfix.Calendar: 0; 
+    Prop.Round: 1; Prop.Round.Prompt: "Точность округления числовых значений"; Prop.Round.Label: "Округление"; Prop.Round.Format: ""; Prop.Round.SortKey: "20"; Prop.Round.Type: 2; Prop.Round.Invisible: FALSE; Prop.Round.Verify: FALSE; Prop.Round.LangID: 1049; Prop.Round.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: TextField>>>
@@ -538,6 +539,7 @@
     Prop.PropertyValue: INDEX(LOOKUP(Prop.Property;Prop.Property.Format);Prop.PropertyValue.Format); Prop.PropertyValue.Prompt: "Значение свойства"; Prop.PropertyValue.Label: "Значение"; Prop.PropertyValue.Format: Prop.Property.Prompt&";"&Prop.UserLabel.Prompt; Prop.PropertyValue.SortKey: 12; Prop.PropertyValue.Type: 1; Prop.PropertyValue.Invisible: STRSAME("Пользовательская";Prop.Property); Prop.PropertyValue.Verify: FALSE; Prop.PropertyValue.LangID: 1049; Prop.PropertyValue.Calendar: 0; 
     Prop.Prefix: ""; Prop.Prefix.Prompt: "Часть строки которая будет выведена До основного значения"; Prop.Prefix.Label: "Префикс"; Prop.Prefix.Format: ""; Prop.Prefix.SortKey: 13; Prop.Prefix.Type: 0; Prop.Prefix.Invisible: FALSE; Prop.Prefix.Verify: FALSE; Prop.Prefix.LangID: 1049; Prop.Prefix.Calendar: 0; 
     Prop.Postfix: ""; Prop.Postfix.Prompt: "Часть строки которая будет выведена ПОСЛЕ основного значения"; Prop.Postfix.Label: "Постфикс"; Prop.Postfix.Format: ""; Prop.Postfix.SortKey: 14; Prop.Postfix.Type: 0; Prop.Postfix.Invisible: FALSE; Prop.Postfix.Verify: FALSE; Prop.Postfix.LangID: 1049; Prop.Postfix.Calendar: 0; 
+    Prop.Round: 1; Prop.Round.Prompt: "Точность округления числовых значений"; Prop.Round.Label: "Округление"; Prop.Round.Format: ""; Prop.Round.SortKey: 20; Prop.Round.Type: 2; Prop.Round.Invisible: FALSE; Prop.Round.Verify: FALSE; Prop.Round.LangID: 1049; Prop.Round.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>

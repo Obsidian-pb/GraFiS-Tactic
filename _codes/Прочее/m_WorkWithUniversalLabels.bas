@@ -27,7 +27,7 @@ Dim delFlag As Boolean
                 ShpObj.Cells("Prop.Property.Format").Formula = """" & GetPropsList(OtherShape) & """" '"Пользовательская"
             '---Устанавливаем ссылки на ячейки Prop.Property фигуры
                 str = GetPropsLinks(OtherShape)
-                ShpObj.Cells("Prop.PropertyValue.Format").Formula = str
+                ShpObj.Cells("Prop.PropertyValue.Format").FormulaU = str
                 
             '---Вбрасываем соединительную линию
                 InsertLink OtherShape, ShpObj
@@ -76,7 +76,7 @@ Dim str As String
         ShpObj.Cells("Prop.Property.Format").Formula = """" & GetPropsList(OtherShape) & """" '"Пользовательская"
     '---Устанавливаем ссылки на ячейки Prop.Property фигуры
         str = GetPropsLinks(OtherShape)
-        ShpObj.Cells("Prop.PropertyValue.Format").Formula = str
+        ShpObj.Cells("Prop.PropertyValue.Format").FormulaU = str
         
     Else
     '---В случае, если кол-во соединений не равно 1 ставим значения подписей по умолчанию
@@ -204,9 +204,21 @@ Dim tempStr As String
     '---Если секция есть - заполняем списко
         For i = 0 To DirShpObj.RowCount(visSectionProp) - 1
             If DirShpObj.CellsSRC(visSectionProp, i, visCustPropsInvis).Result(visNone) = 0 Then
-                tempStr = tempStr & Chr(38) & Chr(34) & ";" & Chr(34) & Chr(38) & _
-                            "Sheet." & DirShpObj.ID & "!" & _
-                            DirShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).Name
+                Select Case DirShpObj.CellsSRC(visSectionProp, i, visCustPropsType).Result(visNumber)
+                    Case Is = 2
+                        tempStr = tempStr & Chr(38) & Chr(34) & ";" & Chr(34) & Chr(38) & _
+                                    "Round(Sheet." & DirShpObj.ID & "!" & _
+                                    DirShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).Name & ",Prop.Round)"
+                    Case Is = 5
+                        tempStr = tempStr & Chr(38) & Chr(34) & ";" & Chr(34) & Chr(38) & _
+                                    "Format(Sheet." & DirShpObj.ID & "!" & _
+                                    DirShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).Name & "," & Chr(34) & "HH:mm" & Chr(34) & ")"
+                    Case Else
+                        tempStr = tempStr & Chr(38) & Chr(34) & ";" & Chr(34) & Chr(38) & _
+                                    "Sheet." & DirShpObj.ID & "!" & _
+                                    DirShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).Name
+                End Select
+
             End If
         Next i
     End If
