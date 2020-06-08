@@ -51,6 +51,15 @@ Dim cell As c_Cell
         cellsMatrix(cell.x, cell.y) = ExtCellType.inExtSquare
     Next cell
 End Sub
+Public Sub RemoveFromExtCellsCollection(ByRef cell As c_Cell)
+'Добавляем входящую клетку из коллекции тушащихся
+    
+    On Error Resume Next
+    
+    extinguishingCells.Remove cell.x & ":" & cell.y
+    cellsMatrix(cell.x, cell.y) = ExtCellType.notInExtSquare
+
+End Sub
 
 Public Sub AddToActiveCellsCollection(ByRef coll As Collection)
 'Добавляем коллекцию входящих клеток в коллекцию активных клеток (внешних, разгорающихся)

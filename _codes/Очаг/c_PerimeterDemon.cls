@@ -30,26 +30,9 @@ End Function
 
 
 Public Sub RunDemon(ByRef perimeterCellsCollection As Collection)
-''Разбиваем фронт пожара на блоки
-'Dim block As c_ExtinguishingBlock
-'
-'    '1 проверяем, не входит ли точка контакта зоны работы ствола в фрагмент фронта пожара, который уже распределен
-'    Set block = CheckBlockExists(extSquare, nozzle.fireContactCell)
-'    If block Is Nothing Then
-'        '2 разбить коллекцию фронта на участки не связанные между собой
-'        BreakFront extSquare, frontCellsCollection, nozzle
-'    Else
-'        '3 Добавляем данные в существующий блок
-'        block.expenseFact = block.expenseFact + nozzle.waterExpense
-'    End If
-    
     
     'Строим последовательность клеток
     BuildConturLine perimeterCellsCollection
-    
-    
-    
-    
 
 End Sub
 
@@ -107,6 +90,12 @@ Private Sub AddPointToCollection(ByRef thisColl As Collection, ByVal pnt As c_Po
     On Error Resume Next
     thisColl.Add pnt, pnt.x & ":" & pnt.y
 End Sub
+Private Sub RemovePointFromCollection(ByRef thisColl As Collection, ByVal pnt As c_Point)
+'Удаляем указанную точку из указанной коллекции
+    On Error Resume Next
+    thisColl.Remove pnt.x & ":" & pnt.y
+End Sub
+
 
 Private Function GetConturPoint(ByVal x As Long, ByVal y As Long) As c_Point
 Dim pnt As c_Point
@@ -131,67 +120,57 @@ Dim pntStart As c_Point
 
 Dim shp As Visio.Shape
 Dim perimterPnts() As Double
-'Dim i As Long
+Dim i As Long
 
-
-''#Без PerimeterCellsFix
-'    i = 0
-'    ReDim perimterPnts(conturPoints.Count * 2 + 1)
-'
-'    Set pnt = conturPoints(1)
-'    Set pntStart = New c_Point
-'    pntStart.SetData pnt.x, pnt.y
-'
-'    perimterPnts(i) = (pnt.x * grain) / mmInInch
-'    i = i + 1
-'    perimterPnts(i) = (pnt.y * grain) / mmInInch
-'    i = i + 1
-'
-'    Do
-'        Set pnt = pnt.GetNextPoint
-'        perimterPnts(i) = (pnt.x * grain) / mmInInch
-'        i = i + 1
-'        perimterPnts(i) = (pnt.y * grain) / mmInInch
-'        i = i + 1
-'
-'        If i > 10000 Then
-'            MsgBox "Переполнение в стеке отрисовки периметра", vbCritical, "Служебное сообщение"
-'            Exit Do
-'        End If
-'    Loop Until pnt.isEqual(pntStart)
+    On Error GoTo EX
 
 '#С PerimeterCellsFix
     'Исправляем последовательность точек
     PerimeterCellsFix
-
-    i = 0
-    ReDim perimterPnts(conturPoints.Count * 2 + 1)
-
-    'Инициализируем массив с координатами периметра
-    For Each pnt In conturPoints
-        perimterPnts(i) = (pnt.x * grain) / mmInInch
-        i = i + 1
-        perimterPnts(i) = (pnt.y * grain) / mmInInch
-        i = i + 1
-    Next pnt
-    '---Заключительная точка, замыкающая фигуру
-    Set pnt = conturPoints(1)
-    perimterPnts(i) = (pnt.x * grain) / mmInInch
-    i = i + 1
-    perimterPnts(i) = (pnt.y * grain) / mmInInch
+'    PerimeterCellsFix2
     
     
-
-    'Рисуем фигуру по массиву точек и придаем ей определенные свойства
-    Set shp = ActivePage.DrawPolyline(perimterPnts, 0)
-        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-        shp.Cells("LinePattern").FormulaU = "0"
-        shp.Cells("FillForegnd").FormulaU = "2"
-        shp.Cells("FillForegndTrans").FormulaU = "50%"
-        shp.Cells("FillBkgndTrans").FormulaU = "50%"
-
+    Dim coll As Collection
+    For Each coll In conturPoints
+        If coll.Count > 1 Then
+            i = 0
+            ReDim perimterPnts(coll.Count * 2 + 1)
+        
+            'Инициализируем массив с координатами периметра
+            For Each pnt In coll
+                perimterPnts(i) = (pnt.x * grain) / mmInInch
+                i = i + 1
+                perimterPnts(i) = (pnt.y * grain) / mmInInch
+                i = i + 1
+                
+                If i > 100000 Then
+                    Debug.Print "Переполнение в стеке отрисовки периметра"    ', vbCritical, "Служебное сообщение"
+                    Stop
+                    
+                    Set DrawSquare = Nothing
+                    Exit Function
+                End If
+            Next pnt
+            '---Заключительная точка, замыкающая фигуру
+            Set pnt = coll(1)
+            perimterPnts(i) = (pnt.x * grain) / mmInInch
+            i = i + 1
+            perimterPnts(i) = (pnt.y * grain) / mmInInch
+            
+            'Рисуем фигуру по массиву точек и придаем ей определенные свойства
+            Set shp = ActivePage.DrawPolyline(perimterPnts, 0)
+                shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+                shp.Cells("LinePattern").FormulaU = "0"
+                shp.Cells("FillForegnd").FormulaU = "2"
+                shp.Cells("FillForegndTrans").FormulaU = "50%"
+                shp.Cells("FillBkgndTrans").FormulaU = "50%"
+        End If
+    Next coll
+    
 
 Set DrawSquare = shp
+EX:
+    Set DrawSquare = Nothing
 End Function
 
 Private Sub PerimeterCellsFix()
@@ -199,44 +178,101 @@ Private Sub PerimeterCellsFix()
 Dim pnt As c_Point
 Dim tmpPnt As c_Point
 Dim curDir As Directions
+Dim newPerimeters As Collection
 Dim newPerimeterPoints As Collection
+Dim i As Long
 
-    Set newPerimeterPoints = New Collection
-    curDir = s
+    Set newPerimeters = New Collection
 
-'    For Each pnt In conturPoints
-'        If Not pnt.Dir = curDir Then
-'            AddPointToCollection newPerimeterPoints, pnt
-'
-'            curDir = pnt.Dir
-'
-'        End If
-'    Next pnt
+    Do While conturPoints.Count > 0
+        Set newPerimeterPoints = New Collection
+        curDir = s
+        
+        Set pnt = conturPoints(1)
+        Set tmpPnt = New c_Point
+        tmpPnt.SetData pnt.x, pnt.y
+        
+        i = 0
+        Do
+            Set pnt = pnt.GetNextPoint
+            'Проверяем в како направлении сейчас двигается линия контура
+            If Not pnt.Dir = curDir Then    'Если направление поменялось - добавляем новую точку в коллекцию и меняем текущее напарвление
+                AddPointToCollection newPerimeterPoints, pnt
     
-    Set pnt = conturPoints(1)
-    Set tmpPnt = New c_Point
-    tmpPnt.SetData pnt.x, pnt.y
-    
-    Do
-        Set pnt = pnt.GetNextPoint
-        'Проверяем в како направлении сейчас двигается линия контура
-        If Not pnt.Dir = curDir Then    'Если направление поменялось - добавляем новую точку в коллекцию и меняем текущее напарвление
-            AddPointToCollection newPerimeterPoints, pnt
-
-            curDir = pnt.Dir
-        End If
-
-'        If i > 10000 Then
-'            MsgBox "Переполнение в стеке отрисовки периметра", vbCritical, "Служебное сообщение"
-'            Exit Do
-'        End If
-    Loop Until pnt.isEqual(tmpPnt)
-    
+                curDir = pnt.Dir
+            End If
+            
+            RemovePointFromCollection conturPoints, pnt
+            
+            i = i + 1
+            If i > 100000 Then
+                Debug.Print "Переполнение в стеке отрисовки периметра"    ', vbCritical, "Служебное сообщение"
+                Stop
+                Exit Sub
+            End If
+        
+        Loop Until pnt.isEqual(tmpPnt)
+        
+        newPerimeters.Add newPerimeterPoints
+    Loop
     
 
     'Обновляем коллекцию
-    Set conturPoints = newPerimeterPoints
+    Set conturPoints = newPerimeters
 End Sub
 
 
 
+'Private Sub PerimeterCellsFix2()
+''КОРОЧЕ, это все переработать
+''Исправляем последовательность точек - скругляем углы
+'Dim curPnt As c_Point
+'
+'Dim coll As Collection
+'Dim newMainColl As Collection
+'Dim newColl As Collection
+'Dim i As Long
+'Dim j As Long
+'
+'    On Error GoTo EX
+'
+'    Set newMainColl = New Collection
+'
+'    j = 0
+'    For Each coll In conturPoints
+'        i = 0
+'        j = j + 1
+'        Set newColl = New Collection
+'
+'        'Инициализируем массив с координатами периметра
+'        For i = 1 To coll.Count
+'            If Not IsOdd(i) Then
+'                AddPointToCollection newColl, coll(i)  'curPnt
+'            End If
+'
+'        Next i
+'        newMainColl.Add newColl
+'
+'    Next coll
+'
+'    Set conturPoints = newMainColl
+'Exit Sub
+'EX:
+'    Stop
+'End Sub
+
+Private Function GetCornerLen(ByRef pnt1 As c_Point, ByRef pnt2 As c_Point, ByRef pnt3 As c_Point) As Integer
+'Возвращает суммарную длину отрезков между тремя точками
+Dim tmpVal As Integer
+    
+    If Abs(pnt1.x - pnt2.x) = 1 Then tmpVal = tmpVal + 1
+    If Abs(pnt1.y - pnt2.y) = 1 Then tmpVal = tmpVal + 1
+    If Abs(pnt2.x - pnt3.x) = 1 Then tmpVal = tmpVal + 1
+    If Abs(pnt2.y - pnt3.y) = 1 Then tmpVal = tmpVal + 1
+
+GetCornerLen = tmpVal
+End Function
+
+Private Function IsOdd(ByVal value As Integer) As Boolean
+    IsOdd = value / 2 = Int(value / 2)
+End Function

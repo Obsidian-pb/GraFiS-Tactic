@@ -51,6 +51,19 @@ Dim tmpSquare As Single
 GetSquare = tmpSquare
 End Function
 
+Public Sub DeleteCellFromEveryBlock(ByVal x As Long, ByVal y As Long)
+'Удаляяем клетку из всех блоков площади тушения
+Dim cell As c_Cell
+Dim block As c_ExtinguishingBlock
+    
+    Set cell = New c_Cell
+    cell.x = x
+    cell.y = y
+    
+    For Each block In extinguishingBlocks
+        block.RemoveFromExtCellsCollection cell
+    Next block
+End Sub
 'Public Function IsCellExtinguished(ByVal x As Long, ByVal y As Long) As Boolean
 ''Проверяем имеется ли входящая клетка в коллекциях тушащихся в каждом из блоков
 'Dim block As c_ExtinguishingBlock
