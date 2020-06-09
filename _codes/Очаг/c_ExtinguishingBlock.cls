@@ -91,7 +91,7 @@ Public Function GetExpenceNeed() As Single
 End Function
 
 Public Function GetWaterExpenseKind() As WaterExpenseKind
-'Подается воды: 0 не подается, 1 - подается недостаточно, 2 - пожается достаточно.
+'Подается воды: 0 не подается, 1 - подается недостаточно, 2 - подается достаточно.
 Dim expenseNeed As Single
     
     expenseNeed = GetExpenceNeed

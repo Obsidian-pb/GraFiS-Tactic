@@ -9,7 +9,8 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Public x As Double
 Public y As Double
-Private nextPoint As c_Point
+Private nextPoint As c_Point        'Основная следующая точка
+Private nextPoint2 As c_Point       'Резервная следующая точка
 Private direction As Directions
 
 Public Sub SetData(ByVal xVal As Double, ByVal yVal As Double)
@@ -27,11 +28,22 @@ Public Function isEqual(ByRef point As c_Point) As Boolean
 End Function
 
 Public Sub SetNextPoint(ByRef pnt As c_Point)
-    Set nextPoint = pnt
+    If nextPoint Is Nothing Then
+        Set nextPoint = pnt
+    Else
+        Set nextPoint2 = pnt
+    End If
     CheckDir
 End Sub
 Public Function GetNextPoint() As c_Point
-    Set GetNextPoint = nextPoint
+'    Set GetNextPoint = nextPoint
+    If Not nextPoint2 Is Nothing Then
+        Set GetNextPoint = nextPoint2
+        Set nextPoint2 = Nothing
+    Else
+        Set GetNextPoint = nextPoint
+        Set nextPoint = Nothing
+    End If
 End Function
 
 Public Property Get Dir()

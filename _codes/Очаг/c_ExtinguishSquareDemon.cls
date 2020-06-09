@@ -41,25 +41,25 @@ End Property
 
 
 
+'Public Sub RunDemon(ByRef extSquare As c_ExtinguishingSquare)
+''Основная процедура запускающая демона - на вход передается объект площади тушения
+''Демон используя волновой алгоритм рассчитывает зону площади тушения пожара
+'Dim block As c_ExtinguishingBlock
+'
+'    'Сохраняем ссылку на объект площади тушения
+'    Set extSquareObj = extSquare
+'
+'    'Перебираем все блоки и для каждого из них строим зоны горения
+'    For Each block In extSquare.extinguishingBlocks
+'        If block.alreadyCalculated = False Then
+'            FillExtSquare block
+'            block.alreadyCalculated = True
+'        End If
+'    Next block
+'
+'End Sub
+
 Public Sub RunDemon(ByRef extSquare As c_ExtinguishingSquare)
-'Основная процедура запускающая демона - на вход передается объект площади тушения
-'Демон используя волновой алгоритм рассчитывает зону площади тушения пожара
-Dim block As c_ExtinguishingBlock
-
-    'Сохраняем ссылку на объект площади тушения
-    Set extSquareObj = extSquare
-     
-    'Перебираем все блоки и для каждого из них строим зоны горения
-    For Each block In extSquare.extinguishingBlocks
-        If block.alreadyCalculated = False Then
-            FillExtSquare block
-            block.alreadyCalculated = True
-        End If
-    Next block
-
-End Sub
-
-Public Sub RunDemonTemp(ByRef extSquare As c_ExtinguishingSquare)
 'Основная процедура запускающая демона - на вход передается объект площади тушения
 'Демон используя волновой алгоритм рассчитывает зону площади тушения пожара
 Dim block As c_ExtinguishingBlock
@@ -70,20 +70,22 @@ Dim i As Integer
     
      i = 0
     'Перебираем все блоки и для каждого из них строим зоны горения
-    For i = 0 To 50
+    Do
         For Each block In extSquare.extinguishingBlocks
             If block.alreadyCalculated = False Then
                 FillExtSquareOneStep block, i
-'                block.alreadyCalculated = True
             End If
         Next block
+        i = i + 1
         
-        'Очищаем матрицы клеток
-'        ReDim calculatedCells(UBound(calculatedCells, 1), UBound(calculatedCells, 2))
-'        ReDim matrix(UBound(matrix, 1), UBound(matrix, 2))
-    Next i
-    
+        If i > 10000 Then
+            MsgBox "Аварийный выход в блоке расчета площадей тушения"
+        End If
+    Loop Until extSquareObj.IsAllBlocksCalculated
 
+    For Each block In extSquare.extinguishingBlocks
+        FillActiveCellsSquare block
+    Next block
 End Sub
 
 Public Sub DrawFireSquare(ByRef extSquare As c_ExtinguishingSquare)
@@ -261,7 +263,7 @@ Private Sub FillExtSquareOneStep(ByRef block As c_ExtinguishingBlock, ByVal i As
 Dim tmpColl As Collection
 Dim cell As c_Cell
 'Dim i As Integer
-
+      
     'перебираем все клетки фронта пожара и указываем в матрице расчитанных клеток, что их обрабатывать не нужно
     If block.extinguishingCells.Count > 0 Then
         SetCellsToCalculated block.extinguishingCells
@@ -277,11 +279,16 @@ Dim cell As c_Cell
         Set tmpColl = OneStep(tmpColl, block.fireWay, (i + 1) * grain)
         
         'Указываем для всех клеток полученной коллекции, что они уже рассчитаны
-'        SetCellsToCalculated tmpColl
+        SetCellsToCalculated tmpColl
 
         'Добавляем клетки из полученной коллекции в коллекцию клеток площади тушения блока
         block.AddToExtCellsCollection tmpColl
-    
+        
+        'Если в итоговой коллекции клеток нет ни одной, значит блок рассчитан
+        If tmpColl.Count = 0 Then
+            block.alreadyCalculated = True
+        End If
+        
     'Очищаем матрицы клеток
 '    ReDim calculatedCells(UBound(calculatedCells, 1), UBound(calculatedCells, 2))
 '    ReDim matrix(UBound(matrix, 1), UBound(matrix, 2))
@@ -377,10 +384,10 @@ Dim shp As Visio.Shape
 'Проверяем не является ли клетка клеткой стены
 If fireMatrixObject.IsWall(cell.x, cell.y) Then Exit Sub
     
-    If calculatedCells(cell.x, cell.y) = 1 And matrix(cell.x, cell.y) >= wayLen Then
+    If calculatedCells(cell.x, cell.y) = 1 And matrix(cell.x, cell.y) > wayLen Then
         calculatedCells(cell.x, cell.y) = 0
         'Удаляем из имеющихся блоков
-'        extSquareObj.DeleteCellFromEveryBlock cell.x, cell.y
+        extSquareObj.DeleteCellFromEveryBlock cell.x, cell.y
     End If
     
     'Если путь превышает предельное значение или текущее максимальное значение или уже рассчитвана - не учитываем его
@@ -391,7 +398,8 @@ If fireMatrixObject.IsWall(cell.x, cell.y) Then Exit Sub
     If matrix(cell.x, cell.y) = 0 Or matrix(cell.x, cell.y) >= wayLen Then
         'Ставим новое значение и пытаемся добавить в коллекция (если такая клетка в коллекции уже есть, ничего не происходит - через Error)
         matrix(cell.x, cell.y) = wayLen
-
+        'Удаляем из имеющихся блоков
+        extSquareObj.DeleteCellFromEveryBlock cell.x, cell.y
 '                If cell.y = 0 Then
 '                    Debug.Print "cell(" & cell.x & ":" & cell.y & ") wayLen=" & matrix(cell.x, cell.y)
 '                End If

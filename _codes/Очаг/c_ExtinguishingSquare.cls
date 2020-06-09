@@ -64,6 +64,18 @@ Dim block As c_ExtinguishingBlock
         block.RemoveFromExtCellsCollection cell
     Next block
 End Sub
+
+Public Function IsAllBlocksCalculated() As Boolean
+Dim block As c_ExtinguishingBlock
+    
+    For Each block In extinguishingBlocks
+        If block.alreadyCalculated = False Then
+            IsAllBlocksCalculated = False
+            Exit Function
+        End If
+    Next block
+IsAllBlocksCalculated = True
+End Function
 'Public Function IsCellExtinguished(ByVal x As Long, ByVal y As Long) As Boolean
 ''Проверяем имеется ли входящая клетка в коллекциях тушащихся в каждом из блоков
 'Dim block As c_ExtinguishingBlock

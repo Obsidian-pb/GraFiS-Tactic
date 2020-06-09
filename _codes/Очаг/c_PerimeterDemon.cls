@@ -41,9 +41,13 @@ End Sub
 Private Sub BuildConturLine(ByRef perimeterCellsCollection As Collection)
 '‘ормируем контур фигуры периметра
 Dim cell As c_Cell
+Dim shp As Visio.Shape
     
     For Each cell In perimeterCellsCollection
         BuildConturElement cell
+        
+'        Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, (cell.x + 1) * grain / mmInInch, (cell.y + 1) * grain / mmInInch)
+'        DoEvents
     Next cell
 End Sub
 
@@ -101,6 +105,10 @@ Private Function GetConturPoint(ByVal x As Long, ByVal y As Long) As c_Point
 Dim pnt As c_Point
     On Error GoTo EX
     Set GetConturPoint = conturPoints.item(x & ":" & y)
+    
+'    Set pnt = New c_Point
+'    pnt.SetData x, y
+'    Set GetConturPoint = pnt
 Exit Function
 EX:
     Set pnt = New c_Point
@@ -127,7 +135,7 @@ Dim i As Long
 '#— PerimeterCellsFix
     '»справл€ем последовательность точек
     PerimeterCellsFix
-'    PerimeterCellsFix2
+'    PerimeterCellsFix2  '—кругление
     
     
     Dim coll As Collection
@@ -195,7 +203,7 @@ Dim i As Long
         i = 0
         Do
             Set pnt = pnt.GetNextPoint
-            'ѕровер€ем в како направлении сейчас двигаетс€ лини€ контура
+            'ѕровер€ем в каком направлении сейчас двигаетс€ лини€ контура
             If Not pnt.Dir = curDir Then    '≈сли направление помен€лось - добавл€ем новую точку в коллекцию и мен€ем текущее напарвление
                 AddPointToCollection newPerimeterPoints, pnt
     

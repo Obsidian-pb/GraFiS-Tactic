@@ -206,7 +206,7 @@ Dim modelledFireShape As Visio.Shape
     modelledFireShape.SendToBack
         
 ''TEST:
-'fireModeller.DrawExtSquareByDemon
+fireModeller.DrawExtSquareByDemon
 'fireModeller.DrawPerimeterCells
 
         

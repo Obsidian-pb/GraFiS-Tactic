@@ -84,7 +84,7 @@ Dim shp As Visio.Shape
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(189)
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(187)
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(351)
-    Set shp = Application.ActivePage.Shapes.ItemFromID(15)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(94)
     
 '    On Error GoTo EX
 '    Set shp = Application.ActiveWindow.Selection(1)
@@ -128,7 +128,7 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
     
     frontDemonImpl.RunDemon2 extSquare, matrix.fireFrontCells, matrix.fireFrontCells
 '    extinguishingSquareDemon.RunDemon extSquare
-    extinguishingSquareDemon.RunDemonTemp extSquare
+    extinguishingSquareDemon.RunDemon extSquare
     
 '    Dim cell As c_Cell
 '    for each cell
