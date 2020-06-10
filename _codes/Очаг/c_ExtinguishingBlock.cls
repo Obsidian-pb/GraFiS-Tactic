@@ -14,6 +14,7 @@ Private cellsMatrix As Variant                  'Матрица клеток
 Public extinguishingCells As Collection         'Коллекция клеток зоны площади тушения, относящихся к данному блоку
 Public fireFrontCells As Collection             'Коллекция клеток фронта пожара, относящихся к даннойму блоку
 Public activeCells As Collection                'Коллекция клеток активной зоны (еще не горящих на максимум), относящихся к даннойму блоку
+Public tmpColl As Collection                    'Временная коллекция клеток - для расчета площади тушения
 
 Public fireWay As Single                        'Глубина тушения поданными стволами (в миллиметрах)
 Public grain As Long
@@ -30,6 +31,7 @@ Private Sub Class_Initialize()
     Set extinguishingCells = New Collection
     Set fireFrontCells = New Collection
     Set activeCells = New Collection
+    Set tmpColl = New Collection
     
     alreadyCalculated = False
 End Sub
@@ -58,6 +60,15 @@ Public Sub RemoveFromExtCellsCollection(ByRef cell As c_Cell)
     
     extinguishingCells.Remove cell.x & ":" & cell.y
     cellsMatrix(cell.x, cell.y) = ExtCellType.notInExtSquare
+
+End Sub
+Public Sub RemoveFromTmpCellsCollection(ByRef cell As c_Cell)
+'Добавляем входящую клетку из коллекции временных при расчете
+    
+    On Error Resume Next
+    
+    tmpColl.Remove cell.x & ":" & cell.y
+'    cellsMatrix(cell.x, cell.y) = ExtCellType.notInExtSquare
 
 End Sub
 

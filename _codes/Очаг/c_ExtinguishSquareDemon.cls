@@ -63,11 +63,12 @@ Public Sub RunDemon(ByRef extSquare As c_ExtinguishingSquare)
 'Основная процедура запускающая демона - на вход передается объект площади тушения
 'Демон используя волновой алгоритм рассчитывает зону площади тушения пожара
 Dim block As c_ExtinguishingBlock
+Dim cell As c_Cell
 Dim i As Integer
-    
+
     'Сохраняем ссылку на объект площади тушения
     Set extSquareObj = extSquare
-    
+
      i = 0
     'Перебираем все блоки и для каждого из них строим зоны горения
     Do
@@ -76,8 +77,15 @@ Dim i As Integer
                 FillExtSquareOneStep block, i
             End If
         Next block
-        i = i + 1
         
+        'Фиксируем текущие состояни рассчитанных клеток
+        For Each block In extSquare.extinguishingBlocks
+            SetCellsToCalculated block.tmpColl
+            block.AddToExtCellsCollection block.tmpColl
+        Next block
+        
+        i = i + 1
+
         If i > 10000 Then
             MsgBox "Аварийный выход в блоке расчета площадей тушения"
         End If
@@ -85,6 +93,7 @@ Dim i As Integer
 
     For Each block In extSquare.extinguishingBlocks
         FillActiveCellsSquare block
+'        block.alreadyCalculated = True
     Next block
 End Sub
 
@@ -265,27 +274,29 @@ Dim cell As c_Cell
 'Dim i As Integer
       
     'перебираем все клетки фронта пожара и указываем в матрице расчитанных клеток, что их обрабатывать не нужно
-    If block.extinguishingCells.Count > 0 Then
-        SetCellsToCalculated block.extinguishingCells
+    If block.tmpColl.Count = 0 Then
+'        SetCellsToCalculated block.extinguishingCells
         
-        Set tmpColl = block.extinguishingCells
-    Else
+'        Set tmpColl = block.extinguishingCells
+'    Else
         SetCellsToCalculated block.fireFrontCells
         
-        Set tmpColl = block.fireFrontCells
+        Set block.tmpColl = block.fireFrontCells
     End If
+'    Debug.Print block.tmpColl.Count
     
     'Рассчитываем площадь тушения (коллекция block.extinguishingCells)
-        Set tmpColl = OneStep(tmpColl, block.fireWay, (i + 1) * grain)
+        Set block.tmpColl = OneStep(block.tmpColl, block.fireWay, (i + 1) * grain)
+'        Debug.Print "после " & block.tmpColl.Count
         
         'Указываем для всех клеток полученной коллекции, что они уже рассчитаны
-        SetCellsToCalculated tmpColl
-
+'        SetCellsToCalculated block.tmpColl
+        
         'Добавляем клетки из полученной коллекции в коллекцию клеток площади тушения блока
-        block.AddToExtCellsCollection tmpColl
+'        block.AddToExtCellsCollection block.tmpColl
         
         'Если в итоговой коллекции клеток нет ни одной, значит блок рассчитан
-        If tmpColl.Count = 0 Then
+        If block.tmpColl.Count = 0 Then
             block.alreadyCalculated = True
         End If
         
@@ -297,6 +308,47 @@ Dim cell As c_Cell
 '    FillActiveCellsSquare block
     
 End Sub
+
+'Private Sub FillExtSquareOneStep(ByRef block As c_ExtinguishingBlock, ByVal i As Integer)
+''При помощи волнового алгоритма строим площади тушения пошагово
+'Dim tmpColl As Collection
+'Dim cell As c_Cell
+''Dim i As Integer
+'
+'    'перебираем все клетки фронта пожара и указываем в матрице расчитанных клеток, что их обрабатывать не нужно
+'    If block.extinguishingCells.Count > 0 Then
+''        SetCellsToCalculated block.extinguishingCells
+'
+'        Set tmpColl = block.extinguishingCells
+'    Else
+'        SetCellsToCalculated block.fireFrontCells
+'
+'        Set tmpColl = block.fireFrontCells
+'    End If
+'    Debug.Print tmpColl.Count
+'
+'    'Рассчитываем площадь тушения (коллекция block.extinguishingCells)
+'        Set tmpColl = OneStep(tmpColl, block.fireWay, (i + 1) * grain)
+'
+'        'Указываем для всех клеток полученной коллекции, что они уже рассчитаны
+'        SetCellsToCalculated tmpColl
+'
+'        'Добавляем клетки из полученной коллекции в коллекцию клеток площади тушения блока
+'        block.AddToExtCellsCollection tmpColl
+'
+'        'Если в итоговой коллекции клеток нет ни одной, значит блок рассчитан
+'        If tmpColl.Count = 0 Then
+'            block.alreadyCalculated = True
+'        End If
+'
+'    'Очищаем матрицы клеток
+''    ReDim calculatedCells(UBound(calculatedCells, 1), UBound(calculatedCells, 2))
+''    ReDim matrix(UBound(matrix, 1), UBound(matrix, 2))
+'
+'    'Следом заполняем коллекцию активных клеток
+''    FillActiveCellsSquare block
+'
+'End Sub
 
 Private Sub FillActiveCellsSquare(ByRef block As c_ExtinguishingBlock)
 'При помощи волнового алгоритма находим все активные клетки относящиеся к данному блоку
@@ -362,10 +414,12 @@ Dim cellPower As Single
         AddCellToColl newColl, NextCell(cell, rd), cellPower + diag * grain, maxWay, maxLenCur
         AddCellToColl newColl, NextCell(cell, d), cellPower + orto * grain, maxWay, maxLenCur
         AddCellToColl newColl, NextCell(cell, ld), cellPower + diag * grain, maxWay, maxLenCur
+        
+
 
 
     Next cell
-    
+'    Debug.Print newColl.Count
     Set OneStep = newColl
     
 End Function

@@ -64,6 +64,19 @@ Dim block As c_ExtinguishingBlock
         block.RemoveFromExtCellsCollection cell
     Next block
 End Sub
+Public Sub DeleteCellTmpFromEveryBlock(ByVal x As Long, ByVal y As Long)
+'”дал€€ем клетку из всех коллекций TmpCells блоков площади тушени€
+Dim cell As c_Cell
+Dim block As c_ExtinguishingBlock
+    
+    Set cell = New c_Cell
+    cell.x = x
+    cell.y = y
+    
+    For Each block In extinguishingBlocks
+        block.RemoveFromTmpCellsCollection cell
+    Next block
+End Sub
 
 Public Function IsAllBlocksCalculated() As Boolean
 Dim block As c_ExtinguishingBlock

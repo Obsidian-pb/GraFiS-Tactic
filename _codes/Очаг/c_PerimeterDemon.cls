@@ -46,8 +46,6 @@ Dim shp As Visio.Shape
     For Each cell In perimeterCellsCollection
         BuildConturElement cell
         
-'        Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, (cell.x + 1) * grain / mmInInch, (cell.y + 1) * grain / mmInInch)
-'        DoEvents
     Next cell
 End Sub
 
@@ -105,10 +103,7 @@ Private Function GetConturPoint(ByVal x As Long, ByVal y As Long) As c_Point
 Dim pnt As c_Point
     On Error GoTo EX
     Set GetConturPoint = conturPoints.item(x & ":" & y)
-    
-'    Set pnt = New c_Point
-'    pnt.SetData x, y
-'    Set GetConturPoint = pnt
+
 Exit Function
 EX:
     Set pnt = New c_Point
