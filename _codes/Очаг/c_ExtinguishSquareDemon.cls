@@ -453,7 +453,8 @@ If fireMatrixObject.IsWall(cell.x, cell.y) Then Exit Sub
         'Ставим новое значение и пытаемся добавить в коллекция (если такая клетка в коллекции уже есть, ничего не происходит - через Error)
         matrix(cell.x, cell.y) = wayLen
         'Удаляем из имеющихся блоков
-        extSquareObj.DeleteCellFromEveryBlock cell.x, cell.y
+'        extSquareObj.DeleteCellFromEveryBlock cell.x, cell.y
+        extSquareObj.DeleteCellTmpFromEveryBlock cell.x, cell.y
 '                If cell.y = 0 Then
 '                    Debug.Print "cell(" & cell.x & ":" & cell.y & ") wayLen=" & matrix(cell.x, cell.y)
 '                End If

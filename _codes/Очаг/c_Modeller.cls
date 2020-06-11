@@ -584,10 +584,33 @@ Public Sub DrawExtSquareByDemon()
 Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
 
     Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
-    
+
     extinguishingSquareDemon.setGrain = grain
     extinguishingSquareDemon.DrawFireSquare extSquare
 End Sub
+'
+'Public Sub DrawExtSquareByDemon()
+''Отрисовываем фигуру периметра при помощи демона
+'Dim perimterDemon As c_PerimeterDemon
+'Dim fireConturs As Visio.Selection
+'Dim shp As Visio.Shape
+'
+'    ClearLayer "Fire"
+'
+'    Set perimterDemon = New c_PerimeterDemon
+'    perimterDemon.setGrain(grain).RunDemon matrix.firePerimeterCells
+'    perimterDemon.DrawSquare
+'
+'    'Объединяем полученные фигуры в окончательную на текущем шаге
+''    On Error Resume Next
+'    Set fireConturs = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
+'    If fireConturs.Count > 0 Then
+'        fireConturs.Combine
+'        Set shp = Application.ActiveWindow.Selection(1)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+'    End If
+'
+'End Sub
 
 
 ''-------Тестовая процедура

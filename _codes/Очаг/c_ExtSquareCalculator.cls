@@ -84,7 +84,8 @@ Dim shp As Visio.Shape
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(189)
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(187)
 '    Set shp = Application.ActivePage.Shapes.ItemFromID(351)
-    Set shp = Application.ActivePage.Shapes.ItemFromID(94)
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(94)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(15)
     
 '    On Error GoTo EX
 '    Set shp = Application.ActiveWindow.Selection(1)
