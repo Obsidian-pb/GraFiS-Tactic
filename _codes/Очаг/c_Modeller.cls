@@ -542,13 +542,15 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
             'Формируем коллекцию фрагментов площади фронта пожара (и блоков тушения на их основе)
             frontDemonImpl.RunDemon extSquare, matrix.fireFrontCells, nozzle
             
-            'Рассчитываем размер каждого из блоков
-            extinguishingSquareDemon.RunDemon extSquare
+'            'Рассчитываем размер каждого из блоков
+'            extinguishingSquareDemon.RunDemon extSquare
 
             i = i + 1
         End If
     Next nozzle
     
+    'Рассчитываем размер каждого из блоков
+    extinguishingSquareDemon.RunDemon extSquare
     
     Dim blck As c_ExtinguishingBlock
     Dim extSquareMeters As Single
@@ -582,11 +584,24 @@ Public Sub DrawExtSquareByDemon()
 'Команда демону отрисовать площадь тушения
 'Dim frontDemonImpl As c_FrontDemon
 Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
-
+Dim fireConturs As Visio.Selection
+Dim shp As Visio.Shape
+    
+    ClearLayer "ExtSquare"
+    
     Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
 
     extinguishingSquareDemon.setGrain = grain
     extinguishingSquareDemon.DrawFireSquare extSquare
+    
+    'Объединяем полученные фигуры площади тушения в окончательную на текущем шаге
+'    On Error Resume Next
+'    Set fireConturs = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "ExtSquare")
+'    If fireConturs.Count > 0 Then
+'        fireConturs.Combine
+'        Set shp = Application.ActiveWindow.Selection(1)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
+'    End If
 End Sub
 '
 'Public Sub DrawExtSquareByDemon()

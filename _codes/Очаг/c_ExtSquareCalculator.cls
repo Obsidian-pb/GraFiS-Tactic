@@ -91,10 +91,11 @@ Dim shp As Visio.Shape
 '    Set shp = Application.ActiveWindow.Selection(1)
     
     Set fireShapeDemon = New c_FireShapeDemon
+    'Расчитываем сетку фигуры
     fireShapeDemon.setGrain(grain).SetFireShape(shp).RunDemon matrix
-    
+    'Расчитываем блоки зоны тушения
     FireSquareCalculate
-    
+    'Строим площадь тушения
     DrawExtSquareByDemon
     
     
@@ -186,12 +187,24 @@ End Sub
 
 Public Sub DrawExtSquareByDemon()
 'Команда демону отрисовать площадь тушения
-'Dim frontDemonImpl As c_FrontDemon
 Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
-
-    Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
+Dim fireConturs As Visio.Selection
+Dim shp As Visio.Shape
     
+    ClearLayer "ExtSquare"
+    
+    Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
+
     extinguishingSquareDemon.setGrain = grain
     extinguishingSquareDemon.DrawFireSquare extSquare
+    
+    'Объединяем полученные фигуры площади тушения в окончательную на текущем шаге
+'    On Error Resume Next
+'    Set fireConturs = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "ExtSquare")
+'    If fireConturs.Count > 0 Then
+'        fireConturs.Combine
+'        Set shp = Application.ActiveWindow.Selection(1)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
+'    End If
 End Sub
 

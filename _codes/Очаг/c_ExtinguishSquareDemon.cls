@@ -10,6 +10,7 @@ Attribute VB_Exposed = False
 Dim matrix As Variant                           'Матрица расчетной зоны
 Dim calculatedCells As Variant                  'Матрица рассчитанных клеток
 Dim grain As Integer                            'Размер зерна
+Private conturPoints As Collection                                  'Коллекция точек контура
 
 Public fireMatrixObject As c_Matrix             'Матрица расчетной зоны
 
@@ -20,7 +21,12 @@ Const orto As Double = 1                      'модификатор распротсранения по ди
 Const mmInInch As Double = 25.4
 
 '--------------------------------Демон построитель зон площади тушения-------------------------------------------
-
+'Private Sub Class_Initialize()
+'    Set conturPoints = New Collection
+'End Sub
+Private Sub Class_Terminate()
+    Set conturPoints = Nothing
+End Sub
 
 
 
@@ -78,7 +84,7 @@ Dim i As Integer
             End If
         Next block
         
-        'Фиксируем текущие состояни рассчитанных клеток
+        'Фиксируем текущие состояния рассчитанных клеток
         For Each block In extSquare.extinguishingBlocks
             SetCellsToCalculated block.tmpColl
             block.AddToExtCellsCollection block.tmpColl
@@ -97,28 +103,54 @@ Dim i As Integer
     Next block
 End Sub
 
+'-------------------Отрисовка площади тушения------------------------------
+'Public Function BuildConturLine(ByRef extSquare As c_ExtinguishingSquare) As c_ExtinguishSquareDemon
+''Формируем контур фигур блоков площади тушения
+'Dim cell As c_Cell
+''Dim shp As Visio.Shape
+'
+'    'Перебираем все блоки и для каждого из них строим зоны горения
+'    For Each block In extSquare.extinguishingBlocks
+''        Set tmpColl = New Collection
+''        Application.ActiveWindow.DeselectAll
+'
+'        If block.extinguishingCells.Count > 0 Then
+'            For Each cell In block.extinguishingCells
+'                If block.IsCellInThisPerimeter(cell) Then
+'                    BuildConturElement cell
+'                End If
+'            Next cell
+'        End If
+'    Next block
+'
+'Set BuildConturLine = Me
+'End Function
+
 Public Sub DrawFireSquare(ByRef extSquare As c_ExtinguishingSquare)
 'Отрисовываем площадь тушения
 Dim block As c_ExtinguishingBlock
 Dim cell As c_Cell
-Dim shp As Visio.Shape
-Dim mainShp As Visio.Shape
-Const mmInInch As Double = 25.4
-Dim tmpColl As Collection
+'Dim shp As Visio.Shape
+'Dim mainShp As Visio.Shape
+'Const mmInInch As Double = 25.4
+'Dim tmpColl As Collection
 
     
     
     'Перебираем все блоки и для каждого из них строим зоны горения
     For Each block In extSquare.extinguishingBlocks
-        Set tmpColl = New Collection
-        Application.ActiveWindow.DeselectAll
+'        Set tmpColl = New Collection
+'        Application.ActiveWindow.DeselectAll
+        Set conturPoints = New Collection
         
         If block.extinguishingCells.Count > 0 Then
             For Each cell In block.extinguishingCells
                 If block.IsCellInThisPerimeter(cell) Then
-                    Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, _
-                            (cell.x + 1) * grain / mmInInch, (cell.y + 1) * grain / mmInInch)
-                    tmpColl.Add shp
+'                    Set shp = Application.ActivePage.DrawRectangle(cell.x * grain / mmInInch, cell.y * grain / mmInInch, _
+'                            (cell.x + 1) * grain / mmInInch, (cell.y + 1) * grain / mmInInch)
+'                    tmpColl.Add shp
+                    
+                    BuildConturElement cell, block
                 End If
                 
                 
@@ -136,12 +168,15 @@ Dim tmpColl As Collection
             Next cell
             
             'Объединяем все фигуры клеток текущего блока в единую фигуру
-            For Each shp In tmpColl
-                Application.ActiveWindow.Select shp, visSelect
-            Next shp
-            Application.ActiveWindow.Selection.Union
-            Set shp = Application.ActiveWindow.Selection(1)
-            CorrectSh shp
+'            For Each shp In tmpColl
+'                Application.ActiveWindow.Select shp, visSelect
+'            Next shp
+'            Application.ActiveWindow.Selection.Union
+'            Set shp = Application.ActiveWindow.Selection(1)
+'            CorrectSh shp
+    
+            'Отрисовываем контуры площади тушения
+            DrawSquare block
     
     '        'Указываем полученной фигуре свойство площади тушения
     '        shp.AddNamedRow visSectionProp, "ExtSquare", visTagDefault
@@ -151,82 +186,276 @@ Dim tmpColl As Collection
 
 End Sub
 
-Private Function CorrectSh(ByRef shp As Visio.Shape) As Visio.Shape
-'Удаляем из полученной фигуры площади тушения лишние линии (секции Geometry)
-Dim secCount As Integer
-Dim secMax As Integer       'Секйия с максимальным количеством строк
-Dim secMin As Integer       'Секйия с минимальным количеством строк
-Dim minVal As Long
-Dim maxVal As Long
-Dim i As Integer
+Private Sub BuildConturElement(ByRef cell As c_Cell, ByRef block As c_ExtinguishingBlock)
+'Строим контур данной клетки
+Dim neighbour(0 To 3) As Boolean
+Dim pnt As c_Point
+Dim pnt2 As c_Point
     
-    secCount = getShapeGeometryCount(shp)
+    'Определяем ортогональных соседей клетки
+    neighbour(0) = block.IsCellInThisBlock(cell.NCell(l))   '.IsCellMaxFire
+    neighbour(1) = block.IsCellInThisBlock(cell.NCell(u))   'cell.NCell(u).IsCellMaxFire
+    neighbour(2) = block.IsCellInThisBlock(cell.NCell(r))   'cell.NCell(r).IsCellMaxFire
+    neighbour(3) = block.IsCellInThisBlock(cell.NCell(d))   'cell.NCell(d).IsCellMaxFire
     
-    If secCount = 2 Then        'Если фигура без внутренней площади
-        shp.DeleteSection visSectionFirstComponent + Int(shp.RowCount(visSectionFirstComponent) > shp.RowCount(visSectionFirstComponent + 1)) * -1
-    ElseIf secCount = 4 Then    'Если фигура с внутренней площадью
-        maxVal = shp.RowCount(visSectionFirstComponent)
-        minVal = maxVal
-        secMax = 0
-        secMin = 0
-        'секция 2
-        If shp.RowCount(visSectionFirstComponent + 1) > maxVal Then
-            maxVal = shp.RowCount(visSectionFirstComponent + 1)
-            secMax = 1
-        End If
-        If shp.RowCount(visSectionFirstComponent + 1) < minVal Then
-            minVal = shp.RowCount(visSectionFirstComponent + 1)
-            secMin = 1
-        End If
-        'секция 3
-        If shp.RowCount(visSectionFirstComponent + 2) > maxVal Then
-            maxVal = shp.RowCount(visSectionFirstComponent + 2)
-            secMax = 2
-        End If
-        If shp.RowCount(visSectionFirstComponent + 2) < minVal Then
-            minVal = shp.RowCount(visSectionFirstComponent + 2)
-            secMin = 2
-        End If
-        'секция 4
-        If shp.RowCount(visSectionFirstComponent + 3) > maxVal Then
-            maxVal = shp.RowCount(visSectionFirstComponent + 3)
-            secMax = 3
-        End If
-        If shp.RowCount(visSectionFirstComponent + 3) < minVal Then
-            minVal = shp.RowCount(visSectionFirstComponent + 3)
-            secMin = 3
-        End If
-        'Удаляем промежуточные секции
-        Do While i < 4
-            If shp.RowCount(visSectionFirstComponent + i) = 0 Then Exit Do  'Если такой секции нет, то значит достигнут конец перебора - выходим из цикла
+    'Проверяем все четыре ортогональных смежных клетки и для каждой из них при необходимости добавляем точку
+    '---Проверяем каждую из соседних клеток, на то, горит ли она по максимуму
+    If Not neighbour(0) Then
+        Set pnt = GetConturPoint(cell.x, cell.y)
+        AddPointToCollection conturPoints, pnt
+        pnt.SetNextPoint GetConturPoint(cell.x, cell.y + 1)
+    End If
+    If Not neighbour(1) Then
+        Set pnt = GetConturPoint(cell.x, cell.y + 1)
+        AddPointToCollection conturPoints, pnt
+        pnt.SetNextPoint GetConturPoint(cell.x + 1, cell.y + 1)
+    End If
+    If Not neighbour(2) Then
+        Set pnt = GetConturPoint(cell.x + 1, cell.y + 1)
+        AddPointToCollection conturPoints, pnt
+        pnt.SetNextPoint GetConturPoint(cell.x + 1, cell.y)
+    End If
+    If Not neighbour(3) Then
+        Set pnt = GetConturPoint(cell.x + 1, cell.y)
+        AddPointToCollection conturPoints, pnt
+        pnt.SetNextPoint GetConturPoint(cell.x, cell.y)
+    End If
+
+End Sub
+
+
+Private Sub AddPointToCollection(ByRef thisColl As Collection, ByVal pnt As c_Point)
+'Добавляем в указанную коллекцию указанную точку
+    On Error Resume Next
+    thisColl.Add pnt, pnt.x & ":" & pnt.y
+End Sub
+Private Sub RemovePointFromCollection(ByRef thisColl As Collection, ByVal pnt As c_Point)
+'Удаляем указанную точку из указанной коллекции
+    On Error Resume Next
+    thisColl.Remove pnt.x & ":" & pnt.y
+End Sub
+
+
+Private Function GetConturPoint(ByVal x As Long, ByVal y As Long) As c_Point
+Dim pnt As c_Point
+    On Error GoTo EX
+    Set GetConturPoint = conturPoints.item(x & ":" & y)
+
+Exit Function
+EX:
+    Set pnt = New c_Point
+    pnt.SetData x, y
+    AddPointToCollection conturPoints, pnt
+    Set GetConturPoint = pnt
+End Function
+
+
+'Private Function CorrectSh(ByRef shp As Visio.Shape) As Visio.Shape
+''Удаляем из полученной фигуры площади тушения лишние линии (секции Geometry)
+'Dim secCount As Integer
+'Dim secMax As Integer       'Секйия с максимальным количеством строк
+'Dim secMin As Integer       'Секйия с минимальным количеством строк
+'Dim minVal As Long
+'Dim maxVal As Long
+'Dim i As Integer
+'
+'    secCount = getShapeGeometryCount(shp)
+'
+'    If secCount = 2 Then        'Если фигура без внутренней площади
+'        shp.DeleteSection visSectionFirstComponent + Int(shp.RowCount(visSectionFirstComponent) > shp.RowCount(visSectionFirstComponent + 1)) * -1
+'    ElseIf secCount = 4 Then    'Если фигура с внутренней площадью
+'        maxVal = shp.RowCount(visSectionFirstComponent)
+'        minVal = maxVal
+'        secMax = 0
+'        secMin = 0
+'        'секция 2
+'        If shp.RowCount(visSectionFirstComponent + 1) > maxVal Then
+'            maxVal = shp.RowCount(visSectionFirstComponent + 1)
+'            secMax = 1
+'        End If
+'        If shp.RowCount(visSectionFirstComponent + 1) < minVal Then
+'            minVal = shp.RowCount(visSectionFirstComponent + 1)
+'            secMin = 1
+'        End If
+'        'секция 3
+'        If shp.RowCount(visSectionFirstComponent + 2) > maxVal Then
+'            maxVal = shp.RowCount(visSectionFirstComponent + 2)
+'            secMax = 2
+'        End If
+'        If shp.RowCount(visSectionFirstComponent + 2) < minVal Then
+'            minVal = shp.RowCount(visSectionFirstComponent + 2)
+'            secMin = 2
+'        End If
+'        'секция 4
+'        If shp.RowCount(visSectionFirstComponent + 3) > maxVal Then
+'            maxVal = shp.RowCount(visSectionFirstComponent + 3)
+'            secMax = 3
+'        End If
+'        If shp.RowCount(visSectionFirstComponent + 3) < minVal Then
+'            minVal = shp.RowCount(visSectionFirstComponent + 3)
+'            secMin = 3
+'        End If
+'        'Удаляем промежуточные секции
+'        Do While i < 4
+'            If shp.RowCount(visSectionFirstComponent + i) = 0 Then Exit Do  'Если такой секции нет, то значит достигнут конец перебора - выходим из цикла
+'
+'            If shp.RowCount(visSectionFirstComponent + i) <> maxVal And shp.RowCount(visSectionFirstComponent + i) <> minVal Then
+'                shp.DeleteSection visSectionFirstComponent + i
+'                i = i - 1
+'            End If
+'
+'            i = i + 1
+'            If i > 100 Then
+'                Set CorrectSh = shp
+'                Debug.Print "Ошибка переполнения в CorrectSh"
+'                Exit Function
+'            End If
+'        Loop
+'    End If
+'Set CorrectSh = shp
+'End Function
+'
+'Private Function getShapeGeometryCount(ByRef shp As Visio.Shape) As Integer
+''Возвращает количество секций Geometry в фигуре shp
+'Dim i As Integer
+'
+'    i = 0
+'    Do While shp.SectionExists(visSectionFirstComponent + i, 0)
+'        i = i + 1
+'    Loop
+'
+'getShapeGeometryCount = i
+'End Function
+
+Public Function DrawSquare(ByRef block As c_ExtinguishingBlock) As Visio.Shape
+'Отрисовываем площадь используя для этого построение DrawPoiyLine
+Dim pnt As c_Point
+Dim pntStart As c_Point
+
+Dim shp As Visio.Shape
+Dim perimterPnts() As Double
+Dim i As Long
+
+    On Error GoTo EX
+
+'#С PerimeterCellsFix
+    'Исправляем последовательность точек
+    PerimeterCellsFix
+'    PerimeterCellsFix2  'Скругление
+    
+    
+    Dim coll As Collection
+    For Each coll In conturPoints
+        If coll.Count > 1 Then
+            i = 0
+            ReDim perimterPnts(coll.Count * 2 + 1)
+        
+            'Инициализируем массив с координатами периметра
+            For Each pnt In coll
+                perimterPnts(i) = (pnt.x * grain) / mmInInch
+                i = i + 1
+                perimterPnts(i) = (pnt.y * grain) / mmInInch
+                i = i + 1
+                
+                If i > 100000 Then
+                    Debug.Print "Переполнение в стеке отрисовки периметра"    ', vbCritical, "Служебное сообщение"
+                    Stop
+                    
+                    Set DrawSquare = Nothing
+                    Exit Function
+                End If
+            Next pnt
+            '---Заключительная точка, замыкающая фигуру
+            Set pnt = coll(1)
+            perimterPnts(i) = (pnt.x * grain) / mmInInch
+            i = i + 1
+            perimterPnts(i) = (pnt.y * grain) / mmInInch
             
-            If shp.RowCount(visSectionFirstComponent + i) <> maxVal And shp.RowCount(visSectionFirstComponent + i) <> minVal Then
-                shp.DeleteSection visSectionFirstComponent + i
-                i = i - 1
+            'Рисуем фигуру по массиву точек и придаем ей определенные свойства
+            Set shp = ActivePage.DrawPolyline(perimterPnts, 0)
+                shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquareTmp")
+        End If
+    Next coll
+    
+    Set fireConturs = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "ExtSquareTmp")
+    If fireConturs.Count > 0 Then
+        fireConturs.Combine
+        Set shp = Application.ActiveWindow.Selection(1)
+        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
+'        shp.Cells("LinePattern").FormulaU = "0"
+        shp.Cells("FillForegnd").FormulaU = "3"
+        shp.Cells("FillForegndTrans").FormulaU = "70%"
+        shp.Cells("FillBkgndTrans").FormulaU = "70%"
+        
+        'Указываем полученной фигуре свойство площади тушения
+        shp.AddNamedRow visSectionProp, "ExtSquare", visTagDefault
+        shp.CellsSRC(visSectionProp, 0, visCustPropsValue).FormulaU = str(block.GetSquare)
+    End If
+
+Set DrawSquare = shp
+EX:
+    Set DrawSquare = Nothing
+End Function
+
+Private Sub PerimeterCellsFix()
+'Исправляем последовательность точек
+Dim pnt As c_Point
+Dim tmpPnt As c_Point
+Dim curDir As Directions
+Dim newPerimeters As Collection
+Dim newPerimeterPoints As Collection
+Dim i As Long
+
+    Set newPerimeters = New Collection
+
+    Do While conturPoints.Count > 0
+        Set newPerimeterPoints = New Collection
+        curDir = s
+        
+        Set pnt = conturPoints(1)
+        Set tmpPnt = New c_Point
+        tmpPnt.SetData pnt.x, pnt.y
+        
+        i = 0
+        Do
+            Set pnt = pnt.GetNextPoint
+            'Проверяем в каком направлении сейчас двигается линия контура
+            If Not pnt.Dir = curDir Then    'Если направление поменялось - добавляем новую точку в коллекцию и меняем текущее напарвление
+                AddPointToCollection newPerimeterPoints, pnt
+    
+                curDir = pnt.Dir
             End If
+            
+            RemovePointFromCollection conturPoints, pnt
             
             i = i + 1
-            If i > 100 Then
-                Set CorrectSh = shp
-                Debug.Print "Ошибка переполнения в CorrectSh"
-                Exit Function
+            If i > 100000 Then
+                Debug.Print "Переполнение в стеке отрисовки периметра"    ', vbCritical, "Служебное сообщение"
+                Stop
+                Exit Sub
             End If
-        Loop
-    End If
-Set CorrectSh = shp
-End Function
-
-Private Function getShapeGeometryCount(ByRef shp As Visio.Shape) As Integer
-'Возвращает количество секций Geometry в фигуре shp
-Dim i As Integer
-
-    i = 0
-    Do While shp.SectionExists(visSectionFirstComponent + i, 0)
-        i = i + 1
+        
+        Loop Until pnt.isEqual(tmpPnt)
+        
+        newPerimeters.Add newPerimeterPoints
     Loop
     
-getShapeGeometryCount = i
-End Function
+
+    'Обновляем коллекцию
+    Set conturPoints = newPerimeters
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+
 
 Private Sub FillExtSquare(ByRef block As c_ExtinguishingBlock)
 'При помощи волнового алгоритма строим площади тушения
@@ -599,3 +828,6 @@ Private Function IsInMatrix(ByRef cell As c_Cell) As Boolean
         IsInMatrix = True
     End If
 End Function
+
+
+

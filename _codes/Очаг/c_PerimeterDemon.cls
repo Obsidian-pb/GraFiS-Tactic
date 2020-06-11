@@ -7,7 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-Private conturPoints As Collection                                  'Коллекция точек периметра
+Private conturPoints As Collection                                  'Коллекция точек контура
 
 Public grain As Integer
 Const mmInInch As Double = 25.4

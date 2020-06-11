@@ -191,22 +191,30 @@ Dim modelledFireShape As Visio.Shape
     '---ќпредел€ем получившуюс€ фигуру и обращаем ее в фигуру площади горени€
     Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
     Set modelledFireShape = vsoSelection(1)
-    Set newFireShape = ActivePage.Drop(modelledFireShape, _
-                        modelledFireShape.Cells("PinX").Result(visInches), modelledFireShape.Cells("PinY").Result(visInches))
+    Application.ActiveWindow.Select modelledFireShape, visSelect
+'    Set newFireShape = ActivePage.Drop(modelledFireShape, _
+'                        modelledFireShape.Cells("PinX").Result(visInches), modelledFireShape.Cells("PinY").Result(visInches))
     
     '---—обственно обращение
     ImportAreaInformation
     '---”казываем дл€ фигуры фактическую площадь тушени€
+'    If fireModeller.GetExtSquare > 0 Then
+'        newFireShape.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
+'        newFireShape.Cells("Prop.ExtSquareT").Formula = CLng(fireModeller.GetExtSquare)
+'    End If
     If fireModeller.GetExtSquare > 0 Then
-        newFireShape.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
-        newFireShape.Cells("Prop.ExtSquareT").Formula = CLng(fireModeller.GetExtSquare)
+        modelledFireShape.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
+        modelledFireShape.Cells("Prop.ExtSquareT").Formula = CLng(fireModeller.GetExtSquare)
     End If
     'ѕеремещаем полученные фигуры на задний план
-    newFireShape.SendToBack
+'    newFireShape.SendToBack
     modelledFireShape.SendToBack
         
 ''TEST:
 fireModeller.DrawExtSquareByDemon
+'—тавим фокус на построенной ранее фигуре зоны горени€
+Application.ActiveWindow.DeselectAll
+Application.ActiveWindow.Select modelledFireShape, visSelect
 'fireModeller.DrawPerimeterCells
 
         
