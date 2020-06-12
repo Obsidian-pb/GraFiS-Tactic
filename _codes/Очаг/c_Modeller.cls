@@ -580,52 +580,38 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
     
 End Sub
 
-Public Sub DrawExtSquareByDemon()
+Public Sub DrawExtSquareByDemon(ByRef fireShp As Visio.Shape)
 ' оманда демону отрисовать площадь тушени€
 'Dim frontDemonImpl As c_FrontDemon
 Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
-Dim fireConturs As Visio.Selection
-Dim shp As Visio.Shape
+'Dim fireConturs As Visio.Selection
+Dim extShp As Visio.Shape
+Dim ExtSquareFormula As String
+Dim squareShapesCol As Collection
+
+'    Set squareShapesCol = New Collection
+    
     
     ClearLayer "ExtSquare"
     
     Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
 
     extinguishingSquareDemon.setGrain = grain
-    extinguishingSquareDemon.DrawFireSquare extSquare
+    Set squareShapesCol = extinguishingSquareDemon.DrawFireSquare(extSquare)
     
-    'ќбъедин€ем полученные фигуры площади тушени€ в окончательную на текущем шаге
-'    On Error Resume Next
-'    Set fireConturs = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "ExtSquare")
-'    If fireConturs.Count > 0 Then
-'        fireConturs.Combine
-'        Set shp = Application.ActiveWindow.Selection(1)
-'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
-'    End If
+    '—оставл€ем стрку формулы дл€ ссылки на размеры полученных площадей тушени€
+    For Each extShp In squareShapesCol
+        If ExtSquareFormula = "" Then
+            ExtSquareFormula = ExtSquareFormula & "IF(ISERR(Sheet." & extShp.ID & "!Prop.ExtSquare),0,Sheet." & extShp.ID & "!Prop.ExtSquare)"
+        Else
+            ExtSquareFormula = ExtSquareFormula & "+IF(ISERR(Sheet." & extShp.ID & "!Prop.ExtSquare),0,Sheet." & extShp.ID & "!Prop.ExtSquare)"
+        End If
+    Next extShp
+    
+    'ѕрисваиваем значению площади тушени€ рассматриваемой фигуры площади пожара значение сумм площадей тушени€ полченных фигур (формулу)
+    fireShp.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
+    fireShp.Cells("Prop.ExtSquareT").FormulaU = ExtSquareFormula
 End Sub
-'
-'Public Sub DrawExtSquareByDemon()
-''ќтрисовываем фигуру периметра при помощи демона
-'Dim perimterDemon As c_PerimeterDemon
-'Dim fireConturs As Visio.Selection
-'Dim shp As Visio.Shape
-'
-'    ClearLayer "Fire"
-'
-'    Set perimterDemon = New c_PerimeterDemon
-'    perimterDemon.setGrain(grain).RunDemon matrix.firePerimeterCells
-'    perimterDemon.DrawSquare
-'
-'    'ќбъедин€ем полученные фигуры в окончательную на текущем шаге
-''    On Error Resume Next
-'    Set fireConturs = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
-'    If fireConturs.Count > 0 Then
-'        fireConturs.Combine
-'        Set shp = Application.ActiveWindow.Selection(1)
-'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-'    End If
-'
-'End Sub
 
 
 ''-------“естова€ процедура

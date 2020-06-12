@@ -1,7 +1,6 @@
 Attribute VB_Name = "m_FireShapeInsert"
 Option Explicit
 '--------------------------------------Модуль добавленияплощадей горения по указанным данным----------------------
-'Public pcm_ShapeForm As F_InsertFire
 
 
 Public Sub Sm_ShapeFormShow(ShpObj As Visio.Shape)
@@ -30,3 +29,21 @@ EX:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "Sm_ShapeFormShow"
 End Sub
+
+Public Sub Sm_ExtSquareFormShow(ShpObj As Visio.Shape)
+'Процедура показвает форму расчета площади тушения
+
+    On Error GoTo EX
+
+'---Указываем объекту формы, какой объект его вызвал
+    F_InsertExtSquare.SetFireShape ShpObj
+
+'---Показываем форму
+    F_InsertExtSquare.Show
+
+Exit Sub
+EX:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "Sm_ExtSquareFormShow"
+End Sub
+

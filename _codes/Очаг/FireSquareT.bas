@@ -7,7 +7,7 @@ Public stopModellingFlag As Boolean      'Флаг остановки моделирования
 
 '------------------------Модуль для построения площади пожара с использованием тактического метода-------------------------------------------------
 
-Public Sub MakeMatrix()
+Public Sub MakeMatrix(ByRef controlForm As Object)
 'Формируем матрицу
 Dim matrix() As Variant
 Dim matrixObj As c_Matrix
@@ -22,7 +22,7 @@ Dim matrixBuilder As c_MatrixBuilder
     
     'Запекаем матрицу открытых пространств
     Set matrixBuilder = New c_MatrixBuilder
-    matrixBuilder.SetForm F_InsertFire
+    matrixBuilder.SetForm controlForm
     matrix = matrixBuilder.NewMatrix(grain)
 
     'Активируем объект матрицы
@@ -40,8 +40,8 @@ Dim matrixBuilder As c_MatrixBuilder
     'Ищем фигуры очага и по их координатам устанавливаем точки начала пожара
     GetFirePoints
     
-    F_InsertFire.lblMatrixIsBaked.Caption = "Матрица запечена за " & tmr.GetElapsedTime & " сек."
-    F_InsertFire.lblMatrixIsBaked.ForeColor = vbGreen
+    controlForm.lblMatrixIsBaked.Caption = "Матрица запечена за " & tmr.GetElapsedTime & " сек."
+    controlForm.lblMatrixIsBaked.ForeColor = vbGreen
     
     tmr.PrintElapsedTime
     Set tmr = Nothing
@@ -49,7 +49,7 @@ Dim matrixBuilder As c_MatrixBuilder
 
 End Sub
 
-Public Sub RefreshOpenSpacesMatrix()
+Public Sub RefreshOpenSpacesMatrix(ByRef controlForm As Object)
 'Обновляем матрицу открытых пространств
 Dim matrix() As Variant
 Dim matrixBuilder As c_MatrixBuilder
@@ -65,7 +65,7 @@ Dim matrixBuilder As c_MatrixBuilder
     
     'Запекаем матрицу открытых пространств
     Set matrixBuilder = New c_MatrixBuilder
-    matrixBuilder.SetForm F_InsertFire
+    matrixBuilder.SetForm controlForm
     matrix = matrixBuilder.NewMatrix(grain)
     
     'Обновляем матрицу открытых пространств
@@ -75,8 +75,8 @@ Dim matrixBuilder As c_MatrixBuilder
     fireModeller.RefreshFirePerimeter
     
     'Выводим сообщение о итогах обновления
-    F_InsertFire.lblMatrixIsBaked.Caption = "Матрица обновлена за " & tmr.GetElapsedTime & " сек."
-    F_InsertFire.lblMatrixIsBaked.ForeColor = vbGreen
+    controlForm.lblMatrixIsBaked.Caption = "Матрица обновлена за " & tmr.GetElapsedTime & " сек."
+    controlForm.lblMatrixIsBaked.ForeColor = vbGreen
 
     tmr.PrintElapsedTime
     Set tmr = Nothing
@@ -192,30 +192,24 @@ Dim modelledFireShape As Visio.Shape
     Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
     Set modelledFireShape = vsoSelection(1)
     Application.ActiveWindow.Select modelledFireShape, visSelect
-'    Set newFireShape = ActivePage.Drop(modelledFireShape, _
-'                        modelledFireShape.Cells("PinX").Result(visInches), modelledFireShape.Cells("PinY").Result(visInches))
     
     '---Собственно обращение
     ImportAreaInformation
-    '---Указываем для фигуры фактическую площадь тушения
-'    If fireModeller.GetExtSquare > 0 Then
-'        newFireShape.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
-'        newFireShape.Cells("Prop.ExtSquareT").Formula = CLng(fireModeller.GetExtSquare)
-'    End If
+'    '---Указываем для фигуры фактическую площадь тушения
     If fireModeller.GetExtSquare > 0 Then
-        modelledFireShape.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
-        modelledFireShape.Cells("Prop.ExtSquareT").Formula = CLng(fireModeller.GetExtSquare)
+'        modelledFireShape.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
+'        modelledFireShape.Cells("Prop.ExtSquareT").Formula = CLng(fireModeller.GetExtSquare)
+        
+        fireModeller.DrawExtSquareByDemon modelledFireShape
     End If
     'Перемещаем полученные фигуры на задний план
-'    newFireShape.SendToBack
     modelledFireShape.SendToBack
         
 ''TEST:
-fireModeller.DrawExtSquareByDemon
+'fireModeller.DrawExtSquareByDemon modelledFireShape
 'Ставим фокус на построенной ранее фигуре зоны горения
 Application.ActiveWindow.DeselectAll
 Application.ActiveWindow.Select modelledFireShape, visSelect
-'fireModeller.DrawPerimeterCells
 
         
     Debug.Print "Всего затрачено " & tmr2.GetElapsedTime & "с."
@@ -250,6 +244,29 @@ Public Sub DestroyMatrix()
     Set fireModeller = Nothing
 End Sub
 
+Public Function IsAcceptableMatrixSize(ByVal maxMatrixSize As Long, ByVal grain As Integer) As Boolean
+Dim xCount As Long
+Dim yCount As Long
+'Dim grain As Integer
+
+    
+    On Error GoTo EX
+    
+'    grain = Me.txtGrainSize.value
+
+    xCount = ActivePage.PageSheet.Cells("PageWidth").Result(visMillimeters) / grain
+    yCount = ActivePage.PageSheet.Cells("PageHeight").Result(visMillimeters) / grain
+    
+    IsAcceptableMatrixSize = xCount * yCount < maxMatrixSize
+Exit Function
+EX:
+    IsAcceptableMatrixSize = False
+End Function
+
+
+
+
+
 Public Sub DrawExtSquare()
 'Внешняя команда на отрисовку площади тушения
     fireModeller.DrawExtSquareByDemon
@@ -261,19 +278,6 @@ End Sub
 
 
 
-
-
-
-
-
-'Public Sub DrawActive()
-'    fireModeller.DrawActiveCells
-''    fireModeller.DrawFrontCells
-'End Sub
-''Public Sub RemoveActive()
-''    fireModeller.RemoveActive
-'''    fireModeller.DrawFrontCells
-''End Sub
 
 
 Private Sub GetFirePoints()
@@ -305,21 +309,8 @@ Dim yIndex As Integer
 End Sub
 
 Private Sub MakeShape()
-
-'    On Error Resume Next
-'
-'    Dim vsoSelection As Visio.Selection
-'    Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
-'
-'    vsoSelection.Union
-'
-'    Application.ActiveWindow.Selection(1).CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-''    Application.ActiveWindow.Selection(1).SendToBack
-    
 'Отрисовываем фигуру хоны горения при помощи демона
     fireModeller.DrawPerimeterCells
-    
-    
 End Sub
 
 Public Function GetStepsCount(ByVal grain As Integer, ByVal speed As Single, ByVal elapsedTime As Single) As Integer

@@ -65,6 +65,6 @@ Exit Sub
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
-    SaveLog Err, "Sm_ShapeFormShow"
+    SaveLog Err, "GetFactorsByDescription"
 End Sub
 

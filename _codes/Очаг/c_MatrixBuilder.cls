@@ -14,7 +14,7 @@ Option Explicit
 Private grain As Integer        'Размер зерна в мм
 Const mmInInch As Double = 25.4
 
-Private form As F_InsertFire
+Private form As Object
 
 Public maskBuilder As c_MaskBuilder
 
@@ -32,7 +32,7 @@ Public matrix As Variant
 '    End If
 'End Function
 
-Public Sub SetForm(ByRef frm As UserForm)
+Public Sub SetForm(ByRef frm As Object)
 'Указываем ссылку на внешнюю форму в которую будет выводиться отчет о процессе запекания формы
     Set form = frm
 End Sub

@@ -68,27 +68,20 @@ Dim j As Long
         Next j
     Next i
     
+    grain = modeller.grain
 End Sub
 
 
 
 
-Public Sub RunDemon()
+Public Sub RunDemon(ByRef shp As Visio.Shape)
 '«апускаем демона
 Dim fireShapeDemon As c_FireShapeDemon
-Dim shp As Visio.Shape
-'    Set matrix = New c_MatrixExtSquare
-'    Set shp = Application.ActivePage.Shapes.ItemFromID(35)
+Dim squareShapesCol As Collection
+Dim extShp As Shape
+Dim ExtSquareFormula As String
 
-'    Set shp = Application.ActivePage.Shapes.ItemFromID(326)
-'    Set shp = Application.ActivePage.Shapes.ItemFromID(189)
-'    Set shp = Application.ActivePage.Shapes.ItemFromID(187)
-'    Set shp = Application.ActivePage.Shapes.ItemFromID(351)
-'    Set shp = Application.ActivePage.Shapes.ItemFromID(94)
-    Set shp = Application.ActivePage.Shapes.ItemFromID(15)
-    
-'    On Error GoTo EX
-'    Set shp = Application.ActiveWindow.Selection(1)
+'    Set squareShapesCol = New Collection
     
     Set fireShapeDemon = New c_FireShapeDemon
     '–асчитываем сетку фигуры
@@ -96,12 +89,18 @@ Dim shp As Visio.Shape
     '–асчитываем блоки зоны тушени€
     FireSquareCalculate
     '—троим площадь тушени€
-    DrawExtSquareByDemon
-    
-    
-    
-
-EX:
+    Set squareShapesCol = DrawExtSquareByDemon
+    '—оставл€ем стрку формулы дл€ ссылки на размеры полученных площадей тушени€
+    For Each extShp In squareShapesCol
+        If ExtSquareFormula = "" Then
+            ExtSquareFormula = ExtSquareFormula & "IF(ISERR(Sheet." & extShp.ID & "!Prop.ExtSquare),0,Sheet." & extShp.ID & "!Prop.ExtSquare)"
+        Else
+            ExtSquareFormula = ExtSquareFormula & "+IF(ISERR(Sheet." & extShp.ID & "!Prop.ExtSquare),0,Sheet." & extShp.ID & "!Prop.ExtSquare)"
+        End If
+    Next extShp
+    'ѕрисваиваем значению площади тушени€ рассматриваемой фигуры площади пожара значение сумм площадей тушени€ полченных фигур (формулу)
+    shp.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
+    shp.Cells("Prop.ExtSquareT").FormulaU = ExtSquareFormula
 End Sub
 
 
@@ -185,18 +184,23 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
     
 End Sub
 
-Public Sub DrawExtSquareByDemon()
+Public Function DrawExtSquareByDemon() As Collection
 ' оманда демону отрисовать площадь тушени€
 Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
 Dim fireConturs As Visio.Selection
 Dim shp As Visio.Shape
+'Dim squareShapesCol As Collection
+'
+'    Set squareShapesCol = New Collection
     
     ClearLayer "ExtSquare"
     
     Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
 
     extinguishingSquareDemon.setGrain = grain
-    extinguishingSquareDemon.DrawFireSquare extSquare
+    Set DrawExtSquareByDemon = extinguishingSquareDemon.DrawFireSquare(extSquare)
+    
+    
     
     'ќбъедин€ем полученные фигуры площади тушени€ в окончательную на текущем шаге
 '    On Error Resume Next
@@ -206,5 +210,5 @@ Dim shp As Visio.Shape
 '        Set shp = Application.ActiveWindow.Selection(1)
 '        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("ExtSquare")
 '    End If
-End Sub
+End Function
 
