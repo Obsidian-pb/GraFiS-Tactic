@@ -342,6 +342,9 @@ Private Sub UserForm_Initialize()
     
 End Sub
 
+Public Property Get AttackDeep() As Integer
+    AttackDeep = txtNozzleRangeValue * 1000
+End Property
 
 Private Sub UserForm_Activate()
 'Процедура активации формы - при показе
@@ -366,8 +369,6 @@ Private Sub UserForm_Activate()
         Me.txtGrainSize.value = 200
     End If
     
-    
-
 End Sub
 
 Private Sub sf_ObjectTypesListRefresh()

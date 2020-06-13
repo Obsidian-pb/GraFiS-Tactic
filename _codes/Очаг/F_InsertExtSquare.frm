@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} F_InsertExtSquare 
    Caption         =   "Рассчитать площадь тушения"
-   ClientHeight    =   3255
+   ClientHeight    =   5985
    ClientLeft      =   45
    ClientTop       =   390
    ClientWidth     =   8850
@@ -33,18 +33,15 @@ Dim matrixChecked As Long           'Количество проверенных клеток
 
 '--------------------------------Блок основных процедур----------------------------------------------------------------
 
-'Private Sub UserForm_Initialize()
-''Процедура загрузки формы
-'
-''---Обновляем списки:
-'    sf_ObjectsListCreation 'Главный список объектов и скоростей
-'
-'    '---Значения выпадающих списков
-'    sf_ObjectTypesListRefresh
-'    sf_ObjectsListRefresh
-'    sf_FireFormLoad
-'
-'End Sub
+Private Sub UserForm_Initialize()
+'Процедура загрузки формы
+
+    '---Значения выпадающих списков
+    FillCBCalculateType
+
+End Sub
+
+
 
 Public Function SetFireShape(ByRef shp As Visio.Shape) As F_InsertExtSquare
     Set fireShape = shp
@@ -149,3 +146,22 @@ Public Sub AddCheckedSize(ByVal size As Long)
     lblMatrixIsBaked.ForeColor = vbBlack
 '    Me.Repaint
 End Sub
+
+
+'------------------------Наполнение списков
+Private Sub FillCBCalculateType()
+'Список возможных вариантов расчета
+    CB_CalculateType.AddItem "Требуемая площадь тушения"
+    CB_CalculateType.AddItem "Фактическая площадь тушения"
+    CB_CalculateType.AddItem "Весь периметр"
+    CB_CalculateType.ListIndex = 0
+    CB_CalculateType.ControlTipText = "Весь периметр - весь периметр фигуры рассматривается как фронт пожара, не зависимо от конфигурации ограждающих конструкций;" & Chr(13) & Chr(10) & _
+    "Требуемая площадь тушения - расчет проводится только для участков фронта пожара, участки, граничащие с ограждающими конструкциями, не рассматриваются;" & Chr(13) & Chr(10) & _
+    "Фактическая площадь тушения - рассчитываются только те участки фронта пожара, на которых поданы стволы"
+End Sub
+
+Public Property Get AttackDeep() As Byte
+    AttackDeep = 5
+End Property
+
+

@@ -99,9 +99,9 @@ Public Sub SetStartFireCell(ByVal x As Long, ByVal y As Long, Optional value As 
 '        shp.Cells("FillForegnd").FormulaU = "2"
 End Sub
 
-Public Sub ActivateNozzles()
+Public Sub ActivateNozzles(ByRef frm As Object)
     Set nozzleDemon = New c_FireNozzlesDemon
-    nozzleDemon.setGrain = grain
+    nozzleDemon.SetForm(frm).setGrain = grain
     Set nozzleDemon.SetMatrix = matrix
     nozzleDemon.FindNozzles
 End Sub

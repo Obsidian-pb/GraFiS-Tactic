@@ -15,6 +15,8 @@ Private fireMatrixObject As c_Matrix                 'Объект расчетной зоны (вне
 
 Private grain As Integer                             'Зерно расчета
 
+Private form As Object                              'Форма вывода данных
+
 Const halfRadian As Double = 1.570796326
 Const diag As Double = 1.4142135623731              'модификатор распространения вверх и вниз
 Const orto As Double = 1                            'модификатор распротсранения по диагонали
@@ -40,7 +42,10 @@ Public Property Set SetMatrix(ByRef matr As c_Matrix)
     Set fireMatrixObject = matr
 End Property
 
-
+Public Function SetForm(ByRef frm As Object) As c_FireNozzlesDemon
+    Set form = frm
+Set SetForm = Me
+End Function
 
 
 
@@ -136,6 +141,7 @@ Dim cell As c_Cell
     If F_InsertFire.optValue Then
         On Error GoTo EX
         maxWay = F_InsertFire.txtNozzleRangeValue * 1000
+'        maxWay = form.AttackDeep
         On Error GoTo EX1
     Else
         If nozzle.nozzleType = waterLafet Then
