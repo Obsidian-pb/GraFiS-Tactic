@@ -131,19 +131,23 @@ Dim modelledFireShape As Visio.Shape
     Do While diffTime < timeElapsed And realCurrentDistance < path
         ClearLayer "ExtSquare"
         'Проверяем, сколько времени длится расчет, если меньше 10 минут, то расчитываем, только каждый второй шаг, т.е., с половиной скорости
-        If currentTime < 10 Then
-            'При вермени менее 10 минут считаем рост только каждый второй шаг
-            If IsEven(fireModeller.CurrentStep) Then
+        Stop   ' - Здесь нужно добавить проверку на достаточность расхода для тушения -> fireModeller.GetExtSquare
+        If fireModeller.GetExtSquare < fireModeller.GetFireSquare Then
+        fireModeller.
+            If currentTime < 10 Then
+                'При вермени менее 10 минут считаем рост только каждый второй шаг
+                If IsEven(fireModeller.CurrentStep) Then
+                    fireModeller.OneRound
+    
+                    'Объединяем добавленные точки в одну фигуру
+                    MakeShape
+                End If
+            Else
                 fireModeller.OneRound
-
+                    
                 'Объединяем добавленные точки в одну фигуру
                 MakeShape
             End If
-        Else
-            fireModeller.OneRound
-                
-            'Объединяем добавленные точки в одну фигуру
-            MakeShape
         End If
         
         'Увеличиваем шаг расчета

@@ -343,7 +343,10 @@ Private Sub UserForm_Initialize()
 End Sub
 
 Public Property Get AttackDeep() As Integer
-    AttackDeep = txtNozzleRangeValue * 1000
+    AttackDeep = 5000   'Условно глубину тушения принимаем по умолчанию равной 5м
+End Property
+Public Property Get StvolCalcDistance() As Integer
+    StvolCalcDistance = txtNozzleRangeValue * 1000
 End Property
 
 Private Sub UserForm_Activate()

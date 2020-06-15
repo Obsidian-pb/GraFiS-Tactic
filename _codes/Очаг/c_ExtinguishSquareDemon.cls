@@ -232,7 +232,7 @@ Dim i As Long
         Set shp = Application.ActiveWindow.Selection(1)
         shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Площадь тушения")
         shp.Cells("LineWeight").FormulaU = "0.24 pt"
-        shp.Cells("LinePattern").FormulaU = "0"
+        shp.Cells("LinePattern").FormulaU = "1"
         shp.Cells("LineColor").FormulaU = "2"
         shp.Cells("FillForegnd").FormulaU = "2"
         shp.Cells("FillForegndTrans").FormulaU = "80%"

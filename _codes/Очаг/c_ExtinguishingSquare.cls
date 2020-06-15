@@ -89,16 +89,32 @@ Dim block As c_ExtinguishingBlock
     Next block
 IsAllBlocksCalculated = True
 End Function
-'Public Function IsCellExtinguished(ByVal x As Long, ByVal y As Long) As Boolean
-''ѕровер€ем имеетс€ ли вход€ща€ клетка в коллекци€х тушащихс€ в каждом из блоков
-'Dim block As c_ExtinguishingBlock
-'
-'    For Each block In extinguishingBlocks
-'        If block.IsCellExtinguished(x, y) Then
-'            IsCellExtinguished = True
-'            Exit Function
-'        End If
-'    Next block
-'
-'IsCellExtinguished = False
-'End Function
+
+Public Function GetWaterExpenseKind() As WaterExpenseKind
+'ѕодаетс€ воды: 0 не подаетс€, 1 - подаетс€ недостаточно, 2 - подаетс€ достаточно.
+Dim block As c_ExtinguishingBlock
+Dim expKind(2) As Byte
+    
+    '≈сли нет ни одного блока тушени€ возвращаем значение notSet
+    If extinguishingBlocks.Count = 0 Then
+        GetWaterExpenseKind = notSet
+        Exit Function
+    End If
+    
+    'ѕровер€ем все блоки - достаточно ли расхода
+    For Each block In extinguishingBlocks
+        expKind(block.GetWaterExpenseKind) = expKind(block.GetWaterExpenseKind) + 1
+    Next block
+    
+    '¬ зваисимости от того, что получилось укзываем достаточность расхода дл€ всей площади тушени€
+    If expKind(sufficient) = extinguishingBlocks.Count Then
+        GetWaterExpenseKind = sufficient
+        Exit Function
+    End If
+    If expKind(notSet) = extinguishingBlocks.Count Then
+        GetWaterExpenseKind = notSet
+        Exit Function
+    End If
+    
+GetWaterExpenseKind = notSufficient
+End Function

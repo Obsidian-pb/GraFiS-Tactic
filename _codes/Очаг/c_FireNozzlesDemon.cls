@@ -140,8 +140,8 @@ Dim cell As c_Cell
 
     If F_InsertFire.optValue Then
         On Error GoTo EX
-        maxWay = F_InsertFire.txtNozzleRangeValue * 1000
-'        maxWay = form.AttackDeep
+'        maxWay = F_InsertFire.txtNozzleRangeValue * 1000
+        maxWay = form.StvolCalcDistance
         On Error GoTo EX1
     Else
         If nozzle.nozzleType = waterLafet Then

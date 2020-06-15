@@ -160,8 +160,12 @@ Private Sub FillCBCalculateType()
     "Фактическая площадь тушения - рассчитываются только те участки фронта пожара, на которых поданы стволы"
 End Sub
 
-Public Property Get AttackDeep() As Byte
-    AttackDeep = 5
+Public Property Get AttackDeep() As Integer
+    Stop
+    AttackDeep = 5000
+End Property
+Public Property Get StvolCalcDistance() As Integer
+    StvolCalcDistance = 5000   'Условно расстояние расчета стволов принимаем по умолчанию равной 5м
 End Property
 
 
