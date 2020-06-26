@@ -584,6 +584,11 @@ Set vO_IntShape = Application.ActivePage.Shapes.ItemFromID(VL_InitShapeID)
         vO_IntShape.Cells("Scratch.B6").FormulaU = """" & """"
         vO_IntShape.Cells("Scratch.C6").FormulaU = """" & """"
     End If
+    
+    '---Устанавливаем расчетные формулы
+    vO_IntShape.Cells("Prop.PressureMin").FormulaForceU = "MIN(Scratch.B1,Scratch.B2,Scratch.B3,Scratch.B4,Scratch.B5,Scratch.B6)"
+    vO_IntShape.Cells("Prop.PressureLostMax").FormulaForceU = "MAX(Scratch.D1,Scratch.D2,Scratch.D3,Scratch.D4,Scratch.D5,Scratch.D6)"
+    vO_IntShape.Cells("Prop.PressureAtFireMin").FormulaForceU = "MIN(Scratch.C1,Scratch.C2,Scratch.C3,Scratch.C4,Scratch.C5,Scratch.C6)"
 
 Exit Sub
 ex:
