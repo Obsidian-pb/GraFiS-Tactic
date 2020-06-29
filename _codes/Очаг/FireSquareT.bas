@@ -130,10 +130,11 @@ Dim modelledFireShape As Visio.Shape
     
     Do While diffTime < timeElapsed And realCurrentDistance < path
         ClearLayer "ExtSquare"
-        'ѕровер€ем, сколько времени длитс€ расчет, если меньше 10 минут, то расчитываем, только каждый второй шаг, т.е., с половиной скорости
-        Stop   ' - «десь нужно добавить проверку на достаточность расхода дл€ тушени€ -> fireModeller.GetExtSquare
+        
+'        Stop   ' - «десь нужно добавить проверку на достаточность расхода дл€ тушени€ -> fireModeller.GetExtSquare
         If fireModeller.GetExtSquare < fireModeller.GetFireSquare Then
-        fireModeller.
+'        fireModeller.
+            'ѕровер€ем, сколько времени длитс€ расчет, если меньше 10 минут, то расчитываем, только каждый второй шаг, т.е., с половиной скорости
             If currentTime < 10 Then
                 'ѕри вермени менее 10 минут считаем рост только каждый второй шаг
                 If IsEven(fireModeller.CurrentStep) Then
@@ -147,6 +148,26 @@ Dim modelledFireShape As Visio.Shape
                     
                 'ќбъедин€ем добавленные точки в одну фигуру
                 MakeShape
+            End If
+        ElseIf fireModeller.GetExtSquare >= fireModeller.GetFireSquare Then
+            If Not fireModeller.GetWaterExpenseKind = sufficient Then   '≈сли достаточно расхода то ничего не делаем, просто считаем следующий шаг
+            
+'            Else
+                'ѕровер€ем, сколько времени длитс€ расчет, если меньше 10 минут, то расчитываем, только каждый второй шаг, т.е., с половиной скорости
+                If currentTime < 10 Then
+                    'ѕри вермени менее 10 минут считаем рост только каждый второй шаг
+                    If IsEven(fireModeller.CurrentStep) Then
+                        fireModeller.OneRound
+        
+                        'ќбъедин€ем добавленные точки в одну фигуру
+                        MakeShape
+                    End If
+                Else
+                    fireModeller.OneRound
+                        
+                    'ќбъедин€ем добавленные точки в одну фигуру
+                    MakeShape
+                End If
             End If
         End If
         

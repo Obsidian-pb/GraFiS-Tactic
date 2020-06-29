@@ -1202,8 +1202,8 @@
     Prop.Round: 1; Prop.Round.Prompt: "Точность округления"; Prop.Round.Label: "Точность округления"; Prop.Round.Format: "0;1;2"; Prop.Round.SortKey: 51; Prop.Round.Type: 1; Prop.Round.Invisible: FALSE; Prop.Round.Verify: FALSE; Prop.Round.LangID: 1049; Prop.Round.Calendar: 0; 
     Prop.HeadDiapasone: ""; Prop.HeadDiapasone.Prompt: "Указывается диапазон производительности прибора подачи. Если диапазона нет, указывается номинальный (рабочий) расход"; Prop.HeadDiapasone.Label: "Диапазон производительности"; Prop.HeadDiapasone.Format: ""; Prop.HeadDiapasone.SortKey: 35; Prop.HeadDiapasone.Type: 0; Prop.HeadDiapasone.Invisible: NOT(Actions.HeadDiapasoneShow.Checked); Prop.HeadDiapasone.Verify: FALSE; Prop.HeadDiapasone.LangID: 1049; Prop.HeadDiapasone.Calendar: 0; 
   Section: Scratch>>>
-    Scratch.A1: 0; Scratch.C1: User.Head+Prop.StvolHeight; 
-    Scratch.A2: 0; Scratch.C2: User.Head+Prop.StvolHeight; 
+    Scratch.A1: 0; Scratch.C1: User.Head+Prop.StvolHeight; Scratch.D1: User.PodOut/(Scratch.A1+Scratch.A2); 
+    Scratch.A2: 0; Scratch.C2: User.Head+Prop.StvolHeight; Scratch.D2: User.PodOut/(Scratch.A1+Scratch.A2); 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>

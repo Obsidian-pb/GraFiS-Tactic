@@ -93,7 +93,11 @@ End Function
 Public Function GetWaterExpenseKind() As WaterExpenseKind
 'Подается воды: 0 не подается, 1 - подается недостаточно, 2 - подается достаточно.
 Dim block As c_ExtinguishingBlock
-Dim expKind(2) As Byte
+'Dim expKind(2) As Byte
+Dim expKind As WaterExpenseKind
+    
+    'Устанавливаем стартовое значение достаточности расхода - по умолчанию, достаточно
+    expKind = WaterExpenseKind.sufficient
     
     'Если нет ни одного блока тушения возвращаем значение notSet
     If extinguishingBlocks.Count = 0 Then
@@ -101,20 +105,28 @@ Dim expKind(2) As Byte
         Exit Function
     End If
     
+'    'Проверяем все блоки - достаточно ли расхода
+'    For Each block In extinguishingBlocks
+'        expKind(block.GetWaterExpenseKind) = expKind(block.GetWaterExpenseKind) + 1
+'    Next block
+'
+'    'В зваисимости от того, что получилось укзываем достаточность расхода для всей площади тушения
+'    If expKind(sufficient) = extinguishingBlocks.Count Then
+'        GetWaterExpenseKind = sufficient
+'        Exit Function
+'    End If
+'    If expKind(notSet) = extinguishingBlocks.Count Then
+'        GetWaterExpenseKind = notSet
+'        Exit Function
+'    End If
+    
     'Проверяем все блоки - достаточно ли расхода
     For Each block In extinguishingBlocks
-        expKind(block.GetWaterExpenseKind) = expKind(block.GetWaterExpenseKind) + 1
+        If expKind > block.GetWaterExpenseKind Then
+            expKind = block.GetWaterExpenseKind
+        End If
     Next block
-    
-    'В зваисимости от того, что получилось укзываем достаточность расхода для всей площади тушения
-    If expKind(sufficient) = extinguishingBlocks.Count Then
-        GetWaterExpenseKind = sufficient
-        Exit Function
-    End If
-    If expKind(notSet) = extinguishingBlocks.Count Then
-        GetWaterExpenseKind = notSet
-        Exit Function
-    End If
-    
-GetWaterExpenseKind = notSufficient
+
+'GetWaterExpenseKind = notSufficient
+GetWaterExpenseKind = expKind
 End Function

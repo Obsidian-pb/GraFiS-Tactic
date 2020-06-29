@@ -499,7 +499,14 @@ End Function
 Public Function GetExtSquare() As Single
 'Возвращает площадь тушения
 Dim tmpVal As Single
-    tmpVal = extSquare.GetSquare
+    If Not extSquare Is Nothing Then
+        tmpVal = extSquare.GetSquare
+    Else
+        tmpVal = 0
+    End If
+    
+    
+'    tmpVal = extSquare.GetSquare
 '    If tmpVal = 0 Then
 '        GetExtSquare = GetFireSquare
 '    Else
@@ -613,6 +620,18 @@ Dim squareShapesCol As Collection
     fireShp.Cells("Prop.ExtSquareT").FormulaU = ExtSquareFormula
 End Sub
 
+Public Function GetWaterExpenseKind() As WaterExpenseKind
+'Проверяем достаточность расхода воды для тушения
+Dim tmpVal As WaterExpenseKind
+    
+    If Not extSquare Is Nothing Then
+        tmpVal = extSquare.GetWaterExpenseKind
+    Else
+        tmpVal = WaterExpenseKind.notSufficient
+    End If
+    
+GetWaterExpenseKind = tmpVal
+End Function
 
 ''-------Тестовая процедура
 'Public Sub DrawActiveCells()
