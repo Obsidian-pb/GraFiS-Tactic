@@ -531,6 +531,7 @@ Dim latestSquareTime As Date
                     Case Is = indexPers.ipZdanie 'Здания
                         .Raise "BuildCount"
                     Case Is = indexPers.ipPodpisUniversal 'Подпись универсальная (так же подпись улиц)
+                        .Raise "OrientCount"
                     Case Is = indexPers.ipRosaVetrov 'Roza vetrov
                         .Raise "OrientCount"
                         
@@ -676,6 +677,7 @@ Dim latestSquareTime As Date
         .SetVal "PANeedOnWaterSource", PF_RoundUp(.Result("NeedStreamW") / 32)
         .SetVal "RSCHSTechincsHave", .Result("RSCHSTechincsHave") + .Result("TotalFireCount") + .Result("MVDCount") + .Result("SMPCount")
         .SetVal "TechnicsNotMchsHave", .Result("RSCHSTechincsHave") - .Result("TotalFireCount")
+        .SetVal "TechnicsNotMchsSmpMvdHave", .Result("TechnicsNotMchsHave") - .Result("SMPCount") - .Result("MVDCount")
         .SetVal "WaterValueNeed10min", .Result("FactStreamW") * 600
         .SetVal "TechnicsNotMchsOtherHave", .Result("TotalTechCount") - .Result("RSCHSTechincsHave")
         
