@@ -195,7 +195,7 @@
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
     User.LineLenight: 10; User.LineLenight.Prompt: ""; 
     User.IndexPers: 110; User.IndexPers.Prompt: "Скатка"; 
-    User.HoseLength: GUARD(INDEX(LOOKUP(Prop.LineType;Prop.LineType.Format);"20;20;4;1;15")); User.HoseLength.Prompt: ""; 
+    User.HoseLength: GUARD(IF(Prop.HoseDiameter<200;INDEX(LOOKUP(Prop.LineType;Prop.LineType.Format);"20;20;4;1;15");100)); User.HoseLength.Prompt: ""; 
     User.Version: 1; User.Version.Prompt: ""; 
     User.TotalLenight: IF(STRSAME(Prop.ShowLenightDirect;"Да");Prop.LineLenightS;Prop.LineLenightHose); User.TotalLenight.Prompt: ""; 
     User.HosesNeed: IF(STRSAME(Prop.ShowLenightDirect;"Да");Prop.HoseNeedS;Prop.HoseNeed); User.HosesNeed.Prompt: ""; 
@@ -344,7 +344,7 @@
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
     User.LineLenight: 10; User.LineLenight.Prompt: ""; 
     User.IndexPers: 111; User.IndexPers.Prompt: "Гармошка"; 
-    User.HoseLength: GUARD(INDEX(LOOKUP(Prop.LineType;Prop.LineType.Format);"20;20;4;1;15")); User.HoseLength.Prompt: ""; 
+    User.HoseLength: GUARD(IF(Prop.HoseDiameter<200;INDEX(LOOKUP(Prop.LineType;Prop.LineType.Format);"20;20;4;1;15");100)); User.HoseLength.Prompt: ""; 
     User.Version: 1; User.Version.Prompt: ""; 
     User.TotalLenight: IF(STRSAME(Prop.ShowLenightDirect;"Да");Prop.LineLenightS;Prop.LineLenightHose); User.TotalLenight.Prompt: ""; 
     User.HosesNeed: IF(STRSAME(Prop.ShowLenightDirect;"Да");Prop.HoseNeedS;Prop.HoseNeed); User.HosesNeed.Prompt: ""; 
@@ -476,7 +476,7 @@
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
     User.LineLenight: 2; User.LineLenight.Prompt: ""; 
     User.IndexPers: 100; User.IndexPers.Prompt: "Напорная рукавная линия"; 
-    User.HoseLength: GUARD(INDEX(LOOKUP(Prop.LineType;Prop.LineType.Format);"20;20;4;1;15")); User.HoseLength.Prompt: ""; 
+    User.HoseLength: GUARD(IF(Prop.HoseDiameter<200;INDEX(LOOKUP(Prop.LineType;Prop.LineType.Format);"20;20;4;1;15");100)); User.HoseLength.Prompt: ""; 
     User.Version: 1; User.Version.Prompt: ""; 
     User.TotalLenight: IF(STRSAME(Prop.ShowLenightDirect;"Да");Prop.LineLenightS;Prop.LineLenightHose); User.TotalLenight.Prompt: ""; 
     User.HosesNeed: IF(STRSAME(Prop.ShowLenightDirect;"Да");Prop.HoseNeedS;Prop.HoseNeed); User.HosesNeed.Prompt: ""; 

@@ -23,15 +23,15 @@ End Sub
 
 Sub RemoveTB_SpecFunc()
 'Процедура добавления панели управления "Спецфункции"-------------------------------
-    On Error GoTo EX
+    On Error GoTo ex
     Application.CommandBars("Спецфункции").Delete
 
-EX:
+ex:
 End Sub
 
 Sub AddButtons()
 'Процедура добавление новой кнопки на панель управления "Спецфункции"--------------
-    On Error GoTo EX
+    On Error GoTo ex
 '---Объявляем переменные и постоянные--------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -77,6 +77,14 @@ Sub AddButtons()
         .Picture = LoadPicture(DocPath & "Bitmaps\Count1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Count2.bmp")
     End With
+'---Кнопка "Выбрать подобные"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Выбрать подобные"
+        .Tag = "Select"
+        .TooltipText = "Выбрать фигуры аналогичные выделенным"
+        .FaceID = 1446
+    End With
 '---Кнопка "Панель таймера"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
@@ -92,7 +100,7 @@ Sub AddButtons()
 
 Set Bar = Nothing
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons"
 End Sub
@@ -101,7 +109,7 @@ End Sub
 Sub DeleteButtons()
 '---Процедура удаления кнопки "Мастер проверок" из панели управления "Спецфункции"--------------
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
@@ -129,7 +137,7 @@ Set Button = Nothing
 Set Bar = Nothing
 Exit Sub
 
-EX:
+ex:
     Set Button = Nothing
     Set Bar = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name

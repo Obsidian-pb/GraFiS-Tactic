@@ -43,7 +43,7 @@ Dim vsoMasterShape As Visio.Shape
     ShpObj.Delete
     
 Exit Sub
-EX:
+ex:
     
 End Sub
 

@@ -30,7 +30,7 @@ Dim curPage As String
 Dim i As Integer
 Dim progressWidthStep As Double
 
-    On Error GoTo EX
+    On Error GoTo ex
 
     curPath = Application.ActiveDocument.path
     
@@ -58,7 +58,7 @@ Dim progressWidthStep As Double
 Label2.Visible = True
 CBClose.Enabled = True
 Exit Sub
-EX:
+ex:
     Label2.Visible = True
     CBClose.Enabled = True
     If Err.Number = -2032466048 Then

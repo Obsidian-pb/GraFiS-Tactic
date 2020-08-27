@@ -6,9 +6,13 @@ Option Explicit
 Public Sub sP_ChangeValue(ShpObj As Visio.Shape)
 'Процедура реакции на действие пользователя
 Dim targetPage As Visio.Page
-
+    
+    On Error GoTo EX
+    
 '---Предлагаем пользователю указать страницу для анализа
     SeetsSelectForm.Show
+    If SeetsSelectForm.SelectedSheet = "" Then Exit Sub
+    
     Set targetPage = Application.ActiveDocument.Pages(SeetsSelectForm.SelectedSheet)
 
 '---обновляем имеющиеся значения свойств
@@ -17,6 +21,7 @@ Dim targetPage As Visio.Page
 '---Запускаем циклы обработки фигур отчета
     sP_ChangeValueMain ShpObj, targetPage
 
+EX:
 End Sub
 
 Public Sub sP_ChangeValueMain(ByRef vsO_BaseShape As Visio.Shape, ByRef vsO_TargetPage As Visio.Page)
@@ -34,6 +39,7 @@ Dim vsO_Shape As Visio.Shape
             If vsO_Shape.CellExists("User.PropertyValue", 0) = True Then '---Проверяем является ли фигура полем отчета
                 vsO_Shape.Cells("User.PropertyValue").FormulaU = _
                     str(A.ResultByCN(vsO_Shape.Cells("Prop.PropertyName").ResultStr(visUnitsString)))
+                vsO_Shape.Cells("Actions.HideText.Checked").FormulaU = 0
             End If
         Next vsO_Shape
     End If

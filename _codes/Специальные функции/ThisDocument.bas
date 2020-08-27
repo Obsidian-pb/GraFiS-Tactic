@@ -26,7 +26,7 @@ Dim ButEvent As c_Buttons
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 'Обрабатываем открытие документа
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
@@ -48,7 +48,7 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     fmsgCheckNewVersion.CheckUpdates
 
 Exit Sub
-EX:
+ex:
    
 End Sub
 
