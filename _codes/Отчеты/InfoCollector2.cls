@@ -91,7 +91,7 @@ Dim latestSquareTime As Date
                         .Raise "SpecialPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipPNS 'омя
-                        .Raise "TargetedPAHave;TotalTechCount;TotalFireCount"
+                        .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"
                         .Raise "PersonnelHave", CellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipAA 'AA
                         .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount"

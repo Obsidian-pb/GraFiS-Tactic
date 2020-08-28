@@ -60,6 +60,17 @@ Sub AddButtons()
         .FaceID = 1090
         .beginGroup = False
     End With
+'---Кнопка "Экспорт в Ворд"-------------------------------------------------
+    'Пока только тактические данные, в перспективе нужноседалть экспорт данных активного окна
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Visible = False
+        .Caption = "Экспорт в Word"
+        .Tag = "export_to_Word"
+        .TooltipText = "Экспортировать тактические данные в документ Word"
+        .FaceID = 268
+        .beginGroup = False
+    End With
 '---Кнопка "Настройки"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
@@ -94,6 +105,9 @@ Sub DeleteButtons()
     Button.Delete
 '---Удаление кнопки "Тактические данные" с панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Тактические данные")
+    Button.Delete
+'---Удаление кнопки "Экспорт в Word" с панели управления "Спецфункции"------------------------
+    Set Button = Bar.Controls("Экспорт в Word")
     Button.Delete
 '---Удаление кнопки "Настройки" с панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Настройки")

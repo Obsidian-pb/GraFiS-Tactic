@@ -146,6 +146,9 @@ Public Sub CloseThis()
     If wAddon Is Nothing Then Exit Sub
     Set app = Nothing
     wAddon.Close
+    
+'---Скрываем кнопку "Экспорт в Word"
+    Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = False
 End Sub
 
 Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
@@ -200,9 +203,48 @@ Dim elem As Element
 
 End Sub
 
+'------------Процедуры экспорта данных формы--------------------------
+Public Sub ExportToWord()
+'Экспортируем данные формы в документ Word
+Dim wrd As Object
+Dim wrdDoc As Object
+Dim wrdTbl As Object
+Dim tactDataRowsCount As Integer
+Dim i As Integer
+    
+    tactDataRowsCount = lstTacticData.ListCount
+    
+    'Создаем новый документ Word
+    Set wrd = CreateObject("Word.Application")
+    wrd.Visible = True
+    wrd.Activate
+    Set wrdDoc = wrd.Documents.Add
+    wrdDoc.Activate
+    'Создаем в новом документе таблицу требуемых размеров
+    Set wrdTbl = wrdDoc.Tables.Add(wrd.Selection.Range, tactDataRowsCount, 2)
+    With wrdTbl
+        If .style <> "Сетка таблицы" Then
+            .style = "Сетка таблицы"
+        End If
+        .ApplyStyleHeadingRows = True
+        .ApplyStyleLastRow = False
+        .ApplyStyleFirstColumn = True
+        .ApplyStyleLastColumn = False
+        .ApplyStyleRowBands = True
+        .ApplyStyleColumnBands = False
+    End With
+    
+    'Заполняем табблицу тактическими данными
+    For i = 1 To tactDataRowsCount
+        wrdTbl.Rows(i).Cells(1).Range.Text = lstTacticData.List(i - 1, 0)
+        wrdTbl.Rows(i).Cells(2).Range.Text = lstTacticData.List(i - 1, 1)
+    Next i
+End Sub
 
 
 
 
-
-
+Private Sub UserForm_Terminate()
+'---Скрываем кнопку "Экспорт в Word"
+    Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = False
+End Sub
