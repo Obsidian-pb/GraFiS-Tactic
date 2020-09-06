@@ -160,18 +160,33 @@ End Function
 'End Sub
 
 '--------------------------------Работа со слоями-------------------------------------
-Public Function GetLayerNumber(ByRef layerName As String) As Integer
+Public Function GetLayerNumber(ByVal layerName As String) As Integer
 Dim layer As Visio.layer
 
     For Each layer In Application.ActivePage.Layers
         If layer.Name = layerName Then
-            GetLayerNumber = layer.Index - 1
+'            GetLayerNumber = layer.Index - 1
+            GetLayerNumber = GetLayerNamberFix(layerName)
             Exit Function
         End If
     Next layer
     
     Set layer = Application.ActivePage.Layers.Add(layerName)
     GetLayerNumber = layer.Index - 1
+End Function
+
+Private Function GetLayerNamberFix(ByVal layerName As String) As Integer
+Dim layer As Visio.layer
+Dim i As Integer
+    
+'    По неизвестной причине так работает стабильнее...
+    For i = 1 To Application.ActivePage.Layers.Count
+        If Application.ActivePage.Layers(i).Name = layerName Then
+            GetLayerNamberFix = i - 1
+            Exit Function
+        End If
+'        i = i + 1
+    Next i
 End Function
 
 '---------------------------------------Служебные функции и проки--------------------------------------------------
