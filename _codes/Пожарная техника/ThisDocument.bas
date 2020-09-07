@@ -52,7 +52,9 @@ Dim ShpInd As Integer
     If cell.Shape Is Nothing Then Exit Sub
 
 '---Проверяем имя ячейки
-'    If IsShapeLinkedToDataAndDropFirst(cell.Shape) Then
+'!!!До конца разобраться!!!
+'    If Not IsShapeLinkedToDataAndDropFirst(cell.Shape) Then
+    If Not IsShapeLinked(cell.Shape) Then
 '    If cell.Shape.CellExists("User.InPage", 0) = False Then
         If cell.Name = "Prop.Set" Then
 '            Debug.Print cell.Name & " -> " & cell.Shape.Name
@@ -67,7 +69,7 @@ Dim ShpInd As Integer
 '    Else
 ''        cell.Shape.Cells("Prop.Set").FormulaU = "INDEX(0,Prop.Set.Format)"
 ''        ShapeLinkRefresh cell.Shape
-'    End If
+    End If
     
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
 End Sub
