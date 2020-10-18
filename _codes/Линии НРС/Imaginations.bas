@@ -362,9 +362,9 @@ End Sub
 Function LayerImport(ShapeFromID As Long, ShapeToID As Long) As String
 '‘ункци€ возвращает номер сло€ в текущем документе соответствующего слою в документе мастера
 Dim ShapeFrom As Visio.Shape
-Dim LayerNumber As Integer, LayerName As String
+Dim LayerNumber As Integer, layerName As String
 Dim Flag As Boolean
-Dim vsoLayer As Visio.Layer
+Dim vsoLayer As Visio.layer
 
     On erro GoTo EX
 '---ѕрисваиваем объектным переменным ‘игуры(ShapeFrom и ShpeTo) в соответствии с индексами
@@ -372,22 +372,22 @@ Dim vsoLayer As Visio.Layer
 '    MsgBox ThisDocument.Masters(ShapeFromID)
     
 '---ѕолучаем название сло€ соответственно номеру в исходном документе
-    LayerName = ShapeFrom.Layer(1).Name
+    layerName = ShapeFrom.layer(1).Name
 
 '---ѕровер€ем есть ли в текущем документе слой с таким именем
     For i = 1 To Application.ActivePage.Layers.Count
-        If Application.ActivePage.Layers(i).Name = LayerName Then
+        If Application.ActivePage.Layers(i).Name = layerName Then
             Flag = True
         End If
     Next i
 
 '---¬ соответствии с полученным названием определ€ем номер сло€ в текущем документе
     If Flag = True Then
-        LayerNumber = Application.ActivePage.Layers(LayerName).Index
+        LayerNumber = Application.ActivePage.Layers(layerName).Index
     Else
     '---—оздаем новый слой с именем сло€ к которому принадлежит исходна€ фигура
-        Set vsoLayer = Application.ActiveWindow.Page.Layers.Add(LayerName)
-        vsoLayer.NameU = LayerName
+        Set vsoLayer = Application.ActiveWindow.Page.Layers.Add(layerName)
+        vsoLayer.NameU = layerName
         vsoLayer.CellsC(visLayerColor).FormulaU = "255"
         vsoLayer.CellsC(visLayerStatus).FormulaU = "0"
         vsoLayer.CellsC(visLayerVisible).FormulaU = "1"
@@ -398,7 +398,7 @@ Dim vsoLayer As Visio.Layer
         vsoLayer.CellsC(visLayerGlue).FormulaU = "1"
         vsoLayer.CellsC(visLayerColorTrans).FormulaU = "0%"
     '---ѕрисваиваем номер нового сло€
-        LayerNumber = Application.ActivePage.Layers(LayerName).Index
+        LayerNumber = Application.ActivePage.Layers(layerName).Index
     End If
         
 LayerImport = Chr(34) & LayerNumber - 1 & Chr(34)

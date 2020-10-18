@@ -111,9 +111,7 @@ Dim ShpInd As Integer
 End Sub
 
 Private Sub sp_TemplatesImport()
-
-Visio.Application.ActivePage.Drop (ThisDocument.Masters("ВсасывающийРукав"))
-
+    Visio.Application.ActivePage.Drop ThisDocument.Masters("ВсасывающийРукав"), 0, 0
 End Sub
 
 

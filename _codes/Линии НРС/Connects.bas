@@ -9,7 +9,7 @@ On Error Resume Next
 
 '---Если подпись ни к чему не приклеена, процедура заканчивается
     If ShpObj.Connects.Count > 0 Then
-        ToShape = ShpObj.Connects.Item(1).ToSheet.ID
+        ToShape = ShpObj.Connects.item(1).ToSheet.ID
         ShpObj.Cells("User.HoseDiameter").FormulaU = "Sheet." & ToShape & "!Prop.HoseDiameter" & ""
         ShpObj.Cells("User.HoseNumber").FormulaU = "Sheet." & ToShape & "!User.HosesNeed" & ""
         ShpObj.Cells("User.WaterExpence").FormulaU = "Sheet." & ToShape & "!Prop.Flow.Value" & ""
@@ -18,7 +18,7 @@ On Error Resume Next
         ShpObj.Cells("User.LineLenight").FormulaU = "Sheet." & ToShape & "!User.TotalLenight" & ""
         ShpObj.Cells("Prop.Pressure").FormulaU = "ROUND(Sheet." & ToShape & "!Prop.HeadInHose*Prop.Koeff,2)" & ""
     Else
-        ToShape = ShpObj.Connects.Item(1).ToSheet.ID
+        ToShape = ShpObj.Connects.item(1).ToSheet.ID
         ShpObj.Cells("User.HoseDiameter").FormulaU = 0
         ShpObj.Cells("User.HoseNumber").FormulaU = 0
         ShpObj.Cells("User.WaterExpence").FormulaU = 0

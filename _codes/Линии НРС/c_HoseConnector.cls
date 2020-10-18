@@ -20,17 +20,7 @@ Private WithEvents vO_App As Visio.Application
 Attribute vO_App.VB_VarHelpID = -1
 Private cpO_InShape, cpO_OutShape As Visio.Shape 'Фигуры в которую входит поток и выходит, соответственно
 
-'---Постоянные индеков графиков
-Const ccs_InIdent = "Connections.GFS_In"
-Const ccs_OutIdent = "Connections.GFS_Ou"
-Const vb_ShapeType_Other = 0                'Ничего
-Const vb_ShapeType_Hose = 1                 'Рукава
-Const vb_ShapeType_PTV = 2                  'ПТВ
-Const vb_ShapeType_Razv = 3                 'Разветвление
-Const vb_ShapeType_Tech = 4                 'Техника
-Const vb_ShapeType_VsasSet = 5              'Всасывающая сетка с линией
-Const vb_ShapeType_GE = 6                   'Гидроэлеватор
-Const vb_ShapeType_WaterContainer = 7       'Водяная емкость
+
 
 'Const vb_LineTypeWork = 0                   'Рабочая рукавная линия
 'Const vb_LineTypeMag = 1                    'Магистральная рукавная линия
