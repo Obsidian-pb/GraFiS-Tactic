@@ -76,8 +76,8 @@ Public Function Q_Clear() As c_NRSNode
 Set Q_Clear = Me
 End Function
 Public Function Q_Raise(ByVal a_Q As Single) As c_NRSNode
-    Q_ = a_Q
-Set Q_Clear = Me
+    Q_ = Q_ + a_Q
+Set Q_Raise = Me
 End Function
 
 Public Property Get hLost() As Double
@@ -181,9 +181,22 @@ Public Function Realize() As c_NRSNode
     Application.EventsEnabled = False
     
     'Для разных фигур разное
-    
-    
-    
+    Select Case CellVal(nodeShape_, "User.IndexPers")
+        Case Is = indexPers.ipAC
+            SetCellVal nodeShape_, "Prop.PodOut", Q_
+'            SetCellVal nodeShape_, "Prop.PumpPressureCur", Q_
+        Case Is = indexPers.ipRukavLineNapor
+            SetCellVal nodeShape_, "Prop.Flow", Q_
+            SetCellVal nodeShape_, "Prop.HeadInHose", hOut
+            SetCellVal nodeShape_, "Prop.HeadLost", hLost
+        Case Is = indexPers.ipRazvetvlenie
+            SetCellVal nodeShape_, "Prop.StreamThrough", Q_
+            SetCellVal nodeShape_, "Prop.HeadInRazv", hOut
+        Case Is = indexPers.ipStvolRuch
+            SetCellVal nodeShape_, "User.PodOut", QStv
+            SetCellVal nodeShape_, "User.Head", hOut
+            '!!!Не забыть учитывать подъем ствола: =GUARD(IF(Scratch.A1-Prop.StvolHeight<0,0,Scratch.A1-Prop.StvolHeight))
+    End Select
     
     
     

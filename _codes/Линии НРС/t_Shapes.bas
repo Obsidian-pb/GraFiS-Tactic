@@ -50,7 +50,7 @@ Dim cll As Visio.cell
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
-        shp.Cells(cellName).Formula = NewVal
+        shp.Cells(cellName).FormulaForce = NewVal
     End If
     
 Exit Sub
