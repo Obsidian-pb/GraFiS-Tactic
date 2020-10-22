@@ -23,7 +23,7 @@ End Sub
 Sub CloneSectionUniverseNames(ByVal SectionIndex As Integer, ByVal ShapeFromID As Long, ByVal ShapeToID As Long)
 'Процедура копирования необходимого набора свойств указанной секции из Фигуры(ShapeFrom) в Фигуру(ShapeTo)
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Объявляем переменные
 Dim ShapeFrom As Visio.Shape, ShapeTo As Visio.Shape
@@ -51,7 +51,7 @@ Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
         Next RowNum
         
     Exit Sub
-EX:
+ex:
 '    Debug.Print Err.Description
     SaveLog Err, "CloneSectionUniverseNames"
     
@@ -60,7 +60,7 @@ End Sub
 Sub CloneSectionScratchNames(ShapeFromID As Long, ShapeToID As Long)
 'Процедура копирования необходимого набора свойств секции Scratch из Фигуры(ShapeFrom) в Фигуру(ShapeTo)
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Объявляем переменные
 Dim ShapeFrom As Visio.Shape, ShapeTo As Visio.Shape
@@ -82,7 +82,7 @@ Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
     Next RowNum
             
     Exit Sub
-EX:
+ex:
 '    Debug.Print Err.Description
     SaveLog Err, "CloneSectionScratchNames"
     
@@ -122,7 +122,7 @@ End Sub
 Sub CloneSectionScratchValues(ShapeFromID As Long, ShapeToID As Long)
 '---Процедура копирования свойств секции Scratch из Фигуры(ShapeFrom) в Фигуру(ShapeTo)
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Объявляем переменные
 Dim ShapeFrom As Visio.Shape, ShapeTo As Visio.Shape
@@ -144,7 +144,7 @@ Dim RowNum As Integer, CellNum As Integer
         Next RowNum
 
     Exit Sub
-EX:
+ex:
 '    Debug.Print Err.Description
     SaveLog Err, "Document_DocumentOpened"
 
@@ -216,7 +216,7 @@ Sub ImportHoseInformation()
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
     '---Проверяем выбран ли какой либо объект
     If Application.ActiveWindow.Selection.Count < 1 Then
         MsgBox "Не выбрана ни одна фигура!", vbInformation
@@ -284,7 +284,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     Set ShapeFrom = Nothing
     
 Exit Sub
-EX:
+ex:
     '---Очищаем объектные переменные
     Set ShapeTo = Nothing
     Set ShapeFrom = Nothing
@@ -299,7 +299,7 @@ Sub ImportVHoseInformation()
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
     '---Проверяем выбран ли какой либо объект
     If Application.ActiveWindow.Selection.Count < 1 Then
         MsgBox "Не выбрана ни одна фигура!", vbInformation
@@ -353,7 +353,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     LenightSetInner (ShapeTo.Name)
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ImportVHoseInformation"
 End Sub
 
@@ -366,7 +366,7 @@ Dim LayerNumber As Integer, layerName As String
 Dim Flag As Boolean
 Dim vsoLayer As Visio.layer
 
-    On erro GoTo EX
+    On erro GoTo ex
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
     Set ShapeFrom = ThisDocument.Masters(ShapeFromID).Shapes(1)
 '    MsgBox ThisDocument.Masters(ShapeFromID)
@@ -403,7 +403,7 @@ Dim vsoLayer As Visio.layer
         
 LayerImport = Chr(34) & LayerNumber - 1 & Chr(34)
 Exit Function
-EX:
+ex:
     SaveLog Err, "LayerImport"
 End Function
 

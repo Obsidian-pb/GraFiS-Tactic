@@ -61,14 +61,14 @@ Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As
 '                MorphToLake
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ComBut_Click"
 End Sub
 
 Private Sub ComBut2_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 'Отслеживаем событие клика по кнопке "Всасывающая линия"
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Проверяем
 '    If ClickAndOnSameButton(Ctrl.Caption) Then Exit Sub
@@ -93,14 +93,14 @@ Private Sub ComBut2_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault A
     End If
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ComBut2_Click"
 End Sub
 
 Private Sub ComBut3_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 'Отслеживаем событие клика по кнопке "Магистральная линия"
 
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Проверяем
 '    If ClickAndOnSameButton(Ctrl.Caption) Then Exit Sub
@@ -125,7 +125,7 @@ Private Sub ComBut3_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault A
     End If
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ComBut3_Click"
 End Sub
 
@@ -135,7 +135,7 @@ End Sub
 Private Function GetSelectedButtonCaption() As String
 Dim v_Ctrl As CommandBarControl
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем какая кнопка нажата и в зависимости от этого выполняем действие
     For Each v_Ctrl In Application.CommandBars("Превращения").Controls
         If v_Ctrl.State = msoButtonDown Then
@@ -146,7 +146,7 @@ Dim v_Ctrl As CommandBarControl
 GetSelectedButtonCaption = ""
 
 Exit Function
-EX:
+ex:
 End Function
 
 

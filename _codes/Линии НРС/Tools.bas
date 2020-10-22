@@ -88,7 +88,7 @@ Dim SQLQuery As String
 Dim List As String
 Dim RSField As Object
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
@@ -120,7 +120,7 @@ Dim RSField As Object
 Set dbs = Nothing
 Set rst = Nothing
 Exit Function
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "ListImport"
     ListImport = Chr(34) & " " & Chr(34)
@@ -136,7 +136,7 @@ Dim SQLQuery As String
 Dim List As String
 Dim RSField As Object, RSField2 As Object
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
@@ -174,7 +174,7 @@ ListImport2 = List
 Set dbs = Nothing
 Set rst = Nothing
 Exit Function
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "ListImport2"
     ListImport2 = Chr(34) & " " & Chr(34)

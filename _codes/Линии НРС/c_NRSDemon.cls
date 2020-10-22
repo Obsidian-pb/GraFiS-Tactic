@@ -46,7 +46,7 @@ Dim modelBuilder As c_NRSModelBuilder
 
 Set BuildNRSModel = Me
 Exit Function
-EX:
+ex:
     Set BuildNRSModel = Me
 End Function
 
@@ -54,25 +54,43 @@ End Function
 Public Function CalculateNRSModel() As c_NRSDemon
 'Рассчитываем модель насосно-рукавной системы: Основная процедура
 Dim i As Integer
+
     
-    On Error GoTo EX
+    On Error GoTo ex
     
+    Dim debugger As C_NRSDebugger
+    Set debugger = New C_NRSDebugger
+    debugger.Activate NRSModel_
+
     'Цикл расчетов:
         For i = 1 To 20
+            Debug.Print i
+        'Обнуляем текущие напоры в узлах
+            ClearhIn
+'            debugger.PrintModelState
         'Расчет от питателей к потребителям
             CalculateNRSModelForward
+'            debugger.PrintModelState
+'!Обязательно обработать корректно!!!
+'Это проблема невязки прямого и обратного расчета - при прямом изменяется напор но еще не изменился расход.
+'При обратном уже изменился расход, но не изменился напор. Поэтому небольшая разница будет всегда! Обрабатывать ее нужно при помощи окурглений на мелких долях!!! 0.000001 >> 0.01
+            If i >= 20 Then Exit For
         'Обнуляем текущие расходы в узлах
             ClearQ
+'            debugger.PrintModelState
         'Расчет от потребителей к питателям
             CalculateNRSModelBackward
-        'Реализуем результаты расчета в фигурах
-            Realize
+'            debugger.PrintModelState
         Next i
+        
+        'Реализуем результаты расчета в фигурах
+        Realize
+    debugger.PrintModelState
+    Set debugger = Nothing
     
-    
-Set CalculateNRSModel = Me
+'Set CalculateNRSModel = Me
 Exit Function
-EX:
+ex:
     Set CalculateNRSModel = Me
 End Function
 
@@ -81,7 +99,7 @@ Public Function CalculateNRSModelForward() As c_NRSDemon
 'Один цикл прямого расчета модели насосно-рукавной системы
 Dim node As c_NRSNode
 
-    On Error GoTo EX
+    On Error GoTo ex
     
     For Each node In NRSModel_.StarterNodes
         CalculateNRSNodeForward node
@@ -91,7 +109,7 @@ Dim node As c_NRSNode
     
 Set CalculateNRSModelForward = Me
 Exit Function
-EX:
+ex:
     Set CalculateNRSModelForward = Me
 End Function
 
@@ -101,14 +119,15 @@ Dim nextNode As c_NRSNode
     
 '    Debug.Print node.ID
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     For Each nextNode In node.OutNodes
 '        Debug.Assert nextNode.ID <> 19
 '        Debug.Assert nextNode.ID <> 67
 '        Debug.Assert node.ID <> 19
-'        Debug.Assert node.ID <> 67
+'        Debug.Assert node.ID <> 324
         nextNode.hIn = node.hOut
+        Debug.Assert node.ID <> 324
         CalculateNRSNodeForward nextNode
     Next nextNode
     
@@ -116,7 +135,7 @@ Dim nextNode As c_NRSNode
     
 Set CalculateNRSNodeForward = Me
 Exit Function
-EX:
+ex:
     Set CalculateNRSNodeForward = Me
 End Function
 
@@ -125,7 +144,7 @@ Public Function ClearQ() As c_NRSDemon
 'Очищаем расходы во всех узлах кроме Enders
 Dim node As c_NRSNode
 
-    On Error GoTo EX
+    On Error GoTo ex
 
     For Each node In NRSModel_.NRSNodes
         If Not node.isEnder Then node.Q_Clear
@@ -133,10 +152,26 @@ Dim node As c_NRSNode
     
 Set ClearQ = Me
 Exit Function
-EX:
+ex:
     Set ClearQ = Me
 End Function
 
+Public Function ClearhIn() As c_NRSDemon
+'Очищаем входящие напоры во всех узлах кроме starters (Возможнос)
+Dim node As c_NRSNode
+
+    On Error GoTo ex
+
+    For Each node In NRSModel_.NRSNodes
+'        If Not node.isStarter Then node.hIn_Clear
+        node.hIn_Clear
+    Next node
+    
+Set ClearhIn = Me
+Exit Function
+ex:
+    Set ClearhIn = Me
+End Function
 
 
 
@@ -144,7 +179,7 @@ Public Function CalculateNRSModelBackward() As c_NRSDemon
 'Один цикл обратного расчета модели насосно-рукавной системы
 Dim node As c_NRSNode
 
-    On Error GoTo EX
+    On Error GoTo ex
     
     For Each node In NRSModel_.EnderNodes
         CalculateNRSNodeBackward node, node.QStv
@@ -158,7 +193,7 @@ Dim node As c_NRSNode
     
 Set CalculateNRSModelBackward = Me
 Exit Function
-EX:
+ex:
     Set CalculateNRSModelBackward = Me
 End Function
 
@@ -186,7 +221,7 @@ Dim prevNode As c_NRSNode
     
 Set CalculateNRSNodeBackward = Me
 Exit Function
-EX:
+ex:
     Set CalculateNRSNodeBackward = Me
 End Function
 
@@ -205,6 +240,6 @@ Dim node As c_NRSNode
     
 Set Realize = Me
 Exit Function
-EX:
+ex:
     Set Realize = Me
 End Function

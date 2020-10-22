@@ -162,7 +162,7 @@ Dim vb_InShapeType, vb_OutShapeType As Byte
 Dim i As Integer
 Dim vs_Formula As String
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Проверить чем являются соединяемые фигуры
     '---УстанавливаемIndexPers для каждой из фигур
@@ -342,7 +342,7 @@ On Error GoTo EX
     
     
 Exit Sub
-EX:
+ex:
     Debug.Print Err.description
 '    Debug.Print vs_Formula
     SaveLog Err, "ps_LinkShapes"
@@ -360,7 +360,7 @@ Public Sub Ps_ConnectionDelete(ByRef aO_Conn As Visio.Connect)
 Dim vO_FromShape, vO_ToShape As Visio.Shape
 Dim vi_InRowNumber, vi_OutRowNumber As Integer
 
-On Error GoTo EX
+On Error GoTo ex
     
 '---Определяем каие фигуры были соединены
     Set vO_FromShape = aO_Conn.FromSheet
@@ -434,7 +434,7 @@ On Error GoTo EX
     Set cpO_OutShape = Nothing
 Exit Sub
 
-EX:
+ex:
 '    Resume Next
     Set cpO_InShape = Nothing
     Set cpO_OutShape = Nothing
@@ -447,7 +447,7 @@ Dim vi_IPInShape, vi_IPOutShape As Integer
 Dim vb_InShapeType, vb_OutShapeType As Byte
 Dim i As Integer
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Проверить чем являются соединяемые фигуры
     '---УстанавливаемIndexPers для каждой из фигур
@@ -548,7 +548,7 @@ On Error GoTo EX
     
     
 Exit Sub
-EX:
+ex:
 '    Debug.Print Err.Description
     SaveLog Err, "ps_DisLinkShapes"
 

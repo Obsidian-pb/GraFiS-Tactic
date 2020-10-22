@@ -26,7 +26,7 @@ Dim node As c_NRSNode
     
 '    FillStartersEnders
     
-    Debug.Print NRSModel_.GetNodesCount
+'    Debug.Print NRSModel_.GetNodesCount
     
 Set Build = NRSModel_
 End Function

@@ -16,13 +16,21 @@ Private H_ As Single                                'Напор создаваемый самим эле
 Private P_ As Single                                'Коэффициент проводимости (для стволов в основном, но можно применять и для прочего оборудования)
 Private Z_ As Single                                'Перепад высот (для линий)
 Private hIn_ As Single                              'Напор на входах (максимален среди всех узлов на вход)
-'Private hOut_ As Single                            'Напор на выходах (одинаков для всех выходов)
+Private hOut_ As Single                             'Напор на выходах (одинаков для всех выходов)
 Private outNodes_ As Collection                     'Коллекция узлов подключенных на выход
 Private inNodes_ As Collection                      'Коллекция узлов подключенных на вход
-Private roundAccuracy_ As Byte                      'Точность округления
+'Private roundAccuracy_ As Byte                      'Точность округления
 Private isStarter_ As Boolean                       'Питатель НРС
 Private isEnder_ As Boolean                         'Потребитель НРС
 
+'----------------События узла-------------------------
+Public Event SChanged(ByVal a_S As Single)
+Public Event QChanged(ByVal a_Q As Single)
+Public Event HChanged(ByVal a_H As Single)
+Public Event PChanged(ByVal a_P As Single)
+Public Event ZChanged(ByVal a_Z As Single)
+Public Event hOutChanged(ByVal a_hOut As Single)
+Public Event hInChanged(ByVal a_hIn As Single)
 
 
 Private Sub Class_Initialize()
@@ -35,9 +43,9 @@ Private Sub Class_Terminate()
     Set nodeShape_ = Nothing
 End Sub
 Public Function Activate(ByRef shp As Visio.Shape, Optional ByVal a_S As Double = 0, Optional ByVal a_Q As Double = 0, Optional ByVal a_H As Single = 0, Optional ByVal a_P As Single = 1, _
-                         Optional ByVal rAcc As Byte = 4) As c_NRSNode
+                         Optional ByVal rAcc As Byte = 2) As c_NRSNode
     Set nodeShape_ = shp
-    CheckStarterEnder
+'    CheckStarterEnder
     
     S_ = a_S
     Q_ = a_Q
@@ -46,7 +54,7 @@ Public Function Activate(ByRef shp As Visio.Shape, Optional ByVal a_S As Double 
     
     roundAccuracy_ = rAcc
     
-    FillProps
+'    FillProps
     
     
 Set Activate = Me
@@ -63,6 +71,7 @@ Public Property Get S() As Double
 End Property
 Public Property Let S(ByVal vNewValue As Double)
     S_ = vNewValue
+    RaiseEvent SChanged(S_)
 End Property
 
 Public Property Get Q() As Single
@@ -70,63 +79,72 @@ Public Property Get Q() As Single
 End Property
 Public Property Let Q(ByVal vNewValue As Single)
     Q_ = vNewValue
-End Property
-Public Function Q_Clear() As c_NRSNode
-    Q_ = 0
-Set Q_Clear = Me
-End Function
-Public Function Q_Raise(ByVal a_Q As Single) As c_NRSNode
-    Q_ = Q_ + a_Q
-Set Q_Raise = Me
-End Function
-
-Public Property Get hLost() As Double
-    hLost = S_ * Q_ ^ 2
+    RaiseEvent QChanged(Q_)
 End Property
 
-Public Property Get QIn() As Single
-    QIn = Q_ / inNodes_.Count
+Public Property Get H() As Single
+    H = H_
+End Property
+Public Property Let H(ByVal vNewValue As Single)
+    H_ = vNewValue
+    RaiseEvent HChanged(H_)
 End Property
 
-Public Property Get QStv() As Single
-'Производительности стволов (и возможно другого оборудования)
-    QStv = P_ * Sqr(hOut)
+Public Property Get P() As Single
+    P = P_
+End Property
+Public Property Let P(ByVal vNewValue As Single)
+    P_ = vNewValue
+    RaiseEvent PChanged(P_)
 End Property
 
-'Public Property Get QOut() As Single
-'Dim mx As Single
-'Dim node As c_NRSNode
-'
-'    For Each node In OutNodes
-'        if
-'    Next node
-'
-'End Property
+Public Property Get Z() As Single
+    Z = Z_
+End Property
+Public Property Let Z(ByVal vNewValue As Single)
+    Z_ = vNewValue
+    RaiseEvent ZChanged(Z_)
+End Property
 
-
-
+Public Property Get hOut() As Single
+    hOut = hOut_
+End Property
+Public Property Let hOut(ByVal vNewValue As Single)
+    hOut_ = vNewValue
+    RaiseEvent hOutChanged(hOut_)
+End Property
 
 Public Property Get hIn() As Single
     hIn = hIn_
 End Property
 Public Property Let hIn(ByVal vNewValue As Single)
-    If vNewValue > hIn_ Then hIn_ = vNewValue
+    hIn_ = vNewValue
+    RaiseEvent hInChanged(hIn_)
 End Property
 
-Public Property Get hOut() As Single
-'    hOut = hOut_
-    hOut = H_ + hIn_ - hLost - Z_
-End Property
-'Public Property Let hOut(ByVal vNewValue As Single)
-'    hOut_ = vNewValue
+'Public Property Get hIn() As Single
+'    hIn = hIn_
 'End Property
+'Public Property Let hIn(ByVal vNewValue As Single)
+''    Debug.Assert nodeShape_.ID <> 213
+'    If vNewValue > hIn_ Then hIn_ = vNewValue
+'End Property
+'Public Function hIn_Clear() As c_NRSNode
+'    hIn_ = 0
+'Set hIn_Clear = Me
+'End Function
+
+
+'Public Property Get hOut() As Single
+''    hOut = hOut_
+''    Debug.Assert nodeShape_.ID <> 324
+'    hOut = H_ + hIn_ - hLost - Z_
+'End Property
+
 
 Public Property Get OutNodes() As Collection
     Set OutNodes = outNodes_
 End Property
-'Public Property Let OutNodes(ByVal vNewValue As Single)
-'    outNodes_ = vNewValue
-'End Property
 Public Function AddOutNode(ByRef node As c_NRSNode) As c_NRSNode
     AddUniqueCollectionItem outNodes_, node
 
@@ -137,6 +155,7 @@ Public Function DeleteOutNode(ByRef node As c_NRSNode) As c_NRSNode
 
 Set DeleteOutNode = Me
 End Function
+
 
 Public Property Get InNodes() As Collection
     Set InNodes = inNodes_
@@ -152,12 +171,20 @@ Public Function DeleteInNode(ByRef node As c_NRSNode) As c_NRSNode
 Set DeleteInNode = Me
 End Function
 
+
 Public Property Get isStarter() As Boolean
     isStarter = isStarter_
+End Property
+Public Property Let isStarter(ByVal vNewValue As Boolean)
+    isStarter_ = vNewValue
 End Property
 Public Property Get isEnder() As Boolean
     isEnder = isEnder_
 End Property
+Public Property Let isEnder(ByVal vNewValue As Boolean)
+    isEnder_ = vNewValue
+End Property
+
 
 Public Property Get NodeShape() As Visio.Shape
     Set NodeShape = nodeShape_
@@ -168,73 +195,12 @@ Public Property Get ID() As String
 End Property
 
 
-Private Sub CheckStarterEnder()
-    isStarter_ = IsGFSShapeWithIP(nodeShape_, Array(ipAC, ipANR, ipPNS, ipAA, ipAV, ipAKT, ipAP, ipAGVT, ipPoezd, ipMotoPump, ipPricep, ipKorabl, ipKater, ipACL, ipACKP, ipAPP, ipKolonka))
-    isEnder_ = IsGFSShapeWithIP(nodeShape_, Array(ipStvolRuch, ipStvolRuchPena, ipStvolLafVoda, ipStvolLafPena, ipStvolLafPoroshok, ipStvolLafVozimiy, ipPenopodemnik, ipStvolGas, ipStvolPoroshok))
-End Sub
 
 
-'---------------------------Большие инструментальные процедуры---------------------------
-Public Function Realize() As c_NRSNode
-'Здесь происходит указание текущих значений для фигур, по итогам расчета
-    On Error GoTo EX
-    Application.EventsEnabled = False
-    
-    'Для разных фигур разное
-    Select Case CellVal(nodeShape_, "User.IndexPers")
-        Case Is = indexPers.ipAC
-            SetCellVal nodeShape_, "Prop.PodOut", Q_
-'            SetCellVal nodeShape_, "Prop.PumpPressureCur", Q_
-        Case Is = indexPers.ipRukavLineNapor
-            SetCellVal nodeShape_, "Prop.Flow", Q_
-            SetCellVal nodeShape_, "Prop.HeadInHose", hOut
-            SetCellVal nodeShape_, "Prop.HeadLost", hLost
-        Case Is = indexPers.ipRazvetvlenie
-            SetCellVal nodeShape_, "Prop.StreamThrough", Q_
-            SetCellVal nodeShape_, "Prop.HeadInRazv", hOut
-        Case Is = indexPers.ipStvolRuch
-            SetCellVal nodeShape_, "User.PodOut", QStv
-            SetCellVal nodeShape_, "User.Head", hOut
-            '!!!Не забыть учитывать подъем ствола: =GUARD(IF(Scratch.A1-Prop.StvolHeight<0,0,Scratch.A1-Prop.StvolHeight))
-    End Select
-    
-    
-    
-Set Realize = Me
-Exit Function
-EX:
-    Application.EventsEnabled = True
-    Set Realize = Me
-End Function
 
-Private Sub FillProps()
-'Заполняем свойства фигур в соответсвии с их IndexPers
-Dim val1 As Variant
-Dim val2 As Variant
 
-    P_ = CellVal(nodeShape_, "User.ProvKoeff", , 1)
 
-    If CellVal(nodeShape_, "Prop.ShowLenightDirect", visUnitsString) = "Да" Then
-'            (Prop.HoseResistance                       / 20)                                    * Prop.LineLenightS                        '* Prop.Flow^2                            + Prop.Different
-        S_ = (CellVal(nodeShape_, "Prop.HoseResistance") / CellVal(nodeShape_, "User.HoseLength")) * CellVal(nodeShape_, "Prop.LineLenightS") '* (CellVal(nodeShape_, "Prop.Flow") ^ 2) + CellVal(nodeShape_, "Prop.Different")
-    Else
-'            Prop.HoseResistance                        * Prop.HoseNeed                        '* Prop.Flow^2                            + Prop.Different
-        S_ = CellVal(nodeShape_, "Prop.HoseResistance") * CellVal(nodeShape_, "Prop.HoseNeed") '* (CellVal(nodeShape_, "Prop.Flow") ^ 2) + CellVal(nodeShape_, "Prop.Different")
-    End If
-    
-    If isEnder_ Then
-        hIn = CellVal(nodeShape_, "Scratch.A1")
-    ElseIf isStarter_ Then
-        val1 = CellVal(nodeShape_, "Prop.PodOut")
-        val2 = CellVal(nodeShape_, "Prop.Flow")
-        If val1 > val2 Then Q_ = val1 Else Q_ = val2
-        
-        H_ = CellVal(nodeShape_, "Prop.PumpPressureCur")
-    End If
 
-    
-    
-    
-    Z_ = CellVal(nodeShape_, "Prop.Different")
-End Sub
+
+
 

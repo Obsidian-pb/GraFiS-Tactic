@@ -20,19 +20,19 @@ End Sub
 
 Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByRef item As Object)
 'Add item (with unique .key prop) to oldCollection
-    On Error GoTo EX
+    On Error GoTo ex
     
     oldCollection.Add item, CStr(item.ID)
 
 Exit Sub
-EX:
-    Debug.Print "Item with key='" & item.ID & "' is already exists!)"
+ex:
+'    Debug.Print "Item with key='" & item.ID & "' is already exists!)"
 End Sub
 
 Public Sub SetCollectionItems(ByRef oldCollection As Collection, ByRef newCollection As Collection)
 'Refresh old collection items with items from newCollection
 Dim item As Object
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set oldCollection = New Collection
 
@@ -41,8 +41,8 @@ Dim item As Object
     Next item
     
 Exit Sub
-EX:
-    Debug.Print "Item with key='" & item.ID & "' is already exists!)"
+ex:
+'    Debug.Print "Item with key='" & item.ID & "' is already exists!)"
 End Sub
 
 Public Sub SetUniqueCollectionItems(ByRef oldCollection As Collection, ByRef newCollection As Collection)
@@ -67,7 +67,7 @@ Public Function GetFromCollection(ByRef coll As Collection, ByVal ID As String) 
 'Get specific item (with unique .ID prop) from collection
 Dim item As Object
 
-    On Error GoTo EX
+    On Error GoTo ex
     Set item = coll.item(ID)
     If Not item Is Nothing Then
         Set GetFromCollection = item
@@ -76,7 +76,7 @@ Dim item As Object
     End If
     
 Exit Function
-EX:
+ex:
     Set GetFromCollection = Nothing
 End Function
 
@@ -84,7 +84,7 @@ Public Function IsInCollection(ByRef coll As Collection, obj As Object) As Boole
 'Check item (with unique .ID prop) existance in collection
 Dim item As Object
 
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set item = coll.item(CStr(obj.ID))
     If Not item Is Nothing Then
@@ -94,7 +94,7 @@ Dim item As Object
     End If
     
 Exit Function
-EX:
+ex:
     IsInCollection = False
 End Function
 

@@ -40,7 +40,7 @@ Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses 
 Dim i As Integer
 Dim indexPers As Integer
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     'Если необходима предварительная проверка на отношение фигуры к ГраФиС:
     If needGFSChecj Then
@@ -76,7 +76,7 @@ Dim indexPers As Integer
 
 IsGFSShapeWithIP = False
 Exit Function
-EX:
+ex:
     IsGFSShapeWithIP = False
     SaveLog Err, "m_Tools.IsGFSShapeWithIP"
 End Function

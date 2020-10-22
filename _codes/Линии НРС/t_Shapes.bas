@@ -20,7 +20,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
                         Optional ByVal defaultValue As Double = 0) As Variant
 'Returns cell with cellName value. If such cell does not exists, return 0
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     If shp.CellExists(cellName, 0) Then
         Select Case dataType
@@ -38,7 +38,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
     End If
     
 Exit Function
-EX:
+ex:
     CellVal = defaultValue
 End Function
 
@@ -46,7 +46,7 @@ Public Sub SetCellVal(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal 
 'Set cell with cellName value. If such cell does not exists, does nothing
 Dim cll As Visio.cell
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
@@ -54,7 +54,7 @@ Dim cll As Visio.cell
     End If
     
 Exit Sub
-EX:
+ex:
 
 End Sub
 

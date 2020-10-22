@@ -34,7 +34,7 @@ End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Показываем окно свойств
     Application.ActiveWindow.Windows.ItemFromID(visWinIDCustProp).Visible = True
 
@@ -80,7 +80,7 @@ Set ButEvent = New Class1
 '    fmsgCheckNewVersion.CheckUpdates
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "Document_DocumentOpened"
 End Sub
 
