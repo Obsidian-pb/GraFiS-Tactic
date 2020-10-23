@@ -29,6 +29,16 @@ Dim node As c_NRSNode
     
 End Function
 
+Public Function PrintQSum() As C_NRSDebugger
+Dim node As c_NRSNode
+Dim sum As Single
+    
+    For Each node In NRSModel_.EnderNodes
+        sum = sum + node.Q
+    Next node
+Debug.Print "sum(Q)=" & sum
+End Function
+
 Public Function PrintNodeState(ByRef nodeID As Long, ByVal level As Byte) As C_NRSDebugger
 Dim node As c_NRSNode
 Dim otst As String

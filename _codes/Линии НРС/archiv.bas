@@ -54,11 +54,12 @@ Dim cll As Visio.cell
     End If
 End Sub
 
-Public Sub SSS()
+Public Sub SSS(ByVal shpID As Long)
 Dim NRSDemon As c_NRSDemon
 Dim shp As Visio.Shape
 
-    Set shp = Application.ActiveWindow.Selection(1)
+'    Set shp = Application.ActiveWindow.Selection(1)
+    Set shp = Application.ActivePage.Shapes.ItemFromID(shpID)
     
     Set NRSDemon = New c_NRSDemon
     'Строим модель

@@ -11,7 +11,19 @@ Option Explicit
 '-------------------Демон-строитель насосно-рукавной системы-----------------------
 Private NRSModel_ As c_NRSModel
 
+Private startersArray_ As Variant
+Private enderArray_ As Variant
 
+
+Private Sub Class_Initialize()
+    startersArray_ = Array(ipAC, ipANR, ipPNS, ipAA, ipAV, ipAKT, ipAP, ipAGVT, ipPoezd, ipMotoPump, ipPricep, ipKorabl, ipKater, ipACL, ipACKP, ipAPP, ipKolonka)
+    enderArray_ = Array(ipStvolRuch, ipStvolRuchPena, ipStvolLafVoda, ipStvolLafPena, ipStvolLafPoroshok, ipStvolLafVozimiy, ipPenopodemnik, ipStvolGas, ipStvolPoroshok)
+End Sub
+Private Sub Class_Terminate()
+    Set startersArray_ = Nothing
+    Set enderArray_ = Nothing
+    Set NRSModel_ = Nothing
+End Sub
 
 Public Function Build(ByRef shp As Visio.Shape) As c_NRSModel
 Dim node As c_NRSNode
@@ -19,7 +31,9 @@ Dim node As c_NRSNode
     Set NRSModel_ = New c_NRSModel
     
     Set node = New c_NRSNode
-    node.Activate shp
+'    node.Activate shp
+    CheckStarterEnder node.Activate(shp)
+    FillProps node
     NRSModel_.AddNRSNode node
     
     GetTechShapeForGESystem node
@@ -54,7 +68,8 @@ Dim cll As Visio.cell
         For Each con In shp.Connects
             If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
                 Set secondNRSNode = New c_NRSNode
-                secondNRSNode.Activate con.ToSheet
+                CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
+                FillProps secondNRSNode
                 If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
 '                    Debug.Assert shp.ID <> 101
                     curNRSNode.AddInNode secondNRSNode
@@ -84,7 +99,8 @@ Dim cll As Visio.cell
                         If con.ToCell.Name = cll.Name Then
 '                            Debug.Assert shp.ID <> 1
                             Set secondNRSNode = New c_NRSNode
-                            secondNRSNode.Activate con.FromSheet
+                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+                            FillProps secondNRSNode
                             curNRSNode.AddOutNode secondNRSNode
                                 secondNRSNode.AddInNode curNRSNode
                 
@@ -99,7 +115,8 @@ Dim cll As Visio.cell
                         If con.ToCell.Name = cll.Name Then
 '                            Debug.Assert shp.ID <> 1
                             Set secondNRSNode = New c_NRSNode
-                            secondNRSNode.Activate con.FromSheet
+                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+                            FillProps secondNRSNode
                             curNRSNode.AddInNode secondNRSNode
                                 secondNRSNode.AddOutNode curNRSNode
                             If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
@@ -125,13 +142,50 @@ End Sub
 'Dim node As c_NRSNode
 '
 '    For Each node In NRSModel_.NRSNodes
+'        CheckStarterEnder node
 '        If node.isStarter Then NRSModel_.AddStarter node
 '    Next node
 'End Sub
 
+Private Function CheckStarterEnder(ByRef node As c_NRSNode) As c_NRSModelBuilder
+    node.isStarter = IsGFSShapeWithIP(node.NodeShape, startersArray_)
+    node.isEnder = IsGFSShapeWithIP(node.NodeShape, enderArray_)
 
+Set CheckStarterEnder = Me
+End Function
 
+Private Function FillProps(ByRef node As c_NRSNode) As c_NRSModelBuilder
+'Заполняем свойства фигур в соответсвии с их IndexPers
+Dim val1 As Variant
+Dim val2 As Variant
 
+    node.P = CellVal(node.NodeShape, "User.ProvKoeff", , 1)
+
+    If CellVal(node.NodeShape, "Prop.ShowLenightDirect", visUnitsString) = "Да" Then
+'            (Prop.HoseResistance                            / 20)                                         * Prop.LineLenightS                            '* Prop.Flow^2                            + Prop.Different
+        node.S = (CellVal(node.NodeShape, "Prop.HoseResistance") / CellVal(node.NodeShape, "User.HoseLength")) * CellVal(node.NodeShape, "Prop.LineLenightS") '* (CellVal(nodeShape_, "Prop.Flow") ^ 2) + CellVal(nodeShape_, "Prop.Different")
+    ElseIf CellVal(node.NodeShape, "Prop.ShowLenightDirect", visUnitsString) = "Нет" Then
+'            Prop.HoseResistance                            * Prop.HoseNeed                            '* Prop.Flow^2                            + Prop.Different
+        node.S = CellVal(node.NodeShape, "Prop.HoseResistance") * CellVal(node.NodeShape, "Prop.HoseNeed") '* (CellVal(nodeShape_, "Prop.Flow") ^ 2) + CellVal(nodeShape_, "Prop.Different")
+    End If
+    
+    If node.isEnder Then
+        node.hIn = CellVal(node.NodeShape, "Scratch.A1")
+    ElseIf node.isStarter Then
+        val1 = CellVal(node.NodeShape, "Prop.PodOut")
+        val2 = CellVal(node.NodeShape, "Prop.Flow")
+        If val1 > val2 Then node.Q = val1 Else node.Q = val2
+        
+        node.H = CellVal(node.NodeShape, "Prop.PumpPressureCur")
+    End If
+
+    
+    
+    
+    node.Z = CellVal(node.NodeShape, "Prop.Different") + CellVal(node.NodeShape, "Prop.StvolHeight")
+    
+Set FillProps = Me
+End Function
 
 
 

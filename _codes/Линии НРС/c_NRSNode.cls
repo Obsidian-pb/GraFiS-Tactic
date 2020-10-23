@@ -17,9 +17,9 @@ Private P_ As Single                                'Коэффициент проводимости (д
 Private Z_ As Single                                'Перепад высот (для линий)
 Private hIn_ As Single                              'Напор на входах (максимален среди всех узлов на вход)
 Private hOut_ As Single                             'Напор на выходах (одинаков для всех выходов)
+Private hlost_ As Single                            'Потери напора
 Private outNodes_ As Collection                     'Коллекция узлов подключенных на выход
 Private inNodes_ As Collection                      'Коллекция узлов подключенных на вход
-'Private roundAccuracy_ As Byte                      'Точность округления
 Private isStarter_ As Boolean                       'Питатель НРС
 Private isEnder_ As Boolean                         'Потребитель НРС
 
@@ -31,6 +31,7 @@ Public Event PChanged(ByVal a_P As Single)
 Public Event ZChanged(ByVal a_Z As Single)
 Public Event hOutChanged(ByVal a_hOut As Single)
 Public Event hInChanged(ByVal a_hIn As Single)
+Public Event hLostChanged(ByVal a_hIn As Single)
 
 
 Private Sub Class_Initialize()
@@ -42,8 +43,8 @@ Private Sub Class_Terminate()
     Set inNodes_ = Nothing
     Set nodeShape_ = Nothing
 End Sub
-Public Function Activate(ByRef shp As Visio.Shape, Optional ByVal a_S As Double = 0, Optional ByVal a_Q As Double = 0, Optional ByVal a_H As Single = 0, Optional ByVal a_P As Single = 1, _
-                         Optional ByVal rAcc As Byte = 2) As c_NRSNode
+Public Function Activate(ByRef shp As Visio.Shape, Optional ByVal a_S As Double = 0, Optional ByVal a_Q As Double = 0, _
+                         Optional ByVal a_H As Single = 0, Optional ByVal a_P As Single = 1) As c_NRSNode
     Set nodeShape_ = shp
 '    CheckStarterEnder
     
@@ -52,7 +53,7 @@ Public Function Activate(ByRef shp As Visio.Shape, Optional ByVal a_S As Double 
     H_ = a_H
     P_ = a_P
     
-    roundAccuracy_ = rAcc
+'    roundAccuracy_ = rAcc
     
 '    FillProps
     
@@ -81,6 +82,14 @@ Public Property Let Q(ByVal vNewValue As Single)
     Q_ = vNewValue
     RaiseEvent QChanged(Q_)
 End Property
+Public Function Q_Clear() As c_NRSNode
+    Q_ = 0
+Set Q_Clear = Me
+End Function
+Public Function Q_Raise(ByVal a_Q As Single) As c_NRSNode
+    Q_ = Q_ + a_Q
+Set Q_Raise = Me
+End Function
 
 Public Property Get H() As Single
     H = H_
@@ -121,6 +130,22 @@ Public Property Let hIn(ByVal vNewValue As Single)
     hIn_ = vNewValue
     RaiseEvent hInChanged(hIn_)
 End Property
+Public Function hIn_Clear() As c_NRSNode
+    hIn_ = 0
+Set hIn_Clear = Me
+End Function
+
+Public Property Get hLost() As Single
+    hLost = hlost_
+End Property
+Public Property Let hLost(ByVal vNewValue As Single)
+    hlost_ = vNewValue
+    RaiseEvent hLostChanged(hIn_)
+End Property
+Public Function hLost_Clear() As c_NRSNode
+    hlost_ = 0
+Set hLost_Clear = Me
+End Function
 
 'Public Property Get hIn() As Single
 '    hIn = hIn_
