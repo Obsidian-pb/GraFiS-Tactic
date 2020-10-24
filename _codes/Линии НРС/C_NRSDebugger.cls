@@ -48,10 +48,11 @@ Dim nextNode As c_NRSNode
     Set node = NRSModel_.GetNRSNodeByKey(nodeID)
     
     For i = 0 To level
-        otst = otst & Chr(9)
+        otst = otst & vbTab
     Next i
     
-    Debug.Print otst & node.ID & ": Q=" & node.Q & Chr(9) & "hIn=" & node.hIn & Chr(9) & "hLost = " & node.hLost & Chr(9) & "hOut = " & node.hOut
+    Debug.Print otst & node.ID & "(" & CellVal(node.NodeShape, "User.IndexPers.Prompt", visUnitsString) & _
+                "): Q=" & node.Q & vbTab & "QPrev=" & node.PrevQ & vbTab & "hIn=" & node.hIn & vbTab & "H=" & node.H & vbTab & "hLost = " & node.hLost & vbTab & "hOut = " & node.hOut
     
     For Each nextNode In node.OutNodes
         PrintNodeState nextNode.ID, level + 1

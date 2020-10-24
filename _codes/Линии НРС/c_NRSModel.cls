@@ -13,11 +13,13 @@ Private NRSNodes_ As Collection                         'Коллекция узлов НРС
 Private starters_ As Collection                         'Коллекция питателей НРС
 Private enders_ As Collection                           'Коллекция потребителей НРС
 
+Public correct As Boolean                              'Флаг корректности модели
 
 Private Sub Class_Initialize()
     Set NRSNodes_ = New Collection
     Set starters_ = New Collection
     Set enders_ = New Collection
+    correct = True
 End Sub
 Private Sub Class_Terminate()
     Set NRSNodes_ = Nothing
@@ -96,3 +98,14 @@ Exit Function
 ex:
     Set GetFirstNRSNode = Nothing
 End Function
+
+Public Property Get TotalQ() As Single
+Dim node As c_NRSNode
+Dim sum As Single
+    
+    For Each node In EnderNodes
+        sum = sum + node.Q
+    Next node
+    
+TotalQ = sum
+End Property

@@ -22,6 +22,7 @@ Private outNodes_ As Collection                     'Коллекция узлов подключенны
 Private inNodes_ As Collection                      'Коллекция узлов подключенных на вход
 Private isStarter_ As Boolean                       'Питатель НРС
 Private isEnder_ As Boolean                         'Потребитель НРС
+Private prevQH(1) As Single                         'Предыдущие значения Q и hOut (пока не ясно до конца что лучше, возможно достаточно оставить Q)
 
 '----------------События узла-------------------------
 Public Event SChanged(ByVal a_S As Single)
@@ -83,6 +84,7 @@ Public Property Let Q(ByVal vNewValue As Single)
     RaiseEvent QChanged(Q_)
 End Property
 Public Function Q_Clear() As c_NRSNode
+    prevQH(0) = Q_
     Q_ = 0
 Set Q_Clear = Me
 End Function
@@ -143,6 +145,7 @@ Public Property Let hLost(ByVal vNewValue As Single)
     RaiseEvent hLostChanged(hIn_)
 End Property
 Public Function hLost_Clear() As c_NRSNode
+'    prevQH(1) = hlost_
     hlost_ = 0
 Set hLost_Clear = Me
 End Function
@@ -217,6 +220,11 @@ End Property
 
 Public Property Get ID() As String
     ID = CStr(nodeShape_.ID)
+End Property
+
+
+Public Property Get PrevQ() As Single
+    PrevQ = prevQH(0)
 End Property
 
 

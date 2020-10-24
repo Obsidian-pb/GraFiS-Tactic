@@ -363,7 +363,7 @@ Function LayerImport(ShapeFromID As Long, ShapeToID As Long) As String
 'Функция возвращает номер слоя в текущем документе соответствующего слою в документе мастера
 Dim ShapeFrom As Visio.Shape
 Dim LayerNumber As Integer, layerName As String
-Dim Flag As Boolean
+Dim flag As Boolean
 Dim vsoLayer As Visio.layer
 
     On erro GoTo ex
@@ -377,12 +377,12 @@ Dim vsoLayer As Visio.layer
 '---Проверяем есть ли в текущем документе слой с таким именем
     For i = 1 To Application.ActivePage.Layers.Count
         If Application.ActivePage.Layers(i).Name = layerName Then
-            Flag = True
+            flag = True
         End If
     Next i
 
 '---В соответствии с полученным названием определяем номер слоя в текущем документе
-    If Flag = True Then
+    If flag = True Then
         LayerNumber = Application.ActivePage.Layers(layerName).Index
     Else
     '---Создаем новый слой с именем слоя к которому принадлежит исходная фигура

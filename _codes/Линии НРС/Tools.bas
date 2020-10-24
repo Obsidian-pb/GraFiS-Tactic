@@ -322,6 +322,11 @@ Public Sub MoveMeFront(ShpObj As Visio.Shape)
     ShpObj.BringToFront
 End Sub
 
+Public Function RInt(ByVal number As Double, Optional ByVal accuracy As Byte = 2) As Double
+'Округляем в меньшую сторону до указанного числа символов
+    RInt = Int(number * 10 ^ accuracy) * 0.1 ^ accuracy
+End Function
+
 '-----------------------------------------Процедуры работы с фигурами----------------------------------------------
 Public Sub SetCheckForAll(ShpObj As Visio.Shape, aS_CellName As String, aB_Value As Boolean)
 'Процедура устанавливает новое значение для всех выбранных фигур одного типа
@@ -418,7 +423,7 @@ Const d = " | "
     
 '---Формируем строку записи об ошибке (Дата | ОС | Path | APPDATA
     errString = Now & d & Environ("OS") & d & "Visio " & Application.version & d & ThisDocument.fullName & d & eroorPosition & _
-        d & error.Number & d & error.description & d & error.Source & d & eroorPosition & d & addition
+        d & error.number & d & error.description & d & error.Source & d & eroorPosition & d & addition
     
 '---Записываем в конец файла лога сведения о ошибке
     Print #1, errString

@@ -62,6 +62,11 @@ Dim shp As Visio.Shape
     Set shp = Application.ActivePage.Shapes.ItemFromID(shpID)
     
     Set NRSDemon = New c_NRSDemon
+'    NRSDemon.roundAccuracy = 4
+'    NRSDemon.checkAccuracy = 2
+'    NRSDemon.outAccuracy = 2
+'    NRSDemon.maxIterations = 100
+'    NRSDemon.approvedHout = 3
     'Строим модель
     NRSDemon.BuildNRSModel shp
     'Рассчитываем модель
