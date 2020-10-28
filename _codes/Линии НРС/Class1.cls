@@ -22,7 +22,7 @@ Private Sub Class_Initialize()
     Set ComBut = Application.CommandBars("Превращения").Controls("Рукав")
     Set ComBut2 = Application.CommandBars("Превращения").Controls("Всасывающий рукав")
     Set ComBut3 = Application.CommandBars("Превращения").Controls("Магистральная линия")
-    Set ComBut4 = Application.CommandBars("Превращения").Controls("Нормализация")
+    Set ComBut4 = Application.CommandBars("Превращения").Controls("Расчет НРС")
 
 End Sub
 
@@ -293,5 +293,31 @@ End Function
 '    Application.EventsEnabled = True
 'End Sub
 Private Sub ComBut4_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
-    NormalizeNRS
+'Расчет НРС
+    
+    'NormalizeNRS
+Dim NRSDemon As c_NRSDemon
+Dim shp As Visio.Shape
+
+    On Error GoTo ex
+    
+    If Not Application.ActiveWindow.Selection.Count = 1 Then Exit Sub
+    
+    Set shp = Application.ActiveWindow.Selection(1)
+    
+    Set NRSDemon = New c_NRSDemon
+'    NRSDemon.roundAccuracy = 4
+'    NRSDemon.checkAccuracy = 2
+'    NRSDemon.outAccuracy = 2
+'    NRSDemon.maxIterations = 100
+'    NRSDemon.approvedHout = 3
+    'Строим модель
+    NRSDemon.BuildNRSModel shp
+    'Рассчитываем модель
+    NRSDemon.CalculateNRSModel
+    
+    Set NRSDemon = Nothing
+Exit Sub
+ex:
+    Set NRSDemon = Nothing
 End Sub

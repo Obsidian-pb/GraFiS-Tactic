@@ -169,7 +169,7 @@ Set Button = Nothing
 Set Bar = Nothing
 End Sub
 
-'--------------------------------------Кнопка Нормализация-------------------------
+'--------------------------------------Кнопка Расчет НРС-------------------------
 Sub AddButtonNormalize()
 'Процедура добавление новой кнопки на панель управления "Превращения"--------------
 
@@ -183,9 +183,9 @@ Sub AddButtonNormalize()
 '---Кнопка "Нормализация"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
-        .Caption = "Нормализация"
-        .Tag = "Normalize"
-        .TooltipText = "Нормализовать НРС"
+        .Caption = "Расчет НРС"
+        .Tag = "Calculate NRS"
+        .TooltipText = "Рассчитать НРС"
         .FaceID = 807
         .BeginGroup = True
     End With
@@ -203,7 +203,7 @@ Sub DeleteButtonNormalize()
 
     Set Bar = Application.CommandBars("Превращения")
 '---Удаление кнопки "Нормализация" на панели управления "Превращения"------------------------
-    Set Button = Bar.Controls("Нормализация")
+    Set Button = Bar.Controls("Расчет НРС")
     Button.Delete
     
 Set Button = Nothing
