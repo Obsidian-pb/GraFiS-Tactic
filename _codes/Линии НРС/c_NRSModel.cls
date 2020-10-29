@@ -78,12 +78,12 @@ Public Function GetNRSNodeByKey(ByVal NRSNodeID As String) As c_NRSNode
 Exit Function
 ex:
     Set GetNRSNodeByKey = Nothing
-    Debug.Print "Such node is not existed in model"
+'    Debug.Print "Such node is not existed in model"
 End Function
 Public Function GetNRSNodeByShape(ByRef shp As Visio.Shape) As c_NRSNode
     On Error GoTo ex
     If InModel(shp) Then
-        Set GetNRSNodeByShape = GetNRSNodeByKey(str(shp.ID))
+        Set GetNRSNodeByShape = GetNRSNodeByKey(CStr(shp.ID))
     End If
     
 Exit Function

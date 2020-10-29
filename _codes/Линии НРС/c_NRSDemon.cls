@@ -447,6 +447,12 @@ Public Function RealizeNode(ByRef node As c_NRSNode) As c_NRSDemon
             SetCellVal node.NodeShape, "User.Head", Round(node.hIn, outAccuracy)
             SetCellVal node.NodeShape, "Prop.HeadS", Round(node.hIn, outAccuracy)
             '!!!Не забыть учитывать подъем ствола: =GUARD(IF(Scratch.A1-Prop.StvolHeight<0,0,Scratch.A1-Prop.StvolHeight))
+        Case Is = indexPers.ipStvolLafVoda
+            SetCellVal node.NodeShape, "User.PodOut", Round(node.Q, outAccuracy)
+            SetCellVal node.NodeShape, "Prop.PodOutS", Round(node.Q, outAccuracy)
+            SetCellVal node.NodeShape, "User.Head", Round(node.hIn, outAccuracy)
+            SetCellVal node.NodeShape, "Prop.HeadS", Round(node.hIn, outAccuracy)
+            
     End Select
     
     
@@ -493,9 +499,10 @@ Public Function SwithNodeCor(ByRef node As c_NRSNode, ByVal correct As Boolean) 
         Select Case CellVal(node.NodeShape, "User.IndexPers")
             Case Is = indexPers.ipRukavLineNapor
                 If correct Then
-                    SetCellVal node.NodeShape, "LineColor", "Styles!ПТВ_ГидрОбор!LineColor"
+'                    SetCellVal node.NodeShape, "LineColor", "Styles!ПТВ_ГидрОбор!LineColor"
+                    SetCellFrml node.NodeShape, "LineColor", "IF(Prop.Flow>Prop.FlowS,2,Styles!Р_Нап!LineColor)"
                 Else
-                    SetCellVal node.NodeShape, "LineColor", 2
+                    SetCellFrml node.NodeShape, "LineColor", 2
                 End If
         End Select
     

@@ -310,6 +310,7 @@ Dim shp As Visio.Shape
 '    NRSDemon.checkAccuracy = 2
 '    NRSDemon.outAccuracy = 2
 '    NRSDemon.maxIterations = 100
+'    NRSDemon.maxIterations = 1
 '    NRSDemon.approvedHout = 3
     'Строим модель
     NRSDemon.BuildNRSModel shp

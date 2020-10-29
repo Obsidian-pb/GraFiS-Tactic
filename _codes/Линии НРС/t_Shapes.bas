@@ -58,6 +58,22 @@ ex:
 
 End Sub
 
+Public Sub SetCellFrml(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal NewFrml As Variant)
+'Set cell with cellName formula. If such cell does not exists, does nothing
+Dim cll As Visio.cell
+    
+    On Error GoTo ex
+    
+    If shp.CellExists(cellName, 0) Then
+        '!!!Need to test!!!
+        shp.Cells(cellName).FormulaForceU = NewFrml
+    End If
+    
+Exit Sub
+ex:
+
+End Sub
+
 Public Sub FixLineGroupProportions()
 'Main sub for fixation the line width of each shape in groupe
 Dim shp As Visio.Shape

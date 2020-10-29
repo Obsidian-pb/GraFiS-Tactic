@@ -38,6 +38,8 @@ Dim node As c_NRSNode
     
     GetTechShapeForGESystem node
     
+    LinkNRSNodes
+    
 '    FillStartersEnders
     
 '    Debug.Print NRSModel_.GetNodesCount
@@ -47,7 +49,106 @@ End Function
 
 
 
-'Private Sub GetTechShapeForGESystem(ByRef shp As Visio.Shape)
+'Private Sub GetTechShapeForGESystem(ByRef curNRSNode As c_NRSNode)
+''Заполняем коллекцию фигур соединенных в НРС
+'Dim shp As Visio.Shape
+'Dim con As Connect
+''Dim sideShp As Visio.Shape
+''Dim curNRSNode As c_NRSNode
+'Dim secondNRSNode As c_NRSNode
+'Dim i As Integer
+'Dim connPointsCount As Integer
+'Dim cll As Visio.cell
+'
+'
+'
+'    Set shp = curNRSNode.NodeShape
+''    Debug.Assert shp.ID <> 19
+'
+'    If IsGFSShapeWithIP(shp, indexPers.ipRukavLineNapor) Then       'Если текущая фигура рукав, то проверяем подключения к его концам...
+'        For Each con In shp.Connects
+'            If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
+''                Set secondNRSNode = New c_NRSNode      'Старое
+''                CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
+'                Set secondNRSNode = NRSModel_.GetNRSNodeByKey(con.ToSheet.ID)
+'                If secondNRSNode Is Nothing Then
+'                    Set secondNRSNode = New c_NRSNode
+'                    CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
+'                End If
+'                FillProps secondNRSNode
+'                If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
+''                    Debug.Assert shp.ID <> 221
+'                    curNRSNode.AddInNode secondNRSNode
+'                        secondNRSNode.AddOutNode curNRSNode
+'
+'                ElseIf Left(con.ToCell.Name, Len(ccs_InIdent)) = ccs_InIdent Then
+''                    Debug.Assert shp.ID <> 221
+'                    curNRSNode.AddOutNode secondNRSNode
+'                        secondNRSNode.AddInNode curNRSNode
+'                Else
+'                    'ЗДЕСЬ ДЛЯ ДРУГИХ РУКАВНЫХ ЛИНИЙ
+'                End If
+'
+'                If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+'                    NRSModel_.AddNRSNode secondNRSNode
+'                    GetTechShapeForGESystem secondNRSNode
+'                End If
+'            End If
+'        Next con
+'    Else                                                            '...иначе проверяем подключения к точкам соединения
+'        connPointsCount = shp.RowCount(visSectionConnectionPts)
+'        If connPointsCount > 0 Then
+'            For i = 0 To connPointsCount - 1
+'                Set cll = shp.CellsSRC(visSectionConnectionPts, i, 0)
+'                If Left(cll.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
+'                    For Each con In shp.FromConnects
+'                        If con.ToCell.Name = cll.Name Then
+''                            Debug.Assert shp.ID <> 221
+''                            Set secondNRSNode = New c_NRSNode      'Старое
+''                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+'                            Set secondNRSNode = NRSModel_.GetNRSNodeByKey(con.FromSheet.ID)
+'                            If secondNRSNode Is Nothing Then
+'                                Set secondNRSNode = New c_NRSNode
+'                                CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+'                            End If
+'                            FillProps secondNRSNode
+'                            curNRSNode.AddOutNode secondNRSNode
+'                                secondNRSNode.AddInNode curNRSNode
+'
+'                            If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+'                                NRSModel_.AddNRSNode secondNRSNode
+'                                GetTechShapeForGESystem secondNRSNode
+'                            End If
+'                        End If
+'                    Next con
+'                ElseIf Left(cll.Name, Len(ccs_InIdent)) = ccs_InIdent Then
+'                    For Each con In shp.FromConnects
+'                        If con.ToCell.Name = cll.Name Then
+''                            Debug.Assert shp.ID <> 1
+'                            Set secondNRSNode = New c_NRSNode
+'                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+'                            FillProps secondNRSNode
+'                            curNRSNode.AddInNode secondNRSNode
+'                                secondNRSNode.AddOutNode curNRSNode
+'                            If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+'                                NRSModel_.AddNRSNode secondNRSNode
+'                                GetTechShapeForGESystem secondNRSNode
+'                            End If
+'                        End If
+'                    Next con
+'                End If
+'            Next i
+'        End If
+'
+'
+'
+'    End If
+'
+'
+'
+'
+'End Sub
+
 Private Sub GetTechShapeForGESystem(ByRef curNRSNode As c_NRSNode)
 'Заполняем коллекцию фигур соединенных в НРС
 Dim shp As Visio.Shape
@@ -67,23 +168,26 @@ Dim cll As Visio.cell
     If IsGFSShapeWithIP(shp, indexPers.ipRukavLineNapor) Then       'Если текущая фигура рукав, то проверяем подключения к его концам...
         For Each con In shp.Connects
             If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
-                Set secondNRSNode = New c_NRSNode
-                CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
-                FillProps secondNRSNode
-                If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
-'                    Debug.Assert shp.ID <> 101
-                    curNRSNode.AddInNode secondNRSNode
-                        secondNRSNode.AddOutNode curNRSNode
-                        
-                ElseIf Left(con.ToCell.Name, Len(ccs_InIdent)) = ccs_InIdent Then
-'                    Debug.Assert shp.ID <> 101
-                    curNRSNode.AddOutNode secondNRSNode
-                        secondNRSNode.AddInNode curNRSNode
-                Else
-                    'ЗДЕСЬ ДЛЯ ДРУГИХ РУКАВНЫХ ЛИНИЙ
-                End If
+'                Set secondNRSNode = New c_NRSNode      'Старое
+'                CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
+'                FillProps secondNRSNode
+'                If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
+''                    Debug.Assert shp.ID <> 221
+'                    curNRSNode.AddInNode secondNRSNode
+'                        secondNRSNode.AddOutNode curNRSNode
+'
+'                ElseIf Left(con.ToCell.Name, Len(ccs_InIdent)) = ccs_InIdent Then
+''                    Debug.Assert shp.ID <> 221
+'                    curNRSNode.AddOutNode secondNRSNode
+'                        secondNRSNode.AddInNode curNRSNode
+'                Else
+'                    'ЗДЕСЬ ДЛЯ ДРУГИХ РУКАВНЫХ ЛИНИЙ
+'                End If
 
-                If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+                If Not NRSModel_.InModel(con.ToSheet) Then
+                    Set secondNRSNode = New c_NRSNode      'Старое
+                    CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
+                    FillProps secondNRSNode
                     NRSModel_.AddNRSNode secondNRSNode
                     GetTechShapeForGESystem secondNRSNode
                 End If
@@ -97,14 +201,15 @@ Dim cll As Visio.cell
                 If Left(cll.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
                     For Each con In shp.FromConnects
                         If con.ToCell.Name = cll.Name Then
-'                            Debug.Assert shp.ID <> 1
-                            Set secondNRSNode = New c_NRSNode
-                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
-                            FillProps secondNRSNode
-                            curNRSNode.AddOutNode secondNRSNode
-                                secondNRSNode.AddInNode curNRSNode
+'                            Debug.Assert shp.ID <> 221
+'                            Set secondNRSNode = New c_NRSNode      'Старое
+'                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+'                            FillProps secondNRSNode
                 
-                            If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+                            If Not NRSModel_.InModel(con.FromSheet) Then
+                                Set secondNRSNode = New c_NRSNode      'Старое
+                                CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+                                FillProps secondNRSNode
                                 NRSModel_.AddNRSNode secondNRSNode
                                 GetTechShapeForGESystem secondNRSNode
                             End If
@@ -114,12 +219,13 @@ Dim cll As Visio.cell
                     For Each con In shp.FromConnects
                         If con.ToCell.Name = cll.Name Then
 '                            Debug.Assert shp.ID <> 1
-                            Set secondNRSNode = New c_NRSNode
-                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
-                            FillProps secondNRSNode
-                            curNRSNode.AddInNode secondNRSNode
-                                secondNRSNode.AddOutNode curNRSNode
-                            If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+'                            Set secondNRSNode = New c_NRSNode
+'                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+'                            FillProps secondNRSNode
+                            If Not NRSModel_.InModel(con.FromSheet) Then
+                                Set secondNRSNode = New c_NRSNode
+                                CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+                                FillProps secondNRSNode
                                 NRSModel_.AddNRSNode secondNRSNode
                                 GetTechShapeForGESystem secondNRSNode
                             End If
@@ -137,6 +243,104 @@ Dim cll As Visio.cell
     
     
 End Sub
+
+Private Sub LinkNRSNodes()
+'Создаем связи для всех узлов модели '  и проверяем их на стартер/эндер
+Dim curNRSNode As c_NRSNode
+Dim shp As Visio.Shape
+Dim con As Connect
+Dim secondNRSNode As c_NRSNode
+Dim i As Integer
+Dim connPointsCount As Integer
+Dim cll As Visio.cell
+    
+    For Each curNRSNode In NRSModel_.NRSNodes
+        Set shp = curNRSNode.NodeShape
+        
+        If IsGFSShapeWithIP(shp, indexPers.ipRukavLineNapor) Then       'Если текущая фигура рукав, то проверяем подключения к его концам...
+            For Each con In shp.Connects
+                If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
+    '                Set secondNRSNode = New c_NRSNode      'Старое
+    '                CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
+                    Set secondNRSNode = NRSModel_.GetNRSNodeByShape(con.ToSheet)
+'                    CheckStarterEnder secondNRSNode
+'                    If secondNRSNode Is Nothing Then
+'                        Set secondNRSNode = New c_NRSNode
+'                        CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
+'                    End If
+'                    FillProps secondNRSNode
+                    If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
+    '                    Debug.Assert shp.ID <> 221
+                        curNRSNode.AddInNode secondNRSNode
+                            secondNRSNode.AddOutNode curNRSNode
+                            
+                    ElseIf Left(con.ToCell.Name, Len(ccs_InIdent)) = ccs_InIdent Then
+    '                    Debug.Assert shp.ID <> 221
+                        curNRSNode.AddOutNode secondNRSNode
+                            secondNRSNode.AddInNode curNRSNode
+                    Else
+                        'ЗДЕСЬ ДЛЯ ДРУГИХ РУКАВНЫХ ЛИНИЙ
+                    End If
+    
+'                    If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+'                        NRSModel_.AddNRSNode secondNRSNode
+'                        GetTechShapeForGESystem secondNRSNode
+'                    End If
+                End If
+            Next con
+        Else                                                            '...иначе проверяем подключения к точкам соединения
+            connPointsCount = shp.RowCount(visSectionConnectionPts)
+            If connPointsCount > 0 Then
+                For i = 0 To connPointsCount - 1
+                    Set cll = shp.CellsSRC(visSectionConnectionPts, i, 0)
+                    If Left(cll.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
+                        For Each con In shp.FromConnects
+                            If con.ToCell.Name = cll.Name Then
+    '                            Debug.Assert shp.ID <> 221
+    '                            Set secondNRSNode = New c_NRSNode      'Старое
+    '                            CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+                                Set secondNRSNode = NRSModel_.GetNRSNodeByShape(con.FromSheet)
+'                                If secondNRSNode Is Nothing Then
+'                                    Set secondNRSNode = New c_NRSNode
+'                                    CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+'                                End If
+'                                FillProps secondNRSNode
+                                curNRSNode.AddOutNode secondNRSNode
+                                    secondNRSNode.AddInNode curNRSNode
+                    
+'                                If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+'                                    NRSModel_.AddNRSNode secondNRSNode
+'                                    GetTechShapeForGESystem secondNRSNode
+'                                End If
+                            End If
+                        Next con
+                    ElseIf Left(cll.Name, Len(ccs_InIdent)) = ccs_InIdent Then
+                        For Each con In shp.FromConnects
+                            If con.ToCell.Name = cll.Name Then
+    '                            Debug.Assert shp.ID <> 1
+                                Set secondNRSNode = NRSModel_.GetNRSNodeByShape(con.FromSheet)
+'                                Set secondNRSNode = New c_NRSNode
+'                                CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+'                                FillProps secondNRSNode
+                                curNRSNode.AddInNode secondNRSNode
+                                    secondNRSNode.AddOutNode curNRSNode
+'                                If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
+'                                    NRSModel_.AddNRSNode secondNRSNode
+'                                    GetTechShapeForGESystem secondNRSNode
+'                                End If
+                            End If
+                        Next con
+                    End If
+                Next i
+            End If
+    
+            
+            
+        End If
+
+    Next curNRSNode
+End Sub
+
 
 'Private Sub FillStartersEnders()
 'Dim node As c_NRSNode
