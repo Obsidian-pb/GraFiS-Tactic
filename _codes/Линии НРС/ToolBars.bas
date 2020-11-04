@@ -24,6 +24,8 @@ End Sub
 
 Sub RemoveTBImagination()
 'Процедура добавления панели управления "Превращения"-------------------------------
+    On Error Resume Next
+    
     Application.CommandBars("Превращения").Delete
 End Sub
 
@@ -69,7 +71,9 @@ End Sub
 
 Sub DeleteButtonLine()
 '---Процедура удаления кнопки "Рукав" с панели управления "Превращения"--------------
-
+    
+    On Error Resume Next
+    
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -112,7 +116,9 @@ End Sub
 
 Sub DeleteButtonMLine()
 '---Процедура удаления кнопки "Магистральная линия" с панели управления "Превращения"--------------
-
+    
+    On Error Resume Next
+    
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -154,7 +160,9 @@ End Sub
 
 Sub DeleteButtonVHose()
 'Процедура удаления кнопки "всасывающий рукав" с панели управления "Превращения"--------------
-
+    
+    On Error Resume Next
+    
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -196,7 +204,9 @@ End Sub
 
 Sub DeleteButtonNormalize()
 'Процедура удаления кнопки "Нормализация" с панели управления "Превращения"--------------
-
+    
+    On Error Resume Next
+    
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -209,6 +219,93 @@ Sub DeleteButtonNormalize()
 Set Button = Nothing
 Set Bar = Nothing
 End Sub
+
+'--------------------------------------Кнопка Настройка расчета НРС-------------------------
+Sub AddButtonNRSSettings()
+'Процедура добавление новой кнопки на панель управления "Превращения"--------------
+
+'---Объявляем переменные и постоянные--------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Превращения")
+    DocPath = ThisDocument.path
+'---Добавляем кнопки на панель управления "Превращения"--------------------------------
+'---Кнопка "Настройка расчета НРС"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Настройка расчета НРС"
+        .Tag = "NRS Settings"
+        .TooltipText = "Настройки расчета НРС"
+        .FaceID = 642
+'        .BeginGroup = True
+    End With
+    Set Button = Nothing
+
+Set Bar = Nothing
+End Sub
+
+Sub DeleteButtonNRSSettings()
+'Процедура удаления кнопки "Настройка расчета НРС" с панели управления "Превращения"--------------
+    
+    On Error Resume Next
+    
+'---Объявляем переменные и постоянные-------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Превращения")
+'---Удаление кнопки "Нормализация" на панели управления "Превращения"------------------------
+    Set Button = Bar.Controls("Настройка расчета НРС")
+    Button.Delete
+    
+Set Button = Nothing
+Set Bar = Nothing
+End Sub
+
+'--------------------------------------Кнопка Отчет расчета НРС-------------------------
+Sub AddButtonNRSReport()
+'Процедура добавление новой кнопки на панель управления "Превращения"--------------
+
+'---Объявляем переменные и постоянные--------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Превращения")
+    DocPath = ThisDocument.path
+'---Добавляем кнопки на панель управления "Превращения"--------------------------------
+'---Кнопка "Настройка расчета НРС"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Отчет расчета НРС"
+        .Tag = "NRS Report"
+        .TooltipText = "Показать отчет расчета НРС"
+        .FaceID = 230
+'        .BeginGroup = True
+    End With
+    Set Button = Nothing
+
+Set Bar = Nothing
+End Sub
+
+Sub DeleteButtonNRSReport()
+'Процедура удаления кнопки "Отчет расчета НРС" с панели управления "Превращения"--------------
+    
+    On Error Resume Next
+    
+'---Объявляем переменные и постоянные-------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Превращения")
+'---Удаление кнопки "Нормализация" на панели управления "Превращения"------------------------
+    Set Button = Bar.Controls("Отчет расчета НРС")
+    Button.Delete
+    
+Set Button = Nothing
+Set Bar = Nothing
+End Sub
+
 
 
 '-----------------------------Инструменты работы с кнопками-------------------------------------

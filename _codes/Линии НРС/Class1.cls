@@ -15,19 +15,29 @@ Public WithEvents ComBut2 As Office.CommandBarButton  'Всасывающая линия
 Attribute ComBut2.VB_VarHelpID = -1
 Public WithEvents ComBut3 As Office.CommandBarButton  'Магистральные линии
 Attribute ComBut3.VB_VarHelpID = -1
-Public WithEvents ComBut4 As Office.CommandBarButton  'Нормализация
+Public WithEvents ComBut4 As Office.CommandBarButton  'Расчет НРС
 Attribute ComBut4.VB_VarHelpID = -1
+Public WithEvents ComBut5 As Office.CommandBarButton  'Настройка расчета НРС
+Attribute ComBut5.VB_VarHelpID = -1
+Public WithEvents ComBut6 As Office.CommandBarButton  'Отчет расчета НРС
+Attribute ComBut6.VB_VarHelpID = -1
 
 Private Sub Class_Initialize()
     Set ComBut = Application.CommandBars("Превращения").Controls("Рукав")
     Set ComBut2 = Application.CommandBars("Превращения").Controls("Всасывающий рукав")
     Set ComBut3 = Application.CommandBars("Превращения").Controls("Магистральная линия")
     Set ComBut4 = Application.CommandBars("Превращения").Controls("Расчет НРС")
-
+    Set ComBut5 = Application.CommandBars("Превращения").Controls("Настройка расчета НРС")
+    Set ComBut6 = Application.CommandBars("Превращения").Controls("Отчет расчета НРС")
 End Sub
 
 Private Sub Class_Terminate()
     Set ComBut = Nothing
+    Set ComBut2 = Nothing
+    Set ComBut3 = Nothing
+    Set ComBut4 = Nothing
+    Set ComBut5 = Nothing
+    Set ComBut6 = Nothing
 End Sub
 
 Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
@@ -150,148 +160,7 @@ ex:
 End Function
 
 
-'-------------------------------Внешние методы класса---------------------
-'Public Sub MakeHoseLine()
-''Метод обращения в рукавную линию
-'Dim ShpObj As Visio.Shape
-'Dim ShpInd As Integer
-'
-''---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
-''    On Error GoTo Tail
-'
-''---Отключаем обработку событий приложением, обращаем фигуру и вновь включаем обработку событий
-'    Application.EventsEnabled = False
-'    ImportHoseInformation
-'    Application.EventsEnabled = True
-'
-''---Идентифицируем активную фигуру
-'    Set ShpObj = Application.ActiveWindow.Selection(1)
-'    ShpInd = ShpObj.ID
-'
-''---Получаем списки для фигуры
-'    '---Запускаем процедуру получения списка Подразделений
-'    ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
-'    '---Запускаем процедуру получения СПИСКОВ Материалов рукавов
-'    ShpObj.Cells("Prop.HoseMaterial.Format").FormulaU = ListImport("З_Рукава", "Материал рукава")
-'    '---Запускаем процедуру получения СПИСКОВ диаметров рукавов
-'    HoseDiametersListImport (ShpInd)
-'    '---Запускаем процедуру получения ЗНАЧЕНИЙ Сопротивлений рукавов
-'    HoseResistanceValueImport (ShpInd)
-'    '---Запускаем процедуру получения ЗНАЧЕНИЙ Пропускной способности рукавов
-'    HoseMaxFlowValueImport (ShpInd)
-'    '---Запускаем процедуру получения ЗНАЧЕНИЙ Массы рукавов
-'    HoseWeightValueImport (ShpInd)
-'
-''---Устанавливаем значение текущего времени бкз ссылки
-'    ShpObj.Cells("Prop.LineTime").FormulaU = _
-'        "DATETIME(" & Str(ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)) & ")"
-'
-''---Отмечаем кнопку
-''    Ctrl.State = False
-'
-''---Открываем окно свойств обращенной фигуры
-'    On Error Resume Next
-'    Application.DoCmd (1312)
-'
-'Exit Sub
-'Tail:
-'    '---Выходим из процедуры обработки
-'    Application.EventsEnabled = True
-'End Sub
-'
-'Public Sub MakeVHoseLine()
-''Метод обращения во всасывающую рукавную линию
-'Dim ShpObj As Visio.Shape
-'Dim ShpInd As Integer
-'
-''---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
-'    On Error GoTo Tail
-'
-''---Отключаем обработку событий приложением, обращаем фигуру и вновь включаем обработку событий
-'    Application.EventsEnabled = False
-'    ImportVHoseInformation
-'    Application.EventsEnabled = True
-'
-''---Идентифицируем активную фигуру
-'    Set ShpObj = Application.ActiveWindow.Selection(1)
-'    ShpInd = ShpObj.ID
-'
-''---Получаем списки для фигуры
-'    '---Запускаем процедуру получения списка Подразделений
-'    ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
-''    '---Запускаем процедуру получения СПИСКОВ Материалов рукавов
-''    ShpObj.Cells("Prop.HoseMaterial.Format").FormulaU = ListImport("З_Рукава", "Материал")
-''    '---Запускаем процедуру получения СПИСКОВ диаметров рукавов
-''    HoseDiametersListImport (ShpInd)
-''    '---Запускаем процедуру получения ЗНАЧЕНИЙ Сопротивлений рукавов
-''    HoseResistanceValueImport (ShpInd)
-''    '---Запускаем процедуру получения ЗНАЧЕНИЙ Пропускной способности рукавов
-''    HoseMaxFlowValueImport (ShpInd)
-''    '---Запускаем процедуру получения ЗНАЧЕНИЙ Массы рукавов
-''    HoseWeightValueImport (ShpInd)
-'
-''---Устанавливаем значение текущего времени бкз ссылки
-'    ShpObj.Cells("Prop.LineTime").FormulaU = _
-'        "DATETIME(" & Str(ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)) & ")"
-'
-''---Открываем окно свойств обращенной фигуры
-'    On Error Resume Next
-'    Application.DoCmd (1312)
-'
-'Exit Sub
-'Tail:
-'    '---Выходим из процедуры обработки
-'    Application.EventsEnabled = True
-'End Sub
-'
-'Public Sub MakeMagHoseLine()
-''Метод обращения в Магистральную рукавную линию
-'Dim ShpObj As Visio.Shape
-'Dim ShpInd As Integer
-'
-''---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
-'    On Error GoTo Tail
-'
-''---Отключаем обработку событий приложением, обращаем фигуру и вновь включаем обработку событий
-'    Application.EventsEnabled = False
-'    ImportHoseInformation
-'    Application.EventsEnabled = True
-'
-''---Идентифицируем активную фигуру
-'    Set ShpObj = Application.ActiveWindow.Selection(1)
-'    ShpInd = ShpObj.ID
-'
-''---Получаем списки для фигуры
-'    '---Запускаем процедуру получения списка Подразделений
-'    ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
-'    '---Запускаем процедуру получения СПИСКОВ Материалов рукавов
-'    ShpObj.Cells("Prop.HoseMaterial.Format").FormulaU = ListImport("З_Рукава", "Материал рукава")
-'    '---Запускаем процедуру получения СПИСКОВ диаметров рукавов
-'    HoseDiametersListImport (ShpInd)
-'    '---Запускаем процедуру получения ЗНАЧЕНИЙ Сопротивлений рукавов
-'    HoseResistanceValueImport (ShpInd)
-'    '---Запускаем процедуру получения ЗНАЧЕНИЙ Пропускной способности рукавов
-'    HoseMaxFlowValueImport (ShpInd)
-'    '---Запускаем процедуру получения ЗНАЧЕНИЙ Массы рукавов
-'    HoseWeightValueImport (ShpInd)
-'
-''---Устнавливаем значения для магистральной линии
-'    ShpObj.Cells("Prop.HoseDiameter").FormulaU = "INDEX(2,Prop.HoseDiameter.Format)"
-'    ShpObj.Cells("Prop.LineType").FormulaU = "INDEX(1,Prop.LineType.Format)"
-'
-''---Устанавливаем значение текущего времени бкз ссылки
-'    ShpObj.Cells("Prop.LineTime").FormulaU = _
-'        "DATETIME(" & Str(ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)) & ")"
-'
-''---Открываем окно свойств обращенной фигуры
-'    On Error Resume Next
-'    Application.DoCmd (1312)
-'
-'Exit Sub
-'Tail:
-'    '---Выходим из процедуры обработки
-'    Application.EventsEnabled = True
-'End Sub
+
 Private Sub ComBut4_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 'Расчет НРС
     
@@ -306,12 +175,14 @@ Dim shp As Visio.Shape
     Set shp = Application.ActiveWindow.Selection(1)
     
     Set NRSDemon = New c_NRSDemon
-'    NRSDemon.roundAccuracy = 4
-'    NRSDemon.checkAccuracy = 2
-'    NRSDemon.outAccuracy = 2
-'    NRSDemon.maxIterations = 100
-'    NRSDemon.maxIterations = 1
-'    NRSDemon.approvedHout = 3
+
+    NRSDemon.roundAccuracy = GetSetting("GraFiS", "GFS_NRS", "RoundAccuracy", 4)
+    NRSDemon.checkAccuracy = GetSetting("GraFiS", "GFS_NRS", "CheckAccuracy", 2)
+    NRSDemon.outAccuracy = GetSetting("GraFiS", "GFS_NRS", "OutAccuracy", 2)
+    NRSDemon.maxIterations = GetSetting("GraFiS", "GFS_NRS", "MaxIterations", 100)
+    NRSDemon.approvedHout = GetSetting("GraFiS", "GFS_NRS", "ApprovedHout", 3)
+
+
     'Строим модель
     NRSDemon.BuildNRSModel shp
     'Рассчитываем модель
@@ -321,4 +192,18 @@ Dim shp As Visio.Shape
 Exit Sub
 ex:
     Set NRSDemon = Nothing
+End Sub
+
+Private Sub ComBut5_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Настройки расчета НРС
+    
+    frmNRSSettings.Show
+    
+End Sub
+
+Private Sub ComBut6_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отчет расчета НРС
+    
+    frmNRSDescription.Show
+    
 End Sub

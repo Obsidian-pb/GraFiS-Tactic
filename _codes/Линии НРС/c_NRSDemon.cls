@@ -101,8 +101,9 @@ Dim i As Integer
             If Not NRSModel_.correct Then
                 Realize.CheckNodes
                 Debug.Print "Итерация " & i
-                debugger.PrintQSum
-                debugger.PrintModelState
+'                debugger.PrintQSum
+'                debugger.PrintModelState
+                debugger.PrintModelState2
                 MsgBox "Текущая насосно-рукавная система неработоспособна при указанных параметрах элементов!", vbInformation
                 Set CalculateNRSModel = Me
                 Exit Function
@@ -136,7 +137,8 @@ Dim i As Integer
         'Реализуем результаты расчета в фигурах
         Realize.CheckNodes
     Debug.Print i
-    debugger.PrintModelState
+'    debugger.PrintModelState
+    debugger.PrintModelState2
     debugger.PrintQSum
     Set debugger = Nothing
     

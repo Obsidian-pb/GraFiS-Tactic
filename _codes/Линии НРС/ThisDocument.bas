@@ -22,6 +22,8 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     DeleteButtonMLine
     DeleteButtonVHose
     DeleteButtonNormalize
+    DeleteButtonNRSSettings
+    DeleteButtonNRSReport
     
 '---В случае, если на панели "Превращения нет ни одной кнопки, удаляем её
     If Application.CommandBars("Превращения").Controls.Count = 0 Then RemoveTBImagination
@@ -62,11 +64,13 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     End If
 
 '---Создаем панель управления "Превращения" и добавляем на нее кнопку "Обратить в линию"
-    AddTBImagination   'Добавляем тулбокс Обрашщения
-    AddButtonLine      'Добавляем кнопку рабочей линии
-    AddButtonMLine     'Добавляем фигуру магистральной линии
-    AddButtonVHose     'Добавляем кнопку всасывающей линии
-    AddButtonNormalize 'Добавляем кнопку "Нормализация"
+    AddTBImagination        'Добавляем тулбокс Обрашщения
+    AddButtonLine           'Добавляем кнопку рабочей линии
+    AddButtonMLine          'Добавляем фигуру магистральной линии
+    AddButtonVHose          'Добавляем кнопку всасывающей линии
+    AddButtonNormalize      'Добавляем кнопку "Расчет НРС"
+    AddButtonNRSSettings    'Добавляем кнопку "Настройки расчета НРС"
+    AddButtonNRSReport      'Добавляем кнопку "Отчет расчета НРС"
 
 Set ButEvent = New Class1
 

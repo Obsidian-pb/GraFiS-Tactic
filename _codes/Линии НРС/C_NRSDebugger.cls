@@ -29,17 +29,53 @@ Dim node As c_NRSNode
     
 End Function
 
+Public Function PrintModelState2() As C_NRSDebugger
+Dim node As c_NRSNode
+    
+    frmNRSDescription.tbNRSDescription.Text = ""
+    
+    For Each node In NRSModel_.StarterNodes
+        PrintNodeState2 node.ID, 0
+    Next node
+    
+    frmNRSDescription.AddNewString "Общий расход из приборов: " & GetQSum & " л/с"
+    frmNRSDescription.AddNewString "------------------------"
+    frmNRSDescription.AddNewString "Q - текущий расход, л/с"
+    frmNRSDescription.AddNewString "QPrev - расход на предыдущей итерации, л/с"
+    frmNRSDescription.AddNewString "hIn - напор на входе в узел, м"
+    frmNRSDescription.AddNewString "H - напор генерируемый узлом (например насосом МСП), м"
+    frmNRSDescription.AddNewString "hLost - потери напора в узле, м"
+    frmNRSDescription.AddNewString "hOut - напор на выходе из узла, м"
+    
+'    frmNRSDescription.Show
+    
+End Function
+
 Public Function PrintQSum() As C_NRSDebugger
+'Dim node As c_NRSNode
+'Dim sum As Single
+'
+'    For Each node In NRSModel_.EnderNodes
+'        sum = sum + node.Q
+'    Next node
+'Debug.Print "sum(Q)=" & sum
+
+Debug.Print "sum(Q)=" & GetQSum
+Set PrintQSum = Me
+End Function
+
+Public Function GetQSum() As Single
 Dim node As c_NRSNode
 Dim sum As Single
     
     For Each node In NRSModel_.EnderNodes
         sum = sum + node.Q
     Next node
-Debug.Print "sum(Q)=" & sum
+    
+GetQSum = sum
 End Function
 
-Public Function PrintNodeState(ByRef nodeID As Long, ByVal level As Byte) As C_NRSDebugger
+Public Sub PrintNodeState(ByRef nodeID As Long, ByVal level As Byte) 'As C_NRSDebugger
 Dim node As c_NRSNode
 Dim otst As String
 Dim i As indexPers
@@ -57,4 +93,32 @@ Dim nextNode As c_NRSNode
     For Each nextNode In node.OutNodes
         PrintNodeState nextNode.ID, level + 1
     Next nextNode
-End Function
+
+'Set PrintNodeState = Me
+End Sub
+
+Public Sub PrintNodeState2(ByRef nodeID As Long, ByVal level As Byte)
+Dim node As c_NRSNode
+Dim otst As String
+Dim i As indexPers
+Dim nextNode As c_NRSNode
+
+    Set node = NRSModel_.GetNRSNodeByKey(nodeID)
+    
+    For i = 0 To level
+        otst = otst & vbTab
+    Next i
+    
+'    frmNRSDescription.tbNRSDescription.Text = frmNRSDescription.tbNRSDescription.Text & _
+'        otst & node.ID & "(" & CellVal(node.NodeShape, "User.IndexPers.Prompt", visUnitsString) & _
+'        "): Q=" & node.Q & vbTab & "QPrev=" & node.PrevQ & vbTab & "hIn=" & node.hIn & vbTab & "H=" & node.H & vbTab & "hLost = " & node.hLost & vbTab & "hOut = " & node.hOut & vbNewLine
+    
+    frmNRSDescription.AddNewString otst & node.ID & "(" & CellVal(node.NodeShape, "User.IndexPers.Prompt", visUnitsString) & _
+        "): Q=" & node.Q & vbTab & "QPrev=" & node.PrevQ & vbTab & "hIn=" & node.hIn & vbTab & "H=" & node.H & vbTab & "hLost = " & node.hLost & vbTab & "hOut = " & node.hOut
+    
+    For Each nextNode In node.OutNodes
+        PrintNodeState2 nextNode.ID, level + 1
+    Next nextNode
+    
+End Sub
+
