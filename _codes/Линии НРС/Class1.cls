@@ -26,9 +26,9 @@ Private Sub Class_Initialize()
     Set ComBut = Application.CommandBars("Превращения").Controls("Рукав")
     Set ComBut2 = Application.CommandBars("Превращения").Controls("Всасывающий рукав")
     Set ComBut3 = Application.CommandBars("Превращения").Controls("Магистральная линия")
-    Set ComBut4 = Application.CommandBars("Превращения").Controls("Расчет НРС")
-    Set ComBut5 = Application.CommandBars("Превращения").Controls("Настройка расчета НРС")
-    Set ComBut6 = Application.CommandBars("Превращения").Controls("Отчет расчета НРС")
+    Set ComBut4 = Application.CommandBars("Насосно-рукавные системы").Controls("Расчет НРС")
+    Set ComBut5 = Application.CommandBars("Насосно-рукавные системы").Controls("Настройка расчета НРС")
+    Set ComBut6 = Application.CommandBars("Насосно-рукавные системы").Controls("Отчет расчета НРС")
 End Sub
 
 Private Sub Class_Terminate()

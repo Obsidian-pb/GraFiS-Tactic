@@ -25,8 +25,10 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     DeleteButtonNRSSettings
     DeleteButtonNRSReport
     
-'---В случае, если на панели "Превращения нет ни одной кнопки, удаляем её
+'---В случае, если на панели "Превращения" нет ни одной кнопки, удаляем её
     If Application.CommandBars("Превращения").Controls.Count = 0 Then RemoveTBImagination
+'---В случае, если на панели "Насосно-рукавные системы" нет ни одной кнопки, удаляем её
+    If Application.CommandBars("Насосно-рукавные системы").Controls.Count = 0 Then RemoveTBNRSCalc
     
 '---Очищаем переменную приложения
 Set LineAppEvents = Nothing
@@ -68,6 +70,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     AddButtonLine           'Добавляем кнопку рабочей линии
     AddButtonMLine          'Добавляем фигуру магистральной линии
     AddButtonVHose          'Добавляем кнопку всасывающей линии
+'---Создаем панель управления "Насосно-рукавные системы"
+    AddTBNRSCalc
     AddButtonNormalize      'Добавляем кнопку "Расчет НРС"
     AddButtonNRSSettings    'Добавляем кнопку "Настройки расчета НРС"
     AddButtonNRSReport      'Добавляем кнопку "Отчет расчета НРС"

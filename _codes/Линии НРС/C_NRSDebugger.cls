@@ -88,7 +88,7 @@ Dim nextNode As c_NRSNode
     Next i
     
     Debug.Print otst & node.ID & "(" & CellVal(node.NodeShape, "User.IndexPers.Prompt", visUnitsString) & _
-                "): Q=" & node.Q & vbTab & "QPrev=" & node.PrevQ & vbTab & "hIn=" & node.hIn & vbTab & "H=" & node.H & vbTab & "hLost = " & node.hLost & vbTab & "hOut = " & node.hOut
+                "): Q=" & node.Q & vbTab & " QPrev=" & node.PrevQ & vbTab & " hIn=" & node.hIn & vbTab & " H=" & node.H & vbTab & " hLost = " & node.hLost & vbTab & " hOut = " & node.hOut
     
     For Each nextNode In node.OutNodes
         PrintNodeState nextNode.ID, level + 1
@@ -114,7 +114,7 @@ Dim nextNode As c_NRSNode
 '        "): Q=" & node.Q & vbTab & "QPrev=" & node.PrevQ & vbTab & "hIn=" & node.hIn & vbTab & "H=" & node.H & vbTab & "hLost = " & node.hLost & vbTab & "hOut = " & node.hOut & vbNewLine
     
     frmNRSDescription.AddNewString otst & node.ID & "(" & CellVal(node.NodeShape, "User.IndexPers.Prompt", visUnitsString) & _
-        "): Q=" & node.Q & vbTab & "QPrev=" & node.PrevQ & vbTab & "hIn=" & node.hIn & vbTab & "H=" & node.H & vbTab & "hLost = " & node.hLost & vbTab & "hOut = " & node.hOut
+        "): Q=" & node.Q & vbTab & " QPrev=" & node.PrevQ & vbTab & " hIn=" & node.hIn & vbTab & " H=" & node.H & vbTab & " hLost = " & node.hLost & vbTab & " hOut = " & node.hOut
     
     For Each nextNode In node.OutNodes
         PrintNodeState2 nextNode.ID, level + 1
