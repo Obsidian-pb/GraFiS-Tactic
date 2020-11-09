@@ -99,9 +99,13 @@ End Sub
 Private Sub SquareAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Long '(64) - Площадь пожара
+'Dim shpFire As Visio.Shape 'Фигура Площадь пожара
+
+'---Проверяем не произошло ли событие в мастере
+    On Error GoTo EX
+    If cell.Shape.ContainingMasterID >= 0 Then Exit Sub
+    
 '---Проверяем имя ячейки
-    
-    
     If cell.Name = "Prop.FireCategorie" Then
         ShpInd = cell.Shape.ID
         '---Запускаем процедуру получения СПИСКОВ описаний объектов пожара для указанной категории
@@ -112,6 +116,12 @@ Dim ShpInd As Long '(64) - Площадь пожара
         ShpInd = cell.Shape.ID
         '---Запускаем процедуру получения ЗНАЧЕНИЙ факторов пожара для данного описания
         GetFactorsByDescription (ShpInd)
+    End If
+    
+    If cell.Name = "Prop.FireTime" Then
+        '---Переносим новые данные из шейп личста фигуры в шейп лист документа
+        Application.ActiveDocument.DocumentSheet.Cells("User.FireTime").FormulaU = _
+            "DATETIME(" & str(CDbl(cell.Shape.Cells("Prop.FireTime").Result(visDate))) & ")"
     End If
         
         
@@ -133,6 +143,7 @@ Dim ShpInd As Long '(64) - Площадь пожара
 'MsgBox Cell.Shape.ID
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
+EX:
 End Sub
 
 Public Sub MastersImport()
