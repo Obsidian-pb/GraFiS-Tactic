@@ -17,3 +17,26 @@ Public Const vb_ShapeType_Tech = 4                 'Техника
 Public Const vb_ShapeType_VsasSet = 5              'Всасывающая сетка с линией
 Public Const vb_ShapeType_GE = 6                   'Гидроэлеватор
 Public Const vb_ShapeType_WaterContainer = 7       'Водяная емкость
+
+'Перечисление типов данных
+Public Enum NRSProp
+    nrsPropS = 0                            'Сопротивление
+    nrsPropQ = 1                            'Расход
+    nrsPropH = 2                            'Напор внутренни
+    nrsPropP = 3                            'Проводимость
+    nrsPropZ = 4                            'Подъем
+    nrsProphOut = 5                         'Напор на выходе
+    nrsProphIn = 6                          'Напор на входе
+    nrsProphLost = 7                        'Потеря напора
+End Enum
+
+
+
+'Public Event SChanged(ByVal a_S As Single)
+'Public Event QChanged(ByVal a_Q As Single)
+'Public Event HChanged(ByVal a_H As Single)
+'Public Event PChanged(ByVal a_P As Single)
+'Public Event ZChanged(ByVal a_Z As Single)
+'Public Event hOutChanged(ByVal a_hOut As Single)
+'Public Event hInChanged(ByVal a_hIn As Single)
+'Public Event hLostChanged(ByVal a_hIn As Single)

@@ -77,12 +77,20 @@ End Function
 Public Function CalculateNRSModel() As c_NRSDemon
 'Рассчитываем модель насосно-рукавной системы: Основная процедура
 Dim i As Integer
+Dim node As c_NRSNode
+'Dim props() As Integer
     
 '    On Error GoTo ex
     
     Dim debugger As C_NRSDebugger
     Set debugger = New C_NRSDebugger
     debugger.Activate NRSModel_
+    
+'    For Each node In NRSModel_.EnderNodes
+'        debugger.AddObserver node.ID, Array(NRSProp.nrsPropQ, NRSProp.nrsProphIn)
+'    Next
+    debugger.AddObserver NRSModel_.StarterNodes(1).ID, Array(NRSProp.nrsPropQ, NRSProp.nrsProphIn)
+    
 
     'Цикл расчетов:
         For i = 1 To maxIterations
@@ -140,6 +148,13 @@ Dim i As Integer
 '    debugger.PrintModelState
     debugger.PrintModelState2
     debugger.PrintQSum
+'    Stop
+'    For Each node In NRSModel_.EnderNodes
+'        Debug.Print debugger.getObserverHistory(node.ID, NRSProp.nrsPropQ)
+'        Debug.Print debugger.getObserverHistory(node.ID, NRSProp.nrsProphIn)
+'    Next
+    Debug.Print debugger.getObserverHistory(NRSModel_.StarterNodes(1).ID, NRSProp.nrsProphIn)
+    
     Set debugger = Nothing
     
 Set CalculateNRSModel = Me
@@ -342,7 +357,7 @@ Private Function GetHOut(ByRef node As c_NRSNode) As Single
 Dim val As Single
 '    Debug.Assert node.ID <> 85
 '    GetHLost node
-    val = node.hIn + node.H - GetHLost(node)
+    val = node.hIn + node.h - GetHLost(node)
 '    Debug.Assert node.ID <> 85
     If val < 0 Then
         val = 0

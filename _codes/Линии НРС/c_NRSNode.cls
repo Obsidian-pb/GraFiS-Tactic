@@ -25,14 +25,15 @@ Private isEnder_ As Boolean                         'Потребитель НРС
 Private prevQH(1) As Single                         'Предыдущие значения Q и hOut (пока не ясно до конца что лучше, возможно достаточно оставить Q)
 
 '----------------События узла-------------------------
-Public Event SChanged(ByVal a_S As Single)
-Public Event QChanged(ByVal a_Q As Single)
-Public Event HChanged(ByVal a_H As Single)
-Public Event PChanged(ByVal a_P As Single)
-Public Event ZChanged(ByVal a_Z As Single)
-Public Event hOutChanged(ByVal a_hOut As Single)
-Public Event hInChanged(ByVal a_hIn As Single)
-Public Event hLostChanged(ByVal a_hIn As Single)
+'Public Event SChanged(ByVal a_S As Single)
+'Public Event QChanged(ByVal a_Q As Single)
+'Public Event HChanged(ByVal a_H As Single)
+'Public Event PChanged(ByVal a_P As Single)
+'Public Event ZChanged(ByVal a_Z As Single)
+'Public Event hOutChanged(ByVal a_hOut As Single)
+'Public Event hInChanged(ByVal a_hIn As Single)
+'Public Event hLostChanged(ByVal a_hIn As Single)
+Public Event PropChanged(ByVal val As Single, ByVal changedProp As NRSProp)
 
 
 Private Sub Class_Initialize()
@@ -73,7 +74,7 @@ Public Property Get S() As Double
 End Property
 Public Property Let S(ByVal vNewValue As Double)
     S_ = vNewValue
-    RaiseEvent SChanged(S_)
+    RaiseEvent PropChanged(S_, nrsPropS)
 End Property
 
 Public Property Get Q() As Single
@@ -81,7 +82,7 @@ Public Property Get Q() As Single
 End Property
 Public Property Let Q(ByVal vNewValue As Single)
     Q_ = vNewValue
-    RaiseEvent QChanged(Q_)
+    RaiseEvent PropChanged(Q_, nrsPropQ)
 End Property
 Public Function Q_Clear() As c_NRSNode
     prevQH(0) = Q_
@@ -93,12 +94,12 @@ Public Function Q_Raise(ByVal a_Q As Single) As c_NRSNode
 Set Q_Raise = Me
 End Function
 
-Public Property Get H() As Single
-    H = H_
+Public Property Get h() As Single
+    h = H_
 End Property
-Public Property Let H(ByVal vNewValue As Single)
+Public Property Let h(ByVal vNewValue As Single)
     H_ = vNewValue
-    RaiseEvent HChanged(H_)
+    RaiseEvent PropChanged(H_, nrsPropH)
 End Property
 
 Public Property Get P() As Single
@@ -106,7 +107,7 @@ Public Property Get P() As Single
 End Property
 Public Property Let P(ByVal vNewValue As Single)
     P_ = vNewValue
-    RaiseEvent PChanged(P_)
+    RaiseEvent PropChanged(P_, nrsPropP)
 End Property
 
 Public Property Get Z() As Single
@@ -114,7 +115,7 @@ Public Property Get Z() As Single
 End Property
 Public Property Let Z(ByVal vNewValue As Single)
     Z_ = vNewValue
-    RaiseEvent ZChanged(Z_)
+    RaiseEvent PropChanged(Z_, nrsPropZ)
 End Property
 
 Public Property Get hOut() As Single
@@ -122,7 +123,7 @@ Public Property Get hOut() As Single
 End Property
 Public Property Let hOut(ByVal vNewValue As Single)
     hOut_ = vNewValue
-    RaiseEvent hOutChanged(hOut_)
+    RaiseEvent PropChanged(hOut_, nrsProphOut)
 End Property
 
 Public Property Get hIn() As Single
@@ -130,7 +131,7 @@ Public Property Get hIn() As Single
 End Property
 Public Property Let hIn(ByVal vNewValue As Single)
     hIn_ = vNewValue
-    RaiseEvent hInChanged(hIn_)
+    RaiseEvent PropChanged(hIn_, nrsProphIn)
 End Property
 Public Function hIn_Clear() As c_NRSNode
     hIn_ = 0
@@ -142,7 +143,7 @@ Public Property Get hLost() As Single
 End Property
 Public Property Let hLost(ByVal vNewValue As Single)
     hlost_ = vNewValue
-    RaiseEvent hLostChanged(hIn_)
+    RaiseEvent PropChanged(hlost_, nrsProphLost)
 End Property
 Public Function hLost_Clear() As c_NRSNode
 '    prevQH(1) = hlost_

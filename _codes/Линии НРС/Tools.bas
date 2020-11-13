@@ -327,6 +327,15 @@ Public Function RInt(ByVal number As Double, Optional ByVal accuracy As Byte = 2
     RInt = Int(number * 10 ^ accuracy) * 0.1 ^ accuracy
 End Function
 
+Public Function ToSng(val As String) As Single
+    On Error GoTo ex
+    
+    ToSng = CSng(Replace(val, ".", ","))
+Exit Function
+ex:
+    If Err.number = 13 Then ToSng = CSng(Replace(val, ",", "."))
+End Function
+
 '-----------------------------------------Процедуры работы с фигурами----------------------------------------------
 Public Sub SetCheckForAll(ShpObj As Visio.Shape, aS_CellName As String, aB_Value As Boolean)
 'Процедура устанавливает новое значение для всех выбранных фигур одного типа
