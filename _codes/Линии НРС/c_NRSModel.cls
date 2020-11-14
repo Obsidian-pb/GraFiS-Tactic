@@ -109,3 +109,13 @@ Dim sum As Single
     
 TotalQ = sum
 End Property
+Public Property Get TotalQPrev() As Single
+Dim node As c_NRSNode
+Dim sum As Single
+    
+    For Each node In EnderNodes
+        sum = sum + node.PrevQ
+    Next node
+    
+TotalQPrev = sum
+End Property

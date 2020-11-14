@@ -9,7 +9,8 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 '----------------------------Демон-наблюдатель для узла НРС------------------------
-Private WithEvents node_ As c_NRSNode
+'Private WithEvents node_ As c_NRSNode
+Private node_ As c_NRSNode
 Attribute node_.VB_VarHelpID = -1
 Private history() As String                 'Содержание истории
 Private historyPropID() As Integer          'Коды данных истории
@@ -41,22 +42,53 @@ End Function
 '    ReDim history(0, 1)
 'End Sub
 
-Private Sub node__PropChanged(ByVal val As Single, ByVal changedProp As NRSProp)
+'Private Sub node__PropChanged(ByVal val As Single, ByVal changedProp As NRSProp)
+'Dim i As Integer
+''    Debug.Assert Not changedProp = nrsProphOut
+''    If changedProp = nrsProphOut Then
+''        Debug.Assert Not changedProp = nrsProphOut
+''    End If
+'    For i = 0 To UBound(history)
+'        If historyPropID(i) = changedProp Then
+'            history(i) = history(i) & Replace(CStr(val), ",", ".") & delimiter
+'            Exit Sub
+'        End If
+'    Next i
+'
+''    If changedProp = prop_ Then
+''        history = history & CStr(val) & delimiter
+''    End If
+'
+'End Sub
+
+Public Sub HistoryExpand()
 Dim i As Integer
-'    Debug.Assert Not changedProp = nrsProphOut
-'    If changedProp = nrsProphOut Then
-'        Debug.Assert Not changedProp = nrsProphOut
-'    End If
-    For i = 0 To UBound(history)
-        If historyPropID(i) = changedProp Then
-            history(i) = history(i) & Replace(CStr(val), ",", ".") & delimiter
-            Exit Sub
-        End If
+Dim val As Single
+Dim valStr As String
+   
+    For i = 0 To UBound(historyPropID)
+        Select Case historyPropID(i)
+            Case Is = NRSProp.nrsPropH
+                val = node_.H
+            Case Is = NRSProp.nrsProphIn
+                val = node_.hIn
+            Case Is = NRSProp.nrsProphLost
+                val = node_.hLost
+            Case Is = NRSProp.nrsProphOut
+                val = node_.hOut
+            Case Is = NRSProp.nrsPropP
+                val = node_.P
+            Case Is = NRSProp.nrsPropQ
+                val = node_.Q
+            Case Is = NRSProp.nrsPropS
+                val = node_.S
+            Case Is = NRSProp.nrsPropZ
+                val = node_.Z
+        End Select
+        
+        valStr = Replace(CStr(val), ",", ".")
+        history(i) = history(i) & valStr & delimiter
     Next i
-    
-'    If changedProp = prop_ Then
-'        history = history & CStr(val) & delimiter
-'    End If
 
 End Sub
 

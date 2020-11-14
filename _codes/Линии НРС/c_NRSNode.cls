@@ -94,10 +94,10 @@ Public Function Q_Raise(ByVal a_Q As Single) As c_NRSNode
 Set Q_Raise = Me
 End Function
 
-Public Property Get h() As Single
-    h = H_
+Public Property Get H() As Single
+    H = H_
 End Property
-Public Property Let h(ByVal vNewValue As Single)
+Public Property Let H(ByVal vNewValue As Single)
     H_ = vNewValue
     RaiseEvent PropChanged(H_, nrsPropH)
 End Property

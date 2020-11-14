@@ -380,7 +380,7 @@ Dim val2 As Variant
         val2 = CellVal(node.NodeShape, "Prop.Flow")
         If val1 > val2 Then node.Q = val1 Else node.Q = val2
         
-        node.h = CellVal(node.NodeShape, "Prop.PumpPressureCur")
+        node.H = CellVal(node.NodeShape, "Prop.PumpPressureCur")
     End If
 
     

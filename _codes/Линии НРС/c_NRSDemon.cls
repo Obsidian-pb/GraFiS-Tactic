@@ -133,7 +133,7 @@ Dim node As c_NRSNode
             CalculateNRSModelBackward
 '            debugger.PrintModelState
 
-
+            debugger.ObsHistoryExpand
             
 '            'Следуюшая строка только для теста!!!
 '            Realize.CheckNodes
@@ -153,7 +153,7 @@ Dim node As c_NRSNode
 '        Debug.Print debugger.getObserverHistory(node.ID, NRSProp.nrsPropQ)
 '        Debug.Print debugger.getObserverHistory(node.ID, NRSProp.nrsProphIn)
 '    Next
-    Debug.Print debugger.getObserverHistory(NRSModel_.StarterNodes(1).ID, NRSProp.nrsProphIn)
+    Debug.Print debugger.getObserverHistory(NRSModel_.StarterNodes(1).ID, NRSProp.nrsPropQ)
     
     Set debugger = Nothing
     
@@ -316,39 +316,13 @@ ex:
 End Function
 
 Private Function CheckStacionar() As Boolean
-Dim node As c_NRSNode
+Dim diff As Double
 
-    For Each node In NRSModel_.NRSNodes
-        If Not node.isEnder Then
-            If IsStacionar(node) = False Then
-                CheckStacionar = False
-                Exit Function
-            End If
-        End If
-    Next node
+    diff = Abs(NRSModel_.TotalQ - NRSModel_.TotalQPrev)
+    CheckStacionar = diff <= 0.1 ^ checkAccuracy
 
-CheckStacionar = True
 End Function
-Private Function IsStacionar(ByRef node As c_NRSNode) As Boolean
-'Проверяем, установлено ли достаточное
-Dim Qnow As Single
-Dim Qprev As Single
-Dim Qnow2 As Single
-Dim Qprev2 As Single
-    
-    Qnow = node.Q
-    Qprev = node.PrevQ
-    
-'    IsStacionar = (Round(Qnow, roundAccuracy) = Round(Qprev, roundAccuracy))
-'    IsStacionar = (Round(Qnow, checkAccuracy) = Round(Qprev, checkAccuracy))
-'    Debug.Print Abs(Round(Qnow, roundAccuracy) - Round(Qprev, roundAccuracy)), 0.1 ^ checkAccuracy
 
-'    IsStacionar = Abs(Round(Qnow, roundAccuracy) - Round(Qprev, roundAccuracy)) < checkAccuracy 'Здесь нужно попробовать не округление а отбрасывание последних цифр
-'    IsStacionar = Abs(Qnow - Qprev) < checkAccuracy 'Здесь нужно попробовать не округление а отбрасывание последних цифр
-    Qnow2 = RInt(Qnow, checkAccuracy)
-    Qprev2 = RInt(Qprev, checkAccuracy)
-    IsStacionar = Qnow2 = Qprev2
-End Function
 
 
 '-------------------------Блок работы с моделью и узлами------------------------------------------
@@ -357,7 +331,7 @@ Private Function GetHOut(ByRef node As c_NRSNode) As Single
 Dim val As Single
 '    Debug.Assert node.ID <> 85
 '    GetHLost node
-    val = node.hIn + node.h - GetHLost(node)
+    val = node.hIn + node.H - GetHLost(node)
 '    Debug.Assert node.ID <> 85
     If val < 0 Then
         val = 0
