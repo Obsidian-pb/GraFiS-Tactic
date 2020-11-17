@@ -41,3 +41,5 @@ On Error Resume Next
     End If
 
 End Sub
+
+'CALLTHIS("s_SetFireTimeInner","Юїру")+DEPENDSON(User.FireTime)

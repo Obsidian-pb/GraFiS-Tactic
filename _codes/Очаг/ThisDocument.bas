@@ -118,11 +118,11 @@ Dim ShpInd As Long '(64) - Площадь пожара
         GetFactorsByDescription (ShpInd)
     End If
     
-    If cell.Name = "Prop.FireTime" Then
-        '---Переносим новые данные из шейп личста фигуры в шейп лист документа
-        Application.ActiveDocument.DocumentSheet.Cells("User.FireTime").FormulaU = _
-            "DATETIME(" & str(CDbl(cell.Shape.Cells("Prop.FireTime").Result(visDate))) & ")"
-    End If
+'    If cell.Name = "Prop.FireTime" Then
+'        '---Переносим новые данные из шейп личста фигуры в шейп лист документа
+'        Application.ActiveDocument.DocumentSheet.Cells("User.FireTime").FormulaU = _
+'            "DATETIME(" & str(CDbl(cell.Shape.Cells("Prop.FireTime").Result(visDate))) & ")"
+'    End If
         
         
 '    ElseIf Cell.Name = "Prop.FireObject" Then

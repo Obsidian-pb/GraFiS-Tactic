@@ -17,9 +17,17 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.Ifc__CustomPropsLevel: 0; 
-    User.FireTime: DATETIME(43952,933981482); User.FireTime.Prompt: ""; 
+    User.FireTime: 17.11.2020 10:57:04; User.FireTime.Prompt: "Время возникновения пожара"; 
     
     User.CurrentTime: DATETIME(43952,933298611); User.CurrentTime.Prompt: ""; 
+    User.FindTime: 17.11.2020 11:02:04; User.FindTime.Prompt: "Время обнаружения пожара"; 
+    User.InfoTime: 17.11.2020 11:03:04; User.InfoTime.Prompt: "Время сообщения о пожаре"; 
+    User.FirstArrivalTime: ""; User.FirstArrivalTime.Prompt: "Время прибытия"; 
+    User.FirstStvolTime: ""; User.FirstStvolTime.Prompt: "Время подачи ствола"; 
+    User.LocalizationTime: ""; User.LocalizationTime.Prompt: "Локализация"; 
+    User.LOGTime: ""; User.LOGTime.Prompt: "ЛОГ"; 
+    User.LPPTime: ""; User.LPPTime.Prompt: "ЛПП"; 
+    User.FireEndTime: ""; User.FireEndTime.Prompt: "ЗАвершение"; 
   Section Object, row: visRowEvent>>>
     
   Section Object, row: visRowDoc>>>
@@ -943,6 +951,7 @@
     Actions.FormShow: "Сформировать площадь пожара"; Actions.FormShow._Unused1: ""; Actions.FormShow._Unused2: ""; Actions.FormShow.Action: CALLTHIS("Sm_ShapeFormShow";"Очаг"); Actions.FormShow.Checked: 0; Actions.FormShow.Disabled: 0; Actions.FormShow.ReadOnly: FALSE; Actions.FormShow.Invisible: FALSE; Actions.FormShow.BeginGroup: FALSE; Actions.FormShow.TagName: ""; Actions.FormShow.ButtonFace: 414; Actions.FormShow.SortKey: 10; 
     Actions.RadiussShow: "Показывать радиус"; Actions.RadiussShow._Unused1: ""; Actions.RadiussShow._Unused2: ""; Actions.RadiussShow.Action: SETF(GetRef(Actions.RadiussShow.Checked);NOT(Actions.RadiussShow.Checked)); Actions.RadiussShow.Checked: 0; Actions.RadiussShow.Disabled: 0; Actions.RadiussShow.ReadOnly: FALSE; Actions.RadiussShow.Invisible: FALSE; Actions.RadiussShow.BeginGroup: TRUE; Actions.RadiussShow.TagName: ""; Actions.RadiussShow.ButtonFace: 97; Actions.RadiussShow.SortKey: 20; 
     Actions.GotoWF1: "Расчет формы площади пожара на WF"; Actions.GotoWF1._Unused1: ""; Actions.GotoWF1._Unused2: ""; Actions.GotoWF1.Action: CALLTHIS("GotoWF";"Очаг";"http://wiki-fire.org/Расчет%20формы%20пожара.ashx";""); Actions.GotoWF1.Checked: 0; Actions.GotoWF1.Disabled: 0; Actions.GotoWF1.ReadOnly: FALSE; Actions.GotoWF1.Invisible: FALSE; Actions.GotoWF1.BeginGroup: TRUE; Actions.GotoWF1.TagName: ""; Actions.GotoWF1.ButtonFace: 1577; Actions.GotoWF1.SortKey: 30; 
+    Actions.TimesShow: "Изменить времена"; Actions.TimesShow._Unused1: ""; Actions.TimesShow._Unused2: ""; Actions.TimesShow.Action: CALLTHIS("ShowTimesForm";"Очаг"); Actions.TimesShow.Checked: 0; Actions.TimesShow.Disabled: 0; Actions.TimesShow.ReadOnly: FALSE; Actions.TimesShow.Invisible: FALSE; Actions.TimesShow.BeginGroup: FALSE; Actions.TimesShow.TagName: ""; Actions.TimesShow.ButtonFace: 586; Actions.TimesShow.SortKey: 21; 
   Section: Character>>>
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: ConnectionPts>>>
@@ -953,21 +962,37 @@
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
     Prop.FireDate: DATETIME(40544); Prop.FireDate.Prompt: "Дата возникновения пожара"; Prop.FireDate.Label: "Дата возникновения"; Prop.FireDate.Format: "{{dd.MM.yyyy}}"; Prop.FireDate.SortKey: 10; Prop.FireDate.Type: 5; Prop.FireDate.Invisible: TRUE; Prop.FireDate.Verify: FALSE; Prop.FireDate.LangID: 1049; 
-    Prop.FireTime: DATETIME(43952,933981482); Prop.FireTime.Prompt: "Полное астрономическое время возникновения пожара"; Prop.FireTime.Label: "Время возникновения"; Prop.FireTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FireTime.SortKey: 20; Prop.FireTime.Type: 5; Prop.FireTime.Invisible: FALSE; Prop.FireTime.Verify: FALSE; Prop.FireTime.LangID: 1049; 
+    Prop.FireTime: 17.11.2020 10:57:04; Prop.FireTime.Prompt: "Полное астрономическое время возникновения пожара"; Prop.FireTime.Label: "Время возникновения"; Prop.FireTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FireTime.SortKey: 20; Prop.FireTime.Type: 5; Prop.FireTime.Invisible: FALSE; Prop.FireTime.Verify: FALSE; Prop.FireTime.LangID: 1049; 
     Prop.FireCause: ""; Prop.FireCause.Prompt: "Причина пожара"; Prop.FireCause.Label: "Причина пожара"; Prop.FireCause.Format: ""; Prop.FireCause.SortKey: 10; Prop.FireCause.Type: 0; Prop.FireCause.Invisible: FALSE; Prop.FireCause.Verify: FALSE; Prop.FireCause.LangID: 1049; 
     Prop.FireGuilty: ""; Prop.FireGuilty.Prompt: "Лицо виновное в возникновении пожара"; Prop.FireGuilty.Label: "Виновный"; Prop.FireGuilty.Format: ""; Prop.FireGuilty.SortKey: 11; Prop.FireGuilty.Type: 0; Prop.FireGuilty.Invisible: FALSE; Prop.FireGuilty.Verify: FALSE; Prop.FireGuilty.LangID: 1049; 
     Prop.FireObject: ""; Prop.FireObject.Prompt: "Объект пожара"; Prop.FireObject.Label: "Объект пожара"; Prop.FireObject.Format: ""; Prop.FireObject.SortKey: 30; Prop.FireObject.Type: 1; Prop.FireObject.Invisible: TRUE; Prop.FireObject.Verify: FALSE; Prop.FireObject.LangID: 1049; 
     Prop.FireOther: ""; Prop.FireOther.Prompt: "Прочие сведения"; Prop.FireOther.Label: "Прочие сведения"; Prop.FireOther.Format: ""; Prop.FireOther.SortKey: 40; Prop.FireOther.Type: 0; Prop.FireOther.Invisible: FALSE; Prop.FireOther.Verify: FALSE; Prop.FireOther.LangID: 1049; Prop.FireOther.Calendar: 0; 
     Prop.RadiusShow: INDEX(Actions.RadiussShow.Checked;Prop.RadiusShow.Format); Prop.RadiusShow.Prompt: "Показать радиус от очага пожара"; Prop.RadiusShow.Label: "Показать радиус"; Prop.RadiusShow.Format: "Нет;Да"; Prop.RadiusShow.Type: 1; Prop.RadiusShow.Invisible: TRUE; Prop.RadiusShow.Verify: FALSE; Prop.RadiusShow.LangID: 1049; Prop.RadiusShow.Calendar: 0; 
-    Prop.FindTime: Prop.FireTime+5/24/60; Prop.FindTime.Prompt: "Полное астрономическое время обнаружения пожара"; Prop.FindTime.Label: "Время обнаружения"; Prop.FindTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FindTime.SortKey: 21; Prop.FindTime.Type: 5; Prop.FindTime.Invisible: TRUE; Prop.FindTime.Verify: FALSE; Prop.FindTime.LangID: 1049; Prop.FindTime.Calendar: 0; 
-    Prop.InfoTime: Prop.FindTime+1/24/60; Prop.InfoTime.Prompt: "Полное астрономическое время сообщения о пожаре в пожарную охрану"; Prop.InfoTime.Label: "Время сообщения"; Prop.InfoTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.InfoTime.SortKey: 22; Prop.InfoTime.Type: 5; Prop.InfoTime.Invisible: TRUE; Prop.InfoTime.Verify: FALSE; Prop.InfoTime.LangID: 1049; Prop.InfoTime.Calendar: 0; 
+    Prop.FindTime: 17.11.2020 11:02:04; Prop.FindTime.Prompt: "Полное астрономическое время обнаружения пожара"; Prop.FindTime.Label: "Время обнаружения"; Prop.FindTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FindTime.SortKey: 21; Prop.FindTime.Type: 5; Prop.FindTime.Invisible: FALSE; Prop.FindTime.Verify: FALSE; Prop.FindTime.LangID: 1049; Prop.FindTime.Calendar: 0; 
+    Prop.InfoTime: 17.11.2020 11:03:04; Prop.InfoTime.Prompt: "Полное астрономическое время сообщения о пожаре в пожарную охрану"; Prop.InfoTime.Label: "Время сообщения"; Prop.InfoTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.InfoTime.SortKey: 22; Prop.InfoTime.Type: 5; Prop.InfoTime.Invisible: FALSE; Prop.InfoTime.Verify: FALSE; Prop.InfoTime.LangID: 1049; Prop.InfoTime.Calendar: 0; 
+    Prop.FirstArrivalTime: ""; Prop.FirstArrivalTime.Prompt: "Полное астрономическое время прибытия первого пожарного подразделения"; Prop.FirstArrivalTime.Label: "Время прибытия"; Prop.FirstArrivalTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FirstArrivalTime.SortKey: 23; Prop.FirstArrivalTime.Type: IF(STRSAME(Prop.FirstArrivalTime;"");0;5); Prop.FirstArrivalTime.Invisible: FALSE; Prop.FirstArrivalTime.Verify: FALSE; Prop.FirstArrivalTime.LangID: 1049; Prop.FirstArrivalTime.Calendar: 0; 
+    Prop.FirstStvolTime: ""; Prop.FirstStvolTime.Prompt: "Полное астрономическое время подачи первого прибора подачи огнетушащих веществ"; Prop.FirstStvolTime.Label: "Время подачи ствола"; Prop.FirstStvolTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FirstStvolTime.SortKey: 24; Prop.FirstStvolTime.Type: IF(STRSAME(Prop.FirstStvolTime;"");0;5); Prop.FirstStvolTime.Invisible: FALSE; Prop.FirstStvolTime.Verify: FALSE; Prop.FirstStvolTime.LangID: 1049; Prop.FirstStvolTime.Calendar: 0; 
+    Prop.LocalizationTime: ""; Prop.LocalizationTime.Prompt: "Полное астрономическое время локализации пожара"; Prop.LocalizationTime.Label: "Время локализации"; Prop.LocalizationTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.LocalizationTime.SortKey: 25; Prop.LocalizationTime.Type: IF(STRSAME(Prop.LocalizationTime;"");0;5); Prop.LocalizationTime.Invisible: FALSE; Prop.LocalizationTime.Verify: FALSE; Prop.LocalizationTime.LangID: 1049; Prop.LocalizationTime.Calendar: 0; 
+    Prop.LOGTime: ""; Prop.LOGTime.Prompt: "Полное астрономическое время ликвидации открытого горения"; Prop.LOGTime.Label: "Время ликвидации ОГ"; Prop.LOGTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.LOGTime.SortKey: 26; Prop.LOGTime.Type: IF(STRSAME(Prop.LOGTime;"");0;5); Prop.LOGTime.Invisible: FALSE; Prop.LOGTime.Verify: FALSE; Prop.LOGTime.LangID: 1049; Prop.LOGTime.Calendar: 0; 
+    Prop.LPPTime: ""; Prop.LPPTime.Prompt: "Полное астрономическое время ликвидации последствий пожара"; Prop.LPPTime.Label: "Время ликвидации ПП"; Prop.LPPTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.LPPTime.SortKey: 27; Prop.LPPTime.Type: IF(STRSAME(Prop.LPPTime;"");0;5); Prop.LPPTime.Invisible: FALSE; Prop.LPPTime.Verify: FALSE; Prop.LPPTime.LangID: 1049; Prop.LPPTime.Calendar: 0; 
+    Prop.FireEndTime: ""; Prop.FireEndTime.Prompt: "Полное астрономическое время убытия в депо последнего подразделения"; Prop.FireEndTime.Label: "Время завершения работ"; Prop.FireEndTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.FireEndTime.SortKey: 28; Prop.FireEndTime.Type: IF(STRSAME(Prop.FireEndTime;"");0;5); Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
+  Section: Scratch>>>
+    Scratch.A1: Prop.FireTime.Label; Scratch.C1: SETF("Prop.FireTime";TheDoc!User.FireTime)+DEPENDSON(TheDoc!User.FireTime); Scratch.D1: SETF("TheDoc!User.FireTime";User.FireTime)+DEPENDSON(User.FireTime); 
+    Scratch.A2: Prop.FindTime.Label; Scratch.C2: SETF("Prop.FindTime";TheDoc!User.FindTime)+DEPENDSON(TheDoc!User.FindTime); Scratch.D2: SETF("TheDoc!User.FindTime";Prop.FindTime)+DEPENDSON(Prop.FindTime); 
+    Scratch.A3: Prop.InfoTime.Label; Scratch.C3: SETF("Prop.InfoTime";TheDoc!User.InfoTime)+DEPENDSON(TheDoc!User.InfoTime); Scratch.D3: SETF("TheDoc!User.InfoTime";Prop.InfoTime)+DEPENDSON(Prop.InfoTime); 
+    Scratch.A4: Prop.FirstArrivalTime.Label; Scratch.C4: SETF("Prop.FirstArrivalTime";TheDoc!User.FirstArrivalTime)+DEPENDSON(TheDoc!User.FirstArrivalTime); Scratch.D4: SETF("TheDoc!User.FirstArrivalTime";Prop.FirstArrivalTime)+DEPENDSON(Prop.FirstArrivalTime); 
+    Scratch.A5: Prop.FirstStvolTime.Label; Scratch.C5: SETF("Prop.FirstStvolTime";TheDoc!User.FirstStvolTime)+DEPENDSON(TheDoc!User.FirstStvolTime); Scratch.D5: SETF("TheDoc!User.FirstStvolTime";Prop.FirstStvolTime)+DEPENDSON(Prop.FirstStvolTime); 
+    Scratch.A6: Prop.LocalizationTime.Label; Scratch.C6: SETF("Prop.LocalizationTime";TheDoc!User.LocalizationTime)+DEPENDSON(TheDoc!User.LocalizationTime); Scratch.D6: SETF("TheDoc!User.LocalizationTime";Prop.LocalizationTime)+DEPENDSON(Prop.LocalizationTime); 
+    Scratch.A7: Prop.LOGTime.Label; Scratch.C7: SETF("Prop.LOGTime";TheDoc!User.LOGTime)+DEPENDSON(TheDoc!User.LOGTime); Scratch.D7: SETF("TheDoc!User.LOGTime";Prop.LOGTime)+DEPENDSON(Prop.LOGTime); 
+    Scratch.A8: Prop.LPPTime.Label; Scratch.C8: SETF("Prop.LPPTime";TheDoc!User.LPPTime)+DEPENDSON(TheDoc!User.LPPTime); Scratch.D8: SETF("TheDoc!User.LPPTime";Prop.LPPTime)+DEPENDSON(Prop.LPPTime); 
+    Scratch.A9: Prop.FireEndTime.Label; Scratch.C9: SETF("Prop.FireEndTime";TheDoc!User.FireEndTime)+DEPENDSON(TheDoc!User.FireEndTime); Scratch.D9: SETF("TheDoc!User.FireEndTime";Prop.FireEndTime)+DEPENDSON(Prop.FireEndTime); 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 70; User.IndexPers.Prompt: "Очаг пожара"; 
     User.Version: 1; User.Version.Prompt: ""; 
-    User.FireTime: Prop.FireTime; User.FireTime.Prompt: CALLTHIS("s_SetFireTimeInner";"Очаг")+DEPENDSON(User.FireTime); 
+    User.FireTime: Prop.FireTime; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("s_SetFireTime";"Очаг")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
