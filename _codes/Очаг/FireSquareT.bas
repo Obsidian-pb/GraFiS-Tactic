@@ -92,7 +92,7 @@ Dim newFireShape As Visio.Shape
 Dim modelledFireShape As Visio.Shape
 
     '¬ключаем обработчик ошибок - дл€ предупреждени€ об отсутствии запеченной матрицы
-    On Error GoTo EX
+    On Error GoTo ex
     
     '≈сли путь равен 0, то указываем его бесконечно большим
     If path = 0 Then path = 10000
@@ -196,7 +196,7 @@ Dim modelledFireShape As Visio.Shape
         F_InsertFire.pathMain = realCurrentDistance
         
         
-        On Error GoTo EX
+        On Error GoTo ex
         
         i = i + 1
         
@@ -243,7 +243,7 @@ Application.ActiveWindow.Select modelledFireShape, visSelect
     Set tmr2 = Nothing
     
 Exit Sub
-EX:
+ex:
     MsgBox "ћатрица не запечена!", vbCritical
     
     '---ќпредел€ем получившуюс€ фигуру и обращаем ее в фигуру площади горени€
@@ -275,7 +275,7 @@ Dim yCount As Long
 'Dim grain As Integer
 
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '    grain = Me.txtGrainSize.value
 
@@ -284,18 +284,18 @@ Dim yCount As Long
     
     IsAcceptableMatrixSize = xCount * yCount < maxMatrixSize
 Exit Function
-EX:
+ex:
     IsAcceptableMatrixSize = False
 End Function
 
 
 
 
-
-Public Sub DrawExtSquare()
-'¬нешн€€ команда на отрисовку площади тушени€
-    fireModeller.DrawExtSquareByDemon
-End Sub
+'Ќе пон€л откуда это
+'Public Sub DrawExtSquare()
+''¬нешн€€ команда на отрисовку площади тушени€
+'    fireModeller.DrawExtSquareByDemon
+'End Sub
 
 
 
@@ -383,17 +383,17 @@ End Function
 
 
 '------------------------------------–јсчет и построение площади тушени€------------------------------
-Public Sub TestExtSquareCalculationRun(ByRef shp As Visio.Shape)
-    TestExtSquareCalculation
-End Sub
+'Public Sub TestExtSquareCalculationRun(ByRef shp As Visio.Shape)
+'    TestExtSquareCalculation
+'End Sub
 
-Public Sub TestExtSquareCalculation()
-'ѕровер€ем работоспособность расчета площади тушени€
-Dim extSquareCalculator As c_ExtSquareCalculator
-    
-    Set extSquareCalculator = New c_ExtSquareCalculator
-    extSquareCalculator.grain = grain
-    extSquareCalculator.SetOpenSpaceLayer fireModeller
-    extSquareCalculator.RunDemon
-    
-End Sub
+'Public Sub TestExtSquareCalculation()
+''ѕровер€ем работоспособность расчета площади тушени€
+'Dim extSquareCalculator As c_ExtSquareCalculator
+'
+'    Set extSquareCalculator = New c_ExtSquareCalculator
+'    extSquareCalculator.grain = grain
+'    extSquareCalculator.SetOpenSpaceLayer fireModeller
+'    extSquareCalculator.RunDemon
+'
+'End Sub

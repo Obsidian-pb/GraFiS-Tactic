@@ -118,7 +118,7 @@ Private Sub CheckRect(ByVal x As Long, ByVal y As Long, ByVal radiuss As Integer
 Dim radiussHalf As Integer
 Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, что бы гарантировать проверку всей площади квадрата - переводит длину пришедшего радиуса (являющегося половиной длины квадрата) к радиусу круга описывающего квадрат, в идеале равен 1,4142135623731
 
-    On Error GoTo EX
+    On Error GoTo ex
                
 '1 Проверяем утверждение, что в радиусе нет стен
     '---Если стен нет, оставляем для всей клетки 0
@@ -190,7 +190,7 @@ Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, 
                 CheckRect x - radiussHalf, y - radiussHalf, radiussHalf
         End If
 Exit Sub
-EX:
+ex:
     Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
 End Sub
 

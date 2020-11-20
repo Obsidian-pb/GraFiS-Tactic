@@ -302,7 +302,7 @@ Sub ImportFogInformation()
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем выбран ли какой либо объект
     If Application.ActiveWindow.Selection.Count < 1 Then
         MsgBox "Не выбрана ни одна фигура!", vbInformation
@@ -341,7 +341,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ImportFogInformation"
 End Sub
 
@@ -354,7 +354,7 @@ Sub ImportRushInformation()
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем выбран ли какой либо объект
     If Application.ActiveWindow.Selection.Count < 1 Then
         MsgBox "Не выбрана ни одна фигура!", vbInformation
@@ -404,7 +404,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     Application.DoCmd (1312)
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ImportRushInformation"
 End Sub
 
@@ -464,7 +464,7 @@ Dim i As Integer
 Dim j As Integer
 Dim k As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 '    Set OriginalShp = Application.ActiveWindow.Page.Shapes.ItemFromID(231)
     Set ReplicaShape = Application.ActiveWindow.Page.DrawRectangle(0, 0, 100, 100)
     
@@ -509,7 +509,7 @@ Dim k As Integer
 Set PF_GeometryCopy = ReplicaShape
 
 Exit Function
-EX:
+ex:
     MsgBox "Возникла непредвиденная ошибка! Если она будет повторяться - обратитесь к разработчику", , ThisDocument.Name
     SaveLog Err, "Document_DocumentOpened"
 End Function

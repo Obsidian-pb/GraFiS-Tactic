@@ -139,7 +139,7 @@ Dim i As Integer
 Dim cell As c_Cell
 
     If F_InsertFire.optValue Then
-        On Error GoTo EX
+        On Error GoTo ex
 '        maxWay = F_InsertFire.txtNozzleRangeValue * 1000
         maxWay = form.StvolCalcDistance
         On Error GoTo EX1
@@ -194,7 +194,7 @@ Dim cell As c_Cell
         Loop
     
 Exit Sub
-EX:
+ex:
     MsgBox "Не правильно указано значение расстояния рассчета стволов"
 Exit Sub
 EX1:

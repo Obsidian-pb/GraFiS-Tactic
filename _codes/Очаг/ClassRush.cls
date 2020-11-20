@@ -24,7 +24,7 @@ End Sub
 
 Private Sub ComBut4_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Проверяем включена ли кнопка - если включена - отключаем
     If Ctrl.State = msoButtonDown Then
@@ -46,13 +46,13 @@ Private Sub ComBut4_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault A
     End If
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ComBut4_Click"
 End Sub
 
 Public Sub MorphToRush()
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем имеется ли возможность обращения фигуры
 '    If Not CheckRushShape Then
 '    '---Отмечаем кнопку
@@ -64,7 +64,7 @@ Public Sub MorphToRush()
     ImportRushInformation
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "MorphToRush"
 End Sub
 

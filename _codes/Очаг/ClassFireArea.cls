@@ -24,7 +24,7 @@ End Sub
 
 Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Проверяем включена ли кнопка - если включена - отключаем
     If Ctrl.State = msoButtonDown Then
@@ -46,13 +46,13 @@ Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As
     End If
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ComBut_Click"
 End Sub
 
 Public Sub MorphToFireArea()
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Проверяем имеется ли возможность обращения фигуры
 '    If Not CheckSquareShape Then
@@ -65,7 +65,7 @@ Public Sub MorphToFireArea()
     ImportAreaInformation
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "MorphToFireArea"
 End Sub
 

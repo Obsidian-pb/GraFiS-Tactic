@@ -31,7 +31,7 @@ Private Sub btnClose_Click()
 End Sub
 
 Private Sub lblGoHyperlink_Click()
-    Shell "cmd /cstart " & lblGoHyperlink.Tag
+    Shell "cmd /cstart " & lblGoHyperlink.tag
 End Sub
 
 Public Sub CheckUpdates()
@@ -62,7 +62,7 @@ Dim xmlNode As Object
 
     GetData = False
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set xmlDoc = CreateObject("MSXML.DOMDocument") ' New DOMDocument60
     xmlDoc.async = False
@@ -87,7 +87,7 @@ Dim xmlNode As Object
     Set xmlNode = Nothing
     Set xmlDoc = Nothing
 Exit Function
-EX:
+ex:
     GetData = False
 End Function
 

@@ -9,7 +9,7 @@ Dim Cell1 As Visio.cell, Cell2 As Visio.cell
 Dim CellFormula As String
 Dim pnt1 As Long, pnt2 As Long
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Вбрасываем фигуру подписи площади
     '---Определяем точки Х и У для вброса
         pntX = ShpObj.CellsU("pinX")
@@ -57,7 +57,7 @@ Dim pnt1 As Long, pnt2 As Long
     Application.DoCmd (1312)
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "InsertLabelSquare"
 End Sub
 
@@ -68,7 +68,7 @@ Dim OtherShape As Visio.Shape
 Dim x, y As Double
 Dim col As Collection
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Определяем координаты активной фигуры
     x = ShpObj.Cells("PinX").Result(visInches)
     y = ShpObj.Cells("Piny").Result(visInches)
@@ -85,7 +85,7 @@ Dim col As Collection
 
 Set OtherShape = Nothing
 Exit Sub
-EX:
+ex:
     Set OtherShape = Nothing
     SaveLog Err, "SeekFire", ShpObj.Name
 End Sub
@@ -95,7 +95,7 @@ Public Sub ConnectedShapesLostCheck(ShpObj As Visio.Shape)
 'Процедура проверяет, не была ли удалена одна из фигур соединенных коннектором, и если была, то удаляет сам коннектор
 Dim CellsVal(4) As String
     
-On Error GoTo EX
+On Error GoTo ex
     
     CellsVal(0) = ShpObj.Cells("BegTrigger").FormulaU
     CellsVal(1) = ShpObj.Cells("BegTrigger").Result(visUnitsString)
@@ -107,7 +107,7 @@ On Error GoTo EX
         ShpObj.Delete
     End If
 Exit Sub
-EX:
+ex:
     'Ошибка
 End Sub
 

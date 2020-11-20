@@ -67,7 +67,7 @@ Private Sub btnBakeMatrix_Click()
     grain = Me.txtGrainSize
     
     'Запекаем матрицу
-    MakeMatrix
+    MakeMatrix Me
 End Sub
 
 Private Sub btnDeleteMatrix_Click()
@@ -83,7 +83,7 @@ Private Sub btnRunFireModelling_Click()
 'При нажатии на кнопку запускаем моделирование
     stopModellingFlag = False
     
-    On Error GoTo EX
+    On Error GoTo ex
     'Определяем требуемое количество шагов
     Dim spd As Single
     Dim timeElapsed As Single
@@ -100,7 +100,7 @@ Private Sub btnRunFireModelling_Click()
         MsgBox "Не все данные корректно указаны!", vbCritical
     End If
 Exit Sub
-EX:
+ex:
     MsgBox "Не все данные корректно указаны!", vbCritical
 End Sub
 
