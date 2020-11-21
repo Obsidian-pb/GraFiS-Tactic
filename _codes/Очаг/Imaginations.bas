@@ -38,7 +38,7 @@ Dim RowNum As Integer, CellNum As Integer
             'If (ShapeTo.RowExists(SectionIndex, RowNum, 0) = 0) And Not (ShapeFrom.RowExists(SectionIndex, RowNum, 0) = 0) Then
                 'MsgBox "create"
                 ShapeTo.AddRow SectionIndex, RowNum, 0
-                ShapeTo.CellsSRC(SectionIndex, RowNum, CellNum).RowNameU = ShapeFrom.CellsSRC(SectionIndex, RowNum, CellNum).RowName
+                ShapeTo.CellsSRC(SectionIndex, RowNum, CellNum).RowNameU = ShapeFrom.CellsSRC(SectionIndex, RowNum, CellNum).rowName
             'End If
         Next RowNum
             

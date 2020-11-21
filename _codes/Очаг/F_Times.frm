@@ -188,33 +188,43 @@ End Sub
             SetVal fStv, CStr(dt)
         End If
     End Sub
+
     '-------------Определение разниц между временами--------------
     Private Sub txt_FindTime_Change()
         CheckDiffs
+        CheckField fin
     End Sub
     Private Sub txt_FireEndTime_Change()
         CheckDiffs
+        CheckField endF
     End Sub
     Private Sub txt_FireTime_Change()
         CheckDiffs
+        CheckField fir
     End Sub
     Private Sub txt_FirstArrivalTime_Change()
         CheckDiffs
+        CheckField fArr
     End Sub
     Private Sub txt_FirstStvolTime_Change()
         CheckDiffs
+        CheckField fStv
     End Sub
     Private Sub txt_InfoTime_Change()
         CheckDiffs
+        CheckField inf
     End Sub
     Private Sub txt_LocalizationTime_Change()
         CheckDiffs
+        CheckField loc
     End Sub
     Private Sub txt_LOGTime_Change()
         CheckDiffs
+        CheckField log
     End Sub
     Private Sub txt_LPPTime_Change()
         CheckDiffs
+        CheckField lpp
     End Sub
     '-------------Вставка текущих значений по двойному клику--------------
     Private Sub txt_FireTime_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
@@ -244,7 +254,10 @@ End Sub
     Private Sub txt_FireEndTime_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
         SetVal endF, CStr(Now)
     End Sub
-
+    '------------Добавление строк в лист страницы
+    Private Sub cb_ShowInPage_Click()
+        AddPageTimeProps
+    End Sub
 
 
 '---------------Функции формы--------------------------
@@ -389,9 +402,11 @@ Dim dtMin As Date
 Dim shp As Visio.Shape
     
     For Each shp In Application.ActivePage.Shapes
-        dt = CellVal(shp, "Prop.ArrivalTime", visDate)
-        If dt > 0 Then
-            If dtMin = 0 Or dtMin > dt Then dtMin = dt
+        If CellVal(shp, "Actions.MainManeure.Checked") = 0 Then
+            dt = CellVal(shp, "Prop.ArrivalTime", visDate)
+            If dt > 0 Then
+                If dtMin = 0 Or dtMin > dt Then dtMin = dt
+            End If
         End If
     Next shp
     
@@ -403,10 +418,12 @@ Dim dtMin As Date
 Dim shp As Visio.Shape
     
     For Each shp In Application.ActivePage.Shapes
-        If IsGFSShapeWithIP(shp, Array(ipStvolRuch, ipStvolRuchPena, ipStvolLafVoda, ipStvolLafPena, ipStvolLafPoroshok, ipStvolLafVozimiy, ipStvolGas, ipStvolPoroshok)) Then
-            dt = CellVal(shp, "Prop.SetTime", visDate)
-            If dt > 0 Then
-                If dtMin = 0 Or dtMin > dt Then dtMin = dt
+        If CellVal(shp, "Actions.MainManeure.Checked") = 0 Then
+            If IsGFSShapeWithIP(shp, Array(ipStvolRuch, ipStvolRuchPena, ipStvolLafVoda, ipStvolLafPena, ipStvolLafPoroshok, ipStvolLafVozimiy, ipStvolGas, ipStvolPoroshok)) Then
+                dt = CellVal(shp, "Prop.SetTime", visDate)
+                If dt > 0 Then
+                    If dtMin = 0 Or dtMin > dt Then dtMin = dt
+                End If
             End If
         End If
     Next shp
@@ -414,7 +431,62 @@ Dim shp As Visio.Shape
 GetMinStvTime = dtMin
 End Function
 
+'------------------Проверка данных----------------------
+Private Sub CheckField(ByVal tag As String)
+Dim cntrl As Control
+Dim str As String
+    
+    On Error GoTo ex
+    
+    Set cntrl = GetControl(tag)
+    str = cntrl.Text
+    
+    If isCorrectData(str) Then
+        SetColor tag, vbBlack
+    Else
+        SetColor tag, vbRed
+    End If
+    
+Exit Sub
+ex:
+    Debug.Print "Error"
+End Sub
 
-
-
-
+'------------------Создание строк данных в странице----------------------
+Private Sub AddPageTimeProps()
+Dim tmpRowInd As Integer
+Dim tmpRow As Visio.Row
+Dim shp As Visio.Shape
+    
+    On Error Resume Next
+    
+    Set shp = Application.ActivePage.PageSheet
+    
+    'Время возникновения
+        tmpRowInd = shp.AddNamedRow(visSectionProp, "FireTime", visTagDefault)
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время возникновения" & """"
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время возникновения пожара" & """"
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        SetCellVal shp, fir, GetVal(fir)
+        
+        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = formShp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU
+        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FireTime" & Chr(34) & ",TheDoc!User.FireTime)+DEPENDSON(TheDoc!User.FireTime)"  'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
+        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FireTime" & Chr(34) & ", Prop.FireTime) + DEPENDSON(Prop.FireTime)"      'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
+        
+    'Время обнаружения
+        tmpRowInd = shp.AddNamedRow(visSectionProp, "FindTime", visTagDefault)
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время обнаружения" & """"
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время обнаружения пожара" & """"
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        SetCellVal shp, fin, GetVal(fin)
+        
+        'Переписать так чтобы формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
+        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = formShp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU
+        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FindTime" & Chr(34) & ",TheDoc!User.FindTime)+DEPENDSON(TheDoc!User.FindTime)"  'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
+        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FindTime" & Chr(34) & ", Prop.FindTime) + DEPENDSON(Prop.FindTime)"      'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
+        
+        
+        
+End Sub

@@ -68,6 +68,14 @@ ex:
 
 End Sub
 
+'Public Function NewRow(ByRef shp As Visio.Shape, ByVal secInd As Integer) As Visio.Row
+'Dim tmpRow As Visio.Row
+'
+'    tmpRow = shp.AddRow(
+'
+'End Function
+
+
 Public Sub FixLineGroupProportions()
 'Main sub for fixation the line width of each shape in groupe
 Dim shp As Visio.Shape
