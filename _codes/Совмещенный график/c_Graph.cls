@@ -285,7 +285,9 @@ End Function
 Public Function PF_GetIntence(ByVal ShpPos As Integer) As Single
 'Функция возвращает значение интенсивности фигуры площади пожара в списке согласно позиции ShpPos
 On Error GoTo EX
-
+    
+'    If ColP_Fires.Count = 0 Then Exit Function
+    
 '---Сортируем фигуры в коллекции площадей пожара
     sC_SortFires
 '---Получаем данные
@@ -304,7 +306,7 @@ Public Function PF_GetTimeEnd(ByVal Modificator As Single, ByVal Opt As String) 
 'Единицы выбираются в указанных опцией
 Dim i As Integer
     
-'---Сортируем фигуры в коллекции плоащдей пожара
+'---Сортируем фигуры в коллекции площадей пожара
     sC_SortFires
     
     PF_GetTimeEnd = DateDiff(Opt, pcpD_BeginDate, ColP_Fires(ColP_Fires.Count).Cells("Prop.SquareTime").ResultStr(visDate)) * Modificator
@@ -334,7 +336,9 @@ Public Function PF_GetMaxSquare(ByVal ShpPos) As Single
 Dim i As Integer
     
 On Error GoTo EX
-
+    
+    If ColP_Fires.Count = 0 Then Exit Function
+    
 '---Сортируем фигуры в коллекции площадей пожара
     sC_SortFires
 '---Получаем данные

@@ -254,10 +254,10 @@ End Sub
     Private Sub txt_FireEndTime_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
         SetVal endF, CStr(Now)
     End Sub
-    '------------Добавление строк в лист страницы
-    Private Sub cb_ShowInPage_Click()
-        AddPageTimeProps
-    End Sub
+'    '------------Добавление строк в лист страницы
+'    Private Sub cb_ShowInPage_Click()
+'        AddPageTimeProps
+'    End Sub
 
 
 '---------------Функции формы--------------------------
@@ -452,41 +452,122 @@ ex:
     Debug.Print "Error"
 End Sub
 
-'------------------Создание строк данных в странице----------------------
-Private Sub AddPageTimeProps()
-Dim tmpRowInd As Integer
-Dim tmpRow As Visio.Row
-Dim shp As Visio.Shape
-    
-    On Error Resume Next
-    
-    Set shp = Application.ActivePage.PageSheet
-    
-    'Время возникновения
-        tmpRowInd = shp.AddNamedRow(visSectionProp, "FireTime", visTagDefault)
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время возникновения" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время возникновения пожара" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
-        SetCellVal shp, fir, GetVal(fir)
-        
-        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
-        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = formShp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU
-        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FireTime" & Chr(34) & ",TheDoc!User.FireTime)+DEPENDSON(TheDoc!User.FireTime)"  'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
-        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FireTime" & Chr(34) & ", Prop.FireTime) + DEPENDSON(Prop.FireTime)"      'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
-        
-    'Время обнаружения
-        tmpRowInd = shp.AddNamedRow(visSectionProp, "FindTime", visTagDefault)
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время обнаружения" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время обнаружения пожара" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
-        SetCellVal shp, fin, GetVal(fin)
-        
-        'Переписать так чтобы формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
-        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
-        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = formShp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU
-        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FindTime" & Chr(34) & ",TheDoc!User.FindTime)+DEPENDSON(TheDoc!User.FindTime)"  'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
-        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FindTime" & Chr(34) & ", Prop.FindTime) + DEPENDSON(Prop.FindTime)"      'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
-        
-        
-        
-End Sub
+''------------------Создание строк данных в странице----------------------
+'Private Sub AddPageTimeProps()
+'Dim tmpRowInd As Integer
+'Dim tmpRow As Visio.Row
+'Dim shp As Visio.Shape
+'
+''    On Error Resume Next
+'
+'    Set shp = Application.ActivePage.PageSheet
+'
+'    'Время возникновения
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "FireTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время возникновения" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время возникновения пожара" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, fir, GetVal(fir)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время возникновения" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FireTime" & Chr(34) & ",TheDoc!User.FireTime)+DEPENDSON(TheDoc!User.FireTime)"  'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FireTime" & Chr(34) & ", Prop.FireTime) + DEPENDSON(Prop.FireTime)"      'ВАЖНО !!! формулы вставлялись явным образом - текстом, иначе можно напороться на ошибки несовпадения индексов строк Scratch
+'
+'    'Время обнаружения
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "FindTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время обнаружения" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время обнаружения пожара" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, fin, GetVal(fin)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время обнаружения" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FindTime" & Chr(34) & ",TheDoc!User.FindTime)+DEPENDSON(TheDoc!User.FindTime)"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FindTime" & Chr(34) & ", Prop.FindTime) + DEPENDSON(Prop.FindTime)"
+'
+'    'Время сообщения
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "InfoTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время сообщения" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время сообщения о пожаре" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, inf, GetVal(inf)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время сообщения" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.InfoTime" & Chr(34) & ",TheDoc!User.InfoTime)+DEPENDSON(TheDoc!User.InfoTime)"  '
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.InfoTime" & Chr(34) & ", Prop.InfoTime) + DEPENDSON(Prop.InfoTime)"
+'
+'    'Время прибытия первого подразделения
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "FirstArrivalTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время прибытия" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время прибытия к месту пожара первого подразделения" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, fArr, GetVal(fArr)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время прибытия" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FirstArrivalTime" & Chr(34) & ",TheDoc!User.FirstArrivalTime)+DEPENDSON(TheDoc!User.FirstArrivalTime)"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FirstArrivalTime" & Chr(34) & ", Prop.FirstArrivalTime) + DEPENDSON(Prop.FirstArrivalTime)"
+'
+'    'Время подачи первого ствола
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "FirstStvolTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время подачи ствола" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время подачи первого ствола" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, fStv, GetVal(fArr)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время подачи ствола" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FirstStvolTime" & Chr(34) & ",TheDoc!User.FirstStvolTime)+DEPENDSON(TheDoc!User.FirstStvolTime)"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FirstStvolTime" & Chr(34) & ", Prop.FirstStvolTime) + DEPENDSON(Prop.FirstStvolTime)"
+'
+'    'Время локализации
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "LocalizationTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время локализации" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время локализации" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, loc, GetVal(fArr)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время локализации" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.LocalizationTime" & Chr(34) & ",TheDoc!User.LocalizationTime)+DEPENDSON(TheDoc!User.LocalizationTime)"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.LocalizationTime" & Chr(34) & ", Prop.LocalizationTime) + DEPENDSON(Prop.LocalizationTime)"
+'
+'    'Время ЛОГ
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "LOGTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время ликвидации ОГ" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время ликвидации открытого горения" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, log, GetVal(fArr)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время ликвидации ОГ" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.LOGTime" & Chr(34) & ",TheDoc!User.LOGTime)+DEPENDSON(TheDoc!User.LOGTime)"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.LOGTime" & Chr(34) & ", Prop.LOGTime) + DEPENDSON(Prop.LOGTime)"
+'
+'    'Время ЛПП
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "LPPTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время ликвидации ПП" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время ликвидации последствий пожара" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, lpp, GetVal(fArr)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время ликвидации ПП" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.LPPTime" & Chr(34) & ",TheDoc!User.LPPTime)+DEPENDSON(TheDoc!User.LPPTime)"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.LPPTime" & Chr(34) & ", Prop.LPPTime) + DEPENDSON(Prop.LPPTime)"
+'
+'    'Время окончания пожара
+'        tmpRowInd = shp.AddNamedRow(visSectionProp, "FireEndTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время завершения работ" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время ликвидации последствий пожара" & """"
+'        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+'        SetCellVal shp, endF, GetVal(fArr)
+'
+'        tmpRowInd = shp.AddRow(visSectionScratch, visRowLast, visTagDefault)
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchA).FormulaU = """" & "Время завершения работ" & """"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchC).FormulaU = "SETF(" & Chr(34) & "Prop.FireEndTime" & Chr(34) & ",TheDoc!User.FireEndTime)+DEPENDSON(TheDoc!User.FireEndTime)"
+'        shp.CellsSRC(visSectionScratch, tmpRowInd, visScratchD).FormulaU = "SETF(" & Chr(34) & "TheDoc!User.FireEndTime" & Chr(34) & ", Prop.FireEndTime) + DEPENDSON(Prop.FireEndTime)"
+'
+'End Sub

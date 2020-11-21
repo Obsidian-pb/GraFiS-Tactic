@@ -353,6 +353,10 @@ Dim PageIndex As Integer
     Set GraphAnalizer = New c_Graph
     GraphAnalizer.pi_TargetPageIndex = PageIndex
     GraphAnalizer.sC_ColRefresh
+    If GraphAnalizer.ColP_Fires.Count = 0 Then
+        Set GraphAnalizer = Nothing
+        Exit Sub
+    End If
 
 '---Проверяем, имеется ли фигура очага
     If GraphAnalizer.PF_CheckFireBeginExist = False Then
@@ -365,19 +369,25 @@ Dim PageIndex As Integer
     On Error Resume Next
     'начало пожара
 '    shp.Cells("Prop.TimeBegin").FormulaU = """" & GraphAnalizer.PF_GetBeginDateTime & """"
-    shp.Cells("Prop.TimeBegin").FormulaU = "TheDoc!User.FireTime"
+'    shp.Cells("Prop.TimeBegin").FormulaU = "TheDoc!User.FireTime"
     'максимальная площдь
 '    shp.Cells("Prop.FireMax").FormulaForceU = "Guard(" & GraphAnalizer.PF_GetMaxSquare(GraphAnalizer.ColP_Fires.Count) & ")"
     shp.Cells("Prop.FireMax").FormulaForceU = "Guard(" & GraphAnalizer.GetMaxGraphSize(GraphAnalizer.ColP_Fires.Count) & ")"
     'максимальное время
-    shp.Cells("Prop.TimeMax").FormulaForceU = "Guard(" & GraphAnalizer.PF_GetTimeEnd(5, "s") / 60 & ")"
+'    shp.Cells("Prop.TimeMax").FormulaForceU = "Guard(" & GraphAnalizer.PF_GetTimeEnd(5, "s") / 60 & ")"
     'время окончания
-    shp.Cells("Prop.TimeEnd").FormulaU = GraphAnalizer.PF_GetTimeEnd(4, "s") / 60
+'    If (ЕстьВремяОкончанияВДокументе) Then
+'    If False Then
+'        shp.Cells("Prop.TimeEnd").FormulaU = "TheDoc!User.FireEndTime"
+'    Else
+'        shp.Cells("Prop.TimeEnd").FormulaU = GraphAnalizer.PF_GetTimeEnd(4, "s") / 60
+'    End If
     'интенсивность
     shp.Cells("Prop.WaterIntense").FormulaForceU = "GUARD(" & str(GraphAnalizer.PF_GetIntence(GraphAnalizer.ColP_Fires.Count)) & ")"
     'показываем, что анализ доолжен проводиться по полученной цифре
     shp.Cells("Prop.WaterIntenseType").Formula = "INDEX(1;Prop.WaterIntenseType.Format)"
     
+Set GraphAnalizer = Nothing
 Exit Sub
 EX:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
