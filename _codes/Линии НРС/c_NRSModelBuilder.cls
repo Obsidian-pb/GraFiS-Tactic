@@ -166,7 +166,15 @@ Dim cll As Visio.cell
 '    Debug.Assert shp.ID <> 19
     
     If IsGFSShapeWithIP(shp, indexPers.ipRukavLineNapor) Then       'Если текущая фигура рукав, то проверяем подключения к его концам...
+'    Connects:     Sheet.34      Sheet.34      BeginX        Sheet.33      Connections.X1
+'    Connects:     Sheet.33      Sheet.33      BeginX        АЦ            Connections.GFS_OutPatrRight.X
+'    FromConnects: Sheet.33      Sheet.34      BeginX        Sheet.33      Connections.X1
+'    Connects:     Sheet.34      Sheet.34      EndX          Водяной ручной ствол        Connections.GFS_In.X
+'    ===========33:
+'    Connects:     Sheet.33      Sheet.33      BeginX        АЦ            Connections.GFS_OutPatrRight.X
+'    FromConnects: Sheet.33      Sheet.34      BeginX        Sheet.33      Connections.X1
         For Each con In shp.Connects
+            Debug.Print "Connects: ", shp.Name, con.FromSheet.Name, con.FromCell.Name, con.ToSheet.Name, con.ToCell.Name
             If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
 '                Set secondNRSNode = New c_NRSNode      'Старое
 '                CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
@@ -191,6 +199,28 @@ Dim cll As Visio.cell
                     NRSModel_.AddNRSNode secondNRSNode
                     GetTechShapeForGESystem secondNRSNode
                 End If
+            End If
+            'Для других рукавов при последовательном соединении
+'            If con.ToCell.Name = "Connections.X1" Then
+'                Debug.Print con.ToSheet.Name
+'                If Not NRSModel_.InModel(con.ToSheet) Then
+'                    Set secondNRSNode = New c_NRSNode      'Старое
+'                    CheckStarterEnder secondNRSNode.Activate(con.ToSheet)
+'                    FillProps secondNRSNode
+'                    NRSModel_.AddNRSNode secondNRSNode
+'                    GetTechShapeForGESystem secondNRSNode
+'                End If
+'            End If
+        Next con
+        'Для других рукавов при последовательном соединении
+        For Each con In shp.FromConnects
+            Debug.Print "FromConnects: ", shp.Name, con.FromSheet.Name, con.FromCell.Name, con.ToSheet.Name, con.ToCell.Name
+            If Not NRSModel_.InModel(con.FromSheet) Then
+                Set secondNRSNode = New c_NRSNode      'Старое
+                CheckStarterEnder secondNRSNode.Activate(con.FromSheet)
+                FillProps secondNRSNode
+                NRSModel_.AddNRSNode secondNRSNode
+                GetTechShapeForGESystem secondNRSNode
             End If
         Next con
     Else                                                            '...иначе проверяем подключения к точкам соединения
@@ -287,6 +317,22 @@ Dim cll As Visio.cell
 '                        GetTechShapeForGESystem secondNRSNode
 '                    End If
                 End If
+            Next con
+            For Each con In shp.FromConnects
+                If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
+                    Stop    'В этом месте необходимо добавить рекурсивную процедуру формирования полной рукавной линии и определения ее направления движения потока
+                    Set secondNRSNode = NRSModel_.GetNRSNodeByShape(con.FromSheet)
+                    If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
+    '                    Debug.Assert shp.ID <> 221
+                        curNRSNode.AddInNode secondNRSNode
+                            secondNRSNode.AddOutNode curNRSNode
+                    ElseIf Left(con.ToCell.Name, Len(ccs_InIdent)) = ccs_InIdent Then
+    '                    Debug.Assert shp.ID <> 221
+                        curNRSNode.AddOutNode secondNRSNode
+                            secondNRSNode.AddInNode curNRSNode
+                    End If
+                End If
+
             Next con
         Else                                                            '...иначе проверяем подключения к точкам соединения
             connPointsCount = shp.RowCount(visSectionConnectionPts)

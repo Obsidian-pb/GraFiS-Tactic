@@ -88,7 +88,7 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     End If
 
 '---Активируем опцию приклеивания к контурам фигур
-    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints
+    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints + visGlueToVertices
 
 '---Добавляем для документа своство "FireTime"
     sm_AddFireTime

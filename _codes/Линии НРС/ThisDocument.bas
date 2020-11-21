@@ -38,7 +38,7 @@ End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 
-    On Error GoTo ex
+'    On Error GoTo ex
 '---Показываем окно свойств
     Application.ActiveWindow.Windows.ItemFromID(visWinIDCustProp).Visible = True
 
@@ -79,7 +79,7 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 Set ButEvent = New Class1
 
 '---Активируем опцию приклеивания к контурам фигур
-    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints
+    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints + visGlueToVertices
 
 '---Добавляем для документа своство "FireTime"
     sm_AddFireTime
