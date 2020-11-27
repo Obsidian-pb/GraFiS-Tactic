@@ -183,7 +183,7 @@ End Sub
     Dim dt As Date
         dt = GetMinStvTime
         If dt = 0 Then
-            MsgBox "На странице нет фигур со свойством 'Время прибытия'."
+            MsgBox "На странице нет фигур со свойством 'Время подачи'."
         Else
             SetVal fStv, CStr(dt)
         End If

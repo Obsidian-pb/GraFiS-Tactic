@@ -283,6 +283,7 @@ Dim secondNRSNode As c_NRSNode
 Dim i As Integer
 Dim connPointsCount As Integer
 Dim cll As Visio.cell
+Dim flowDir As Integer
     
     For Each curNRSNode In NRSModel_.NRSNodes
         Set shp = curNRSNode.NodeShape
@@ -308,9 +309,24 @@ Dim cll As Visio.cell
     '                    Debug.Assert shp.ID <> 221
                         curNRSNode.AddOutNode secondNRSNode
                             secondNRSNode.AddInNode curNRSNode
-                    Else
-                        'ЗДЕСЬ ДЛЯ ДРУГИХ РУКАВНЫХ ЛИНИЙ
                     End If
+'                    Stop
+                    'Если это фигура - рукавная линия, запускаем рекурсивный перебор последующих фигур с целью выяснить в каком напарвлении движется вода
+                    If IsGFSShapeWithIP(con.ToSheet, indexPers.ipRukavLineNapor) Then
+                        flowDir = IsHoseForOut(con.ToSheet, shp.ID)
+                        If flowDir = -1 Then
+'                            curNRSNode.AddOutNode secondNRSNode
+'                                secondNRSNode.AddInNode curNRSNode
+                            curNRSNode.AddInNode secondNRSNode
+                                secondNRSNode.AddOutNode curNRSNode
+                        ElseIf flowDir = 1 Then
+'                            curNRSNode.AddInNode secondNRSNode
+'                                secondNRSNode.AddOutNode curNRSNode
+                            curNRSNode.AddOutNode secondNRSNode
+                                secondNRSNode.AddInNode curNRSNode
+                        End If
+                    End If
+    
     
 '                    If Not NRSModel_.InModel(secondNRSNode.NodeShape) Then
 '                        NRSModel_.AddNRSNode secondNRSNode
@@ -320,7 +336,6 @@ Dim cll As Visio.cell
             Next con
             For Each con In shp.FromConnects
                 If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
-                    Stop    'В этом месте необходимо добавить рекурсивную процедуру формирования полной рукавной линии и определения ее направления движения потока
                     Set secondNRSNode = NRSModel_.GetNRSNodeByShape(con.FromSheet)
                     If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
     '                    Debug.Assert shp.ID <> 221
@@ -331,8 +346,24 @@ Dim cll As Visio.cell
                         curNRSNode.AddOutNode secondNRSNode
                             secondNRSNode.AddInNode curNRSNode
                     End If
+'                    Stop    'В этом месте необходимо добавить рекурсивную процедуру формирования полной рукавной линии и определения ее направления движения потока
+                    'Если это фигура - рукавная линия, запускаем рекурсивный перебор последующих фигур с целью выяснить в каком напарвлении движется вода
+                    If IsGFSShapeWithIP(con.FromSheet, indexPers.ipRukavLineNapor) Then
+                        flowDir = IsHoseForOut(con.FromSheet, shp.ID)
+                        If flowDir = -1 Then
+'                            curNRSNode.AddOutNode secondNRSNode
+'                                secondNRSNode.AddInNode curNRSNode
+                            curNRSNode.AddInNode secondNRSNode
+                                secondNRSNode.AddOutNode curNRSNode
+                        ElseIf flowDir = 1 Then
+'                            curNRSNode.AddInNode secondNRSNode
+'                                secondNRSNode.AddOutNode curNRSNode
+                            curNRSNode.AddOutNode secondNRSNode
+                                secondNRSNode.AddInNode curNRSNode
+                        End If
+                    End If
                 End If
-
+                
             Next con
         Else                                                            '...иначе проверяем подключения к точкам соединения
             connPointsCount = shp.RowCount(visSectionConnectionPts)
@@ -385,7 +416,111 @@ Dim cll As Visio.cell
         End If
 
     Next curNRSNode
+'Stop
 End Sub
+
+
+Private Function IsHoseForOut(ByRef shp As Visio.Shape, ByVal PrevShpID As Long) As Integer
+'Проверяем является ли фигура рукава фигурой принимающей поток
+'-1 = фигура передает поток
+' 0 = фигура та же от которой пришел расчет - ничего не происходит
+' 1 = Фигура принимает поток
+Dim con As Connect
+Dim nextShp As Visio.Shape
+Dim flowDir As Integer
+    
+    If isAlreadyLinked(shp.ID, PrevShpID) Then
+        IsHoseForOut = 0
+        Exit Function
+    End If
+    
+    For Each con In shp.Connects
+        Set nextShp = con.ToSheet
+        If nextShp.ID <> PrevShpID Then
+        
+            If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
+                If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
+'                    IsHoseForOut = False
+                    IsHoseForOut = -1
+                    Exit Function
+                ElseIf Left(con.ToCell.Name, Len(ccs_InIdent)) = ccs_InIdent Then
+'                    IsHoseForOut = True
+                    IsHoseForOut = 1
+                    Exit Function
+                End If
+                
+                If IsGFSShapeWithIP(nextShp, indexPers.ipRukavLineNapor) Then
+                    flowDir = IsHoseForOut(nextShp, shp.ID)
+                    IsHoseForOut = flowDir
+                    If flowDir <> 0 Then Exit Function
+                End If
+                
+            End If
+        Else
+            IsHoseForOut = 0
+        End If
+    Next con
+    For Each con In shp.FromConnects
+        Set nextShp = con.FromSheet
+        If nextShp.ID <> PrevShpID Then
+            
+            If con.FromCell.Name = "BeginX" Or con.FromCell.Name = "EndX" Then
+                If Left(con.ToCell.Name, Len(ccs_OutIdent)) = ccs_OutIdent Then
+'                    IsHoseForOut = False
+                    IsHoseForOut = -1
+                    Exit Function
+                        
+                ElseIf Left(con.ToCell.Name, Len(ccs_InIdent)) = ccs_InIdent Then
+'                    IsHoseForOut = True
+                    IsHoseForOut = 1
+                    Exit Function
+                End If
+'                Stop    'В этом месте необходимо добавить рекурсивную процедуру формирования полной рукавной линии и определения ее направления движения потока
+                'Если это фигура - рукавная линия, запускаем рекурсивный перебор последующих фигур с целью выяснить в каком напарвлении движется вода
+                If IsGFSShapeWithIP(nextShp, indexPers.ipRukavLineNapor) Then
+'                    If IsHoseForOut(nextShp) Then
+'                        curNRSNode.AddInNode secondNRSNode
+'                            secondNRSNode.AddOutNode curNRSNode
+'                    Else
+'                        curNRSNode.AddOutNode secondNRSNode
+'                            secondNRSNode.AddInNode curNRSNode
+'                    End If
+'                    IsHoseForOut = IsHoseForOut(nextShp, shp.ID)
+                    flowDir = IsHoseForOut(nextShp, shp.ID)
+                    IsHoseForOut = flowDir
+                    If flowDir <> 0 Then Exit Function
+                End If
+            End If
+            
+        Else
+            IsHoseForOut = 0
+            
+        End If
+    Next con
+End Function
+
+Private Function isAlreadyLinked(ByVal key1 As String, ByVal key2 As String) As Boolean
+'Проверяем не связаны ли уже узлы НРС с переданными ID связью
+Dim node As c_NRSNode
+Dim nodetmp As c_NRSNode
+    
+    Set node = NRSModel_.GetNRSNodeByKey(key1)
+    
+    For Each nodetmp In node.OutNodes
+        If nodetmp.ID = key2 Then
+            isAlreadyLinked = True
+            Exit Function
+        End If
+    Next nodetmp
+    For Each nodetmp In node.InNodes
+        If nodetmp.ID = key2 Then
+            isAlreadyLinked = True
+            Exit Function
+        End If
+    Next nodetmp
+    
+isAlreadyLinked = False
+End Function
 
 
 'Private Sub FillStartersEnders()

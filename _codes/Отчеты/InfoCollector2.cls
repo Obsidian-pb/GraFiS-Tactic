@@ -216,6 +216,10 @@ Dim latestSquareTime As Date
                         .Raise "SmokeCount"
                     Case Is = indexPers.ipOchag 'Очаг
                         .Raise "OchagCount"
+                        
+                        'Временные показатели
+                        .SetValByCellID shp, "Prop.FireTime;Prop.FindTime;Prop.InfoTime;Prop.FirstArrivalTime;Prop.FirstStvolTime;" & _
+                            "Prop.LocalizationTime;Prop.LOGTime;Prop.LPPTime;Prop.FireEndTime", visUnitsString
                     Case Is = indexPers.ipPostradavshie 'Пострадавшие
                         .Raise "InjuredCount", CellVal(shp, "User.CasCount")
                         .Raise "DeadCount", CellVal(shp, "User.DiedCount")
@@ -661,6 +665,7 @@ Dim latestSquareTime As Date
 '            End If
         End If
     Next shp
+
 
 
     

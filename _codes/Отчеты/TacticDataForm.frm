@@ -189,7 +189,7 @@ Dim elem As Element
 '    With A
     For Each elem In elemCollection
         If elem.inTacticForm Then
-            If elem.Result > 0 Then
+            If elem.Result > 0 And elem.Result <> "" Then
                 lstTacticData.AddItem elem.callName, i
                 lstTacticData.List(i, 1) = elem.ResultStr
                 i = i + 1

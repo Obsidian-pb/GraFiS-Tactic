@@ -88,7 +88,7 @@ Dim shp As Visio.Shape
         tmpRowInd = shp.AddNamedRow(visSectionProp, "FindTime", visTagDefault)
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время обнаружения" & """"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время обнаружения пожара" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = "IF(STRSAME(Prop.FindTime," & Chr(34) & Chr(34) & "),0,5)"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsSortKey).FormulaU = 21
 '        SetCellVal shp, "Prop.FindTime", GetVal(fin)
         SetCellVal shp, "Prop.FindTime", CellVal(shpFire, "Prop.FindTime", visDate)
@@ -102,7 +102,7 @@ Dim shp As Visio.Shape
         tmpRowInd = shp.AddNamedRow(visSectionProp, "InfoTime", visTagDefault)
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время сообщения" & """"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время сообщения о пожаре" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = "IF(STRSAME(Prop.InfoTime," & Chr(34) & Chr(34) & "),0,5)"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsSortKey).FormulaU = 22
 '        SetCellVal shp, "Prop.InfoTime", GetVal(inf)
         SetCellVal shp, "Prop.InfoTime", CellVal(shpFire, "Prop.InfoTime", visDate)
@@ -116,7 +116,7 @@ Dim shp As Visio.Shape
         tmpRowInd = shp.AddNamedRow(visSectionProp, "FirstArrivalTime", visTagDefault)
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время прибытия" & """"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время прибытия к месту пожара первого подразделения" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = "IF(STRSAME(Prop.FirstArrivalTime," & Chr(34) & Chr(34) & "),0,5)"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsSortKey).FormulaU = 23
 '        SetCellVal shp, "Prop.FirstArrivalTime", GetVal(fArr)
         SetCellVal shp, "Prop.FirstArrivalTime", CellVal(shpFire, "Prop.FirstArrivalTime", visDate)
@@ -130,7 +130,7 @@ Dim shp As Visio.Shape
         tmpRowInd = shp.AddNamedRow(visSectionProp, "FirstStvolTime", visTagDefault)
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время подачи ствола" & """"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время подачи первого ствола" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = "IF(STRSAME(Prop.FirstStvolTime," & Chr(34) & Chr(34) & "),0,5)"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsSortKey).FormulaU = 24
 '        SetCellVal shp, "Prop.FirstStvolTime", GetVal(fArr)
         SetCellVal shp, "Prop.FirstStvolTime", CellVal(shpFire, "Prop.FirstStvolTime", visDate)
@@ -144,7 +144,7 @@ Dim shp As Visio.Shape
         tmpRowInd = shp.AddNamedRow(visSectionProp, "LocalizationTime", visTagDefault)
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время локализации" & """"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время локализации" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = "IF(STRSAME(Prop.LocalizationTime," & Chr(34) & Chr(34) & "),0,5)"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsSortKey).FormulaU = 25
 '        SetCellVal shp, "Prop.LocalizationTime", GetVal(fArr)
         SetCellVal shp, "Prop.LocalizationTime", CellVal(shpFire, "Prop.LocalizationTime", visDate)
@@ -158,7 +158,7 @@ Dim shp As Visio.Shape
         tmpRowInd = shp.AddNamedRow(visSectionProp, "LOGTime", visTagDefault)
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время ликвидации ОГ" & """"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время ликвидации открытого горения" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = "IF(STRSAME(Prop.LOGTime," & Chr(34) & Chr(34) & "),0,5)"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsSortKey).FormulaU = 26
 '        SetCellVal shp, "Prop.LOGTime", GetVal(fArr)
         SetCellVal shp, "Prop.LOGTime", CellVal(shpFire, "Prop.LOGTime", visDate)
@@ -172,7 +172,7 @@ Dim shp As Visio.Shape
         tmpRowInd = shp.AddNamedRow(visSectionProp, "LPPTime", visTagDefault)
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время ликвидации ПП" & """"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время ликвидации последствий пожара" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = "IF(STRSAME(Prop.LPPTime," & Chr(34) & Chr(34) & "),0,5)"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsSortKey).FormulaU = 27
 '        SetCellVal shp, "Prop.LPPTime", GetVal(fArr)
         SetCellVal shp, "Prop.LPPTime", CellVal(shpFire, "Prop.LPPTime", visDate)
@@ -186,7 +186,7 @@ Dim shp As Visio.Shape
         tmpRowInd = shp.AddNamedRow(visSectionProp, "FireEndTime", visTagDefault)
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsLabel).Formula = """" & "Время завершения работ" & """"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsPrompt).Formula = """" & "Полное астрономическое время ликвидации последствий пожара" & """"
-        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = 5
+        shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsType).FormulaU = "IF(STRSAME(Prop.FireEndTime," & Chr(34) & Chr(34) & "),0,5)"
         shp.CellsSRC(visSectionProp, tmpRowInd, visCustPropsSortKey).FormulaU = 28
 '        SetCellVal shp, "Prop.FireEndTime", GetVal(fArr)
         SetCellVal shp, "Prop.FireEndTime", CellVal(shpFire, "Prop.FireEndTime", visDate)

@@ -165,7 +165,19 @@ Private Sub fillElemCollection()
 
     AddNewElement "AllHosesWithLabels", "Все рукавные линии с подписями", , True, , False, False
     AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", , True, , False, False
-
+    
+    'Временные показатели
+    AddNewElement "FireTime", "Время возникновения пожара", , , "Prop.FireTime", True
+    AddNewElement "FindTime", "Время обнаружения пожара", , , "Prop.FindTime", True
+    AddNewElement "InfoTime", "Время сообщения о пожаре", , , "Prop.InfoTime", True
+    AddNewElement "FirstArrivalTime", "Время прибытия первого подразделения", , , "Prop.FirstArrivalTime", True
+    AddNewElement "FirstStvolTime", "Время подачи первого ствола", , , "Prop.FirstStvolTime", True
+    AddNewElement "LocalizationTime", "Время локализации", , , "Prop.LocalizationTime", True
+    AddNewElement "LOGTime", "Время ликвидации открытого горения", , , "Prop.LOGTime", True
+    AddNewElement "LPPTime", "Время ликвидации последствий пожара", , , "Prop.LPPTime", True
+    AddNewElement "FireEndTime", "Время окончания пожара", , , "Prop.FireEndTime", True
+    
+    
 End Sub
 
 Private Function AddNewElement(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_resultStrPattern As String = "", _
@@ -198,6 +210,8 @@ Dim nextElem As Element
     End If
     
     'Коллекция элементов с расчетными ячейками
+'    Debug.Assert elem.cellID = ""
+'    Debug.Assert elem.cellID <> "Prop.FireTime"
     If elem.cellID <> "" Then elemWithCellsCollection.Add elem, elem.cellID
     
     Set AddElement = elem
@@ -313,7 +327,7 @@ Dim elem As Element
     Set Clear = Me
 End Function
 
-Public Function RaiseByCellID(ByRef shp As Visio.Shape, ByVal a_CellIDs As String) As ElementsShell
+Public Function RaiseByCellID(ByRef shp As Visio.Shape, ByVal a_CellIDs As String, Optional ByVal dataType As VisUnitCodes = visNumber) As ElementsShell
 'Увеличиваем значение элемента по имени ячейки
 'a_CellIDs - перечисление через строчку с запятой имен ячеек в виде "User.IndexPers"
 Dim elem As Element
@@ -326,14 +340,22 @@ Dim i As Integer
 'Вариант с уникальным именем ячейки для каждого элемента - так быстрее, но нельзя считать для многих элементов
         Set elem = ByCellID(cellIDArray(i))
         If Not elem Is Nothing Then
-            elem.RaiseValue CellVal(shp, cellIDArray(i))
+'            Select Case dataType
+'                Case Is = visNumber
+'                    elem.RaiseValue CellVal(shp, cellIDArray(i), dataType)
+'                Case Is = visUnitsString
+'                    elem.SetValue CellVal(shp, cellIDArray(i), dataType)
+'                Case Is = visDate
+'                    elem.RaiseValue CellVal(shp, cellIDArray(i), dataType)
+'            End Select
+            elem.RaiseValue CellVal(shp, cellIDArray(i), dataType)
         End If
     Next i
     
 Set RaiseByCellID = Me
 End Function
 
-Public Function SetValByCellID(ByRef shp As Visio.Shape, ByVal a_CellIDs As String) As ElementsShell
+Public Function SetValByCellID(ByRef shp As Visio.Shape, ByVal a_CellIDs As String, Optional ByVal dataType As VisUnitCodes = visNumber) As ElementsShell
 'Устанавливаем значение элемента по имени ячейки
 'a_CellIDs - перечисление через строчку с запятой имен ячеек в виде "User.IndexPers"
 Dim elem As Element
@@ -346,7 +368,7 @@ Dim i As Integer
 'Вариант с уникальным именем ячейки для каждого элемента - так быстрее, но нельзя считать для многих элементов
         Set elem = ByCellID(cellIDArray(i))
         If Not elem Is Nothing Then
-            elem.SetValue CellVal(shp, cellIDArray(i))
+            elem.SetValue CellVal(shp, cellIDArray(i), dataType)
         End If
     Next i
     
