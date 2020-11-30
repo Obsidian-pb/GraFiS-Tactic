@@ -28,13 +28,13 @@ Public Property Let State(ByVal state_a As Boolean)
     If Not state_ Then
         ShowData Me.tb_HTMLCode.Text
         
-        wb_Bowser.Visible = True
-        tb_HTMLCode.Visible = False
+        wb_Bowser.visible = True
+        tb_HTMLCode.visible = False
         
         cb_ChangeView.Caption = "Текст"
     Else
-        wb_Bowser.Visible = False
-        tb_HTMLCode.Visible = True
+        wb_Bowser.visible = False
+        tb_HTMLCode.visible = True
         
         cb_ChangeView.Caption = "HTML"
     End If
@@ -93,16 +93,28 @@ Private Sub cb_Cancel_Click()
     Me.Hide
 End Sub
 
+Private Sub cb_ToShape_Click()
+    Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
+    
+    formShape.Characters.Paste
+End Sub
 
 
 
-
-Public Sub ShowHTML(ByRef shp As Visio.Shape, ByVal htmlText As String)
+Public Sub ShowHTML(ByRef shp As Visio.Shape, ByVal htmlText As String, Optional ByVal visible As Boolean = True)
     Set formShape = shp
     
     tb_HTMLCode.Text = htmlText
     ShowData htmlText
-    Me.Show
+    If visible Then
+        Me.Show
+    End If
+End Sub
+
+Public Sub CopyBrowserContent(ByRef shp As Visio.Shape, ByVal htmlText As String)
+    ShowHTML shp, htmlText, False
+    Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
+    formShape.Characters.Paste
 End Sub
 
 Public Sub ShowData(ByVal htmlText As String)
@@ -131,7 +143,7 @@ End Sub
 
 
 Private Sub SaveHTMLPattern()
-    SetCellVal formShape, "User.TextPattern", tb_HTMLCode.Text
+    SetCellVal formShape, "User.TextPattern", Replace(tb_HTMLCode.Text, Chr(34), Chr(39))
 End Sub
 
 
