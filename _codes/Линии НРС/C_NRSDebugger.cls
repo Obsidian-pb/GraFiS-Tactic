@@ -11,6 +11,8 @@ Option Explicit
 '----------------------------Демон-дебаггер для модели НРС------------------------
 Private NRSModel_ As c_NRSModel
 Private NRSObservers As Collection
+Private calculatedNodes As Collection
+Const space = "    "
 
 
 Private Sub Class_Initialize()
@@ -31,6 +33,8 @@ End Function
 Public Function PrintModelState() As C_NRSDebugger
 Dim node As c_NRSNode
     
+    Set calculatedNodes = New Collection
+    
     For Each node In NRSModel_.StarterNodes
         PrintNodeState node.ID, 0
     Next node
@@ -39,6 +43,8 @@ End Function
 
 Public Function PrintModelState2() As C_NRSDebugger
 Dim node As c_NRSNode
+    
+    Set calculatedNodes = New Collection
     
     frmNRSDescription.tbNRSDescription.Text = ""
     
@@ -89,14 +95,16 @@ Dim otst As String
 Dim i As indexPers
 Dim nextNode As c_NRSNode
 
+    
+
     Set node = NRSModel_.GetNRSNodeByKey(nodeID)
     
     For i = 0 To level
-        otst = otst & vbTab
+        otst = otst & space
     Next i
     
     Debug.Print otst & node.ID & "(" & CellVal(node.NodeShape, "User.IndexPers.Prompt", visUnitsString) & _
-                "): Q=" & node.Q & vbTab & " QPrev=" & node.PrevQ & vbTab & " hIn=" & node.hIn & vbTab & " H=" & node.H & vbTab & " hLost = " & node.hLost & vbTab & " hOut = " & node.hOut
+                "): Q=" & node.Q & space & " QPrev=" & node.PrevQ & space & " hIn=" & node.hIn & space & " H=" & node.H & space & " hLost = " & node.hLost & space & " hOut = " & node.hOut
     
     For Each nextNode In node.OutNodes
         PrintNodeState nextNode.ID, level + 1
@@ -114,18 +122,23 @@ Dim nextNode As c_NRSNode
     Set node = NRSModel_.GetNRSNodeByKey(nodeID)
     
     For i = 0 To level
-        otst = otst & vbTab
+        otst = otst & space
     Next i
     
 '    frmNRSDescription.tbNRSDescription.Text = frmNRSDescription.tbNRSDescription.Text & _
 '        otst & node.ID & "(" & CellVal(node.NodeShape, "User.IndexPers.Prompt", visUnitsString) & _
-'        "): Q=" & node.Q & vbTab & "QPrev=" & node.PrevQ & vbTab & "hIn=" & node.hIn & vbTab & "H=" & node.H & vbTab & "hLost = " & node.hLost & vbTab & "hOut = " & node.hOut & vbNewLine
+'        "): Q=" & node.Q & space & "QPrev=" & node.PrevQ & space & "hIn=" & node.hIn & space & "H=" & node.H & space & "hLost = " & node.hLost & space & "hOut = " & node.hOut & vbNewLine
     
     frmNRSDescription.AddNewString otst & node.ID & "(" & CellVal(node.NodeShape, "User.IndexPers.Prompt", visUnitsString) & _
-        "): Q=" & node.Q & vbTab & " QPrev=" & node.PrevQ & vbTab & " hIn=" & node.hIn & vbTab & " H=" & node.H & vbTab & " hLost = " & node.hLost & vbTab & " hOut = " & node.hOut
+        "): Q=" & node.Q & space & " QPrev=" & node.PrevQ & space & " hIn=" & node.hIn & space & " H=" & node.H & space & " hLost = " & node.hLost & space & " hOut = " & node.hOut
     
     For Each nextNode In node.OutNodes
-        PrintNodeState2 nextNode.ID, level + 1
+'        PrintNodeState2 nextNode.ID, level + 1
+        
+        If Not IsInCollection(calculatedNodes, nextNode) Then
+            AddUniqueCollectionItem calculatedNodes, nextNode
+            PrintNodeState2 nextNode.ID, level + 1
+        End If
     Next nextNode
     
 End Sub

@@ -18,6 +18,7 @@ Public outAccuracy As Byte                   'Точность округления при выводе дан
 Public maxIterations As Integer              'Максимальное количестов итераций расчета
 Public approvedHout As Single                'Допустимый напор на выходе из узлов
 
+Private calculatedNodes As Collection        'Коллекция рассчитанных узлов
 
 Private Sub Class_Initialize()
     roundAccuracy = 3
@@ -94,6 +95,8 @@ Dim node As c_NRSNode
 
     'Цикл расчетов:
         For i = 1 To maxIterations
+        'Обнуляем коллекцию рассчитанных узлов НРС
+            Set calculatedNodes = New Collection
         'Обнуляем текущие напоры в узлах
             ClearhIn
 '            debugger.PrintModelState
@@ -126,6 +129,8 @@ Dim node As c_NRSNode
 '                Exit Function
 '            End If
             
+        'Обнуляем коллекцию рассчитанных узлов НРС
+            Set calculatedNodes = New Collection
         'Обнуляем текущие расходы в узлах
             ClearQ
 '            debugger.PrintModelState
@@ -200,7 +205,13 @@ Dim tmpVal As Single
 '        Debug.Assert node.ID <> 85
         If tmpVal > nextNode.hIn Then
             nextNode.hIn = tmpVal     'Учитываем, что напор на входе равен максимальному напору из входящих
-            CalculateNRSNodeForward nextNode
+'            CalculateNRSNodeForward nextNode
+            
+            If Not IsInCollection(calculatedNodes, nextNode) Then
+                AddUniqueCollectionItem calculatedNodes, nextNode
+                CalculateNRSNodeForward nextNode
+            End If
+            
         End If
 '        nextNode.hIn = GetHOut(node)    'node.hOut
 '        Debug.Assert node.ID <> 324
@@ -257,7 +268,7 @@ Public Function CalculateNRSModelBackward() As c_NRSDemon
 Dim node As c_NRSNode
 
     On Error GoTo ex
-    
+       
     For Each node In NRSModel_.EnderNodes
         CalculateNRSNodeBackward node, GetQStv(node) 'node.QStv
     Next node
@@ -287,7 +298,13 @@ Dim newQ As Single
 '        newQ = RInt(a_Q / node.InNodes.Count, roundAccuracy)
         newQ = Round(a_Q / node.InNodes.Count, roundAccuracy)
         prevNode.Q_Raise newQ
-        CalculateNRSNodeBackward prevNode, newQ
+'        CalculateNRSNodeBackward prevNode, newQ
+        
+'        Debug.Assert node.ID <> 7
+        If Not IsInCollection(calculatedNodes, prevNode) Then
+            AddUniqueCollectionItem calculatedNodes, prevNode
+            CalculateNRSNodeBackward prevNode, newQ
+        End If
     Next prevNode
     
     
