@@ -69,6 +69,8 @@ Dim left As Integer
     cb_Cancel.top = top + height + 6
     
     Me.height = cb_Save.top + cb_Save.height + 30
+    
+    State = True
 End Sub
 
 

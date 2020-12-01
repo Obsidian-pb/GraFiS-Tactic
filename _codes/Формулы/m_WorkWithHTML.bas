@@ -42,12 +42,18 @@ Public Sub TryGetFromAnalaizer(ByRef shp As Visio.Shape, ByVal nameOfRow As Stri
 End Sub
 
 
-Public Sub TTT()
-Dim arr  As Variant
-'»спользовать это дл€ получени€ списка элементов анализа в форме добавлени€ €чеек дл€ анализа
-    arr = a.GetElementsCode
-    
-    Debug.Print arr(1, 0), arr(1, 1)
+
+
+Public Sub ShowAElemAddForm(ByRef shp As Visio.Shape)
+    f_InsertAnalizedCell.ShowMe shp
 End Sub
+
+'Public Sub TTT()
+'Dim arr  As Variant
+''»спользовать это дл€ получени€ списка элементов анализа в форме добавлени€ €чеек дл€ анализа
+'    arr = a.GetElementsCode
+'
+'    Debug.Print arr(1, 0), arr(1, 1)
+'End Sub
 
 
