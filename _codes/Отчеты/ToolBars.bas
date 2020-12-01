@@ -11,7 +11,7 @@ Sub AddTB_SpecFunc()
     Dim i As Integer
     
 '---Проверяем есть ли уже панель управления "Спецфункции"------------------------------
-    For i = 1 To Application.CommandBars.Count
+    For i = 1 To Application.CommandBars.count
         If Application.CommandBars(i).Name = "Спецфункции" Then Exit Sub
     Next i
 

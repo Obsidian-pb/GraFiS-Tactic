@@ -125,6 +125,16 @@ EX:
     SaveLog Err, "m_Tools.IsGFSShapeWithIP"
 End Function
 
+Public Function SM(ByVal str As String, ByVal count As Integer) As String
+'Мультипличируем строку указанное количество раз
+'Например, SM("*",5) => "*****"
+Dim i As Integer
+Dim strTmp As String
+    For i = 1 To count
+        strTmp = strTmp & str
+    Next i
+SM = strTmp
+End Function
 
 '--------------------------------Сохранение лога ошибки-------------------------------------
 Public Sub SaveLog(ByRef error As ErrObject, ByVal eroorPosition As String, Optional ByVal addition As String)

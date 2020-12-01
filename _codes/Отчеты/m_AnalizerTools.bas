@@ -29,7 +29,7 @@ Dim elemShell As ElementsShell
     Set coll = elemShell.GetElementsCollection(searchString, searchByCallName)
     
     For Each elem In coll
-        Debug.Print elem.ID
+        Debug.Print elem.ID & SM(" ", 30 - Len(elem.ID)) & elem.callName
     Next elem
     
 End Sub
@@ -105,7 +105,7 @@ Dim newCallName As String
         End If
     End If
     
-    If shp.Shapes.Count > 0 Then
+    If shp.Shapes.count > 0 Then
         For Each shpChild In shp.Shapes
             SetPropertyNames shpChild, properyNames
         Next shpChild

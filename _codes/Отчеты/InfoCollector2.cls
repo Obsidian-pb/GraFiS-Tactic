@@ -808,3 +808,20 @@ Public Sub PrintState(Optional ByVal elemIDs As String = "")
 'Печатаем в Debug состояние указанных или всех элементов
     elements.PrintState elemIDs
 End Sub
+
+Public Function GetElementsCode() As Variant
+Dim arr As Variant
+Dim elm As Element
+Dim i As Integer
+    
+    ReDim arr(elements.count - 1, 1)
+    
+    i = 0
+    For Each elm In elements.GetElementsCollection("")
+        arr(i, 0) = elm.ID
+        arr(i, 1) = elm.callName
+        
+        i = i + 1
+    Next elm
+GetElementsCode = arr
+End Function

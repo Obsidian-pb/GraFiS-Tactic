@@ -29,9 +29,9 @@ Private Sub Class_Terminate()
 End Sub
 
 '-------------------------------------Свойства класса----------------------------------------------
-Public Property Get Count() As Integer
+Public Property Get count() As Integer
 'Количество элементов в коллекции
-    Count = elemCollection.Count
+    count = elemCollection.count
 End Property
 
 
@@ -419,7 +419,7 @@ Public Function CallNames(Optional ByVal delimiter As String = ";") As String
 Dim elem As Element
 Dim tmpStr As String
     
-    If elemCollection.Count = 0 Then
+    If elemCollection.count = 0 Then
         CallNames = ""
         Exit Function
     End If

@@ -93,11 +93,11 @@ Private Sub cb_Cancel_Click()
     Me.Hide
 End Sub
 
-Private Sub cb_ToShape_Click()
-    Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
-    
-    formShape.Characters.Paste
-End Sub
+'Private Sub cb_ToShape_Click()
+'    Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
+'
+'    formShape.Characters.Paste
+'End Sub
 
 
 
@@ -112,6 +112,8 @@ Public Sub ShowHTML(ByRef shp As Visio.Shape, ByVal htmlText As String, Optional
 End Sub
 
 Public Sub CopyBrowserContent(ByRef shp As Visio.Shape, ByVal htmlText As String)
+'    ClearShapeText shp
+    shp.Text = ""
     ShowHTML shp, htmlText, False
     Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
     formShape.Characters.Paste
@@ -151,15 +153,27 @@ End Sub
 
 Private Function PatternToHTML(ByVal htmlText As String) As String
 'Функция чистит код исходника HTML и заменяет вставленные ссылки на ячейки фигуры фактическими их значениями
-Dim cellVal As String
 Dim cll As Visio.Cell
 Dim i As Integer
-'dim cellName as String
+Dim targetPageIndex As Integer
+    
+    'Обновляем Анализатор "Отчетов"
+    targetPageIndex = cellVal(formShape, "Prop.TargetPageIndex")
+    If targetPageIndex = 0 Then
+        a.Refresh Application.ActivePage.Index
+    Else
+        a.Refresh targetPageIndex
+    End If
+    
     
     htmlText = Replace(htmlText, Asc(34), "'")
     
     For i = 0 To formShape.RowCount(visSectionProp) - 1
+        'Получаем ссылку на ячейку секции Props
         Set cll = formShape.CellsSRC(visSectionProp, i, visCustPropsValue)
+        'Пытаемся обновить данные из анализатора "Отчетов"
+        TryGetFromAnalaizer formShape, cll.RowNameU
+        'Формируем итоговый текст html
         htmlText = Replace(htmlText, "$" & cll.RowNameU & "$", ClearString(cll.ResultStr(visUnitsString)))
     Next i
 

@@ -31,7 +31,7 @@ Dim vsO_Shape As Visio.Shape
     On Error GoTo EX
 
 '---Перебираем все фигуры в отчете
-    If vsO_BaseShape.Shapes.Count > 0 Then
+    If vsO_BaseShape.Shapes.count > 0 Then
         For Each vsO_Shape In vsO_BaseShape.Shapes
             If vsO_Shape.CellExists("Actions.ChangeValue", 0) = True Then '---Проверяем является ли фигура ОТЧЕТОМ!!!
                 sP_ChangeValueMain vsO_Shape, vsO_TargetPage

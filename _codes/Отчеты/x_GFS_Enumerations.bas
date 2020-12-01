@@ -156,6 +156,7 @@ Public Enum indexPers
    ipVzriv = 340                               'Место взрыва
    ipMashiniMVD = 3001                         'Машины МВД
    ipMashiniMinzdrav = 3002                    'Машины Минздрав
+   ipFormula = 500                             'Формулы
 End Enum
 
 'Перечисления констант объектов железной дороги
