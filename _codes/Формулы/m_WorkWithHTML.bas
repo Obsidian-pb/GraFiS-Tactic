@@ -8,7 +8,6 @@ Public Sub ShowData(ByRef shp As Visio.Shape, ByVal htmlText As String)
 End Sub
 
 Public Sub ShowDataInShape(ByRef shp As Visio.Shape, ByVal htmlText As String)
-'    shp.Text = ""
     f_FormulaForm.CopyBrowserContent shp, htmlText
     SetShowDataInShapeControlFormula shp, "User.DataChangeAction.Prompt"
 End Sub

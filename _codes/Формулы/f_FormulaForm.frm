@@ -114,11 +114,17 @@ Public Sub ShowHTML(ByRef shp As Visio.Shape, ByVal htmlText As String, Optional
 End Sub
 
 Public Sub CopyBrowserContent(ByRef shp As Visio.Shape, ByVal htmlText As String)
-'    ClearShapeText shp
+Dim objClpb As New DataObject, sStr As String
+    
     shp.Text = ""
+    
     ShowHTML shp, htmlText, False
     Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
     formShape.Characters.Paste
+    
+    sStr = ""
+    objClpb.SetText sStr
+    objClpb.PutInClipboard
 End Sub
 
 Public Sub ShowData(ByVal htmlText As String)
