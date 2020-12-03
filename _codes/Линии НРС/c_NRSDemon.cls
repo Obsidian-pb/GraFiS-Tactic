@@ -204,6 +204,7 @@ Dim tmpVal As Single
         tmpVal = GetHOut(node)
 '        Debug.Assert node.ID <> 85
         If tmpVal > nextNode.hIn Then
+            Stop    'Здесь нужно добавить учет специфических фигур типа гидроэлеватора и т.д. (nextNode.hIn = Кподпора*tmpVal) При этом нужно не забыть добавить указание свойств самого гидроэлеватора!
             nextNode.hIn = tmpVal     'Учитываем, что напор на входе равен максимальному напору из входящих
 '            CalculateNRSNodeForward nextNode
             
@@ -297,6 +298,7 @@ Dim newQ As Single
 '        Debug.Assert node.InNodes.Count < 2
 '        newQ = RInt(a_Q / node.InNodes.Count, roundAccuracy)
         newQ = Round(a_Q / node.InNodes.Count, roundAccuracy)
+        Stop    'Здесь нужно добавить учет специфических фигур типа гидроэлеватора и т.д. (prevNode.Q_Raise =newQ/(1-Кэжекции) Не забыть добавить казание собственных свойств гидроэлеваторов
         prevNode.Q_Raise newQ
 '        CalculateNRSNodeBackward prevNode, newQ
         
