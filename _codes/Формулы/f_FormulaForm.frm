@@ -16,6 +16,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private state_ As Boolean
+Private lastChange_ As Date
 Public formShape As Visio.Shape
 
 
@@ -115,6 +116,10 @@ End Sub
 
 Public Sub CopyBrowserContent(ByRef shp As Visio.Shape, ByVal htmlText As String)
 Dim objClpb As New DataObject, sStr As String
+    
+    If lastChange_ = Now Then Exit Sub
+    lastChange_ = Now
+    Debug.Print lastChange_
     
     shp.Text = ""
     

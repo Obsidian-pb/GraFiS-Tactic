@@ -17,7 +17,7 @@ Dim i As Integer
 Dim frml As String
 Dim nameOfRow As String
     
-    frml = " "
+    frml = ""
     For i = 0 To shp.RowCount(visSectionProp) - 1
         'Получаем имя строки
         nameOfRow = shp.CellsSRC(visSectionProp, i, visCustPropsValue).RowNameU
