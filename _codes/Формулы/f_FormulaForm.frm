@@ -16,7 +16,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private state_ As Boolean
-Private lastChange_ As Date
+'Private lastChange_ As Date
 Public formShape As Visio.Shape
 
 
@@ -90,6 +90,7 @@ End Sub
 
 Private Sub cb_Save_Click()
     SaveHTMLPattern
+    PasteBrowserContent
 End Sub
 
 Private Sub cb_Cancel_Click()
@@ -117,13 +118,26 @@ End Sub
 Public Sub CopyBrowserContent(ByRef shp As Visio.Shape, ByVal htmlText As String)
 Dim objClpb As New DataObject, sStr As String
     
-    If lastChange_ = Now Then Exit Sub
-    lastChange_ = Now
-    Debug.Print lastChange_
+'    If lastChange_ = Now Then Exit Sub
+'    lastChange_ = Now
+'    Debug.Print lastChange_
     
-    shp.Text = ""
+'    shp.Text = ""
     
     ShowHTML shp, htmlText, False
+    PasteBrowserContent
+    
+'    Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
+'    formShape.Characters.Paste
+'
+'    sStr = ""
+'    objClpb.SetText sStr
+'    objClpb.PutInClipboard
+End Sub
+
+Public Sub PasteBrowserContent()
+Dim objClpb As New DataObject, sStr As String
+
     Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
     formShape.Characters.Paste
     
