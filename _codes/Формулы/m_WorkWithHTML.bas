@@ -56,3 +56,29 @@ End Sub
 'End Sub
 
 
+
+Public Sub Resolve(ByVal str As String)
+Dim i As Integer
+    
+    For i = 0 To Len(str)
+        If Mid(str, i) = "" Then
+            
+        End If
+            
+    Next i
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
