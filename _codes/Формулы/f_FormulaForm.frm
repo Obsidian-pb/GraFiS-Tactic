@@ -71,6 +71,8 @@ Dim left As Integer
     
     Me.height = cb_Save.top + cb_Save.height + 30
     
+    lbl_Tip.top = top + height + 6
+    
     State = True
 End Sub
 
@@ -137,7 +139,9 @@ End Sub
 
 Public Sub PasteBrowserContent()
 Dim objClpb As New DataObject, sStr As String
-
+    
+    On Error Resume Next
+    
     Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
     formShape.Characters.Paste
     

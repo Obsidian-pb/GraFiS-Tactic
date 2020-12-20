@@ -84,7 +84,7 @@
   Section Object, row: visRowXFormOut>>>
     PinX: 0 м; PinY: 0 м; Width: 0,0254 м; Height: 0,0254 м; LocPinX: Width*0; LocPinY: Height*0; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
-=>sheet: Пример расчета площади
+=>sheet: Справка
   Section: Character>>>
     Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
   Section: Paragraph>>>
@@ -110,7 +110,7 @@
   Section Object, row: visRowPageLayout>>>
     ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPage>>>
-    PageWidth: 8 м; PageHeight: 2 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+    PageWidth: 34 м; PageHeight: 100,4 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
   Section Object, row: visRowPrintProperties>>>
     PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
   Section Object, row: visRowShapeLayout>>>
@@ -119,528 +119,82 @@
     EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
   Section Object, row: visRowText>>>
     LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-
-=>sheet: Sheet.5
-  Section: Action>>>
-    Actions.ShowData: "Показать расчет"; Actions.ShowData._Unused1: ""; Actions.ShowData._Unused2: ""; Actions.ShowData.Action: CALLTHIS("ShowData";"Формулы";User.TextPattern); Actions.ShowData.Checked: 0; Actions.ShowData.Disabled: 0; Actions.ShowData.ReadOnly: FALSE; Actions.ShowData.Invisible: FALSE; Actions.ShowData.BeginGroup: FALSE; Actions.ShowData.TagName: ""; Actions.ShowData.ButtonFace: ""; Actions.ShowData.SortKey: 10; 
-  Section: Character>>>
-    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-  Section: FirstComponent>>>
-    Geometry1.NoFill: FALSE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: Height*0; 
-    Geometry1.X2: Width*1; Geometry1.Y2: Height*0; 
-    Geometry1.X3: Width*1; Geometry1.Y3: Height*1; 
-    Geometry1.X4: Width*0; Geometry1.Y4: Height*1; 
-    Geometry1.X5: Geometry1.X1; Geometry1.Y5: Geometry1.Y1; 
-  Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-  Section: Prop>>>
-    Prop.Width: 10; Prop.Width.Prompt: ""; Prop.Width.Label: ""; Prop.Width.Format: ""; Prop.Width.SortKey: ""; Prop.Width.Type: 2; Prop.Width.Invisible: FALSE; Prop.Width.Verify: FALSE; Prop.Width.LangID: 1049; Prop.Width.Calendar: 0; 
-    Prop.Height: 20; Prop.Height.Prompt: ""; Prop.Height.Label: ""; Prop.Height.Format: ""; Prop.Height.SortKey: ""; Prop.Height.Type: 2; Prop.Height.Invisible: FALSE; Prop.Height.Verify: FALSE; Prop.Height.LangID: 1049; Prop.Height.Calendar: 0; 
-    Prop.Square: Prop.Width*Prop.Height; Prop.Square.Prompt: ""; Prop.Square.Label: ""; Prop.Square.Format: ""; Prop.Square.SortKey: ""; Prop.Square.Type: 2; Prop.Square.Invisible: FALSE; Prop.Square.Verify: FALSE; Prop.Square.LangID: 1049; Prop.Square.Calendar: 0; 
-  Section: Tab>>>
-    Tabs.X1: 0; 
-  Section: User>>>
-    User.IndexPers: 500; User.IndexPers.Prompt: ""; 
-    User.TextPattern: "<p><h1>Площадь фигуры равна:</h1></p>
-<p align='center'><b>S<sub>ф</sub>=a x b</b></p>
-<p>где S<sub>ф</sub> - площадь фигуры, мм<sup>2</sup>, a - длина фигуры, мм, b - ширина фигуры, мм</p>
-<p align='center'>$Square$ = $Height$ x $Width$</p>
-<hr/>"; User.TextPattern.Prompt: "Исходный код HTML"; 
-  Section Object, row: visRowEvent>>>
-    
-  Section Object, row: visRowFill>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
-  Section Object, row: visRowGroup>>>
-    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
-  Section Object, row: visRowHelpCopyright>>>
-    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
-  Section Object, row: visRowImage>>>
-    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
-  Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
-  Section Object, row: visRowLock>>>
-    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
-  Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
-  Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
-  Section Object, row: visRowPrintProperties>>>
-    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
-  Section Object, row: visRowShapeLayout>>>
-    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
-  Section Object, row: visRowStyle>>>
-    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
-  Section Object, row: visRowText>>>
-    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-  Section Object, row: visRowXFormOut>>>
-    PinX: 4 м; PinY: 1 м; Width: 8 м; Height: 2 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
-
-=>sheet: Формулы 2
-  Section: Character>>>
-    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-  Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-  Section: Tab>>>
-    Tabs.X1: 0; 
-  Section Object, row: visRowEvent>>>
-    
-  Section Object, row: visRowFill>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
-  Section Object, row: visRowGroup>>>
-    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
-  Section Object, row: visRowHelpCopyright>>>
-    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
-  Section Object, row: visRowImage>>>
-    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
-  Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
-  Section Object, row: visRowLock>>>
-    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
-  Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
-  Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
-  Section Object, row: visRowPage>>>
-    PageWidth: 31 м; PageHeight: 12,5 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
-  Section Object, row: visRowPrintProperties>>>
-    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
-  Section Object, row: visRowShapeLayout>>>
-    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
-  Section Object, row: visRowStyle>>>
-    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
-  Section Object, row: visRowText>>>
-    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-
-=>sheet: Пример расчета площади
-  Section: Action>>>
-    Actions.ShowData: "Редактировать исходный код"; Actions.ShowData._Unused1: ""; Actions.ShowData._Unused2: ""; Actions.ShowData.Action: CALLTHIS("ShowData";"Формулы";User.TextPattern); Actions.ShowData.Checked: 0; Actions.ShowData.Disabled: 0; Actions.ShowData.ReadOnly: FALSE; Actions.ShowData.Invisible: FALSE; Actions.ShowData.BeginGroup: FALSE; Actions.ShowData.TagName: ""; Actions.ShowData.ButtonFace: ""; Actions.ShowData.SortKey: 10; 
-    Actions.ShowDataInShape: "Отображать результат в фигуре"; Actions.ShowDataInShape._Unused1: ""; Actions.ShowDataInShape._Unused2: ""; Actions.ShowDataInShape.Action: SETF("Actions.ShowDataInShape.Checked";NOT(Actions.ShowDataInShape.Checked)); Actions.ShowDataInShape.Checked: 1; Actions.ShowDataInShape.Disabled: 0; Actions.ShowDataInShape.ReadOnly: FALSE; Actions.ShowDataInShape.Invisible: FALSE; Actions.ShowDataInShape.BeginGroup: FALSE; Actions.ShowDataInShape.TagName: ""; Actions.ShowDataInShape.ButtonFace: ""; Actions.ShowDataInShape.SortKey: "20"; 
-  Section: Character>>>
-    Char.Font: 23; Char.Color: 0; Char.Style: 17; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 24 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 23; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-    Char.Font[2]: 23; Char.Color[2]: 0; Char.Style[2]: 17; Char.Case[2]: 0; Char.Pos[2]: 0; Char.FontScale[2]: 100%; Char._Unused6[2]: 0; Char.Size[2]: 18 пт; Char.DblUnderline[2]: FALSE; Char.Overline[2]: FALSE; Char.Strikethru[2]: FALSE; Char.Highlight[2]: FALSE; Char._Unused12[2]: FALSE; Char.DoubleStrikethrough[2]: FALSE; Char.RTLText[2]: FALSE; Char.UseVertical[2]: FALSE; Char.Letterspace[2]: 0 пт; Char.ColorTrans[2]: 0%; Char.AsianFont[2]: 0; Char.ComplexScriptFont[2]: 23; Char.LocalizeFont[2]: 0; Char.ComplexScriptSize[2]: -100%; Char.LangID[2]: 1049; 
-    Char.Font[3]: 23; Char.Color[3]: 0; Char.Style[3]: 17; Char.Case[3]: 0; Char.Pos[3]: 0; Char.FontScale[3]: 100%; Char._Unused6[3]: 0; Char.Size[3]: 12 пт; Char.DblUnderline[3]: FALSE; Char.Overline[3]: FALSE; Char.Strikethru[3]: FALSE; Char.Highlight[3]: FALSE; Char._Unused12[3]: FALSE; Char.DoubleStrikethrough[3]: FALSE; Char.RTLText[3]: FALSE; Char.UseVertical[3]: FALSE; Char.Letterspace[3]: 0 пт; Char.ColorTrans[3]: 0%; Char.AsianFont[3]: 0; Char.ComplexScriptFont[3]: 23; Char.LocalizeFont[3]: 0; Char.ComplexScriptSize[3]: -100%; Char.LangID[3]: 1049; 
-    Char.Font[4]: 23; Char.Color[4]: 0; Char.Style[4]: 17; Char.Case[4]: 0; Char.Pos[4]: 2; Char.FontScale[4]: 100%; Char._Unused6[4]: 0; Char.Size[4]: 12 пт; Char.DblUnderline[4]: FALSE; Char.Overline[4]: FALSE; Char.Strikethru[4]: FALSE; Char.Highlight[4]: FALSE; Char._Unused12[4]: FALSE; Char.DoubleStrikethrough[4]: FALSE; Char.RTLText[4]: FALSE; Char.UseVertical[4]: FALSE; Char.Letterspace[4]: 0 пт; Char.ColorTrans[4]: 0%; Char.AsianFont[4]: 0; Char.ComplexScriptFont[4]: 23; Char.LocalizeFont[4]: 0; Char.ComplexScriptSize[4]: -100%; Char.LangID[4]: 1049; 
-    Char.Font[5]: 23; Char.Color[5]: 0; Char.Style[5]: 17; Char.Case[5]: 0; Char.Pos[5]: 0; Char.FontScale[5]: 100%; Char._Unused6[5]: 0; Char.Size[5]: 12 пт; Char.DblUnderline[5]: FALSE; Char.Overline[5]: FALSE; Char.Strikethru[5]: FALSE; Char.Highlight[5]: FALSE; Char._Unused12[5]: FALSE; Char.DoubleStrikethrough[5]: FALSE; Char.RTLText[5]: FALSE; Char.UseVertical[5]: FALSE; Char.Letterspace[5]: 0 пт; Char.ColorTrans[5]: 0%; Char.AsianFont[5]: 0; Char.ComplexScriptFont[5]: 23; Char.LocalizeFont[5]: 0; Char.ComplexScriptSize[5]: -100%; Char.LangID[5]: 1049; 
-    Char.Font[6]: 23; Char.Color[6]: 0; Char.Style[6]: 0; Char.Case[6]: 0; Char.Pos[6]: 0; Char.FontScale[6]: 100%; Char._Unused6[6]: 0; Char.Size[6]: 12 пт; Char.DblUnderline[6]: FALSE; Char.Overline[6]: FALSE; Char.Strikethru[6]: FALSE; Char.Highlight[6]: FALSE; Char._Unused12[6]: FALSE; Char.DoubleStrikethrough[6]: FALSE; Char.RTLText[6]: FALSE; Char.UseVertical[6]: FALSE; Char.Letterspace[6]: 0 пт; Char.ColorTrans[6]: 0%; Char.AsianFont[6]: 0; Char.ComplexScriptFont[6]: 23; Char.LocalizeFont[6]: 0; Char.ComplexScriptSize[6]: -100%; Char.LangID[6]: 1049; 
-    Char.Font[7]: 23; Char.Color[7]: 0; Char.Style[7]: 0; Char.Case[7]: 0; Char.Pos[7]: 2; Char.FontScale[7]: 100%; Char._Unused6[7]: 0; Char.Size[7]: 12 пт; Char.DblUnderline[7]: FALSE; Char.Overline[7]: FALSE; Char.Strikethru[7]: FALSE; Char.Highlight[7]: FALSE; Char._Unused12[7]: FALSE; Char.DoubleStrikethrough[7]: FALSE; Char.RTLText[7]: FALSE; Char.UseVertical[7]: FALSE; Char.Letterspace[7]: 0 пт; Char.ColorTrans[7]: 0%; Char.AsianFont[7]: 0; Char.ComplexScriptFont[7]: 23; Char.LocalizeFont[7]: 0; Char.ComplexScriptSize[7]: -100%; Char.LangID[7]: 1049; 
-    Char.Font[8]: 23; Char.Color[8]: 0; Char.Style[8]: 0; Char.Case[8]: 0; Char.Pos[8]: 0; Char.FontScale[8]: 100%; Char._Unused6[8]: 0; Char.Size[8]: 12 пт; Char.DblUnderline[8]: FALSE; Char.Overline[8]: FALSE; Char.Strikethru[8]: FALSE; Char.Highlight[8]: FALSE; Char._Unused12[8]: FALSE; Char.DoubleStrikethrough[8]: FALSE; Char.RTLText[8]: FALSE; Char.UseVertical[8]: FALSE; Char.Letterspace[8]: 0 пт; Char.ColorTrans[8]: 0%; Char.AsianFont[8]: 0; Char.ComplexScriptFont[8]: 23; Char.LocalizeFont[8]: 0; Char.ComplexScriptSize[8]: -100%; Char.LangID[8]: 1049; 
-    Char.Font[9]: 23; Char.Color[9]: 0; Char.Style[9]: 0; Char.Case[9]: 0; Char.Pos[9]: 1; Char.FontScale[9]: 100%; Char._Unused6[9]: 0; Char.Size[9]: 12 пт; Char.DblUnderline[9]: FALSE; Char.Overline[9]: FALSE; Char.Strikethru[9]: FALSE; Char.Highlight[9]: FALSE; Char._Unused12[9]: FALSE; Char.DoubleStrikethrough[9]: FALSE; Char.RTLText[9]: FALSE; Char.UseVertical[9]: FALSE; Char.Letterspace[9]: 0 пт; Char.ColorTrans[9]: 0%; Char.AsianFont[9]: 0; Char.ComplexScriptFont[9]: 23; Char.LocalizeFont[9]: 0; Char.ComplexScriptSize[9]: -100%; Char.LangID[9]: 1049; 
-    Char.Font[10]: 23; Char.Color[10]: 0; Char.Style[10]: 0; Char.Case[10]: 0; Char.Pos[10]: 0; Char.FontScale[10]: 100%; Char._Unused6[10]: 0; Char.Size[10]: 12 пт; Char.DblUnderline[10]: FALSE; Char.Overline[10]: FALSE; Char.Strikethru[10]: FALSE; Char.Highlight[10]: FALSE; Char._Unused12[10]: FALSE; Char.DoubleStrikethrough[10]: FALSE; Char.RTLText[10]: FALSE; Char.UseVertical[10]: FALSE; Char.Letterspace[10]: 0 пт; Char.ColorTrans[10]: 0%; Char.AsianFont[10]: 0; Char.ComplexScriptFont[10]: 23; Char.LocalizeFont[10]: 0; Char.ComplexScriptSize[10]: -100%; Char.LangID[10]: 1049; 
-    Char.Font[11]: 23; Char.Color[11]: 0; Char.Style[11]: 0; Char.Case[11]: 0; Char.Pos[11]: 2; Char.FontScale[11]: 100%; Char._Unused6[11]: 0; Char.Size[11]: 12 пт; Char.DblUnderline[11]: FALSE; Char.Overline[11]: FALSE; Char.Strikethru[11]: FALSE; Char.Highlight[11]: FALSE; Char._Unused12[11]: FALSE; Char.DoubleStrikethrough[11]: FALSE; Char.RTLText[11]: FALSE; Char.UseVertical[11]: FALSE; Char.Letterspace[11]: 0 пт; Char.ColorTrans[11]: 0%; Char.AsianFont[11]: 0; Char.ComplexScriptFont[11]: 23; Char.LocalizeFont[11]: 0; Char.ComplexScriptSize[11]: -100%; Char.LangID[11]: 1049; 
-    Char.Font[12]: 23; Char.Color[12]: 0; Char.Style[12]: 0; Char.Case[12]: 0; Char.Pos[12]: 0; Char.FontScale[12]: 100%; Char._Unused6[12]: 0; Char.Size[12]: 12 пт; Char.DblUnderline[12]: FALSE; Char.Overline[12]: FALSE; Char.Strikethru[12]: FALSE; Char.Highlight[12]: FALSE; Char._Unused12[12]: FALSE; Char.DoubleStrikethrough[12]: FALSE; Char.RTLText[12]: FALSE; Char.UseVertical[12]: FALSE; Char.Letterspace[12]: 0 пт; Char.ColorTrans[12]: 0%; Char.AsianFont[12]: 0; Char.ComplexScriptFont[12]: 23; Char.LocalizeFont[12]: 0; Char.ComplexScriptSize[12]: -100%; Char.LangID[12]: 1049; 
-    Char.Font[13]: 23; Char.Color[13]: 0; Char.Style[13]: 0; Char.Case[13]: 0; Char.Pos[13]: 1; Char.FontScale[13]: 100%; Char._Unused6[13]: 0; Char.Size[13]: 12 пт; Char.DblUnderline[13]: FALSE; Char.Overline[13]: FALSE; Char.Strikethru[13]: FALSE; Char.Highlight[13]: FALSE; Char._Unused12[13]: FALSE; Char.DoubleStrikethrough[13]: FALSE; Char.RTLText[13]: FALSE; Char.UseVertical[13]: FALSE; Char.Letterspace[13]: 0 пт; Char.ColorTrans[13]: 0%; Char.AsianFont[13]: 0; Char.ComplexScriptFont[13]: 23; Char.LocalizeFont[13]: 0; Char.ComplexScriptSize[13]: -100%; Char.LangID[13]: 1049; 
-    Char.Font[14]: 23; Char.Color[14]: 0; Char.Style[14]: 0; Char.Case[14]: 0; Char.Pos[14]: 0; Char.FontScale[14]: 100%; Char._Unused6[14]: 0; Char.Size[14]: 12 пт; Char.DblUnderline[14]: FALSE; Char.Overline[14]: FALSE; Char.Strikethru[14]: FALSE; Char.Highlight[14]: FALSE; Char._Unused12[14]: FALSE; Char.DoubleStrikethrough[14]: FALSE; Char.RTLText[14]: FALSE; Char.UseVertical[14]: FALSE; Char.Letterspace[14]: 0 пт; Char.ColorTrans[14]: 0%; Char.AsianFont[14]: 0; Char.ComplexScriptFont[14]: 23; Char.LocalizeFont[14]: 0; Char.ComplexScriptSize[14]: -100%; Char.LangID[14]: 1049; 
-    Char.Font[15]: 23; Char.Color[15]: 0; Char.Style[15]: 17; Char.Case[15]: 0; Char.Pos[15]: 0; Char.FontScale[15]: 100%; Char._Unused6[15]: 0; Char.Size[15]: 18 пт; Char.DblUnderline[15]: FALSE; Char.Overline[15]: FALSE; Char.Strikethru[15]: FALSE; Char.Highlight[15]: FALSE; Char._Unused12[15]: FALSE; Char.DoubleStrikethrough[15]: FALSE; Char.RTLText[15]: FALSE; Char.UseVertical[15]: FALSE; Char.Letterspace[15]: 0 пт; Char.ColorTrans[15]: 0%; Char.AsianFont[15]: 0; Char.ComplexScriptFont[15]: 23; Char.LocalizeFont[15]: 0; Char.ComplexScriptSize[15]: -100%; Char.LangID[15]: 1049; 
-    Char.Font[16]: 23; Char.Color[16]: 0; Char.Style[16]: 0; Char.Case[16]: 0; Char.Pos[16]: 0; Char.FontScale[16]: 100%; Char._Unused6[16]: 0; Char.Size[16]: 12 пт; Char.DblUnderline[16]: FALSE; Char.Overline[16]: FALSE; Char.Strikethru[16]: FALSE; Char.Highlight[16]: FALSE; Char._Unused12[16]: FALSE; Char.DoubleStrikethrough[16]: FALSE; Char.RTLText[16]: FALSE; Char.UseVertical[16]: FALSE; Char.Letterspace[16]: 0 пт; Char.ColorTrans[16]: 0%; Char.AsianFont[16]: 0; Char.ComplexScriptFont[16]: 23; Char.LocalizeFont[16]: 0; Char.ComplexScriptSize[16]: -100%; Char.LangID[16]: 1049; 
-    Char.Font[17]: 4; Char.Color[17]: 0; Char.Style[17]: 0; Char.Case[17]: 0; Char.Pos[17]: 0; Char.FontScale[17]: 100%; Char._Unused6[17]: 0; Char.Size[17]: 10 пт; Char.DblUnderline[17]: FALSE; Char.Overline[17]: FALSE; Char.Strikethru[17]: FALSE; Char.Highlight[17]: FALSE; Char._Unused12[17]: FALSE; Char.DoubleStrikethrough[17]: FALSE; Char.RTLText[17]: FALSE; Char.UseVertical[17]: FALSE; Char.Letterspace[17]: 0 пт; Char.ColorTrans[17]: 0%; Char.AsianFont[17]: 0; Char.ComplexScriptFont[17]: 0; Char.LocalizeFont[17]: 0; Char.ComplexScriptSize[17]: -100%; Char.LangID[17]: 1033; 
-  Section: FirstComponent>>>
-    Geometry1.NoFill: FALSE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: Height*0; 
-    Geometry1.X2: Width*1; Geometry1.Y2: Height*0; 
-    Geometry1.X3: Width*1; Geometry1.Y3: Height*1; 
-    Geometry1.X4: Width*0; Geometry1.Y4: Height*1; 
-    Geometry1.X5: Geometry1.X1; Geometry1.Y5: Geometry1.Y1; 
-  Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 5 пт; Para.SpAfter: 5 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: 12 пт; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-    Para.IndFirst[2]: 0 мм; Para.IndLeft[2]: 0 мм; Para.IndRight[2]: 0 мм; Para.SpLine[2]: -120%; Para.SpBefore[2]: 0 пт; Para.SpAfter[2]: 0 пт; Para.HorzAlign[2]: 1; Para.Bullet[2]: 0; Para.BulletStr[2]: ""; Para.BulletFont[2]: 0; Para.LocalizeBulletFont[2]: 0; Para.BulletFontSize[2]: 12 пт; Para.TextPosAfterBullet[2]: 0 мм; Para.Flags[2]: 0; 
-    Para.IndFirst[3]: 0 мм; Para.IndLeft[3]: 0 мм; Para.IndRight[3]: 0 мм; Para.SpLine[3]: -120%; Para.SpBefore[3]: 0 пт; Para.SpAfter[3]: 0 пт; Para.HorzAlign[3]: 0; Para.Bullet[3]: 0; Para.BulletStr[3]: ""; Para.BulletFont[3]: 0; Para.LocalizeBulletFont[3]: 0; Para.BulletFontSize[3]: 12 пт; Para.TextPosAfterBullet[3]: 0 мм; Para.Flags[3]: 0; 
-    Para.IndFirst[4]: 0 мм; Para.IndLeft[4]: 0 мм; Para.IndRight[4]: 0 мм; Para.SpLine[4]: -120%; Para.SpBefore[4]: 0 пт; Para.SpAfter[4]: 0 пт; Para.HorzAlign[4]: 1; Para.Bullet[4]: 0; Para.BulletStr[4]: ""; Para.BulletFont[4]: 0; Para.LocalizeBulletFont[4]: 0; Para.BulletFontSize[4]: 12 пт; Para.TextPosAfterBullet[4]: 0 мм; Para.Flags[4]: 0; 
-    Para.IndFirst[5]: 0 мм; Para.IndLeft[5]: 0 мм; Para.IndRight[5]: 0 мм; Para.SpLine[5]: -120%; Para.SpBefore[5]: 0 пт; Para.SpAfter[5]: 0 пт; Para.HorzAlign[5]: 0; Para.Bullet[5]: 0; Para.BulletStr[5]: ""; Para.BulletFont[5]: 0; Para.LocalizeBulletFont[5]: 0; Para.BulletFontSize[5]: 12 пт; Para.TextPosAfterBullet[5]: 0 мм; Para.Flags[5]: 0; 
-    Para.IndFirst[6]: 0 мм; Para.IndLeft[6]: 0 мм; Para.IndRight[6]: 0 мм; Para.SpLine[6]: -120%; Para.SpBefore[6]: 5 пт; Para.SpAfter[6]: 5 пт; Para.HorzAlign[6]: 0; Para.Bullet[6]: 0; Para.BulletStr[6]: ""; Para.BulletFont[6]: 0; Para.LocalizeBulletFont[6]: 0; Para.BulletFontSize[6]: 12 пт; Para.TextPosAfterBullet[6]: 0 мм; Para.Flags[6]: 0; 
-    Para.IndFirst[7]: 0 мм; Para.IndLeft[7]: 0 мм; Para.IndRight[7]: 0 мм; Para.SpLine[7]: -120%; Para.SpBefore[7]: 0 пт; Para.SpAfter[7]: 0 пт; Para.HorzAlign[7]: 0; Para.Bullet[7]: 0; Para.BulletStr[7]: ""; Para.BulletFont[7]: 0; Para.LocalizeBulletFont[7]: 0; Para.BulletFontSize[7]: 12 пт; Para.TextPosAfterBullet[7]: 0 мм; Para.Flags[7]: 0; 
-    Para.IndFirst[8]: 0 мм; Para.IndLeft[8]: 0 мм; Para.IndRight[8]: 0 мм; Para.SpLine[8]: -120%; Para.SpBefore[8]: 5 пт; Para.SpAfter[8]: 5 пт; Para.HorzAlign[8]: 0; Para.Bullet[8]: 0; Para.BulletStr[8]: ""; Para.BulletFont[8]: 0; Para.LocalizeBulletFont[8]: 0; Para.BulletFontSize[8]: 12 пт; Para.TextPosAfterBullet[8]: 0 мм; Para.Flags[8]: 0; 
-  Section: Prop>>>
-    Prop.Width: 12,5; Prop.Width.Prompt: ""; Prop.Width.Label: ""; Prop.Width.Format: ""; Prop.Width.SortKey: ""; Prop.Width.Type: 2; Prop.Width.Invisible: FALSE; Prop.Width.Verify: FALSE; Prop.Width.LangID: 1049; Prop.Width.Calendar: 0; 
-    Prop.Height: 25; Prop.Height.Prompt: ""; Prop.Height.Label: ""; Prop.Height.Format: ""; Prop.Height.SortKey: ""; Prop.Height.Type: 2; Prop.Height.Invisible: FALSE; Prop.Height.Verify: FALSE; Prop.Height.LangID: 1049; Prop.Height.Calendar: 0; 
-    Prop.Square: Prop.Width*Prop.Height; Prop.Square.Prompt: ""; Prop.Square.Label: ""; Prop.Square.Format: ""; Prop.Square.SortKey: ""; Prop.Square.Type: 2; Prop.Square.Invisible: FALSE; Prop.Square.Verify: FALSE; Prop.Square.LangID: 1049; Prop.Square.Calendar: 0; 
-    Prop.txt: "1fggh"; Prop.txt.Prompt: ""; Prop.txt.Label: ""; Prop.txt.Format: ""; Prop.txt.SortKey: ""; Prop.txt.Type: 0; Prop.txt.Invisible: FALSE; Prop.txt.Verify: FALSE; Prop.txt.LangID: 1049; Prop.txt.Calendar: 0; 
-    Prop.Название: MASTERNAME(); Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
-    Prop.Perimeter: 2*(Prop.Width+Prop.Height); Prop.Perimeter.Prompt: ""; Prop.Perimeter.Label: ""; Prop.Perimeter.Format: ""; Prop.Perimeter.SortKey: ""; Prop.Perimeter.Type: 2; Prop.Perimeter.Invisible: FALSE; Prop.Perimeter.Verify: FALSE; Prop.Perimeter.LangID: 1049; Prop.Perimeter.Calendar: 0; 
-    Prop.A_ACCount: 0; Prop.A_ACCount.Prompt: ""; Prop.A_ACCount.Label: ""; Prop.A_ACCount.Format: ""; Prop.A_ACCount.SortKey: ""; Prop.A_ACCount.Type: 0; Prop.A_ACCount.Invisible: FALSE; Prop.A_ACCount.Verify: FALSE; Prop.A_ACCount.LangID: 1049; Prop.A_ACCount.Calendar: 0; 
-  Section: Tab>>>
-    Tabs.X1: 0; 
-  Section: User>>>
-    User.IndexPers: 500; User.IndexPers.Prompt: ""; 
-    User.TextPattern: "<h1>$Название$</h1>
-<h2>Площадь фигуры равна:</h2>
-<p align='center'><b>S<sub>ф</sub>=a x b</b></p>
-<p>где S<sub>ф</sub> - площадь фигуры, мм<sup>2</sup>, a - длина фигуры, мм, b - ширина фигуры, мм</p>
-<p align='center'>S<sub>ф</sub>=$Height$ x $Width$ = $Square$ мм<sup>2</sup></p>
-<hr/>
-<h2>Периметр = $Perimeter$</h2>
-<table border='1'>
-<tr>
-<td>111</td><td>200</td><td>300</td>
-</tr>
-</table>"; User.TextPattern.Prompt: "Исходный код HTML"; 
-    User.DataChangeAction: GUARD(IF(Actions.ShowDataInShape.Checked=1;CALLTHIS("ShowDataInShape";"Формулы";User.TextPattern)+DEPENDSON(User.DataChangeAction.Prompt)+DEPENDSON(User.TextPattern);CALLTHIS("ClearShapeText";"Формулы"))); User.DataChangeAction.Prompt: Prop.Width&Prop.Height&Prop.Square&Prop.txt&Prop.Perimeter; 
-  Section Object, row: visRowEvent>>>
-    
-  Section Object, row: visRowFill>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
-  Section Object, row: visRowGroup>>>
-    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
-  Section Object, row: visRowHelpCopyright>>>
-    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
-  Section Object, row: visRowImage>>>
-    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
-  Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
-  Section Object, row: visRowLock>>>
-    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
-  Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
-  Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
-  Section Object, row: visRowPrintProperties>>>
-    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
-  Section Object, row: visRowShapeLayout>>>
-    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
-  Section Object, row: visRowStyle>>>
-    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
-  Section Object, row: visRowText>>>
-    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-  Section Object, row: visRowXFormOut>>>
-    PinX: 15,5 м; PinY: 6,25 м; Width: 31 м; Height: 12,5 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
-
-=>sheet: Вариант 3 (с анализатором)
-  Section: Character>>>
-    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-  Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-  Section: Tab>>>
-    Tabs.X1: 0; 
-  Section Object, row: visRowEvent>>>
-    
-  Section Object, row: visRowFill>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
-  Section Object, row: visRowGroup>>>
-    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
-  Section Object, row: visRowHelpCopyright>>>
-    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
-  Section Object, row: visRowImage>>>
-    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
-  Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
-  Section Object, row: visRowLock>>>
-    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
-  Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
-  Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
-  Section Object, row: visRowPage>>>
-    PageWidth: 34 м; PageHeight: 19 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
-  Section Object, row: visRowPrintProperties>>>
-    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
-  Section Object, row: visRowShapeLayout>>>
-    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
-  Section Object, row: visRowStyle>>>
-    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
-  Section Object, row: visRowText>>>
-    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-
-=>sheet: Формулы 3 (с анализатором).2
-  Section: Action>>>
-    Actions.ShowData: "Редактировать исходный код"; Actions.ShowData._Unused1: ""; Actions.ShowData._Unused2: ""; Actions.ShowData.Action: CALLTHIS("ShowData";"Формулы";User.TextPattern); Actions.ShowData.Checked: 0; Actions.ShowData.Disabled: 0; Actions.ShowData.ReadOnly: FALSE; Actions.ShowData.Invisible: FALSE; Actions.ShowData.BeginGroup: FALSE; Actions.ShowData.TagName: ""; Actions.ShowData.ButtonFace: ""; Actions.ShowData.SortKey: 10; 
-    Actions.ShowDataInShape: "Отображать результат в фигуре"; Actions.ShowDataInShape._Unused1: ""; Actions.ShowDataInShape._Unused2: ""; Actions.ShowDataInShape.Action: SETF("Actions.ShowDataInShape.Checked";NOT(Actions.ShowDataInShape.Checked)); Actions.ShowDataInShape.Checked: 1; Actions.ShowDataInShape.Disabled: 0; Actions.ShowDataInShape.ReadOnly: FALSE; Actions.ShowDataInShape.Invisible: FALSE; Actions.ShowDataInShape.BeginGroup: FALSE; Actions.ShowDataInShape.TagName: ""; Actions.ShowDataInShape.ButtonFace: ""; Actions.ShowDataInShape.SortKey: "20"; 
-  Section: Character>>>
-    Char.Font: 23; Char.Color: 0; Char.Style: 17; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 24 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 23; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-    Char.Font[2]: 23; Char.Color[2]: 0; Char.Style[2]: 17; Char.Case[2]: 0; Char.Pos[2]: 0; Char.FontScale[2]: 100%; Char._Unused6[2]: 0; Char.Size[2]: 18 пт; Char.DblUnderline[2]: FALSE; Char.Overline[2]: FALSE; Char.Strikethru[2]: FALSE; Char.Highlight[2]: FALSE; Char._Unused12[2]: FALSE; Char.DoubleStrikethrough[2]: FALSE; Char.RTLText[2]: FALSE; Char.UseVertical[2]: FALSE; Char.Letterspace[2]: 0 пт; Char.ColorTrans[2]: 0%; Char.AsianFont[2]: 0; Char.ComplexScriptFont[2]: 23; Char.LocalizeFont[2]: 0; Char.ComplexScriptSize[2]: -100%; Char.LangID[2]: 1049; 
-    Char.Font[3]: 23; Char.Color[3]: 0; Char.Style[3]: 17; Char.Case[3]: 0; Char.Pos[3]: 0; Char.FontScale[3]: 100%; Char._Unused6[3]: 0; Char.Size[3]: 12 пт; Char.DblUnderline[3]: FALSE; Char.Overline[3]: FALSE; Char.Strikethru[3]: FALSE; Char.Highlight[3]: FALSE; Char._Unused12[3]: FALSE; Char.DoubleStrikethrough[3]: FALSE; Char.RTLText[3]: FALSE; Char.UseVertical[3]: FALSE; Char.Letterspace[3]: 0 пт; Char.ColorTrans[3]: 0%; Char.AsianFont[3]: 0; Char.ComplexScriptFont[3]: 23; Char.LocalizeFont[3]: 0; Char.ComplexScriptSize[3]: -100%; Char.LangID[3]: 1049; 
-    Char.Font[4]: 23; Char.Color[4]: 0; Char.Style[4]: 17; Char.Case[4]: 0; Char.Pos[4]: 2; Char.FontScale[4]: 100%; Char._Unused6[4]: 0; Char.Size[4]: 12 пт; Char.DblUnderline[4]: FALSE; Char.Overline[4]: FALSE; Char.Strikethru[4]: FALSE; Char.Highlight[4]: FALSE; Char._Unused12[4]: FALSE; Char.DoubleStrikethrough[4]: FALSE; Char.RTLText[4]: FALSE; Char.UseVertical[4]: FALSE; Char.Letterspace[4]: 0 пт; Char.ColorTrans[4]: 0%; Char.AsianFont[4]: 0; Char.ComplexScriptFont[4]: 23; Char.LocalizeFont[4]: 0; Char.ComplexScriptSize[4]: -100%; Char.LangID[4]: 1049; 
-    Char.Font[5]: 23; Char.Color[5]: 0; Char.Style[5]: 17; Char.Case[5]: 0; Char.Pos[5]: 0; Char.FontScale[5]: 100%; Char._Unused6[5]: 0; Char.Size[5]: 12 пт; Char.DblUnderline[5]: FALSE; Char.Overline[5]: FALSE; Char.Strikethru[5]: FALSE; Char.Highlight[5]: FALSE; Char._Unused12[5]: FALSE; Char.DoubleStrikethrough[5]: FALSE; Char.RTLText[5]: FALSE; Char.UseVertical[5]: FALSE; Char.Letterspace[5]: 0 пт; Char.ColorTrans[5]: 0%; Char.AsianFont[5]: 0; Char.ComplexScriptFont[5]: 23; Char.LocalizeFont[5]: 0; Char.ComplexScriptSize[5]: -100%; Char.LangID[5]: 1049; 
-    Char.Font[6]: 23; Char.Color[6]: 0; Char.Style[6]: 0; Char.Case[6]: 0; Char.Pos[6]: 0; Char.FontScale[6]: 100%; Char._Unused6[6]: 0; Char.Size[6]: 12 пт; Char.DblUnderline[6]: FALSE; Char.Overline[6]: FALSE; Char.Strikethru[6]: FALSE; Char.Highlight[6]: FALSE; Char._Unused12[6]: FALSE; Char.DoubleStrikethrough[6]: FALSE; Char.RTLText[6]: FALSE; Char.UseVertical[6]: FALSE; Char.Letterspace[6]: 0 пт; Char.ColorTrans[6]: 0%; Char.AsianFont[6]: 0; Char.ComplexScriptFont[6]: 23; Char.LocalizeFont[6]: 0; Char.ComplexScriptSize[6]: -100%; Char.LangID[6]: 1049; 
-    Char.Font[7]: 23; Char.Color[7]: 0; Char.Style[7]: 0; Char.Case[7]: 0; Char.Pos[7]: 2; Char.FontScale[7]: 100%; Char._Unused6[7]: 0; Char.Size[7]: 12 пт; Char.DblUnderline[7]: FALSE; Char.Overline[7]: FALSE; Char.Strikethru[7]: FALSE; Char.Highlight[7]: FALSE; Char._Unused12[7]: FALSE; Char.DoubleStrikethrough[7]: FALSE; Char.RTLText[7]: FALSE; Char.UseVertical[7]: FALSE; Char.Letterspace[7]: 0 пт; Char.ColorTrans[7]: 0%; Char.AsianFont[7]: 0; Char.ComplexScriptFont[7]: 23; Char.LocalizeFont[7]: 0; Char.ComplexScriptSize[7]: -100%; Char.LangID[7]: 1049; 
-    Char.Font[8]: 23; Char.Color[8]: 0; Char.Style[8]: 0; Char.Case[8]: 0; Char.Pos[8]: 0; Char.FontScale[8]: 100%; Char._Unused6[8]: 0; Char.Size[8]: 12 пт; Char.DblUnderline[8]: FALSE; Char.Overline[8]: FALSE; Char.Strikethru[8]: FALSE; Char.Highlight[8]: FALSE; Char._Unused12[8]: FALSE; Char.DoubleStrikethrough[8]: FALSE; Char.RTLText[8]: FALSE; Char.UseVertical[8]: FALSE; Char.Letterspace[8]: 0 пт; Char.ColorTrans[8]: 0%; Char.AsianFont[8]: 0; Char.ComplexScriptFont[8]: 23; Char.LocalizeFont[8]: 0; Char.ComplexScriptSize[8]: -100%; Char.LangID[8]: 1049; 
-    Char.Font[9]: 23; Char.Color[9]: 0; Char.Style[9]: 0; Char.Case[9]: 0; Char.Pos[9]: 1; Char.FontScale[9]: 100%; Char._Unused6[9]: 0; Char.Size[9]: 12 пт; Char.DblUnderline[9]: FALSE; Char.Overline[9]: FALSE; Char.Strikethru[9]: FALSE; Char.Highlight[9]: FALSE; Char._Unused12[9]: FALSE; Char.DoubleStrikethrough[9]: FALSE; Char.RTLText[9]: FALSE; Char.UseVertical[9]: FALSE; Char.Letterspace[9]: 0 пт; Char.ColorTrans[9]: 0%; Char.AsianFont[9]: 0; Char.ComplexScriptFont[9]: 23; Char.LocalizeFont[9]: 0; Char.ComplexScriptSize[9]: -100%; Char.LangID[9]: 1049; 
-    Char.Font[10]: 23; Char.Color[10]: 0; Char.Style[10]: 0; Char.Case[10]: 0; Char.Pos[10]: 0; Char.FontScale[10]: 100%; Char._Unused6[10]: 0; Char.Size[10]: 12 пт; Char.DblUnderline[10]: FALSE; Char.Overline[10]: FALSE; Char.Strikethru[10]: FALSE; Char.Highlight[10]: FALSE; Char._Unused12[10]: FALSE; Char.DoubleStrikethrough[10]: FALSE; Char.RTLText[10]: FALSE; Char.UseVertical[10]: FALSE; Char.Letterspace[10]: 0 пт; Char.ColorTrans[10]: 0%; Char.AsianFont[10]: 0; Char.ComplexScriptFont[10]: 23; Char.LocalizeFont[10]: 0; Char.ComplexScriptSize[10]: -100%; Char.LangID[10]: 1049; 
-    Char.Font[11]: 23; Char.Color[11]: 0; Char.Style[11]: 0; Char.Case[11]: 0; Char.Pos[11]: 2; Char.FontScale[11]: 100%; Char._Unused6[11]: 0; Char.Size[11]: 12 пт; Char.DblUnderline[11]: FALSE; Char.Overline[11]: FALSE; Char.Strikethru[11]: FALSE; Char.Highlight[11]: FALSE; Char._Unused12[11]: FALSE; Char.DoubleStrikethrough[11]: FALSE; Char.RTLText[11]: FALSE; Char.UseVertical[11]: FALSE; Char.Letterspace[11]: 0 пт; Char.ColorTrans[11]: 0%; Char.AsianFont[11]: 0; Char.ComplexScriptFont[11]: 23; Char.LocalizeFont[11]: 0; Char.ComplexScriptSize[11]: -100%; Char.LangID[11]: 1049; 
-    Char.Font[12]: 23; Char.Color[12]: 0; Char.Style[12]: 0; Char.Case[12]: 0; Char.Pos[12]: 0; Char.FontScale[12]: 100%; Char._Unused6[12]: 0; Char.Size[12]: 12 пт; Char.DblUnderline[12]: FALSE; Char.Overline[12]: FALSE; Char.Strikethru[12]: FALSE; Char.Highlight[12]: FALSE; Char._Unused12[12]: FALSE; Char.DoubleStrikethrough[12]: FALSE; Char.RTLText[12]: FALSE; Char.UseVertical[12]: FALSE; Char.Letterspace[12]: 0 пт; Char.ColorTrans[12]: 0%; Char.AsianFont[12]: 0; Char.ComplexScriptFont[12]: 23; Char.LocalizeFont[12]: 0; Char.ComplexScriptSize[12]: -100%; Char.LangID[12]: 1049; 
-    Char.Font[13]: 23; Char.Color[13]: 0; Char.Style[13]: 0; Char.Case[13]: 0; Char.Pos[13]: 1; Char.FontScale[13]: 100%; Char._Unused6[13]: 0; Char.Size[13]: 12 пт; Char.DblUnderline[13]: FALSE; Char.Overline[13]: FALSE; Char.Strikethru[13]: FALSE; Char.Highlight[13]: FALSE; Char._Unused12[13]: FALSE; Char.DoubleStrikethrough[13]: FALSE; Char.RTLText[13]: FALSE; Char.UseVertical[13]: FALSE; Char.Letterspace[13]: 0 пт; Char.ColorTrans[13]: 0%; Char.AsianFont[13]: 0; Char.ComplexScriptFont[13]: 23; Char.LocalizeFont[13]: 0; Char.ComplexScriptSize[13]: -100%; Char.LangID[13]: 1049; 
-    Char.Font[14]: 23; Char.Color[14]: 0; Char.Style[14]: 0; Char.Case[14]: 0; Char.Pos[14]: 0; Char.FontScale[14]: 100%; Char._Unused6[14]: 0; Char.Size[14]: 12 пт; Char.DblUnderline[14]: FALSE; Char.Overline[14]: FALSE; Char.Strikethru[14]: FALSE; Char.Highlight[14]: FALSE; Char._Unused12[14]: FALSE; Char.DoubleStrikethrough[14]: FALSE; Char.RTLText[14]: FALSE; Char.UseVertical[14]: FALSE; Char.Letterspace[14]: 0 пт; Char.ColorTrans[14]: 0%; Char.AsianFont[14]: 0; Char.ComplexScriptFont[14]: 23; Char.LocalizeFont[14]: 0; Char.ComplexScriptSize[14]: -100%; Char.LangID[14]: 1049; 
-    Char.Font[15]: 23; Char.Color[15]: 0; Char.Style[15]: 17; Char.Case[15]: 0; Char.Pos[15]: 0; Char.FontScale[15]: 100%; Char._Unused6[15]: 0; Char.Size[15]: 18 пт; Char.DblUnderline[15]: FALSE; Char.Overline[15]: FALSE; Char.Strikethru[15]: FALSE; Char.Highlight[15]: FALSE; Char._Unused12[15]: FALSE; Char.DoubleStrikethrough[15]: FALSE; Char.RTLText[15]: FALSE; Char.UseVertical[15]: FALSE; Char.Letterspace[15]: 0 пт; Char.ColorTrans[15]: 0%; Char.AsianFont[15]: 0; Char.ComplexScriptFont[15]: 23; Char.LocalizeFont[15]: 0; Char.ComplexScriptSize[15]: -100%; Char.LangID[15]: 1049; 
-    Char.Font[16]: 23; Char.Color[16]: 0; Char.Style[16]: 0; Char.Case[16]: 0; Char.Pos[16]: 0; Char.FontScale[16]: 100%; Char._Unused6[16]: 0; Char.Size[16]: 12 пт; Char.DblUnderline[16]: FALSE; Char.Overline[16]: FALSE; Char.Strikethru[16]: FALSE; Char.Highlight[16]: FALSE; Char._Unused12[16]: FALSE; Char.DoubleStrikethrough[16]: FALSE; Char.RTLText[16]: FALSE; Char.UseVertical[16]: FALSE; Char.Letterspace[16]: 0 пт; Char.ColorTrans[16]: 0%; Char.AsianFont[16]: 0; Char.ComplexScriptFont[16]: 23; Char.LocalizeFont[16]: 0; Char.ComplexScriptSize[16]: -100%; Char.LangID[16]: 1049; 
-    Char.Font[17]: 23; Char.Color[17]: 0; Char.Style[17]: 0; Char.Case[17]: 0; Char.Pos[17]: 0; Char.FontScale[17]: 100%; Char._Unused6[17]: 0; Char.Size[17]: 12 пт; Char.DblUnderline[17]: FALSE; Char.Overline[17]: FALSE; Char.Strikethru[17]: FALSE; Char.Highlight[17]: FALSE; Char._Unused12[17]: FALSE; Char.DoubleStrikethrough[17]: FALSE; Char.RTLText[17]: FALSE; Char.UseVertical[17]: FALSE; Char.Letterspace[17]: 0 пт; Char.ColorTrans[17]: 0%; Char.AsianFont[17]: 0; Char.ComplexScriptFont[17]: 23; Char.LocalizeFont[17]: 0; Char.ComplexScriptSize[17]: -100%; Char.LangID[17]: 1033; 
-  Section: FirstComponent>>>
-    Geometry1.NoFill: FALSE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: Height*0; 
-    Geometry1.X2: Width*1; Geometry1.Y2: Height*0; 
-    Geometry1.X3: Width*1; Geometry1.Y3: Height*1; 
-    Geometry1.X4: Width*0; Geometry1.Y4: Height*1; 
-    Geometry1.X5: Geometry1.X1; Geometry1.Y5: Geometry1.Y1; 
-  Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 5 пт; Para.SpAfter: 5 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: 12 пт; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-    Para.IndFirst[2]: 0 мм; Para.IndLeft[2]: 0 мм; Para.IndRight[2]: 0 мм; Para.SpLine[2]: -120%; Para.SpBefore[2]: 0 пт; Para.SpAfter[2]: 0 пт; Para.HorzAlign[2]: 1; Para.Bullet[2]: 0; Para.BulletStr[2]: ""; Para.BulletFont[2]: 0; Para.LocalizeBulletFont[2]: 0; Para.BulletFontSize[2]: 12 пт; Para.TextPosAfterBullet[2]: 0 мм; Para.Flags[2]: 0; 
-    Para.IndFirst[3]: 0 мм; Para.IndLeft[3]: 0 мм; Para.IndRight[3]: 0 мм; Para.SpLine[3]: -120%; Para.SpBefore[3]: 0 пт; Para.SpAfter[3]: 0 пт; Para.HorzAlign[3]: 0; Para.Bullet[3]: 0; Para.BulletStr[3]: ""; Para.BulletFont[3]: 0; Para.LocalizeBulletFont[3]: 0; Para.BulletFontSize[3]: 12 пт; Para.TextPosAfterBullet[3]: 0 мм; Para.Flags[3]: 0; 
-    Para.IndFirst[4]: 0 мм; Para.IndLeft[4]: 0 мм; Para.IndRight[4]: 0 мм; Para.SpLine[4]: -120%; Para.SpBefore[4]: 0 пт; Para.SpAfter[4]: 0 пт; Para.HorzAlign[4]: 1; Para.Bullet[4]: 0; Para.BulletStr[4]: ""; Para.BulletFont[4]: 0; Para.LocalizeBulletFont[4]: 0; Para.BulletFontSize[4]: 12 пт; Para.TextPosAfterBullet[4]: 0 мм; Para.Flags[4]: 0; 
-    Para.IndFirst[5]: 0 мм; Para.IndLeft[5]: 0 мм; Para.IndRight[5]: 0 мм; Para.SpLine[5]: -120%; Para.SpBefore[5]: 0 пт; Para.SpAfter[5]: 0 пт; Para.HorzAlign[5]: 0; Para.Bullet[5]: 0; Para.BulletStr[5]: ""; Para.BulletFont[5]: 0; Para.LocalizeBulletFont[5]: 0; Para.BulletFontSize[5]: 12 пт; Para.TextPosAfterBullet[5]: 0 мм; Para.Flags[5]: 0; 
-    Para.IndFirst[6]: 0 мм; Para.IndLeft[6]: 0 мм; Para.IndRight[6]: 0 мм; Para.SpLine[6]: -120%; Para.SpBefore[6]: 5 пт; Para.SpAfter[6]: 5 пт; Para.HorzAlign[6]: 0; Para.Bullet[6]: 0; Para.BulletStr[6]: ""; Para.BulletFont[6]: 0; Para.LocalizeBulletFont[6]: 0; Para.BulletFontSize[6]: 12 пт; Para.TextPosAfterBullet[6]: 0 мм; Para.Flags[6]: 0; 
-    Para.IndFirst[7]: -6,35 мм; Para.IndLeft[7]: 12,7 мм; Para.IndRight[7]: 0 мм; Para.SpLine[7]: -120%; Para.SpBefore[7]: 0 пт; Para.SpAfter[7]: 0 пт; Para.HorzAlign[7]: 0; Para.Bullet[7]: 1; Para.BulletStr[7]: ""; Para.BulletFont[7]: 0; Para.LocalizeBulletFont[7]: 0; Para.BulletFontSize[7]: 12 пт; Para.TextPosAfterBullet[7]: 0 мм; Para.Flags[7]: 0; 
-    Para.IndFirst[8]: 0 мм; Para.IndLeft[8]: 0 мм; Para.IndRight[8]: 0 мм; Para.SpLine[8]: -120%; Para.SpBefore[8]: 5 пт; Para.SpAfter[8]: 5 пт; Para.HorzAlign[8]: 0; Para.Bullet[8]: 0; Para.BulletStr[8]: ""; Para.BulletFont[8]: 0; Para.LocalizeBulletFont[8]: 0; Para.BulletFontSize[8]: 12 пт; Para.TextPosAfterBullet[8]: 0 мм; Para.Flags[8]: 0; 
-  Section: Prop>>>
-    Prop.Width: 12,5; Prop.Width.Prompt: ""; Prop.Width.Label: ""; Prop.Width.Format: ""; Prop.Width.SortKey: ""; Prop.Width.Type: 2; Prop.Width.Invisible: FALSE; Prop.Width.Verify: FALSE; Prop.Width.LangID: 1049; Prop.Width.Calendar: 0; 
-    Prop.Height: 30; Prop.Height.Prompt: ""; Prop.Height.Label: ""; Prop.Height.Format: ""; Prop.Height.SortKey: ""; Prop.Height.Type: 2; Prop.Height.Invisible: FALSE; Prop.Height.Verify: FALSE; Prop.Height.LangID: 1049; Prop.Height.Calendar: 0; 
-    Prop.Square: Prop.Width*Prop.Height; Prop.Square.Prompt: ""; Prop.Square.Label: ""; Prop.Square.Format: ""; Prop.Square.SortKey: ""; Prop.Square.Type: 2; Prop.Square.Invisible: FALSE; Prop.Square.Verify: FALSE; Prop.Square.LangID: 1049; Prop.Square.Calendar: 0; 
-    Prop.txt: "1fggh"; Prop.txt.Prompt: ""; Prop.txt.Label: ""; Prop.txt.Format: ""; Prop.txt.SortKey: ""; Prop.txt.Type: 0; Prop.txt.Invisible: FALSE; Prop.txt.Verify: FALSE; Prop.txt.LangID: 1049; Prop.txt.Calendar: 0; 
-    Prop.Название: MASTERNAME(); Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
-    Prop.Perimeter: 2*(Prop.Width+Prop.Height); Prop.Perimeter.Prompt: ""; Prop.Perimeter.Label: ""; Prop.Perimeter.Format: ""; Prop.Perimeter.SortKey: ""; Prop.Perimeter.Type: 2; Prop.Perimeter.Invisible: FALSE; Prop.Perimeter.Verify: FALSE; Prop.Perimeter.LangID: 1049; Prop.Perimeter.Calendar: 0; 
-    Prop.A_ACCount: "3"; Prop.A_ACCount.Prompt: ""; Prop.A_ACCount.Label: ""; Prop.A_ACCount.Format: ""; Prop.A_ACCount.SortKey: ""; Prop.A_ACCount.Type: 0; Prop.A_ACCount.Invisible: FALSE; Prop.A_ACCount.Verify: FALSE; Prop.A_ACCount.LangID: 1049; Prop.A_ACCount.Calendar: 0; 
-    Prop.TargetPageIndex: 0; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 10; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
-    Prop.A_StvolWHave: "2"; Prop.A_StvolWHave.Prompt: ""; Prop.A_StvolWHave.Label: ""; Prop.A_StvolWHave.Format: ""; Prop.A_StvolWHave.SortKey: ""; Prop.A_StvolWHave.Type: 0; Prop.A_StvolWHave.Invisible: FALSE; Prop.A_StvolWHave.Verify: FALSE; Prop.A_StvolWHave.LangID: 1049; Prop.A_StvolWHave.Calendar: 0; 
-    Prop.A_FireTime: "27.11.2020 12:30:00"; Prop.A_FireTime.Prompt: ""; Prop.A_FireTime.Label: ""; Prop.A_FireTime.Format: ""; Prop.A_FireTime.SortKey: ""; Prop.A_FireTime.Type: 0; Prop.A_FireTime.Invisible: FALSE; Prop.A_FireTime.Verify: FALSE; Prop.A_FireTime.LangID: 1049; Prop.A_FireTime.Calendar: 0; 
-  Section: Tab>>>
-    Tabs.X1: 0; 
-  Section: User>>>
-    User.IndexPers: 500; User.IndexPers.Prompt: ""; 
-    User.TextPattern: "<h1>$Название$</h1>
-<h2>Площадь фигуры равна:</h2>
-<p align='center'><b>S<sub>ф</sub>=a x b</b></p>
-<p>где S<sub>ф</sub> - площадь фигуры, мм<sup>2</sup>, a - длина фигуры, мм, b - ширина фигуры, мм</p>
-<p align='center'>S<sub>ф</sub>=$Height$ x $Width$ = $Square$ мм<sup>2</sup></p>
-<hr/>
-<h2>Периметр = $Perimeter$</h2>
-<h2>Данные полученные из анализатора:</h2>
-<ul>
-<li>Количество АЦ: $A_ACCount$</li>
-<li>Количество водяных стволов: $A_StvolWHave$</li>
-<li>Время возникновения: $A_FireTime$</li>
-</ul>
-"; User.TextPattern.Prompt: "Исходный код HTML"; 
-    User.DataChangeAction: GUARD(IF(Actions.ShowDataInShape.Checked=1;CALLTHIS("ShowDataInShape";"Формулы";User.TextPattern)+DEPENDSON(User.DataChangeAction.Prompt)+DEPENDSON(User.TextPattern);CALLTHIS("ClearShapeText";"Формулы"))); User.DataChangeAction.Prompt: Prop.Width&Prop.Height&Prop.Square&Prop.txt&Prop.Название&Prop.Perimeter&Prop.A_ACCount&Prop.TargetPageIndex&Prop.A_StvolWHave&Prop.A_FireTime; 
-  Section Object, row: visRowEvent>>>
-    
-  Section Object, row: visRowFill>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
-  Section Object, row: visRowGroup>>>
-    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
-  Section Object, row: visRowHelpCopyright>>>
-    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
-  Section Object, row: visRowImage>>>
-    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
-  Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
-  Section Object, row: visRowLock>>>
-    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
-  Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
-  Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
-  Section Object, row: visRowPrintProperties>>>
-    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
-  Section Object, row: visRowShapeLayout>>>
-    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
-  Section Object, row: visRowStyle>>>
-    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
-  Section Object, row: visRowText>>>
-    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-  Section Object, row: visRowXFormOut>>>
-    PinX: 17 м; PinY: 9,5 м; Width: 34 м; Height: 19 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
-
-=>sheet: Вариант 4
-  Section: Character>>>
-    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-  Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-  Section: Tab>>>
-    Tabs.X1: 0; 
-  Section Object, row: visRowEvent>>>
-    
-  Section Object, row: visRowFill>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
-  Section Object, row: visRowGroup>>>
-    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
-  Section Object, row: visRowHelpCopyright>>>
-    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
-  Section Object, row: visRowImage>>>
-    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
-  Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
-  Section Object, row: visRowLock>>>
-    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
-  Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
-  Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
-  Section Object, row: visRowPage>>>
-    PageWidth: 34 м; PageHeight: 21 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
-  Section Object, row: visRowPrintProperties>>>
-    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
-  Section Object, row: visRowShapeLayout>>>
-    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
-  Section Object, row: visRowStyle>>>
-    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
-  Section Object, row: visRowText>>>
-    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-
-=>sheet: Вариант 3 (с анализатором).50
-  Section: Action>>>
-    Actions.ShowData: "Редактировать исходный код"; Actions.ShowData._Unused1: ""; Actions.ShowData._Unused2: ""; Actions.ShowData.Action: CALLTHIS("ShowData";"Формулы";User.TextPattern); Actions.ShowData.Checked: 0; Actions.ShowData.Disabled: 0; Actions.ShowData.ReadOnly: FALSE; Actions.ShowData.Invisible: FALSE; Actions.ShowData.BeginGroup: FALSE; Actions.ShowData.TagName: ""; Actions.ShowData.ButtonFace: ""; Actions.ShowData.SortKey: 10; 
-    Actions.ShowDataInShape: "Отображать результат в фигуре"; Actions.ShowDataInShape._Unused1: ""; Actions.ShowDataInShape._Unused2: ""; Actions.ShowDataInShape.Action: SETF("Actions.ShowDataInShape.Checked";NOT(Actions.ShowDataInShape.Checked)); Actions.ShowDataInShape.Checked: 1; Actions.ShowDataInShape.Disabled: 0; Actions.ShowDataInShape.ReadOnly: FALSE; Actions.ShowDataInShape.Invisible: FALSE; Actions.ShowDataInShape.BeginGroup: FALSE; Actions.ShowDataInShape.TagName: ""; Actions.ShowDataInShape.ButtonFace: ""; Actions.ShowDataInShape.SortKey: "20"; 
-    Actions.Row_3: "Добавить анализируемую ячейку"; Actions.Row_3._Unused1: ""; Actions.Row_3._Unused2: ""; Actions.Row_3.Action: CALLTHIS("ShowAElemAddForm";"Формулы"); Actions.Row_3.Checked: 0; Actions.Row_3.Disabled: 0; Actions.Row_3.ReadOnly: FALSE; Actions.Row_3.Invisible: FALSE; Actions.Row_3.BeginGroup: TRUE; Actions.Row_3.TagName: ""; Actions.Row_3.ButtonFace: ""; Actions.Row_3.SortKey: 30; 
-  Section: Character>>>
-    Char.Font: 23; Char.Color: 0; Char.Style: 17; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 24 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 23; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-    Char.Font[2]: 23; Char.Color[2]: 0; Char.Style[2]: 17; Char.Case[2]: 0; Char.Pos[2]: 0; Char.FontScale[2]: 100%; Char._Unused6[2]: 0; Char.Size[2]: 18 пт; Char.DblUnderline[2]: FALSE; Char.Overline[2]: FALSE; Char.Strikethru[2]: FALSE; Char.Highlight[2]: FALSE; Char._Unused12[2]: FALSE; Char.DoubleStrikethrough[2]: FALSE; Char.RTLText[2]: FALSE; Char.UseVertical[2]: FALSE; Char.Letterspace[2]: 0 пт; Char.ColorTrans[2]: 0%; Char.AsianFont[2]: 0; Char.ComplexScriptFont[2]: 23; Char.LocalizeFont[2]: 0; Char.ComplexScriptSize[2]: -100%; Char.LangID[2]: 1049; 
-    Char.Font[3]: 23; Char.Color[3]: 0; Char.Style[3]: 17; Char.Case[3]: 0; Char.Pos[3]: 0; Char.FontScale[3]: 100%; Char._Unused6[3]: 0; Char.Size[3]: 12 пт; Char.DblUnderline[3]: FALSE; Char.Overline[3]: FALSE; Char.Strikethru[3]: FALSE; Char.Highlight[3]: FALSE; Char._Unused12[3]: FALSE; Char.DoubleStrikethrough[3]: FALSE; Char.RTLText[3]: FALSE; Char.UseVertical[3]: FALSE; Char.Letterspace[3]: 0 пт; Char.ColorTrans[3]: 0%; Char.AsianFont[3]: 0; Char.ComplexScriptFont[3]: 23; Char.LocalizeFont[3]: 0; Char.ComplexScriptSize[3]: -100%; Char.LangID[3]: 1049; 
-    Char.Font[4]: 23; Char.Color[4]: 0; Char.Style[4]: 17; Char.Case[4]: 0; Char.Pos[4]: 2; Char.FontScale[4]: 100%; Char._Unused6[4]: 0; Char.Size[4]: 12 пт; Char.DblUnderline[4]: FALSE; Char.Overline[4]: FALSE; Char.Strikethru[4]: FALSE; Char.Highlight[4]: FALSE; Char._Unused12[4]: FALSE; Char.DoubleStrikethrough[4]: FALSE; Char.RTLText[4]: FALSE; Char.UseVertical[4]: FALSE; Char.Letterspace[4]: 0 пт; Char.ColorTrans[4]: 0%; Char.AsianFont[4]: 0; Char.ComplexScriptFont[4]: 23; Char.LocalizeFont[4]: 0; Char.ComplexScriptSize[4]: -100%; Char.LangID[4]: 1049; 
-    Char.Font[5]: 23; Char.Color[5]: 0; Char.Style[5]: 17; Char.Case[5]: 0; Char.Pos[5]: 0; Char.FontScale[5]: 100%; Char._Unused6[5]: 0; Char.Size[5]: 12 пт; Char.DblUnderline[5]: FALSE; Char.Overline[5]: FALSE; Char.Strikethru[5]: FALSE; Char.Highlight[5]: FALSE; Char._Unused12[5]: FALSE; Char.DoubleStrikethrough[5]: FALSE; Char.RTLText[5]: FALSE; Char.UseVertical[5]: FALSE; Char.Letterspace[5]: 0 пт; Char.ColorTrans[5]: 0%; Char.AsianFont[5]: 0; Char.ComplexScriptFont[5]: 23; Char.LocalizeFont[5]: 0; Char.ComplexScriptSize[5]: -100%; Char.LangID[5]: 1049; 
-    Char.Font[6]: 23; Char.Color[6]: 0; Char.Style[6]: 0; Char.Case[6]: 0; Char.Pos[6]: 0; Char.FontScale[6]: 100%; Char._Unused6[6]: 0; Char.Size[6]: 12 пт; Char.DblUnderline[6]: FALSE; Char.Overline[6]: FALSE; Char.Strikethru[6]: FALSE; Char.Highlight[6]: FALSE; Char._Unused12[6]: FALSE; Char.DoubleStrikethrough[6]: FALSE; Char.RTLText[6]: FALSE; Char.UseVertical[6]: FALSE; Char.Letterspace[6]: 0 пт; Char.ColorTrans[6]: 0%; Char.AsianFont[6]: 0; Char.ComplexScriptFont[6]: 23; Char.LocalizeFont[6]: 0; Char.ComplexScriptSize[6]: -100%; Char.LangID[6]: 1049; 
-    Char.Font[7]: 23; Char.Color[7]: 0; Char.Style[7]: 0; Char.Case[7]: 0; Char.Pos[7]: 2; Char.FontScale[7]: 100%; Char._Unused6[7]: 0; Char.Size[7]: 12 пт; Char.DblUnderline[7]: FALSE; Char.Overline[7]: FALSE; Char.Strikethru[7]: FALSE; Char.Highlight[7]: FALSE; Char._Unused12[7]: FALSE; Char.DoubleStrikethrough[7]: FALSE; Char.RTLText[7]: FALSE; Char.UseVertical[7]: FALSE; Char.Letterspace[7]: 0 пт; Char.ColorTrans[7]: 0%; Char.AsianFont[7]: 0; Char.ComplexScriptFont[7]: 23; Char.LocalizeFont[7]: 0; Char.ComplexScriptSize[7]: -100%; Char.LangID[7]: 1049; 
-    Char.Font[8]: 23; Char.Color[8]: 0; Char.Style[8]: 0; Char.Case[8]: 0; Char.Pos[8]: 0; Char.FontScale[8]: 100%; Char._Unused6[8]: 0; Char.Size[8]: 12 пт; Char.DblUnderline[8]: FALSE; Char.Overline[8]: FALSE; Char.Strikethru[8]: FALSE; Char.Highlight[8]: FALSE; Char._Unused12[8]: FALSE; Char.DoubleStrikethrough[8]: FALSE; Char.RTLText[8]: FALSE; Char.UseVertical[8]: FALSE; Char.Letterspace[8]: 0 пт; Char.ColorTrans[8]: 0%; Char.AsianFont[8]: 0; Char.ComplexScriptFont[8]: 23; Char.LocalizeFont[8]: 0; Char.ComplexScriptSize[8]: -100%; Char.LangID[8]: 1049; 
-    Char.Font[9]: 23; Char.Color[9]: 0; Char.Style[9]: 0; Char.Case[9]: 0; Char.Pos[9]: 1; Char.FontScale[9]: 100%; Char._Unused6[9]: 0; Char.Size[9]: 12 пт; Char.DblUnderline[9]: FALSE; Char.Overline[9]: FALSE; Char.Strikethru[9]: FALSE; Char.Highlight[9]: FALSE; Char._Unused12[9]: FALSE; Char.DoubleStrikethrough[9]: FALSE; Char.RTLText[9]: FALSE; Char.UseVertical[9]: FALSE; Char.Letterspace[9]: 0 пт; Char.ColorTrans[9]: 0%; Char.AsianFont[9]: 0; Char.ComplexScriptFont[9]: 23; Char.LocalizeFont[9]: 0; Char.ComplexScriptSize[9]: -100%; Char.LangID[9]: 1049; 
-    Char.Font[10]: 23; Char.Color[10]: 0; Char.Style[10]: 0; Char.Case[10]: 0; Char.Pos[10]: 0; Char.FontScale[10]: 100%; Char._Unused6[10]: 0; Char.Size[10]: 12 пт; Char.DblUnderline[10]: FALSE; Char.Overline[10]: FALSE; Char.Strikethru[10]: FALSE; Char.Highlight[10]: FALSE; Char._Unused12[10]: FALSE; Char.DoubleStrikethrough[10]: FALSE; Char.RTLText[10]: FALSE; Char.UseVertical[10]: FALSE; Char.Letterspace[10]: 0 пт; Char.ColorTrans[10]: 0%; Char.AsianFont[10]: 0; Char.ComplexScriptFont[10]: 23; Char.LocalizeFont[10]: 0; Char.ComplexScriptSize[10]: -100%; Char.LangID[10]: 1049; 
-    Char.Font[11]: 23; Char.Color[11]: 0; Char.Style[11]: 0; Char.Case[11]: 0; Char.Pos[11]: 2; Char.FontScale[11]: 100%; Char._Unused6[11]: 0; Char.Size[11]: 12 пт; Char.DblUnderline[11]: FALSE; Char.Overline[11]: FALSE; Char.Strikethru[11]: FALSE; Char.Highlight[11]: FALSE; Char._Unused12[11]: FALSE; Char.DoubleStrikethrough[11]: FALSE; Char.RTLText[11]: FALSE; Char.UseVertical[11]: FALSE; Char.Letterspace[11]: 0 пт; Char.ColorTrans[11]: 0%; Char.AsianFont[11]: 0; Char.ComplexScriptFont[11]: 23; Char.LocalizeFont[11]: 0; Char.ComplexScriptSize[11]: -100%; Char.LangID[11]: 1049; 
-    Char.Font[12]: 23; Char.Color[12]: 0; Char.Style[12]: 0; Char.Case[12]: 0; Char.Pos[12]: 0; Char.FontScale[12]: 100%; Char._Unused6[12]: 0; Char.Size[12]: 12 пт; Char.DblUnderline[12]: FALSE; Char.Overline[12]: FALSE; Char.Strikethru[12]: FALSE; Char.Highlight[12]: FALSE; Char._Unused12[12]: FALSE; Char.DoubleStrikethrough[12]: FALSE; Char.RTLText[12]: FALSE; Char.UseVertical[12]: FALSE; Char.Letterspace[12]: 0 пт; Char.ColorTrans[12]: 0%; Char.AsianFont[12]: 0; Char.ComplexScriptFont[12]: 23; Char.LocalizeFont[12]: 0; Char.ComplexScriptSize[12]: -100%; Char.LangID[12]: 1049; 
-    Char.Font[13]: 23; Char.Color[13]: 0; Char.Style[13]: 0; Char.Case[13]: 0; Char.Pos[13]: 1; Char.FontScale[13]: 100%; Char._Unused6[13]: 0; Char.Size[13]: 12 пт; Char.DblUnderline[13]: FALSE; Char.Overline[13]: FALSE; Char.Strikethru[13]: FALSE; Char.Highlight[13]: FALSE; Char._Unused12[13]: FALSE; Char.DoubleStrikethrough[13]: FALSE; Char.RTLText[13]: FALSE; Char.UseVertical[13]: FALSE; Char.Letterspace[13]: 0 пт; Char.ColorTrans[13]: 0%; Char.AsianFont[13]: 0; Char.ComplexScriptFont[13]: 23; Char.LocalizeFont[13]: 0; Char.ComplexScriptSize[13]: -100%; Char.LangID[13]: 1049; 
-    Char.Font[14]: 23; Char.Color[14]: 0; Char.Style[14]: 0; Char.Case[14]: 0; Char.Pos[14]: 0; Char.FontScale[14]: 100%; Char._Unused6[14]: 0; Char.Size[14]: 12 пт; Char.DblUnderline[14]: FALSE; Char.Overline[14]: FALSE; Char.Strikethru[14]: FALSE; Char.Highlight[14]: FALSE; Char._Unused12[14]: FALSE; Char.DoubleStrikethrough[14]: FALSE; Char.RTLText[14]: FALSE; Char.UseVertical[14]: FALSE; Char.Letterspace[14]: 0 пт; Char.ColorTrans[14]: 0%; Char.AsianFont[14]: 0; Char.ComplexScriptFont[14]: 23; Char.LocalizeFont[14]: 0; Char.ComplexScriptSize[14]: -100%; Char.LangID[14]: 1049; 
-    Char.Font[15]: 23; Char.Color[15]: 0; Char.Style[15]: 17; Char.Case[15]: 0; Char.Pos[15]: 0; Char.FontScale[15]: 100%; Char._Unused6[15]: 0; Char.Size[15]: 18 пт; Char.DblUnderline[15]: FALSE; Char.Overline[15]: FALSE; Char.Strikethru[15]: FALSE; Char.Highlight[15]: FALSE; Char._Unused12[15]: FALSE; Char.DoubleStrikethrough[15]: FALSE; Char.RTLText[15]: FALSE; Char.UseVertical[15]: FALSE; Char.Letterspace[15]: 0 пт; Char.ColorTrans[15]: 0%; Char.AsianFont[15]: 0; Char.ComplexScriptFont[15]: 23; Char.LocalizeFont[15]: 0; Char.ComplexScriptSize[15]: -100%; Char.LangID[15]: 1049; 
-    Char.Font[16]: 23; Char.Color[16]: 0; Char.Style[16]: 0; Char.Case[16]: 0; Char.Pos[16]: 0; Char.FontScale[16]: 100%; Char._Unused6[16]: 0; Char.Size[16]: 12 пт; Char.DblUnderline[16]: FALSE; Char.Overline[16]: FALSE; Char.Strikethru[16]: FALSE; Char.Highlight[16]: FALSE; Char._Unused12[16]: FALSE; Char.DoubleStrikethrough[16]: FALSE; Char.RTLText[16]: FALSE; Char.UseVertical[16]: FALSE; Char.Letterspace[16]: 0 пт; Char.ColorTrans[16]: 0%; Char.AsianFont[16]: 0; Char.ComplexScriptFont[16]: 23; Char.LocalizeFont[16]: 0; Char.ComplexScriptSize[16]: -100%; Char.LangID[16]: 1049; 
-    Char.Font[17]: 23; Char.Color[17]: 0; Char.Style[17]: 0; Char.Case[17]: 0; Char.Pos[17]: 0; Char.FontScale[17]: 100%; Char._Unused6[17]: 0; Char.Size[17]: 12 пт; Char.DblUnderline[17]: FALSE; Char.Overline[17]: FALSE; Char.Strikethru[17]: FALSE; Char.Highlight[17]: FALSE; Char._Unused12[17]: FALSE; Char.DoubleStrikethrough[17]: FALSE; Char.RTLText[17]: FALSE; Char.UseVertical[17]: FALSE; Char.Letterspace[17]: 0 пт; Char.ColorTrans[17]: 0%; Char.AsianFont[17]: 0; Char.ComplexScriptFont[17]: 23; Char.LocalizeFont[17]: 0; Char.ComplexScriptSize[17]: -100%; Char.LangID[17]: 1033; 
-  Section: FirstComponent>>>
-    Geometry1.NoFill: FALSE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
-    Geometry1.X1: Width*0; Geometry1.Y1: Height*0; 
-    Geometry1.X2: Width*1; Geometry1.Y2: Height*0; 
-    Geometry1.X3: Width*1; Geometry1.Y3: Height*1; 
-    Geometry1.X4: Width*0; Geometry1.Y4: Height*1; 
-    Geometry1.X5: Geometry1.X1; Geometry1.Y5: Geometry1.Y1; 
-  Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 5 пт; Para.SpAfter: 5 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: 12 пт; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-    Para.IndFirst[2]: 0 мм; Para.IndLeft[2]: 0 мм; Para.IndRight[2]: 0 мм; Para.SpLine[2]: -120%; Para.SpBefore[2]: 0 пт; Para.SpAfter[2]: 0 пт; Para.HorzAlign[2]: 1; Para.Bullet[2]: 0; Para.BulletStr[2]: ""; Para.BulletFont[2]: 0; Para.LocalizeBulletFont[2]: 0; Para.BulletFontSize[2]: 12 пт; Para.TextPosAfterBullet[2]: 0 мм; Para.Flags[2]: 0; 
-    Para.IndFirst[3]: 0 мм; Para.IndLeft[3]: 0 мм; Para.IndRight[3]: 0 мм; Para.SpLine[3]: -120%; Para.SpBefore[3]: 0 пт; Para.SpAfter[3]: 0 пт; Para.HorzAlign[3]: 0; Para.Bullet[3]: 0; Para.BulletStr[3]: ""; Para.BulletFont[3]: 0; Para.LocalizeBulletFont[3]: 0; Para.BulletFontSize[3]: 12 пт; Para.TextPosAfterBullet[3]: 0 мм; Para.Flags[3]: 0; 
-    Para.IndFirst[4]: 0 мм; Para.IndLeft[4]: 0 мм; Para.IndRight[4]: 0 мм; Para.SpLine[4]: -120%; Para.SpBefore[4]: 0 пт; Para.SpAfter[4]: 0 пт; Para.HorzAlign[4]: 1; Para.Bullet[4]: 0; Para.BulletStr[4]: ""; Para.BulletFont[4]: 0; Para.LocalizeBulletFont[4]: 0; Para.BulletFontSize[4]: 12 пт; Para.TextPosAfterBullet[4]: 0 мм; Para.Flags[4]: 0; 
-    Para.IndFirst[5]: 0 мм; Para.IndLeft[5]: 0 мм; Para.IndRight[5]: 0 мм; Para.SpLine[5]: -120%; Para.SpBefore[5]: 0 пт; Para.SpAfter[5]: 0 пт; Para.HorzAlign[5]: 0; Para.Bullet[5]: 0; Para.BulletStr[5]: ""; Para.BulletFont[5]: 0; Para.LocalizeBulletFont[5]: 0; Para.BulletFontSize[5]: 12 пт; Para.TextPosAfterBullet[5]: 0 мм; Para.Flags[5]: 0; 
-    Para.IndFirst[6]: 0 мм; Para.IndLeft[6]: 0 мм; Para.IndRight[6]: 0 мм; Para.SpLine[6]: -120%; Para.SpBefore[6]: 5 пт; Para.SpAfter[6]: 5 пт; Para.HorzAlign[6]: 0; Para.Bullet[6]: 0; Para.BulletStr[6]: ""; Para.BulletFont[6]: 0; Para.LocalizeBulletFont[6]: 0; Para.BulletFontSize[6]: 12 пт; Para.TextPosAfterBullet[6]: 0 мм; Para.Flags[6]: 0; 
-    Para.IndFirst[7]: -6,35 мм; Para.IndLeft[7]: 12,7 мм; Para.IndRight[7]: 0 мм; Para.SpLine[7]: -120%; Para.SpBefore[7]: 0 пт; Para.SpAfter[7]: 0 пт; Para.HorzAlign[7]: 0; Para.Bullet[7]: 1; Para.BulletStr[7]: ""; Para.BulletFont[7]: 0; Para.LocalizeBulletFont[7]: 0; Para.BulletFontSize[7]: 12 пт; Para.TextPosAfterBullet[7]: 0 мм; Para.Flags[7]: 0; 
-    Para.IndFirst[8]: 0 мм; Para.IndLeft[8]: 0 мм; Para.IndRight[8]: 0 мм; Para.SpLine[8]: -120%; Para.SpBefore[8]: 5 пт; Para.SpAfter[8]: 5 пт; Para.HorzAlign[8]: 0; Para.Bullet[8]: 0; Para.BulletStr[8]: ""; Para.BulletFont[8]: 0; Para.LocalizeBulletFont[8]: 0; Para.BulletFontSize[8]: 12 пт; Para.TextPosAfterBullet[8]: 0 мм; Para.Flags[8]: 0; 
-  Section: Prop>>>
-    Prop.Width: 12,5; Prop.Width.Prompt: ""; Prop.Width.Label: ""; Prop.Width.Format: ""; Prop.Width.SortKey: ""; Prop.Width.Type: 2; Prop.Width.Invisible: FALSE; Prop.Width.Verify: FALSE; Prop.Width.LangID: 1049; Prop.Width.Calendar: 0; 
-    Prop.Height: 30; Prop.Height.Prompt: ""; Prop.Height.Label: ""; Prop.Height.Format: ""; Prop.Height.SortKey: ""; Prop.Height.Type: 2; Prop.Height.Invisible: FALSE; Prop.Height.Verify: FALSE; Prop.Height.LangID: 1049; Prop.Height.Calendar: 0; 
-    Prop.Square: Prop.Width*Prop.Height; Prop.Square.Prompt: ""; Prop.Square.Label: ""; Prop.Square.Format: ""; Prop.Square.SortKey: ""; Prop.Square.Type: 2; Prop.Square.Invisible: FALSE; Prop.Square.Verify: FALSE; Prop.Square.LangID: 1049; Prop.Square.Calendar: 0; 
-    Prop.txt: "1fggh"; Prop.txt.Prompt: ""; Prop.txt.Label: ""; Prop.txt.Format: ""; Prop.txt.SortKey: ""; Prop.txt.Type: 0; Prop.txt.Invisible: FALSE; Prop.txt.Verify: FALSE; Prop.txt.LangID: 1049; Prop.txt.Calendar: 0; 
-    Prop.Название: MASTERNAME(); Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
-    Prop.Perimeter: 2*(Prop.Width+Prop.Height); Prop.Perimeter.Prompt: ""; Prop.Perimeter.Label: ""; Prop.Perimeter.Format: ""; Prop.Perimeter.SortKey: ""; Prop.Perimeter.Type: 2; Prop.Perimeter.Invisible: FALSE; Prop.Perimeter.Verify: FALSE; Prop.Perimeter.LangID: 1049; Prop.Perimeter.Calendar: 0; 
-    Prop.A_ACCount: "3"; Prop.A_ACCount.Prompt: ""; Prop.A_ACCount.Label: ""; Prop.A_ACCount.Format: ""; Prop.A_ACCount.SortKey: ""; Prop.A_ACCount.Type: 0; Prop.A_ACCount.Invisible: FALSE; Prop.A_ACCount.Verify: FALSE; Prop.A_ACCount.LangID: 1049; Prop.A_ACCount.Calendar: 0; 
-    Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 10; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
-    Prop.A_StvolWHave: "2"; Prop.A_StvolWHave.Prompt: ""; Prop.A_StvolWHave.Label: ""; Prop.A_StvolWHave.Format: ""; Prop.A_StvolWHave.SortKey: ""; Prop.A_StvolWHave.Type: 0; Prop.A_StvolWHave.Invisible: FALSE; Prop.A_StvolWHave.Verify: FALSE; Prop.A_StvolWHave.LangID: 1049; Prop.A_StvolWHave.Calendar: 0; 
-    Prop.A_FireTime: "27.11.2020 12:30:00"; Prop.A_FireTime.Prompt: ""; Prop.A_FireTime.Label: ""; Prop.A_FireTime.Format: ""; Prop.A_FireTime.SortKey: ""; Prop.A_FireTime.Type: 0; Prop.A_FireTime.Invisible: FALSE; Prop.A_FireTime.Verify: FALSE; Prop.A_FireTime.LangID: 1049; Prop.A_FireTime.Calendar: 0; 
-    Prop.A_RSCHSTechincsHave: "4"; Prop.A_RSCHSTechincsHave.Prompt: ""; Prop.A_RSCHSTechincsHave.Label: ""; Prop.A_RSCHSTechincsHave.Format: ""; Prop.A_RSCHSTechincsHave.SortKey: ""; Prop.A_RSCHSTechincsHave.Type: 0; Prop.A_RSCHSTechincsHave.Invisible: FALSE; Prop.A_RSCHSTechincsHave.Verify: FALSE; Prop.A_RSCHSTechincsHave.LangID: 1049; Prop.A_RSCHSTechincsHave.Calendar: 0; 
-    Prop.A_MainPAHave: "3"; Prop.A_MainPAHave.Prompt: ""; Prop.A_MainPAHave.Label: ""; Prop.A_MainPAHave.Format: ""; Prop.A_MainPAHave.SortKey: ""; Prop.A_MainPAHave.Type: 0; Prop.A_MainPAHave.Invisible: FALSE; Prop.A_MainPAHave.Verify: FALSE; Prop.A_MainPAHave.LangID: 1049; Prop.A_MainPAHave.Calendar: 0; 
-    Prop.A_SpecialPAHave: "1"; Prop.A_SpecialPAHave.Prompt: ""; Prop.A_SpecialPAHave.Label: ""; Prop.A_SpecialPAHave.Format: ""; Prop.A_SpecialPAHave.SortKey: ""; Prop.A_SpecialPAHave.Type: 0; Prop.A_SpecialPAHave.Invisible: FALSE; Prop.A_SpecialPAHave.Verify: FALSE; Prop.A_SpecialPAHave.LangID: 1049; Prop.A_SpecialPAHave.Calendar: 0; 
-    Prop.A_ACNeed: "1"; Prop.A_ACNeed.Prompt: ""; Prop.A_ACNeed.Label: ""; Prop.A_ACNeed.Format: ""; Prop.A_ACNeed.SortKey: ""; Prop.A_ACNeed.Type: 0; Prop.A_ACNeed.Invisible: FALSE; Prop.A_ACNeed.Verify: FALSE; Prop.A_ACNeed.LangID: 1049; Prop.A_ACNeed.Calendar: 0; 
-    Prop.A_AGCount: "0"; Prop.A_AGCount.Prompt: ""; Prop.A_AGCount.Label: ""; Prop.A_AGCount.Format: ""; Prop.A_AGCount.SortKey: ""; Prop.A_AGCount.Type: 0; Prop.A_AGCount.Invisible: FALSE; Prop.A_AGCount.Verify: FALSE; Prop.A_AGCount.LangID: 1049; Prop.A_AGCount.Calendar: 0; 
-    Prop.A_SMPCount: "0"; Prop.A_SMPCount.Prompt: ""; Prop.A_SMPCount.Label: ""; Prop.A_SMPCount.Format: ""; Prop.A_SMPCount.SortKey: ""; Prop.A_SMPCount.Type: 0; Prop.A_SMPCount.Invisible: FALSE; Prop.A_SMPCount.Verify: FALSE; Prop.A_SMPCount.LangID: 1049; Prop.A_SMPCount.Calendar: 0; 
-  Section: Tab>>>
-    Tabs.X1: 0; 
-  Section: User>>>
-    User.IndexPers: 500; User.IndexPers.Prompt: ""; 
-    User.TextPattern: "<h1>$Название$</h1>
-<h2>Площадь фигуры равна:</h2>
-<p align='center'><b>S<sub>ф</sub>=a x b</b></p>
-<p>где S<sub>ф</sub> - площадь фигуры, мм<sup>2</sup>, a - длина фигуры, мм, b - ширина фигуры, мм</p>
-<p align='center'>S<sub>ф</sub>=$Height$ x $Width$ = $Square$ мм<sup>2</sup></p>
-<hr/>
-<h2>Периметр = $Perimeter$</h2>
-<h2>Данные полученные из анализатора:</h2>
-<ul>
-<li>Количество АЦ: $A_ACCount$</li>
-<li>Количество водяных стволов: $A_StvolWHave$</li>
-<li>Время возникновения: $A_FireTime$</li>
-<li>Специальных ПА: $A_SpecialPAHave$</li>
-</ul>
-"; User.TextPattern.Prompt: "Исходный код HTML"; 
-    User.DataChangeAction: GUARD(IF(Actions.ShowDataInShape.Checked=1;CALLTHIS("ShowDataInShape";"Формулы";User.TextPattern)+DEPENDSON(User.DataChangeAction.Prompt)+DEPENDSON(User.TextPattern);CALLTHIS("ClearShapeText";"Формулы"))); User.DataChangeAction.Prompt: Prop.Width&Prop.Height&Prop.Square&Prop.txt&Prop.Название&Prop.Perimeter&Prop.A_ACCount&Prop.TargetPageIndex&Prop.A_StvolWHave&Prop.A_FireTime; 
-  Section Object, row: visRowEvent>>>
-    
-  Section Object, row: visRowFill>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
-  Section Object, row: visRowGroup>>>
-    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
-  Section Object, row: visRowHelpCopyright>>>
-    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
-  Section Object, row: visRowImage>>>
-    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
-  Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
-  Section Object, row: visRowLock>>>
-    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
-  Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
-  Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
-  Section Object, row: visRowPrintProperties>>>
-    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
-  Section Object, row: visRowShapeLayout>>>
-    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
-  Section Object, row: visRowStyle>>>
-    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
-  Section Object, row: visRowText>>>
-    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-  Section Object, row: visRowXFormOut>>>
-    PinX: 17 м; PinY: 10,5 м; Width: 34 м; Height: 21 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Вариант 5
-  Section: Character>>>
-    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-  Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-  Section: Tab>>>
-    Tabs.X1: 0; 
-  Section Object, row: visRowEvent>>>
-    
-  Section Object, row: visRowFill>>>
-    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
-  Section Object, row: visRowGroup>>>
-    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
-  Section Object, row: visRowHelpCopyright>>>
-    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
-  Section Object, row: visRowImage>>>
-    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
-  Section Object, row: visRowLine>>>
-    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
-  Section Object, row: visRowLock>>>
-    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
-  Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
-  Section Object, row: visRowPageLayout>>>
-    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
-  Section Object, row: visRowPage>>>
-    PageWidth: 34 м; PageHeight: 28,4 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
-  Section Object, row: visRowPrintProperties>>>
-    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
-  Section Object, row: visRowShapeLayout>>>
-    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
-  Section Object, row: visRowStyle>>>
-    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
-  Section Object, row: visRowText>>>
-    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
-
-=>sheet: Вариант 4
   Section: Action>>>
     Actions.ShowData: "Редактировать исходный код"; Actions.ShowData._Unused1: ""; Actions.ShowData._Unused2: ""; Actions.ShowData.Action: CALLTHIS("ShowData";"Формулы";User.TextPattern); Actions.ShowData.Checked: 0; Actions.ShowData.Disabled: 0; Actions.ShowData.ReadOnly: FALSE; Actions.ShowData.Invisible: FALSE; Actions.ShowData.BeginGroup: FALSE; Actions.ShowData.TagName: ""; Actions.ShowData.ButtonFace: 1401; Actions.ShowData.SortKey: 20; 
     Actions.ShowDataInShape: "Отображать результат в фигуре"; Actions.ShowDataInShape._Unused1: ""; Actions.ShowDataInShape._Unused2: ""; Actions.ShowDataInShape.Action: SETF("Actions.ShowDataInShape.Checked";NOT(Actions.ShowDataInShape.Checked)); Actions.ShowDataInShape.Checked: 0; Actions.ShowDataInShape.Disabled: 0; Actions.ShowDataInShape.ReadOnly: FALSE; Actions.ShowDataInShape.Invisible: TRUE; Actions.ShowDataInShape.BeginGroup: FALSE; Actions.ShowDataInShape.TagName: ""; Actions.ShowDataInShape.ButtonFace: ""; Actions.ShowDataInShape.SortKey: 21; 
     Actions.AnalizedCellAdd: "Добавить анализируемую ячейку"; Actions.AnalizedCellAdd._Unused1: ""; Actions.AnalizedCellAdd._Unused2: ""; Actions.AnalizedCellAdd.Action: CALLTHIS("ShowAElemAddForm";"Формулы"); Actions.AnalizedCellAdd.Checked: 0; Actions.AnalizedCellAdd.Disabled: 0; Actions.AnalizedCellAdd.ReadOnly: FALSE; Actions.AnalizedCellAdd.Invisible: FALSE; Actions.AnalizedCellAdd.BeginGroup: TRUE; Actions.AnalizedCellAdd.TagName: ""; Actions.AnalizedCellAdd.ButtonFace: 2163; Actions.AnalizedCellAdd.SortKey: 30; 
     Actions.Refresh: "Обновить формулу"; Actions.Refresh._Unused1: ""; Actions.Refresh._Unused2: ""; Actions.Refresh.Action: CALLTHIS("ShowDataInShape";"Формулы";User.TextPattern); Actions.Refresh.Checked: 0; Actions.Refresh.Disabled: 0; Actions.Refresh.ReadOnly: FALSE; Actions.Refresh.Invisible: FALSE; Actions.Refresh.BeginGroup: FALSE; Actions.Refresh.TagName: ""; Actions.Refresh.ButtonFace: 1977; Actions.Refresh.SortKey: 10; 
   Section: Character>>>
-    Char.Font: 23; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 23; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
-    Char.Font[2]: 23; Char.Color[2]: 0; Char.Style[2]: 17; Char.Case[2]: 0; Char.Pos[2]: 0; Char.FontScale[2]: 100%; Char._Unused6[2]: 0; Char.Size[2]: 24 пт; Char.DblUnderline[2]: FALSE; Char.Overline[2]: FALSE; Char.Strikethru[2]: FALSE; Char.Highlight[2]: FALSE; Char._Unused12[2]: FALSE; Char.DoubleStrikethrough[2]: FALSE; Char.RTLText[2]: FALSE; Char.UseVertical[2]: FALSE; Char.Letterspace[2]: 0 пт; Char.ColorTrans[2]: 0%; Char.AsianFont[2]: 0; Char.ComplexScriptFont[2]: 23; Char.LocalizeFont[2]: 0; Char.ComplexScriptSize[2]: -100%; Char.LangID[2]: 1049; 
-    Char.Font[3]: 23; Char.Color[3]: 0; Char.Style[3]: 17; Char.Case[3]: 0; Char.Pos[3]: 0; Char.FontScale[3]: 100%; Char._Unused6[3]: 0; Char.Size[3]: 18 пт; Char.DblUnderline[3]: FALSE; Char.Overline[3]: FALSE; Char.Strikethru[3]: FALSE; Char.Highlight[3]: FALSE; Char._Unused12[3]: FALSE; Char.DoubleStrikethrough[3]: FALSE; Char.RTLText[3]: FALSE; Char.UseVertical[3]: FALSE; Char.Letterspace[3]: 0 пт; Char.ColorTrans[3]: 0%; Char.AsianFont[3]: 0; Char.ComplexScriptFont[3]: 23; Char.LocalizeFont[3]: 0; Char.ComplexScriptSize[3]: -100%; Char.LangID[3]: 1049; 
-    Char.Font[4]: 23; Char.Color[4]: 0; Char.Style[4]: 17; Char.Case[4]: 0; Char.Pos[4]: 0; Char.FontScale[4]: 100%; Char._Unused6[4]: 0; Char.Size[4]: 12 пт; Char.DblUnderline[4]: FALSE; Char.Overline[4]: FALSE; Char.Strikethru[4]: FALSE; Char.Highlight[4]: FALSE; Char._Unused12[4]: FALSE; Char.DoubleStrikethrough[4]: FALSE; Char.RTLText[4]: FALSE; Char.UseVertical[4]: FALSE; Char.Letterspace[4]: 0 пт; Char.ColorTrans[4]: 0%; Char.AsianFont[4]: 0; Char.ComplexScriptFont[4]: 23; Char.LocalizeFont[4]: 0; Char.ComplexScriptSize[4]: -100%; Char.LangID[4]: 1049; 
-    Char.Font[5]: 23; Char.Color[5]: 0; Char.Style[5]: 17; Char.Case[5]: 0; Char.Pos[5]: 2; Char.FontScale[5]: 100%; Char._Unused6[5]: 0; Char.Size[5]: 12 пт; Char.DblUnderline[5]: FALSE; Char.Overline[5]: FALSE; Char.Strikethru[5]: FALSE; Char.Highlight[5]: FALSE; Char._Unused12[5]: FALSE; Char.DoubleStrikethrough[5]: FALSE; Char.RTLText[5]: FALSE; Char.UseVertical[5]: FALSE; Char.Letterspace[5]: 0 пт; Char.ColorTrans[5]: 0%; Char.AsianFont[5]: 0; Char.ComplexScriptFont[5]: 23; Char.LocalizeFont[5]: 0; Char.ComplexScriptSize[5]: -100%; Char.LangID[5]: 1049; 
-    Char.Font[6]: 23; Char.Color[6]: 0; Char.Style[6]: 17; Char.Case[6]: 0; Char.Pos[6]: 0; Char.FontScale[6]: 100%; Char._Unused6[6]: 0; Char.Size[6]: 12 пт; Char.DblUnderline[6]: FALSE; Char.Overline[6]: FALSE; Char.Strikethru[6]: FALSE; Char.Highlight[6]: FALSE; Char._Unused12[6]: FALSE; Char.DoubleStrikethrough[6]: FALSE; Char.RTLText[6]: FALSE; Char.UseVertical[6]: FALSE; Char.Letterspace[6]: 0 пт; Char.ColorTrans[6]: 0%; Char.AsianFont[6]: 0; Char.ComplexScriptFont[6]: 23; Char.LocalizeFont[6]: 0; Char.ComplexScriptSize[6]: -100%; Char.LangID[6]: 1049; 
-    Char.Font[7]: 23; Char.Color[7]: 0; Char.Style[7]: 0; Char.Case[7]: 0; Char.Pos[7]: 0; Char.FontScale[7]: 100%; Char._Unused6[7]: 0; Char.Size[7]: 12 пт; Char.DblUnderline[7]: FALSE; Char.Overline[7]: FALSE; Char.Strikethru[7]: FALSE; Char.Highlight[7]: FALSE; Char._Unused12[7]: FALSE; Char.DoubleStrikethrough[7]: FALSE; Char.RTLText[7]: FALSE; Char.UseVertical[7]: FALSE; Char.Letterspace[7]: 0 пт; Char.ColorTrans[7]: 0%; Char.AsianFont[7]: 0; Char.ComplexScriptFont[7]: 23; Char.LocalizeFont[7]: 0; Char.ComplexScriptSize[7]: -100%; Char.LangID[7]: 1049; 
-    Char.Font[8]: 23; Char.Color[8]: 0; Char.Style[8]: 0; Char.Case[8]: 0; Char.Pos[8]: 2; Char.FontScale[8]: 100%; Char._Unused6[8]: 0; Char.Size[8]: 12 пт; Char.DblUnderline[8]: FALSE; Char.Overline[8]: FALSE; Char.Strikethru[8]: FALSE; Char.Highlight[8]: FALSE; Char._Unused12[8]: FALSE; Char.DoubleStrikethrough[8]: FALSE; Char.RTLText[8]: FALSE; Char.UseVertical[8]: FALSE; Char.Letterspace[8]: 0 пт; Char.ColorTrans[8]: 0%; Char.AsianFont[8]: 0; Char.ComplexScriptFont[8]: 23; Char.LocalizeFont[8]: 0; Char.ComplexScriptSize[8]: -100%; Char.LangID[8]: 1049; 
-    Char.Font[9]: 23; Char.Color[9]: 0; Char.Style[9]: 0; Char.Case[9]: 0; Char.Pos[9]: 0; Char.FontScale[9]: 100%; Char._Unused6[9]: 0; Char.Size[9]: 12 пт; Char.DblUnderline[9]: FALSE; Char.Overline[9]: FALSE; Char.Strikethru[9]: FALSE; Char.Highlight[9]: FALSE; Char._Unused12[9]: FALSE; Char.DoubleStrikethrough[9]: FALSE; Char.RTLText[9]: FALSE; Char.UseVertical[9]: FALSE; Char.Letterspace[9]: 0 пт; Char.ColorTrans[9]: 0%; Char.AsianFont[9]: 0; Char.ComplexScriptFont[9]: 23; Char.LocalizeFont[9]: 0; Char.ComplexScriptSize[9]: -100%; Char.LangID[9]: 1049; 
-    Char.Font[10]: 23; Char.Color[10]: 0; Char.Style[10]: 0; Char.Case[10]: 0; Char.Pos[10]: 1; Char.FontScale[10]: 100%; Char._Unused6[10]: 0; Char.Size[10]: 12 пт; Char.DblUnderline[10]: FALSE; Char.Overline[10]: FALSE; Char.Strikethru[10]: FALSE; Char.Highlight[10]: FALSE; Char._Unused12[10]: FALSE; Char.DoubleStrikethrough[10]: FALSE; Char.RTLText[10]: FALSE; Char.UseVertical[10]: FALSE; Char.Letterspace[10]: 0 пт; Char.ColorTrans[10]: 0%; Char.AsianFont[10]: 0; Char.ComplexScriptFont[10]: 23; Char.LocalizeFont[10]: 0; Char.ComplexScriptSize[10]: -100%; Char.LangID[10]: 1049; 
-    Char.Font[11]: 23; Char.Color[11]: 0; Char.Style[11]: 0; Char.Case[11]: 0; Char.Pos[11]: 0; Char.FontScale[11]: 100%; Char._Unused6[11]: 0; Char.Size[11]: 12 пт; Char.DblUnderline[11]: FALSE; Char.Overline[11]: FALSE; Char.Strikethru[11]: FALSE; Char.Highlight[11]: FALSE; Char._Unused12[11]: FALSE; Char.DoubleStrikethrough[11]: FALSE; Char.RTLText[11]: FALSE; Char.UseVertical[11]: FALSE; Char.Letterspace[11]: 0 пт; Char.ColorTrans[11]: 0%; Char.AsianFont[11]: 0; Char.ComplexScriptFont[11]: 23; Char.LocalizeFont[11]: 0; Char.ComplexScriptSize[11]: -100%; Char.LangID[11]: 1049; 
-    Char.Font[12]: 23; Char.Color[12]: 0; Char.Style[12]: 0; Char.Case[12]: 0; Char.Pos[12]: 2; Char.FontScale[12]: 100%; Char._Unused6[12]: 0; Char.Size[12]: 12 пт; Char.DblUnderline[12]: FALSE; Char.Overline[12]: FALSE; Char.Strikethru[12]: FALSE; Char.Highlight[12]: FALSE; Char._Unused12[12]: FALSE; Char.DoubleStrikethrough[12]: FALSE; Char.RTLText[12]: FALSE; Char.UseVertical[12]: FALSE; Char.Letterspace[12]: 0 пт; Char.ColorTrans[12]: 0%; Char.AsianFont[12]: 0; Char.ComplexScriptFont[12]: 23; Char.LocalizeFont[12]: 0; Char.ComplexScriptSize[12]: -100%; Char.LangID[12]: 1049; 
+    Char.Font: 23; Char.Color: 0; Char.Style: 17; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 24 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 23; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+    Char.Font[2]: 23; Char.Color[2]: 0; Char.Style[2]: 17; Char.Case[2]: 0; Char.Pos[2]: 0; Char.FontScale[2]: 100%; Char._Unused6[2]: 0; Char.Size[2]: 18 пт; Char.DblUnderline[2]: FALSE; Char.Overline[2]: FALSE; Char.Strikethru[2]: FALSE; Char.Highlight[2]: FALSE; Char._Unused12[2]: FALSE; Char.DoubleStrikethrough[2]: FALSE; Char.RTLText[2]: FALSE; Char.UseVertical[2]: FALSE; Char.Letterspace[2]: 0 пт; Char.ColorTrans[2]: 0%; Char.AsianFont[2]: 0; Char.ComplexScriptFont[2]: 23; Char.LocalizeFont[2]: 0; Char.ComplexScriptSize[2]: -100%; Char.LangID[2]: 1049; 
+    Char.Font[3]: 23; Char.Color[3]: 0; Char.Style[3]: 17; Char.Case[3]: 0; Char.Pos[3]: 0; Char.FontScale[3]: 100%; Char._Unused6[3]: 0; Char.Size[3]: 12 пт; Char.DblUnderline[3]: FALSE; Char.Overline[3]: FALSE; Char.Strikethru[3]: FALSE; Char.Highlight[3]: FALSE; Char._Unused12[3]: FALSE; Char.DoubleStrikethrough[3]: FALSE; Char.RTLText[3]: FALSE; Char.UseVertical[3]: FALSE; Char.Letterspace[3]: 0 пт; Char.ColorTrans[3]: 0%; Char.AsianFont[3]: 0; Char.ComplexScriptFont[3]: 23; Char.LocalizeFont[3]: 0; Char.ComplexScriptSize[3]: -100%; Char.LangID[3]: 1049; 
+    Char.Font[4]: 60; Char.Color[4]: 0; Char.Style[4]: 0; Char.Case[4]: 0; Char.Pos[4]: 0; Char.FontScale[4]: 100%; Char._Unused6[4]: 0; Char.Size[4]: 10 пт; Char.DblUnderline[4]: FALSE; Char.Overline[4]: FALSE; Char.Strikethru[4]: FALSE; Char.Highlight[4]: FALSE; Char._Unused12[4]: FALSE; Char.DoubleStrikethrough[4]: FALSE; Char.RTLText[4]: FALSE; Char.UseVertical[4]: FALSE; Char.Letterspace[4]: 0 пт; Char.ColorTrans[4]: 0%; Char.AsianFont[4]: 0; Char.ComplexScriptFont[4]: 60; Char.LocalizeFont[4]: 0; Char.ComplexScriptSize[4]: -100%; Char.LangID[4]: 1049; 
+    Char.Font[5]: 23; Char.Color[5]: 0; Char.Style[5]: 17; Char.Case[5]: 0; Char.Pos[5]: 0; Char.FontScale[5]: 100%; Char._Unused6[5]: 0; Char.Size[5]: 24 пт; Char.DblUnderline[5]: FALSE; Char.Overline[5]: FALSE; Char.Strikethru[5]: FALSE; Char.Highlight[5]: FALSE; Char._Unused12[5]: FALSE; Char.DoubleStrikethrough[5]: FALSE; Char.RTLText[5]: FALSE; Char.UseVertical[5]: FALSE; Char.Letterspace[5]: 0 пт; Char.ColorTrans[5]: 0%; Char.AsianFont[5]: 0; Char.ComplexScriptFont[5]: 23; Char.LocalizeFont[5]: 0; Char.ComplexScriptSize[5]: -100%; Char.LangID[5]: 1049; 
+    Char.Font[6]: 23; Char.Color[6]: 0; Char.Style[6]: 17; Char.Case[6]: 0; Char.Pos[6]: 0; Char.FontScale[6]: 100%; Char._Unused6[6]: 0; Char.Size[6]: 18 пт; Char.DblUnderline[6]: FALSE; Char.Overline[6]: FALSE; Char.Strikethru[6]: FALSE; Char.Highlight[6]: FALSE; Char._Unused12[6]: FALSE; Char.DoubleStrikethrough[6]: FALSE; Char.RTLText[6]: FALSE; Char.UseVertical[6]: FALSE; Char.Letterspace[6]: 0 пт; Char.ColorTrans[6]: 0%; Char.AsianFont[6]: 0; Char.ComplexScriptFont[6]: 23; Char.LocalizeFont[6]: 0; Char.ComplexScriptSize[6]: -100%; Char.LangID[6]: 1049; 
+    Char.Font[7]: 23; Char.Color[7]: 0; Char.Style[7]: 17; Char.Case[7]: 0; Char.Pos[7]: 0; Char.FontScale[7]: 100%; Char._Unused6[7]: 0; Char.Size[7]: 14 пт; Char.DblUnderline[7]: FALSE; Char.Overline[7]: FALSE; Char.Strikethru[7]: FALSE; Char.Highlight[7]: FALSE; Char._Unused12[7]: FALSE; Char.DoubleStrikethrough[7]: FALSE; Char.RTLText[7]: FALSE; Char.UseVertical[7]: FALSE; Char.Letterspace[7]: 0 пт; Char.ColorTrans[7]: 0%; Char.AsianFont[7]: 0; Char.ComplexScriptFont[7]: 23; Char.LocalizeFont[7]: 0; Char.ComplexScriptSize[7]: -100%; Char.LangID[7]: 1049; 
+    Char.Font[8]: 23; Char.Color[8]: 0; Char.Style[8]: 17; Char.Case[8]: 0; Char.Pos[8]: 0; Char.FontScale[8]: 100%; Char._Unused6[8]: 0; Char.Size[8]: 12 пт; Char.DblUnderline[8]: FALSE; Char.Overline[8]: FALSE; Char.Strikethru[8]: FALSE; Char.Highlight[8]: FALSE; Char._Unused12[8]: FALSE; Char.DoubleStrikethrough[8]: FALSE; Char.RTLText[8]: FALSE; Char.UseVertical[8]: FALSE; Char.Letterspace[8]: 0 пт; Char.ColorTrans[8]: 0%; Char.AsianFont[8]: 0; Char.ComplexScriptFont[8]: 23; Char.LocalizeFont[8]: 0; Char.ComplexScriptSize[8]: -100%; Char.LangID[8]: 1049; 
+    Char.Font[9]: 23; Char.Color[9]: 0; Char.Style[9]: 17; Char.Case[9]: 0; Char.Pos[9]: 0; Char.FontScale[9]: 100%; Char._Unused6[9]: 0; Char.Size[9]: 18 пт; Char.DblUnderline[9]: FALSE; Char.Overline[9]: FALSE; Char.Strikethru[9]: FALSE; Char.Highlight[9]: FALSE; Char._Unused12[9]: FALSE; Char.DoubleStrikethrough[9]: FALSE; Char.RTLText[9]: FALSE; Char.UseVertical[9]: FALSE; Char.Letterspace[9]: 0 пт; Char.ColorTrans[9]: 0%; Char.AsianFont[9]: 0; Char.ComplexScriptFont[9]: 23; Char.LocalizeFont[9]: 0; Char.ComplexScriptSize[9]: -100%; Char.LangID[9]: 1049; 
+    Char.Font[10]: 23; Char.Color[10]: 0; Char.Style[10]: 17; Char.Case[10]: 0; Char.Pos[10]: 0; Char.FontScale[10]: 100%; Char._Unused6[10]: 0; Char.Size[10]: 12 пт; Char.DblUnderline[10]: FALSE; Char.Overline[10]: FALSE; Char.Strikethru[10]: FALSE; Char.Highlight[10]: FALSE; Char._Unused12[10]: FALSE; Char.DoubleStrikethrough[10]: FALSE; Char.RTLText[10]: FALSE; Char.UseVertical[10]: FALSE; Char.Letterspace[10]: 0 пт; Char.ColorTrans[10]: 0%; Char.AsianFont[10]: 0; Char.ComplexScriptFont[10]: 23; Char.LocalizeFont[10]: 0; Char.ComplexScriptSize[10]: -100%; Char.LangID[10]: 1049; 
+    Char.Font[11]: 60; Char.Color[11]: 0; Char.Style[11]: 0; Char.Case[11]: 0; Char.Pos[11]: 0; Char.FontScale[11]: 100%; Char._Unused6[11]: 0; Char.Size[11]: 10 пт; Char.DblUnderline[11]: FALSE; Char.Overline[11]: FALSE; Char.Strikethru[11]: FALSE; Char.Highlight[11]: FALSE; Char._Unused12[11]: FALSE; Char.DoubleStrikethrough[11]: FALSE; Char.RTLText[11]: FALSE; Char.UseVertical[11]: FALSE; Char.Letterspace[11]: 0 пт; Char.ColorTrans[11]: 0%; Char.AsianFont[11]: 0; Char.ComplexScriptFont[11]: 60; Char.LocalizeFont[11]: 0; Char.ComplexScriptSize[11]: -100%; Char.LangID[11]: 1049; 
+    Char.Font[12]: 23; Char.Color[12]: 0; Char.Style[12]: 17; Char.Case[12]: 0; Char.Pos[12]: 0; Char.FontScale[12]: 100%; Char._Unused6[12]: 0; Char.Size[12]: 12 пт; Char.DblUnderline[12]: FALSE; Char.Overline[12]: FALSE; Char.Strikethru[12]: FALSE; Char.Highlight[12]: FALSE; Char._Unused12[12]: FALSE; Char.DoubleStrikethrough[12]: FALSE; Char.RTLText[12]: FALSE; Char.UseVertical[12]: FALSE; Char.Letterspace[12]: 0 пт; Char.ColorTrans[12]: 0%; Char.AsianFont[12]: 0; Char.ComplexScriptFont[12]: 23; Char.LocalizeFont[12]: 0; Char.ComplexScriptSize[12]: -100%; Char.LangID[12]: 1049; 
     Char.Font[13]: 23; Char.Color[13]: 0; Char.Style[13]: 0; Char.Case[13]: 0; Char.Pos[13]: 0; Char.FontScale[13]: 100%; Char._Unused6[13]: 0; Char.Size[13]: 12 пт; Char.DblUnderline[13]: FALSE; Char.Overline[13]: FALSE; Char.Strikethru[13]: FALSE; Char.Highlight[13]: FALSE; Char._Unused12[13]: FALSE; Char.DoubleStrikethrough[13]: FALSE; Char.RTLText[13]: FALSE; Char.UseVertical[13]: FALSE; Char.Letterspace[13]: 0 пт; Char.ColorTrans[13]: 0%; Char.AsianFont[13]: 0; Char.ComplexScriptFont[13]: 23; Char.LocalizeFont[13]: 0; Char.ComplexScriptSize[13]: -100%; Char.LangID[13]: 1049; 
-    Char.Font[14]: 23; Char.Color[14]: 0; Char.Style[14]: 0; Char.Case[14]: 0; Char.Pos[14]: 1; Char.FontScale[14]: 100%; Char._Unused6[14]: 0; Char.Size[14]: 12 пт; Char.DblUnderline[14]: FALSE; Char.Overline[14]: FALSE; Char.Strikethru[14]: FALSE; Char.Highlight[14]: FALSE; Char._Unused12[14]: FALSE; Char.DoubleStrikethrough[14]: FALSE; Char.RTLText[14]: FALSE; Char.UseVertical[14]: FALSE; Char.Letterspace[14]: 0 пт; Char.ColorTrans[14]: 0%; Char.AsianFont[14]: 0; Char.ComplexScriptFont[14]: 23; Char.LocalizeFont[14]: 0; Char.ComplexScriptSize[14]: -100%; Char.LangID[14]: 1049; 
+    Char.Font[14]: 23; Char.Color[14]: 0; Char.Style[14]: 34; Char.Case[14]: 0; Char.Pos[14]: 0; Char.FontScale[14]: 100%; Char._Unused6[14]: 0; Char.Size[14]: 12 пт; Char.DblUnderline[14]: FALSE; Char.Overline[14]: FALSE; Char.Strikethru[14]: FALSE; Char.Highlight[14]: FALSE; Char._Unused12[14]: FALSE; Char.DoubleStrikethrough[14]: FALSE; Char.RTLText[14]: FALSE; Char.UseVertical[14]: FALSE; Char.Letterspace[14]: 0 пт; Char.ColorTrans[14]: 0%; Char.AsianFont[14]: 0; Char.ComplexScriptFont[14]: 23; Char.LocalizeFont[14]: 0; Char.ComplexScriptSize[14]: -100%; Char.LangID[14]: 1049; 
     Char.Font[15]: 23; Char.Color[15]: 0; Char.Style[15]: 0; Char.Case[15]: 0; Char.Pos[15]: 0; Char.FontScale[15]: 100%; Char._Unused6[15]: 0; Char.Size[15]: 12 пт; Char.DblUnderline[15]: FALSE; Char.Overline[15]: FALSE; Char.Strikethru[15]: FALSE; Char.Highlight[15]: FALSE; Char._Unused12[15]: FALSE; Char.DoubleStrikethrough[15]: FALSE; Char.RTLText[15]: FALSE; Char.UseVertical[15]: FALSE; Char.Letterspace[15]: 0 пт; Char.ColorTrans[15]: 0%; Char.AsianFont[15]: 0; Char.ComplexScriptFont[15]: 23; Char.LocalizeFont[15]: 0; Char.ComplexScriptSize[15]: -100%; Char.LangID[15]: 1049; 
-    Char.Font[16]: 23; Char.Color[16]: 0; Char.Style[16]: 17; Char.Case[16]: 0; Char.Pos[16]: 0; Char.FontScale[16]: 100%; Char._Unused6[16]: 0; Char.Size[16]: 18 пт; Char.DblUnderline[16]: FALSE; Char.Overline[16]: FALSE; Char.Strikethru[16]: FALSE; Char.Highlight[16]: FALSE; Char._Unused12[16]: FALSE; Char.DoubleStrikethrough[16]: FALSE; Char.RTLText[16]: FALSE; Char.UseVertical[16]: FALSE; Char.Letterspace[16]: 0 пт; Char.ColorTrans[16]: 0%; Char.AsianFont[16]: 0; Char.ComplexScriptFont[16]: 23; Char.LocalizeFont[16]: 0; Char.ComplexScriptSize[16]: -100%; Char.LangID[16]: 1049; 
+    Char.Font[16]: 23; Char.Color[16]: 0; Char.Style[16]: 4; Char.Case[16]: 0; Char.Pos[16]: 0; Char.FontScale[16]: 100%; Char._Unused6[16]: 0; Char.Size[16]: 12 пт; Char.DblUnderline[16]: FALSE; Char.Overline[16]: FALSE; Char.Strikethru[16]: FALSE; Char.Highlight[16]: FALSE; Char._Unused12[16]: FALSE; Char.DoubleStrikethrough[16]: FALSE; Char.RTLText[16]: FALSE; Char.UseVertical[16]: FALSE; Char.Letterspace[16]: 0 пт; Char.ColorTrans[16]: 0%; Char.AsianFont[16]: 0; Char.ComplexScriptFont[16]: 23; Char.LocalizeFont[16]: 0; Char.ComplexScriptSize[16]: -100%; Char.LangID[16]: 1049; 
     Char.Font[17]: 23; Char.Color[17]: 0; Char.Style[17]: 0; Char.Case[17]: 0; Char.Pos[17]: 0; Char.FontScale[17]: 100%; Char._Unused6[17]: 0; Char.Size[17]: 12 пт; Char.DblUnderline[17]: FALSE; Char.Overline[17]: FALSE; Char.Strikethru[17]: FALSE; Char.Highlight[17]: FALSE; Char._Unused12[17]: FALSE; Char.DoubleStrikethrough[17]: FALSE; Char.RTLText[17]: FALSE; Char.UseVertical[17]: FALSE; Char.Letterspace[17]: 0 пт; Char.ColorTrans[17]: 0%; Char.AsianFont[17]: 0; Char.ComplexScriptFont[17]: 23; Char.LocalizeFont[17]: 0; Char.ComplexScriptSize[17]: -100%; Char.LangID[17]: 1049; 
-    Char.Font[18]: 23; Char.Color[18]: 0; Char.Style[18]: 17; Char.Case[18]: 0; Char.Pos[18]: 0; Char.FontScale[18]: 100%; Char._Unused6[18]: 0; Char.Size[18]: 24 пт; Char.DblUnderline[18]: FALSE; Char.Overline[18]: FALSE; Char.Strikethru[18]: FALSE; Char.Highlight[18]: FALSE; Char._Unused12[18]: FALSE; Char.DoubleStrikethrough[18]: FALSE; Char.RTLText[18]: FALSE; Char.UseVertical[18]: FALSE; Char.Letterspace[18]: 0 пт; Char.ColorTrans[18]: 0%; Char.AsianFont[18]: 0; Char.ComplexScriptFont[18]: 23; Char.LocalizeFont[18]: 0; Char.ComplexScriptSize[18]: -100%; Char.LangID[18]: 1049; 
+    Char.Font[18]: 23; Char.Color[18]: 0; Char.Style[18]: 0; Char.Case[18]: 0; Char.Pos[18]: 2; Char.FontScale[18]: 100%; Char._Unused6[18]: 0; Char.Size[18]: 12 пт; Char.DblUnderline[18]: FALSE; Char.Overline[18]: FALSE; Char.Strikethru[18]: FALSE; Char.Highlight[18]: FALSE; Char._Unused12[18]: FALSE; Char.DoubleStrikethrough[18]: FALSE; Char.RTLText[18]: FALSE; Char.UseVertical[18]: FALSE; Char.Letterspace[18]: 0 пт; Char.ColorTrans[18]: 0%; Char.AsianFont[18]: 0; Char.ComplexScriptFont[18]: 23; Char.LocalizeFont[18]: 0; Char.ComplexScriptSize[18]: -100%; Char.LangID[18]: 1049; 
     Char.Font[19]: 23; Char.Color[19]: 0; Char.Style[19]: 0; Char.Case[19]: 0; Char.Pos[19]: 0; Char.FontScale[19]: 100%; Char._Unused6[19]: 0; Char.Size[19]: 12 пт; Char.DblUnderline[19]: FALSE; Char.Overline[19]: FALSE; Char.Strikethru[19]: FALSE; Char.Highlight[19]: FALSE; Char._Unused12[19]: FALSE; Char.DoubleStrikethrough[19]: FALSE; Char.RTLText[19]: FALSE; Char.UseVertical[19]: FALSE; Char.Letterspace[19]: 0 пт; Char.ColorTrans[19]: 0%; Char.AsianFont[19]: 0; Char.ComplexScriptFont[19]: 23; Char.LocalizeFont[19]: 0; Char.ComplexScriptSize[19]: -100%; Char.LangID[19]: 1049; 
-    Char.Font[20]: 23; Char.Color[20]: 0; Char.Style[20]: 0; Char.Case[20]: 0; Char.Pos[20]: 0; Char.FontScale[20]: 100%; Char._Unused6[20]: 0; Char.Size[20]: 12 пт; Char.DblUnderline[20]: FALSE; Char.Overline[20]: FALSE; Char.Strikethru[20]: FALSE; Char.Highlight[20]: FALSE; Char._Unused12[20]: FALSE; Char.DoubleStrikethrough[20]: FALSE; Char.RTLText[20]: FALSE; Char.UseVertical[20]: FALSE; Char.Letterspace[20]: 0 пт; Char.ColorTrans[20]: 0%; Char.AsianFont[20]: 0; Char.ComplexScriptFont[20]: 23; Char.LocalizeFont[20]: 0; Char.ComplexScriptSize[20]: -100%; Char.LangID[20]: 1033; 
+    Char.Font[20]: 23; Char.Color[20]: 0; Char.Style[20]: 0; Char.Case[20]: 0; Char.Pos[20]: 1; Char.FontScale[20]: 100%; Char._Unused6[20]: 0; Char.Size[20]: 12 пт; Char.DblUnderline[20]: FALSE; Char.Overline[20]: FALSE; Char.Strikethru[20]: FALSE; Char.Highlight[20]: FALSE; Char._Unused12[20]: FALSE; Char.DoubleStrikethrough[20]: FALSE; Char.RTLText[20]: FALSE; Char.UseVertical[20]: FALSE; Char.Letterspace[20]: 0 пт; Char.ColorTrans[20]: 0%; Char.AsianFont[20]: 0; Char.ComplexScriptFont[20]: 23; Char.LocalizeFont[20]: 0; Char.ComplexScriptSize[20]: -100%; Char.LangID[20]: 1049; 
+    Char.Font[21]: 23; Char.Color[21]: 0; Char.Style[21]: 0; Char.Case[21]: 0; Char.Pos[21]: 0; Char.FontScale[21]: 100%; Char._Unused6[21]: 0; Char.Size[21]: 12 пт; Char.DblUnderline[21]: FALSE; Char.Overline[21]: FALSE; Char.Strikethru[21]: FALSE; Char.Highlight[21]: FALSE; Char._Unused12[21]: FALSE; Char.DoubleStrikethrough[21]: FALSE; Char.RTLText[21]: FALSE; Char.UseVertical[21]: FALSE; Char.Letterspace[21]: 0 пт; Char.ColorTrans[21]: 0%; Char.AsianFont[21]: 0; Char.ComplexScriptFont[21]: 23; Char.LocalizeFont[21]: 0; Char.ComplexScriptSize[21]: -100%; Char.LangID[21]: 1049; 
+    Char.Font[22]: 23; Char.Color[22]: 0; Char.Style[22]: 17; Char.Case[22]: 0; Char.Pos[22]: 0; Char.FontScale[22]: 100%; Char._Unused6[22]: 0; Char.Size[22]: 18 пт; Char.DblUnderline[22]: FALSE; Char.Overline[22]: FALSE; Char.Strikethru[22]: FALSE; Char.Highlight[22]: FALSE; Char._Unused12[22]: FALSE; Char.DoubleStrikethrough[22]: FALSE; Char.RTLText[22]: FALSE; Char.UseVertical[22]: FALSE; Char.Letterspace[22]: 0 пт; Char.ColorTrans[22]: 0%; Char.AsianFont[22]: 0; Char.ComplexScriptFont[22]: 23; Char.LocalizeFont[22]: 0; Char.ComplexScriptSize[22]: -100%; Char.LangID[22]: 1049; 
+    Char.Font[23]: 23; Char.Color[23]: 0; Char.Style[23]: 17; Char.Case[23]: 0; Char.Pos[23]: 0; Char.FontScale[23]: 100%; Char._Unused6[23]: 0; Char.Size[23]: 12 пт; Char.DblUnderline[23]: FALSE; Char.Overline[23]: FALSE; Char.Strikethru[23]: FALSE; Char.Highlight[23]: FALSE; Char._Unused12[23]: FALSE; Char.DoubleStrikethrough[23]: FALSE; Char.RTLText[23]: FALSE; Char.UseVertical[23]: FALSE; Char.Letterspace[23]: 0 пт; Char.ColorTrans[23]: 0%; Char.AsianFont[23]: 0; Char.ComplexScriptFont[23]: 23; Char.LocalizeFont[23]: 0; Char.ComplexScriptSize[23]: -100%; Char.LangID[23]: 1049; 
+    Char.Font[24]: 60; Char.Color[24]: 0; Char.Style[24]: 0; Char.Case[24]: 0; Char.Pos[24]: 0; Char.FontScale[24]: 100%; Char._Unused6[24]: 0; Char.Size[24]: 10 пт; Char.DblUnderline[24]: FALSE; Char.Overline[24]: FALSE; Char.Strikethru[24]: FALSE; Char.Highlight[24]: FALSE; Char._Unused12[24]: FALSE; Char.DoubleStrikethrough[24]: FALSE; Char.RTLText[24]: FALSE; Char.UseVertical[24]: FALSE; Char.Letterspace[24]: 0 пт; Char.ColorTrans[24]: 0%; Char.AsianFont[24]: 0; Char.ComplexScriptFont[24]: 60; Char.LocalizeFont[24]: 0; Char.ComplexScriptSize[24]: -100%; Char.LangID[24]: 1049; 
+    Char.Font[25]: 23; Char.Color[25]: 0; Char.Style[25]: 0; Char.Case[25]: 0; Char.Pos[25]: 0; Char.FontScale[25]: 100%; Char._Unused6[25]: 0; Char.Size[25]: 12 пт; Char.DblUnderline[25]: FALSE; Char.Overline[25]: FALSE; Char.Strikethru[25]: FALSE; Char.Highlight[25]: FALSE; Char._Unused12[25]: FALSE; Char.DoubleStrikethrough[25]: FALSE; Char.RTLText[25]: FALSE; Char.UseVertical[25]: FALSE; Char.Letterspace[25]: 0 пт; Char.ColorTrans[25]: 0%; Char.AsianFont[25]: 0; Char.ComplexScriptFont[25]: 23; Char.LocalizeFont[25]: 0; Char.ComplexScriptSize[25]: -100%; Char.LangID[25]: 1049; 
+    Char.Font[26]: 23; Char.Color[26]: 0; Char.Style[26]: 17; Char.Case[26]: 0; Char.Pos[26]: 0; Char.FontScale[26]: 100%; Char._Unused6[26]: 0; Char.Size[26]: 18 пт; Char.DblUnderline[26]: FALSE; Char.Overline[26]: FALSE; Char.Strikethru[26]: FALSE; Char.Highlight[26]: FALSE; Char._Unused12[26]: FALSE; Char.DoubleStrikethrough[26]: FALSE; Char.RTLText[26]: FALSE; Char.UseVertical[26]: FALSE; Char.Letterspace[26]: 0 пт; Char.ColorTrans[26]: 0%; Char.AsianFont[26]: 0; Char.ComplexScriptFont[26]: 23; Char.LocalizeFont[26]: 0; Char.ComplexScriptSize[26]: -100%; Char.LangID[26]: 1049; 
+    Char.Font[27]: 23; Char.Color[27]: 0; Char.Style[27]: 17; Char.Case[27]: 0; Char.Pos[27]: 0; Char.FontScale[27]: 100%; Char._Unused6[27]: 0; Char.Size[27]: 12 пт; Char.DblUnderline[27]: FALSE; Char.Overline[27]: FALSE; Char.Strikethru[27]: FALSE; Char.Highlight[27]: FALSE; Char._Unused12[27]: FALSE; Char.DoubleStrikethrough[27]: FALSE; Char.RTLText[27]: FALSE; Char.UseVertical[27]: FALSE; Char.Letterspace[27]: 0 пт; Char.ColorTrans[27]: 0%; Char.AsianFont[27]: 0; Char.ComplexScriptFont[27]: 23; Char.LocalizeFont[27]: 0; Char.ComplexScriptSize[27]: -100%; Char.LangID[27]: 1049; 
+    Char.Font[28]: 60; Char.Color[28]: 0; Char.Style[28]: 0; Char.Case[28]: 0; Char.Pos[28]: 0; Char.FontScale[28]: 100%; Char._Unused6[28]: 0; Char.Size[28]: 10 пт; Char.DblUnderline[28]: FALSE; Char.Overline[28]: FALSE; Char.Strikethru[28]: FALSE; Char.Highlight[28]: FALSE; Char._Unused12[28]: FALSE; Char.DoubleStrikethrough[28]: FALSE; Char.RTLText[28]: FALSE; Char.UseVertical[28]: FALSE; Char.Letterspace[28]: 0 пт; Char.ColorTrans[28]: 0%; Char.AsianFont[28]: 0; Char.ComplexScriptFont[28]: 60; Char.LocalizeFont[28]: 0; Char.ComplexScriptSize[28]: -100%; Char.LangID[28]: 1049; 
+    Char.Font[29]: 23; Char.Color[29]: 0; Char.Style[29]: 0; Char.Case[29]: 0; Char.Pos[29]: 0; Char.FontScale[29]: 100%; Char._Unused6[29]: 0; Char.Size[29]: 12 пт; Char.DblUnderline[29]: FALSE; Char.Overline[29]: FALSE; Char.Strikethru[29]: FALSE; Char.Highlight[29]: FALSE; Char._Unused12[29]: FALSE; Char.DoubleStrikethrough[29]: FALSE; Char.RTLText[29]: FALSE; Char.UseVertical[29]: FALSE; Char.Letterspace[29]: 0 пт; Char.ColorTrans[29]: 0%; Char.AsianFont[29]: 0; Char.ComplexScriptFont[29]: 23; Char.LocalizeFont[29]: 0; Char.ComplexScriptSize[29]: -100%; Char.LangID[29]: 1049; 
+    Char.Font[30]: 23; Char.Color[30]: 0; Char.Style[30]: 17; Char.Case[30]: 0; Char.Pos[30]: 0; Char.FontScale[30]: 100%; Char._Unused6[30]: 0; Char.Size[30]: 18 пт; Char.DblUnderline[30]: FALSE; Char.Overline[30]: FALSE; Char.Strikethru[30]: FALSE; Char.Highlight[30]: FALSE; Char._Unused12[30]: FALSE; Char.DoubleStrikethrough[30]: FALSE; Char.RTLText[30]: FALSE; Char.UseVertical[30]: FALSE; Char.Letterspace[30]: 0 пт; Char.ColorTrans[30]: 0%; Char.AsianFont[30]: 0; Char.ComplexScriptFont[30]: 23; Char.LocalizeFont[30]: 0; Char.ComplexScriptSize[30]: -100%; Char.LangID[30]: 1049; 
+    Char.Font[31]: 23; Char.Color[31]: 0; Char.Style[31]: 17; Char.Case[31]: 0; Char.Pos[31]: 0; Char.FontScale[31]: 100%; Char._Unused6[31]: 0; Char.Size[31]: 12 пт; Char.DblUnderline[31]: FALSE; Char.Overline[31]: FALSE; Char.Strikethru[31]: FALSE; Char.Highlight[31]: FALSE; Char._Unused12[31]: FALSE; Char.DoubleStrikethrough[31]: FALSE; Char.RTLText[31]: FALSE; Char.UseVertical[31]: FALSE; Char.Letterspace[31]: 0 пт; Char.ColorTrans[31]: 0%; Char.AsianFont[31]: 0; Char.ComplexScriptFont[31]: 23; Char.LocalizeFont[31]: 0; Char.ComplexScriptSize[31]: -100%; Char.LangID[31]: 1049; 
+    Char.Font[32]: 60; Char.Color[32]: 0; Char.Style[32]: 0; Char.Case[32]: 0; Char.Pos[32]: 0; Char.FontScale[32]: 100%; Char._Unused6[32]: 0; Char.Size[32]: 10 пт; Char.DblUnderline[32]: FALSE; Char.Overline[32]: FALSE; Char.Strikethru[32]: FALSE; Char.Highlight[32]: FALSE; Char._Unused12[32]: FALSE; Char.DoubleStrikethrough[32]: FALSE; Char.RTLText[32]: FALSE; Char.UseVertical[32]: FALSE; Char.Letterspace[32]: 0 пт; Char.ColorTrans[32]: 0%; Char.AsianFont[32]: 0; Char.ComplexScriptFont[32]: 60; Char.LocalizeFont[32]: 0; Char.ComplexScriptSize[32]: -100%; Char.LangID[32]: 1049; 
+    Char.Font[33]: 23; Char.Color[33]: 0; Char.Style[33]: 0; Char.Case[33]: 0; Char.Pos[33]: 0; Char.FontScale[33]: 100%; Char._Unused6[33]: 0; Char.Size[33]: 12 пт; Char.DblUnderline[33]: FALSE; Char.Overline[33]: FALSE; Char.Strikethru[33]: FALSE; Char.Highlight[33]: FALSE; Char._Unused12[33]: FALSE; Char.DoubleStrikethrough[33]: FALSE; Char.RTLText[33]: FALSE; Char.UseVertical[33]: FALSE; Char.Letterspace[33]: 0 пт; Char.ColorTrans[33]: 0%; Char.AsianFont[33]: 0; Char.ComplexScriptFont[33]: 23; Char.LocalizeFont[33]: 0; Char.ComplexScriptSize[33]: -100%; Char.LangID[33]: 1049; 
+    Char.Font[34]: 60; Char.Color[34]: 0; Char.Style[34]: 0; Char.Case[34]: 0; Char.Pos[34]: 0; Char.FontScale[34]: 100%; Char._Unused6[34]: 0; Char.Size[34]: 10 пт; Char.DblUnderline[34]: FALSE; Char.Overline[34]: FALSE; Char.Strikethru[34]: FALSE; Char.Highlight[34]: FALSE; Char._Unused12[34]: FALSE; Char.DoubleStrikethrough[34]: FALSE; Char.RTLText[34]: FALSE; Char.UseVertical[34]: FALSE; Char.Letterspace[34]: 0 пт; Char.ColorTrans[34]: 0%; Char.AsianFont[34]: 0; Char.ComplexScriptFont[34]: 60; Char.LocalizeFont[34]: 0; Char.ComplexScriptSize[34]: -100%; Char.LangID[34]: 1049; 
+    Char.Font[35]: 23; Char.Color[35]: 0; Char.Style[35]: 0; Char.Case[35]: 0; Char.Pos[35]: 0; Char.FontScale[35]: 100%; Char._Unused6[35]: 0; Char.Size[35]: 12 пт; Char.DblUnderline[35]: FALSE; Char.Overline[35]: FALSE; Char.Strikethru[35]: FALSE; Char.Highlight[35]: FALSE; Char._Unused12[35]: FALSE; Char.DoubleStrikethrough[35]: FALSE; Char.RTLText[35]: FALSE; Char.UseVertical[35]: FALSE; Char.Letterspace[35]: 0 пт; Char.ColorTrans[35]: 0%; Char.AsianFont[35]: 0; Char.ComplexScriptFont[35]: 23; Char.LocalizeFont[35]: 0; Char.ComplexScriptSize[35]: -100%; Char.LangID[35]: 1049; 
+    Char.Font[36]: 23; Char.Color[36]: 0; Char.Style[36]: 17; Char.Case[36]: 0; Char.Pos[36]: 0; Char.FontScale[36]: 100%; Char._Unused6[36]: 0; Char.Size[36]: 18 пт; Char.DblUnderline[36]: FALSE; Char.Overline[36]: FALSE; Char.Strikethru[36]: FALSE; Char.Highlight[36]: FALSE; Char._Unused12[36]: FALSE; Char.DoubleStrikethrough[36]: FALSE; Char.RTLText[36]: FALSE; Char.UseVertical[36]: FALSE; Char.Letterspace[36]: 0 пт; Char.ColorTrans[36]: 0%; Char.AsianFont[36]: 0; Char.ComplexScriptFont[36]: 23; Char.LocalizeFont[36]: 0; Char.ComplexScriptSize[36]: -100%; Char.LangID[36]: 1049; 
+    Char.Font[37]: 23; Char.Color[37]: 0; Char.Style[37]: 17; Char.Case[37]: 0; Char.Pos[37]: 0; Char.FontScale[37]: 100%; Char._Unused6[37]: 0; Char.Size[37]: 12 пт; Char.DblUnderline[37]: FALSE; Char.Overline[37]: FALSE; Char.Strikethru[37]: FALSE; Char.Highlight[37]: FALSE; Char._Unused12[37]: FALSE; Char.DoubleStrikethrough[37]: FALSE; Char.RTLText[37]: FALSE; Char.UseVertical[37]: FALSE; Char.Letterspace[37]: 0 пт; Char.ColorTrans[37]: 0%; Char.AsianFont[37]: 0; Char.ComplexScriptFont[37]: 23; Char.LocalizeFont[37]: 0; Char.ComplexScriptSize[37]: -100%; Char.LangID[37]: 1049; 
+    Char.Font[38]: 60; Char.Color[38]: 0; Char.Style[38]: 0; Char.Case[38]: 0; Char.Pos[38]: 0; Char.FontScale[38]: 100%; Char._Unused6[38]: 0; Char.Size[38]: 10 пт; Char.DblUnderline[38]: FALSE; Char.Overline[38]: FALSE; Char.Strikethru[38]: FALSE; Char.Highlight[38]: FALSE; Char._Unused12[38]: FALSE; Char.DoubleStrikethrough[38]: FALSE; Char.RTLText[38]: FALSE; Char.UseVertical[38]: FALSE; Char.Letterspace[38]: 0 пт; Char.ColorTrans[38]: 0%; Char.AsianFont[38]: 0; Char.ComplexScriptFont[38]: 60; Char.LocalizeFont[38]: 0; Char.ComplexScriptSize[38]: -100%; Char.LangID[38]: 1049; 
+    Char.Font[39]: 23; Char.Color[39]: 0; Char.Style[39]: 0; Char.Case[39]: 0; Char.Pos[39]: 0; Char.FontScale[39]: 100%; Char._Unused6[39]: 0; Char.Size[39]: 12 пт; Char.DblUnderline[39]: FALSE; Char.Overline[39]: FALSE; Char.Strikethru[39]: FALSE; Char.Highlight[39]: FALSE; Char._Unused12[39]: FALSE; Char.DoubleStrikethrough[39]: FALSE; Char.RTLText[39]: FALSE; Char.UseVertical[39]: FALSE; Char.Letterspace[39]: 0 пт; Char.ColorTrans[39]: 0%; Char.AsianFont[39]: 0; Char.ComplexScriptFont[39]: 23; Char.LocalizeFont[39]: 0; Char.ComplexScriptSize[39]: -100%; Char.LangID[39]: 1049; 
+    Char.Font[40]: 23; Char.Color[40]: 0; Char.Style[40]: 17; Char.Case[40]: 0; Char.Pos[40]: 0; Char.FontScale[40]: 100%; Char._Unused6[40]: 0; Char.Size[40]: 24 пт; Char.DblUnderline[40]: FALSE; Char.Overline[40]: FALSE; Char.Strikethru[40]: FALSE; Char.Highlight[40]: FALSE; Char._Unused12[40]: FALSE; Char.DoubleStrikethrough[40]: FALSE; Char.RTLText[40]: FALSE; Char.UseVertical[40]: FALSE; Char.Letterspace[40]: 0 пт; Char.ColorTrans[40]: 0%; Char.AsianFont[40]: 0; Char.ComplexScriptFont[40]: 23; Char.LocalizeFont[40]: 0; Char.ComplexScriptSize[40]: -100%; Char.LangID[40]: 1049; 
+    Char.Font[41]: 23; Char.Color[41]: 0; Char.Style[41]: 0; Char.Case[41]: 0; Char.Pos[41]: 0; Char.FontScale[41]: 100%; Char._Unused6[41]: 0; Char.Size[41]: 12 пт; Char.DblUnderline[41]: FALSE; Char.Overline[41]: FALSE; Char.Strikethru[41]: FALSE; Char.Highlight[41]: FALSE; Char._Unused12[41]: FALSE; Char.DoubleStrikethrough[41]: FALSE; Char.RTLText[41]: FALSE; Char.UseVertical[41]: FALSE; Char.Letterspace[41]: 0 пт; Char.ColorTrans[41]: 0%; Char.AsianFont[41]: 0; Char.ComplexScriptFont[41]: 23; Char.LocalizeFont[41]: 0; Char.ComplexScriptSize[41]: -100%; Char.LangID[41]: 1049; 
+    Char.Font[42]: 23; Char.Color[42]: 0; Char.Style[42]: 17; Char.Case[42]: 0; Char.Pos[42]: 0; Char.FontScale[42]: 100%; Char._Unused6[42]: 0; Char.Size[42]: 12 пт; Char.DblUnderline[42]: FALSE; Char.Overline[42]: FALSE; Char.Strikethru[42]: FALSE; Char.Highlight[42]: FALSE; Char._Unused12[42]: FALSE; Char.DoubleStrikethrough[42]: FALSE; Char.RTLText[42]: FALSE; Char.UseVertical[42]: FALSE; Char.Letterspace[42]: 0 пт; Char.ColorTrans[42]: 0%; Char.AsianFont[42]: 0; Char.ComplexScriptFont[42]: 23; Char.LocalizeFont[42]: 0; Char.ComplexScriptSize[42]: -100%; Char.LangID[42]: 1049; 
+    Char.Font[43]: 23; Char.Color[43]: 0; Char.Style[43]: 0; Char.Case[43]: 0; Char.Pos[43]: 0; Char.FontScale[43]: 100%; Char._Unused6[43]: 0; Char.Size[43]: 12 пт; Char.DblUnderline[43]: FALSE; Char.Overline[43]: FALSE; Char.Strikethru[43]: FALSE; Char.Highlight[43]: FALSE; Char._Unused12[43]: FALSE; Char.DoubleStrikethrough[43]: FALSE; Char.RTLText[43]: FALSE; Char.UseVertical[43]: FALSE; Char.Letterspace[43]: 0 пт; Char.ColorTrans[43]: 0%; Char.AsianFont[43]: 0; Char.ComplexScriptFont[43]: 23; Char.LocalizeFont[43]: 0; Char.ComplexScriptSize[43]: -100%; Char.LangID[43]: 1049; 
+    Char.Font[44]: 23; Char.Color[44]: 0; Char.Style[44]: 34; Char.Case[44]: 0; Char.Pos[44]: 0; Char.FontScale[44]: 100%; Char._Unused6[44]: 0; Char.Size[44]: 12 пт; Char.DblUnderline[44]: FALSE; Char.Overline[44]: FALSE; Char.Strikethru[44]: FALSE; Char.Highlight[44]: FALSE; Char._Unused12[44]: FALSE; Char.DoubleStrikethrough[44]: FALSE; Char.RTLText[44]: FALSE; Char.UseVertical[44]: FALSE; Char.Letterspace[44]: 0 пт; Char.ColorTrans[44]: 0%; Char.AsianFont[44]: 0; Char.ComplexScriptFont[44]: 23; Char.LocalizeFont[44]: 0; Char.ComplexScriptSize[44]: -100%; Char.LangID[44]: 1049; 
+    Char.Font[45]: 23; Char.Color[45]: 0; Char.Style[45]: 0; Char.Case[45]: 0; Char.Pos[45]: 0; Char.FontScale[45]: 100%; Char._Unused6[45]: 0; Char.Size[45]: 12 пт; Char.DblUnderline[45]: FALSE; Char.Overline[45]: FALSE; Char.Strikethru[45]: FALSE; Char.Highlight[45]: FALSE; Char._Unused12[45]: FALSE; Char.DoubleStrikethrough[45]: FALSE; Char.RTLText[45]: FALSE; Char.UseVertical[45]: FALSE; Char.Letterspace[45]: 0 пт; Char.ColorTrans[45]: 0%; Char.AsianFont[45]: 0; Char.ComplexScriptFont[45]: 23; Char.LocalizeFont[45]: 0; Char.ComplexScriptSize[45]: -100%; Char.LangID[45]: 1049; 
+    Char.Font[46]: 23; Char.Color[46]: 0; Char.Style[46]: 17; Char.Case[46]: 0; Char.Pos[46]: 0; Char.FontScale[46]: 100%; Char._Unused6[46]: 0; Char.Size[46]: 12 пт; Char.DblUnderline[46]: FALSE; Char.Overline[46]: FALSE; Char.Strikethru[46]: FALSE; Char.Highlight[46]: FALSE; Char._Unused12[46]: FALSE; Char.DoubleStrikethrough[46]: FALSE; Char.RTLText[46]: FALSE; Char.UseVertical[46]: FALSE; Char.Letterspace[46]: 0 пт; Char.ColorTrans[46]: 0%; Char.AsianFont[46]: 0; Char.ComplexScriptFont[46]: 23; Char.LocalizeFont[46]: 0; Char.ComplexScriptSize[46]: -100%; Char.LangID[46]: 1049; 
+    Char.Font[47]: 23; Char.Color[47]: 0; Char.Style[47]: 0; Char.Case[47]: 0; Char.Pos[47]: 0; Char.FontScale[47]: 100%; Char._Unused6[47]: 0; Char.Size[47]: 12 пт; Char.DblUnderline[47]: FALSE; Char.Overline[47]: FALSE; Char.Strikethru[47]: FALSE; Char.Highlight[47]: FALSE; Char._Unused12[47]: FALSE; Char.DoubleStrikethrough[47]: FALSE; Char.RTLText[47]: FALSE; Char.UseVertical[47]: FALSE; Char.Letterspace[47]: 0 пт; Char.ColorTrans[47]: 0%; Char.AsianFont[47]: 0; Char.ComplexScriptFont[47]: 23; Char.LocalizeFont[47]: 0; Char.ComplexScriptSize[47]: -100%; Char.LangID[47]: 1049; 
+    Char.Font[48]: 23; Char.Color[48]: 0; Char.Style[48]: 17; Char.Case[48]: 0; Char.Pos[48]: 0; Char.FontScale[48]: 100%; Char._Unused6[48]: 0; Char.Size[48]: 24 пт; Char.DblUnderline[48]: FALSE; Char.Overline[48]: FALSE; Char.Strikethru[48]: FALSE; Char.Highlight[48]: FALSE; Char._Unused12[48]: FALSE; Char.DoubleStrikethrough[48]: FALSE; Char.RTLText[48]: FALSE; Char.UseVertical[48]: FALSE; Char.Letterspace[48]: 0 пт; Char.ColorTrans[48]: 0%; Char.AsianFont[48]: 0; Char.ComplexScriptFont[48]: 23; Char.LocalizeFont[48]: 0; Char.ComplexScriptSize[48]: -100%; Char.LangID[48]: 1049; 
+    Char.Font[49]: 23; Char.Color[49]: 0; Char.Style[49]: 17; Char.Case[49]: 0; Char.Pos[49]: 0; Char.FontScale[49]: 100%; Char._Unused6[49]: 0; Char.Size[49]: 18 пт; Char.DblUnderline[49]: FALSE; Char.Overline[49]: FALSE; Char.Strikethru[49]: FALSE; Char.Highlight[49]: FALSE; Char._Unused12[49]: FALSE; Char.DoubleStrikethrough[49]: FALSE; Char.RTLText[49]: FALSE; Char.UseVertical[49]: FALSE; Char.Letterspace[49]: 0 пт; Char.ColorTrans[49]: 0%; Char.AsianFont[49]: 0; Char.ComplexScriptFont[49]: 23; Char.LocalizeFont[49]: 0; Char.ComplexScriptSize[49]: -100%; Char.LangID[49]: 1049; 
+    Char.Font[50]: 23; Char.Color[50]: 0; Char.Style[50]: 17; Char.Case[50]: 0; Char.Pos[50]: 0; Char.FontScale[50]: 100%; Char._Unused6[50]: 0; Char.Size[50]: 12 пт; Char.DblUnderline[50]: FALSE; Char.Overline[50]: FALSE; Char.Strikethru[50]: FALSE; Char.Highlight[50]: FALSE; Char._Unused12[50]: FALSE; Char.DoubleStrikethrough[50]: FALSE; Char.RTLText[50]: FALSE; Char.UseVertical[50]: FALSE; Char.Letterspace[50]: 0 пт; Char.ColorTrans[50]: 0%; Char.AsianFont[50]: 0; Char.ComplexScriptFont[50]: 23; Char.LocalizeFont[50]: 0; Char.ComplexScriptSize[50]: -100%; Char.LangID[50]: 1049; 
+    Char.Font[51]: 23; Char.Color[51]: 0; Char.Style[51]: 17; Char.Case[51]: 0; Char.Pos[51]: 2; Char.FontScale[51]: 100%; Char._Unused6[51]: 0; Char.Size[51]: 12 пт; Char.DblUnderline[51]: FALSE; Char.Overline[51]: FALSE; Char.Strikethru[51]: FALSE; Char.Highlight[51]: FALSE; Char._Unused12[51]: FALSE; Char.DoubleStrikethrough[51]: FALSE; Char.RTLText[51]: FALSE; Char.UseVertical[51]: FALSE; Char.Letterspace[51]: 0 пт; Char.ColorTrans[51]: 0%; Char.AsianFont[51]: 0; Char.ComplexScriptFont[51]: 23; Char.LocalizeFont[51]: 0; Char.ComplexScriptSize[51]: -100%; Char.LangID[51]: 1049; 
+    Char.Font[52]: 23; Char.Color[52]: 0; Char.Style[52]: 17; Char.Case[52]: 0; Char.Pos[52]: 0; Char.FontScale[52]: 100%; Char._Unused6[52]: 0; Char.Size[52]: 12 пт; Char.DblUnderline[52]: FALSE; Char.Overline[52]: FALSE; Char.Strikethru[52]: FALSE; Char.Highlight[52]: FALSE; Char._Unused12[52]: FALSE; Char.DoubleStrikethrough[52]: FALSE; Char.RTLText[52]: FALSE; Char.UseVertical[52]: FALSE; Char.Letterspace[52]: 0 пт; Char.ColorTrans[52]: 0%; Char.AsianFont[52]: 0; Char.ComplexScriptFont[52]: 23; Char.LocalizeFont[52]: 0; Char.ComplexScriptSize[52]: -100%; Char.LangID[52]: 1049; 
+    Char.Font[53]: 23; Char.Color[53]: 0; Char.Style[53]: 0; Char.Case[53]: 0; Char.Pos[53]: 0; Char.FontScale[53]: 100%; Char._Unused6[53]: 0; Char.Size[53]: 12 пт; Char.DblUnderline[53]: FALSE; Char.Overline[53]: FALSE; Char.Strikethru[53]: FALSE; Char.Highlight[53]: FALSE; Char._Unused12[53]: FALSE; Char.DoubleStrikethrough[53]: FALSE; Char.RTLText[53]: FALSE; Char.UseVertical[53]: FALSE; Char.Letterspace[53]: 0 пт; Char.ColorTrans[53]: 0%; Char.AsianFont[53]: 0; Char.ComplexScriptFont[53]: 23; Char.LocalizeFont[53]: 0; Char.ComplexScriptSize[53]: -100%; Char.LangID[53]: 1049; 
+    Char.Font[54]: 23; Char.Color[54]: 0; Char.Style[54]: 0; Char.Case[54]: 0; Char.Pos[54]: 2; Char.FontScale[54]: 100%; Char._Unused6[54]: 0; Char.Size[54]: 12 пт; Char.DblUnderline[54]: FALSE; Char.Overline[54]: FALSE; Char.Strikethru[54]: FALSE; Char.Highlight[54]: FALSE; Char._Unused12[54]: FALSE; Char.DoubleStrikethrough[54]: FALSE; Char.RTLText[54]: FALSE; Char.UseVertical[54]: FALSE; Char.Letterspace[54]: 0 пт; Char.ColorTrans[54]: 0%; Char.AsianFont[54]: 0; Char.ComplexScriptFont[54]: 23; Char.LocalizeFont[54]: 0; Char.ComplexScriptSize[54]: -100%; Char.LangID[54]: 1049; 
+    Char.Font[55]: 23; Char.Color[55]: 0; Char.Style[55]: 0; Char.Case[55]: 0; Char.Pos[55]: 0; Char.FontScale[55]: 100%; Char._Unused6[55]: 0; Char.Size[55]: 12 пт; Char.DblUnderline[55]: FALSE; Char.Overline[55]: FALSE; Char.Strikethru[55]: FALSE; Char.Highlight[55]: FALSE; Char._Unused12[55]: FALSE; Char.DoubleStrikethrough[55]: FALSE; Char.RTLText[55]: FALSE; Char.UseVertical[55]: FALSE; Char.Letterspace[55]: 0 пт; Char.ColorTrans[55]: 0%; Char.AsianFont[55]: 0; Char.ComplexScriptFont[55]: 23; Char.LocalizeFont[55]: 0; Char.ComplexScriptSize[55]: -100%; Char.LangID[55]: 1049; 
+    Char.Font[56]: 23; Char.Color[56]: 0; Char.Style[56]: 0; Char.Case[56]: 0; Char.Pos[56]: 1; Char.FontScale[56]: 100%; Char._Unused6[56]: 0; Char.Size[56]: 12 пт; Char.DblUnderline[56]: FALSE; Char.Overline[56]: FALSE; Char.Strikethru[56]: FALSE; Char.Highlight[56]: FALSE; Char._Unused12[56]: FALSE; Char.DoubleStrikethrough[56]: FALSE; Char.RTLText[56]: FALSE; Char.UseVertical[56]: FALSE; Char.Letterspace[56]: 0 пт; Char.ColorTrans[56]: 0%; Char.AsianFont[56]: 0; Char.ComplexScriptFont[56]: 23; Char.LocalizeFont[56]: 0; Char.ComplexScriptSize[56]: -100%; Char.LangID[56]: 1049; 
+    Char.Font[57]: 23; Char.Color[57]: 0; Char.Style[57]: 0; Char.Case[57]: 0; Char.Pos[57]: 0; Char.FontScale[57]: 100%; Char._Unused6[57]: 0; Char.Size[57]: 12 пт; Char.DblUnderline[57]: FALSE; Char.Overline[57]: FALSE; Char.Strikethru[57]: FALSE; Char.Highlight[57]: FALSE; Char._Unused12[57]: FALSE; Char.DoubleStrikethrough[57]: FALSE; Char.RTLText[57]: FALSE; Char.UseVertical[57]: FALSE; Char.Letterspace[57]: 0 пт; Char.ColorTrans[57]: 0%; Char.AsianFont[57]: 0; Char.ComplexScriptFont[57]: 23; Char.LocalizeFont[57]: 0; Char.ComplexScriptSize[57]: -100%; Char.LangID[57]: 1049; 
+    Char.Font[58]: 23; Char.Color[58]: 0; Char.Style[58]: 0; Char.Case[58]: 0; Char.Pos[58]: 2; Char.FontScale[58]: 100%; Char._Unused6[58]: 0; Char.Size[58]: 12 пт; Char.DblUnderline[58]: FALSE; Char.Overline[58]: FALSE; Char.Strikethru[58]: FALSE; Char.Highlight[58]: FALSE; Char._Unused12[58]: FALSE; Char.DoubleStrikethrough[58]: FALSE; Char.RTLText[58]: FALSE; Char.UseVertical[58]: FALSE; Char.Letterspace[58]: 0 пт; Char.ColorTrans[58]: 0%; Char.AsianFont[58]: 0; Char.ComplexScriptFont[58]: 23; Char.LocalizeFont[58]: 0; Char.ComplexScriptSize[58]: -100%; Char.LangID[58]: 1049; 
+    Char.Font[59]: 23; Char.Color[59]: 0; Char.Style[59]: 0; Char.Case[59]: 0; Char.Pos[59]: 0; Char.FontScale[59]: 100%; Char._Unused6[59]: 0; Char.Size[59]: 12 пт; Char.DblUnderline[59]: FALSE; Char.Overline[59]: FALSE; Char.Strikethru[59]: FALSE; Char.Highlight[59]: FALSE; Char._Unused12[59]: FALSE; Char.DoubleStrikethrough[59]: FALSE; Char.RTLText[59]: FALSE; Char.UseVertical[59]: FALSE; Char.Letterspace[59]: 0 пт; Char.ColorTrans[59]: 0%; Char.AsianFont[59]: 0; Char.ComplexScriptFont[59]: 23; Char.LocalizeFont[59]: 0; Char.ComplexScriptSize[59]: -100%; Char.LangID[59]: 1049; 
+    Char.Font[60]: 23; Char.Color[60]: 0; Char.Style[60]: 0; Char.Case[60]: 0; Char.Pos[60]: 1; Char.FontScale[60]: 100%; Char._Unused6[60]: 0; Char.Size[60]: 12 пт; Char.DblUnderline[60]: FALSE; Char.Overline[60]: FALSE; Char.Strikethru[60]: FALSE; Char.Highlight[60]: FALSE; Char._Unused12[60]: FALSE; Char.DoubleStrikethrough[60]: FALSE; Char.RTLText[60]: FALSE; Char.UseVertical[60]: FALSE; Char.Letterspace[60]: 0 пт; Char.ColorTrans[60]: 0%; Char.AsianFont[60]: 0; Char.ComplexScriptFont[60]: 23; Char.LocalizeFont[60]: 0; Char.ComplexScriptSize[60]: -100%; Char.LangID[60]: 1049; 
+    Char.Font[61]: 23; Char.Color[61]: 0; Char.Style[61]: 0; Char.Case[61]: 0; Char.Pos[61]: 0; Char.FontScale[61]: 100%; Char._Unused6[61]: 0; Char.Size[61]: 12 пт; Char.DblUnderline[61]: FALSE; Char.Overline[61]: FALSE; Char.Strikethru[61]: FALSE; Char.Highlight[61]: FALSE; Char._Unused12[61]: FALSE; Char.DoubleStrikethrough[61]: FALSE; Char.RTLText[61]: FALSE; Char.UseVertical[61]: FALSE; Char.Letterspace[61]: 0 пт; Char.ColorTrans[61]: 0%; Char.AsianFont[61]: 0; Char.ComplexScriptFont[61]: 23; Char.LocalizeFont[61]: 0; Char.ComplexScriptSize[61]: -100%; Char.LangID[61]: 1049; 
+    Char.Font[62]: 23; Char.Color[62]: 0; Char.Style[62]: 17; Char.Case[62]: 0; Char.Pos[62]: 0; Char.FontScale[62]: 100%; Char._Unused6[62]: 0; Char.Size[62]: 24 пт; Char.DblUnderline[62]: FALSE; Char.Overline[62]: FALSE; Char.Strikethru[62]: FALSE; Char.Highlight[62]: FALSE; Char._Unused12[62]: FALSE; Char.DoubleStrikethrough[62]: FALSE; Char.RTLText[62]: FALSE; Char.UseVertical[62]: FALSE; Char.Letterspace[62]: 0 пт; Char.ColorTrans[62]: 0%; Char.AsianFont[62]: 0; Char.ComplexScriptFont[62]: 23; Char.LocalizeFont[62]: 0; Char.ComplexScriptSize[62]: -100%; Char.LangID[62]: 1049; 
+    Char.Font[63]: 23; Char.Color[63]: 0; Char.Style[63]: 0; Char.Case[63]: 0; Char.Pos[63]: 0; Char.FontScale[63]: 100%; Char._Unused6[63]: 0; Char.Size[63]: 12 пт; Char.DblUnderline[63]: FALSE; Char.Overline[63]: FALSE; Char.Strikethru[63]: FALSE; Char.Highlight[63]: FALSE; Char._Unused12[63]: FALSE; Char.DoubleStrikethrough[63]: FALSE; Char.RTLText[63]: FALSE; Char.UseVertical[63]: FALSE; Char.Letterspace[63]: 0 пт; Char.ColorTrans[63]: 0%; Char.AsianFont[63]: 0; Char.ComplexScriptFont[63]: 23; Char.LocalizeFont[63]: 0; Char.ComplexScriptSize[63]: -100%; Char.LangID[63]: 1049; 
+    Char.Font[64]: 23; Char.Color[64]: 0; Char.Style[64]: 17; Char.Case[64]: 0; Char.Pos[64]: 0; Char.FontScale[64]: 100%; Char._Unused6[64]: 0; Char.Size[64]: 12 пт; Char.DblUnderline[64]: FALSE; Char.Overline[64]: FALSE; Char.Strikethru[64]: FALSE; Char.Highlight[64]: FALSE; Char._Unused12[64]: FALSE; Char.DoubleStrikethrough[64]: FALSE; Char.RTLText[64]: FALSE; Char.UseVertical[64]: FALSE; Char.Letterspace[64]: 0 пт; Char.ColorTrans[64]: 0%; Char.AsianFont[64]: 0; Char.ComplexScriptFont[64]: 23; Char.LocalizeFont[64]: 0; Char.ComplexScriptSize[64]: -100%; Char.LangID[64]: 1049; 
+    Char.Font[65]: 23; Char.Color[65]: 0; Char.Style[65]: 0; Char.Case[65]: 0; Char.Pos[65]: 0; Char.FontScale[65]: 100%; Char._Unused6[65]: 0; Char.Size[65]: 12 пт; Char.DblUnderline[65]: FALSE; Char.Overline[65]: FALSE; Char.Strikethru[65]: FALSE; Char.Highlight[65]: FALSE; Char._Unused12[65]: FALSE; Char.DoubleStrikethrough[65]: FALSE; Char.RTLText[65]: FALSE; Char.UseVertical[65]: FALSE; Char.Letterspace[65]: 0 пт; Char.ColorTrans[65]: 0%; Char.AsianFont[65]: 0; Char.ComplexScriptFont[65]: 23; Char.LocalizeFont[65]: 0; Char.ComplexScriptSize[65]: -100%; Char.LangID[65]: 1049; 
+    Char.Font[66]: 23; Char.Color[66]: 0; Char.Style[66]: 17; Char.Case[66]: 0; Char.Pos[66]: 0; Char.FontScale[66]: 100%; Char._Unused6[66]: 0; Char.Size[66]: 12 пт; Char.DblUnderline[66]: FALSE; Char.Overline[66]: FALSE; Char.Strikethru[66]: FALSE; Char.Highlight[66]: FALSE; Char._Unused12[66]: FALSE; Char.DoubleStrikethrough[66]: FALSE; Char.RTLText[66]: FALSE; Char.UseVertical[66]: FALSE; Char.Letterspace[66]: 0 пт; Char.ColorTrans[66]: 0%; Char.AsianFont[66]: 0; Char.ComplexScriptFont[66]: 23; Char.LocalizeFont[66]: 0; Char.ComplexScriptSize[66]: -100%; Char.LangID[66]: 1049; 
+    Char.Font[67]: 23; Char.Color[67]: 0; Char.Style[67]: 0; Char.Case[67]: 0; Char.Pos[67]: 0; Char.FontScale[67]: 100%; Char._Unused6[67]: 0; Char.Size[67]: 12 пт; Char.DblUnderline[67]: FALSE; Char.Overline[67]: FALSE; Char.Strikethru[67]: FALSE; Char.Highlight[67]: FALSE; Char._Unused12[67]: FALSE; Char.DoubleStrikethrough[67]: FALSE; Char.RTLText[67]: FALSE; Char.UseVertical[67]: FALSE; Char.Letterspace[67]: 0 пт; Char.ColorTrans[67]: 0%; Char.AsianFont[67]: 0; Char.ComplexScriptFont[67]: 23; Char.LocalizeFont[67]: 0; Char.ComplexScriptSize[67]: -100%; Char.LangID[67]: 1049; 
+    Char.Font[68]: 23; Char.Color[68]: 0; Char.Style[68]: 0; Char.Case[68]: 0; Char.Pos[68]: 0; Char.FontScale[68]: 100%; Char._Unused6[68]: 0; Char.Size[68]: 12 пт; Char.DblUnderline[68]: FALSE; Char.Overline[68]: FALSE; Char.Strikethru[68]: FALSE; Char.Highlight[68]: FALSE; Char._Unused12[68]: FALSE; Char.DoubleStrikethrough[68]: FALSE; Char.RTLText[68]: FALSE; Char.UseVertical[68]: FALSE; Char.Letterspace[68]: 0 пт; Char.ColorTrans[68]: 0%; Char.AsianFont[68]: 0; Char.ComplexScriptFont[68]: 23; Char.LocalizeFont[68]: 0; Char.ComplexScriptSize[68]: -100%; Char.LangID[68]: 1033; 
   Section: FirstComponent>>>
     Geometry1.NoFill: FALSE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
     Geometry1.X1: Width*0; Geometry1.Y1: Height*0; 
@@ -649,65 +203,181 @@
     Geometry1.X4: Width*0; Geometry1.Y4: Height*1; 
     Geometry1.X5: Geometry1.X1; Geometry1.Y5: Geometry1.Y1; 
   Section: Paragraph>>>
-    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: 12 пт; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
-    Para.IndFirst[2]: 0 мм; Para.IndLeft[2]: 0 мм; Para.IndRight[2]: 0 мм; Para.SpLine[2]: -120%; Para.SpBefore[2]: 5 пт; Para.SpAfter[2]: 5 пт; Para.HorzAlign[2]: 0; Para.Bullet[2]: 0; Para.BulletStr[2]: ""; Para.BulletFont[2]: 0; Para.LocalizeBulletFont[2]: 0; Para.BulletFontSize[2]: 12 пт; Para.TextPosAfterBullet[2]: 0 мм; Para.Flags[2]: 0; 
-    Para.IndFirst[3]: 0 мм; Para.IndLeft[3]: 0 мм; Para.IndRight[3]: 0 мм; Para.SpLine[3]: -120%; Para.SpBefore[3]: 0 пт; Para.SpAfter[3]: 0 пт; Para.HorzAlign[3]: 1; Para.Bullet[3]: 0; Para.BulletStr[3]: ""; Para.BulletFont[3]: 0; Para.LocalizeBulletFont[3]: 0; Para.BulletFontSize[3]: 12 пт; Para.TextPosAfterBullet[3]: 0 мм; Para.Flags[3]: 0; 
-    Para.IndFirst[4]: 0 мм; Para.IndLeft[4]: 0 мм; Para.IndRight[4]: 0 мм; Para.SpLine[4]: -120%; Para.SpBefore[4]: 0 пт; Para.SpAfter[4]: 0 пт; Para.HorzAlign[4]: 0; Para.Bullet[4]: 0; Para.BulletStr[4]: ""; Para.BulletFont[4]: 0; Para.LocalizeBulletFont[4]: 0; Para.BulletFontSize[4]: 12 пт; Para.TextPosAfterBullet[4]: 0 мм; Para.Flags[4]: 0; 
-    Para.IndFirst[5]: 0 мм; Para.IndLeft[5]: 0 мм; Para.IndRight[5]: 0 мм; Para.SpLine[5]: -120%; Para.SpBefore[5]: 0 пт; Para.SpAfter[5]: 0 пт; Para.HorzAlign[5]: 1; Para.Bullet[5]: 0; Para.BulletStr[5]: ""; Para.BulletFont[5]: 0; Para.LocalizeBulletFont[5]: 0; Para.BulletFontSize[5]: 12 пт; Para.TextPosAfterBullet[5]: 0 мм; Para.Flags[5]: 0; 
-    Para.IndFirst[6]: 0 мм; Para.IndLeft[6]: 0 мм; Para.IndRight[6]: 0 мм; Para.SpLine[6]: -120%; Para.SpBefore[6]: 0 пт; Para.SpAfter[6]: 0 пт; Para.HorzAlign[6]: 0; Para.Bullet[6]: 0; Para.BulletStr[6]: ""; Para.BulletFont[6]: 0; Para.LocalizeBulletFont[6]: 0; Para.BulletFontSize[6]: 12 пт; Para.TextPosAfterBullet[6]: 0 мм; Para.Flags[6]: 0; 
-    Para.IndFirst[7]: 0 мм; Para.IndLeft[7]: 0 мм; Para.IndRight[7]: 0 мм; Para.SpLine[7]: -120%; Para.SpBefore[7]: 5 пт; Para.SpAfter[7]: 5 пт; Para.HorzAlign[7]: 0; Para.Bullet[7]: 0; Para.BulletStr[7]: ""; Para.BulletFont[7]: 0; Para.LocalizeBulletFont[7]: 0; Para.BulletFontSize[7]: 12 пт; Para.TextPosAfterBullet[7]: 0 мм; Para.Flags[7]: 0; 
-    Para.IndFirst[8]: -6,35 мм; Para.IndLeft[8]: 12,7 мм; Para.IndRight[8]: 0 мм; Para.SpLine[8]: -120%; Para.SpBefore[8]: 0 пт; Para.SpAfter[8]: 0 пт; Para.HorzAlign[8]: 0; Para.Bullet[8]: 1; Para.BulletStr[8]: ""; Para.BulletFont[8]: 0; Para.LocalizeBulletFont[8]: 0; Para.BulletFontSize[8]: 12 пт; Para.TextPosAfterBullet[8]: 0 мм; Para.Flags[8]: 0; 
-    Para.IndFirst[9]: 0 мм; Para.IndLeft[9]: 0 мм; Para.IndRight[9]: 0 мм; Para.SpLine[9]: -120%; Para.SpBefore[9]: 5 пт; Para.SpAfter[9]: 5 пт; Para.HorzAlign[9]: 0; Para.Bullet[9]: 0; Para.BulletStr[9]: ""; Para.BulletFont[9]: 0; Para.LocalizeBulletFont[9]: 0; Para.BulletFontSize[9]: 12 пт; Para.TextPosAfterBullet[9]: 0 мм; Para.Flags[9]: 0; 
-    Para.IndFirst[10]: -6,35 мм; Para.IndLeft[10]: 12,7 мм; Para.IndRight[10]: 0 мм; Para.SpLine[10]: -120%; Para.SpBefore[10]: 0 пт; Para.SpAfter[10]: 0 пт; Para.HorzAlign[10]: 0; Para.Bullet[10]: 0; Para.BulletStr[10]: ""; Para.BulletFont[10]: 0; Para.LocalizeBulletFont[10]: 0; Para.BulletFontSize[10]: 12 пт; Para.TextPosAfterBullet[10]: 0 мм; Para.Flags[10]: 0; 
-    Para.IndFirst[11]: 0 мм; Para.IndLeft[11]: 0 мм; Para.IndRight[11]: 0 мм; Para.SpLine[11]: -120%; Para.SpBefore[11]: 0 пт; Para.SpAfter[11]: 0 пт; Para.HorzAlign[11]: 0; Para.Bullet[11]: 0; Para.BulletStr[11]: ""; Para.BulletFont[11]: 0; Para.LocalizeBulletFont[11]: 0; Para.BulletFontSize[11]: 12 пт; Para.TextPosAfterBullet[11]: 0 мм; Para.Flags[11]: 0; 
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 5 пт; Para.SpAfter: 5 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: 12 пт; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.Width: 20; Prop.Width.Prompt: ""; Prop.Width.Label: ""; Prop.Width.Format: ""; Prop.Width.SortKey: ""; Prop.Width.Type: 2; Prop.Width.Invisible: FALSE; Prop.Width.Verify: FALSE; Prop.Width.LangID: 1049; Prop.Width.Calendar: 0; 
-    Prop.Height: 30; Prop.Height.Prompt: ""; Prop.Height.Label: ""; Prop.Height.Format: ""; Prop.Height.SortKey: ""; Prop.Height.Type: 2; Prop.Height.Invisible: FALSE; Prop.Height.Verify: FALSE; Prop.Height.LangID: 1049; Prop.Height.Calendar: 0; 
-    Prop.Square: Prop.Width*Prop.Height; Prop.Square.Prompt: ""; Prop.Square.Label: ""; Prop.Square.Format: ""; Prop.Square.SortKey: ""; Prop.Square.Type: 2; Prop.Square.Invisible: FALSE; Prop.Square.Verify: FALSE; Prop.Square.LangID: 1049; Prop.Square.Calendar: 0; 
-    Prop.txt: "форма 222"; Prop.txt.Prompt: ""; Prop.txt.Label: ""; Prop.txt.Format: ""; Prop.txt.SortKey: ""; Prop.txt.Type: 0; Prop.txt.Invisible: FALSE; Prop.txt.Verify: FALSE; Prop.txt.LangID: 1049; Prop.txt.Calendar: 0; 
-    Prop.Название: MASTERNAME(); Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
-    Prop.Perimeter: 2*(Prop.Width+Prop.Height); Prop.Perimeter.Prompt: ""; Prop.Perimeter.Label: ""; Prop.Perimeter.Format: ""; Prop.Perimeter.SortKey: ""; Prop.Perimeter.Type: 2; Prop.Perimeter.Invisible: FALSE; Prop.Perimeter.Verify: FALSE; Prop.Perimeter.LangID: 1049; Prop.Perimeter.Calendar: 0; 
-    Prop.A_ACCount: "3"; Prop.A_ACCount.Prompt: ""; Prop.A_ACCount.Label: ""; Prop.A_ACCount.Format: ""; Prop.A_ACCount.SortKey: ""; Prop.A_ACCount.Type: 0; Prop.A_ACCount.Invisible: FALSE; Prop.A_ACCount.Verify: FALSE; Prop.A_ACCount.LangID: 1049; Prop.A_ACCount.Calendar: 0; 
+    Prop.Название: "Краткая справка по основам html-разметки"; Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
     Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 10; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
-    Prop.A_StvolWHave: "2"; Prop.A_StvolWHave.Prompt: ""; Prop.A_StvolWHave.Label: ""; Prop.A_StvolWHave.Format: ""; Prop.A_StvolWHave.SortKey: ""; Prop.A_StvolWHave.Type: 0; Prop.A_StvolWHave.Invisible: FALSE; Prop.A_StvolWHave.Verify: FALSE; Prop.A_StvolWHave.LangID: 1049; Prop.A_StvolWHave.Calendar: 0; 
-    Prop.A_FireTime: "27.11.2020 12:30:00"; Prop.A_FireTime.Prompt: ""; Prop.A_FireTime.Label: ""; Prop.A_FireTime.Format: ""; Prop.A_FireTime.SortKey: ""; Prop.A_FireTime.Type: 0; Prop.A_FireTime.Invisible: FALSE; Prop.A_FireTime.Verify: FALSE; Prop.A_FireTime.LangID: 1049; Prop.A_FireTime.Calendar: 0; 
-    Prop.A_RSCHSTechincsHave: "4"; Prop.A_RSCHSTechincsHave.Prompt: ""; Prop.A_RSCHSTechincsHave.Label: ""; Prop.A_RSCHSTechincsHave.Format: ""; Prop.A_RSCHSTechincsHave.SortKey: ""; Prop.A_RSCHSTechincsHave.Type: 0; Prop.A_RSCHSTechincsHave.Invisible: FALSE; Prop.A_RSCHSTechincsHave.Verify: FALSE; Prop.A_RSCHSTechincsHave.LangID: 1049; Prop.A_RSCHSTechincsHave.Calendar: 0; 
-    Prop.A_MainPAHave: "3"; Prop.A_MainPAHave.Prompt: ""; Prop.A_MainPAHave.Label: ""; Prop.A_MainPAHave.Format: ""; Prop.A_MainPAHave.SortKey: ""; Prop.A_MainPAHave.Type: 0; Prop.A_MainPAHave.Invisible: FALSE; Prop.A_MainPAHave.Verify: FALSE; Prop.A_MainPAHave.LangID: 1049; Prop.A_MainPAHave.Calendar: 0; 
-    Prop.A_SpecialPAHave: "1"; Prop.A_SpecialPAHave.Prompt: ""; Prop.A_SpecialPAHave.Label: ""; Prop.A_SpecialPAHave.Format: ""; Prop.A_SpecialPAHave.SortKey: ""; Prop.A_SpecialPAHave.Type: 0; Prop.A_SpecialPAHave.Invisible: FALSE; Prop.A_SpecialPAHave.Verify: FALSE; Prop.A_SpecialPAHave.LangID: 1049; Prop.A_SpecialPAHave.Calendar: 0; 
-    Prop.A_ACNeed: "1"; Prop.A_ACNeed.Prompt: ""; Prop.A_ACNeed.Label: ""; Prop.A_ACNeed.Format: ""; Prop.A_ACNeed.SortKey: ""; Prop.A_ACNeed.Type: 0; Prop.A_ACNeed.Invisible: FALSE; Prop.A_ACNeed.Verify: FALSE; Prop.A_ACNeed.LangID: 1049; Prop.A_ACNeed.Calendar: 0; 
-    Prop.A_AGCount: "0"; Prop.A_AGCount.Prompt: ""; Prop.A_AGCount.Label: ""; Prop.A_AGCount.Format: ""; Prop.A_AGCount.SortKey: ""; Prop.A_AGCount.Type: 0; Prop.A_AGCount.Invisible: FALSE; Prop.A_AGCount.Verify: FALSE; Prop.A_AGCount.LangID: 1049; Prop.A_AGCount.Calendar: 0; 
-    Prop.A_SMPCount: "0"; Prop.A_SMPCount.Prompt: ""; Prop.A_SMPCount.Label: ""; Prop.A_SMPCount.Format: ""; Prop.A_SMPCount.SortKey: ""; Prop.A_SMPCount.Type: 0; Prop.A_SMPCount.Invisible: FALSE; Prop.A_SMPCount.Verify: FALSE; Prop.A_SMPCount.LangID: 1049; Prop.A_SMPCount.Calendar: 0; 
-    Prop.showThis: "none"; Prop.showThis.Prompt: ""; Prop.showThis.Label: ""; Prop.showThis.Format: ""; Prop.showThis.SortKey: ""; Prop.showThis.Type: 0; Prop.showThis.Invisible: FALSE; Prop.showThis.Verify: FALSE; Prop.showThis.LangID: 1033; Prop.showThis.Calendar: 0; 
+    Prop.Площадь: 1000; Prop.Площадь.Prompt: ""; Prop.Площадь.Label: ""; Prop.Площадь.Format: ""; Prop.Площадь.SortKey: ""; Prop.Площадь.Type: 0; Prop.Площадь.Invisible: FALSE; Prop.Площадь.Verify: FALSE; Prop.Площадь.LangID: 1033; Prop.Площадь.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
-    Tabs.X2: 1; Tabs.Y2: 12,7 мм; Tabs.A2: 0; Tabs.B2: 0; 
-    Tabs.X3: 0; 
   Section: User>>>
     User.IndexPers: 500; User.IndexPers.Prompt: ""; 
-    User.TextPattern: "<div style='display: $showThis$'>123</div>
-<div hidden>456: $txt$</div>
-<h1>$Название$</h1>
+    User.TextPattern: "<h1>$Название$</h1>
+<h2>Заголовки:</h2>
+<table border='1' width='100%'>
+<tr>
+<th>Код разметки</th><th>Результат</th>
+</tr>
+<tr>
+<td><code>&lt;h1&gt;Заголовок 1 уровня&lt;/h1&gt;<br/>
+&lt;h1&gt;Заголовок 2 уровня&lt;/h1&gt;<br>
+&lt;h1&gt;Заголовок 3 уровня&lt;/h1&gt;<br/>
+&lt;h1&gt;Заголовок 4 уровня&lt;/h1&gt;
+</code>
+</td>
+<td>
+<h1>Заголовок 1 уровня</h1>
+<h2>Заголовок 2 уровня</h2>
+<h3>Заголовок 3 уровня</h3>
+<h4>Заголовок 4 уровня</h4>
+</td>
+</tr>
+</table>
+
+<h2>Формат текста:</h2>
+<table border='1' width='100%'>
+<tr>
+<th>Код разметки</th><th>Результат</th>
+</tr>
+<tr>
+<td><code>&lt;b&gt;Жирный&lt;/b&gt;<br/>
+&lt;i&gt;Курсив&lt;/i&gt;<br/>
+&lt;u&gt;Подчеркнутый&lt;/u&gt;<br/>
+&lt;sub&gt;Подстрочный&lt;/sub&gt;<br/>
+&lt;sup&gt;Надстрочный&lt;/sup&gt;
+</code>
+</td>
+<td>
+<b>Жирный</b></br>
+<i>Курсив</i></br>
+<u>Подчеркнутый</u><br/>
+ТЕКСТ<sub>Подстрочный</sub><br/>
+ТЕКСТ<sup>Надстрочный</sup>
+</td>
+</tr>
+</table>
+
+<h2>Абзац:</h2>
+<table border='1' width='100%'>
+<tr>
+<th>Код разметки</th><th>Результат</th>
+</tr>
+<tr>
+<td><code>&lt;p&gt;Основной текст абзаца&lt;/p&gt;<br/>
+&lt;p align='center'&gt;Абзац выровненный по середине&lt;/p&gt;
+</code>
+</td>
+<td>
+<p>Основной текст абзаца</p>
+<p align='center'>Абзац выровненный по середине</p>
+</td>
+</tr>
+</table>
+
+<h2>Переносы и линии:</h2>
+<table border='1' width='100%'>
+<tr>
+<th>Код разметки</th><th>Результат</th>
+</tr>
+<tr>
+<td><code>Перенос &lt;br/&gt; текста<br/>
+Горизонтальная линия &lt;hr/&gt;
+</code>
+</td>
+<td>
+Перенос <br/> текста<br/><br/>
+Горизонтальная линия<hr/><br/>
+</td>
+</tr>
+</table>
+
+<h2>Списки</h2>
+<table border='1' width='100%'>
+<tr>
+<th>Код разметки</th><th>Результат</th>
+</tr>
+<tr>
+<td><code>
+Простой список:<br/>
+&lt;ul&gt;<br/>
+&lt;li>Элемент 1&lt;/li&gt;<br/>
+&lt;li>Элемент 2&lt;/li&gt;<br/>
+&lt;/ul&gt;</code>
+</td>
+<td>
+<ul>
+<li>Элемент 1</li>
+<li>Элемент 2</li>
+</ul></td>
+</tr>
+<tr>
+<td><code>
+Нумерованный список:<br/>
+&lt;ol&gt;<br/>
+&lt;li>Элемент 1&lt;/li&gt;<br/>
+&lt;li>Элемент 2&lt;/li&gt;<br/>
+&lt;/ol&gt;</code>
+</td>
+<td>
+<ol>
+<li>Элемент 1</li>
+<li>Элемент 2</li>
+</ol></td>
+</tr>
+</table>
+
+<h2>Таблицы</h2>
+<table border='1' width='100%'>
+<tr>
+<th>Код разметки</th><th>Результат</th>
+</tr>
+<tr>
+<td><code>
+&lt;table  border='1' width='100%' &gt;<br/>
+&lt;tr&gt;<br/>
+&lt;td&gt; Ячейка 1 &lt;/td&gt;<br/>
+&lt;td&gt; Ячейка 2 &lt;/td&gt;<br/>
+&lt;/tr&gt;<br/>
+&lt;/table&gt;
+</code>
+</td>
+<td>
+<table border='1' width='100%'>
+<tr>
+<td>Ячейка 1
+</td>
+<td>Ячейка 2
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<hr/>
+<h1>Вставка значений из фигур:</h1>
+<p>Для вствки значений из ячеек формул фигуры следует указать название ячейки охватив ее знаком $ </p>
+<p><b>Например:</b><br/>
+'$Площадь $' (<i>без пробела в конце</i>) - в итоговом тексте вместо этого выражения будет вставлено значение ячейки 'Prop.Площадь': <b>$Площадь$</b>.
+</p>
+<p style='color: red'>Важно - вставляются только значения ячеек из секции Prop (Данные фигуры)</p>
+
+<hr/>
+<h1>Пример разметки для формул:</h1>
+
+
+
 <h2>Площадь фигуры равна:</h2>
 <p align='center'><b>S<sub>ф</sub>=a x b</b></p>
 <p>где S<sub>ф</sub> - площадь фигуры, мм<sup>2</sup>, a - длина фигуры, мм, b - ширина фигуры, мм</p>
 <p align='center'>S<sub>ф</sub>=$Height$ x $Width$ = $Square$ мм<sup>2</sup></p>
-<hr/>
-<h2>Периметр = $Perimeter$</h2>
-<h2>Данные полученные из анализатора:</h2>
-<ul>
-<li>Количество АЦ: $A_ACCount$</li>
-<li>Количество водяных стволов: $A_StvolWHave$</li>
-<li>Время возникновения: $A_FireTime$</li>
-<li>Специальных ПА: $A_SpecialPAHave$</li>
-</ul>
-<h1>Заголовок еще один</h1>
-<ol>
-<li>Количество АЦ: $A_ACCount$</li>
-<li>Количество водяных стволов: $A_StvolWHave$</li>
-<li>Время возникновения: $A_FireTime$</li>
-<li>Специальных ПА: $A_SpecialPAHave$</li>
-</ol>"; User.TextPattern.Prompt: "Исходный код HTML"; 
-    User.DataChangeAction: ""; User.DataChangeAction.Prompt: Prop.Width&Prop.Height&Prop.Square&Prop.txt&Prop.Название&Prop.Perimeter&Prop.A_ACCount&Prop.TargetPageIndex&Prop.A_StvolWHave&Prop.A_FireTime&Prop.A_RSCHSTechincsHave&Prop.A_MainPAHave&Prop.A_SpecialPAHave&Prop.A_ACNeed&Prop.A_AGCount&Prop.A_SMPCount&Prop.showThis; 
+
+<h1>ВАЖНЫЕ ЗАМЕЧАНИЯ</h1>
+<p>Не все значения отражающиеся на странице html могут быть перенесены в текст фигур!<br/>
+<b>Не переносятся:</b> горизонтальные линии и таблицы</p>
+<p>Не переносятся стилизованные ячейки. Например, выделенные цветом.</p>
+<p>Вы можете добавлять или удалять любые строки секции Prop. Но настоятельно не рекомендуется удалять строку <b>TargetPageIndex</b> ('Страница анализа'). Она требуется для идентификации целевых страниц анализа.</p>"; User.TextPattern.Prompt: "Исходный код HTML"; 
+    User.DataChangeAction: ""; User.DataChangeAction.Prompt: Prop.Название&Prop.TargetPageIndex&Prop.Площадь; 
   Section Object, row: visRowEvent>>>
     
   Section Object, row: visRowFill>>>
@@ -735,7 +405,99 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXFormOut>>>
-    PinX: 17 м; PinY: 14,2 м; Width: 34 м; Height: 28,4 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: 17 м; PinY: 50,2 м; Width: 34 м; Height: 100,4 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+
+=>sheet: Пустая
+  Section: Character>>>
+    Char.Font: 4; Char.Color: 0; Char.Style: 0; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 12 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 0; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPage>>>
+    PageWidth: 34 м; PageHeight: 4 м; ShdwOffsetX: 3 мм; ShdwOffsetY: -3 мм; PageScale: 5 мм; DrawingScale: 1 м; DrawingSizeType: 4; DrawingScaleType: 4; _Unused5F: 0; _Unused60: 0; InhibitSnap: FALSE; UIVisibility: 0; ShdwType: 0; ShdwObliqueAngle: 0 град; ShdwScaleFactor: 100%; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 0 мм; RightMargin: 0 мм; TopMargin: 0 мм; BottomMargin: 0 мм; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+
+=>sheet: Вариант 5.97
+  Section: Action>>>
+    Actions.ShowData: "Редактировать исходный код"; Actions.ShowData._Unused1: ""; Actions.ShowData._Unused2: ""; Actions.ShowData.Action: CALLTHIS("ShowData";"Формулы";User.TextPattern); Actions.ShowData.Checked: 0; Actions.ShowData.Disabled: 0; Actions.ShowData.ReadOnly: FALSE; Actions.ShowData.Invisible: FALSE; Actions.ShowData.BeginGroup: FALSE; Actions.ShowData.TagName: ""; Actions.ShowData.ButtonFace: 1401; Actions.ShowData.SortKey: 20; 
+    Actions.ShowDataInShape: "Отображать результат в фигуре"; Actions.ShowDataInShape._Unused1: ""; Actions.ShowDataInShape._Unused2: ""; Actions.ShowDataInShape.Action: SETF("Actions.ShowDataInShape.Checked";NOT(Actions.ShowDataInShape.Checked)); Actions.ShowDataInShape.Checked: 0; Actions.ShowDataInShape.Disabled: 0; Actions.ShowDataInShape.ReadOnly: FALSE; Actions.ShowDataInShape.Invisible: TRUE; Actions.ShowDataInShape.BeginGroup: FALSE; Actions.ShowDataInShape.TagName: ""; Actions.ShowDataInShape.ButtonFace: ""; Actions.ShowDataInShape.SortKey: 21; 
+    Actions.AnalizedCellAdd: "Добавить анализируемую ячейку"; Actions.AnalizedCellAdd._Unused1: ""; Actions.AnalizedCellAdd._Unused2: ""; Actions.AnalizedCellAdd.Action: CALLTHIS("ShowAElemAddForm";"Формулы"); Actions.AnalizedCellAdd.Checked: 0; Actions.AnalizedCellAdd.Disabled: 0; Actions.AnalizedCellAdd.ReadOnly: FALSE; Actions.AnalizedCellAdd.Invisible: FALSE; Actions.AnalizedCellAdd.BeginGroup: TRUE; Actions.AnalizedCellAdd.TagName: ""; Actions.AnalizedCellAdd.ButtonFace: 2163; Actions.AnalizedCellAdd.SortKey: 30; 
+    Actions.Refresh: "Обновить формулу"; Actions.Refresh._Unused1: ""; Actions.Refresh._Unused2: ""; Actions.Refresh.Action: CALLTHIS("ShowDataInShape";"Формулы";User.TextPattern); Actions.Refresh.Checked: 0; Actions.Refresh.Disabled: 0; Actions.Refresh.ReadOnly: FALSE; Actions.Refresh.Invisible: FALSE; Actions.Refresh.BeginGroup: FALSE; Actions.Refresh.TagName: ""; Actions.Refresh.ButtonFace: 1977; Actions.Refresh.SortKey: 10; 
+  Section: Character>>>
+    Char.Font: 23; Char.Color: 0; Char.Style: 17; Char.Case: 0; Char.Pos: 0; Char.FontScale: 100%; Char._Unused6: 0; Char.Size: 24 пт; Char.DblUnderline: FALSE; Char.Overline: FALSE; Char.Strikethru: FALSE; Char.Highlight: FALSE; Char._Unused12: FALSE; Char.DoubleStrikethrough: FALSE; Char.RTLText: FALSE; Char.UseVertical: FALSE; Char.Letterspace: 0 пт; Char.ColorTrans: 0%; Char.AsianFont: 0; Char.ComplexScriptFont: 23; Char.LocalizeFont: 0; Char.ComplexScriptSize: -100%; Char.LangID: 1049; 
+    Char.Font[2]: 23; Char.Color[2]: 0; Char.Style[2]: 0; Char.Case[2]: 0; Char.Pos[2]: 0; Char.FontScale[2]: 100%; Char._Unused6[2]: 0; Char.Size[2]: 12 пт; Char.DblUnderline[2]: FALSE; Char.Overline[2]: FALSE; Char.Strikethru[2]: FALSE; Char.Highlight[2]: FALSE; Char._Unused12[2]: FALSE; Char.DoubleStrikethrough[2]: FALSE; Char.RTLText[2]: FALSE; Char.UseVertical[2]: FALSE; Char.Letterspace[2]: 0 пт; Char.ColorTrans[2]: 0%; Char.AsianFont[2]: 0; Char.ComplexScriptFont[2]: 23; Char.LocalizeFont[2]: 0; Char.ComplexScriptSize[2]: -100%; Char.LangID[2]: 1033; 
+  Section: FirstComponent>>>
+    Geometry1.NoFill: FALSE; Geometry1.NoLine: FALSE; Geometry1.NoShow: FALSE; Geometry1.NoSnap: FALSE; 
+    Geometry1.X1: Width*0; Geometry1.Y1: Height*0; 
+    Geometry1.X2: Width*1; Geometry1.Y2: Height*0; 
+    Geometry1.X3: Width*1; Geometry1.Y3: Height*1; 
+    Geometry1.X4: Width*0; Geometry1.Y4: Height*1; 
+    Geometry1.X5: Geometry1.X1; Geometry1.Y5: Geometry1.Y1; 
+  Section: Paragraph>>>
+    Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 5 пт; Para.SpAfter: 5 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: 12 пт; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
+  Section: Prop>>>
+    Prop.Название: "Пустая формула"; Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
+    Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 10; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
+  Section: Tab>>>
+    Tabs.X1: 0; 
+  Section: User>>>
+    User.IndexPers: 500; User.IndexPers.Prompt: ""; 
+    User.TextPattern: "<h1>$Название$</h1>"; User.TextPattern.Prompt: "Исходный код HTML"; 
+    User.DataChangeAction: ""; User.DataChangeAction.Prompt: Prop.Название&Prop.TargetPageIndex; 
+  Section Object, row: visRowEvent>>>
+    
+  Section Object, row: visRowFill>>>
+    FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
+  Section Object, row: visRowGroup>>>
+    SelectMode: 1; DisplayMode: 2; IsDropTarget: FALSE; IsSnapTarget: TRUE; IsTextEditTarget: TRUE; DontMoveChildren: FALSE; 
+  Section Object, row: visRowHelpCopyright>>>
+    HelpTopic: ""; Copyright: ""; Sect1.A17: ""; Sect1.B17: ""; 
+  Section Object, row: visRowImage>>>
+    Gamma: 1; Contrast: 50%; Brightness: 50%; Sharpen: 0%; Blur: 0%; Denoise: 0%; Transparency: 0%; _Unused8F: 0%; _Unused90: 0; 
+  Section Object, row: visRowLine>>>
+    LineWeight: 0,72 пт; LineColor: 0; LinePattern: 1; Rounding: 0 м; EndArrowSize: 2; BeginArrow: 0; EndArrow: 0; LineCap: 0; BeginArrowSize: 2; LineColorTrans: 0%; 
+  Section Object, row: visRowLock>>>
+    LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 0; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 0; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
+  Section Object, row: visRowMisc>>>
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: ""; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+  Section Object, row: visRowPageLayout>>>
+    ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
+  Section Object, row: visRowPrintProperties>>>
+    PageLeftMargin: 6,35 мм; PageRightMargin: 6,35 мм; PageTopMargin: 6,35 мм; PageBottomMargin: 6,35 мм; ScaleX: 100%; ScaleY: 100%; PagesX: 1; PagesY: 1; CenterX: FALSE; CenterY: FALSE; OnPage: FALSE; PrintGrid: FALSE; PrintPageOrientation: 1; PaperKind: 9; PaperSource: 7; 
+  Section Object, row: visRowShapeLayout>>>
+    ShapePermeableX: FALSE; ShapePermeableY: FALSE; ShapePermeablePlace: FALSE; Sect1.B24: FALSE; Sect1.C24: FALSE; Sect1.D24: FALSE; Sect1.E24: FALSE; Sect1.F24: FALSE; ShapeFixedCode: 0; ShapePlowCode: 0; ShapeRouteStyle: 0; ShapePlaceStyle: 0; ConFixedCode: 0; ConLineJumpCode: 0; ConLineJumpStyle: 0; ShapePlaceDepth: 0; ConLineJumpDirX: 0; ConLineJumpDirY: 0; ShapePlaceFlip: 0; ConLineRouteExt: 0; ShapeSplit: 0; ShapeSplittable: 0; 
+  Section Object, row: visRowStyle>>>
+    EnableLineProps: 1; EnableFillProps: 1; EnableTextProps: 1; HideForApply: FALSE; 
+  Section Object, row: visRowText>>>
+    LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
+  Section Object, row: visRowXFormOut>>>
+    PinX: 17 м; PinY: 2 м; Width: 34 м; Height: 4 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Нет стиля
   Section: Character>>>
