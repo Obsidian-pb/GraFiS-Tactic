@@ -48,6 +48,10 @@ Public Sub ShowAElemAddForm(ByRef shp As Visio.Shape)
     f_InsertAnalizedCell.ShowMe shp
 End Sub
 
+Public Sub ShowLinkToCellForm(ByRef shp As Visio.Shape)
+    f_LinkToCell.ShowMe shp
+End Sub
+
 'Public Sub TTT()
 'Dim arr  As Variant
 ''»спользовать это дл€ получени€ списка элементов анализа в форме добавлени€ €чеек дл€ анализа

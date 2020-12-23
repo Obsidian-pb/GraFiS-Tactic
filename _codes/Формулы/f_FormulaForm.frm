@@ -184,7 +184,7 @@ End Sub
 
 Private Function PatternToHTML(ByVal htmlText As String) As String
 '‘ункци€ чистит код исходника HTML и замен€ет вставленные ссылки на €чейки фигуры фактическими их значени€ми
-Dim cll As Visio.Cell
+Dim cll As Visio.cell
 Dim i As Integer
 Dim targetPageIndex As Integer
     
