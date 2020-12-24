@@ -74,6 +74,29 @@ ex:
 
 End Sub
 
+Public Function ShapeHaveCell(ByRef shp As Visio.Shape, ByVal cellName As String, _
+                              Optional ByVal val As Variant = "") As Boolean
+On Error GoTo ex
+    
+    If shp.CellExists(cellName, 0) Then
+        If val <> "" Then
+            If shp.Cells(cellName).ResultStr(visUnitsString) = val Then
+                ShapeHaveCell = True
+            Else
+                ShapeHaveCell = False
+            End If
+        Else
+            ShapeHaveCell = True
+        End If
+    Else
+        ShapeHaveCell = False
+    End If
+    
+Exit Function
+ex:
+    ShapeHaveCell = False
+End Function
+
 Public Sub FixLineGroupProportions()
 'Main sub for fixation the line width of each shape in groupe
 Dim shp As Visio.Shape

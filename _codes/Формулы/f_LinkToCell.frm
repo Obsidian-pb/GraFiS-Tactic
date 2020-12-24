@@ -31,12 +31,19 @@ Private Sub cb_Save_Click()
 End Sub
 
 Private Sub lb_FormulaShapes_Change()
-    'Debug.Print Me.lb_FormulaShapes.ListIndex
     If Me.lb_FormulaShapes.ListIndex < 0 Then Exit Sub
     FillFormulaList frmlShapesColl(Me.lb_FormulaShapes.ListIndex + 1)
 End Sub
 
 
+
+Private Sub lb_FormulaShapes_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
+Dim sourceShp As Visio.Shape
+    
+    Set sourceShp = frmlShapesColl(Me.lb_FormulaShapes.ListIndex + 1)
+    Application.ActiveWindow.ScrollViewTo sourceShp.Cells("PinX"), sourceShp.Cells("PinY")
+
+End Sub
 
 Private Sub UserForm_Activate()
     FillShapesList
@@ -90,14 +97,18 @@ End Sub
 Private Sub SaveLink()
 Dim i As Integer
 Dim rowI As Integer
+Dim rowName As String
 Dim sourceShp As Visio.Shape
+Dim frml As String
     
     Set sourceShp = frmlShapesColl(Me.lb_FormulaShapes.ListIndex + 1)
     For i = 0 To Me.lb_Cells.ListCount - 1
         If Me.lb_Cells.Selected(i) Then
-            If formShape.CellExists("Prop." & Me.lb_Cells.List(i, 0), 0) = 0 Then
-                rowI = formShape.AddNamedRow(visSectionProp, Me.lb_Cells.List(i, 0) & "_" & sourceShp.ID, visTagDefault)
-'                formShape.CellsSRC(visSectionProp, rowI, visCustPropsLabel).FormulaU = """" & Me.lb_AElements.List(i, 1) & """" sourceShp
+            rowName = Me.lb_Cells.List(i, 0) & "_" & sourceShp.ID
+            If Not ShapeHaveCell(formShape, "Prop." & rowName) Then
+                rowI = formShape.AddNamedRow(visSectionProp, rowName, visTagDefault)
+                frml = "Sheet." & sourceShp.ID & "!Prop." & Me.lb_Cells.List(i, 0)
+                formShape.CellsSRC(visSectionProp, rowI, visCustPropsValue).FormulaU = frml
             End If
         End If
     Next i
