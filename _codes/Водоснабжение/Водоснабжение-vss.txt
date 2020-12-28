@@ -381,7 +381,7 @@
     Prop.Common: ""; Prop.Common.Prompt: "Общие сведения импортированные из других источников"; Prop.Common.Label: "Общие сведения"; Prop.Common.Format: ""; Prop.Common.SortKey: 40; Prop.Common.Type: 0; Prop.Common.Invisible: LEN(Prop.Common)=0; Prop.Common.Verify: FALSE; Prop.Common.LangID: 1049; Prop.Common.Calendar: 0; 
     Prop.PKNumber: ""; Prop.PKNumber.Prompt: "Номер пожарного водоема"; Prop.PKNumber.Label: "Номер ПК"; Prop.PKNumber.Format: ""; Prop.PKNumber.SortKey: 20; Prop.PKNumber.Type: 0; Prop.PKNumber.Invisible: FALSE; Prop.PKNumber.Verify: FALSE; Prop.PKNumber.LangID: 1049; 
     Prop.PKDiameter: ""; Prop.PKDiameter.Prompt: "Диаметр полугаки"; Prop.PKDiameter.Label: "Диаметр полугайки"; Prop.PKDiameter.Format: ""; Prop.PKDiameter.SortKey: 30; Prop.PKDiameter.Type: 2; Prop.PKDiameter.Invisible: FALSE; Prop.PKDiameter.Verify: FALSE; Prop.PKDiameter.LangID: 1049; 
-    Prop.StreamIn: ""; Prop.StreamIn.Prompt: "Водоотдача ПК"; Prop.StreamIn.Label: "Водоотдача ПК"; Prop.StreamIn.Format: ""; Prop.StreamIn.SortKey: 31; Prop.StreamIn.Type: 2; Prop.StreamIn.Invisible: FALSE; Prop.StreamIn.Verify: FALSE; Prop.StreamIn.LangID: 1049; 
+    Prop.StreamOut: ""; Prop.StreamOut.Prompt: "Водоотдача ПК"; Prop.StreamOut.Label: "Водоотдача ПК"; Prop.StreamOut.Format: ""; Prop.StreamOut.SortKey: 31; Prop.StreamOut.Type: 2; Prop.StreamOut.Invisible: FALSE; Prop.StreamOut.Verify: FALSE; Prop.StreamOut.LangID: 1049; 
     Prop.Radius: 200 м; Prop.Radius.Prompt: "Расстояние от водоисточника, м"; Prop.Radius.Label: "Радиус"; Prop.Radius.Format: ""; Prop.Radius.SortKey: 51; Prop.Radius.Type: 2; Prop.Radius.Invisible: FALSE; Prop.Radius.Verify: FALSE; Prop.Radius.LangID: 1049; Prop.Radius.Calendar: 0; 
     Prop.Coordinates: 0; Prop.Coordinates.Prompt: "Координаты ПК (широта, долгота)"; Prop.Coordinates.Label: "Координаты (широта, долгота)"; Prop.Coordinates.Format: ""; Prop.Coordinates.SortKey: 50; Prop.Coordinates.Type: 0; Prop.Coordinates.Invisible: FALSE; Prop.Coordinates.Verify: FALSE; Prop.Coordinates.LangID: 1049; Prop.Coordinates.Calendar: 0; 
   Section: Tab>>>
@@ -411,7 +411,7 @@
   Section Object, row: visRowLock>>>
     LockWidth: 0; LockHeight: 0; LockMoveX: 0; LockMoveY: 0; LockAspect: 1; LockDelete: 0; LockBegin: 0; LockEnd: 0; LockRotate: 0; LockCrop: 0; LockVtxEdit: 0; LockTextEdit: 1; LockFormat: 0; LockGroup: 0; LockCalcWH: 0; LockSelect: 0; LockCustProp: 0; LockFromGroupFormat: 0; LockThemeColors: 0; LockThemeEffects: 0; 
   Section Object, row: visRowMisc>>>
-    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: "Пожарный кран №"&Prop.PKNumber&", "&CHAR(13)&"Водоотдача ПК: "&Prop.StreamIn&"л/с"; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
+    NoObjHandles: FALSE; NonPrinting: FALSE; NoCtlHandles: FALSE; NoAlignBox: FALSE; UpdateAlignBox: FALSE; HideText: FALSE; _Unused83: FALSE; ShapeTabStop: FALSE; DynFeedback: 0; GlueType: 0; WalkPreference: 0; ObjType: 0; _Unused78: 0; _Unused79: 0; Comment: "Пожарный кран №"&Prop.PKNumber&", "&CHAR(13)&"Водоотдача ПК: "&Prop.StreamOut&"л/с"; IsDropSource: FALSE; NoLiveDynamics: FALSE; LocalizeMerge: FALSE; Sect1.S18: FALSE; Sect1.T18: FALSE; Sect1.U18: FALSE; Sect1.V18: FALSE; Sect1.W18: FALSE; Calendar: 0; LangID: 1049; ShapeKeywords: ""; DropOnPageScale: 100%; 
   Section Object, row: visRowPageLayout>>>
     ResizePage: FALSE; EnableGrid: FALSE; DynamicsOff: FALSE; CtrlAsInput: FALSE; Sect1.C25: FALSE; Sect1.D25: FALSE; Sect1.E25: FALSE; Sect1.F25: FALSE; PlaceStyle: 0; RouteStyle: 0; PlaceDepth: 0; PlowCode: 0; LineJumpCode: 1; LineJumpStyle: 0; PageLineJumpDirX: 0; PageLineJumpDirY: 0; LineToNodeX: 0,0025 м; LineToNodeY: 0,0025 м; BlockSizeX: 0,005 м; BlockSizeY: 0,005 м; AvenueSizeX: 0,0075 м; AvenueSizeY: 0,0075 м; LineToLineX: 0,0025 м; LineToLineY: 0,0025 м; LineJumpFactorX: 0,66666666666667; LineJumpFactorY: 0,66666666666667; LineAdjustFrom: 0; LineAdjustTo: 0; PlaceFlip: 0; LineRouteExt: 0; PageShapeSplit: 0; 
   Section Object, row: visRowPrintProperties>>>
@@ -1186,7 +1186,7 @@
     User.Dist2: 0,63; User.Dist2.Prompt: ""; 
     User.ShapeColor2: Styles!ВИ_Емкость!Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
     User.PageScale: (Страница!DrawingScale/Страница!PageScale)/200; User.PageScale.Prompt: ""; 
-    User.DischargeTime: (Prop.WaterContainerValue*Prop.OstKoeff)/(User.GettingFlow); User.DischargeTime.Prompt: ISERR(User.DischargeTime); 
+    User.DischargeTime: (Prop.WaterContainerValue*(1-Prop.OstKoeff))/(User.GettingFlow*60); User.DischargeTime.Prompt: ISERR(User.DischargeTime); 
     User.GettingFlow: Prop.PodOut-Prop.PodIn; User.GettingFlow.Prompt: ""; 
     User.ShapeColor3: Styles!ВИ_Емкость!FillForegnd; User.ShapeColor3.Prompt: "Цвет Заливки"; 
   Section Object, row: visRowEvent>>>
