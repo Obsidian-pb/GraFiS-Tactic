@@ -144,7 +144,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет фигуры"; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ID(); 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ID(); 
     User.IndexPers: 63; User.IndexPers.Prompt: Sheet.6!Fields.Value; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 

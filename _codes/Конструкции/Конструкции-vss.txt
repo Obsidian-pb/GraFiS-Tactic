@@ -2025,7 +2025,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.IndexPers: 82; User.IndexPers.Prompt: ""; 
-    User.Rotate: IF(OR(Angle>90 град;Angle<-89 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.Version: 1; User.Version.Prompt: ""; 
     User.Size200: 200/(Страница!DrawingScale/Страница!PageScale); User.Size200.Prompt: ""; 
   Section Object, row: visRowEvent>>>

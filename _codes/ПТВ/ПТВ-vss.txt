@@ -177,7 +177,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 34; User.IndexPers.Prompt: "Ствол: "&IF(STRSAME(Prop.TTHType;"Стандартные");Prop.StvolTypeS;Prop.StvolType)&", "&IF(STRSAME(Prop.TTHType;"Стандартные");Prop.DiameterInS;Prop.DiameterIn); 
     User.PodOut: GUARD(IF(STRSAME(Prop.TTHType;"Стандартные");Prop.PodOutS;Prop.PodOut)); User.PodOut.Prompt: ""; 
@@ -312,7 +312,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.StreamType: IF(Prop.FoamRF<20;0;"")&IF(AND(Prop.FoamRF>19;Prop.FoamRF<200);1;"")&IF(Prop.FoamRF>199;2;""); User.StreamType.Prompt: "Кратность пены"; 
     User.IndexPers: 35; User.IndexPers.Prompt: User.LabelTop; 
@@ -432,7 +432,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 76; User.IndexPers.Prompt: "Газовый ствол"; 
     User.Version: 1; User.Version.Prompt: ""; 
@@ -684,7 +684,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 77; User.IndexPers.Prompt: "Порошковый ствол"; 
     User.Version: 1; User.Version.Prompt: ""; 
@@ -816,7 +816,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 36; User.IndexPers.Prompt: IF(STRSAME(Prop.TTHType;"Стандартные");Prop.StvolTypeS;Prop.StvolType)&", "&IF(STRSAME(Prop.TTHType;"Стандартные");Prop.DiameterOutS;Prop.Variant); 
     User.PodOut: GUARD(IF(STRSAME(Prop.TTHType;"Стандартные");Prop.PodOutS;Prop.PodOut)); User.PodOut.Prompt: ""; 
@@ -953,7 +953,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.StreamType: IF(Prop.FoamRF<20;0;"")&IF(AND(Prop.FoamRF>19;Prop.FoamRF<200);1;"")&IF(Prop.FoamRF>199;2;""); User.StreamType.Prompt: "Кратность пены"; 
     User.IndexPers: 37; User.IndexPers.Prompt: User.LabelTop; 
@@ -1076,7 +1076,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 38; User.IndexPers.Prompt: "Лафетный порошковый ствол"; 
     User.Version: 1; User.Version.Prompt: ""; 
@@ -1207,7 +1207,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 39; User.IndexPers.Prompt: User.LabelTop; 
     User.PodOut: GUARD(IF(STRSAME(Prop.TTHType;"Стандартные");Prop.PodOutS;Prop.PodOut)); User.PodOut.Prompt: ""; 
@@ -1331,7 +1331,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 40; User.IndexPers.Prompt: "Гидроэлеватор"; 
     User.Version: 1; User.Version.Prompt: ID(); 
@@ -1469,7 +1469,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: IF(User.IsInWorkField;LineColor;2); User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 41; User.IndexPers.Prompt: "Пеносмеситель"; 
     User.Version: 1; User.Version.Prompt: ""; 
@@ -1596,7 +1596,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет фигуры"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
     User.IndexPers: 42; User.IndexPers.Prompt: "Разветвление"; 
@@ -1971,7 +1971,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет фигуры"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
     User.IndexPers: 107; User.IndexPers.Prompt: "Коллектор"; 
@@ -2073,7 +2073,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 21; User.IndexPers.Prompt: "Лестница-палка"; 
     User.Version: 1; User.Version.Prompt: ""; 
@@ -2174,7 +2174,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 43; User.IndexPers.Prompt: "Штурмовая лестница"; 
     User.Version: 1; User.Version.Prompt: ""; 
@@ -2275,7 +2275,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 44; User.IndexPers.Prompt: "Лестницы трехколенная"; 
     User.Version: 1; User.Version.Prompt: ""; 
@@ -2390,7 +2390,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
     User.StreamType: IF(Prop.FoamRF<20;0;"")&IF(AND(Prop.FoamRF>19;Prop.FoamRF<200);1;"")&IF(Prop.FoamRF>199;2;""); User.StreamType.Prompt: ""; 
@@ -2511,7 +2511,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(AND(Angle>-90 град;Angle<90 град);1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.StreamType: IF(Prop.FoamRF<20;0;"")&IF(AND(Prop.FoamRF>19;Prop.FoamRF<200);1;"")&IF(Prop.FoamRF>199;2;""); User.StreamType.Prompt: "Кратность пены"; 
     User.IndexPers: 22; User.IndexPers.Prompt: "Гребенка пеногенераторов"; 
@@ -3061,7 +3061,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет фигуры"; 
     User.IndexPers: 104; User.IndexPers.Prompt: Prop.StvolType; 
     User.PodOut: Prop.PodOut; User.PodOut.Prompt: ""; 

@@ -175,7 +175,7 @@
     Fields.Value: Prop.PipeType&Prop.PipeDiameter&Prop.Pressure; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет контура"; 
-    User.Rotate: IF(OR(Angle>90 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>90 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.TypeString: IF(STRSAME(Prop.PipeType;"Тупиковый");"Т-";"К-")&IF(STRSAME(Prop.ShowDirectProduction;"Явный");Prop.PipeDiameterR;Prop.PipeDiameter); User.TypeString.Prompt: ""; 
     User.IndexPers: 50; User.IndexPers.Prompt: "Пожарный гидрант"; 
     User.Version: 1; User.Version.Prompt: ""; 
@@ -285,7 +285,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет контура"; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>90 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.IndexPers: 51; User.IndexPers.Prompt: "Пожарный водоем"; 
     User.Version: 1; User.Version.Prompt: ""; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
@@ -388,7 +388,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет контура"; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.IndexPers: 52; User.IndexPers.Prompt: "Пожарный кран"; 
     User.Version: 1; User.Version.Prompt: ""; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
@@ -579,7 +579,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.IndexPers: 55; User.IndexPers.Prompt: "Колодец"; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет внешнего контура"; 
     User.ShapeColor2: FillBkgnd; User.ShapeColor2.Prompt: "Цвет внутреннего контура"; 
     User.Version: 1; User.Version.Prompt: ""; 

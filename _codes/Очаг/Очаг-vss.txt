@@ -1582,7 +1582,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.IndexPers: 87; User.IndexPers.Prompt: "Одиночный пожар"; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Подпись номера"; 

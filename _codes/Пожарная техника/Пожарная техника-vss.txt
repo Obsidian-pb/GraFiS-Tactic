@@ -196,7 +196,7 @@
   Section: TextField>>>
     Fields.Value: ""; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.IndexPers: 1; User.IndexPers.Prompt: "АЦ"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -344,7 +344,7 @@
   Section: TextField>>>
     Fields.Value: ""; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.IndexPers: 163; User.IndexPers.Prompt: "АПП"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -489,7 +489,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 2; User.IndexPers.Prompt: "АНР"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -602,7 +602,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 3; User.IndexPers.Prompt: "АЛ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
@@ -719,7 +719,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 4; User.IndexPers.Prompt: Prop.LiftTipe&" подъемник"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -874,7 +874,7 @@
   Section: TextField>>>
     Fields.Value: ""; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.IndexPers: 161; User.IndexPers.Prompt: "АЦЛ"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1037,7 +1037,7 @@
   Section: TextField>>>
     Fields.Value: ""; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.IndexPers: 162; User.IndexPers.Prompt: "АЦКП"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1188,7 +1188,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 9; User.IndexPers.Prompt: "АА"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1302,7 +1302,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 5; User.IndexPers.Prompt: "АСО"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывных"; 
@@ -1419,7 +1419,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 6; User.IndexPers.Prompt: "АТ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -1526,7 +1526,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 7; User.IndexPers.Prompt: "АДУ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -1667,7 +1667,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 8; User.IndexPers.Prompt: "ПНС"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1806,7 +1806,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 10; User.IndexPers.Prompt: "АВ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1948,7 +1948,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 11; User.IndexPers.Prompt: "АКТ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -2076,7 +2076,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 12; User.IndexPers.Prompt: "АП"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -2212,7 +2212,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 13; User.IndexPers.Prompt: "АГВТ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -2331,7 +2331,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 14; User.IndexPers.Prompt: "АГ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -2453,7 +2453,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 15; User.IndexPers.Prompt: "АГДЗС"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2559,7 +2559,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 16; User.IndexPers.Prompt: "КС"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2664,7 +2664,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 17; User.IndexPers.Prompt: "ЛБ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2779,7 +2779,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 18; User.IndexPers.Prompt: "АСА"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2885,7 +2885,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 19; User.IndexPers.Prompt: "АШ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -3015,7 +3015,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 20; User.IndexPers.Prompt: "АР"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -3133,7 +3133,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 160; User.IndexPers.Prompt: Prop.Type; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 

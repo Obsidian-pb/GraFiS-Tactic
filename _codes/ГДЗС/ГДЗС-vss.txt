@@ -191,7 +191,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.ShapeColor: 4; User.ShapeColor.Prompt: ""; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
     User.IndexPers: 46; User.IndexPers.Prompt: "Звено ГДЗС (ДАСВ)"; 
@@ -338,7 +338,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.ShapeColor: 4; User.ShapeColor.Prompt: ""; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
     User.IndexPers: 90; User.IndexPers.Prompt: "Звено ГДЗС (ДАСК)"; 
@@ -446,7 +446,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.ShapeColor: 2; User.ShapeColor.Prompt: ""; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.IndexPers: 47; User.IndexPers.Prompt: "Пост ГДЗС"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: FillForegnd; User.ShapeColor2.Prompt: "Цвет заливки"; 
@@ -548,7 +548,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.IndexPers: 48; User.IndexPers.Prompt: "КПП ГДЗС"; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: FillForegnd; User.ShapeColor2.Prompt: "Цвет заливки"; 
     User.ShapeColor3: Char.Color; User.ShapeColor3.Prompt: "Цвет позывного"; 
@@ -656,7 +656,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.IndexPers: 49; User.IndexPers.Prompt: "Дымосос"; 
-    User.Rotate: IF(OR(Angle>89 град;Angle<-90 град);1;0); User.Rotate.Prompt: ""; 
+    User.Rotate: IF(AND(ANG360(Angle)>89 град;ANG360(Angle)<270 град);1;0); User.Rotate.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: FillBkgnd; User.ShapeColor2.Prompt: "Цвет подписи"; 
     User.Version: 1; User.Version.Prompt: ""; 

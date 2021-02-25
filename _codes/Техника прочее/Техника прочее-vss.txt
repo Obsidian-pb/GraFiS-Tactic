@@ -152,7 +152,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 73; User.IndexPers.Prompt: "Машина на гусеничном ходу"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -256,7 +256,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 74; User.IndexPers.Prompt: "Танк"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -365,7 +365,7 @@
     User.ShapeColor3: FillForegnd; User.ShapeColor3.Prompt: "Цвет содержимого"; 
     User.ShapeColor4: FillBkgnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
     User.LabelBottom: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";"")&IF(AND(OR(Actions.UnitShow.Checked;Actions.CallShow.Checked);Actions.ArrivalTimeShow.Checked);CHAR(10);"")&IF(Actions.ArrivalTimeShow.Checked;FORMAT(Prop.ArrivalTime;"HH:mm");""); User.LabelBottom.Prompt: "Подпись"; 
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.InnerLetter: Prop.TypeLetter; User.InnerLetter.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("BaseListsRefresh";"Техника_прочее")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
@@ -468,7 +468,7 @@
     User.ShapeColor3: FillForegnd; User.ShapeColor3.Prompt: "Цвет содержимого"; 
     User.ShapeColor4: FillBkgnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
     User.LabelBottom: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";"")&IF(AND(OR(Actions.UnitShow.Checked;Actions.CallShow.Checked);Actions.ArrivalTimeShow.Checked);CHAR(10);"")&IF(Actions.ArrivalTimeShow.Checked;FORMAT(Prop.ArrivalTime;"HH:mm");""); User.LabelBottom.Prompt: "Подпись"; 
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: DOCMD(1312)+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
@@ -570,7 +570,7 @@
     User.ShapeColor3: 2; User.ShapeColor3.Prompt: "Цвет содержимого"; 
     User.ShapeColor4: FillBkgnd; User.ShapeColor4.Prompt: "Цвет заливки"; 
     User.LabelBottom: IF(Actions.UnitShow.Checked;Prop.Unit;"")&IF(Actions.CallShow.Checked;"("&Prop.Call&")";"")&IF(AND(OR(Actions.UnitShow.Checked;Actions.CallShow.Checked);Actions.ArrivalTimeShow.Checked);CHAR(10);"")&IF(Actions.ArrivalTimeShow.Checked;FORMAT(Prop.ArrivalTime;"HH:mm");""); User.LabelBottom.Prompt: "Подпись"; 
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: DOCMD(1312)+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
@@ -692,7 +692,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 24; User.IndexPers.Prompt: "Поезд"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -795,7 +795,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 25; User.IndexPers.Prompt: "Пожарный самолет"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -896,7 +896,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 26; User.IndexPers.Prompt: "Пожарный гидросамолет"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -997,7 +997,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: OR(Angle<-90 град;Angle>90 град); 
+    User.DownOrient: AND(ANG360(Angle)>90 град;ANG360(Angle)<270 град); 
     User.IndexPers: 27; User.IndexPers.Prompt: "Пожарный вертолет"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: ""; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: ""; 
@@ -1119,7 +1119,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: OR(Angle>90 град;Angle<-90 град); User.DownOrient.Prompt: ""; 
+    User.DownOrient: AND(ANG360(Angle)>90 град;ANG360(Angle)<270 град); User.DownOrient.Prompt: ""; 
     User.IndexPers: 28; User.IndexPers.Prompt: "Мотопомпа"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1231,7 +1231,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 29; User.IndexPers.Prompt: "Пожарный прицеп"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -1356,7 +1356,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 30; User.IndexPers.Prompt: "Пожарный корабль"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -1483,7 +1483,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 31; User.IndexPers.Prompt: "Пожарный катер"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -1589,7 +1589,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 32; User.IndexPers.Prompt: Prop.Model; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: FillForegnd; User.ShapeColor2.Prompt: "Цвет полосы"; 
@@ -1685,7 +1685,7 @@
   Section: User>>>
     User.IndexPers: 33; User.IndexPers.Prompt: ""; 
     User.Version: 1; User.Version.Prompt: ""; 
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); EventDrop: DOCMD(1312)+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
