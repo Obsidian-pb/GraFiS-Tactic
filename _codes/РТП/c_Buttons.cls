@@ -30,7 +30,7 @@ Private Sub ComButCommand_Click(ByVal Ctrl As Office.CommandBarButton, CancelDef
     On Error GoTo Tail
     
 '---Запускаем основное событие
-    frm_Command.Show
+    frm_Command.NewCommand
 Tail:
     '---Выходим из процедуры обработки
 End Sub
