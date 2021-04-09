@@ -17,11 +17,11 @@
     User.Ifc__CustomPropsLevel: 0; 
     User.FireTime: NOW(); User.FireTime.Prompt: ""; 
     
-    User.CurrentTime: User.FireTime; User.CurrentTime.Prompt: ""; 
+    User.CurrentTime: DATETIME(44295,507800926); User.CurrentTime.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     
   Section Object, row: visRowDoc>>>
-    OutputFormat: 0; LockPreview: FALSE; Metric: TRUE; AddMarkup: FALSE; ViewMarkup: FALSE; PreviewQuality: 0; PreviewScope: 1; DocLangID: 1049; 
+    OutputFormat: 0; LockPreview: FALSE; Metric: TRUE; AddMarkup: FALSE; ViewMarkup: FALSE; PreviewQuality: 0; PreviewScope: 0; DocLangID: 1049; 
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>

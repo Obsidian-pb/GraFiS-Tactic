@@ -22,6 +22,8 @@ Const delimiter = " | "
 
 
 
+
+
 Private Sub UserForm_Activate()
 '    If Application.ActiveWindow.Selection.Count <> 1 Then Exit Sub
 '
@@ -98,6 +100,22 @@ Private Sub btn_Cancel_Click()
     Me.Hide
 End Sub
 
+'Кнопка Удалить
+Private Sub btn_Delete_Click()
+Dim targetCellNameShort As String
+    
+    ' Есл целевой ячейки нет, значит, нужно просто отменить действие
+    If targetCellName = "" Then
+        Me.Hide
+    Else
+        targetCellNameShort = Split(targetCellName, ".")(1)
+        
+'        shp.DeleteRow(
+    End If
+    
+    
+    
+End Sub
 
 Private Function GetCurrentTime() As String
     GetCurrentTime = Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").ResultStr(visUnitsString)
