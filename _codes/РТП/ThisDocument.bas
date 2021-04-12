@@ -10,12 +10,12 @@ Attribute VB_Exposed = True
 
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
-    AddTBImagination
+    AddTB
     AddButtons
 End Sub
 
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     DeleteButtons
-    RemoveTBImagination
+    RemoveTB
 End Sub

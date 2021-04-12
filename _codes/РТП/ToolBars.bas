@@ -4,7 +4,7 @@ Option Explicit
 Private btns As c_Buttons
 
 
-Sub AddTBImagination()
+Sub AddTB()
 'Процедура добавления панели управления "РТП"-------------------------------
 Dim i As Integer
 '---Объявляем переменные и постоянные--------------------------------------------------
@@ -24,7 +24,7 @@ Dim i As Integer
 
 End Sub
 
-Sub RemoveTBImagination()
+Sub RemoveTB()
 'Процедура добавления панели управления "РТП"-------------------------------
     On Error Resume Next
     Application.CommandBars("РТП").Delete

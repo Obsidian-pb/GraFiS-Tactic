@@ -37,7 +37,7 @@ Dim i As Integer
 Dim rowName As String
 Dim comTime As String
 Dim comText As String
-Dim comArr() As String
+Dim comarr() As String
     
 '    On Error GoTo ex
     
@@ -45,9 +45,9 @@ Dim comArr() As String
         rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
         If Len(rowName) > 12 Then
             If Left(rowName, 12) = "GFS_Command_" Then
-                comArr = Split(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), " | ")
-                wkst.Cells(rowNumber, 1) = comArr(0)
-                wkst.Cells(rowNumber, 2) = getCallName(shp) & " " & comArr(UBound(comArr))
+                comarr = Split(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), " | ")
+                wkst.Cells(rowNumber, 1) = comarr(0)
+                wkst.Cells(rowNumber, 2) = getCallName(shp) & " " & comarr(UBound(comarr))
                 
                 rowNumber = rowNumber + 1
             End If
