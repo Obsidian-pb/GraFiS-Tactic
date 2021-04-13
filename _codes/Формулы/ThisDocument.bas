@@ -23,7 +23,7 @@ Const rep = "־עקועû.vss"
 Dim stenc As Visio.Document
     
     For Each stenc In Application.Documents
-        If stenc.Name = rep Then
+        If stenc.name = rep Then
             'stenc.
             Exit Sub
         End If

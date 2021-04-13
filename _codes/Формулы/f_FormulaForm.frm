@@ -16,8 +16,9 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private state_ As Boolean
-'Private lastChange_ As Date
+Private markersColl As Collection
 Public formShape As Visio.Shape
+
 
 
 Public Property Get State() As Boolean
@@ -41,20 +42,59 @@ Public Property Let State(ByVal state_a As Boolean)
     End If
 End Property
 
+Private Sub cbox_Markers_Change()
+    InsertMarker
+End Sub
+
+Private Sub cbox_Markers_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+    If KeyCode = 13 Then
+        InsertMarker
+    End If
+End Sub
+
+Private Sub InsertMarker()
+Dim txt1 As String
+Dim txt2 As String
+Dim i As Integer
+Dim l As Long
+Dim s As Long
+
+    If Me.cbox_Markers.ListIndex < 0 Then Exit Sub
+
+    l = Me.tb_HTMLCode.SelStart
+    i = 1
+    Do While i <= l
+        If Asc(Mid(Me.tb_HTMLCode.Text, i, 1)) = 13 Then
+            l = l + 1
+        End If
+        i = i + 1
+        If i > 10000 Then Exit Sub
+    Loop
+    s = Me.tb_HTMLCode.SelLength
+    Do While i <= l + s
+        If Asc(Mid(Me.tb_HTMLCode.Text, i, 1)) = 13 Then
+            s = s + 1
+        End If
+        i = i + 1
+        If i > 10000 Then Exit Sub
+    Loop
+    txt1 = left(Me.tb_HTMLCode.Text, l)
+    txt2 = Right(Me.tb_HTMLCode.Text, Me.tb_HTMLCode.TextLength - l - s)
+    
+    Me.tb_HTMLCode.Text = txt1 & "$" & markersColl(Me.cbox_Markers.ListIndex + 1) & "$" & txt2
+End Sub
+
 Private Sub UserForm_Activate()
 Dim width As Integer
 Dim height As Integer
 Dim top As Integer
 Dim left As Integer
-
     
-    
+    'Устанавливаем размеры формы и содержимого
     top = 30
     left = 6
     width = Me.InsideWidth - left * 2
     height = 400
-    
-    
 
     tb_HTMLCode.width = width
     tb_HTMLCode.height = height
@@ -73,11 +113,34 @@ Dim left As Integer
     
     lbl_Tip.top = top + height + 6
     
+    'Наполняем список ячеек для вставки
+    FillMarkersList
+    
     State = True
 End Sub
 
 
-
+Private Sub FillMarkersList()
+'Заполняем список маркеров
+Dim i As Integer
+Dim rowName As String
+Dim cellLabel As String
+    
+    Set markersColl = New Collection
+    cbox_Markers.Clear
+    
+    For i = 0 To formShape.RowCount(visSectionProp) - 1
+        rowName = formShape.CellsSRC(visSectionProp, i, visCustPropsLabel).rowName
+        cellLabel = formShape.CellsSRC(visSectionProp, i, visCustPropsLabel).ResultStr(visUnitsString)
+        If cellLabel = "" Then
+            cbox_Markers.AddItem rowName, i
+        Else
+            cbox_Markers.AddItem cellLabel, i
+        End If
+        markersColl.Add rowName
+    Next i
+    
+End Sub
 
 
 
@@ -99,19 +162,13 @@ Private Sub cb_Cancel_Click()
     Me.Hide
 End Sub
 
-'Private Sub cb_ToShape_Click()
-'    Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
-'
-'    formShape.Characters.Paste
-'End Sub
-
-
-
 Public Sub ShowHTML(ByRef shp As Visio.Shape, ByVal htmlText As String, Optional ByVal visible As Boolean = True)
     Set formShape = shp
     
     tb_HTMLCode.Text = htmlText
     ShowData htmlText
+'    DoEvents
+'    sleep 0.25, True
     If visible Then
         Me.Show
     End If
@@ -120,21 +177,9 @@ End Sub
 Public Sub CopyBrowserContent(ByRef shp As Visio.Shape, ByVal htmlText As String)
 Dim objClpb As New DataObject, sStr As String
     
-'    If lastChange_ = Now Then Exit Sub
-'    lastChange_ = Now
-'    Debug.Print lastChange_
-    
-'    shp.Text = ""
-    
     ShowHTML shp, htmlText, False
     PasteBrowserContent
-    
-'    Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
-'    formShape.Characters.Paste
-'
-'    sStr = ""
-'    objClpb.SetText sStr
-'    objClpb.PutInClipboard
+
 End Sub
 
 Public Sub PasteBrowserContent()
@@ -143,6 +188,12 @@ Dim objClpb As New DataObject, sStr As String
     On Error Resume Next
     
     Me.wb_Bowser.Document.body.createTextRange.execCommand "Copy"
+'    Me.wb_Bowser.Document.body.createTextRange.execCommand "Cut"
+'    DoEvents
+    
+'!!!Очень важно - пауза на ожидание записи в буфер
+    sleep 0.1, True
+    
     formShape.Characters.Paste
     
     sStr = ""
@@ -156,7 +207,7 @@ Dim mDoc As MSHTML.IHTMLDocument
     
     On Error GoTo Tail
     
-    htmlText = PatternToHTML(htmlText)
+    htmlText = PatternToHTML(formShape, htmlText)
     
     'Открываем пустую страницу
     wb_Bowser.Navigate "about:blank"
@@ -164,14 +215,18 @@ Dim mDoc As MSHTML.IHTMLDocument
     Set mDoc = wb_Bowser.Document
     
     mDoc.Write htmlText
+'    sleep 0.25, True
     wb_Bowser.Refresh
+    
+'    DoEvents
+    
        
     Set mDoc = Nothing
     
 Exit Sub
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
-'    SaveLog Err, "ShowData"
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.name
+    SaveLog Err, "ShowData", "Формулы - f_formulaForm"
 End Sub
 
 
@@ -182,42 +237,34 @@ End Sub
 
 
 
-Private Function PatternToHTML(ByVal htmlText As String) As String
-'Функция чистит код исходника HTML и заменяет вставленные ссылки на ячейки фигуры фактическими их значениями
-Dim cll As Visio.cell
-Dim i As Integer
-Dim targetPageIndex As Integer
-    
-    'Обновляем Анализатор "Отчетов"
-    targetPageIndex = cellVal(formShape, "Prop.TargetPageIndex")
-    If targetPageIndex = 0 Then
-        a.Refresh Application.ActivePage.Index
-    Else
-        a.Refresh targetPageIndex
-    End If
-    
-    
-    htmlText = Replace(htmlText, Asc(34), "'")
-    
-    For i = 0 To formShape.RowCount(visSectionProp) - 1
-        'Получаем ссылку на ячейку секции Props
-        Set cll = formShape.CellsSRC(visSectionProp, i, visCustPropsValue)
-        'Пытаемся обновить данные из анализатора "Отчетов"
-        TryGetFromAnalaizer formShape, cll.RowNameU
-        'Формируем итоговый текст html
-        htmlText = Replace(htmlText, "$" & cll.RowNameU & "$", ClearString(cll.ResultStr(visUnitsString)))
-    Next i
-
-PatternToHTML = htmlText
-End Function
-
-
-
-
-'<p><b>sdfgsdg</b></p>
-'<div>Площадь = $Prop.Square$</div>
-
-
+'Private Function PatternToHTML(ByVal htmlText As String) As String
+''Функция чистит код исходника HTML и заменяет вставленные ссылки на ячейки фигуры фактическими их значениями
+'Dim cll As Visio.cell
+'Dim i As Integer
+'Dim targetPageIndex As Integer
+'
+'    'Обновляем Анализатор "Отчетов"
+'    targetPageIndex = cellVal(formShape, "Prop.TargetPageIndex")
+'    If targetPageIndex = 0 Then
+'        a.Refresh Application.ActivePage.Index
+'    Else
+'        a.Refresh targetPageIndex
+'    End If
+'
+'
+'    htmlText = Replace(htmlText, Asc(34), "'")
+'
+'    For i = 0 To formShape.RowCount(visSectionProp) - 1
+'        'Получаем ссылку на ячейку секции Props
+'        Set cll = formShape.CellsSRC(visSectionProp, i, visCustPropsValue)
+'        'Пытаемся обновить данные из анализатора "Отчетов"
+'        TryGetFromAnalaizer formShape, cll.RowNameU
+'        'Формируем итоговый текст html
+'        htmlText = Replace(htmlText, "$" & cll.RowNameU & "$", ClearString(cll.ResultStr(visUnitsString)))
+'    Next i
+'
+'PatternToHTML = htmlText
+'End Function
 
 
 

@@ -60,7 +60,7 @@ End Sub
 Public Sub RemoveFromCollection(ByRef oldCollection As Collection, ByRef item As Object)
 'Remove specific item (with unique .ID prop) from collection
     On Error Resume Next
-    oldCollection.Remove item.ID
+    oldCollection.Remove CStr(item.ID)
 End Sub
 
 Public Function GetFromCollection(ByRef coll As Collection, ByVal ID As String) As Object
@@ -98,7 +98,28 @@ ex:
     IsInCollection = False
 End Function
 
-
-
-
-
+Public Function GetGFSShapes(ByRef cellArr As Variant, Optional ByVal delimiter As String = ":") As Collection
+'Применение: GetGFSShapes(Array("User.IndexPers:500","User.IndexPers:1"))
+Dim shp As Visio.Shape
+Dim shpCellItems() As String
+Dim i As Integer
+Dim tmpColl As Collection
+    
+    Set tmpColl = New Collection
+    
+    For Each shp In Application.ActivePage.Shapes
+        For i = 0 To UBound(cellArr)
+            shpCellItems = Split(cellArr(i), delimiter)
+            If ShapeHaveCell(shp, shpCellItems(0), shpCellItems(1)) Then
+'                tmpColl.Add shp
+                AddUniqueCollectionItem tmpColl, shp
+            End If
+        Next i
+    Next shp
+    
+    If tmpColl.Count > 0 Then
+        Set GetGFSShapes = tmpColl
+    Else
+        Set GetGFSShapes = Nothing
+    End If
+End Function

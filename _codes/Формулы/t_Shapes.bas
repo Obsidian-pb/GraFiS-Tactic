@@ -82,6 +82,8 @@ On Error GoTo ex
         If val <> "" Then
             If shp.Cells(cellName).ResultStr(visUnitsString) = val Then
                 ShapeHaveCell = True
+            ElseIf shp.Cells(cellName).Result(visNumber) = val Then
+                ShapeHaveCell = True
             Else
                 ShapeHaveCell = False
             End If
