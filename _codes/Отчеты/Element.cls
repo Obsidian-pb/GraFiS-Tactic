@@ -63,9 +63,9 @@ Public Property Get HidedInMCheck() As Boolean
 'Ёлемент не отображаетс€ в окне мастера проверки схемы
     HidedInMCheck = p_HidedInMCheck
 End Property
-Public Property Let HidedInMCheck(ByVal newVal As Boolean)
+Public Property Let HidedInMCheck(ByVal NewVal As Boolean)
 'Ёлемент не отображаетс€ в окне мастера проверки схемы
-    p_HidedInMCheck = newVal
+    p_HidedInMCheck = NewVal
 End Property
 
 

@@ -11,10 +11,6 @@ Public Sub k()
     KillA
 End Sub
 
-Public Sub SSS()
-    
-End Sub
-
 Public Sub TastCalculator()
 Dim newAnalizer As ElementsShell
 Dim shp As Visio.Shape
@@ -151,3 +147,11 @@ Dim tmpStr() As String
     Next i
 ParsePattern = tmpStr  ' Split(Left(tmpStr, Len(tmpStr) - 1), ";")
 End Function
+
+
+'Public Sub GFS_Collection_Test()
+'Dim shp As Visio.Shape
+'    For Each shp In A.Refresh(1).GFSShapes
+'        Debug.Print shp.ID
+'    Next shp
+'End Sub

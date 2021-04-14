@@ -255,7 +255,7 @@ End Sub
 Public Function ByID(ByVal a_elemID As String) As Element
 '‘ункци€ возвращает ссылку на Ёлемент с ID = a_elemID
     On Error GoTo EX
-    Set ByID = elemCollection.Item(a_elemID)
+    Set ByID = elemCollection.item(a_elemID)
     
 Exit Function
 EX:
@@ -265,7 +265,7 @@ End Function
 Public Function ByCellID(ByVal a_elemCellID As String) As Element
 '‘ункци€ возвращает ссылку на Ёлемент с именем €чейки CellID = a_elemCellID
     On Error GoTo EX
-    Set ByCellID = elemWithCellsCollection.Item(a_elemCellID)
+    Set ByCellID = elemWithCellsCollection.item(a_elemCellID)
     
 Exit Function
 EX:
@@ -348,7 +348,7 @@ Dim i As Integer
 '                Case Is = visDate
 '                    elem.RaiseValue CellVal(shp, cellIDArray(i), dataType)
 '            End Select
-            elem.RaiseValue CellVal(shp, cellIDArray(i), dataType)
+            elem.RaiseValue cellVal(shp, cellIDArray(i), dataType)
         End If
     Next i
     
@@ -368,7 +368,7 @@ Dim i As Integer
 '¬ариант с уникальным именем €чейки дл€ каждого элемента - так быстрее, но нельз€ считать дл€ многих элементов
         Set elem = ByCellID(cellIDArray(i))
         If Not elem Is Nothing Then
-            elem.SetValue CellVal(shp, cellIDArray(i), dataType)
+            elem.SetValue cellVal(shp, cellIDArray(i), dataType)
         End If
     Next i
     

@@ -19,7 +19,7 @@ Dim vfi_Temp As Integer
 
 End Function
 
-Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber) As Variant
+Public Function cellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber) As Variant
 '‘ункци€ возвращает значение €чейки с указанным названием. ≈сли такой €чейки нет, возвращает 0
     
     On Error GoTo EX
@@ -27,20 +27,20 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
     If shp.CellExists(cellName, 0) Then
         Select Case dataType
             Case Is = visNumber
-                CellVal = shp.Cells(cellName).Result(dataType)
+                cellVal = shp.Cells(cellName).Result(dataType)
             Case Is = visUnitsString
-                CellVal = shp.Cells(cellName).ResultStr(dataType)
+                cellVal = shp.Cells(cellName).ResultStr(dataType)
             Case Is = visDate
-                CellVal = shp.Cells(cellName).Result(dataType)
+                cellVal = shp.Cells(cellName).Result(dataType)
         End Select
     Else
-        CellVal = 0
+        cellVal = 0
     End If
     
     
 Exit Function
 EX:
-    CellVal = 0
+    cellVal = 0
 End Function
 
 Public Function IsGFSShape(ByRef shp As Visio.Shape, Optional ByVal useManeure As Boolean = True) As Boolean

@@ -178,9 +178,9 @@ Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
 End Sub
 
 '------------Список предупреждений------------
-Private Sub lstWarnings_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub lstWarnings_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     If Button = 2 Then
-        If Y > 0 And X > 0 And Y < lstWarnings.Height And X < lstWarnings.Width Then
+        If y > 0 And x > 0 And y < lstWarnings.Height And x < lstWarnings.Width Then
             DoEvents
             CreateNewMenu
         End If

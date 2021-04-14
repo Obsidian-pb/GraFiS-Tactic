@@ -85,7 +85,7 @@ Dim curCallName As String
 Dim newCallName As String
     
     If shp.CellExists("Prop.PropertyName", 0) Then
-        curCallName = CellVal(shp, "Prop.PropertyName.Value", visUnitsString)
+        curCallName = cellVal(shp, "Prop.PropertyName.Value", visUnitsString)
         If Not InStr(1, properyNames, curCallName, vbTextCompare) > 0 Then
             'Проверяем заменялось ли уже такое имя вызова
             newCallName = GetExistedAnswer(curCallName)
@@ -117,7 +117,7 @@ Dim str As Object
     
     On Error GoTo EX
 
-    Set str = changedNames.Item(curCallName)
+    Set str = changedNames.item(curCallName)
 Exit Function
 EX:
     Set str = Nothing
