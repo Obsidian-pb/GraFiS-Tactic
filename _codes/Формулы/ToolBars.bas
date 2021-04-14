@@ -4,7 +4,7 @@ Option Explicit
 Private btns As c_Buttons
 
 
-Sub AddTB()
+Sub AddTB_f()
 'Процедура добавления панели управления "Формулы"-------------------------------
 Dim i As Integer
 '---Объявляем переменные и постоянные--------------------------------------------------
@@ -24,20 +24,20 @@ Dim i As Integer
 
 End Sub
 
-Sub RemoveTB()
+Sub RemoveTB_f()
 'Процедура добавления панели управления "Формулы"-------------------------------
     On Error Resume Next
     Application.CommandBars("Формулы").Delete
 End Sub
 
-Sub AddButtons()
+Sub AddButtons_f()
 'Процедура добавление новой кнопки на панель управления "Формулы"--------------
     
 '---Объявляем переменные и постоянные--------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     Set Bar = Application.CommandBars("Формулы")
     
@@ -65,17 +65,17 @@ Sub AddButtons()
     Set Bar = Nothing
 
 Exit Sub
-ex:
+EX:
     Set Button = Nothing
     Set Bar = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.name
-    SaveLog Err, "AddButtons", "Кнопки на панели Формулы"
+'    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.name
+    SaveLog Err, "AddButtons_f", "Кнопки на панели Формулы"
 End Sub
 
 
-Sub DeleteButtons()
+Sub DeleteButtons_f()
 '---Процедура удаления кнопок из панели управления "Формулы"--------------
-    On Error GoTo ex
+    On Error GoTo EX
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
 
@@ -93,6 +93,9 @@ Set Button = Nothing
 Set Bar = Nothing
 
 Exit Sub
-ex:
+EX:
 'Выходим из процедуры
+    Set Button = Nothing
+    Set Bar = Nothing
+    SaveLog Err, "AddButtons_f", "Кнопки на панели Формулы"
 End Sub

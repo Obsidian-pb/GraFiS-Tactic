@@ -206,8 +206,9 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 5 пт; Para.SpAfter: 5 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: 12 пт; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.Название: "Краткая справка по основам html-разметки"; Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
-    Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 10; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
+    Prop.Номер: ""; Prop.Номер.Prompt: ""; Prop.Номер.Label: ""; Prop.Номер.Format: ""; Prop.Номер.SortKey: 10; Prop.Номер.Type: 0; Prop.Номер.Invisible: FALSE; Prop.Номер.Verify: FALSE; Prop.Номер.LangID: 1049; Prop.Номер.Calendar: 0; 
+    Prop.Название: "Краткая справка по основам html-разметки"; Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 11; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
+    Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 12; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
     Prop.Площадь: 1000; Prop.Площадь.Prompt: ""; Prop.Площадь.Label: ""; Prop.Площадь.Format: ""; Prop.Площадь.SortKey: ""; Prop.Площадь.Type: 0; Prop.Площадь.Invisible: FALSE; Prop.Площадь.Verify: FALSE; Prop.Площадь.LangID: 1033; Prop.Площадь.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
@@ -464,14 +465,15 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 5 пт; Para.SpAfter: 5 пт; Para.HorzAlign: 0; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: 12 пт; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.Название: "Пустая формула"; Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
-    Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 10; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
+    Prop.Номер: ""; Prop.Номер.Prompt: ""; Prop.Номер.Label: ""; Prop.Номер.Format: ""; Prop.Номер.SortKey: 10; Prop.Номер.Type: 0; Prop.Номер.Invisible: FALSE; Prop.Номер.Verify: FALSE; Prop.Номер.LangID: 1049; Prop.Номер.Calendar: 0; 
+    Prop.Название: "Пустая формула"; Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 11; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
+    Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 12; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
     User.IndexPers: 500; User.IndexPers.Prompt: ""; 
-    User.TextPattern: "<h1>$Название$</h1>"; User.TextPattern.Prompt: "Исходный код HTML"; 
-    User.DataChangeAction: ""; User.DataChangeAction.Prompt: Prop.Название&Prop.TargetPageIndex; 
+    User.TextPattern: "<h1>$Номер$ $Название$</h1>"; User.TextPattern.Prompt: "Исходный код HTML"; 
+    User.DataChangeAction: ""; User.DataChangeAction.Prompt: Prop.Номер&Prop.Название&Prop.TargetPageIndex; 
   Section Object, row: visRowEvent>>>
     EventDrop: CALLTHIS("ShowDataInShape";"Формулы";User.TextPattern); 
   Section Object, row: visRowFill>>>
@@ -613,8 +615,9 @@
     Para.IndFirst[6]: 0 мм; Para.IndLeft[6]: 0 мм; Para.IndRight[6]: 0 мм; Para.SpLine[6]: -120%; Para.SpBefore[6]: 0 пт; Para.SpAfter[6]: 0 пт; Para.HorzAlign[6]: 0; Para.Bullet[6]: 0; Para.BulletStr[6]: ""; Para.BulletFont[6]: 0; Para.LocalizeBulletFont[6]: 0; Para.BulletFontSize[6]: 12 пт; Para.TextPosAfterBullet[6]: 0 мм; Para.Flags[6]: 0; 
     Para.IndFirst[7]: 0 мм; Para.IndLeft[7]: 0 мм; Para.IndRight[7]: 0 мм; Para.SpLine[7]: -120%; Para.SpBefore[7]: 5 пт; Para.SpAfter[7]: 5 пт; Para.HorzAlign[7]: 0; Para.Bullet[7]: 0; Para.BulletStr[7]: ""; Para.BulletFont[7]: 0; Para.LocalizeBulletFont[7]: 0; Para.BulletFontSize[7]: 12 пт; Para.TextPosAfterBullet[7]: 0 мм; Para.Flags[7]: 0; 
   Section: Prop>>>
-    Prop.Название: "Время свободного развития пожара"; Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 10; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
-    Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 10; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
+    Prop.Номер: ""; Prop.Номер.Prompt: ""; Prop.Номер.Label: ""; Prop.Номер.Format: ""; Prop.Номер.SortKey: 10; Prop.Номер.Type: 0; Prop.Номер.Invisible: FALSE; Prop.Номер.Verify: FALSE; Prop.Номер.LangID: 1049; Prop.Номер.Calendar: 0; 
+    Prop.Название: "Время свободного развития пожара"; Prop.Название.Prompt: "Название формулы или блока вычислений"; Prop.Название.Format: ""; Prop.Название.SortKey: 11; Prop.Название.Type: 0; Prop.Название.Invisible: FALSE; Prop.Название.Verify: FALSE; Prop.Название.LangID: 1049; Prop.Название.Calendar: 0; 
+    Prop.TargetPageIndex: 1; Prop.TargetPageIndex.Prompt: "Порядковый номер целевой страницы (если указан 0 - анализируется текущая)"; Prop.TargetPageIndex.Label: "Страница анализа"; Prop.TargetPageIndex.Format: ""; Prop.TargetPageIndex.SortKey: 12; Prop.TargetPageIndex.Type: 2; Prop.TargetPageIndex.Invisible: FALSE; Prop.TargetPageIndex.Verify: FALSE; Prop.TargetPageIndex.LangID: 1049; Prop.TargetPageIndex.Calendar: 0; 
     Prop.скорость: "40"; Prop.скорость.Prompt: ""; Prop.скорость.Label: ""; Prop.скорость.Format: ""; Prop.скорость.SortKey: 30; Prop.скорость.Type: 0; Prop.скорость.Invisible: FALSE; Prop.скорость.Verify: FALSE; Prop.скорость.LangID: 1049; Prop.скорость.Calendar: 0; 
     Prop.расстояние: "4"; Prop.расстояние.Prompt: ""; Prop.расстояние.Label: ""; Prop.расстояние.Format: ""; Prop.расстояние.SortKey: 31; Prop.расстояние.Type: 0; Prop.расстояние.Invisible: FALSE; Prop.расстояние.Verify: FALSE; Prop.расстояние.LangID: 1049; Prop.расстояние.Calendar: 0; 
     Prop.вр_сл: (Prop.расстояние*60)/Prop.скорость; Prop.вр_сл.Prompt: ""; Prop.вр_сл.Label: ""; Prop.вр_сл.Format: ""; Prop.вр_сл.SortKey: 32; Prop.вр_сл.Type: 0; Prop.вр_сл.Invisible: FALSE; Prop.вр_сл.Verify: FALSE; Prop.вр_сл.LangID: 1049; Prop.вр_сл.Calendar: 0; 
@@ -632,7 +635,7 @@
     Tabs.X1: 0; 
   Section: User>>>
     User.IndexPers: 500; User.IndexPers.Prompt: ""; 
-    User.TextPattern: "<h2>$Название$</h2>
+    User.TextPattern: "<h2>$Номер$ $Название$</h2>
 <p align='center'>
 <b>t<sub>св.</sub> = t<sub>обн.</sub> + t<sub>сообщ.</sub> + t<sub>сб.</sub> + t<sub>сл.</sub> + t<sub>б.р.</sub></b></p>
 <p align='center'>
@@ -657,7 +660,7 @@
 <b>u<sub>сл.</sub></b> средняя скорость движения МСП, км/ч;<br/>
 </p>
 "; User.TextPattern.Prompt: "Исходный код HTML"; 
-    User.DataChangeAction: ""; User.DataChangeAction.Prompt: Prop.Название&Prop.TargetPageIndex&Prop.скорость&Prop.расстояние&Prop.вр_сл&Prop.вр_обн&Prop.вр_сообщ&Prop.вр_сб&Prop.вр_бр&Prop.вр_св&Prop.A_FireTime&Prop.A_FindTime&Prop.A_InfoTime&Prop.A_FirstArrivalTime&Prop.A_FirstStvolTime; 
+    User.DataChangeAction: ""; User.DataChangeAction.Prompt: Prop.Номер&Prop.Название&Prop.TargetPageIndex&Prop.скорость&Prop.расстояние&Prop.вр_сл&Prop.вр_обн&Prop.вр_сообщ&Prop.вр_сб&Prop.вр_бр&Prop.вр_св&Prop.A_FireTime&Prop.A_FindTime&Prop.A_InfoTime&Prop.A_FirstArrivalTime&Prop.A_FirstStvolTime; 
   Section Object, row: visRowEvent>>>
     EventDrop: CALLTHIS("ShowDataInShape";"Формулы";User.TextPattern); 
   Section Object, row: visRowFill>>>

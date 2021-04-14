@@ -20,7 +20,7 @@ Public Function cellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
                         Optional ByVal defaultValue As Double = 0) As Variant
 'Returns cell with cellName value. If such cell does not exists, return 0
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         Select Case dataType
@@ -38,7 +38,7 @@ Public Function cellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
     End If
     
 Exit Function
-ex:
+EX:
     cellVal = defaultValue
 End Function
 
@@ -54,7 +54,7 @@ Dim cll As Visio.cell
     End If
     
 Exit Sub
-ex:
+EX:
 
 End Sub
 
@@ -62,7 +62,7 @@ Public Sub SetCellFrml(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal
 'Set cell with cellName formula. If such cell does not exists, does nothing
 Dim cll As Visio.cell
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
@@ -70,13 +70,13 @@ Dim cll As Visio.cell
     End If
     
 Exit Sub
-ex:
+EX:
 
 End Sub
 
 Public Function ShapeHaveCell(ByRef shp As Visio.Shape, ByVal cellName As String, _
                               Optional ByVal val As Variant = "") As Boolean
-On Error GoTo ex
+On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         If val <> "" Then
@@ -95,7 +95,7 @@ On Error GoTo ex
     End If
     
 Exit Function
-ex:
+EX:
     ShapeHaveCell = False
 End Function
 
@@ -168,7 +168,7 @@ Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses 
 Dim i As Integer
 Dim indexPers As Integer
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     'Если необходима предварительная проверка на отношение фигуры к ГраФиС:
     If needGFSChecj Then
@@ -204,7 +204,7 @@ Dim indexPers As Integer
 
 IsGFSShapeWithIP = False
 Exit Function
-ex:
+EX:
     IsGFSShapeWithIP = False
     SaveLog Err, "m_Tools.IsGFSShapeWithIP"
 End Function

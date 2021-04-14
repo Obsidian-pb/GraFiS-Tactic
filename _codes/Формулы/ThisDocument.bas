@@ -10,9 +10,19 @@ Attribute VB_Exposed = True
 Option Explicit
 
 
+Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
+    'Деактивируем панель инстурментов
+    DeleteButtons_f
+    RemoveTB_f
+End Sub
+
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     'Проверяем, видим ли трафыарет "Отчеты"
     CheckReportsStencil
+    
+    'Активируем панель инстурментов
+    AddTB_f
+    AddButtons_f
 End Sub
 
 
@@ -22,6 +32,8 @@ Public Sub CheckReportsStencil()
 Const rep = "Отчеты.vss"
 Dim stenc As Visio.Document
     
+    On Error GoTo EX
+    
     For Each stenc In Application.Documents
         If stenc.name = rep Then
             'stenc.
@@ -30,6 +42,9 @@ Dim stenc As Visio.Document
     Next stenc
     
     Application.Documents.Open (ThisDocument.path & rep)
+EX:
+'Выходим без действия
+SaveLog Err, "CheckReportsStencil", "Проверка наличия подключенного трафарета Отчеты.vss"
 End Sub
 
 
