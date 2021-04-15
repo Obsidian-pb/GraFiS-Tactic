@@ -18,11 +18,16 @@ Dim item As Object
     Next item
 End Sub
 
-Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByRef item As Object)
+'Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByRef item As Object, Optional ByVal key As String = "")
+Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByVal item As Variant, Optional ByVal key As String = "")
 'Add item (with unique .key prop) to oldCollection
     On Error GoTo EX
     
-    oldCollection.Add item, CStr(item.ID)
+    If key = "" Then
+        oldCollection.Add item, CStr(item.ID)
+    Else
+        oldCollection.Add item, key
+    End If
 
 Exit Sub
 EX:
@@ -206,6 +211,86 @@ EX:
     Set FilterShapesAnd = New Collection
 End Function
 
+Public Function Sort(ByVal shps As Collection, ByVal sortCellName As String, Optional ByVal desc As Boolean = True) As Collection
+'Функция возвращает отсортированную коллекцию фигур. Фигуры сортируются по значению в ячейке sortCellName - чем больше, тем выше
+'desc: True - от большего к меньшему; False - от меньшего к большему
+Dim i As Integer
+Dim tmpshp As Visio.Shape
+Dim tmpColl As Collection
+
+    
+    Set tmpColl = New Collection
+    
+    Do While shps.count > 1
+        
+        If desc Then
+            Set tmpshp = GetMaxShp(shps, sortCellName)
+        Else
+            Set tmpshp = GetMinShp(shps, sortCellName)
+        End If
+        
+        AddUniqueCollectionItem tmpColl, tmpshp
+        RemoveFromCollection shps, tmpshp
+        
+        i = i + 1
+        If i > 100 Then Exit Do
+    Loop
+    
+    Set tmpshp = shps(1)
+    AddUniqueCollectionItem tmpColl, tmpshp
+'    Debug.Print tmpshp.ID & " " & cellVal(tmpshp, sortCellName)
+    
+    Set Sort = tmpColl
+End Function
+
+Public Function GetMaxShp(ByRef col As Collection, ByVal sortCellName As String) As Visio.Shape
+'Возвращает фигуру с максимальным значением в ячейке sortCellName
+Dim i As Integer
+Dim shp1 As Visio.Shape
+Dim shp2 As Visio.Shape
+Dim shp1Val As Double
+Dim shp2Val As Double
+    
+    Set shp1 = col(1)
+    shp1Val = cellVal(shp1, sortCellName)
+    For i = 1 To col.count
+        Set shp2 = col(i)
+        shp2Val = cellVal(shp2, sortCellName)
+        
+        If shp2Val > shp1Val Then
+            Set shp1 = shp2
+            shp1Val = shp2Val
+        End If
+    Next i
+    Debug.Print shp1.ID & " " & shp1Val
+    
+Set GetMaxShp = shp1
+End Function
+
+Public Function GetMinShp(ByRef col As Collection, ByVal sortCellName As String) As Visio.Shape
+'Возвращает фигуру с минимальным значением в ячейке sortCellName
+Dim i As Integer
+Dim shp1 As Visio.Shape
+Dim shp2 As Visio.Shape
+Dim shp1Val As Double
+Dim shp2Val As Double
+    
+    Set shp1 = col(1)
+    shp1Val = cellVal(shp1, sortCellName)
+    For i = 1 To col.count
+        Set shp2 = col(i)
+        shp2Val = cellVal(shp2, sortCellName)
+        
+        If shp2Val < shp1Val Then
+            Set shp1 = shp2
+            shp1Val = shp2Val
+        End If
+    Next i
+'    Debug.Print shp1.ID & " " & shp1Val
+    
+Set GetMinShp = shp1
+End Function
+
 '------------------------Агрегатные функции по коллекциям-----------------------------------
 'Public Function CellSum(ByRef shpColl As Variant, ByVal cellName As String, Optional ByVal returnType As VbVarType = vbSingle) As Variant
 Public Function CellSum(ByRef shpColl As Variant, ByVal cellName As String, Optional ByVal returnType As VisUnitCodes = visNumber) As Variant
@@ -284,6 +369,65 @@ Dim i As Long
     Next shp
 CellAvg = total / i
 End Function
+
+Public Function GetUniqueVals(ByRef shpColl As Variant, ByVal cellName As String, _
+                              Optional ByVal returnType As VisUnitCodes = visUnitsString, _
+                              Optional ByVal defaultValue As Variant = 0, _
+                              Optional ByVal valueToIgnore As Variant) As Collection
+'Возвращает коллекцию уникальных значений в ячейках фигур коллекции shpColl
+'dim tmpVal
+Dim newColl As Collection
+Dim tmp As String
+Dim shp As Visio.Shape
+    
+    Set newColl = New Collection
+    
+    For Each shp In shpColl
+        tmp = cellVal(shp, cellName, returnType, defaultValue)
+        If valueToIgnore = Empty Then
+            AddUniqueCollectionItem newColl, tmp, tmp
+        Else
+            If tmp <> valueToIgnore Then
+                AddUniqueCollectionItem newColl, tmp, tmp
+            End If
+        End If
+    Next shp
+    
+Set GetUniqueVals = newColl
+End Function
+
+Public Function StrColToStr(ByRef col As Collection, ByVal delimiter As String) As String
+'Возвращает строку собранную из строковых значений коллекции
+'! Не строковые значения игнорируются
+Dim item As Variant
+Dim str As String
+
+    On Error Resume Next
+    
+    str = ""
+    For Each item In col
+        str = str & item & delimiter
+    Next item
+    
+    str = Left(str, Len(str) - Len(delimiter))
+    
+StrColToStr = str
+End Function
+
+'Public Sub TTT()
+'Dim c As Collection
+'Dim shp As Visio.Shape
+'
+''Set c = A.Refresh(1).GetGFSShapes("User.IndexPers:" & indexPers.ipStvolRuch & ";User.IndexPers:" & indexPers.ipStvolLafVoda)
+'Set c = A.Refresh(1).GetGFSShapes("User.IndexPers:" & indexPers.ipAC)
+'Set c = Sort(c, "Prop.ArrivalTime", False)
+'
+'    For Each shp In c
+'        Debug.Print CDate(cellVal(shp, "Prop.ArrivalTime", visDate))
+'    Next shp
+'
+'End Sub
+
 
 'Public Sub TTT()
 'Dim c As Collection

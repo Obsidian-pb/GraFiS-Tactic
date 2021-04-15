@@ -18,17 +18,17 @@ Dim shp As Visio.Shape
     Set wkst = exl.ActiveSheet
     exl.Visible = True
     
-'    rowNumber = 1
-'    For Each shp In Application.ActivePage.Shapes
-'        fillCommand shp
-'    Next shp
-    
     rowNumber = 1
     For Each shp In Application.ActivePage.Shapes
-        getSetTime shp
-        
-'        rowNumber = rowNumber + 1
+        fillCommand shp
     Next shp
+    
+'    rowNumber = 1
+'    For Each shp In Application.ActivePage.Shapes
+'        getSetTime shp
+'
+''        rowNumber = rowNumber + 1
+'    Next shp
     
 End Sub
 
@@ -87,4 +87,4 @@ Exit Sub
 ex:
     
 End Sub
-'GFS_Command_13
+

@@ -994,7 +994,7 @@
     User.Version: 1; User.Version.Prompt: ""; 
     User.FireTime: Prop.FireTime; 
   Section Object, row: visRowEvent>>>
-    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("s_SetFireTime";"Очаг")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
+    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("s_SetFireTime";"Очаг")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); EventMultiDrop: CALLTHIS("s_SetFireTime";"Очаг")+SETF(GetRef(Width);(Width/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect")+SETF(GetRef(Height);(Height/Страница!User.GFS_Aspect)&"*ThePage!User.GFS_Aspect"); 
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: 1; ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: 0; FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>
