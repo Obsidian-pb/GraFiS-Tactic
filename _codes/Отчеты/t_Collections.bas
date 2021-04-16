@@ -21,12 +21,19 @@ End Sub
 'Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByRef item As Object, Optional ByVal key As String = "")
 Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByVal item As Variant, Optional ByVal key As String = "")
 'Add item (with unique .key prop) to oldCollection
+'Dim i As Integer
+'Dim s As String
     On Error GoTo EX
     
     If key = "" Then
         oldCollection.Add item, CStr(item.ID)
     Else
-        oldCollection.Add item, key
+'        s = key & " "
+'        For i = 1 To Len(key)
+'            s = s & Asc(Mid(key, i, 1))
+'        Next i
+'        Debug.Print s
+        oldCollection.Add item, CStr(key)
     End If
 
 Exit Sub
