@@ -41,6 +41,86 @@ End Function
 'EX:
 '    cellVal = defaultValue
 'End Function
+'!!!Рабочая
+'Public Function cellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber, Optional defaultValue As Variant = 0) As Variant
+''Функция возвращает значение ячейки с указанным названием. Если такой ячейки нет, возвращает 0
+'
+'    On Error GoTo EX
+'
+'    If shp.CellExists(cellName, 0) Then
+'        Select Case dataType
+'            Case Is = visNumber
+'                cellVal = shp.Cells(cellName).Result(dataType)
+'            Case Is = visUnitsString
+'                cellVal = shp.Cells(cellName).ResultStr(dataType)
+'            Case Is = visDate
+'                cellVal = shp.Cells(cellName).Result(dataType)
+'            Case Else
+'                cellVal = shp.Cells(cellName).Result(dataType)
+'        End Select
+'    Else
+'        cellVal = defaultValue
+'    End If
+'
+'
+'Exit Function
+'EX:
+'    cellVal = defaultValue
+'End Function
+Public Function cellVal(ByRef shps As Variant, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber, Optional defaultValue As Variant = 0) As Variant
+'Функция возвращает значение ячейки с указанным названием. Если такой ячейки нет, возвращает 0
+Dim shp As Visio.Shape
+Dim tmpVal As Variant
+    
+    On Error GoTo EX
+    
+'    Debug.Print TypeName(shps)
+    Select Case TypeName(shps)
+        
+        Case Is = "Shape"
+            Set shp = shps
+            If shp.CellExists(cellName, 0) Then
+                Select Case dataType
+                    Case Is = visNumber
+                        cellVal = shp.Cells(cellName).Result(dataType)
+                    Case Is = visUnitsString
+                        cellVal = shp.Cells(cellName).ResultStr(dataType)
+                    Case Is = visDate
+                        cellVal = shp.Cells(cellName).Result(dataType)
+                    Case Else
+                        cellVal = shp.Cells(cellName).Result(dataType)
+                End Select
+            Else
+                cellVal = defaultValue
+            End If
+            Exit Function
+        Case Is = "Shapes"
+            For Each shp In shps
+                tmpVal = cellVal(shp, cellName, dataType, defaultValue)
+                If tmpVal <> defaultValue Then
+                    cellVal = tmpVal
+                    Exit Function
+                End If
+            Next shp
+        Case Is = "Collection"
+            For Each shp In shps
+                tmpVal = cellVal(shp, cellName, dataType, defaultValue)
+                If tmpVal <> defaultValue Then
+                    cellVal = tmpVal
+                    Exit Function
+                End If
+            Next shp
+    End Select
+    
+cellVal = defaultValue
+Exit Function
+EX:
+    cellVal = defaultValue
+End Function
+
+
+
+
 
 Public Sub SetCellVal(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal NewVal As Variant)
 'Set cell with cellName value. If such cell does not exists, does nothing

@@ -303,40 +303,40 @@ End Function
 Public Function CellSum(ByRef shpColl As Variant, ByVal cellName As String, Optional ByVal returnType As VisUnitCodes = visNumber) As Variant
 'Возвращает сумму значений ячеек с именем cellName всех фигур в коллекции shpColl
 Dim shp As Visio.Shape
-Dim tmpval As Variant
+Dim tmpVal As Variant
 
     For Each shp In shpColl
         'Проверка на shp!
         If TypeName(shp) = "Shape" Then
-            tmpval = tmpval + cellVal(shp, cellName, returnType)
+            tmpVal = tmpVal + cellVal(shp, cellName, returnType)
         End If
     Next shp
-CellSum = tmpval
+CellSum = tmpVal
 End Function
 
 Public Function CellMax(ByRef shpColl As Variant, ByVal cellName As String, Optional ByVal returnType As VisUnitCodes = visNumber) As Variant
 'Возвращает максимальное значение ячеек с именем cellName всех фигур в коллекции shpColl
 Dim shp As Visio.Shape
-Dim tmpval As Variant
+Dim tmpVal As Variant
 Dim cVal As Variant
     
-    tmpval = 0
+    tmpVal = 0
     For Each shp In shpColl
         'Проверка на shp!
         If TypeName(shp) = "Shape" Then
             cVal = cellVal(shp, cellName, returnType)
-            If tmpval < cVal Then
-                tmpval = cVal
+            If tmpVal < cVal Then
+                tmpVal = cVal
             End If
         End If
     Next shp
-CellMax = tmpval
+CellMax = tmpVal
 End Function
 
 Public Function CellMin(ByRef shpColl As Variant, ByVal cellName As String, Optional ByVal returnType As VisUnitCodes = visNumber) As Variant
 'Возвращает максимальное значение ячеек с именем cellName всех фигур в коллекции shpColl
 Dim shp As Visio.Shape
-Dim tmpval As Variant
+Dim tmpVal As Variant
 Dim cVal As Variant
 Dim start As Boolean
     
@@ -344,19 +344,19 @@ Dim start As Boolean
     For Each shp In shpColl
         'Проверяем на первый запуск
         If start Then
-            tmpval = cellVal(shp, cellName, returnType)
+            tmpVal = cellVal(shp, cellName, returnType)
             start = Not start
         Else
             'Проверка на shp!
             If TypeName(shp) = "Shape" Then
                 cVal = cellVal(shp, cellName, returnType)
-                If tmpval > cVal Then
-                    tmpval = cVal
+                If tmpVal > cVal Then
+                    tmpVal = cVal
                 End If
             End If
         End If
     Next shp
-CellMin = tmpval
+CellMin = tmpVal
 End Function
 
 Public Function CellAvg(ByRef shpColl As Variant, ByVal cellName As String, Optional ByVal returnType As VisUnitCodes = visNumber) As Variant

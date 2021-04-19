@@ -157,6 +157,15 @@ Public Enum indexPers
    ipMashiniMVD = 3001                         'Машины МВД
    ipMashiniMinzdrav = 3002                    'Машины Минздрав
    ipFormula = 500                             'Формулы
+   ipInfoMain = 600                            'Инфоблок Основные сведения
+   ipInfoOrganization = 601                    'Инфоблок Организация
+   ipInfoObject = 602                          'Инфоблок Объект пожара
+   ipInfoCaller = 603                          'Инфоблок Заявитель
+   ipInfoSituation = 604                       'Инфоблок Обстановка
+   ipInfoOther = 605                           'Инфоблок Прочее
+   ipInfoEffects = 606                         'Инфоблок Последствия
+   ipInfoSignatures = 607                      'Инфоблок Подписи
+   ipInfoCommonFireInfo = 608                  'Инфоблок Сведения о тушении пожара
 End Enum
 
 'Перечисления констант объектов железной дороги

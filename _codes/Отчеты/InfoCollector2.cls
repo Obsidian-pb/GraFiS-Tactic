@@ -846,3 +846,39 @@ Public Function GetGFSShapesAnd(ByVal filterStr As String, _
 'Возвращаем отфильтрованные фигуры ГраФиС
     Set GetGFSShapesAnd = FilterShapesAnd(GFSShapes, filterStr, d_elem, d_val)
 End Function
+Public Function GetSingleValue(ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visUnitsString, Optional defaultValue As Variant = 0) As Variant
+Dim shp As Visio.Shape
+Dim tmpStr As String
+    
+    On Error GoTo EX
+    
+    For Each shp In A.GFSShapes
+        tmpStr = cellVal(shp, cellName, dataType, "")
+        If tmpStr <> "" Then
+            GetSingleValue = tmpStr
+            Exit Function
+        End If
+    Next shp
+        
+Exit Function
+EX:
+    GetSingleValue = ""
+End Function
+'Public Function GetSingleValue(ByVal filterStr As String, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visUnitsString, Optional defaultValue As Variant = 0) As Variant
+'Dim shp As Visio.Shape
+'Dim col As Collection
+'
+'    On Error GoTo EX
+'
+'    Set col = A.GetGFSShapes(filterStr)
+'    If col.count = 1 Then
+'        Set shp = col(1)
+'        GetSingleValue = cellVal(shp, cellName, dataType, defaultValue)
+'    Else
+'        GetSingleValue = ""
+'    End If
+'
+'Exit Function
+'EX:
+'    GetSingleValue = ""
+'End Function

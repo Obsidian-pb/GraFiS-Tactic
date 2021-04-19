@@ -19,29 +19,29 @@ Dim vfi_Temp As Integer
 
 End Function
 
-Public Function cellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber, Optional defaultValue As Variant = 0) As Variant
-'‘ункци€ возвращает значение €чейки с указанным названием. ≈сли такой €чейки нет, возвращает 0
-    
-    On Error GoTo EX
-    
-    If shp.CellExists(cellName, 0) Then
-        Select Case dataType
-            Case Is = visNumber
-                cellVal = shp.Cells(cellName).Result(dataType)
-            Case Is = visUnitsString
-                cellVal = shp.Cells(cellName).ResultStr(dataType)
-            Case Is = visDate
-                cellVal = shp.Cells(cellName).Result(dataType)
-        End Select
-    Else
-        cellVal = defaultValue
-    End If
-    
-    
-Exit Function
-EX:
-    cellVal = defaultValue
-End Function
+'Public Function cellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber, Optional defaultValue As Variant = 0) As Variant
+''‘ункци€ возвращает значение €чейки с указанным названием. ≈сли такой €чейки нет, возвращает 0
+'
+'    On Error GoTo EX
+'
+'    If shp.CellExists(cellName, 0) Then
+'        Select Case dataType
+'            Case Is = visNumber
+'                cellVal = shp.Cells(cellName).Result(dataType)
+'            Case Is = visUnitsString
+'                cellVal = shp.Cells(cellName).ResultStr(dataType)
+'            Case Is = visDate
+'                cellVal = shp.Cells(cellName).Result(dataType)
+'        End Select
+'    Else
+'        cellVal = defaultValue
+'    End If
+'
+'
+'Exit Function
+'EX:
+'    cellVal = defaultValue
+'End Function
 
 Public Function IsGFSShape(ByRef shp As Visio.Shape, Optional ByVal useManeure As Boolean = True) As Boolean
 '‘ункци€ возвращает True, если фигура €вл€етс€ фигурой √ра‘и—
