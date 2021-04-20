@@ -154,8 +154,8 @@ Public Enum indexPers
    ipGranicaBezopasnoyZoni = 306               'Граница зоны безопасного удаления
    ipRVS = 330                                 'РВС
    ipVzriv = 340                               'Место взрыва
-   ipMashiniMVD = 3001                         'Машины МВД
-   ipMashiniMinzdrav = 3002                    'Машины Минздрав
+'   ipMashiniMVD = 3001                         'Машины МВД
+'   ipMashiniMinzdrav = 3002                    'Машины Минздрав
    ipFormula = 500                             'Формулы
    ipInfoMain = 600                            'Инфоблок Основные сведения
    ipInfoOrganization = 601                    'Инфоблок Организация

@@ -202,7 +202,7 @@ Dim latestSquareTime As Date
                         .Raise "PersonnelHave", cellVal(shp, "Prop.PersonnelHave") - 1
                     Case Is = indexPers.ipMVD 'МВД
                         .Raise "TotalTechCount;MVDCount"
-                    Case Is = indexPers.ipMashiniMinzdrav 'Минздрав
+                    Case Is = indexPers.ipAmbulance 'Минздрав
                         .Raise "TotalTechCount;SMPCount"
                         
                 '---Объекты пожара-----------------
@@ -633,7 +633,7 @@ Dim latestSquareTime As Date
                                 .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipMVD 'МВД
                                 .Raise "MVDCount;TotalTechCount", cellVal(shp, "Prop.Quantity") - 1
-                            Case Is = indexPers.ipMashiniMinzdrav 'Минздрав
+                            Case Is = indexPers.ipAmbulance 'Минздрав
                                 .Raise "SMPCount;TotalTechCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipPrispAvto 'Приспособленная техника
                                 .Raise "OtherTechincsHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
