@@ -34,7 +34,7 @@ Sub AddButtons()
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     Set Bar = Application.CommandBars("Превращения")
     DocPath = ThisDocument.path
@@ -82,7 +82,7 @@ Sub AddButtons()
     Set Bar = Nothing
 
 Exit Sub
-ex:
+EX:
     Set Button = Nothing
     Set Bar = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name

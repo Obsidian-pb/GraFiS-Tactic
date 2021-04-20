@@ -30,7 +30,7 @@ Dim shp As Visio.Shape
 
 '---Ищем необходимую запись в наборе данных и по ней определяем интенсивность для заданных параметров
     With rsType
-        .Filter = Criteria
+        .filter = Criteria
         If .RecordCount > 0 Then
             .MoveFirst
             If ![ИнтенсивностьПоВодеРасч] > 0 Then 'Если значения интенсивности подачи воды в БД нет

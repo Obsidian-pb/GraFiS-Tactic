@@ -16,6 +16,8 @@ Const mmInInch As Double = 25.4
 
 Private form As Object
 
+Private bordreRect As Visio.Shape
+
 Public maskBuilder As c_MaskBuilder
 
 Public matrix As Variant
@@ -52,6 +54,9 @@ Dim arr() As Integer
     Debug.Print "Размер матрицы " & xCount * yCount
     
     ReDim matrix(xCount, yCount)
+       
+    'Проверяем наличие контурной фигуры
+    TryGetShape bordreRect, "User.IndexPers:1001"
        
     'Определяем конфигурацию матрицы (стены, зоны горения и т.д.)
     Set maskBuilder = New c_MaskBuilder
@@ -101,12 +106,51 @@ End Sub
 
 Private Function IsOpenSpace(x As Long, y As Long, tolerance As Double) As Boolean
 'Функция возвращает Истина, если указанная точка не соприкасается с маской стен, и наоборот, если соприкасается
-    IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+    'Доделать учет ограничивающей фигуры!!!
+    If bordreRect Is Nothing Then
+        'Снаружи только маски стен
+        IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+    Else
+        'Снаружи и маски стен и ограничивающей фигуры
+'        flag1 = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+'        flag2 = bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+'        IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 And _
+'                      bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) > 0
+        
+        'Если за пределами, то не учитывается!
+'        IsOpenSpace = bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) > 0
+        If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 Then
+            IsOpenSpace = False
+'            IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+        Else
+            IsOpenSpace = True
+            IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+        End If
+'        IsOpenSpace = flag1 Or flag2
+    End If
+    
 End Function
 
 Private Function IsTotalWall(x As Long, y As Long, tolerance As Double) As Boolean
 'Функция возвращает Истина, если указанная точка не соприкасается с маской свободного пространства, и наоборот, если соприкасается
-    IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+'    IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+    
+    If bordreRect Is Nothing Then
+        'Снаружи только маски стен
+        IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+    Else
+        'Снаружи и маски стен и ограничивающей фигуры
+        'Если за пределами, то не учитывается!
+'        IsTotalWall = bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+        If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 Then
+            IsTotalWall = True
+'            IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+        Else
+            IsTotalWall = False
+            IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+        End If
+
+    End If
 End Function
 
 
@@ -118,7 +162,17 @@ Private Sub CheckRect(ByVal x As Long, ByVal y As Long, ByVal radiuss As Integer
 Dim radiussHalf As Integer
 Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, что бы гарантировать проверку всей площади квадрата - переводит длину пришедшего радиуса (являющегося половиной длины квадрата) к радиусу круга описывающего квадрат, в идеале равен 1,4142135623731
 
-    On Error GoTo ex
+    On Error GoTo EX
+               
+''0 Проверяем утверждение, что в радиусе нет нерассчитываемых зон
+'    If Not bordreRect Is Nothing Then
+'        If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) > 1 Then
+'            form.AddCheckedSize (radiuss * 2) ^ 2
+'
+''            Exit Sub
+'        End If
+'
+'    End If
                
 '1 Проверяем утверждение, что в радиусе нет стен
     '---Если стен нет, оставляем для всей клетки 0
@@ -190,7 +244,7 @@ Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, 
                 CheckRect x - radiussHalf, y - radiussHalf, radiussHalf
         End If
 Exit Sub
-ex:
+EX:
     Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
 End Sub
 
@@ -206,6 +260,17 @@ Const radiussModificator As Double = 1.4142
     yAct = y + 0.5 + Not dirUp
 
 '    If Not maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, radiussModificator * grain * 0.5 / mmInInch) = 0 Then
+    If Not bordreRect Is Nothing Then
+        If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 Then
+            If dirRight = True And dirUp = True Then matrix(x, y) = CellState.csWall
+            If dirRight = False And dirUp = True Then matrix(x - 1, y) = CellState.csWall
+            If dirRight = True And dirUp = False Then matrix(x, y - 1) = CellState.csWall
+            If dirRight = False And dirUp = False Then matrix(x - 1, y - 1) = CellState.csWall
+        End If
+        Exit Sub
+    End If
+    
+    
     If Not maskBuilder.pO_MaskShape.HitTest(xAct * grain / mmInInch, yAct * grain / mmInInch, radiussModificator * grain * 0.5 / mmInInch) = 0 Then
         If dirRight = True And dirUp = True Then matrix(x, y) = CellState.csWall
         If dirRight = False And dirUp = True Then matrix(x - 1, y) = CellState.csWall

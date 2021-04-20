@@ -51,7 +51,9 @@ Dim vO_Shape As Visio.Shape
     '---Удаляем из маски стен проемы
     If col_WallsShapes.Count = 0 And col_DoorsShapes.Count = 0 Then Exit Sub
     s_deleteDoors
-
+    
+    '---Добавляем к маске стен контур
+    
 
 Set vO_Shape = Nothing
 End Sub

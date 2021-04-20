@@ -163,11 +163,11 @@ End Sub
 
 Private Function GetConturPoint(ByVal x As Long, ByVal y As Long) As c_Point
 Dim pnt As c_Point
-    On Error GoTo ex
+    On Error GoTo EX
     Set GetConturPoint = conturPoints.item(x & ":" & y)
 
 Exit Function
-ex:
+EX:
     Set pnt = New c_Point
     pnt.SetData x, y
     AddPointToCollection conturPoints, pnt
@@ -185,7 +185,7 @@ Dim shp As Visio.Shape
 Dim perimterPnts() As Double
 Dim i As Long
 
-    On Error GoTo ex
+    On Error GoTo EX
 
 '#С PerimeterCellsFix
     'Исправляем последовательность точек
@@ -247,7 +247,7 @@ Dim i As Long
 
 Set DrawSquare = shp
 Exit Function
-ex:
+EX:
     Set DrawSquare = Nothing
 End Function
 

@@ -23,7 +23,7 @@ End Sub
 
 Private Sub ComBut3_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 
-    On Error GoTo ex
+    On Error GoTo EX
 '---Проверяем включена ли кнопка - если включена - отключаем
     If Ctrl.State = msoButtonDown Then
         Ctrl.State = msoButtonUp
@@ -46,14 +46,14 @@ Private Sub ComBut3_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault A
 
     
 Exit Sub
-ex:
+EX:
     SaveLog Err, "ComBut3_Click"
 End Sub
 
 Public Sub MorphToFog()
 'Обращаем фигуру в зону задымления
 
-    On Error GoTo ex
+    On Error GoTo EX
 '---Проверяем имеется ли возможность обращения фигуры
 '    If Not CheckSquareShape Then
 '    '---Отмечаем кнопку
@@ -65,7 +65,7 @@ Public Sub MorphToFog()
     ImportFogInformation
     
 Exit Sub
-ex:
+EX:
     SaveLog Err, "MorphToFog"
 End Sub
 

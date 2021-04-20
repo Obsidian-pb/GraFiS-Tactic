@@ -92,7 +92,7 @@ Dim newFireShape As Visio.Shape
 Dim modelledFireShape As Visio.Shape
 
     '¬ключаем обработчик ошибок - дл€ предупреждени€ об отсутствии запеченной матрицы
-    On Error GoTo ex
+    On Error GoTo EX
     
     '≈сли путь равен 0, то указываем его бесконечно большим
     If path = 0 Then path = 10000
@@ -196,7 +196,7 @@ Dim modelledFireShape As Visio.Shape
         F_InsertFire.pathMain = realCurrentDistance
         
         
-        On Error GoTo ex
+        On Error GoTo EX
         
         i = i + 1
         
@@ -243,7 +243,7 @@ Application.ActiveWindow.Select modelledFireShape, visSelect
     Set tmr2 = Nothing
     
 Exit Sub
-ex:
+EX:
     MsgBox "ћатрица не запечена!", vbCritical
     
     '---ќпредел€ем получившуюс€ фигуру и обращаем ее в фигуру площади горени€
@@ -275,7 +275,7 @@ Dim yCount As Long
 'Dim grain As Integer
 
     
-    On Error GoTo ex
+    On Error GoTo EX
     
 '    grain = Me.txtGrainSize.value
 
@@ -284,7 +284,7 @@ Dim yCount As Long
     
     IsAcceptableMatrixSize = xCount * yCount < maxMatrixSize
 Exit Function
-ex:
+EX:
     IsAcceptableMatrixSize = False
 End Function
 

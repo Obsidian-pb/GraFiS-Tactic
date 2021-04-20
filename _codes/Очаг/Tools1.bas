@@ -55,79 +55,7 @@ End Function
 'End Function
 
 
-'--------------------------------Коллекции-------------------------------------
-Public Sub AddCollectionItems(ByRef oldCollection As Collection, ByRef newCollection As Collection)
-'Добавляем элементы новой коллекции в старую
-Dim GenPointItem As c_Point
 
-    '---Перебираем все элементы в новой коллекции и добавляем их в старую
-    For Each GenPointItem In newCollection
-        oldCollection.Add GenPointItem
-    Next GenPointItem
-End Sub
-
-Public Sub AddUniqueCollectionItems(ByRef oldCollection As Collection, ByRef newCollection As Collection)
-'Добавляем новые элементы новой коллекции в старую
-Dim GenPointItem As c_Point
-
-    '---Перебираем все элементы в новой коллекции и добавляем их в старую
-    For Each GenPointItem In newCollection
-       AddUniqueCollectionItem oldCollection, GenPointItem
-    Next GenPointItem
-End Sub
-
-Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByRef item As c_Point)
-Dim GenPointItem As c_Point
-
-    '---Перебираем все элементы в новой коллекции и добавляем их в старую
-    For Each GenPointItem In oldCollection
-        If GenPointItem.x = item.x And GenPointItem.y = item.y Then Exit Sub
-    Next GenPointItem
-
-    oldCollection.Add item
-End Sub
-
-Public Sub SetCollection(ByRef oldCollection As Collection, ByRef newCollection As Collection)
-'Обновляем старую коллекцию в соответствии со значениями новой коллекции
-Dim item As Variant
-
-    Set oldCollection = New Collection
-
-    '---Перебираем все элементы в новой коллекции и добавляем их в старую
-    For Each item In newCollection
-        oldCollection.Add item
-    Next item
-
-    '---очищаем новую коллекцию
-End Sub
-
-Public Sub RemoveFromCollection(ByRef coll As Collection, element As Variant)
-Dim item As Variant
-Dim i As Integer
-
-    i = 0
-
-    For Each item In coll
-        If item.x = element.x And item.y = element.y Then
-            coll.Remove i + 1
-            Exit Sub
-        End If
-        i = i + 1
-    Next item
-End Sub
-
-Public Function IsInCollection(ByRef coll As Collection, point As c_Point) As Boolean
-Dim item As c_Point
-
-    For Each item In coll
-        If item.isEqual(point) Then
-            IsInCollection = True
-            Exit Function
-        End If
-    Next item
-
-IsInCollection = False
-End Function
 
 'Public Sub NormalizeCollection(ByRef col As Collection)
 ''Нормализуем коллекцию координат точек для отрисовки
@@ -216,7 +144,7 @@ Dim isStrait As Boolean
     
     ShapeIsLine = False
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.RowCount(visSectionFirstComponent) <> 3 Then Exit Function       'Строк в секции геометрии больше или меньше двух
     If shp.RowType(visSectionFirstComponent, 2) <> 139 Then Exit Function   '139 - LineTo
@@ -224,7 +152,7 @@ Dim isStrait As Boolean
 ShapeIsLine = True
 Exit Function
 
-ex:
+EX:
 ShapeIsLine = False
 End Function
 

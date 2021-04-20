@@ -23,7 +23,7 @@ End Sub
 
 Private Sub ComBut2_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 
-    On Error GoTo ex
+    On Error GoTo EX
 '---Проверяем включена ли кнопка - если включена - отключаем
     If Ctrl.State = msoButtonDown Then
         Ctrl.State = msoButtonUp
@@ -44,13 +44,13 @@ Private Sub ComBut2_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault A
     End If
     
 Exit Sub
-ex:
+EX:
     SaveLog Err, "ComBut2_Click"
 End Sub
 
 Public Sub MorphToStorm()
 
-    On Error GoTo ex
+    On Error GoTo EX
 '---Проверяем имеется ли возможность обращения фигуры
 '    If Not CheckSquareShape Then
 '    '---Отмечаем кнопку
@@ -62,7 +62,7 @@ Public Sub MorphToStorm()
     ImportStormInformation
     
 Exit Sub
-ex:
+EX:
     SaveLog Err, "MorphToStorm"
 End Sub
 

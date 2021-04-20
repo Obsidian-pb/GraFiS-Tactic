@@ -4,7 +4,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
                         Optional ByVal defaultValue As Double = 0) As Variant
 'Returns cell with cellName value. If such cell does not exists, return 0
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         Select Case dataType
@@ -22,7 +22,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
     End If
     
 Exit Function
-ex:
+EX:
     CellVal = defaultValue
 End Function
 
@@ -31,7 +31,7 @@ Public Sub SetCellVal(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal 
 Dim cll As Visio.cell
 Dim typeN As String
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     typeN = TypeName(NewVal)
     If shp.CellExists(cellName, 0) Then
@@ -48,7 +48,7 @@ Dim typeN As String
     End If
     
 Exit Sub
-ex:
+EX:
 
 End Sub
 
@@ -56,7 +56,7 @@ Public Sub SetCellFrml(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal
 'Set cell with cellName formula. If such cell does not exists, does nothing
 Dim cll As Visio.cell
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
@@ -64,16 +64,9 @@ Dim cll As Visio.cell
     End If
     
 Exit Sub
-ex:
+EX:
 
 End Sub
-
-'Public Function NewRow(ByRef shp As Visio.Shape, ByVal secInd As Integer) As Visio.Row
-'Dim tmpRow As Visio.Row
-'
-'    tmpRow = shp.AddRow(
-'
-'End Function
 
 
 Public Sub FixLineGroupProportions()
@@ -136,4 +129,27 @@ Dim shp2 As Visio.Shape
     
 End Sub
 
-
+Public Function ShapeHaveCell(ByRef shp As Visio.Shape, ByVal cellName As String, _
+                              Optional ByVal val As Variant = "") As Boolean
+On Error GoTo EX
+    
+    If shp.CellExists(cellName, 0) Then
+        If val <> "" Then
+            If shp.Cells(cellName).ResultStr(visUnitsString) = val Then
+                ShapeHaveCell = True
+            ElseIf shp.Cells(cellName).Result(visNumber) = val Then
+                ShapeHaveCell = True
+            Else
+                ShapeHaveCell = False
+            End If
+        Else
+            ShapeHaveCell = True
+        End If
+    Else
+        ShapeHaveCell = False
+    End If
+    
+Exit Function
+EX:
+    ShapeHaveCell = False
+End Function
