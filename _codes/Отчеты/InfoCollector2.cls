@@ -17,7 +17,7 @@ Public elements As ElementsShell
 '----------------------------------------Публичные свойства (настройки)----------------------------------------------
 Public options As InfoCollectorOptions          'Настройки расчета
 
-'----------------------------------------Внутренине свойства (служебные)---------------------------------------------
+'----------------------------------------Внутренние свойства (служебные)---------------------------------------------
 Private gfs_shapes As Collection                'Коллекция фигур ГраФиС обнаруженных анализатором
 
 '----------------------------------------События класса---------------------------------------------------------
@@ -563,11 +563,11 @@ Dim latestSquareTime As Date
                         Select Case shp.Cells("User.MotherIndexPers")
                                   '---Пожарные автомобили-----------
                             Case Is = indexPers.ipAC 'Автоцистерны
-                                .Raise "MainPAHave;ACCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;MainPAHave;ACCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipANR 'АНР
-                                .Raise "MainPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;MainPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAPP 'АПП
-                                .Raise "MainPAHave;ACCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;MainPAHave;ACCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAL 'АЛ
                                 .Raise "SpecialPAHave;ALCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAKP 'АКП
@@ -579,19 +579,19 @@ Dim latestSquareTime As Date
                             Case Is = indexPers.ipADU 'АДУ
                                 .Raise "SpecialPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipPNS 'ПНС
-                                .Raise "TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAA 'AA
-                                .Raise "TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAV 'АВ
-                                .Raise "TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAKT 'АКТ
-                                .Raise "TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAP 'АП
-                                .Raise "TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAGVT 'АГВТ
-                                .Raise "TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAG 'АГТ
-                                .Raise "TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAGDZS 'АГДЗС
                                 .Raise "TargetedPAHave;AGCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipKS 'ПКС
@@ -606,11 +606,11 @@ Dim latestSquareTime As Date
                                 .Raise "SpecialPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                                 
                             Case Is = indexPers.ipACL 'АЦЛ
-                                .Raise "MainPAHave;ALCount;ACCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;MainPAHave;ALCount;ACCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAKP 'АЦКП
-                                .Raise "MainPAHave;AKPCount;ACCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
-                            Case Is = indexPers.ipAPP 'АПП
-                                .Raise "MainPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "MainOverallHave;MainPAHave;AKPCount;ACCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+'                            Case Is = indexPers.ipAPP 'АПП
+'                                .Raise "MainPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                         
                         '---Прочая пожарная техника----------
                             Case Is = indexPers.ipPoezd 'Поезда
