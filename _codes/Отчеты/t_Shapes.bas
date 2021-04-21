@@ -75,42 +75,32 @@ Dim tmpVal As Variant
     On Error GoTo EX
     
 '    Debug.Print TypeName(shps)
-    Select Case TypeName(shps)
-        
-        Case Is = "Shape"
-            Set shp = shps
-            If shp.CellExists(cellName, 0) Then
-                Select Case dataType
-                    Case Is = visNumber
-                        cellVal = shp.Cells(cellName).Result(dataType)
-                    Case Is = visUnitsString
-                        cellVal = shp.Cells(cellName).ResultStr(dataType)
-                    Case Is = visDate
-                        cellVal = shp.Cells(cellName).Result(dataType)
-                    Case Else
-                        cellVal = shp.Cells(cellName).Result(dataType)
-                End Select
-            Else
-                cellVal = defaultValue
+    If TypeName(shps) = "Shape" Then        'Если фигура
+        Set shp = shps
+        If shp.CellExists(cellName, 0) Then
+            Select Case dataType
+                Case Is = visNumber
+                    cellVal = shp.Cells(cellName).Result(dataType)
+                Case Is = visUnitsString
+                    cellVal = shp.Cells(cellName).ResultStr(dataType)
+                Case Is = visDate
+                    cellVal = shp.Cells(cellName).Result(dataType)
+                Case Else
+                    cellVal = shp.Cells(cellName).Result(dataType)
+            End Select
+        Else
+            cellVal = defaultValue
+        End If
+        Exit Function
+    ElseIf TypeName(shps) = "Shapes" Or TypeName(shps) = "Collection" Then     'Если коллекция
+        For Each shp In shps
+            tmpVal = cellVal(shp, cellName, dataType, defaultValue)
+            If tmpVal <> defaultValue Then
+                cellVal = tmpVal
+                Exit Function
             End If
-            Exit Function
-        Case Is = "Shapes"
-            For Each shp In shps
-                tmpVal = cellVal(shp, cellName, dataType, defaultValue)
-                If tmpVal <> defaultValue Then
-                    cellVal = tmpVal
-                    Exit Function
-                End If
-            Next shp
-        Case Is = "Collection"
-            For Each shp In shps
-                tmpVal = cellVal(shp, cellName, dataType, defaultValue)
-                If tmpVal <> defaultValue Then
-                    cellVal = tmpVal
-                    Exit Function
-                End If
-            Next shp
-    End Select
+        Next shp
+    End If
     
 cellVal = defaultValue
 Exit Function
