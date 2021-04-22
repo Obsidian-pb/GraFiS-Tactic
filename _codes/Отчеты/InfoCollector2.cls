@@ -612,7 +612,7 @@ Dim latestSquareTime As Date
                             Case Is = indexPers.ipAG '¿√“
                                 .Raise "MainOverallHave;TargetedPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipAGDZS '¿√ƒ«—
-                                .Raise "TargetedPAHave;AGCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
+                                .Raise "SpecialPAHave;AGCount;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipKS 'œ —
                                 .Raise "SpecialPAHave;TotalTechCount;TotalFireCount", cellVal(shp, "Prop.Quantity") - 1
                             Case Is = indexPers.ipPozhLab 'À¡
