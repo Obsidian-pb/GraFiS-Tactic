@@ -1,9 +1,9 @@
 Attribute VB_Name = "m_ExportCommands"
 Option Explicit
 
-Private exl As Excel.Application
-Private wkbk As Excel.Workbook
-Private wkst As Excel.Worksheet
+Private exl As Object ' Excel.Application
+Private wkbk As Object '  Excel.Workbook
+Private wkst As Object '  Excel.Worksheet
 Private rowNumber As Integer
 
 
@@ -13,7 +13,7 @@ Public Sub Export()
 Dim shp As Visio.Shape
 
 
-    Set exl = New Excel.Application
+    Set exl = CreateObject("Excel.Application")   ' New Excel.Application
     Set wkbk = exl.Workbooks.Add()
     Set wkst = exl.ActiveSheet
     exl.visible = True
@@ -37,7 +37,7 @@ Dim i As Integer
 Dim rowName As String
 Dim comTime As String
 Dim comText As String
-Dim comarr() As String
+Dim comArr() As String
     
 '    On Error GoTo ex
     
@@ -45,9 +45,9 @@ Dim comarr() As String
         rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
         If Len(rowName) > 12 Then
             If left(rowName, 12) = "GFS_Command_" Then
-                comarr = Split(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), " | ")
-                wkst.Cells(rowNumber, 1) = comarr(0)
-                wkst.Cells(rowNumber, 2) = getCallName(shp) & " " & comarr(UBound(comarr))
+                comArr = Split(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), delimiter)
+                wkst.Cells(rowNumber, 1) = comArr(0)
+                wkst.Cells(rowNumber, 2) = getCallName(shp) & " " & comArr(UBound(comArr))
                 
                 rowNumber = rowNumber + 1
             End If
@@ -58,19 +58,19 @@ Dim comarr() As String
     
     
 Exit Sub
-ex:
+EX:
 
 End Sub
 
 Public Function getCallName(ByRef shp As Visio.Shape) As String
-    On Error GoTo ex
+    On Error GoTo EX
     getCallName = shp.Cells("Prop.Call").ResultStr(visUnitsString)
 Exit Function
-ex:
+EX:
     getCallName = "-"
 End Function
 Public Sub getSetTime(ByRef shp As Visio.Shape)
-    On Error GoTo ex
+    On Error GoTo EX
     If shp.Cells("User.IndexPers").Result(visNumber) = 34 Then
         wkst.Cells(rowNumber, 4) = shp.Cells("Prop.SetTime").ResultStr(visDate)
         wkst.Cells(rowNumber, 5) = shp.Cells("User.DiameterIn").ResultStr(visUnitsString)
@@ -84,7 +84,7 @@ Public Sub getSetTime(ByRef shp As Visio.Shape)
     
     
 Exit Sub
-ex:
+EX:
     
 End Sub
 

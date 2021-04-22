@@ -12,13 +12,13 @@ Dim i As Integer
     
 '---Проверяем есть ли уже панель управления "РТП"------------------------------
     For i = 1 To Application.CommandBars.Count
-        If Application.CommandBars(i).name = "РТП" Then Exit Sub
+        If Application.CommandBars(i).Name = "РТП" Then Exit Sub
     Next i
 
 '---Создаем панель управления "РТП"--------------------------------------------
     Set Bar = Application.CommandBars.Add(Position:=msoBarRight, Temporary:=True)
     With Bar
-        .name = "РТП"
+        .Name = "РТП"
         .visible = True
     End With
 
@@ -37,7 +37,7 @@ Sub AddButtons()
     Dim Bar As CommandBar
     Dim DocPath As String
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     Set Bar = Application.CommandBars("РТП")
     
@@ -62,16 +62,16 @@ Sub AddButtons()
     Set Bar = Nothing
 
 Exit Sub
-ex:
+EX:
     Set Bar = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.name
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons", "Команды"
 End Sub
 
 
 Sub DeleteButtons()
 '---Процедура удаления кнопки "Команда" из панели управления "РТП"--------------
-    On Error GoTo ex
+    On Error GoTo EX
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
 
@@ -89,6 +89,6 @@ Set Button = Nothing
 Set Bar = Nothing
 
 Exit Sub
-ex:
+EX:
 'Выходим из процедуры
 End Sub
