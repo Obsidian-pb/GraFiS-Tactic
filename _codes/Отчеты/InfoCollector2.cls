@@ -422,8 +422,9 @@ Dim latestSquareTime As Date
                 '---Водоснабжение   -!!!REWRITE ALL shp.Cells to CellVal
                     Case Is = indexPers.ipPG 'ПГ
                         .Raise "WaterSourceCount"
-                        If shp.CellExists("User.Distance", 0) = True Then
-                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.length") <> 0 Then
+                        
+                        If shp.CellExists("User.Distance", 0) <> 0 Then
+                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.Length") <> 0 Then
                                 If .ByID("DistanceMin").Result > shp.Cells("User.Distance").Result(visMeters) Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                                 If .ByID("DistanceMin").Result = 0 Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                             End If
@@ -431,7 +432,7 @@ Dim latestSquareTime As Date
                     Case Is = indexPers.ipPW 'ПВ
                         .Raise "WaterSourceCount"
                         If shp.CellExists("User.Distance", 0) = True Then
-                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.length") <> 0 Then
+                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.Length") <> 0 Then
                                 If .ByID("DistanceMin").Result > shp.Cells("User.Distance").Result(visMeters) Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                                 If .ByID("DistanceMin").Result = 0 Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                             End If
@@ -439,7 +440,7 @@ Dim latestSquareTime As Date
                     Case Is = indexPers.ipPK 'ПК
                         .Raise "WaterSourceCount"
                         If shp.CellExists("User.Distance", 0) = True Then
-                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.length") <> 0 Then
+                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.Length") <> 0 Then
                                 If .ByID("DistanceMin").Result > shp.Cells("User.Distance").Result(visMeters) Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                                 If .ByID("DistanceMin").Result = 0 Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                             End If
@@ -448,7 +449,7 @@ Dim latestSquareTime As Date
                         .Raise "WaterSourceCount"
                         .Raise "WaterValueHave", cellVal(shp, "Prop.Value") * 1000
                         If shp.CellExists("User.Distance", 0) = True Then
-                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.length") <> 0 Then
+                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.Length") <> 0 Then
                                 If .ByID("DistanceMin").Result > shp.Cells("User.Distance").Result(visMeters) Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                                 If .ByID("DistanceMin").Result = 0 Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                             End If
@@ -456,7 +457,7 @@ Dim latestSquareTime As Date
                     Case Is = indexPers.ipPirs 'Пирс
                         .Raise "WaterSourceCount"
                         If shp.CellExists("User.Distance", 0) = True Then
-                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.length") <> 0 Then
+                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.Length") <> 0 Then
                                 If .ByID("DistanceMin").Result > shp.Cells("User.Distance").Result(visMeters) Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                                 If .ByID("DistanceMin").Result = 0 Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                             End If
@@ -465,7 +466,25 @@ Dim latestSquareTime As Date
                         .Raise "WaterSourceCount"
                         .Raise "WaterValueHave", cellVal(shp, "Prop.WTValue") * 1000
                         If shp.CellExists("User.Distance", 0) = True Then
-                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.length") <> 0 Then
+                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.Length") <> 0 Then
+                                If .ByID("DistanceMin").Result > shp.Cells("User.Distance").Result(visMeters) Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
+                                If .ByID("DistanceMin").Result = 0 Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
+                            End If
+                        End If
+                    Case Is = indexPers.ipKolodec
+                        .Raise "WaterSourceCount"
+                        .Raise "WaterValueHave", cellVal(shp, "Prop.WTValue") * 1000
+                        If shp.CellExists("User.Distance", 0) = True Then
+                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.Length") <> 0 Then
+                                If .ByID("DistanceMin").Result > shp.Cells("User.Distance").Result(visMeters) Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
+                                If .ByID("DistanceMin").Result = 0 Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
+                            End If
+                        End If
+                    Case Is = indexPers.ipZakrVodoistochnik
+                        .Raise "WaterSourceCount"
+                        .Raise "WaterValueHave", cellVal(shp, "Prop.WTValue") * 1000
+                        If shp.CellExists("User.Distance", 0) = True Then
+                            If InStr(1, shp.Cells("User.Distance").FormulaU, "!User.Length") <> 0 Then
                                 If .ByID("DistanceMin").Result > shp.Cells("User.Distance").Result(visMeters) Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                                 If .ByID("DistanceMin").Result = 0 Then .SetVal "DistanceMin", Round(shp.Cells("User.Distance").Result(visMeters))
                             End If
