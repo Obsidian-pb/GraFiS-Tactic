@@ -85,14 +85,14 @@ Private Sub fillElemCollection()
 
     AddNewElement "GetedWaterValue", "Забирается воды из внешних источников", "{$} л/с (max = {GetedWaterValueMax} л/с )", , , , False
     AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум", , , , , False
-    AddNewElement "GetingWaterCount", "Установлено на водоисточники", "{$} ({PANeedOnWaterSource} - требуется установить)"
+    AddNewElement "GetingWaterCount", "МСП установлено на водоисточники", "{$} ({PANeedOnWaterSource} - требуется установить)"
     AddNewElement "PANeedOnWaterSource", "Требуется установить на водоисточники", , , , , False
     AddNewElement "WaterEternal", "Бесконечный запас воды", , False, , False, False
 
     AddNewElement "GDZSChainsCountWork", "Звеньев ГДЗС работает", "{$} ({GDZSMansCountWork} газодымозащитников)"
     AddNewElement "GDZSChainsCountWorkSoft", "Звеньев ГДЗС работает в стандартных условиях", , , , , False
     AddNewElement "GDZSChainsCountWorkHard", "Звеньев ГДЗС работает в сложных условиях", , , , , False
-    AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется"
+    AddNewElement "GDZSChainsCountNeed", "Звеньев ГДЗС требуется (+ резерв)"
     AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется", "{$} ({GDZSMansRezCountHave} газодымозащитников)", , , , False
     AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется", , , , , False
 '    AddNewElement "GDZSChainsCanBeFormed", "Звеньев ГДЗС Может быть сформировано"

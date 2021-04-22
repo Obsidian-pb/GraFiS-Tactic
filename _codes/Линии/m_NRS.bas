@@ -140,7 +140,7 @@ Dim DischargeTime As Double
     If PodOut > 0 Then totalStr = totalStr & "Общий расход системы - " & PodOut & " л/с" & Chr(10)
     If PodIn > 0 Then totalStr = totalStr & "Общий забор воды - " & PodIn & " л/с" & Chr(10)
     If HosesValue > 0 Then totalStr = totalStr & "Объем воды в рукавах - " & HosesValue & " л" & Chr(10)
-    If WaterValue > 0 Then totalStr = totalStr & "Объем воды в емкостях МСП " & WaterValue & " л" & Chr(10)
+    If WaterValue > 0 Then totalStr = totalStr & "Объем воды в емкостях МСП - " & WaterValue & " л" & Chr(10)
     If PW_Value > 0 Then totalStr = totalStr & "Объем доступной воды в пожарных водоемах - " & PW_Value & " л" & Chr(10)
     If WaterOpen_Value > 0 Then totalStr = totalStr & "Объем доступной воды в открытых водоисточниках - " & WaterOpen_Value & " л" & Chr(10)
 
