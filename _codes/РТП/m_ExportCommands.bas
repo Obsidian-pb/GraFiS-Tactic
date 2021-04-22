@@ -16,7 +16,7 @@ Dim shp As Visio.Shape
     Set exl = New Excel.Application
     Set wkbk = exl.Workbooks.Add()
     Set wkst = exl.ActiveSheet
-    exl.Visible = True
+    exl.visible = True
     
     rowNumber = 1
     For Each shp In Application.ActivePage.Shapes
@@ -44,7 +44,7 @@ Dim comarr() As String
     For i = 0 To shp.RowCount(visSectionUser) - 1
         rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
         If Len(rowName) > 12 Then
-            If Left(rowName, 12) = "GFS_Command_" Then
+            If left(rowName, 12) = "GFS_Command_" Then
                 comarr = Split(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), " | ")
                 wkst.Cells(rowNumber, 1) = comarr(0)
                 wkst.Cells(rowNumber, 2) = getCallName(shp) & " " & comarr(UBound(comarr))

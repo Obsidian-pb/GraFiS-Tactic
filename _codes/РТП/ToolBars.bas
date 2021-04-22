@@ -12,14 +12,14 @@ Dim i As Integer
     
 '---Проверяем есть ли уже панель управления "РТП"------------------------------
     For i = 1 To Application.CommandBars.Count
-        If Application.CommandBars(i).Name = "РТП" Then Exit Sub
+        If Application.CommandBars(i).name = "РТП" Then Exit Sub
     Next i
 
 '---Создаем панель управления "РТП"--------------------------------------------
     Set Bar = Application.CommandBars.Add(Position:=msoBarRight, Temporary:=True)
     With Bar
-        .Name = "РТП"
-        .Visible = True
+        .name = "РТП"
+        .visible = True
     End With
 
 End Sub
@@ -34,7 +34,7 @@ Sub AddButtons()
 'Процедура добавление новой кнопки на панель управления "РТП"--------------
     
 '---Объявляем переменные и постоянные--------------------------------------------------
-    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim Bar As CommandBar
     Dim DocPath As String
     
     On Error GoTo ex
@@ -43,24 +43,28 @@ Sub AddButtons()
     
 '---Добавляем кнопки на панель управления "РТП"--------------------------------
 '---Кнопка "Команда"-------------------------------------------------
-    Set Button = Bar.Controls.Add(Type:=msoControlButton)
-    With Button
+    With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Команда"
         .Tag = "Command"
         .TooltipText = "Команда тактической единице"
-        .FaceID = 238
+        .FaceID = 346
+    End With
+'---Кнопка "Информация"-------------------------------------------------
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Информация"
+        .Tag = "Info"
+        .TooltipText = "Информация для фигуры"
+        .FaceID = 162
     End With
     
     Set btns = New c_Buttons
     
-    Set Button = Nothing
     Set Bar = Nothing
 
 Exit Sub
 ex:
-    Set Button = Nothing
     Set Bar = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.name
     SaveLog Err, "AddButtons", "Команды"
 End Sub
 
@@ -74,6 +78,9 @@ Sub DeleteButtons()
     Set Bar = Application.CommandBars("РТП")
 '---Удаление кнопки "Команда" из панели управления "РТП"------------------------
     Set Button = Bar.Controls("Команда")
+    Button.Delete
+'---Удаление кнопки "Информация" из панели управления "РТП"------------------------
+    Set Button = Bar.Controls("Информация")
     Button.Delete
 
 Set btns = Nothing
