@@ -95,7 +95,7 @@ Dim startTime As Date
 Dim durationS As String
 Dim durationI As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 
     'Если время выполнения не указано, работа не имеет ограничения
     'Если время выполнения = *, единица закончила работу на пожаре
@@ -129,6 +129,6 @@ Dim durationI As Integer
     End If
     
 Exit Function
-EX:
+ex:
     GetCommandState = tsError
 End Function

@@ -6,7 +6,7 @@ Public Function cellVal(ByRef shps As Variant, ByVal cellName As String, Optiona
 Dim shp As Visio.Shape
 Dim tmpVal As Variant
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '    Debug.Print TypeName(shps)
     If TypeName(shps) = "Shape" Then        'Если фигура
@@ -38,7 +38,7 @@ Dim tmpVal As Variant
     
 cellVal = defaultValue
 Exit Function
-EX:
+ex:
     cellVal = defaultValue
 End Function
 
@@ -67,6 +67,6 @@ Dim cll As Visio.Cell
     End If
     
 Exit Sub
-EX:
+ex:
 
 End Sub

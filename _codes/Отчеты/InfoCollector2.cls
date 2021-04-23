@@ -37,7 +37,7 @@ End Sub
 
 
 
-Public Function Refresh(ByVal a_PageIndex As Integer, Optional ByRef shps As Collection) As InfoCollector2
+Public Function Refresh(ByVal a_PageIndex As Integer, Optional ByVal maxDate As Date = 401769) As InfoCollector2
 'ѕроцедура обновлени€ свойств класса
 'ѕеребирает все элементы наход€щиес€ на указанном a_PageIndex листе
 Dim shp As Visio.Shape
@@ -54,14 +54,18 @@ Dim latestSquareTime As Date
     elements.Clear
 '---ќбнул€ем коллекцию фигур √ра‘и—
     Set gfs_shapes = New Collection
-
-'”станавливаем индекс страницы дл€ анализа
+    
+'---”станавливаем индекс страницы дл€ анализа
     Set targetPage = Application.ActiveDocument.Pages(a_PageIndex)
-
+    
+'---»справ€ем врем€ дл€ корректной обработки равных времен (по неизвестной причине возвращает False при "01.04.2015 11:08:00"="01.04.2015 11:08:00")
+    maxDate = DateAdd("s", 1, maxDate)
+    
 '---ѕеребираем все фигуры и в случае если фигура €вл€етс€ фигурой √ра‘и— анализируем еЄ
     For Each shp In targetPage.Shapes
         If IsGFSShape(shp) Then         'явл€етс€ ли фигура фигурой √ра‘и—
-            AddUniqueCollectionItem gfs_shapes, shp
+            If GetGFSShapeSetTime(shp) <= maxDate Then
+                AddUniqueCollectionItem gfs_shapes, shp
 '            If vsO_Shape.Cells("User.Version") >= CP_GrafisVersion Then  'ѕровер€ем версию фигуры
                 shpIndex = cellVal(shp, "User.IndexPers")  'ќпредел€ем индекс фигуры √ра‘и—
                 
@@ -685,7 +689,7 @@ Dim latestSquareTime As Date
                                     "Prop.Foam"
                 End With    'elements
                 
-'            End If
+            End If
         End If
     Next shp
 
@@ -883,26 +887,30 @@ Exit Function
 EX:
     GetSingleValue = ""
 End Function
-Public Function GetGFSShapesLessTime(ByVal dt As Date) As Collection
-'‘ункци€ возвращает коллекцию фигур √ра‘и— со временм прибыти€ менее указанного
-Dim tmpCol As Collection
-Dim shp As Visio.Shape
-    
-    On Error GoTo EX
-    
-    Set tmpCol = New Collection
-    
-    For Each shp In A.GFSShapes
-        If GetGFSShapeSetTime(shp) < dt Then
-            AddUniqueCollectionItem tmpCol, shp
-        End If
-    Next shp
-        
-    Set GetGFSShapesLessTime = tmpCol
-Exit Function
-EX:
-    Set GetGFSShapesLessTime = Nothing
-End Function
+
+
+
+
+'Public Function GetGFSShapesLessTime(ByVal dt As Date) As Collection
+''‘ункци€ возвращает коллекцию фигур √ра‘и— со временм прибыти€ менее указанного
+'Dim tmpCol As Collection
+'Dim shp As Visio.Shape
+'
+'    On Error GoTo EX
+'
+'    Set tmpCol = New Collection
+'
+'    For Each shp In A.GFSShapes
+'        If GetGFSShapeSetTime(shp) < dt Then
+'            AddUniqueCollectionItem tmpCol, shp
+'        End If
+'    Next shp
+'
+'    Set GetGFSShapesLessTime = tmpCol
+'Exit Function
+'EX:
+'    Set GetGFSShapesLessTime = Nothing
+'End Function
 
 'Public Function GetSingleValue(ByVal filterStr As String, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visUnitsString, Optional defaultValue As Variant = 0) As Variant
 'Dim shp As Visio.Shape

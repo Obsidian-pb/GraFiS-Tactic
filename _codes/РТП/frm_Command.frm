@@ -40,7 +40,7 @@ Public Sub NewCommand()
     Set shp = Application.ActiveWindow.Selection(1)
     targetCellName = ""
     
-    Me.txt_CommandText.Text = GetCurrentTime & delimiter
+    Me.txt_CommandText.text = GetCurrentTime & delimiter
     
     Me.Show
 End Sub
@@ -49,7 +49,7 @@ Public Sub CurrentCommand(ByRef shp_a As Visio.Shape, ByVal cellName As String)
     Set shp = shp_a
     targetCellName = cellName
     
-    Me.txt_CommandText.Text = shp.Cells(cellName).ResultStr(visUnitsString)
+    Me.txt_CommandText.text = shp.Cells(cellName).ResultStr(visUnitsString)
     
     Me.Show
 End Sub
@@ -152,7 +152,7 @@ End Function
 Private Function GetCommandText(Optional ByVal l As Integer = 25) As String
 Dim str As String
 
-    On Error GoTo EX
+    On Error GoTo ex
 
     str = FixText(Me.txt_CommandText)
     If Len(str) < l Then
@@ -162,14 +162,14 @@ Dim str As String
     End If
 
 Exit Function
-EX:
+ex:
     GetCommandText = "***"
 End Function
 Private Function GetRowIndex(cellName As String) As Integer
-    On Error GoTo EX
+    On Error GoTo ex
     GetRowIndex = shp.Cells(cellName).Row
 Exit Function
-EX:
+ex:
     GetRowIndex = -1
 End Function
 

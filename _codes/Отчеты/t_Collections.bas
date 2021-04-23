@@ -433,6 +433,7 @@ Dim curVal As Date
                  cellVal(shp, "Prop.FormingTime", visDate) + _
                  cellVal(shp, "Prop.FindTime", visDate) + _
                  cellVal(shp, "Prop.RushTime", visDate)
+'    Debug.Print curVal
 
 GetGFSShapeSetTime = curVal
 End Function
@@ -440,7 +441,8 @@ End Function
 
 
 Public Sub TTT()
-Debug.Print GetGFSShapeSetTime(Application.ActiveWindow.Selection(1)) < CDate("01.04.2015 11:25:00")
+'Debug.Print GetGFSShapeSetTime(Application.ActiveWindow.Selection(1)) < CDate("01.04.2015 11:25:00")
+Debug.Print GetGFSShapeSetTime(Application.ActiveWindow.Selection(1)) < 401769
 End Sub
 'Public Sub TTT()
 'Dim c As Collection

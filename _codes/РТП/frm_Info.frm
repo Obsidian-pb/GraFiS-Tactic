@@ -29,7 +29,7 @@ Public Property Let State(ByVal state_a As Boolean)
     state_ = state_a
     
     If Not state_ Then
-        ShowData Me.tb_HTMLCode.Text
+        ShowData Me.tb_HTMLCode.text
         
         wb_Bowser.visible = True
         tb_HTMLCode.visible = False
@@ -65,7 +65,7 @@ Dim s As Long
     l = Me.tb_HTMLCode.SelStart
     i = 1
     Do While i <= l
-        If Asc(Mid(Me.tb_HTMLCode.Text, i, 1)) = 13 Then
+        If Asc(Mid(Me.tb_HTMLCode.text, i, 1)) = 13 Then
             l = l + 1
         End If
         i = i + 1
@@ -73,16 +73,16 @@ Dim s As Long
     Loop
     s = Me.tb_HTMLCode.SelLength
     Do While i <= l + s
-        If Asc(Mid(Me.tb_HTMLCode.Text, i, 1)) = 13 Then
+        If Asc(Mid(Me.tb_HTMLCode.text, i, 1)) = 13 Then
             s = s + 1
         End If
         i = i + 1
         If i > 10000 Then Exit Sub
     Loop
-    txt1 = left(Me.tb_HTMLCode.Text, l)
-    txt2 = Right(Me.tb_HTMLCode.Text, Me.tb_HTMLCode.TextLength - l - s)
+    txt1 = left(Me.tb_HTMLCode.text, l)
+    txt2 = Right(Me.tb_HTMLCode.text, Me.tb_HTMLCode.TextLength - l - s)
     
-    Me.tb_HTMLCode.Text = txt1 & "$" & markersColl(Me.cbox_Markers.ListIndex + 1) & "$" & txt2
+    Me.tb_HTMLCode.text = txt1 & "$" & markersColl(Me.cbox_Markers.ListIndex + 1) & "$" & txt2
 End Sub
 
 Private Sub UserForm_Activate()
@@ -166,7 +166,7 @@ End Sub
 Public Sub ShowHTML(ByRef shp As Visio.Shape, ByVal htmlText As String, Optional ByVal visible As Boolean = True)
     Set formShape = shp
     
-    tb_HTMLCode.Text = htmlText
+    tb_HTMLCode.text = htmlText
     ShowData htmlText
 '    DoEvents
 '    sleep 0.25, True
@@ -232,7 +232,7 @@ End Sub
 
 
 Private Sub SaveHTMLPattern()
-    SetCellVal formShape, "User.TextPattern", Replace(tb_HTMLCode.Text, Chr(34), Chr(39))
+    SetCellVal formShape, "User.TextPattern", Replace(tb_HTMLCode.text, Chr(34), Chr(39))
 End Sub
 
 
