@@ -31,7 +31,7 @@ Public Sub CheckEnd(ByRef shp As Visio.Shape, ByVal t As Date)
             SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 1089
             SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Ожидает команд"
         Case Is = tactState.tsEnd
-            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 840
+            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 1088  ' 840
             SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Закончил работу на пожаре (убыл)"
         Case Is = tactState.tsNotStarted
             SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 2743
@@ -59,9 +59,9 @@ Dim firstState As tactState
                 Case Is = tactState.tsInProgress
                     shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 346
                 Case Is = tactState.tsWaiting
-                    shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 837
+                    shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 1087  '837
                 Case Is = tactState.tsEnd
-                    shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 837
+                    shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 1087  '837
                 Case Is = tactState.tsError
                     shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 463
                 Case Is = tactState.tsNotStarted

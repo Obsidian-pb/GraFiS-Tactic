@@ -6,7 +6,7 @@ Public Function SortCommands(ByVal coms As Collection, Optional ByVal desc As Bo
 'Функция возвращает отсортированную коллекцию фигур. Фигуры сортируются по значению в ячейке sortCellName - чем больше, тем выше
 'desc: True - от большего к меньшему; False - от меньшего к большему
 Dim i As Integer
-Dim com As c_Command
+Dim com As c_SimpleDescription
 Dim tmpColl As Collection
 
     
@@ -33,11 +33,11 @@ Dim tmpColl As Collection
     
     Set SortCommands = tmpColl
 End Function
-Public Function GetMinCom(ByRef col As Collection) As c_Command
+Public Function GetMinCom(ByRef col As Collection) As c_SimpleDescription
 'Возвращает команду с минимальным временем отдачи
 Dim i As Integer
-Dim com1 As c_Command
-Dim com2 As c_Command
+Dim com1 As c_SimpleDescription
+Dim com2 As c_SimpleDescription
 Dim com1Time As Double
 Dim com2Time As Double
     

@@ -56,6 +56,14 @@ Sub AddButtons()
         .TooltipText = "Информация для фигуры"
         .FaceID = 162
     End With
+'---Кнопка "Экспорт описания БД"-------------------------------------------------
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Экспорт описания БД"
+        .Tag = "DescriptionExport"
+        .TooltipText = "Экспорт описания БД"
+        .BeginGroup = True
+        .FaceID = 582
+    End With
     
     Set btns = New c_Buttons
     
@@ -81,6 +89,9 @@ Sub DeleteButtons()
     Button.Delete
 '---Удаление кнопки "Информация" из панели управления "РТП"------------------------
     Set Button = Bar.Controls("Информация")
+    Button.Delete
+'---Удаление кнопки "Экспорт описания БД" из панели управления "РТП"------------------------
+    Set Button = Bar.Controls("Экспорт описания БД")
     Button.Delete
 
 Set btns = Nothing
