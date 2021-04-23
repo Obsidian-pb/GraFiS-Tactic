@@ -7,6 +7,8 @@ Public Enum tactState
     tsWaiting = 1
     tsEnd = 2
     tsError = 3
+    tsNotStarted = 4
+    tsUnknown = -1
 End Enum
 
 Public Const delimiter = " | "
@@ -31,6 +33,9 @@ Public Sub CheckEnd(ByRef shp As Visio.Shape, ByVal t As Date)
         Case Is = tactState.tsEnd
             SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 840
             SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Закончил работу на пожаре (убыл)"
+        Case Is = tactState.tsNotStarted
+            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 2743
+            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Выполнение не началось"
         Case Is = tactState.tsError
             SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 463
             SetCellFrml shp, "SmartTags.GFS_Commands.Description", "ОШИБКА - проверьте корректность данных"
@@ -42,6 +47,9 @@ Private Function GetTactState(ByRef shp As Visio.Shape) As tactState
 Dim i As Integer
 Dim curTime As Date
 Dim curCommandState As tactState
+Dim firstState As tactState
+    
+    firstState = tactState.tsUnknown
     
     For i = 0 To shp.RowCount(visSectionAction) - 1
         If left(shp.CellsSRC(visSectionAction, i, 0).rowName, 11) = "GFS_Command" Then
@@ -56,11 +64,28 @@ Dim curCommandState As tactState
                     shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 837
                 Case Is = tactState.tsError
                     shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 463
+                Case Is = tactState.tsNotStarted
+                    shp.CellsSRC(visSectionAction, i, visActionButtonFace).Formula = 2743
             End Select
+            
+            'Запоминаем состояние первой команды
+            If firstState = tactState.tsUnknown Then
+                firstState = curCommandState
+            End If
         End If
     Next i
     
-    GetTactState = curCommandState
+    'Проверяем начала ли выполняться первая команда. Если да, то возвращае обычное значение, если нет - то состояние "Не началось"
+    If firstState = tsNotStarted Then
+        GetTactState = tactState.tsNotStarted
+    Else
+        If curCommandState = tsNotStarted Then
+            GetTactState = tsInProgress
+        Else
+            GetTactState = curCommandState
+        End If
+    End If
+    
 End Function
 
 Public Function GetCommandState(ByRef curTime As Date, ByVal commandText As String) As tactState
@@ -69,6 +94,8 @@ Dim comArrLen As Integer
 Dim startTime As Date
 Dim durationS As String
 Dim durationI As Integer
+
+    On Error GoTo EX
 
     'Если время выполнения не указано, работа не имеет ограничения
     'Если время выполнения = *, единица закончила работу на пожаре
@@ -80,20 +107,24 @@ Dim durationI As Integer
     
     curTime = DateAdd("s", 10, curTime)
     
-    If durationS = "*" Then
-        If curTime >= startTime Then
-            GetCommandState = tsEnd
-        Else
-            GetCommandState = tsInProgress
-        End If
-    ElseIf durationS = "" Or durationS = " " Then
-        GetCommandState = tsInProgress
+    If curTime < startTime Then
+        GetCommandState = tsNotStarted
     Else
-        durationI = Int(durationS)
-        If curTime >= DateAdd("n", durationI, startTime) Then
-            GetCommandState = tsWaiting
-        Else
+        If durationS = "*" Then
+'            If curTime >= startTime Then
+                GetCommandState = tsEnd
+'            Else
+'                GetCommandState = tsInProgress
+'            End If
+        ElseIf durationS = "" Or durationS = " " Then
             GetCommandState = tsInProgress
+        Else
+            durationI = Int(durationS)
+            If curTime >= DateAdd("n", durationI, startTime) Then
+                GetCommandState = tsWaiting
+            Else
+                GetCommandState = tsInProgress
+            End If
         End If
     End If
     

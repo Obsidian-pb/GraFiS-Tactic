@@ -37,7 +37,7 @@ End Sub
 
 
 
-Public Function Refresh(a_PageIndex As Integer) As InfoCollector2
+Public Function Refresh(ByVal a_PageIndex As Integer, Optional ByRef shps As Collection) As InfoCollector2
 'Процедура обновления свойств класса
 'Перебирает все элементы находящиеся на указанном a_PageIndex листе
 Dim shp As Visio.Shape
@@ -883,6 +883,27 @@ Exit Function
 EX:
     GetSingleValue = ""
 End Function
+Public Function GetGFSShapesLessTime(ByVal dt As Date) As Collection
+'Функция возвращает коллекцию фигур ГраФиС со временм прибытия менее указанного
+Dim tmpCol As Collection
+Dim shp As Visio.Shape
+    
+    On Error GoTo EX
+    
+    Set tmpCol = New Collection
+    
+    For Each shp In A.GFSShapes
+        If GetGFSShapeSetTime(shp) < dt Then
+            AddUniqueCollectionItem tmpCol, shp
+        End If
+    Next shp
+        
+    Set GetGFSShapesLessTime = tmpCol
+Exit Function
+EX:
+    Set GetGFSShapesLessTime = Nothing
+End Function
+
 'Public Function GetSingleValue(ByVal filterStr As String, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visUnitsString, Optional defaultValue As Variant = 0) As Variant
 'Dim shp As Visio.Shape
 'Dim col As Collection

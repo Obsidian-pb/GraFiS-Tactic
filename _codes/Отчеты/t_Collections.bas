@@ -421,6 +421,27 @@ Dim str As String
 StrColToStr = str
 End Function
 
+Public Function GetGFSShapeSetTime(ByRef shp As Visio.Shape) As Date
+Dim curVal As Date
+
+    curVal = cellVal(shp, "Prop.ArrivalTime", visDate) + _
+                 cellVal(shp, "Prop.LineTime", visDate) + _
+                 cellVal(shp, "Prop.SetTime", visDate) + _
+                 cellVal(shp, "Prop.SquareTime", visDate) + _
+                 cellVal(shp, "Prop.StabCreationTime", visDate) + _
+                 cellVal(shp, "Prop.UTPCreationTime", visDate) + _
+                 cellVal(shp, "Prop.FormingTime", visDate) + _
+                 cellVal(shp, "Prop.FindTime", visDate) + _
+                 cellVal(shp, "Prop.RushTime", visDate)
+
+GetGFSShapeSetTime = curVal
+End Function
+
+
+
+Public Sub TTT()
+Debug.Print GetGFSShapeSetTime(Application.ActiveWindow.Selection(1)) < CDate("01.04.2015 11:25:00")
+End Sub
 'Public Sub TTT()
 'Dim c As Collection
 'Dim shp As Visio.Shape
