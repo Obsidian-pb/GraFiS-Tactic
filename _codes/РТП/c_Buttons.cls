@@ -12,17 +12,22 @@ Option Explicit
 'Класс для обработки нажатий на кнопки
 Public WithEvents ComButCommand As Office.CommandBarButton           'Команда
 Attribute ComButCommand.VB_VarHelpID = -1
+Public WithEvents ComButInfo As Office.CommandBarButton              'Информация
+Attribute ComButInfo.VB_VarHelpID = -1
 Public WithEvents ComButDescExport As Office.CommandBarButton        'Экспорт описания БД
 Attribute ComButDescExport.VB_VarHelpID = -1
 
 
 Private Sub Class_Initialize()
     Set ComButCommand = Application.CommandBars("РТП").Controls("Команда")
+    Set ComButInfo = Application.CommandBars("РТП").Controls("Информация")
     Set ComButDescExport = Application.CommandBars("РТП").Controls("Экспорт описания БД")
 End Sub
 
 Private Sub Class_Terminate()
     Set ComButCommand = Nothing
+    Set ComButInfo = Nothing
+    Set ComButDescExport = Nothing
 End Sub
 
 
@@ -47,6 +52,18 @@ Private Sub ComButDescExport_Click(ByVal Ctrl As Office.CommandBarButton, Cancel
     
 '---Запускаем основное событие
     DescriptionExportToWord
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
+
+Private Sub ComButInfo_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки
+    
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+'---Запускаем основное событие
+    frm_InfoSimple.NewInfo
 Tail:
     '---Выходим из процедуры обработки
 End Sub
