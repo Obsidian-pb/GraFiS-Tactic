@@ -250,7 +250,7 @@ End Sub
 
 
 
-Private Sub checkSingleCell(ByVal x As Integer, ByVal y As Integer, ByVal dirRight As Boolean, ByVal dirUp As Boolean)
+Private Sub checkSingleCell(ByVal x As Integer, ByVal y As Integer, ByVal dirRight As Boolean, ByVal dirUp As Boolean, Optional tolerance As Double = 0)
 'Проверяем наличие стен для единичной (атомарной ячейки)
 Dim xAct As Double
 Dim yAct As Double
