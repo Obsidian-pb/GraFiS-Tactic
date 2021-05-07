@@ -36,7 +36,7 @@ Public Sub NewInfo()
     Set shp = Application.ActiveWindow.Selection(1)
     targetCellName = ""
     
-    Me.txt_InfoText.text = GetCurrentTime & delimiter & "0" & delimiter
+    Me.txt_InfoText.text = GetCurrentTime & delimiter '& "0" & delimiter
     
     Me.Show
 End Sub
@@ -45,7 +45,7 @@ Public Sub CurrentInfo(ByRef shp_a As Visio.Shape, ByVal cellName As String)
     Set shp = shp_a
     targetCellName = cellName
     
-    Me.txt_CommandText.text = shp.Cells(cellName).ResultStr(visUnitsString)
+    Me.txt_InfoText.text = shp.Cells(cellName).ResultStr(visUnitsString)
     
     Me.Show
 End Sub
@@ -65,41 +65,28 @@ Dim targetCellNameShort As String
         
         'строка в секции User
         rowI = shp.AddNamedRow(visSectionUser, rowIName, 0)
-        shp.CellsSRC(visSectionUser, rowI, 0).Formula = """" & FixText(Me.txt_CommandText) & """"
+        shp.CellsSRC(visSectionUser, rowI, 0).Formula = """" & FixText(Me.txt_InfoText) & """"
         
         'строка в секции СмартТегов
-        tagName = "Commands"
-        If shp.CellExists("SmartTags.GFS_Commands", False) = 0 Then
-            rowT = shp.AddNamedRow(visSectionSmartTag, "GFS_Commands", 0)
+        tagName = "Info"
+        If shp.CellExists("SmartTags.GFS_Info", False) = 0 Then
+            rowT = shp.AddNamedRow(visSectionSmartTag, "GFS_Info", 0)
             shp.CellsSRC(visSectionSmartTag, rowT, visSmartTagName).Formula = """" & tagName & """"
-            shp.CellsSRC(visSectionSmartTag, rowA, visSmartTagButtonFace).Formula = 346
+            shp.CellsSRC(visSectionSmartTag, rowT, visSmartTagButtonFace).Formula = 0
+            shp.CellsSRC(visSectionSmartTag, rowT, visSmartTagY).Formula = "Height"
         End If
         
         'строка в секции Action
         rowA = shp.AddNamedRow(visSectionAction, rowIName, 0)
         shp.CellsSRC(visSectionAction, rowA, visActionMenu).Formula = """" & GetCommandText(75) & """"
         shp.CellsSRC(visSectionAction, rowA, visActionTagName).Formula = """" & tagName & """"
-        frml = "CALLTHIS(" & Chr(34) & "RedactThisText" & _
+        frml = "CALLTHIS(" & Chr(34) & "RedactThisInfo" & _
                 Chr(34) & "," & Chr(34) & "РТП" & Chr(34) & "," & _
                 Chr(34) & "User." & rowIName & Chr(34) & ")"
         shp.CellsSRC(visSectionAction, rowA, visActionAction).FormulaU = frml
-        
-        'Добавляем строку проверки текущего времени User.CurrentDocTime, если ее нет
-        If cellVal(shp, "User.CurrentDocTime", , "-1") < 0 Then
-            rowIName = "CurrentDocTime"
-            rowI = shp.AddNamedRow(visSectionUser, rowIName, 0)
-            shp.CellsSRC(visSectionUser, rowI, 0).Formula = "TheDoc!User.CurrentTime"
-            frml = "CALLTHIS(" & Chr(34) & "CheckEnd" & _
-                Chr(34) & "," & Chr(34) & "РТП" & Chr(34) & _
-                ",User.CurrentDocTime)"
-            shp.CellsSRC(visSectionUser, rowI, 1).FormulaU = frml
-        End If
-        
-        'Здесь в будущем можно будет указывать иконку самой строки команды
-'        shp.CellsSRC(visSectionAction, rowA, visActionButtonFace).Formula = 346
-        
+                
     Else
-        shp.Cells(targetCellName).Formula = """" & FixText(Me.txt_CommandText) & """"
+        shp.Cells(targetCellName).Formula = """" & FixText(Me.txt_InfoText) & """"
         targetCellNameShort = Split(targetCellName, ".")(1)
         shp.Cells("Actions." & targetCellNameShort).Formula = """" & GetCommandText(75) & """"
     End If
@@ -112,7 +99,7 @@ Private Sub btn_Cancel_Click()
     Me.Hide
 End Sub
 
-'Кнопка Отменить
+'Кнопка Удалить
 Private Sub btn_Delete_Click()
 Dim targetCellNameShort As String
 Dim targetRowIndex As Integer
@@ -134,7 +121,7 @@ Dim targetRowIndex As Integer
     End If
     
     'Пытаемся удалить смарт тег (для случая, если команд больше нет)
-    TryDeleteSmartTag "Commands", "SmartTags.GFS_Commands"
+    TryDeleteSmartTag "Info", "SmartTags.GFS_Info"
     
     Me.Hide
 End Sub
@@ -150,7 +137,7 @@ Dim str As String
 
     On Error GoTo ex
 
-    str = FixText(Me.txt_CommandText)
+    str = FixText(Me.txt_InfoText)
     If Len(str) < l Then
         GetCommandText = str
     Else
@@ -184,9 +171,6 @@ Dim smartTagRowIndex As Integer
         Next i
     
         shp.DeleteRow visSectionSmartTag, smartTagRowIndex
-        'Удаляем так же и ячейку отслеживания времени
-        On Error Resume Next
-        shp.DeleteRow visSectionUser, shp.Cells("User.CurrentDocTime").Row
     End If
 
 End Sub

@@ -40,7 +40,7 @@ Public Sub NewCommand()
     Set shp = Application.ActiveWindow.Selection(1)
     targetCellName = ""
     
-    Me.txt_CommandText.text = GetCurrentTime & delimiter
+    Me.txt_CommandText.text = GetCurrentTime & delimiter & "2" & delimiter
     
     Me.Show
 End Sub
@@ -76,7 +76,7 @@ Dim targetCellNameShort As String
         If shp.CellExists("SmartTags.GFS_Commands", False) = 0 Then
             rowT = shp.AddNamedRow(visSectionSmartTag, "GFS_Commands", 0)
             shp.CellsSRC(visSectionSmartTag, rowT, visSmartTagName).Formula = """" & tagName & """"
-            shp.CellsSRC(visSectionSmartTag, rowA, visSmartTagButtonFace).Formula = 346
+            shp.CellsSRC(visSectionSmartTag, rowT, visSmartTagButtonFace).Formula = 346
         End If
         
         'строка в секции Action

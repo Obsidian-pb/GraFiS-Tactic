@@ -21,6 +21,12 @@ Public Sub RedactThisText(ByRef shp As Visio.Shape, ByVal cellName As String)
     frm_Command.CurrentCommand shp, cellName
 End Sub
 
+Public Sub RedactThisInfo(ByRef shp As Visio.Shape, ByVal cellName As String)
+    frm_InfoSimple.CurrentInfo shp, cellName
+End Sub
+
+
+
 Public Sub CheckEnd(ByRef shp As Visio.Shape, ByVal t As Date)
     
     Select Case GetTactState(shp)
