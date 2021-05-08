@@ -13,10 +13,12 @@ End Type
 Private Declare Sub GetSystemTime Lib "kernel32" (st As SYSTEMTIME)
 
 Const interval = 5
-Const secondsInTurn = 1     'Реального времени проходит за ход
+Const secondsInTurn = 10     'Реального времени проходит за ход - было 1
+Const сhangeVal = 16.6         'Скорость изменения - было 5
 
 Private turns As Long
 Private startDateTime As Date
+Private endDateTime As Date
 Private CellsList() As String
 
 
@@ -33,7 +35,7 @@ Dim m As Long
 End Function
 
 Private Sub FillCellsList()
-ReDim CellsList(8) As String
+ReDim CellsList(9) As String
     CellsList(0) = "Prop.ArrivalTime"
     CellsList(1) = "Prop.SetTime"
     CellsList(2) = "Prop.LineTime"
@@ -42,7 +44,8 @@ ReDim CellsList(8) As String
     CellsList(5) = "Prop.UTPCreationTime"
     CellsList(6) = "Prop.FormingTime"
     CellsList(7) = "Prop.StabCreationTime"
-    CellsList(8) = "Prop.ApearnceTime"              'Время появления установленное вручную
+    CellsList(8) = "Prop.ApearanceTime"              'Время появления установленное вручную
+    CellsList(9) = "Prop.FindTime"
 End Sub
 
 
@@ -64,14 +67,17 @@ Dim curDateTime As Date
     ShapeTranspSetForAllShapes 100
     
     'Получаем стартовую дату
-    startDateTime = Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
+'    startDateTime = Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
+    startDateTime = CDate("15.04.2021 12:25:00")
+    endDateTime = CDate("15.04.2021 12:55:00")
     turns = 0
     
     
     GetSystemTime begin
     GetSystemTime cur
     
-    Do While i < 1000
+'    Do While i < 1000
+    Do While curDateTime < endDateTime
         If milSec(cur) > milSec(begin) + interval Then
             'Action:
             turns = turns + 1
@@ -104,8 +110,11 @@ Dim shp As Visio.Shape
     
     For Each shp In Application.ActivePage.Shapes
         If IsTimeLeft(shp, curTime) Then
-            ShapeTranspChange shp, -5, True
+            ShapeTranspChange shp, -1 * сhangeVal, True
         End If
+'        If ShpIsInvisible(shp) Then
+'            ShapeTranspChange shp, 100, True
+'        End If
     Next shp
 End Sub
 
@@ -134,11 +143,25 @@ Dim shpTime As Date
     
     IsTimeLeftForCell = False
     
-    shpTime = shp.Cells(cellName).Result(visDate)
+'    shpTime = shp.Cells(cellName).Result(visDate)
+    shpTime = shp.Cells(cellName).ResultStr(visUnitsString)
 '    If shpTime < curTime Then  'And shpTime > DateAdd("s", -20, curTime) Then
-    If shpTime < curTime And DateAdd("s", 20, shpTime) > curTime Then
+'    If shpTime < curTime And DateAdd("s", 20, shpTime) > curTime Then
+    If shpTime < curTime And DateAdd("s", (100 / сhangeVal) * secondsInTurn, shpTime) > curTime Then
         IsTimeLeftForCell = True
     End If
+    If shpTime < curTime Then
+        If DateAdd("s", (100 / сhangeVal) * secondsInTurn, shpTime) > curTime Then
+            IsTimeLeftForCell = True
+        Else
+            If ShpIsInvisible(shp) Then
+                IsTimeLeftForCell = True
+                ShapeTranspSet shp, 0
+            End If
+        End If
+    End If
+    
+    
 Exit Function
 ex:
     IsTimeLeftForCell = False
@@ -172,10 +195,17 @@ Dim shpChild As Visio.Shape
     'Изменяем значение
     curVal = curVal + val
     
-    shp.Cells("LineColorTrans").Formula = curVal & "%"
-    shp.Cells("FillForegndTrans").Formula = curVal & "%"
-    shp.Cells("FillBkgndTrans").Formula = curVal & "%"
-    shp.Cells("Char.ColorTrans").Formula = curVal & "%"
+    If curVal >= 0 Then
+        shp.Cells("LineColorTrans").Formula = curVal & "%"
+        shp.Cells("FillForegndTrans").Formula = curVal & "%"
+        shp.Cells("FillBkgndTrans").Formula = curVal & "%"
+        shp.Cells("Char.ColorTrans").Formula = curVal & "%"
+    ElseIf curVal < 0 Then
+        shp.Cells("LineColorTrans").Formula = "0%"
+        shp.Cells("FillForegndTrans").Formula = "0%"
+        shp.Cells("FillBkgndTrans").Formula = "0%"
+        shp.Cells("Char.ColorTrans").Formula = "0%"
+    End If
     
     
 End Sub
@@ -231,28 +261,24 @@ Dim i As Byte
         End If
         
     Next i
-'
-'
-'    If shp.CellExists("Prop.ArrivalTime", 0) Then
-'        IsTimedGrafisShape = True
-'        Exit Function
-'    End If
-'    If shp.CellExists("Prop.SetTime", 0) Then
-'        IsTimedGrafisShape = True
-'        Exit Function
-'    End If
-'    If shp.CellExists("Prop.LineTime", 0) Then
-'        IsTimedGrafisShape = True
-'        Exit Function
-'    End If
-'    If shp.CellExists("Prop.SquareTime", 0) Then
-'        IsTimedGrafisShape = True
-'        Exit Function
-'    End If
-'    If shp.CellExists("Prop.FireTime", 0) Then
-'        IsTimedGrafisShape = True
-'        Exit Function
-'    End If
+
 IsTimedGrafisShape = False
 End Function
 
+Private Function ShpIsInvisible(ByRef shp As Visio.Shape) As Boolean
+    ShpIsInvisible = shp.Cells("LineColorTrans").Result(visNumber) > 0  ' = 1
+End Function
+
+'Public Sub ToolAddProp()
+'Dim shp As Visio.Shape
+'Dim rowI As Integer
+'
+'    On Error Resume Next
+'
+''    startDateTime = Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)
+'
+'    For Each shp In Application.ActiveWindow.Selection
+'        rowI = shp.AddNamedRow(visSectionProp, "ApearanceTime", visTagDefault)
+'        shp.CellsSRC(visSectionProp, rowI, visCustPropsType).FormulaU = 5
+'    Next shp
+'End Sub

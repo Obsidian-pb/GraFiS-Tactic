@@ -541,6 +541,9 @@ Private Function GetShapeTime(ByRef shp As Visio.Shape, ByVal cellName) As Doubl
 'Функция возвращает значение для текущей ячейки, если такой ячейки нет - возвращается 0
 On Error GoTo ex
     GetShapeTime = shp.Cells(cellName).Result(visDate)
+    If GetShapeTime = 0 Then
+        GetShapeTime = shp.Cells(cellName).ResultStr(visUnitsString)
+    End If
 Exit Function
 ex:
     GetShapeTime = 0
@@ -610,7 +613,7 @@ ex:
 End Function
 
 Private Function GetFireTime() As Boolean
-'Функция устанавливает значение времени начала пожара для ячейки User.FireTime и вщзвращает истину если фигура есть
+'Функция устанавливает значение времени начала пожара для ячейки User.FireTime и возвращает истину если фигура есть
 'Ложь - если нет
 Dim shp As Visio.Shape
 Dim timeVal As Double

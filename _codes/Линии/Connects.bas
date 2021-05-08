@@ -15,6 +15,7 @@ On Error Resume Next
         ShpObj.Cells("User.WaterExpence").FormulaU = "Sheet." & ToShape & "!Prop.Flow.Value" & ""
         ShpObj.Cells("User.Resistance").FormulaU = "Sheet." & ToShape & "!Prop.HoseResistance.Value" & ""
         ShpObj.Cells("User.LineLenight").FormulaU = "Sheet." & ToShape & "!User.TotalLenight" & ""
+        ShpObj.Cells("Prop.ApearanceTime").FormulaU = "Sheet." & ToShape & "!Prop.LineTime" & ""
         ShpObj.Cells("Prop.Pressure").FormulaU = "ROUND(Sheet." & ToShape & "!Prop.HeadInHose*Prop.Koeff,2)" & ""
         
         RotateAtHoseLine ShpObj, ShpObj.Connects.Item(1).ToSheet
@@ -25,6 +26,7 @@ On Error Resume Next
         ShpObj.Cells("User.WaterExpence").FormulaU = 0
         ShpObj.Cells("User.Resistance").FormulaU = 0
         ShpObj.Cells("User.LineLenight").FormulaU = 0
+        ShpObj.Cells("Prop.ApearanceTime").FormulaU = 0
         ShpObj.Cells("Prop.Pressure").FormulaU = 0
     End If
     
@@ -32,13 +34,19 @@ End Sub
 
 Public Sub ConnSoft(ShpObj As Visio.Shape)
 'Процедура приклеивания подписи положения рукава
+Dim ToShape As Integer
 
 '---Предотвращаем появление сообщения об ошибке
 On Error Resume Next
 
 '---Если подпись ни к чему не приклеена, процедура заканчивается
     If ShpObj.Connects.Count > 0 Then
+        ToShape = ShpObj.Connects.Item(1).ToSheet.ID
+        ShpObj.Cells("Prop.ApearanceTime").FormulaU = "Sheet." & ToShape & "!Prop.LineTime" & ""
+        
         RotateAtHoseLine ShpObj, ShpObj.Connects.Item(1).ToSheet
+    Else
+        ShpObj.Cells("Prop.ApearanceTime").FormulaU = 0
     End If
     
 End Sub
