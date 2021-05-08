@@ -90,7 +90,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                 End If
             Case Is = 70 'Очаг пожара
                 Set pcpO_BeginFire = vsO_Shape
-                pcpD_BeginDate = pcpO_BeginFire.Cells("Prop.FireTime")
+                pcpD_BeginDate = pcpO_BeginFire.Cells("Prop.FireTime").ResultStr(visUnitsString)
             End Select
         End If
     End If
