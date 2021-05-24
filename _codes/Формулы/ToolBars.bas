@@ -37,7 +37,7 @@ Sub AddButtons_f()
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set Bar = Application.CommandBars("Формулы")
     
@@ -65,7 +65,7 @@ Sub AddButtons_f()
     Set Bar = Nothing
 
 Exit Sub
-EX:
+ex:
     Set Button = Nothing
     Set Bar = Nothing
 '    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.name
@@ -75,7 +75,7 @@ End Sub
 
 Sub DeleteButtons_f()
 '---Процедура удаления кнопок из панели управления "Формулы"--------------
-    On Error GoTo EX
+    On Error GoTo ex
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
 
@@ -93,7 +93,7 @@ Set Button = Nothing
 Set Bar = Nothing
 
 Exit Sub
-EX:
+ex:
 'Выходим из процедуры
     Set Button = Nothing
     Set Bar = Nothing

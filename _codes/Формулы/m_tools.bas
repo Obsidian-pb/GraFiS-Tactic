@@ -2,10 +2,16 @@ Attribute VB_Name = "m_tools"
 
 
 Public Function ClearString(ByVal txt As String) As String
-'Функция получает на вход строку и возвращает округленное до сотых число (если строка представляла число) или исходную строку
+'Функция получает на вход строку и возвращает число (если строка представляла число) или исходную строку
 Dim tmpVal As Variant
-    On Error Resume Next
-    txt = Round(txt, 2)
+Dim num As Single
+
+    On Error GoTo ex
+    num = CSng(txt)
+    
+    ClearString = CStr(num)
+Exit Function
+ex:
     ClearString = txt
 End Function
 

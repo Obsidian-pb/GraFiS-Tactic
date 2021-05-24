@@ -32,7 +32,7 @@ Public Sub CheckReportsStencil()
 Const rep = "Отчеты.vss"
 Dim stenc As Visio.Document
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     For Each stenc In Application.Documents
         If stenc.name = rep Then
@@ -42,7 +42,7 @@ Dim stenc As Visio.Document
     Next stenc
     
     Application.Documents.Open (ThisDocument.path & rep)
-EX:
+ex:
 'Выходим без действия
 SaveLog Err, "CheckReportsStencil", "Проверка наличия подключенного трафарета Отчеты.vss"
 End Sub
