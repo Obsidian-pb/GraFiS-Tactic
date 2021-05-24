@@ -1,141 +1,21 @@
-<h1>Краткая справка по основам html-разметки</h1>
-<h2>Заголовки:</h2>
-<table border='1' width='100%'>
-<tr>
-<th>Код разметки</th><th>Результат</th>
-</tr>
-<tr>
-<td><code>&lt;h1&gt;Заголовок 1 уровня&lt;/h1&gt;<br/>
-&lt;h1&gt;Заголовок 2 уровня&lt;/h1&gt;<br>
-&lt;h1&gt;Заголовок 3 уровня&lt;/h1&gt;<br/>
-&lt;h1&gt;Заголовок 4 уровня&lt;/h1&gt;
-</code>
-</td>
-<td>
-<h1>Заголовок 1 уровня</h1>
-<h2>Заголовок 2 уровня</h2>
-<h3>Заголовок 3 уровня</h3>
-<h4>Заголовок 4 уровня</h4>
-</td>
-</tr>
-</table>
+<h3>$Номер$. $Название$</h3>
+<p align='center'>
+<b>N<sup>Б</sup><sub>тр.т</sub>= Q<sub>тр.т</sub>/q<sup>Б</sup></b></br>
+<b>N<sup>А</sup><sub>тр.т</sub>= Q<sub>тр.т</sub>/q<sup>А</sup></b></br>
+<b>N<sup>ПЛС</sup><sub>тр.т</sub>= Q<sub>тр.т</sub>/q<sup>ПЛС</sup></b>
+</p>
+<p align='center'>
+    <b>N<sup>Б</sup><sub>тр.т</sub>= $Intensity$/$ПроизвБ$</b></br>
+    <b>N<sup>А</sup><sub>тр.т</sub>= $Intensity$/$ПроизвА$</b></br>
+    <b>N<sup>ПЛС</sup><sub>тр.т</sub>= $Intensity$/$ПроизвПЛС$</b>
+    </p>
+<p>где:<br/>
+<b>N<sup>Б</sup><sub>тр.т</sub></b> - количество требуемых для тушения стволов Б, ед.</br>
+<b>N<sup>А</sup><sub>тр.т</sub></b> - количество требуемых для тушения стволов А, ед.</br>
+<b>N<sup>ПЛС</sup><sub>тр.т</sub></b> - количество требуемых для тушения лафетных стволов, ед.</br>
+<b>Q<sub>тр.т</b> - требуемый расход воды на тушение, л/сек</br>
+<b>q<sup>Б</sup> </b> - производительность ствола Б, л/сек. Принимаем $ПроизвБ$</br>
+<b>q<sup>А</sup> </b> - производительность ствола А, л/сек. Принимаем $ПроизвА$</br>
+<b>q<sup>ПЛС</sup> </b> - производительность лафетного ствола, л/сек. Принимаем $ПроизвПЛС$</br>
+</p>
 
-<h2>Формат текста:</h2>
-<table border='1' width='100%'>
-<tr>
-<th>Код разметки</th><th>Результат</th>
-</tr>
-<tr>
-<td><code>&lt;b&gt;Жирный&lt;/b&gt;<br/>
-&lt;i&gt;Курсив&lt;/i&gt;<br/>
-&lt;u&gt;Подчеркнутый&lt;/u&gt;<br/>
-&lt;sub&gt;Подстрочный&lt;/sub&gt;<br/>
-&lt;sup&gt;Надстрочный&lt;/sup&gt;
-</code>
-</td>
-<td>
-<b>Жирный</b></br>
-<i>Курсив</i></br>
-<u>Подчеркнутый</u><br/>
-ТЕКСТ<sub>Подстрочный</sub><br/>
-ТЕКСТ<sup>Надстрочный</sup>
-</td>
-</tr>
-</table>
-
-<h2>Абзац:</h2>
-<table border='1' width='100%'>
-<tr>
-<th>Код разметки</th><th>Результат</th>
-</tr>
-<tr>
-<td><code>&lt;p&gt;Основной текст абзаца&lt;/p&gt;<br/>
-&lt;p align='center'&gt;Абзац выровненный по середине&lt;/p&gt;
-</code>
-</td>
-<td>
-<p>Основной текст абзаца</p>
-<p align='center'>Абзац выровненный по середине</p>
-</td>
-</tr>
-</table>
-
-<h2>Переносы и линии:</h2>
-<table border='1' width='100%'>
-<tr>
-<th>Код разметки</th><th>Результат</th>
-</tr>
-<tr>
-<td><code>Перенос &lt;br/&gt; текста<br/>
-Горизонтальная линия &lt;hr/&gt;
-</code>
-</td>
-<td>
-Перенос <br/> текста<br/><br/>
-Горизонтальная линия<hr/><br/>
-</td>
-</tr>
-</table>
-
-<h2>Списки</h2>
-<table border='1' width='100%'>
-<tr>
-<th>Код разметки</th><th>Результат</th>
-</tr>
-<tr>
-<td><code>
-Простой список:<br/>
-&lt;ul&gt;<br/>
-&lt;li>Элемент 1&lt;/li&gt;<br/>
-&lt;li>Элемент 2&lt;/li&gt;<br/>
-&lt;/ul&gt;</code>
-</td>
-<td>
-<ul>
-<li>Элемент 1</li>
-<li>Элемент 2</li>
-</ul></td>
-</tr>
-<tr>
-<td><code>
-Нумерованный список:<br/>
-&lt;ol&gt;<br/>
-&lt;li>Элемент 1&lt;/li&gt;<br/>
-&lt;li>Элемент 2&lt;/li&gt;<br/>
-&lt;/ol&gt;</code>
-</td>
-<td>
-<ol>
-<li>Элемент 1</li>
-<li>Элемент 2</li>
-</ol></td>
-</tr>
-</table>
-
-<h2>Таблицы</h2>
-<table border='1' width='100%'>
-<tr>
-<th>Код разметки</th><th>Результат</th>
-</tr>
-<tr>
-<td><code>
-&lt;table  border='1' width='100%' &gt;<br/>
-&lt;tr&gt;<br/>
-&lt;td&gt; Ячейка 1 &lt;/td&gt;<br/>
-&lt;td&gt; Ячейка 2 &lt;/td&gt;<br/>
-&lt;/tr&gt;<br/>
-&lt;/table&gt;
-</code>
-</td>
-<td>
-<table border='1' width='100%'>
-<tr>
-<td>Ячейка 1
-</td>
-<td>Ячейка 2
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</table>

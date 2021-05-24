@@ -225,7 +225,7 @@ Dim mDoc As MSHTML.IHTMLDocument
     
 Exit Sub
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.name
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ShowData", "Формулы - f_formulaForm"
 End Sub
 

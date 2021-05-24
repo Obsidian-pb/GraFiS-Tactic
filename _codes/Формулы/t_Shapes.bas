@@ -206,7 +206,7 @@ IsGFSShapeWithIP = False
 Exit Function
 ex:
     IsGFSShapeWithIP = False
-    SaveLog Err, "m_Tools.IsGFSShapeWithIP"
+'    SaveLog Err, "m_Tools.IsGFSShapeWithIP"
 End Function
 
 

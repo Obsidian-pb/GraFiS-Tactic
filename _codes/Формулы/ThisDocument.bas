@@ -9,11 +9,26 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Option Explicit
 
+Private WithEvents app  As Visio.Application
+Attribute app.VB_VarHelpID = -1
+
+
+
+Public Sub tempAct()
+    Set app = Visio.Application
+End Sub
+
+Private Sub app_ConnectionsAdded(ByVal Connects As IVConnects)
+    TurnIntoFormulaConnection Connects
+End Sub
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     'Деактивируем панель инстурментов
     DeleteButtons_f
     RemoveTB_f
+    
+    'Деактивируем объект приложения
+    Set app = Nothing
 End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
@@ -23,6 +38,9 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     'Активируем панель инстурментов
     AddTB_f
     AddButtons_f
+    
+    'Активируем объект приложения
+    Set app = Visio.Application
 End Sub
 
 
@@ -35,7 +53,7 @@ Dim stenc As Visio.Document
     On Error GoTo ex
     
     For Each stenc In Application.Documents
-        If stenc.name = rep Then
+        If stenc.Name = rep Then
             'stenc.
             Exit Sub
         End If

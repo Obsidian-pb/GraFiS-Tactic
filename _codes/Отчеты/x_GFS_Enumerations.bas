@@ -157,6 +157,7 @@ Public Enum indexPers
 '   ipMashiniMVD = 3001                         'Машины МВД
 '   ipMashiniMinzdrav = 3002                    'Машины Минздрав
    ipFormula = 500                             'Формулы
+   ipFormulaConnector = 501                    'Соединитель формул
    ipInfoMain = 600                            'Инфоблок Основные сведения
    ipInfoOrganization = 601                    'Инфоблок Организация
    ipInfoObject = 602                          'Инфоблок Объект пожара

@@ -14,7 +14,7 @@ End Sub
 Public Sub ShowDataInShape(ByRef shp As Visio.Shape, ByVal htmlText As String)
     On Error Resume Next
     f_FormulaForm.CopyBrowserContent shp, htmlText
-    SetShowDataInShapeControlFormula shp, "User.DataChangeAction.Prompt"
+'    SetShowDataInShapeControlFormula shp, "User.DataChangeAction.Prompt"
 End Sub
 
 Private Sub SetShowDataInShapeControlFormula(ByRef shp As Visio.Shape, ByVal cellName As String)

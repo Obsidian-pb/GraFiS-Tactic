@@ -74,7 +74,7 @@ Dim frmlName As String
             frmlName = cellVal(shp, "Prop.Название", visUnitsString)
             AddUniqueCollectionItem frmlShapesColl, shp
             If frmlName = "0" Then
-                Me.lb_FormulaShapes.AddItem shp.name
+                Me.lb_FormulaShapes.AddItem shp.Name
             Else
                 Me.lb_FormulaShapes.AddItem frmlName
             End If

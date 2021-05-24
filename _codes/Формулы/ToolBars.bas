@@ -12,13 +12,13 @@ Dim i As Integer
     
 '---Проверяем есть ли уже панель управления "Формулы"------------------------------
     For i = 1 To Application.CommandBars.Count
-        If Application.CommandBars(i).name = "Формулы" Then Exit Sub
+        If Application.CommandBars(i).Name = "Формулы" Then Exit Sub
     Next i
 
 '---Создаем панель управления "Формулы"--------------------------------------------
     Set Bar = Application.CommandBars.Add(Position:=msoBarRight, Temporary:=True)
     With Bar
-        .name = "Формулы"
+        .Name = "Формулы"
         .visible = True
     End With
 
