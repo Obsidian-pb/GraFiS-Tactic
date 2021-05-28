@@ -73,6 +73,8 @@ Public Enum indexPers
 '   ipPloschadPozhara = 64                      'Сектор 270
 '   ipPloschadPozhara = 64                      'Площадь круглая
 '   ipPloschadPozhara = 64                      'Площадь неправильной формы
+   ipDutyFace = 65                             'Должностное лицо
+   ipStabCOnsistence = 66                      'Состав штаба
    ipOchag = 70                                'Очаг пожара
    ipZadiml = 71                               'Задымление
    ipKolonka = 72                              'Колонка
