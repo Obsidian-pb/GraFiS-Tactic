@@ -7,7 +7,7 @@ Public Function GetReadyString(ByVal val As Variant, ByVal prefix As String, ByV
 'Возвращает сформированную строку в виде prefix & val & postfix. В случае если val=ignore, возвращает ifEmpty
 'В случае невозможности преобразования val к строке возвращает ifEmpty
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     If val = ignore Then
         GetReadyString = ifEmpty
@@ -15,7 +15,7 @@ Public Function GetReadyString(ByVal val As Variant, ByVal prefix As String, ByV
         GetReadyString = prefix & str(val) & postfix
     End If
 Exit Function
-EX:
+ex:
     GetReadyString = ifEmpty
 End Function
 Public Function GetReadyStringA(ByVal elemID As String, ByVal prefix As String, ByVal postfix As String, Optional ignore As Variant = 0, Optional ifEmpty As String = "") As String
@@ -24,7 +24,7 @@ Public Function GetReadyStringA(ByVal elemID As String, ByVal prefix As String, 
 'Самостоятельно образщается к A, где elemID - код данных получаемых анализатором моделей
 Dim val As Variant
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     val = A.Result(elemID)
     If val = ignore Then
@@ -33,7 +33,7 @@ Dim val As Variant
         GetReadyStringA = prefix & str(val) & postfix
     End If
 Exit Function
-EX:
+ex:
     GetReadyStringA = ifEmpty
 End Function
 
@@ -42,7 +42,7 @@ Public Sub fixAllGFSShapesC()
 Dim shp As Visio.Shape
     
     For Each shp In A.gfsShapes
-        SetCellVal shp, "Prop.Unit", Replace(cellval(shp, "Prop.Unit", visUnitsString), "C", "С")
+        SetCellVal shp, "Prop.Unit", Replace(cellVal(shp, "Prop.Unit", visUnitsString), "C", "С")
     Next shp
 End Sub
 

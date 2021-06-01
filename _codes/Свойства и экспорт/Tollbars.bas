@@ -40,7 +40,7 @@ Sub AddButtons()
 Dim Bar As CommandBar
 Dim DocPath As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set Bar = Application.CommandBars("Экспорт")
     
@@ -65,7 +65,7 @@ Dim DocPath As String
     Set Bar = Nothing
 
 Exit Sub
-EX:
+ex:
     Set Bar = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons", "Экспорт"
@@ -74,7 +74,7 @@ End Sub
 
 Sub DeleteButtons()
 '---Процедура удаления кнопки "Команда" из панели управления "Экспорт"--------------
-    On Error GoTo EX
+    On Error GoTo ex
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar
 
@@ -87,7 +87,7 @@ Set btns = Nothing
 Set Bar = Nothing
 
 Exit Sub
-EX:
+ex:
 'Выходим из процедуры
 End Sub
 

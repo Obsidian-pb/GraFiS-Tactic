@@ -54,8 +54,17 @@ Sub AddButtons()
         .Caption = "Информация"
         .Tag = "Info"
         .TooltipText = "Информация для фигуры"
-        .FaceID = 162
+        .FaceID = 487 ' 162
+        .BeginGroup = True
     End With
+'---Кнопка "Оценка"-------------------------------------------------
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Оценка"
+        .Tag = "Mark"
+        .TooltipText = "Оценка участника боевых действий или личного состава"
+        .FaceID = 215 ' 162
+    End With
+    
 '---Кнопка "Экспорт описания БД"-------------------------------------------------
     With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Экспорт описания БД"
@@ -89,6 +98,9 @@ Sub DeleteButtons()
     Button.Delete
 '---Удаление кнопки "Информация" из панели управления "РТП"------------------------
     Set Button = Bar.Controls("Информация")
+    Button.Delete
+'---Удаление кнопки "Оценка" из панели управления "РТП"------------------------
+    Set Button = Bar.Controls("Оценка")
     Button.Delete
 '---Удаление кнопки "Экспорт описания БД" из панели управления "РТП"------------------------
     Set Button = Bar.Controls("Экспорт описания БД")

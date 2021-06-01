@@ -17,7 +17,7 @@ Option Explicit
 
 Private shp As Visio.Shape
 Private targetCellName As String
-
+Private infoType As Byte
 
 
 
@@ -30,13 +30,23 @@ Private Sub UserForm_Activate()
 
 End Sub
 
-Public Sub NewInfo()
+Public Sub NewInfo(Optional ByVal infoType_a As Byte = 0)
     If Application.ActiveWindow.Selection.Count <> 1 Then Exit Sub
     
     Set shp = Application.ActiveWindow.Selection(1)
     targetCellName = ""
     
-    Me.txt_InfoText.text = GetCurrentTime & delimiter '& "0" & delimiter
+    infoType = infoType_a
+    
+    Select Case infoType
+        Case Is = 0     'Информация
+            Me.txt_InfoText.text = GetCurrentTime & delimiter
+        Case Is = 1     'Оценка
+            Me.txt_InfoText.text = GetCurrentTime & delimiter & "Оценка" & delimiter
+        Case Is = 2     'Радиообмен
+            Me.txt_InfoText.text = GetCurrentTime & delimiter & "Сообщение" & delimiter
+    End Select
+    
     
     Me.Show
 End Sub
@@ -61,7 +71,7 @@ Dim targetCellNameShort As String
     
     'Если имени целевой ячейки нет, значит необходимо создавать новую ячейку, если есть - использовать ее для изменения
     If targetCellName = "" Then
-        rowIName = "GFS_Command_" & shp.RowCount(visSectionUser) + 1
+        rowIName = "GFS_Info_" & shp.RowCount(visSectionUser) + 1
         
         'строка в секции User
         rowI = shp.AddNamedRow(visSectionUser, rowIName, 0)
@@ -84,7 +94,16 @@ Dim targetCellNameShort As String
                 Chr(34) & "," & Chr(34) & "РТП" & Chr(34) & "," & _
                 Chr(34) & "User." & rowIName & Chr(34) & ")"
         shp.CellsSRC(visSectionAction, rowA, visActionAction).FormulaU = frml
-                
+        
+        Select Case infoType
+            Case Is = 0     'Информация
+                shp.CellsSRC(visSectionAction, rowA, visActionButtonFace).FormulaU = 0
+            Case Is = 1     'Оценка
+                shp.CellsSRC(visSectionAction, rowA, visActionButtonFace).FormulaU = 215
+            Case Is = 2     'Радиообмен
+                shp.CellsSRC(visSectionAction, rowA, visActionButtonFace).FormulaU = 192
+        End Select
+        
     Else
         shp.Cells(targetCellName).Formula = """" & FixText(Me.txt_InfoText) & """"
         targetCellNameShort = Split(targetCellName, ".")(1)

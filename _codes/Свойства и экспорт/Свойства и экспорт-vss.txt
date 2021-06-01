@@ -570,8 +570,9 @@
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
     Prop.BlockCaption: "Организация"; Prop.BlockCaption.Prompt: "Заголовок блока"; Prop.BlockCaption.Label: "Заголовок блока"; Prop.BlockCaption.Format: ""; Prop.BlockCaption.SortKey: 10; Prop.BlockCaption.Type: 0; Prop.BlockCaption.Invisible: FALSE; Prop.BlockCaption.Verify: FALSE; Prop.BlockCaption.LangID: 1049; Prop.BlockCaption.Calendar: 0; 
+    Prop.Guard: ""; Prop.Guard.Prompt: "Кем охраняется организация"; Prop.Guard.Label: "Охрана"; Prop.Guard.Format: ""; Prop.Guard.SortKey: 23; Prop.Guard.Type: 0; Prop.Guard.Invisible: FALSE; Prop.Guard.Verify: TRUE; Prop.Guard.LangID: 1049; Prop.Guard.Calendar: 0; 
     Prop.OrgPrinadl: ""; Prop.OrgPrinadl.Prompt: "Ведомственная принадлежность"; Prop.OrgPrinadl.Label: "Ведомственная принадлежность"; Prop.OrgPrinadl.Format: ""; Prop.OrgPrinadl.SortKey: 21; Prop.OrgPrinadl.Type: 0; Prop.OrgPrinadl.Invisible: FALSE; Prop.OrgPrinadl.Verify: TRUE; Prop.OrgPrinadl.LangID: 1049; Prop.OrgPrinadl.Calendar: 0; 
-    Prop.OrgPropertyType: " "; Prop.OrgPropertyType.Prompt: "Форма собственности"; Prop.OrgPropertyType.Label: "Форма собственности"; Prop.OrgPropertyType.Format: ""; Prop.OrgPropertyType.SortKey: ""; Prop.OrgPropertyType.Type: 0; Prop.OrgPropertyType.Invisible: FALSE; Prop.OrgPropertyType.Verify: FALSE; Prop.OrgPropertyType.LangID: 1049; Prop.OrgPropertyType.Calendar: 0; 
+    Prop.OrgPropertyType: " "; Prop.OrgPropertyType.Prompt: "Форма собственности"; Prop.OrgPropertyType.Label: "Форма собственности"; Prop.OrgPropertyType.Format: ""; Prop.OrgPropertyType.SortKey: 22; Prop.OrgPropertyType.Type: 0; Prop.OrgPropertyType.Invisible: FALSE; Prop.OrgPropertyType.Verify: TRUE; Prop.OrgPropertyType.LangID: 1049; Prop.OrgPropertyType.Calendar: 0; 
   Section: Scratch>>>
     Scratch.A1: "Время сообщения"; Scratch.C1: SETF("Prop.InfoTime";TheDoc!User.InfoTime)+DEPENDSON(TheDoc!User.InfoTime); Scratch.D1: 0; 
   Section: Tab>>>
@@ -579,7 +580,7 @@
   Section: User>>>
     User.IndexPers: 601; User.IndexPers.Prompt: "Инфоблок Организация"; 
     User.visDGDefaultPos: PNT(3;3); 
-    User.visDGDisplayFormat: USE({01C5ED82-0150-0000-8E40-00608CF305B2}); 
+    User.visDGDisplayFormat: USE({00BC4740-0015-0000-8E40-00608CF305B2}); 
   Section Object, row: visRowEvent>>>
     EventDblClick: DOCMD(1312); 
   Section Object, row: visRowFill>>>
@@ -607,7 +608,7 @@
   Section Object, row: visRowText>>>
     LeftMargin: 4 пт; RightMargin: 4 пт; TopMargin: 4 пт; BottomMargin: 4 пт; VerticalAlign: 1; TextBkgnd: 0; DefaultTabStop: 15 мм; TextMaxDepth: 4294967295; TextGeometry: 0; TextContainer: 0; TextDirection: 0; TextBkgndTrans: 0%; 
   Section Object, row: visRowXFormOut>>>
-    PinX: 10 м; PinY: 1,775 м; Width: 20 м; Height: 3,55 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
+    PinX: 10 м; PinY: 1,475 м; Width: 20 м; Height: 4,1500000000001 м; LocPinX: Width*0,5; LocPinY: Height*0,5; Angle: 0 град; FlipX: FALSE; FlipY: FALSE; ResizeMode: 0; 
 
 =>sheet: Объект пожара
   Section: Character>>>
@@ -1929,7 +1930,7 @@
     User.visDGVisible: TRUE; 
     User.visDGShowBorder: FALSE; 
     User.visDGHideText: FALSE; 
-    User.visDGNextItemID: 9; 
+    User.visDGNextItemID: 10; 
     User.msvDGCalloutGap: DrawingScale/PageScale*0,0625; 
   Section Object, row: visRowEvent>>>
     

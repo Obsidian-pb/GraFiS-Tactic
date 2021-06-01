@@ -1,6 +1,8 @@
 Attribute VB_Name = "m_Export"
 Option Explicit
 
+'Разделеитель строк в командах и информации
+Const delimiter = " | "
 'Знак границы маркера
 Const mChar = "$"
 'Путь и названия шаблонов документов
@@ -48,14 +50,14 @@ Dim gettedTxt As String
     'Процедуры экспорта:
     '---Основное
 '        gettedTxt = cellVal(gfsShapes, "Prop.NP_Name", visUnitsString, "")
-        SetData wrd, "НП", cellval(gfsShapes, "Prop.NP_Name", visUnitsString, "")                       'Населенный пункт
-        SetData wrd, "ДЗФИО", cellval(gfsShapes, "Prop.PersonCreate", visUnitsString, "")                      'должность, звание, фамилия, имя, отчество (при наличии)
-        SetData wrd, "Наименование", cellval(gfsShapes, "Prop.ObjectName", visUnitsString, "")          'Наименование
-        SetData wrd, "Принадлежность", cellval(gfsShapes, "Prop.Affiliation", visUnitsString, "")       'Принадлежность объекта
-        SetData wrd, "Адрес", cellval(gfsShapes, "Prop.Address", visUnitsString, "")                    'Адрес организации
-        SetData wrd, "МестоПожара", cellval(gfsShapes, "Prop.FireStartPlace", visUnitsString, "")              'Место возникновения пожара
-        SetData wrd, "Заявитель", cellval(gfsShapes, "Prop.CallerFIOAndCase", visUnitsString, "")               'Фамилия, имя, отчество (при наличии) лица, обнаружившего пожар и способ сообщения о нем в пожарную охрану
-        SetData wrd, "Заявитель_т", cellval(gfsShapes, "Prop.CallPhone", visUnitsString, "")            'Номер телефона заявителя
+        SetData wrd, "НП", cellVal(gfsShapes, "Prop.NP_Name", visUnitsString, "")                       'Населенный пункт
+        SetData wrd, "ДЗФИО", cellVal(gfsShapes, "Prop.PersonCreate", visUnitsString, "")                      'должность, звание, фамилия, имя, отчество (при наличии)
+        SetData wrd, "Наименование", cellVal(gfsShapes, "Prop.ObjectName", visUnitsString, "")          'Наименование
+        SetData wrd, "Принадлежность", cellVal(gfsShapes, "Prop.Affiliation", visUnitsString, "")       'Принадлежность объекта
+        SetData wrd, "Адрес", cellVal(gfsShapes, "Prop.Address", visUnitsString, "")                    'Адрес организации
+        SetData wrd, "МестоПожара", cellVal(gfsShapes, "Prop.FireStartPlace", visUnitsString, "")              'Место возникновения пожара
+        SetData wrd, "Заявитель", cellVal(gfsShapes, "Prop.CallerFIOAndCase", visUnitsString, "")               'Фамилия, имя, отчество (при наличии) лица, обнаружившего пожар и способ сообщения о нем в пожарную охрану
+        SetData wrd, "Заявитель_т", cellVal(gfsShapes, "Prop.CallPhone", visUnitsString, "")            'Номер телефона заявителя
         
         
         
@@ -124,7 +126,7 @@ Dim gettedTxt As String
         'Обстановка на момент прибытия
         Set gettedCol = A.GetGFSShapesAnd("User.IndexPers:604;Prop.SituationKind:на момент прибытия")
         If gettedCol.Count > 0 Then
-            SetData wrd, "Обст_Приб", cellval(gettedCol, "Prop.SituationDescription", visUnitsString, " ")
+            SetData wrd, "Обст_Приб", cellVal(gettedCol, "Prop.SituationDescription", visUnitsString, " ")
         End If
         
         'Количество звеньев ГДЗС
@@ -164,7 +166,7 @@ Dim gettedTxt As String
         
         
         'Погибло людей
-        gettedTxt = cellval(gfsShapes, "Prop.HumansDie", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.HumansDie", visUnitsString, "")
 '        SetData wrd, "200", "Погибло людей: " & Split(gettedTxt, "/")(0) & "в том числе детей: " & Split(gettedTxt, "/")(1) & "работников ПО: " & Split(gettedTxt, "/")(2)
         SetData wrd, "200", Split(gettedTxt, "/")(0)
         SetData wrd, "200Д", Split(gettedTxt, "/")(1)
@@ -173,7 +175,7 @@ Dim gettedTxt As String
         
         
          'Травмировано людей
-        gettedTxt = cellval(gfsShapes, "Prop.HumansInjured", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.HumansInjured", visUnitsString, "")
         SetData wrd, "300", Split(gettedTxt, "/")(0)
         SetData wrd, "300Д", Split(gettedTxt, "/")(1)
         SetData wrd, "300ПО", Split(gettedTxt, "/")(2)
@@ -185,34 +187,34 @@ Dim gettedTxt As String
         
         'Уничтожено/повреждено
         '---строений
-        gettedTxt = cellval(gfsShapes, "Prop.ConstructionsAffected", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.ConstructionsAffected", visUnitsString, "")
         SetData wrd, "Уничт_Стр", Split(gettedTxt, "/")(0)
         SetData wrd, "Повр_Стр", Split(gettedTxt, "/")(1)
         '---Квартир
-        gettedTxt = cellval(gfsShapes, "Prop.FlatsAffected", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.FlatsAffected", visUnitsString, "")
         SetData wrd, "Уничт_ЖК", Split(gettedTxt, "/")(0)
         SetData wrd, "Повр_ЖК", Split(gettedTxt, "/")(1)
         '---Комнат
-        gettedTxt = cellval(gfsShapes, "Prop.RoomsAffected", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.RoomsAffected", visUnitsString, "")
         SetData wrd, "Уничт_Комн", Split(gettedTxt, "/")(0)
         SetData wrd, "Повр_Комн", Split(gettedTxt, "/")(1)
         '---Площади
-        gettedTxt = cellval(gfsShapes, "Prop.SquareAffected", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.SquareAffected", visUnitsString, "")
         SetData wrd, "Уничт_Пл", Split(gettedTxt, "/")(0)
         SetData wrd, "Повр_Пл", Split(gettedTxt, "/")(1)
         '---Техники
-        gettedTxt = cellval(gfsShapes, "Prop.TechnicsAffected", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.TechnicsAffected", visUnitsString, "")
         SetData wrd, "Уничт_Тех", Split(gettedTxt, "/")(0)
         SetData wrd, "Повр_Тех", Split(gettedTxt, "/")(1)
         '---сельхоз культур
-        gettedTxt = cellval(gfsShapes, "Prop.AgricultureAffected", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.AgricultureAffected", visUnitsString, "")
         SetData wrd, "Уничт_СХ", ClearString(gettedTxt)
         '---сельхоз животных
-        gettedTxt = cellval(gfsShapes, "Prop.CattleAffected", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.CattleAffected", visUnitsString, "")
         SetData wrd, "200СХ", ClearString(gettedTxt)
         'Спасено
         '---людей
-        gettedTxt = cellval(gfsShapes, "Prop.Saved", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.Saved", visUnitsString, "")
         SetData wrd, "Спас_Л", Split(gettedTxt, "/")(0)
         '---техники
         SetData wrd, "Спас_Т", Split(gettedTxt, "/")(1)
@@ -234,20 +236,20 @@ Dim gettedTxt As String
         
         
         
-        SetData wrd, "ПожАвт", cellval(gfsShapes, "Prop.FireAutomatics", visUnitsString, "")
+        SetData wrd, "ПожАвт", cellVal(gfsShapes, "Prop.FireAutomatics", visUnitsString, "")
         SetData wrd, "Осн_Спец", "Основных ПА: " & A.Result("MainOverallHave") & ", Специальных ПА:" & A.Result("SpecialPAHave")
         
         
         'Обстоятельства усложняющие обстановку
-        gettedTxt = cellval(gfsShapes, "Prop.CircumstancesRize", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.CircumstancesRize", visUnitsString, "")
         SetData wrd, "Обст", ClearString(gettedTxt)
         
         'Силы и средства применявшиеся при тушении
-        gettedTxt = cellval(gfsShapes, "Prop.SiS", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.SiS", visUnitsString, "")
         SetData wrd, "СиС", ClearString(gettedTxt)
         
         'Водоисточники
-        gettedTxt = cellval(gfsShapes, "Prop.WaterSources", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.WaterSources", visUnitsString, "")
         SetData wrd, "ВидВодоист", ClearString(gettedTxt)
         
         
@@ -273,6 +275,7 @@ Dim gettedCol As Collection
 Dim gettedTxt As String
 
 
+
     'Определяем путь к шаблону документа
     path = ThisDocument.path & pathNameKBD
     'Создаем новый документ Word
@@ -293,38 +296,162 @@ Dim gettedTxt As String
     'Формируем основную коллекцию фигур ГраФиС:
     Set gfsShapes = A.Refresh(Application.ActivePage.Index).gfsShapes
     'Процедуры экспорта:
-    '---Даты и время
-        'Дата пожара:
+        'Вызов №
+        gettedTxt = cellVal(gfsShapes, "Prop.FireRank", visUnitsString)
+        SetData wrd, "Вызов", gettedTxt
+        'Подразделение
+        gettedTxt = cellVal(gfsShapes, "Prop.ThisDocUnit", visUnitsString)
+        SetData wrd, "Подр", gettedTxt
+        'Дата пожара
         gettedDate = CDate(A.Result("FireTime"))
         SetData wrd, "П_Дата", Format(gettedDate, "DD.MM.YYYY")
+        'Наименование организации (объекта), его ведомственная принадлежность (форма собственности), адрес
+        gettedTxt = cellVal(gfsShapes, "Prop.ObjectName", visUnitsString)
+        gettedTxt = gettedTxt & ", " & cellVal(gfsShapes, "Prop.OrgPrinadl", visUnitsString)
+        gettedTxt = gettedTxt & ", " & cellVal(gfsShapes, "Prop.OrgPropertyType", visUnitsString)
+        gettedTxt = gettedTxt & ", " & cellVal(gfsShapes, "Prop.Address", visUnitsString)
+        SetData wrd, "Инф_Орг", gettedTxt
+        'размеры в плане, этажность
+        gettedTxt = cellVal(gfsShapes, "Prop.ObjectWidth", visUnitsString)
+        gettedTxt = gettedTxt & "х" & cellVal(gfsShapes, "Prop.ObjectLenight", visUnitsString)
+        gettedTxt = gettedTxt & ", " & cellVal(gfsShapes, "Prop.ObjectFloorCount", visUnitsString) & " этажей"
+        SetData wrd, "Хар_Орг1", gettedTxt
+        'конструктивные особенности, степень огнестойкости категория производства
+        gettedTxt = cellVal(gfsShapes, "Prop.ObjectConstructions", visUnitsString)
+        gettedTxt = gettedTxt & ", " & cellVal(gfsShapes, "Prop.ObjectSO", visUnitsString)
+        gettedTxt = gettedTxt & ", " & cellVal(gfsShapes, "Prop.ObjectCP", visUnitsString)
+        SetData wrd, "Хар_Орг2", gettedTxt
+        'Кем охраняется организация (объект), кто обнаружил пожар
+        gettedTxt = cellVal(gfsShapes, "Prop.Guard", visUnitsString)
+        gettedTxt = gettedTxt & ", " & cellVal(gfsShapes, "Prop.CallerFIOAndCase", visUnitsString)
+        SetData wrd, "Охр", gettedTxt
+        'Время/площадь
+        '---возникновения пожара
+            gettedDate = CDate(A.Result("FireTime"))
+            SetData wrd, "Возн_Вр", Format(gettedDate, "HH:NN")
+            SetData wrd, "Возн_Пл", "0"
+        '---обнаружения пожара
+            gettedDate = CDate(A.Result("FindTime"))
+            SetData wrd, "Обн_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "Обн_Пл", gettedTxt
+        '---сообщения пожара
+            gettedDate = CDate(A.Result("InfoTime"))
+            SetData wrd, "Сооб_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "Сооб_Пл", gettedTxt
+        '---выезда караула
+            gettedDate = DateAdd("n", 1, CDate(A.Result("InfoTime")))
+            SetData wrd, "Выезд_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "Выезд_Пл", gettedTxt
+        '---прибытия на пожар
+            gettedDate = CDate(A.Result("FirstArrivalTime"))
+            SetData wrd, "1Подр_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "Приб_Пл", gettedTxt
+        '---подачи первого ствола
+            gettedDate = CDate(A.Result("FirstStvolTime"))
+            SetData wrd, "1Ств_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "1Ств_Пл", gettedTxt
+        '---вызова дополнительных сил
+'            gettedDate = CDate(A.Result("FireTime"))
+            SetData wrd, "ДопСил_Вр", "---"
+            SetData wrd, "ДопСил_Пл", "---"
+        '---локализации
+            gettedDate = CDate(A.Result("LocalizationTime"))
+            SetData wrd, "Лок_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "Лок_Пл", gettedTxt
+        '---ликвидации открытого горения
+            gettedDate = CDate(A.Result("LOGTime"))
+            SetData wrd, "ЛОГ_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "ЛОГ_Пл", gettedTxt
+        '---ликвидации
+            gettedDate = CDate(A.Result("LPPTime"))
+            SetData wrd, "Ликв_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "Ликв_Пл", gettedTxt
+        '---возвращения в часть
+            gettedDate = CDate(A.Result("FireEndTime"))
+            SetData wrd, "Возв_Вр", Format(gettedDate, "HH:NN")
+            A.Refresh Application.ActivePage.Index, gettedDate
+            gettedTxt = A.Result("FireSquare")
+            SetData wrd, "Возв_Пл", gettedTxt
+        'Возвращаем анализ полного набора данных
+        Set gfsShapes = A.Refresh(Application.ActivePage.Index).gfsShapes
+        'Водоснабжение
+        gettedTxt = cellVal(gfsShapes, "Prop.WaterSources", visUnitsString, " ")
+        SetData wrd, "Водоснабжение", ClearString(gettedTxt)
+        'Способы подачи воды:
+        '---
+            
+            
+            
+            
+        
+        'Обстановка на момент прибытия
+        Set gettedCol = A.GetGFSShapesAnd("User.IndexPers:604;Prop.SituationKind:на момент прибытия")
+        If gettedCol.Count > 0 Then
+            SetData wrd, "Обст", cellVal(gettedCol, "Prop.SituationDescription", visUnitsString, " ")
+        End If
+        'Оценка действий
+        gettedTxt = GetMarkStr(gfsShapes)
+        SetData wrd, "ОценкаДействий", gettedTxt
+        
+        'Штаб
+        gettedTxt = Format(cellVal(gfsShapes, "Prop.StabCreationTime", visDate), "HH:NN") & ". " & GetStabMembers
+        SetData wrd, "ШТАБ", gettedTxt
+        
+        'БУ/СТП - время, задачи участков (секторов) тушения пожара
+        gettedTxt = GetBUSTPString
+        SetData wrd, "БУ/СТП", gettedTxt
+        
+        'Обстоятельства, способствующие развитию пожара
+        gettedTxt = cellVal(gfsShapes, "Prop.CircumstancesRize", visUnitsString, " ")
+        SetData wrd, "Обст", gettedTxt
+        'Обстоятельства, усложняющие обстановку
+        gettedTxt = cellVal(gfsShapes, "Prop.CircumstancesComplicate", visUnitsString, " ")
+        SetData wrd, "Слож", gettedTxt
+        
+        'Силы и средства применявшиеся при тушении
+        gettedTxt = cellVal(gfsShapes, "Prop.SiS", visUnitsString, "")
+        SetData wrd, "СиС", ClearString(gettedTxt)
+        'С использованием техники организаций (объектов)
+        '---Не реализовано
+        SetData wrd, "ТехОрг", "---"
+        '---С использованием сил и средств опорных пунктов тушения крупных пожаров
+        SetData wrd, "СиСОП", "---"
+        
+        'ГДЗС 46,90 (ДАСВ, ДАСК)
+        Set gettedCol = A.GetGFSShapes("User.IndexPers:46;User.IndexPers:90")
+        If gettedCol.Count > 0 Then
+            SetData wrd, "ГДЗС", A.Result("GDZSChainsCountWork") & " звеньев, " & A.Result("GDZSMansCountWork") & " газодымозащитинков"
+        End If
+        '1 звено
+        '---Не реализовано
+        SetData wrd, "1ЗВ", "---"
+        '2 звена и более
+        '---Не реализовано
+        SetData wrd, "2ЗВ", "---"
+        
+        'С какими службами было организовано взаимодействие
+        gettedTxt = GetServicesCommunications
+        SetData wrd, "Взаим_Сл", gettedTxt
 
-
-
-'        gettedDate = CDate(A.Result("FireTime"))
-'        SetData wrd, "П_День", Format(gettedDate, "DD")                             'День возникновения пожара
-'        SetData wrd, "П_Месяц", Split(Format(gettedDate, "DD MMMM"), " ")(1)        'Месяц возникновения пожара
-'        SetData wrd, "П_Год", Format(gettedDate, "YY")                              'Месяц возникновения пожара
-'        'Дата сообщения:
-'        gettedDate = CDate(A.Result("InfoTime"))
-'        SetData wrd, "Сооб_Дата", Format(gettedDate, "DD MMMM YYYY")                'Дата сообщения о пожаре
-'        SetData wrd, "Сооб_Час", Format(gettedDate, "HH")                           'Час сообщения о пожаре
-'        SetData wrd, "Сооб_Мин", Format(gettedDate, "NN")                           'Минута сообщения о пожаре
-'        'Время прибытия первого подразделения:
-'        gettedDate = CDate(A.Result("FirstArrivalTime"))
-'        SetData wrd, "1Подр_Час", Format(gettedDate, "HH")                           'Час сообщения о пожаре
-'        SetData wrd, "1Подр_Мин", Format(gettedDate, "NN")                           'Минута сообщения о пожаре
-'
-'
-'        'Перечень подразделений
-'        Set gettedCol = GetUniqueVals(gfsShapes, "Prop.Unit", , "-", "-")
-'        SetData wrd, "Подразделения", StrColToStr(gettedCol, ", ")
-'        'Тип, количество и принадлежность пожарной техники
-'        SetData wrd, "Техника", GetTechniks(gettedCol)
         
         
         
-        
-
         
         
 End Sub
@@ -332,6 +459,8 @@ End Sub
 '                    Optional ByVal ignore As Variant = 0, Optional ByVal ifIgnore As Variant = " ")
 Private Sub SetData(ByRef wrd As Object, ByVal markerName As String, ByVal txt As String)
 'Замена маркера в тексте текстом из результата анализа
+    
+    On Error GoTo ex
     
     'Если пришедшие данные необходимо проигнорировать (например, в случае, если дата равна 0), приравниваем txt = ifIgnore
 '    If txt = ignore Then txt = ifIgnore
@@ -357,6 +486,9 @@ Private Sub SetData(ByRef wrd As Object, ByVal markerName As String, ByVal txt A
         End With
         .Selection.Find.Execute Replace:=2
     End With
+    
+ex:
+    
 End Sub
 
 Private Sub clearLostMarkers(ByRef wrd As Object, Optional ByVal defaultVal As String = "     ")
@@ -430,16 +562,16 @@ Dim i As Integer
     cased = " "
     
     For Each shp In col
-        deadCount = cellval(shp, "Prop.CasCount")
-        casCount = cellval(shp, "Prop.iedCount")
+        deadCount = cellVal(shp, "Prop.CasCount")
+        casCount = cellVal(shp, "Prop.iedCount")
         
         For i = 1 To 5
             If deadCount + casCount > 5 Then Exit For
             
             If i <= deadCount Then
-                deads = deads & cellval(shp, "Prop.Cas" & i, visUnitsString) & ", "
+                deads = deads & cellVal(shp, "Prop.Cas" & i, visUnitsString) & ", "
             Else
-                cased = cased & cellval(shp, "Prop.Cas" & i, visUnitsString) & ", "
+                cased = cased & cellVal(shp, "Prop.Cas" & i, visUnitsString) & ", "
             End If
         Next i
     Next shp
@@ -448,6 +580,127 @@ Dim i As Integer
     GetVictims.Add deads
     GetVictims.Add cased
 End Function
+
+
+
+
+Private Function GetMarkStr(ByRef col As Collection) As String
+'Формируем коллекцию оценок
+Dim i As Integer
+Dim rowName As String
+Dim marks As String
+Dim shp As Visio.Shape
+    
+    On Error GoTo ex
+    
+    For Each shp In col
+        For i = 0 To shp.RowCount(visSectionUser) - 1
+            rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
+            If Len(rowName) > 9 Then
+                If Left(rowName, 9) = "GFS_Info_" Then
+                    'Печатаем в поле оценки
+                    If IsGFSShapeWithIP(shp, ipDutyFace, True) Then
+                        marks = marks & cellVal(shp, "Prop.Duty", visUnitsString) & " " & GetInfo(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)) & Chr(13)
+                    Else
+                        marks = marks & GetInfo(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)) & ", "
+                    End If
+                    
+'                    cmndID = cmndID + 1
+                End If
+            End If
+        Next i
+    Next shp
+    
+    GetMarkStr = marks
+
+Exit Function
+ex:
+    GetMarkStr = " "
+End Function
+
+Private Function GetInfo(ByVal str As String) As String
+Dim strArr() As String
+    
+    strArr = Split(str, delimiter)
+    If UBound(strArr) > 1 Then
+        GetInfo = strArr(UBound(strArr))
+    ElseIf UBound(strArr) = 1 Then
+        GetInfo = strArr(0)
+    Else
+        GetInfo = " "
+    End If
+End Function
+
+Private Function GetStabMembers() As String
+Dim shp1 As Visio.Shape
+Dim shp2 As Visio.Shape
+Dim gettedCol As Collection
+Dim stabMember As String
+    
+    On Error GoTo ex
+    
+    Set gettedCol = A.GetGFSShapes("User.IndexPers:66")
+    
+    If gettedCol.Count > 0 Then
+        Set shp1 = gettedCol(1)
+        
+        Set gettedCol = A.GetGFSShapes("User.IndexPers:65")
+        For Each shp2 In gettedCol
+            If shp2.SpatialRelation(shp1, 0, 0) = 4 Then
+                stabMember = stabMember & cellVal(shp2, "Prop.Duty", visUnitsString) & ": " & _
+                    cellVal(shp2, "Prop.FIO", visUnitsString) & ", "
+            End If
+        Next shp2
+    End If
+    
+GetStabMembers = stabMember
+Exit Function
+ex:
+    GetStabMembers = " "
+End Function
+
+Private Function GetBUSTPString() As String
+Dim gettedCol As Collection
+Dim shp As Visio.Shape
+Dim tmpStr As String
+
+    On Error GoTo ex
+
+    Set gettedCol = A.GetGFSShapes("Prop.UTP_STP_Reserv:Участок;Prop.UTP_STP_Reserv:Сектор")
+    
+    For Each shp In gettedCol
+        tmpStr = tmpStr & cellVal(shp, "User.IndexPers.Prompt", visUnitsString) & ": " & _
+            "Начальник - " & cellVal(shp, "Prop.NachUTP", visUnitsString) & ", " & _
+            "задача - " & cellVal(shp, "Prop.UTPMission", visUnitsString) & ", " & _
+            "приданые СиС - " & cellVal(shp, "Prop.UTPUnits", visUnitsString) & Chr(13)
+    Next shp
+    
+GetBUSTPString = tmpStr
+Exit Function
+ex:
+    GetBUSTPString = " "
+End Function
+
+Private Function GetServicesCommunications() As String
+Dim gettedCol As Collection
+Dim shp As Visio.Shape
+Dim tmpStr As String
+    
+    On Error GoTo ex
+    
+    Set gettedCol = A.GetGFSShapes("Prop.ServiceMembership:Прочие")
+    
+    For Each shp In gettedCol
+        tmpStr = tmpStr & cellVal(shp, "Prop.ServiceDescription", visUnitsString) & ", "
+    Next shp
+    
+    GetServicesCommunications = tmpStr
+    
+Exit Function
+ex:
+    GetServicesCommunications = " "
+End Function
+
 
 
 

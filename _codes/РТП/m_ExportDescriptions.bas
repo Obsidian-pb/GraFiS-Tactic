@@ -59,7 +59,7 @@ Dim fireTime As Date
     If comColSorted.Count > 0 Then
         A.Refresh Application.ActivePage.Index, curTime
 '        fireTime = A.Result("FireTime")     'Не слишкои надежно
-        fireTime = cellVal(Application.ActivePage.Shapes, "Prop.FireTime", visDate)    'Так надежнее
+        fireTime = cellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
         curTime = comColSorted(1).time
         '---Вставка первой записи
         wrdTbl.Rows(1).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, curTime)

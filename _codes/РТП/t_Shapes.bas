@@ -15,12 +15,16 @@ Dim tmpVal As Variant
             Select Case dataType
                 Case Is = visNumber
                     cellVal = shp.Cells(cellName).Result(dataType)
+                    Exit Function
                 Case Is = visUnitsString
                     cellVal = shp.Cells(cellName).ResultStr(dataType)
+                    Exit Function
                 Case Is = visDate
                     cellVal = shp.Cells(cellName).Result(dataType)
+                    Exit Function
                 Case Else
                     cellVal = shp.Cells(cellName).Result(dataType)
+                    Exit Function
             End Select
         Else
             cellVal = defaultValue
