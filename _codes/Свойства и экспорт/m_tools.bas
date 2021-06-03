@@ -55,6 +55,7 @@ Dim tmpVal As Variant
 End Function
 
 
+
 '--------------------------------Сохранение лога ошибки-------------------------------------
 Public Sub SaveLog(ByRef error As ErrObject, ByVal eroorPosition As String, Optional ByVal addition As String)
 'Прока сохранения лога программы

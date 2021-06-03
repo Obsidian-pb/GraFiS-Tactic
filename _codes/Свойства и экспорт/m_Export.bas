@@ -394,8 +394,18 @@ Dim gettedTxt As String
         gettedTxt = cellVal(gfsShapes, "Prop.WaterSources", visUnitsString, " ")
         SetData wrd, "Водоснабжение", ClearString(gettedTxt)
         'Способы подачи воды:
-        '---
-            
+        '---от емкостей АЦ
+            gettedTxt = cellVal(gfsShapes, "Prop.WaterFromAC", visUnitsString, " ")
+            SetData wrd, "ПодачаОтЕмкостей", ClearString(gettedTxt)
+        '---с установкой на ВИ
+            gettedTxt = cellVal(gfsShapes, "Prop.WaterOnWS", visUnitsString, " ")
+            SetData wrd, "УстНаВИ", ClearString(gettedTxt)
+        '---Подвоз воды
+            gettedTxt = cellVal(gfsShapes, "Prop.WaterDelivery", visUnitsString, " ")
+            SetData wrd, "Подв", ClearString(gettedTxt)
+        '---Перекачка
+            gettedTxt = cellVal(gfsShapes, "Prop.WaterByHoses", visUnitsString, " ")
+            SetData wrd, "Перекач", ClearString(gettedTxt)
             
             
             
@@ -404,6 +414,8 @@ Dim gettedTxt As String
         Set gettedCol = A.GetGFSShapesAnd("User.IndexPers:604;Prop.SituationKind:на момент прибытия")
         If gettedCol.Count > 0 Then
             SetData wrd, "Обст", cellVal(gettedCol, "Prop.SituationDescription", visUnitsString, " ")
+        Else
+            SetData wrd, "Обст", " "
         End If
         'Оценка действий
         gettedTxt = GetMarkStr(gfsShapes)
@@ -419,13 +431,13 @@ Dim gettedTxt As String
         
         'Обстоятельства, способствующие развитию пожара
         gettedTxt = cellVal(gfsShapes, "Prop.CircumstancesRize", visUnitsString, " ")
-        SetData wrd, "Обст", gettedTxt
+        SetData wrd, "Разв", gettedTxt
         'Обстоятельства, усложняющие обстановку
         gettedTxt = cellVal(gfsShapes, "Prop.CircumstancesComplicate", visUnitsString, " ")
         SetData wrd, "Слож", gettedTxt
         
         'Силы и средства применявшиеся при тушении
-        gettedTxt = cellVal(gfsShapes, "Prop.SiS", visUnitsString, "")
+        gettedTxt = cellVal(gfsShapes, "Prop.SiS", visUnitsString, " ")
         SetData wrd, "СиС", ClearString(gettedTxt)
         'С использованием техники организаций (объектов)
         '---Не реализовано
@@ -449,16 +461,69 @@ Dim gettedTxt As String
         gettedTxt = GetServicesCommunications
         SetData wrd, "Взаим_Сл", gettedTxt
 
+        'Не прибыли подразделения пожарной охраны
+        gettedTxt = cellVal(gfsShapes, "Prop.UnitsNotArrive", visUnitsString, "")
+        SetData wrd, "Неприбытие", gettedTxt
         
+        'Неисправность в работе пожарной техники
+        gettedTxt = cellVal(gfsShapes, "Prop.TechnicsBroke", visUnitsString, "")
+        SetData wrd, "Неиспр", gettedTxt
         
+        'Причина и виновник пожара
+        gettedTxt = cellVal(gfsShapes, "Prop.FireCause", visUnitsString, "")
+        SetData wrd, "Причина", gettedTxt
+        gettedTxt = cellVal(gfsShapes, "Prop.FireGuilty", visUnitsString, "")
+        SetData wrd, "Виновник", gettedTxt
         
+        'Спасено людей
+        gettedTxt = cellVal(gfsShapes, "Prop.Saved", visUnitsString, "")
+        SetData wrd, "Спас_Л", Split(gettedTxt, "/")(0)
+        '---Не реализовано
+            SetData wrd, "ПожСпас_Л", "-'"
+            SetData wrd, "ДПОСпас_Л", "-'"
+            SetData wrd, "НасСпас_Л", "-'"
+        'Погибло при пожаре
+        gettedTxt = cellVal(gfsShapes, "Prop.HumansDie", visUnitsString, "")
+        SetData wrd, "200", Split(gettedTxt, "/")(0)
+        'Травмировано
+        gettedTxt = cellVal(gfsShapes, "Prop.HumansInjured", visUnitsString, "")
+        SetData wrd, "300", Split(gettedTxt, "/")(0)
+        'Уничтожено строений
+        gettedTxt = cellVal(gfsShapes, "Prop.ConstructionsAffected", visUnitsString, "")
+        SetData wrd, "Уничт_Стр", Split(gettedTxt, "/")(0)
+        'Погибло животных
+        gettedTxt = cellVal(gfsShapes, "Prop.CattleAffected", visUnitsString, "")
+        SetData wrd, "Жив", ClearString(gettedTxt)
+        'Сумма ущерба, причиненного пожаром
+        gettedTxt = cellVal(gfsShapes, "Prop.MaterialLoss", visUnitsString, "")
+        SetData wrd, "МУщерб", Split(gettedTxt, "/")(0) & "тыс.руб"
+        SetData wrd, "МСпасено", Split(gettedTxt, "/")(1) & "тыс.руб"
+        'Израсходовано ОТВ
+        gettedTxt = cellVal(gfsShapes, "Prop.OTVSpend", visUnitsString, "")
+        SetData wrd, "ОТВ", ClearString(gettedTxt)
+        'Нарушения правил ОТ
+        gettedTxt = cellVal(gfsShapes, "Prop.OTBrake", visUnitsString, "")
+        '---всего
+        SetData wrd, "ОТТБ", Split(gettedTxt, "/")(0)
+        '---При этом погибло
+        SetData wrd, "ОТ200", Split(gettedTxt, "/")(1)
+        '---При этом пострадало
+        SetData wrd, "ОТ300", Split(gettedTxt, "/")(2)
         
+        'Подпись:
+        gettedTxt = cellVal(gfsShapes, "Prop.PersonCreate", visUnitsString, "")
+        SetData wrd, "Составил", ClearString(gettedTxt)
         
 End Sub
+
+
 'Private Sub SetData(ByRef wrd As Object, ByVal markerName As String, ByVal txt As String, _
 '                    Optional ByVal ignore As Variant = 0, Optional ByVal ifIgnore As Variant = " ")
 Private Sub SetData(ByRef wrd As Object, ByVal markerName As String, ByVal txt As String)
 'Замена маркера в тексте текстом из результата анализа
+Dim txtPart As String
+Const txtPartMaxLen = 200
+Dim i As Integer
     
     On Error GoTo ex
     
@@ -468,24 +533,60 @@ Private Sub SetData(ByRef wrd As Object, ByVal markerName As String, ByVal txt A
     'Добавляем к имени маркера граничные знаки: "markerName"=>"$markerName$"
     markerName = mChar & markerName & mChar
     
-    'Собственно заменяем все одноименные маркеры текстом txt
-    With wrd
-        .Selection.Find.ClearFormatting
-        .Selection.Find.Replacement.ClearFormatting
-        With .Selection.Find
-            .Text = markerName
-            .Replacement.Text = txt
-            .Forward = True
-            .Wrap = 1
-            .Format = False
-            .MatchCase = False
-            .MatchWholeWord = False
-            .MatchWildcards = False
-            .MatchSoundsLike = False
-            .MatchAllWordForms = False
+    'Для txt = ""
+    If txt = "" Then
+        With wrd
+            .Selection.Find.ClearFormatting
+            .Selection.Find.Replacement.ClearFormatting
+            With .Selection.Find
+                .Text = markerName
+                .Replacement.Text = txt
+                .Forward = True
+                .Wrap = 1
+                .Format = False
+                .MatchCase = False
+                .MatchWholeWord = False
+                .MatchWildcards = False
+                .MatchSoundsLike = False
+                .MatchAllWordForms = False
+            End With
+            .Selection.Find.Execute Replace:=2
         End With
-        .Selection.Find.Execute Replace:=2
-    End With
+    End If
+    
+    Do While Len(txt) > 0
+        If Len(txt) > txtPartMaxLen Then
+            txtPart = Left(txt, txtPartMaxLen)
+'            txtPart = txtPart & "$$$"
+            txtPart = txtPart & markerName
+            txt = Right(txt, Len(txt) - 200)
+        Else
+            txtPart = txt
+            txt = ""
+        End If
+        
+        'Собственно заменяем все одноименные маркеры текстом txt
+        With wrd
+            .Selection.Find.ClearFormatting
+            .Selection.Find.Replacement.ClearFormatting
+            With .Selection.Find
+                .Text = markerName
+                .Replacement.Text = txtPart
+                .Forward = True
+                .Wrap = 1
+                .Format = False
+                .MatchCase = False
+                .MatchWholeWord = False
+                .MatchWildcards = False
+                .MatchSoundsLike = False
+                .MatchAllWordForms = False
+            End With
+            .Selection.Find.Execute Replace:=2
+        End With
+        
+        i = i + 1
+        If i > 20 Then Exit Do
+    Loop
     
 ex:
     
@@ -600,9 +701,9 @@ Dim shp As Visio.Shape
                 If Left(rowName, 9) = "GFS_Info_" Then
                     'Печатаем в поле оценки
                     If IsGFSShapeWithIP(shp, ipDutyFace, True) Then
-                        marks = marks & cellVal(shp, "Prop.Duty", visUnitsString) & " " & GetInfo(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)) & Chr(13)
+                        marks = marks & cellVal(shp, "Prop.Duty", visUnitsString) & " " & GetInfo(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)) & ", " & Chr(13)
                     Else
-                        marks = marks & GetInfo(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)) & ", "
+                        marks = marks & GetInfo(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)) & ", " & Chr(13)
                     End If
                     
 '                    cmndID = cmndID + 1
