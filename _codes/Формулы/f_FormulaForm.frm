@@ -126,18 +126,21 @@ Dim i As Integer
 Dim rowName As String
 Dim cellLabel As String
     
-    Set markersColl = New Collection
+'    Set markersColl = New Collection
     cbox_Markers.Clear
     
     For i = 0 To formShape.RowCount(visSectionProp) - 1
         rowName = formShape.CellsSRC(visSectionProp, i, visCustPropsLabel).rowName
         cellLabel = formShape.CellsSRC(visSectionProp, i, visCustPropsLabel).ResultStr(visUnitsString)
-        If cellLabel = "" Then
-            cbox_Markers.AddItem rowName, i
-        Else
-            cbox_Markers.AddItem cellLabel, i
-        End If
-        markersColl.Add rowName
+'        If cellLabel = "" Then
+'            cbox_Markers.AddItem rowName, i
+'        Else
+'            cbox_Markers.AddItem cellLabel, i
+'        End If
+        cbox_Markers.AddItem rowName, i
+        cbox_Markers.Column(1, i) = cellLabel
+        
+'        markersColl.Add rowName
     Next i
     
 End Sub
