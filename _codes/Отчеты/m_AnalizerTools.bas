@@ -85,24 +85,29 @@ Dim curCallName As String
 Dim newCallName As String
     
     If shp.CellExists("Prop.PropertyName", 0) Then
-        curCallName = cellVal(shp, "Prop.PropertyName.Value", visUnitsString)
-        If Not InStr(1, properyNames, curCallName, vbTextCompare) > 0 Then
-            'Проверяем заменялось ли уже такое имя вызова
-            newCallName = GetExistedAnswer(curCallName)
-            If newCallName = "" Then
-                NewPropSelectForm.OpenForSelect properyNames, curCallName
-                If NewPropSelectForm.ok Then
-                    shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
-                    shp.Cells("Prop.PropertyName.Value").Formula = """" & NewPropSelectForm.lbCallNames.Text & """"
-                    'Сохраняем принятый вариант для следующих изменений ДОРАБОТАТЬ! ИНОГДА ВЫЗЫВАЕТ ОШИБКУ
-                    
-'                    changedNames.Add NewPropSelectForm.lbCallNames.Text, curCallName
-                End If
-            Else
-                shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
-                shp.Cells("Prop.PropertyName.Value").Formula = """" & newCallName & """"
-            End If
-        End If
+        shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
+    
+        'More accurate fix - tmporary blocked! Need to review
+'        curCallName = cellVal(shp, "Prop.PropertyName.Value", visUnitsString)
+''        Debug.Print curCallName
+'        If Not InStr(1, properyNames, curCallName, vbTextCompare) > 0 Then
+'            Debug.Print curCallName
+'            'Проверяем заменялось ли уже такое имя вызова
+'            newCallName = GetExistedAnswer(curCallName)
+'            If newCallName = "" Then
+'                NewPropSelectForm.OpenForSelect properyNames, curCallName
+'                If NewPropSelectForm.ok Then
+'                    shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
+'                    shp.Cells("Prop.PropertyName.Value").Formula = """" & NewPropSelectForm.lbCallNames.Text & """"
+'                    'Сохраняем принятый вариант для следующих изменений ДОРАБОТАТЬ! ИНОГДА ВЫЗЫВАЕТ ОШИБКУ
+'
+''                    changedNames.Add NewPropSelectForm.lbCallNames.Text, curCallName
+'                End If
+'            Else
+'                shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
+'                shp.Cells("Prop.PropertyName.Value").Formula = """" & newCallName & """"
+'            End If
+'        End If
     End If
     
     If shp.Shapes.count > 0 Then

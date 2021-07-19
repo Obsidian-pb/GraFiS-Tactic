@@ -17,6 +17,8 @@ Attribute ComButInfo.VB_VarHelpID = -1
 Public WithEvents ComButMark As Office.CommandBarButton              'Оценка
 Attribute ComButMark.VB_VarHelpID = -1
 
+Public WithEvents ComButDescView As Office.CommandBarButton          'Показать описание БД
+Attribute ComButDescView.VB_VarHelpID = -1
 Public WithEvents ComButDescExport As Office.CommandBarButton        'Экспорт описания БД
 Attribute ComButDescExport.VB_VarHelpID = -1
 
@@ -26,6 +28,7 @@ Private Sub Class_Initialize()
     Set ComButInfo = Application.CommandBars("РТП").Controls("Информация")
     Set ComButMark = Application.CommandBars("РТП").Controls("Оценка")
     
+    Set ComButDescView = Application.CommandBars("РТП").Controls("Показать описание БД")
     Set ComButDescExport = Application.CommandBars("РТП").Controls("Экспорт описания БД")
 End Sub
 
@@ -34,6 +37,7 @@ Private Sub Class_Terminate()
     Set ComButInfo = Nothing
     Set ComButMark = Nothing
     
+    Set ComButDescView = Nothing
     Set ComButDescExport = Nothing
 End Sub
 
@@ -59,6 +63,18 @@ Private Sub ComButDescExport_Click(ByVal Ctrl As Office.CommandBarButton, Cancel
     
 '---Запускаем основное событие
     DescriptionExportToWord
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
+
+Private Sub ComButDescView_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки
+    
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+'---Запускаем основное событие
+    DescriptionViewInList
 Tail:
     '---Выходим из процедуры обработки
 End Sub

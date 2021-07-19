@@ -169,6 +169,7 @@ Public Enum indexPers
    ipInfoEffects = 606                         'Инфоблок Последствия
    ipInfoSignatures = 607                      'Инфоблок Подписи
    ipInfoCommonFireInfo = 608                  'Инфоблок Сведения о тушении пожара
+   ipStatists = 1000                           'Статисты (для учений)
 End Enum
 
 'Перечисления констант объектов железной дороги

@@ -22,6 +22,8 @@ Dim i As Integer
         .visible = True
     End With
 
+'---Добавляем кнопки на панель управления
+    AddButtons
 End Sub
 
 Sub RemoveTB()
@@ -67,10 +69,18 @@ Sub AddButtons()
     
 '---Кнопка "Экспорт описания БД"-------------------------------------------------
     With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Показать описание БД"
+        .Tag = "DescriptionView"
+        .TooltipText = "Показать описание БД"
+        .BeginGroup = True
+        .FaceID = 5
+    End With
+    
+    With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Экспорт описания БД"
         .Tag = "DescriptionExport"
         .TooltipText = "Экспорт описания БД"
-        .BeginGroup = True
+'        .BeginGroup = True
         .FaceID = 582
     End With
     

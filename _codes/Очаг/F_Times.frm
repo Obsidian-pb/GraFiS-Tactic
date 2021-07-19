@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} F_Times
    ClientHeight    =   4440
    ClientLeft      =   45
    ClientTop       =   390
-   ClientWidth     =   8505
+   ClientWidth     =   8505.001
    OleObjectBlob   =   "F_Times.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
