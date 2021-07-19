@@ -75,7 +75,7 @@ Dim i As Integer
 
 End Function
 
-Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses As Variant, Optional needGFSChecj As Boolean = False) As Boolean
+Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses As Variant, Optional needGFSCheck As Boolean = False) As Boolean
 '‘ункци€ возвращает True, если фигура €вл€етс€ фигурой √ра‘и— и среди переданных типов фигур √ра‘и— (gfsIndexPreses) присутствует IndexPers данной фигуры
 'ѕо умолчанию предполагаетс€ что переданна€ фигура уже проверена на то, относитс€ ли она к фигурам √ра‘и—. ¬ случае, если у фигуры нет €чейки User.IndexPers _
 'обработчик ошибки указывает функции вернуть False
@@ -87,7 +87,7 @@ Dim indexPers As Integer
     On Error GoTo EX
     
     '≈сли необходима предварительна€ проверка на отношение фигуры к √ра‘и—:
-    If needGFSChecj Then
+    If needGFSCheck Then
         If Not IsGFSShape(shp) Then
             IsGFSShapeWithIP = False
             Exit Function

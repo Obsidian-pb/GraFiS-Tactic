@@ -16,17 +16,15 @@ Attribute app.VB_VarHelpID = -1
 
 
 
-Private Sub app_SelectionAdded(ByVal Selection As IVSelection)
-    Print Selection.Count
-End Sub
+'Private Sub app_SelectionAdded(ByVal Selection As IVSelection)
+'    Print Selection.Count
+'End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     AddTB
-    AddButtons
 End Sub
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
-    DeleteButtons
     RemoveTB
 End Sub
 

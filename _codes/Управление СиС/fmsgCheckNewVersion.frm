@@ -70,9 +70,9 @@ Dim xmlNode As Object
     xmlDoc.Load "http://graphicalfiresets.ru/Source/GFSVersion.xml"
     
     Set xmlNode = xmlDoc.SelectSingleNode("//version")
-    version = CInt(xmlNode.Text)
+    version = CInt(xmlNode.text)
     Set xmlNode = xmlDoc.SelectSingleNode("//description")
-    description = xmlNode.Text
+    description = xmlNode.text
     
     If a_version < version Then
         Me.txtVersion = VersionToMaskString(version)
@@ -98,7 +98,7 @@ Dim firstString As String
 Dim secondString As String
 
     firstString = CStr(a_version)
-    secondString = Left(firstString, 2) & "." & Mid(firstString, 3, 1) & "." & Right(firstString, 2)
+    secondString = left(firstString, 2) & "." & Mid(firstString, 3, 1) & "." & Right(firstString, 2)
     
     VersionToMaskString = secondString
     

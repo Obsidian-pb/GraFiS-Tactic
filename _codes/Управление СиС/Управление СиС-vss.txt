@@ -16,7 +16,7 @@
   Section: User>>>
     User.Ifc__CustomPropsLevel: 0; 
     User.FireTime: NOW(); User.FireTime.Prompt: ""; 
-    User.CurrentTime: NOW(); User.CurrentTime.Prompt: ""; 
+    User.CurrentTime: DATETIME(44393,480405093); User.CurrentTime.Prompt: ""; 
     
     User.FindTime: "01.04.2015 10:03:00"; User.FindTime.Prompt: "Время обнаружения пожара"; 
     User.InfoTime: 01.04.2015 10:03:00; User.InfoTime.Prompt: "Время сообщения о пожаре"; 
@@ -341,7 +341,7 @@
   Section: Paragraph>>>
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
-    Prop.ArrivalTime: 01.04.2015 11:15:00; Prop.ArrivalTime.Prompt: "Полное астрономическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.ArrivalTime.SortKey: 14; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; 
+    Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное астрономическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.ArrivalTime.SortKey: 14; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; 
     Prop.Duty: INDEX(0;Prop.Duty.Format); Prop.Duty.Prompt: "Должностное лицо, участник тушени пожара, представитель служб или объекта и т.д."; Prop.Duty.Label: "Должность на пожаре"; Prop.Duty.Format: "РТП-1;РТП-2;РТП-3;Ответственный за ОТ;"; Prop.Duty.SortKey: 10; Prop.Duty.Type: 4; Prop.Duty.Invisible: FALSE; Prop.Duty.Verify: FALSE; Prop.Duty.LangID: 1049; 
     Prop.FIO: ""; Prop.FIO.Prompt: "Фамилия Имя Отчество"; Prop.FIO.Label: "Ф.И.О."; Prop.FIO.Format: ""; Prop.FIO.SortKey: 11; Prop.FIO.Type: 0; Prop.FIO.Invisible: FALSE; Prop.FIO.Verify: FALSE; Prop.FIO.LangID: 1049; 
     Prop.DutyJob: ""; Prop.DutyJob.Prompt: "Должность (звание, при наличии) лица"; Prop.DutyJob.Label: "Рабочая должность"; Prop.DutyJob.Format: ""; Prop.DutyJob.SortKey: 12; Prop.DutyJob.Type: 0; Prop.DutyJob.Invisible: FALSE; Prop.DutyJob.Verify: FALSE; Prop.DutyJob.LangID: 1049; Prop.DutyJob.Calendar: 0; 

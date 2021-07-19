@@ -85,6 +85,11 @@ Dim tmpVal As Variant
                     cellVal = shp.Cells(cellName).ResultStr(dataType)
                 Case Is = visDate
                     cellVal = shp.Cells(cellName).Result(dataType)
+'                    Debug.Assert cellName <> "Prop.FireTime"
+'                    If cellName = "Prop.FireTime" Then Stop
+                    If cellVal = 0 Then
+                        cellVal = CDate(shp.Cells(cellName).ResultStr(visUnitsString))
+                    End If
                 Case Else
                     cellVal = shp.Cells(cellName).Result(dataType)
             End Select

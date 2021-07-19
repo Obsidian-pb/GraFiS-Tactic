@@ -218,7 +218,8 @@ EX:
     Set FilterShapesAnd = New Collection
 End Function
 
-Public Function Sort(ByVal shps As Collection, ByVal sortCellName As String, Optional ByVal desc As Boolean = True) As Collection
+Public Function SortCol(ByVal shps As Collection, ByVal sortCellName As String, Optional ByVal desc As Boolean = True, _
+                        Optional ByVal dataType As VisUnitCodes = visNumber) As Collection
 '‘ункци€ возвращает отсортированную коллекцию фигур. ‘игуры сортируютс€ по значению в €чейке sortCellName - чем больше, тем выше
 'desc: True - от большего к меньшему; False - от меньшего к большему
 Dim i As Integer
@@ -231,9 +232,9 @@ Dim tmpColl As Collection
     Do While shps.count > 1
         
         If desc Then
-            Set tmpshp = GetMaxShp(shps, sortCellName)
+            Set tmpshp = GetMaxShp(shps, sortCellName, dataType)
         Else
-            Set tmpshp = GetMinShp(shps, sortCellName)
+            Set tmpshp = GetMinShp(shps, sortCellName, dataType)
         End If
         
         AddUniqueCollectionItem tmpColl, tmpshp
@@ -247,23 +248,55 @@ Dim tmpColl As Collection
     AddUniqueCollectionItem tmpColl, tmpshp
 '    Debug.Print tmpshp.ID & " " & cellVal(tmpshp, sortCellName)
     
-    Set Sort = tmpColl
+    Set SortCol = tmpColl
 End Function
 
-Public Function GetMaxShp(ByRef col As Collection, ByVal sortCellName As String) As Visio.Shape
+Public Function GetMaxShp(ByRef col As Collection, ByVal sortCellName As String, Optional ByVal dataType As VisUnitCodes = visNumber) As Visio.Shape
 '¬озвращает фигуру с максимальным значением в €чейке sortCellName
 Dim i As Integer
+Dim j As Integer
 Dim shp1 As Visio.Shape
 Dim shp2 As Visio.Shape
 Dim shp1Val As Double
 Dim shp2Val As Double
+Const d = ";"
+Dim sortCellNames() As String
+Dim sortCellNameOne As String
     
     Set shp1 = col(1)
-    shp1Val = cellVal(shp1, sortCellName)
+            
+            '---ƒл€ случа€, если в качестве полей сортировки указано несколько возможных полей (не одновременно!)
+            If InStr(1, sortCellName, d) > 0 Then
+                sortCellNames = Split(sortCellName, d)
+                For j = 0 To UBound(sortCellNames)
+                    If ShapeHaveCell(shp1, sortCellNames(j)) Then
+                        sortCellNameOne = sortCellNames(j)
+                        Exit For
+                    End If
+                Next j
+            Else
+                sortCellNameOne = sortCellName
+            End If
+    
+    shp1Val = cellVal(shp1, sortCellNameOne, dataType)
     For i = 1 To col.count
         Set shp2 = col(i)
-        shp2Val = cellVal(shp2, sortCellName)
         
+            '---ƒл€ случа€, если в качестве полей сортировки указано несколько возможных полей (не одновременно!)
+            If InStr(1, sortCellName, d) > 0 Then
+'                sortCellNames = Split(sortCellName, d)
+                For j = 0 To UBound(sortCellNames)
+                    If ShapeHaveCell(shp2, sortCellNames(j)) Then
+                        sortCellNameOne = sortCellNames(j)
+                        Exit For
+                    End If
+                Next j
+            Else
+                sortCellNameOne = sortCellName
+            End If
+        
+        
+        shp2Val = cellVal(shp2, sortCellNameOne, dataType)
         If shp2Val > shp1Val Then
             Set shp1 = shp2
             shp1Val = shp2Val
@@ -274,20 +307,54 @@ Dim shp2Val As Double
 Set GetMaxShp = shp1
 End Function
 
-Public Function GetMinShp(ByRef col As Collection, ByVal sortCellName As String) As Visio.Shape
+Public Function GetMinShp(ByRef col As Collection, ByVal sortCellName As String, Optional ByVal dataType As VisUnitCodes = visNumber) As Visio.Shape
 '¬озвращает фигуру с минимальным значением в €чейке sortCellName
 Dim i As Integer
+Dim j As Integer
 Dim shp1 As Visio.Shape
 Dim shp2 As Visio.Shape
 Dim shp1Val As Double
 Dim shp2Val As Double
+Const d = ";"
+Dim sortCellNames() As String
+Dim sortCellNameOne As String
     
     Set shp1 = col(1)
-    shp1Val = cellVal(shp1, sortCellName)
+    
+            '---ƒл€ случа€, если в качестве полей сортировки указано несколько возможных полей (не одновременно!)
+            If InStr(1, sortCellName, d) > 0 Then
+                sortCellNames = Split(sortCellName, d)
+                For j = 0 To UBound(sortCellNames)
+                    If ShapeHaveCell(shp1, sortCellNames(j)) Then
+                        sortCellNameOne = sortCellNames(j)
+                        Exit For
+                    End If
+                Next j
+            Else
+                sortCellNameOne = sortCellName
+            End If
+    
+    
+    shp1Val = cellVal(shp1, sortCellNameOne, dataType)
+'    Debug.Print sortCellNameOne & ", " & shp1Val
     For i = 1 To col.count
         Set shp2 = col(i)
-        shp2Val = cellVal(shp2, sortCellName)
         
+            '---ƒл€ случа€, если в качестве полей сортировки указано несколько возможных полей (не одновременно!)
+            If InStr(1, sortCellName, d) > 0 Then
+'                sortCellNames = Split(sortCellName, d)
+                For j = 0 To UBound(sortCellNames)
+                    If ShapeHaveCell(shp2, sortCellNames(j)) Then
+                        sortCellNameOne = sortCellNames(j)
+                        Exit For
+                    End If
+                Next j
+            Else
+                sortCellNameOne = sortCellName
+            End If
+        
+        
+        shp2Val = cellVal(shp2, sortCellNameOne, dataType)
         If shp2Val < shp1Val Then
             Set shp1 = shp2
             shp1Val = shp2Val
