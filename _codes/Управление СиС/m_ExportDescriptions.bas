@@ -155,6 +155,7 @@ Dim f As frm_ListForm
         A.Refresh Application.ActivePage.Index, curTime
         
         fireTime = cellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
+'        fireTime = A.Result("FireTime")
         curTime = comColSorted(1).time
         
         ReDim myArray(comColSorted.Count, 4)

@@ -40,8 +40,8 @@ Dim f As frm_ListForm
             '---Вставка остальных записей
             Set shp = units(i)
             myArray(i, 0) = shp.ID
-            myArray(i, 1) = cellVal(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
-            myArray(i, 2) = cellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
+            myArray(i, 1) = cellVal(shp, "Prop.Unit", visUnitsString, "") & cellVal(shp, "Prop.Owner", visUnitsString, "")  '"Подразделение"
+            myArray(i, 2) = cellVal(shp, "Prop.Call", visUnitsString, "") & cellVal(shp, "Prop.About", visUnitsString, "")  '"Позывной"
             myArray(i, 3) = cellVal(shp, "Prop.Model", visUnitsString, "")  '"Модель"
             myArray(i, 4) = Format(cellVal(shp, "Prop.ArrivalTime"), "hh:mm:ss")  '"Время прибытия"
             myArray(i, 5) = cellVal(shp, "Prop.PersonnelHave")  '"Личный состав"
@@ -269,8 +269,9 @@ Private Function pf_IsMainTechnics(ByVal a_IndexPers As Integer) As Boolean
 'Является ли индекс индексом техники
     If a_IndexPers <= 20 Or a_IndexPers = 24 Or a_IndexPers = 25 Or a_IndexPers = 26 Or a_IndexPers = 27 Or _
         a_IndexPers = 28 Or a_IndexPers = 29 Or a_IndexPers = 30 Or a_IndexPers = 31 Or a_IndexPers = 32 Or _
-        a_IndexPers = 73 Or a_IndexPers = 74 Or _
-        a_IndexPers = 160 Or a_IndexPers = 161 Or a_IndexPers = 162 Or a_IndexPers = 163 Then
+        a_IndexPers = 33 Or a_IndexPers = 73 Or a_IndexPers = 74 Or _
+        a_IndexPers = 160 Or a_IndexPers = 161 Or a_IndexPers = 162 Or a_IndexPers = 163 Or _
+        a_IndexPers = 3000 Or a_IndexPers = 3001 Or a_IndexPers = 3002 Then
         pf_IsMainTechnics = True
     Else
         pf_IsMainTechnics = False
