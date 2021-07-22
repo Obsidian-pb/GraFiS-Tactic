@@ -29,6 +29,7 @@ End Sub
 Sub RemoveTB()
 'Процедура добавления панели управления "РТП"-------------------------------
     On Error Resume Next
+    Set btns = Nothing
     Application.CommandBars("РТП").Delete
 End Sub
 
@@ -108,6 +109,13 @@ Sub AddButtons()
         .TooltipText = "Показать таймлайн модели"
 '        .BeginGroup = True
         .FaceID = 11
+    End With
+    '---"Экспликация"
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Экспликация"
+        .Tag = "ExplicationView"
+        .TooltipText = "Показать экспликацию помещенийи"
+        .FaceID = 544
     End With
     '---"Статисты"
     With Bar.Controls.Add(Type:=msoControlButton)

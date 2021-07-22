@@ -63,7 +63,7 @@ Dim fireTime As Date
         r = 1
         A.Refresh Application.ActivePage.Index, curTime
 '        fireTime = A.Result("FireTime")     'Не слишкои надежно
-        fireTime = cellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
+        fireTime = CellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
         curTime = comColSorted(1).time
         '---Вставка первой записи
 '        wrdTblRow = wrdTbl.Rows(r)
@@ -154,7 +154,7 @@ Dim f As frm_ListForm
     If comColSorted.Count > 0 Then
         A.Refresh Application.ActivePage.Index, curTime
         
-        fireTime = cellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
+        fireTime = CellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
 '        fireTime = A.Result("FireTime")
         curTime = comColSorted(1).time
         

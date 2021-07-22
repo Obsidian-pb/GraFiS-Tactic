@@ -29,6 +29,8 @@ Public WithEvents ComButTimelineView As Office.CommandBarButton      'Показать т
 Attribute ComButTimelineView.VB_VarHelpID = -1
 Public WithEvents ComButStatistsView As Office.CommandBarButton      'Показать список статистов
 Attribute ComButStatistsView.VB_VarHelpID = -1
+Public WithEvents ComButExplicationView As Office.CommandBarButton   'Показать экспликацию
+Attribute ComButExplicationView.VB_VarHelpID = -1
 
 Public WithEvents ComButDescExport As Office.CommandBarButton        'Экспорт описания БД
 Attribute ComButDescExport.VB_VarHelpID = -1
@@ -45,6 +47,7 @@ Private Sub Class_Initialize()
     Set ComButGDZSView = Application.CommandBars("РТП").Controls("Список ГДЗС")
     Set ComButTimelineView = Application.CommandBars("РТП").Controls("Таймлайн")
     Set ComButStatistsView = Application.CommandBars("РТП").Controls("Список статистов")
+    Set ComButExplicationView = Application.CommandBars("РТП").Controls("Экспликация")
     
     Set ComButDescExport = Application.CommandBars("РТП").Controls("Экспорт описания БД")
 End Sub
@@ -55,6 +58,13 @@ Private Sub Class_Terminate()
     Set ComButMark = Nothing
     
     Set ComButDescView = Nothing
+    Set ComButTechView = Nothing
+    Set ComButNozzlesView = Nothing
+    Set ComButGDZSView = Nothing
+    Set ComButTimelineView = Nothing
+    Set ComButStatistsView = Nothing
+    Set ComButExplicationView = Nothing
+    
     Set ComButDescExport = Nothing
 End Sub
 
@@ -153,7 +163,17 @@ Private Sub ComButStatistsView_Click(ByVal Ctrl As Office.CommandBarButton, Canc
 Tail:
     '---Выходим из процедуры обработки
 End Sub
-
+Private Sub ComButExplicationView_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки
+    
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+'---Запускаем основное событие
+    ShowExplication
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
 
 
 
