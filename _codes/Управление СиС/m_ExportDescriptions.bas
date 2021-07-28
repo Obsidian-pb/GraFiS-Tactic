@@ -158,7 +158,7 @@ Dim f As frm_ListForm
 '        fireTime = A.Result("FireTime")
         curTime = comColSorted(1).time
         
-        ReDim myArray(comColSorted.Count, 4)
+        ReDim myArray(comColSorted.Count, 3)
         '---Вставка первой записи
         myArray(0, 0) = "ID"
         myArray(0, 1) = "Время"
