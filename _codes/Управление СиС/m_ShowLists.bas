@@ -99,9 +99,9 @@ Dim f As frm_ListForm
             myArray(i, 2) = CellVal(shp, "User.IndexPers.Prompt", visUnitsString, "")  '"Тип ствола"
             myArray(i, 3) = CellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
             myArray(i, 4) = Format(CellVal(shp, "Prop.SetTime"), "hh:mm:ss")  '"Время подачи"
-            myArray(i, 5) = CellVal(shp, "Prop.Personnel", "")  '"Личный состав"
-            myArray(i, 6) = CellVal(shp, "Prop.UseDirection", "")  '"Работа"
-            myArray(i, 7) = CellVal(shp, "User.PodOut", "")  '"Производительность"
+            myArray(i, 5) = CellVal(shp, "Prop.Personnel")  '"Личный состав"
+            myArray(i, 6) = CellVal(shp, "Prop.UseDirection", visUnitsString, "")  '"Работа"
+            myArray(i, 7) = CellVal(shp, "User.PodOut")  '"Производительность"
         Next i
     End If
 
@@ -154,7 +154,7 @@ Dim f As frm_ListForm
             myArray(i, 2) = CellVal(shp, "User.IndexPers.Prompt", visUnitsString, "")  '"Тип"
             myArray(i, 3) = CellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
             myArray(i, 4) = Format(CellVal(shp, "Prop.FormingTime"), "hh:mm:ss")  '"Время формирования"
-            myArray(i, 5) = CellVal(shp, "Prop.Personnel", "")  '"Личный состав"
+            myArray(i, 5) = CellVal(shp, "Prop.Personnel")  '"Личный состав"
             myArray(i, 6) = CellVal(shp, "Prop.AirDevice", visUnitsString, " ")  '"СИЗОД"
         Next i
     End If
@@ -254,7 +254,7 @@ Dim f As frm_ListForm
             myArray(i, 0) = shp.ID
             myArray(i, 1) = CellVal(shp, "Prop.State", visUnitsString, "")   '"Состояние"
             myArray(i, 2) = CellVal(shp, "Prop.Info", visUnitsString, "")  '"Информация"
-            myArray(i, 3) = CellVal(shp, "Prop.StatistsQuatity", , "")  '"Количество людей"
+            myArray(i, 3) = CellVal(shp, "Prop.StatistsQuatity")  '"Количество людей"
         Next i
     End If
 
@@ -304,7 +304,7 @@ Dim f As frm_ListForm
             myArray(i, 2) = CellVal(shp, "Prop.Use", visUnitsString, "")  '"Назначение"
             myArray(i, 3) = CellVal(shp, "Prop.Name", visUnitsString, "")  '"Имя"
             myArray(i, 4) = CellVal(shp, "Prop.visArea", visUnitsString, "")    '"Площадь"
-            myArray(i, 5) = CellVal(shp, "Prop.OccupantCount", , "")  '"Рассчетное число людей"
+            myArray(i, 5) = CellVal(shp, "Prop.OccupantCount")  '"Рассчетное число людей"
         Next i
     End If
 

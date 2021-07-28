@@ -123,7 +123,7 @@ Dim colCount As Byte
     
     
     'Наполняем содержимым список
-    colCount = UBound(arr, 2)
+    colCount = UBound(arr, 2) + 1
     Me.LB_List.ColumnCount = colCount
     
     If colWidth <> "" Then
