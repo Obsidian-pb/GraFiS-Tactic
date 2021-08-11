@@ -121,7 +121,7 @@ Public Sub SetCellVal(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal 
 'Set cell with cellName value. If such cell does not exists, does nothing
 Dim cll As Visio.Cell
     
-'    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
@@ -130,7 +130,7 @@ Dim cll As Visio.Cell
     
 Exit Sub
 EX:
-
+    Debug.Print "Error in t_Shapes modul in 'Otcheti'! " & shp.Name & ", " & cellName & ", " & NewVal
 End Sub
 
 Public Sub SetCellFrml(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal NewFrml As Variant)
