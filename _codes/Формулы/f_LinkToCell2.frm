@@ -105,7 +105,7 @@ Dim frml As String
     shpConn.AddNamedRow visSectionProp, cellFromName, visTagDefault
     shpConn.Cells("Prop." & cellFromName).FormulaU = frml
     'ѕоказываем в коннекторе параметр св€зи
-    Stop   '«десь вместо имени €чейки указываем ее Label
+'    Stop   '«десь вместо имени €чейки указываем ее Label
     frml = Chr(34) & cellFromName & "=>" & cellToName & ": " & Chr(34) & "&" & frml
     shpConn.Characters.AddCustomFieldU frml, visFmtNumGenNoUnits
     

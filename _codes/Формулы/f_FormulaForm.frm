@@ -81,7 +81,8 @@ Dim s As Long
     txt1 = left(Me.tb_HTMLCode.Text, l)
     txt2 = Right(Me.tb_HTMLCode.Text, Me.tb_HTMLCode.TextLength - l - s)
     
-    Me.tb_HTMLCode.Text = txt1 & "$" & markersColl(Me.cbox_Markers.ListIndex + 1) & "$" & txt2
+'    Me.tb_HTMLCode.Text = txt1 & "$" & markersColl(Me.cbox_Markers.ListIndex + 1) & "$" & txt2
+    Me.tb_HTMLCode.Text = txt1 & "$" & Me.cbox_Markers.Column(0) & "$" & txt2
 End Sub
 
 Private Sub UserForm_Activate()
