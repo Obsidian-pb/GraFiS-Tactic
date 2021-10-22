@@ -91,7 +91,7 @@ Private Function GetKindOfCell(ByVal xVal As Long, ByVal yVal As Long) As Byte
         GetKindOfCell = 1
         Exit Function
     End If
-    If matrix.IsWall(xVal, yVal) Then
+    If matrix.isWall(xVal, yVal) Then
         GetKindOfCell = 2
         Exit Function
     End If

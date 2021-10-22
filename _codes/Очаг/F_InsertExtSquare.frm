@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} F_InsertExtSquare
    ClientHeight    =   5985
    ClientLeft      =   45
    ClientTop       =   390
-   ClientWidth     =   8850.001
+   ClientWidth     =   8850
    OleObjectBlob   =   "F_InsertExtSquare.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

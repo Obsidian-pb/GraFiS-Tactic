@@ -141,8 +141,9 @@ Private Function testWall2(ByVal x As Double, ByVal y As Double, ByVal tolerance
 Dim shpN As Visio.Shape
 Dim sel As Visio.Selection
 
-    ' Разобраться - скорее всего проблема в единицах измерения x и y
+    ' пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ x пїЅ y
     Set sel = Application.ActivePage.SpatialSearch(x, y, VisSpatialRelationCodes.visSpatialOverlap, 100, visSpatialFrontToBack)
+    'Р Р°Р±РѕС‡РёР№ РІР°СЂРёР°РЅС‚: Application.ActivePage.SpatialSearch(x, y, VisSpatialRelationCodes.visSpatialContainedIn, 0, visSpatialFrontToBack) - СЃРѕРґРµСЂР¶РёС‚СЃСЏ РІ РѕС‡РµСЂС‚Р°РЅРёСЏС… С„РёРіСѓСЂС‹
     
     For Each shpN In sel
         Debug.Print shpN.Name
@@ -155,15 +156,15 @@ testWall2 = False
 End Function
 
 Public Function isWall(ByRef aO_Shape As Visio.Shape) As Boolean
-'Функция возвращает Истина, если фигура - стена, в противном случае - Ложь
+'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅ
 Dim shapeType As Integer
-'---Проверяем, является ли фигура фигурой конструкций
+'---пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     If aO_Shape.CellExists("User.ShapeClass", 0) = False Or aO_Shape.CellExists("User.ShapeType", 0) = False Then
         isWall = False
         Exit Function
     End If
 
-'---Проверяем, является ли фигура фигурой СТЕНА
+'---пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     shapeType = aO_Shape.Cells("User.ShapeType").Result(visNumber)
     If aO_Shape.Cells("User.ShapeClass").Result(visNumber) = 3 And _
         (shapeType = 44 Or shapeType = 6) Then

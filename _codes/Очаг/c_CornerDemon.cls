@@ -203,42 +203,42 @@ Private Function IsCellNearTheWallAndNotFire(ByVal xVal As Long, ByVal yVal As L
     If x < 0 Or y < 0 Or x > matrix.DimensionX Or y > matrix.DimensionY Then Exit Function
     
     'Проверяем саму клетку
-    If matrix.IsCellMaxFire(xVal, yVal) Or matrix.IsWall(xVal, yVal) Then
+    If matrix.IsCellMaxFire(xVal, yVal) Or matrix.isWall(xVal, yVal) Then
         IsCellNearTheWallAndNotFire = False
         Exit Function
     End If
     
     'По ортогонали
-    If matrix.IsWall(xVal, yVal - 1) Then
+    If matrix.isWall(xVal, yVal - 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal, yVal + 1) Then
+    If matrix.isWall(xVal, yVal + 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal - 1, yVal) Then
+    If matrix.isWall(xVal - 1, yVal) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal + 1, yVal) Then
+    If matrix.isWall(xVal + 1, yVal) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
     'По диагонали
-    If matrix.IsWall(xVal - 1, yVal - 1) Then
+    If matrix.isWall(xVal - 1, yVal - 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal - 1, yVal + 1) Then
+    If matrix.isWall(xVal - 1, yVal + 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal + 1, yVal - 1) Then
+    If matrix.isWall(xVal + 1, yVal - 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal + 1, yVal + 1) Then
+    If matrix.isWall(xVal + 1, yVal + 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If

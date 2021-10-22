@@ -191,12 +191,49 @@ End Function
 
 Public Function GetOpenSpaceLayerValue(ByVal x As Long, ByVal y As Long) As Byte
     GetOpenSpaceLayerValue = openSpaceLayer(x, y)
+'Здесь нужно будет предусмотреть разовую проверку и запоминание статуса ячейки - иначе резуо падает скорость моделирования и вообще весь смысл этой затеи пропадает:
+'GetOpenSpaceLayerValue = testWall2(x * 200 / 25.4, y * 200 / 25.4, 0)
 End Function
 Public Function GetOpenSpaceLayer() As Variant
 'Возвращаем матрицу ограждающих конструкций
     GetOpenSpaceLayer = openSpaceLayer
 End Function
+'<<<!!!!!ТЕСТОВЫЙ БЛОК
+Private Function testWall2(ByVal x As Double, ByVal y As Double, ByVal tolerance As Double) As Boolean
+Dim shpN As Visio.Shape
+Dim sel As Visio.Selection
 
+'    Set sel = Application.ActivePage.SpatialSearch(x, y, VisSpatialRelationCodes.visSpatialOverlap, 100, visSpatialFrontToBack)
+    Set sel = Application.ActivePage.SpatialSearch(x, y, VisSpatialRelationCodes.visSpatialContainedIn, 0, visSpatialFrontToBack) '- ?????????? ? ?????????? ??????
+    
+    For Each shpN In sel
+        Debug.Print shpN.Name
+        If isWallInner(shpN) Then
+            testWall2 = True
+            Exit Function
+        End If
+    Next shpN
+testWall2 = False
+End Function
+Public Function isWallInner(ByRef aO_Shape As Visio.Shape) As Boolean
+'??????? ?????????? ??????, ???? ?????? - ?????, ? ????????? ?????? - ????
+Dim shapeType As Integer
+'---?????????, ???????? ?? ?????? ??????? ???????????
+    If aO_Shape.CellExists("User.ShapeClass", 0) = False Or aO_Shape.CellExists("User.ShapeType", 0) = False Then
+        isWallInner = False
+        Exit Function
+    End If
+
+'---?????????, ???????? ?? ?????? ??????? ?????
+    shapeType = aO_Shape.Cells("User.ShapeType").Result(visNumber)
+    If aO_Shape.Cells("User.ShapeClass").Result(visNumber) = 3 And _
+        (shapeType = 44 Or shapeType = 6) Then
+        isWallInner = True
+        Exit Function
+    End If
+isWallInner = False
+End Function
+'!!!!!ТЕСТОВЫЙ БЛОК>>>
 
 Public Function IsInner(ByVal x As Long, ByVal y As Long) As Boolean
 'Возвращет Истина, если вокруг клетки только горящие (или стены), Ложь, если есть хоть одна не полностью горящая
@@ -394,17 +431,17 @@ Private Function IsCellCanFire(ByVal x As Long, ByVal y As Long) As Boolean
     
 End Function
 
-Public Function IsWall(ByVal x As Long, ByVal y As Long) As Boolean
+Public Function isWall(ByVal x As Long, ByVal y As Long) As Boolean
 'Проверяем, находится ли в указанной клетке стена
     On Error GoTo EX
     If openSpaceLayer(x, y) = 1 Then
-        IsWall = True
+        isWall = True
     Else
-        IsWall = False
+        isWall = False
     End If
 Exit Function
 EX:
-    IsWall = True
+    isWall = True
 End Function
 
 Public Function IsCellMaxFire(ByVal x As Long, ByVal y As Long) As Boolean

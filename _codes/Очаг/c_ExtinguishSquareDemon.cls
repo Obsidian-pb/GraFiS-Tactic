@@ -450,7 +450,7 @@ Dim shp As Visio.Shape
     If Not fireMatrixObject.IsCellMaxFire(cell.x, cell.y) Then Exit Sub
     
 'ѕровер€ем не €вл€етс€ ли клетка клеткой стены
-If fireMatrixObject.IsWall(cell.x, cell.y) Then Exit Sub
+If fireMatrixObject.isWall(cell.x, cell.y) Then Exit Sub
     
     If calculatedCells(cell.x, cell.y) = 1 And matrix(cell.x, cell.y) > wayLen Then
         calculatedCells(cell.x, cell.y) = 0
