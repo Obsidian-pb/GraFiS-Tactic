@@ -2,8 +2,8 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} fmsgCheckNewVersion 
    Caption         =   "Сведения об обновлении"
    ClientHeight    =   3360
-   ClientLeft      =   48
-   ClientTop       =   372
+   ClientLeft      =   45
+   ClientTop       =   375
    ClientWidth     =   8100
    OleObjectBlob   =   "fmsgCheckNewVersion.frx":0000
    StartUpPosition =   1  'CenterOwner
@@ -70,9 +70,9 @@ Dim xmlNode As Object
     xmlDoc.Load "http://graphicalfiresets.ru/Source/GFSVersion.xml"
     
     Set xmlNode = xmlDoc.SelectSingleNode("//version")
-    version = CInt(xmlNode.Text)
+    version = CInt(xmlNode.text)
     Set xmlNode = xmlDoc.SelectSingleNode("//description")
-    description = xmlNode.Text
+    description = xmlNode.text
     
     If a_version < version Then
         Me.txtVersion = VersionToMaskString(version)
@@ -98,7 +98,7 @@ Dim firstString As String
 Dim secondString As String
 
     firstString = CStr(a_version)
-    secondString = Left(firstString, 2) & "." & Mid(firstString, 3, 1) & "." & Right(firstString, 2)
+    secondString = left(firstString, 2) & "." & Mid(firstString, 3, 1) & "." & Right(firstString, 2)
     
     VersionToMaskString = secondString
     
@@ -123,7 +123,7 @@ On Error GoTo Tail
 Exit Function
 
 Tail:
-MsgBox "Что-то пошло не так! Проверьте наличие файла Version.txt (Файл должен находиться в том же каталоге, что и текущий файл.", vbCritical
+MsgBox "Что-то пошло не так! Проверьте наличие файла Version.txt (Файл должен находиться в том же каталоге, что и текущий файл.", vbCritical, ThisDocument.Name
 GetVersion = False
 End Function
 

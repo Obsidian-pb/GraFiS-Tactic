@@ -15,6 +15,7 @@ Const vb_ShapeType_Tech = 4                 'Техника
 Const vb_ShapeType_VsasSet = 5              'Всасывающая сетка с линией
 Const vb_ShapeType_GE = 6                   'Гидроэлеватор
 Const vb_ShapeType_WaterContainer = 7       'Водяная емкость
+Const vb_ShapeType_PG = 8                   'Пожарный гидрант
 
 
 
@@ -135,7 +136,7 @@ Exit Sub
 EndSub:
     Resume Next
 '    Debug.Print Err.Description
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "Ps_ConnectionAdd"
     Set cpO_InShape = Nothing
     Set cpO_OutShape = Nothing
@@ -233,14 +234,20 @@ On Error GoTo ExitSub
                 cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).Formula = 2
             End If
         End If
-    
-    
+'    '---ПТВ (Пожарная колонка)->ПГ
+'        If vb_OutShapeType = vb_ShapeType_PTV And vb_InShapeType = vb_ShapeType_PG Then
+'            cpO_OutShape.Cells("User.WSShapeID").Formula = cpO_InShape.ID
+'        End If
+'    '---ПГ->ПТВ (Пожарная колонка)
+'        If vb_OutShapeType = vb_ShapeType_PG And vb_InShapeType = vb_ShapeType_PTV Then
+'            cpO_InShape.Cells("User.WSShapeID").Formula = cpO_OutShape.ID
+'        End If
     
     
 Exit Sub
 ExitSub:
 '    Debug.Print Err.Description
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ps_LinkShapes"
 
 End Sub
@@ -252,9 +259,11 @@ End Sub
 '----------------------------------------Служебные Функции-----------------------------------------------
 Private Function f_IdentShape(ByVal ai_ShapeIP As Integer) As Integer
 'Функция идентифициурет фигуру и возвращает значение её типа
-Dim Arr_PTVs(28, 1) As Integer
+Dim Arr_PTVs(29, 1) As Integer
 Dim i As Integer
-
+    
+    On Error GoTo Tail
+    
 '---Указываем значения IndexPers и соответствующие им определения
     Arr_PTVs(0, 0) = 34  'Водяной ручной ствол
         Arr_PTVs(0, 1) = vb_ShapeType_PTV
@@ -314,17 +323,22 @@ Dim i As Integer
         Arr_PTVs(27, 1) = vb_ShapeType_PTV
     Arr_PTVs(28, 0) = 105 'Водосборник
         Arr_PTVs(28, 1) = vb_ShapeType_Razv
-        
+    Arr_PTVs(29, 0) = ipPG 'Пожарный гидрант
+        Arr_PTVs(29, 1) = vb_ShapeType_PG
         
         
 '---Указываем значение по умолчанию
     f_IdentShape = vb_ShapeType_Other
 
 '---Проверяем является ли фигура
-        For i = 0 To 28
+        For i = 0 To UBound(Arr_PTVs, 1)
             If ai_ShapeIP = Arr_PTVs(i, 0) Then f_IdentShape = Arr_PTVs(i, 1): Exit Function
         Next i
 
+Exit Function
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "f_IdentShape"
 End Function
 
 

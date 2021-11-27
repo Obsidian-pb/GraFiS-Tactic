@@ -49,20 +49,20 @@ Dim ShpInd As Integer
 
     If cell.Name = "Prop.Set" Then
         '---Запускаем процедуру получения списков моделей
-        ShpInd = cell.Shape.ID
-        ModelsListImport (ShpInd)
+'        ShpInd = cell.Shape.ID
+        ModelsListImport cell.Shape
     ElseIf cell.Name = "Prop.Model" Then
         '---Процедура получения ТТХ - СДЕЛАТЬ
         If Not IsShapeHaveCalloutAndDropFirst(cell.Shape) Then
-            ShpInd = cell.Shape.ID
-            GetTTH (ShpInd)
+'            ShpInd = cell.Shape.ID
+            GetTTH cell.Shape
         End If
     End If
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "vdAppEventsTech2_CellChanged"
 End Sub
 

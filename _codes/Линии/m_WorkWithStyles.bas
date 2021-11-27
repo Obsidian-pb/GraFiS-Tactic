@@ -1,6 +1,6 @@
 Attribute VB_Name = "m_WorkWithStyles"
 '----------------------------В модуле хранятся процедуры работы со стилями--------------------------------------
-Dim Line_StyleSet(4) As String
+Dim Line_StyleSet(5) As String
 
 
 Private Sub s_StyleSetsDeclare()
@@ -10,7 +10,7 @@ Private Sub s_StyleSetsDeclare()
     Line_StyleSet(1) = "Р_Нап"
     Line_StyleSet(2) = "Р_НВ"
     Line_StyleSet(3) = "Р_Подпись"
-    
+    Line_StyleSet(4) = "Р_Пробр"
     
 End Sub
 

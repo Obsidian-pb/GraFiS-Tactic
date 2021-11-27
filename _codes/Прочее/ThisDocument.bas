@@ -7,7 +7,17 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+Option Explicit
 
+Dim WithEvents visApp As Visio.Application
+Attribute visApp.VB_VarHelpID = -1
+
+
+
+Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
+    'Удаляем ссылку на приложение
+'    Set visApp = Visio.Application
+End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 
@@ -18,6 +28,9 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     If Application.ActiveDocument.DocumentSheet.CellExists("User.GFSColorTheme", 0) = 0 Then
         StyleExport
     End If
+    
+'---Привязываем объект visApp к ссылке на приложение Visio
+'    Set visApp = Visio.Application
 
 '---Проверяем наличие обновлений
     fmsgCheckNewVersion.CheckUpdates
@@ -25,7 +38,11 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 Exit Sub
 Tail:
     SaveLog Err, "Document_DocumentOpened"
-    MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком."
+    MsgBox "Программа вызвала ошибку! Если это будет повторяться, свяжитесь с разработчиком.", , ThisDocument.Name
 End Sub
+
+
+
+
 
 

@@ -69,3 +69,11 @@ EX:
 Set OtherShape = Nothing
 End Sub
 
+
+Public Sub SetTime(ByRef shp As Visio.Shape)
+    On Error Resume Next
+    
+    Application.DoCmd 1312
+    'Здесь мы вычисляем время показаетля и указываем его для расположения вехи
+    Debug.Print shp.Cells("Prop.MilestoneType").ResultStr(visUnitsString) & ": " & "Здесь мы вычисляем время показаетля и указываем его для расположения вехи"
+End Sub

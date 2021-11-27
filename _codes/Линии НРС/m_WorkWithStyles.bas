@@ -54,7 +54,7 @@ Dim vO_StyleFrom As Visio.style
 Dim vO_StyleTo As Visio.style
 Dim vs_RowName As String
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Создвем необходимый набор объектов
     Set vO_StyleFrom = ThisDocument.Styles(as_StyleName)
     Set vO_StyleTo = ActiveDocument.Styles(as_StyleName)
@@ -108,7 +108,7 @@ Dim vs_RowName As String
     Set vO_Stenc = Nothing
     
 Exit Sub
-EX:
+ex:
 '---Очищаем объекты
     Set vO_StyleFrom = Nothing
     Set vO_StyleTo = Nothing

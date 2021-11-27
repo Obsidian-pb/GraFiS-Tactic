@@ -39,7 +39,7 @@ Dim i As Integer
                 StyleRefresh WaterSource_StyleSet(i)
             Else
             '---Если нет - вбрасываем стиь WaterSource_StyleSet(i) в активный документе
-                vO_Doc.Drop vO_Stl, 0, 0
+                vO_Doc.drop vO_Stl, 0, 0
             End If
         Next i
 

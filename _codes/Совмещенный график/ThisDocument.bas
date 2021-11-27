@@ -34,5 +34,10 @@ Dim cell As Visio.cell
         docSheet.AddNamedRow visSectionUser, "CurrentTime", visTagDefault
         docSheet.Cells("User.CurrentTime").FormulaU = "User.FireTime"
     End If
+    If Not docSheet.CellExists("User.FireEndTime", 0) Then
+        docSheet.AddNamedRow visSectionUser, "FireEndTime", visTagDefault
+        docSheet.Cells("User.FireEndTime").FormulaU = "User.FireTime+0.05"
+    End If
 
 End Sub
+

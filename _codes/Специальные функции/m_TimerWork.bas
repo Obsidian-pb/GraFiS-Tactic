@@ -56,7 +56,7 @@ Public Sub AddTBTimer(ShpObj As Visio.Shape)
 '---Добавляем тулбокс таймера
 Dim i As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Объявляем переменные и постоянные--------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
@@ -77,7 +77,7 @@ Dim i As Integer
     ShpObj.Delete
 
 Exit Sub
-EX:
+ex:
     'Error
     ShpObj.Delete
 
@@ -104,7 +104,7 @@ Dim controlTime As CommandBarControl
 Dim timeCell As Visio.Cell
 Dim curDateTime As Date
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Определяем объект поля CurrentDate
     Set controlDate = Application.CommandBars("Таймер").Controls("Дата")
 '---Определяем объект поля CurrentTime
@@ -143,7 +143,7 @@ Dim curDateTime As Date
 '---Если поля обнулились - заполняем их
     timerTB.FillFullData
 
-EX:
+ex:
 End Sub
 
 

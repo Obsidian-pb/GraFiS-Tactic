@@ -22,9 +22,13 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     DeleteButtonMLine
     DeleteButtonVHose
     DeleteButtonNormalize
+    DeleteButtonNRSSettings
+    DeleteButtonNRSReport
     
-'---В случае, если на панели "Превращения нет ни одной кнопки, удаляем её
+'---В случае, если на панели "Превращения" нет ни одной кнопки, удаляем её
     If Application.CommandBars("Превращения").Controls.Count = 0 Then RemoveTBImagination
+'---В случае, если на панели "Насосно-рукавные системы" нет ни одной кнопки, удаляем её
+    If Application.CommandBars("Насосно-рукавные системы").Controls.Count = 0 Then RemoveTBNRSCalc
     
 '---Очищаем переменную приложения
 Set LineAppEvents = Nothing
@@ -34,7 +38,7 @@ End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 
-    On Error GoTo EX
+'    On Error GoTo ex
 '---Показываем окно свойств
     Application.ActiveWindow.Windows.ItemFromID(visWinIDCustProp).Visible = True
 
@@ -62,16 +66,20 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     End If
 
 '---Создаем панель управления "Превращения" и добавляем на нее кнопку "Обратить в линию"
-    AddTBImagination   'Добавляем тулбокс Обрашщения
-    AddButtonLine      'Добавляем кнопку рабочей линии
-    AddButtonMLine     'Добавляем фигуру магистральной линии
-    AddButtonVHose     'Добавляем кнопку всасывающей линии
-    AddButtonNormalize 'Добавляем кнопку "Нормализация"
+    AddTBImagination        'Добавляем тулбокс Обрашщения
+    AddButtonLine           'Добавляем кнопку рабочей линии
+    AddButtonMLine          'Добавляем фигуру магистральной линии
+    AddButtonVHose          'Добавляем кнопку всасывающей линии
+'---Создаем панель управления "Насосно-рукавные системы"
+    AddTBNRSCalc
+    AddButtonNormalize      'Добавляем кнопку "Расчет НРС"
+    AddButtonNRSSettings    'Добавляем кнопку "Настройки расчета НРС"
+    AddButtonNRSReport      'Добавляем кнопку "Отчет расчета НРС"
 
 Set ButEvent = New Class1
 
 '---Активируем опцию приклеивания к контурам фигур
-    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints
+    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints + visGlueToVertices
 
 '---Добавляем для документа своство "FireTime"
     sm_AddFireTime
@@ -80,7 +88,7 @@ Set ButEvent = New Class1
 '    fmsgCheckNewVersion.CheckUpdates
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "Document_DocumentOpened"
 End Sub
 
@@ -111,9 +119,7 @@ Dim ShpInd As Integer
 End Sub
 
 Private Sub sp_TemplatesImport()
-
-Visio.Application.ActivePage.Drop (ThisDocument.Masters("ВсасывающийРукав"))
-
+    Visio.Application.ActivePage.Drop ThisDocument.Masters("ВсасывающийРукав"), 0, 0
 End Sub
 
 

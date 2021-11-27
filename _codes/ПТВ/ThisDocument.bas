@@ -19,7 +19,9 @@ End Sub
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 'Процедура при открытии документа
-
+    
+    On Error GoTo EX
+    
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
 
@@ -37,7 +39,11 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     
 '---Проверяем наличие обновлений
     fmsgCheckNewVersion.CheckUpdates
-
+    
+Exit Sub
+EX:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "Document_DocumentOpened"
 End Sub
 
 Private Sub PTVAppEvents_CellChanged(ByVal cell As IVCell)
@@ -132,7 +138,7 @@ Dim ShpInd As Integer
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
 Exit Sub
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PTVAppEvents_CellChanged"
 End Sub
 
@@ -140,6 +146,8 @@ Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
 Dim cell As Visio.cell
+
+    On Error GoTo Tail
 
     Set docSheet = Application.ActiveDocument.DocumentSheet
     
@@ -151,5 +159,13 @@ Dim cell As Visio.cell
         docSheet.AddNamedRow visSectionUser, "CurrentTime", visTagDefault
         docSheet.Cells("User.CurrentTime").FormulaU = "User.FireTime"
     End If
-
+    
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "AddTimeUserCells"
 End Sub
+
+'============
+'Код для показа мастера:
+'ThisDocument.Masters("Гидроабразивный ствол").Hidden = False

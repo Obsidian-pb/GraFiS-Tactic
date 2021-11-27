@@ -14,6 +14,7 @@ Private cellsMatrix As Variant                  'Матрица клеток
 Public extinguishingCells As Collection         'Коллекция клеток зоны площади тушения, относящихся к данному блоку
 Public fireFrontCells As Collection             'Коллекция клеток фронта пожара, относящихся к даннойму блоку
 Public activeCells As Collection                'Коллекция клеток активной зоны (еще не горящих на максимум), относящихся к даннойму блоку
+Public tmpColl As Collection                    'Временная коллекция клеток - для расчета площади тушения
 
 Public fireWay As Single                        'Глубина тушения поданными стволами (в миллиметрах)
 Public grain As Long
@@ -30,6 +31,7 @@ Private Sub Class_Initialize()
     Set extinguishingCells = New Collection
     Set fireFrontCells = New Collection
     Set activeCells = New Collection
+    Set tmpColl = New Collection
     
     alreadyCalculated = False
 End Sub
@@ -42,26 +44,45 @@ End Sub
 
 Public Sub AddToExtCellsCollection(ByRef coll As Collection)
 'Добавляем коллекцию входящих клеток в коллекцию горящих
-Dim Cell As c_Cell
+Dim cell As c_Cell
     
     AddCellsToCollection extinguishingCells, coll
     
     'Для всех входящих клеток устанавливаем значение "в зоне тушения"
-    For Each Cell In coll
-        cellsMatrix(Cell.x, Cell.y) = ExtCellType.inExtSquare
-    Next Cell
+    For Each cell In coll
+        cellsMatrix(cell.x, cell.y) = ExtCellType.inExtSquare
+    Next cell
+End Sub
+Public Sub RemoveFromExtCellsCollection(ByRef cell As c_Cell)
+'Добавляем входящую клетку из коллекции тушащихся
+    
+    On Error Resume Next
+    
+    extinguishingCells.Remove cell.x & ":" & cell.y
+    cellsMatrix(cell.x, cell.y) = ExtCellType.notInExtSquare
+
+End Sub
+Public Sub RemoveFromTmpCellsCollection(ByRef cell As c_Cell)
+'Добавляем входящую клетку из коллекции временных при расчете
+    
+    On Error Resume Next
+    
+    tmpColl.Remove cell.x & ":" & cell.y
+'    cellsMatrix(cell.x, cell.y) = ExtCellType.notInExtSquare
+
 End Sub
 
 Public Sub AddToActiveCellsCollection(ByRef coll As Collection)
 'Добавляем коллекцию входящих клеток в коллекцию активных клеток (внешних, разгорающихся)
-Dim Cell As c_Cell
+Dim cell As c_Cell
     
     AddCellsToCollection activeCells, coll
     
     'Для всех входящих клеток устанавливаем значение "в зоне тушения"
-    For Each Cell In coll
-        cellsMatrix(Cell.x, Cell.y) = ExtCellType.inExtSquare
-    Next Cell
+    On Error Resume Next
+    For Each cell In coll
+        cellsMatrix(cell.x, cell.y) = ExtCellType.inExtSquare
+    Next cell
 End Sub
 
 Public Function IsCellExtinguished(ByVal x As Long, ByVal y As Long) As Boolean
@@ -81,7 +102,7 @@ Public Function GetExpenceNeed() As Single
 End Function
 
 Public Function GetWaterExpenseKind() As WaterExpenseKind
-'Подается воды: 0 не подается, 1 - подается недостаточно, 2 - пожается достаточно.
+'Подается воды: 0 не подается, 1 - подается недостаточно, 2 - подается достаточно.
 Dim expenseNeed As Single
     
     expenseNeed = GetExpenceNeed
@@ -98,11 +119,11 @@ Dim expenseNeed As Single
 End Function
 
 
-Public Function IsCellInThisFront(ByRef Cell As c_Cell) As Boolean
-'Проверяем, относится ли пришедшая клетка к коллекции клеток периметра поажара данного ьлока
+Public Function IsCellInThisFront(ByRef cell As c_Cell) As Boolean
+'Проверяем, относится ли пришедшая клетка к коллекции клеток фронта пожара данного блока
 Dim cll As c_Cell
     For Each cll In fireFrontCells
-        If cll.x = Cell.x And cll.y = Cell.y Then
+        If cll.x = cell.x And cll.y = cell.y Then
             IsCellInThisFront = True
             Exit Function
         End If
@@ -110,8 +131,33 @@ Dim cll As c_Cell
 IsCellInThisFront = False
 End Function
 
+Public Function IsCellInThisPerimeter(ByRef cell As c_Cell) As Boolean
+'Проверяем, относится ли пришедшая клетка к коллекции клеток периметра пожара данного блока
+Dim cll As c_Cell
+    
+    IsCellInThisPerimeter = Not (IsCellInThisBlock(cell.NCell(d)) And _
+                            IsCellInThisBlock(cell.NCell(l)) And _
+                            IsCellInThisBlock(cell.NCell(ld)) And _
+                            IsCellInThisBlock(cell.NCell(lu)) And _
+                            IsCellInThisBlock(cell.NCell(r)) And _
+                            IsCellInThisBlock(cell.NCell(rd)) And _
+                            IsCellInThisBlock(cell.NCell(ru)) And _
+                            IsCellInThisBlock(cell.NCell(u)))
+End Function
 
-
+Public Function IsCellInThisBlock(ByRef cell As c_Cell) As Boolean
+'Проверяем, относится ли пришедшая клетка к коллекции клеток данного блока
+Dim tmpCell As c_Cell
+    On Error GoTo EX
+    'Добавить проверку на выход из матрицы!!!
+    
+    Set tmpCell = extinguishingCells.item(cell.x & ":" & cell.y)
+    IsCellInThisBlock = True
+Exit Function
+EX:
+'    Debug.Print cell.x * grain & ":" & cell.y * grain
+    IsCellInThisBlock = False
+End Function
 
 
 '--------------------------Свойства---------------------------------------------------
@@ -128,9 +174,10 @@ End Property
 '------------------------Инструменты-------------------------------------------------
 Private Sub AddCellsToCollection(ByRef col1 As Collection, ByRef col2 As Collection)
 'Добавляем все клетки из коллекции 2 в коллекцию 1
-Dim Cell As c_Cell
-
-    For Each Cell In col2
-        col1.Add Cell, Cell.x & ":" & Cell.y
-    Next Cell
+Dim cell As c_Cell
+    
+    On Error Resume Next
+    For Each cell In col2
+        col1.Add cell, cell.x & ":" & cell.y
+    Next cell
 End Sub

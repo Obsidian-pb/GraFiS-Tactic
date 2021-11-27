@@ -53,28 +53,28 @@ End Sub
 Public Sub HoseDiametersListImport(ShpIndex As Long)
 'Процедура импорта Вариантов стволов
 '---Объявляем переменные
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 Dim indexPers As Integer
 Dim Criteria As String
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set Shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    indexPers = Shp.Cells("User.IndexPers")
+    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели стволов для текущей фигуры
 Select Case indexPers
     Case Is = 100
-        Criteria = "[Материал рукава] = '" & Shp.Cells("Prop.HoseMaterial").ResultStr(visUnitsString) & "' "
-        Shp.Cells("Prop.HoseDiameter.Format").FormulaU = ListImport2("З_Рукава", "Диаметр рукавов", Criteria)
+        Criteria = "[Материал рукава] = '" & shp.Cells("Prop.HoseMaterial").ResultStr(visUnitsString) & "' "
+        shp.Cells("Prop.HoseDiameter.Format").FormulaU = ListImport2("З_Рукава", "Диаметр рукавов", Criteria)
 
 End Select
 
 '---В случае, если значение поля для нового списка равно "", переводим фокус в ячейке на 0-е положение.
-If Shp.Cells("Prop.HoseDiameter").ResultStr(Visio.visNone) = "" Then
-    Shp.Cells("Prop.HoseDiameter").FormulaU = "INDEX(0,Prop.HoseDiameter.Format)"
+If shp.Cells("Prop.HoseDiameter").ResultStr(Visio.visNone) = "" Then
+    shp.Cells("Prop.HoseDiameter").FormulaU = "INDEX(0,Prop.HoseDiameter.Format)"
 End If
 
-Set Shp = Nothing
+Set shp = Nothing
 
 End Sub
 

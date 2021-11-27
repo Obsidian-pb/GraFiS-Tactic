@@ -3,3 +3,4 @@
 *.exe
 _source/*
 *.~vss
+*.laccdb

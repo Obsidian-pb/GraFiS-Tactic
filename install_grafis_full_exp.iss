@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "АИГС ГраФиС-Тактик"
-#define MyAppVersion "12.0.00"
+#define MyAppVersion "12.9.00"
 #define MyAppPublisher "НТЦ ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России"
 #define MyAppURL "https://www.graphicalfiresets.ru/"
 
@@ -71,13 +71,14 @@ Source: "Резервуары.vss"; DestDir: "{app}"; components: traf
 Source: "Робототехнические средства.vss"; DestDir: "{app}"; components: traf
 Source: "Руководство пользователя.docx"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Связь и освещение.vss"; DestDir: "{app}"; components: traf
+Source: "Свойства и экспорт.vss"; DestDir: "{app}"; components: traf
 Source: "Совмещенный график.vss"; DestDir: "{app}"; components: traf
 Source: "Специальные функции.vss"; DestDir: "{app}"; components: traf
 Source: "Справочник.accdb"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Техника прочее НРС.vss"; DestDir: "{app}"; components: traf_nrs
 Source: "Техника прочее.vss"; DestDir: "{app}"; components: traf
 Source: "Управление СиС.vss"; DestDir: "{app}"; components: traf
-Source: "Формы (управление).vss"; DestDir: "{app}"; components: traf
+Source: "Формулы.vss"; DestDir: "{app}"; components: traf
 Source: "Сведения.xls"; DestDir: "{app}"; Flags: confirmoverwrite; components: traf
 Source: "Шаблон моделирование НРС с масштабом 200.vst"; DestDir: "{app}"; components: traf_nrs
 Source: "Шаблон с масштабом 1000.vst"; DestDir: "{app}"; components: traf
@@ -87,6 +88,8 @@ Source: "Шаблон плана эвакуации (200).vst"; DestDir: "{app}"; components: templa
 Source: "Шаблон плана эвакуации (500).vst"; DestDir: "{app}"; components: templatesEvac
 Source: "Шаблон плана эвакуации (1000).vst"; DestDir: "{app}"; components: templatesEvac
 Source: "Bitmaps\*"; DestDir: "{app}\Bitmaps\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
+Source: "Templates\*"; DestDir: "{app}\Templates\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
+Source: "Norilsk2021\*"; DestDir: "{app}\Norilsk2021\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "_installer\ico.ico"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Отчеты\Конструктор отчетов.vsd"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "Отчеты\Детали отчетов.vss"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf

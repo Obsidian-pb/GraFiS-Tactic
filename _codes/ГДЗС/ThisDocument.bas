@@ -40,10 +40,6 @@ Set GDZSAppEvents = Visio.Application
 
 End Sub
 
-'Public Sub ActivateApp()
-'Set GDZSAppEvents = Visio.Application
-'End Sub
-
 Private Sub GDZSAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer

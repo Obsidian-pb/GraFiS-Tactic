@@ -31,7 +31,7 @@ Private Sub btnClose_Click()
 End Sub
 
 Private Sub lblGoHyperlink_Click()
-    Shell "cmd /cstart " & lblGoHyperlink.Tag
+    Shell "cmd /cstart " & lblGoHyperlink.tag
 End Sub
 
 Public Sub CheckUpdates()
@@ -123,7 +123,7 @@ On Error GoTo Tail
 Exit Function
 
 Tail:
-MsgBox "Что-то пошло не так! Проверьте наличие файла Version.txt (Файл должен находиться в том же каталоге, что и текущий файл.", vbCritical
+MsgBox "Что-то пошло не так! Проверьте наличие файла Version.txt (Файл должен находиться в том же каталоге, что и текущий файл.", vbCritical, ThisDocument.Name
 GetVersion = False
 End Function
 

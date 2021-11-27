@@ -9,7 +9,7 @@ Public Sub Ps_CalculatorShow(ShpObj As Visio.Shape, aS_SIZODType As String)
 Dim i As Integer
 Dim vD_Time As Date
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Определяем стартовые значения формы
     ChainContentForm.VS_DevceType = aS_SIZODType
     ChainContentForm.VS_DeviceModel = ShpObj.Cells("Prop.AirDevice").ResultStr(visUnitsString)
@@ -94,7 +94,7 @@ Dim vD_Time As Date
     ChainContentForm.Show
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "Ps_CalculatorShow", ShpObj.Name
 End Sub
 

@@ -19,7 +19,7 @@ Public Sub PS_GlueToShape(ShpObj As Visio.Shape)
 Dim OtherShape As Visio.Shape
 Dim x As Double, y As Double
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Определяем координаты и радиус активной фигуры
     x = ShpObj.Cells("PinX").Result(visInches)
@@ -61,9 +61,9 @@ Dim x As Double, y As Double
 
 Set OtherShape = Nothing
 Exit Sub
-EX:
+ex:
     Set OtherShape = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GlueToShape"
 End Sub
 
@@ -81,7 +81,7 @@ Dim newHoseDistance As Double
 
 Dim curHoseShapeID As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Проверяем имеются ли у данной фигуры необходимые поля (для проверки фигур составленных ранее схем)
     If ShpObj.CellExists("User.ShapeHoseID", 0) = False Then Exit Sub
@@ -92,7 +92,7 @@ Dim curHoseShapeID As Integer
     shpSize = ShpObj.Cells("Height").Result(visInches) / 2
     curHoseDistance = shpSize * 1.01
 
-'---Проверяем налOtherShapeичие фигуры на месте перемещения лафетного ствола
+'---Проверяем наличие фигуры на месте перемещения
     '---Перебираем все фигуры на странице
     For Each OtherShape In Application.ActivePage.Shapes
     '    '---Если фигура является группой перебираем и все входящие в нее фигуры тоже
@@ -136,7 +136,11 @@ Dim curHoseShapeID As Integer
         curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
         '---1 Проверяем было ли звено уже привязано к линии
         If curHoseShapeID <> 0 Then
-            SetHoseLineGDZSStatus Application.ActivePage.Shapes.ItemFromID(curHoseShapeID), ShpObj, False
+            Set curHoseShape = GetShapeByID(curHoseShapeID)
+            '---Если было привязано, и линия к которой она была привязана не удалена
+            If Not curHoseShape Is Nothing Then
+                SetHoseLineGDZSStatus curHoseShape, ShpObj, False
+            End If
         End If
         '---Указываем, что звено больше не работает с линией
         ShpObj.Cells("User.ShapeHoseID").Formula = 0
@@ -145,9 +149,9 @@ Dim curHoseShapeID As Integer
 
 Set OtherShape = Nothing
 Exit Sub
-EX:
+ex:
     Set OtherShape = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GlueToHose"
 End Sub
 
@@ -168,10 +172,18 @@ Dim extShp As Visio.Shape
     Else
         For Each con In shp.Connects
             Set extShp = con.ToSheet
-            If IsShapeGraFiSType(extShp, Array(34, 35, 36, 37, 38, 39)) Then
+            If IsShapeGraFiSType(extShp, Array(34)) Then
                 'Указываем сведения, что со стволом НЕ работает указанное звено ГДЗС
                 extShp.Cells("Prop.Personnel").FormulaU = "IF(STRSAME(Prop.TTHType," & Chr(34) & _
                     "Стандартные" & Chr(34) & "),IF(Prop.DiameterInS>50,2,1),IF(Prop.DiameterIn>50,2,1))"
+            End If
+            If IsShapeGraFiSType(extShp, Array(35)) Then
+                'Указываем сведения, что со стволом НЕ работает указанное звено ГДЗС
+                extShp.Cells("Prop.Personnel").FormulaU = 1
+            End If
+            If IsShapeGraFiSType(extShp, Array(36, 37, 38, 39)) Then
+                'Указываем сведения, что со стволом НЕ работает указанное звено ГДЗС
+                extShp.Cells("Prop.Personnel").FormulaU = 3
             End If
         Next con
     End If
@@ -214,8 +226,9 @@ Dim newCenter As c_Vector
 Dim vector1 As c_Vector
 Dim vector2 As c_Vector
 Dim vector3 As c_Vector
+Dim frml As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '    Application.EventsEnabled = False
     
@@ -227,15 +240,21 @@ Dim vector3 As c_Vector
     If curPoint.IsSame(newCenter, 0.1) Then Exit Sub
     
     '2 размещаем фигуру в ближайшей точке
-    gdzsShp.Cells("PinX").Formula = str(newCenter.x)
-    gdzsShp.Cells("PinY").Formula = str(newCenter.y)
+'    gdzsShp.Cells("PinX").Formula = str(newCenter.x)
+'    gdzsShp.Cells("PinY").Formula = str(newCenter.y)
+    frml = GetGlueGDZSToHoseFormula(newCenter, hoseLineShp)
+    gdzsShp.Cells("PinX").FormulaU = frml
+    gdzsShp.Cells("PinY").FormulaU = frml
     
     '3 ищем две точки на линии
     Set vector1 = GetPointOnLineShape(curPoint, hoseLineShp, gdzsShp.Cells("Height").Result(visInches) / 2, 0)
     Set vector2 = GetPointOnLineShape(curPoint, hoseLineShp, gdzsShp.Cells("Height").Result(visInches) / 2, vector1.segmentNumber + 1)
     Set vector3 = NewVectorXY(vector1.x - vector2.x, vector1.y - vector2.y)
-    gdzsShp.Cells("Angle").Formula = str(vector3.Angle) & "deg"
-EX:
+'    gdzsShp.Cells("Angle").Formula = str(vector3.Angle) & "deg"
+    frml = "Sheet." & hoseLineShp.ID & "!Angle+(" & str(vector3.Angle - hoseLineShp.Cells("Angle").Result(visDegrees)) & "deg)"
+    gdzsShp.Cells("Angle").FormulaU = frml
+    
+ex:
 '    Application.EventsEnabled = True
 End Sub
 
@@ -250,4 +269,19 @@ Dim distance As Double
     Set FindNearestHoseLinePoint = GetPointOnLineShape(curPoint, hoseLineShp, distance)
     
 End Function
+
+'-----------------------------------------Приклеивание фигуры звена к рукавной линии----------------------------------------------
+Private Function GetGlueGDZSToHoseFormula(ByRef curPoint As c_Vector, ByRef hoseLineShp As Visio.Shape) As String
+'Возвращает формулу приклеивания звена ГДЗС к рукавной линии
+Dim x As Double
+Dim y As Double
+
+    '1 переводим координаты в систему рукавной линии
+    hoseLineShp.XYFromPage curPoint.x, curPoint.y, x, y
+    
+    '2 формируем формулу
+    GetGlueGDZSToHoseFormula = "PAR(PNT(Sheet." & hoseLineShp.ID & "!Width*" & Replace(CStr(x / hoseLineShp.Cells("Width")), ",", ".") & _
+                               ",Sheet." & hoseLineShp.ID & "!Height*" & Replace(CStr(y / hoseLineShp.Cells("Height")), ",", ".") & "))"
+End Function
+
 

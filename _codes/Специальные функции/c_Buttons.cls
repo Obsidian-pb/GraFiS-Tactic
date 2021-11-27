@@ -21,6 +21,8 @@ Public WithEvents ComBut4 As Office.CommandBarButton  'Количество фигур
 Attribute ComBut4.VB_VarHelpID = -1
 Public WithEvents ComBut5 As Office.CommandBarButton  'Таймер
 Attribute ComBut5.VB_VarHelpID = -1
+Public WithEvents ComBut6 As Office.CommandBarButton  'Выбрать подобные (Выбор по типу фигуры ГраФиС)
+Attribute ComBut6.VB_VarHelpID = -1
 
 
 Private Sub Class_Initialize()
@@ -29,7 +31,8 @@ Private Sub Class_Initialize()
     Set ComBut3 = Application.CommandBars("Спецфункции").Controls("Исправить расположение")
     Set ComBut4 = Application.CommandBars("Спецфункции").Controls("Количество фигур")
     Set ComBut5 = Application.CommandBars("Спецфункции").Controls("Таймер")
-
+    Set ComBut6 = Application.CommandBars("Спецфункции").Controls("Выбрать подобные")
+    
 End Sub
 
 Private Sub Class_Terminate()
@@ -38,6 +41,7 @@ Private Sub Class_Terminate()
     Set ComBut3 = Nothing
     Set ComBut4 = Nothing
     Set ComBut5 = Nothing
+    Set ComBut6 = Nothing
 End Sub
 
 Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
@@ -124,6 +128,41 @@ Tail:
     '---Выходим из процедуры обработки
 End Sub
 
+Private Sub ComBut6_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки "Выбрать подобные"
+Dim ShpObj As Visio.Shape
+Dim ShpInd As Variant
+Dim shpIndArr As Variant
+Dim indexPersColl As Collection
+
+'---Включаем обработку ошибок - для предотвращения выброса класса
+    On Error GoTo Tail
+    
+'---Выбираем все аналогичные фигуры
+    '1 узнаемкакие IndexPers у фигур в выборке
+        If Application.ActiveWindow.Selection.Count = 0 Then Exit Sub
+        
+        Set indexPersColl = New Collection
+        
+        For Each ShpObj In Application.ActiveWindow.Selection
+            If IsGFSShape(ShpObj) Then
+                Set indexPersColl = AddToColl(indexPersColl, ShpObj.Cells("User.IndexPers").ResultStr(0))
+            End If
+        Next ShpObj
+    
+    '2 выбираем все фигуры с имеющимися IndexPers
+        shpIndArr = ColToArr(indexPersColl)
+        
+        For Each ShpObj In Application.ActivePage.Shapes
+            If IsGFSShapeWithIP(ShpObj, shpIndArr) Then
+                ActiveWindow.Select ShpObj, visSelect
+            End If
+        Next ShpObj
+
+Exit Sub
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
 
 Public Sub PictureRefresh()
 'Обновляем картинки на кнопках

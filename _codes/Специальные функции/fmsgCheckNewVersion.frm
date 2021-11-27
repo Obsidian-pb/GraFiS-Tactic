@@ -62,7 +62,7 @@ Dim xmlNode As Object
 
     GetData = False
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set xmlDoc = CreateObject("MSXML.DOMDocument") ' New DOMDocument60
     xmlDoc.async = False
@@ -87,7 +87,7 @@ Dim xmlNode As Object
     Set xmlNode = Nothing
     Set xmlDoc = Nothing
 Exit Function
-EX:
+ex:
     GetData = False
 End Function
 
@@ -123,7 +123,7 @@ On Error GoTo Tail
 Exit Function
 
 Tail:
-MsgBox "Что-то пошло не так! Проверьте наличие файла Version.txt (Файл должен находиться в том же каталоге, что и текущий файл.", vbCritical
+MsgBox "Что-то пошло не так! Проверьте наличие файла Version.txt (Файл должен находиться в том же каталоге, что и текущий файл.", vbCritical, ThisDocument.Name
 GetVersion = False
 End Function
 

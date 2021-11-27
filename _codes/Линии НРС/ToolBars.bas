@@ -24,7 +24,39 @@ End Sub
 
 Sub RemoveTBImagination()
 'Процедура добавления панели управления "Превращения"-------------------------------
+    On Error Resume Next
+    
     Application.CommandBars("Превращения").Delete
+End Sub
+
+
+
+Sub AddTBNRSCalc()
+'Процедура добавления панели управления "Насосно-рукавные системы"-------------------------------
+
+'---Объявляем переменные и постоянные--------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+    
+'---Проверяем есть ли уже панель управления "Насосно-рукавные системы"------------------------------
+    For i = 1 To Application.CommandBars.Count
+        If Application.CommandBars(i).Name = "Насосно-рукавные системы" Then Exit Sub
+    Next i
+
+'---Создаем панель управления "Превращения"--------------------------------------------
+    Set Bar = Application.CommandBars.Add(Position:=msoBarRight, Temporary:=True)
+    With Bar
+        .Name = "Насосно-рукавные системы"
+        .Visible = True
+    End With
+
+End Sub
+
+Sub RemoveTBNRSCalc()
+'Процедура добавления панели управления "Насосно-рукавные системы"-------------------------------
+    On Error Resume Next
+    
+    Application.CommandBars("Насосно-рукавные системы").Delete
 End Sub
 
 '--------------------------------------Кнопка рабочая линия-------------------------
@@ -69,7 +101,9 @@ End Sub
 
 Sub DeleteButtonLine()
 '---Процедура удаления кнопки "Рукав" с панели управления "Превращения"--------------
-
+    
+    On Error Resume Next
+    
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -112,7 +146,9 @@ End Sub
 
 Sub DeleteButtonMLine()
 '---Процедура удаления кнопки "Магистральная линия" с панели управления "Превращения"--------------
-
+    
+    On Error Resume Next
+    
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -154,7 +190,9 @@ End Sub
 
 Sub DeleteButtonVHose()
 'Процедура удаления кнопки "всасывающий рукав" с панели управления "Превращения"--------------
-
+    
+    On Error Resume Next
+    
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -169,23 +207,23 @@ Set Button = Nothing
 Set Bar = Nothing
 End Sub
 
-'--------------------------------------Кнопка Нормализация-------------------------
+'--------------------------------------Кнопка Расчет НРС-------------------------
 Sub AddButtonNormalize()
-'Процедура добавление новой кнопки на панель управления "Превращения"--------------
+'Процедура добавление новой кнопки на панель управления "Насосно-рукавные системы"--------------
 
 '---Объявляем переменные и постоянные--------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
 
-    Set Bar = Application.CommandBars("Превращения")
+    Set Bar = Application.CommandBars("Насосно-рукавные системы")
     DocPath = ThisDocument.path
-'---Добавляем кнопки на панель управления "Превращения"--------------------------------
+'---Добавляем кнопки на панель управления "Насосно-рукавные системы"--------------------------------
 '---Кнопка "Нормализация"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
-        .Caption = "Нормализация"
-        .Tag = "Normalize"
-        .TooltipText = "Нормализовать НРС"
+        .Caption = "Расчет НРС"
+        .Tag = "Calculate NRS"
+        .TooltipText = "Рассчитать НРС"
         .FaceID = 807
         .BeginGroup = True
     End With
@@ -195,20 +233,109 @@ Set Bar = Nothing
 End Sub
 
 Sub DeleteButtonNormalize()
-'Процедура удаления кнопки "Нормализация" с панели управления "Превращения"--------------
-
+'Процедура удаления кнопки "Нормализация" с панели управления "Насосно-рукавные системы"--------------
+    
+    On Error Resume Next
+    
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
 
-    Set Bar = Application.CommandBars("Превращения")
-'---Удаление кнопки "Нормализация" на панели управления "Превращения"------------------------
-    Set Button = Bar.Controls("Нормализация")
+    Set Bar = Application.CommandBars("Насосно-рукавные системы")
+'---Удаление кнопки "Нормализация" на панели управления "Насосно-рукавные системы"------------------------
+    Set Button = Bar.Controls("Расчет НРС")
     Button.Delete
     
 Set Button = Nothing
 Set Bar = Nothing
 End Sub
+
+'--------------------------------------Кнопка Настройка расчета НРС-------------------------
+Sub AddButtonNRSSettings()
+'Процедура добавление новой кнопки на панель управления "Насосно-рукавные системы"--------------
+
+'---Объявляем переменные и постоянные--------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Насосно-рукавные системы")
+    DocPath = ThisDocument.path
+'---Добавляем кнопки на панель управления "Насосно-рукавные системы"--------------------------------
+'---Кнопка "Настройка расчета НРС"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Настройка расчета НРС"
+        .Tag = "NRS Settings"
+        .TooltipText = "Настройки расчета НРС"
+        .FaceID = 642
+'        .BeginGroup = True
+    End With
+    Set Button = Nothing
+
+Set Bar = Nothing
+End Sub
+
+Sub DeleteButtonNRSSettings()
+'Процедура удаления кнопки "Настройка расчета НРС" с панели управления "Насосно-рукавные системы"--------------
+    
+    On Error Resume Next
+    
+'---Объявляем переменные и постоянные-------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Насосно-рукавные системы")
+'---Удаление кнопки "Нормализация" на панели управления "Превращения"------------------------
+    Set Button = Bar.Controls("Настройка расчета НРС")
+    Button.Delete
+    
+Set Button = Nothing
+Set Bar = Nothing
+End Sub
+
+'--------------------------------------Кнопка Отчет расчета НРС-------------------------
+Sub AddButtonNRSReport()
+'Процедура добавление новой кнопки на панель управления "Насосно-рукавные системы"--------------
+
+'---Объявляем переменные и постоянные--------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Насосно-рукавные системы")
+    DocPath = ThisDocument.path
+'---Добавляем кнопки на панель управления "Насосно-рукавные системы"--------------------------------
+'---Кнопка "Настройка расчета НРС"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Отчет расчета НРС"
+        .Tag = "NRS Report"
+        .TooltipText = "Показать отчет расчета НРС"
+        .FaceID = 230
+'        .BeginGroup = True
+    End With
+    Set Button = Nothing
+
+Set Bar = Nothing
+End Sub
+
+Sub DeleteButtonNRSReport()
+'Процедура удаления кнопки "Отчет расчета НРС" с панели управления "Насосно-рукавные системы"--------------
+    
+    On Error Resume Next
+    
+'---Объявляем переменные и постоянные-------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Насосно-рукавные системы")
+'---Удаление кнопки "Отчет расчета НРС" на панели управления "Насосно-рукавные системы"------------------------
+    Set Button = Bar.Controls("Отчет расчета НРС")
+    Button.Delete
+    
+Set Button = Nothing
+Set Bar = Nothing
+End Sub
+
 
 
 '-----------------------------Инструменты работы с кнопками-------------------------------------

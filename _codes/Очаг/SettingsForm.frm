@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SettingsForm
    ClientHeight    =   4980
    ClientLeft      =   45
    ClientTop       =   375
-   ClientWidth     =   8610.001
+   ClientWidth     =   8610
    OleObjectBlob   =   "SettingsForm.frx":0000
    ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
@@ -67,7 +67,7 @@ Private Sub btnBakeMatrix_Click()
     grain = Me.txtGrainSize
     
     'Запекаем матрицу
-    MakeMatrix
+    MakeMatrix Me
 End Sub
 
 Private Sub btnDeleteMatrix_Click()

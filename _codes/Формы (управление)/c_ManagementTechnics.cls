@@ -158,10 +158,20 @@ End Sub
 '---------------------------------Процедуры работы с формой в окне-------------------------------------------------------
 Private Sub ShowWindow()
 'Процедура показывает окно "Управление силами и средствами" и ассоциирует его с формой Base
-'Dim FormHandle As Long
+Dim otherForm As Object
 
-    Set wAddon = ActiveWindow.Windows.Add("Base", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
-    Set v_ManagementTechincs = New f_ManagementTechincs
+'    If AnyFormsShowed(otherForm) Then
+'        Set wAddon = ActiveWindow.Windows.Add("Base", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , , "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+'    Else
+'        Set wAddon = ActiveWindow.Windows.Add("Base", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , 210, "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+'    End If
+    If AnyFormsShowed(otherForm) Then
+        Set wAddon = ActiveWindow.Windows.Add("Base", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, , "Упр", "Упр")
+    Else
+        Set wAddon = ActiveWindow.Windows.Add("Base", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, 210, "Упр", "Упр")
+    End If
+    
+    Set v_ManagementTechincs = f_ManagementTechincs
     v_ManagementTechincs.Caption = "Base"
 
 
@@ -188,7 +198,28 @@ Private Sub ShowWindow()
 '---передача в процедуру получения информации
     ps_GetTechnics v_ManagementTechincs
 
+'---Устанавливаем размер формы, чтобы она выглядела корректно
+    If Not otherForm Is Nothing Then
+        v_ManagementTechincs.Width = otherForm.Width
+        v_ManagementTechincs.Height = otherForm.Height
+    End If
 End Sub
+
+Private Function AnyFormsShowed(ByRef frm As Object) As Boolean
+'Возвращает True если хоть одна форма уже показана
+    If f_ManagementGDZS.Visible = True Then
+        AnyFormsShowed = True
+        Set frm = f_ManagementGDZS
+        Exit Function
+    End If
+    If f_ManagementStvols.Visible = True Then
+        AnyFormsShowed = True
+        Set frm = f_ManagementStvols
+        Exit Function
+    End If
+AnyFormsShowed = False
+End Function
+
 
 Public Sub PS_ShowWindow()
     If v_ManagementTechincs Is Nothing Then

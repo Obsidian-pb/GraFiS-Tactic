@@ -31,6 +31,7 @@ Const vb_ShapeType_Tech = 4                 'Техника
 Const vb_ShapeType_VsasSet = 5              'Всасывающая сетка с линией
 Const vb_ShapeType_GE = 6                   'Гидроэлеватор
 Const vb_ShapeType_WaterContainer = 7       'Водяная емкость
+Const vb_ShapeType_PG = 8                   'Пожарный гидрант
 
 'Const vb_LineTypeWork = 0                   'Рабочая рукавная линия
 'Const vb_LineTypeMag = 1                    'Магистральная рукавная линия
@@ -332,8 +333,6 @@ On Error GoTo EX
                 cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).Formula = 2
             End If
         End If
-    Exit Sub
-    
     
     
     
@@ -519,28 +518,27 @@ On Error GoTo EX
             cpO_OutShape.Cells("Scratch.A" & CStr(ai_OutRowNumber + 1)).Formula = 0
         End If
     '---Всасывающая сетка->Техника основная
-    If vb_OutShapeType = vb_ShapeType_VsasSet And vb_InShapeType = vb_ShapeType_Tech Then
-        cpO_OutShape.Cells("Scratch.A1").Formula = 0
-        cpO_OutShape.Cells("Scratch.B1").Formula = 0
-        '---Указываем, что к фигуре подсоединены рукава на вход
-        cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
-    End If
+        If vb_OutShapeType = vb_ShapeType_VsasSet And vb_InShapeType = vb_ShapeType_Tech Then
+            cpO_OutShape.Cells("Scratch.A1").Formula = 0
+            cpO_OutShape.Cells("Scratch.B1").Formula = 0
+            '---Указываем, что к фигуре подсоединены рукава на вход
+            cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
+        End If
     '---Рукав->Емкость
-    If vb_OutShapeType = vb_ShapeType_Hose And vb_InShapeType = vb_ShapeType_WaterContainer Then
-        cpO_OutShape.Cells("Scratch.A1").Formula = 0
-        cpO_OutShape.Cells("Scratch.B1").Formula = 0
-        cpO_OutShape.Cells("User.FlowToShape").Formula = ""
-        cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
-    End If
+        If vb_OutShapeType = vb_ShapeType_Hose And vb_InShapeType = vb_ShapeType_WaterContainer Then
+            cpO_OutShape.Cells("Scratch.A1").Formula = 0
+            cpO_OutShape.Cells("Scratch.B1").Formula = 0
+            cpO_OutShape.Cells("User.FlowToShape").Formula = ""
+            cpO_InShape.Cells("Scratch.A" & CStr(ai_InRowNumber + 1)).Formula = 0
+        End If
     '---Емкость->Рукав
-    If vb_OutShapeType = vb_ShapeType_WaterContainer And vb_InShapeType = vb_ShapeType_Hose Then
-        cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 2).Formula = 0
-        cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 3).Formula = 0
-        cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 4).Formula = 0
-        cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 5).Formula = 0
-        cpO_InShape.Cells("User.FlowFromShape").Formula = ""
-    End If
-    
+        If vb_OutShapeType = vb_ShapeType_WaterContainer And vb_InShapeType = vb_ShapeType_Hose Then
+            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 2).Formula = 0
+            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 3).Formula = 0
+            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 4).Formula = 0
+            cpO_OutShape.CellsSRC(visSectionScratch, ai_OutRowNumber, 5).Formula = 0
+            cpO_InShape.Cells("User.FlowFromShape").Formula = ""
+        End If
     
     
 Exit Sub
@@ -694,12 +692,11 @@ Dim i As Integer
         Arr_PTVs(32, 1) = vb_ShapeType_Tech
         
         
-        
 '---Указываем значение по умолчанию
     f_IdentShape = vb_ShapeType_Other
 
 '---Проверяем является ли фигура
-        For i = 0 To 32
+        For i = 0 To UBound(Arr_PTVs, 1)
             If ai_ShapeIP = Arr_PTVs(i, 0) Then f_IdentShape = Arr_PTVs(i, 1): Exit Function
         Next i
 
@@ -826,19 +823,19 @@ EndSub:
     SaveLog Err, "GetHoseShape"
 End Function
 
-Private Function GetShapeType(ByRef Shp As Visio.Shape) As Integer
+Private Function GetShapeType(ByRef shp As Visio.Shape) As Integer
 'Функция возвращает тип фигуры - если фигура не фигура ГраФиС - возвращается vb_ShapeType_Other
-    If Shp.CellExists("User.IndexPers", 0) Then
-        GetShapeType = f_IdentShape(Shp.Cells("User.IndexPers").Result(visNumber))
+    If shp.CellExists("User.IndexPers", 0) Then
+        GetShapeType = f_IdentShape(shp.Cells("User.IndexPers").Result(visNumber))
     Else
         GetShapeType = vb_ShapeType_Other
     End If
 End Function
 
-Private Function IsSpecificShape(ByRef Shp As Visio.Shape, ByVal indexPers As Integer) As Boolean
+Private Function IsSpecificShape(ByRef shp As Visio.Shape, ByVal indexPers As Integer) As Boolean
 'Функция возвращает истина, если указанная фигура имеет указанный IndexPers - если не ГраФиС, возвращается Ложь
-    If Shp.CellExists("User.IndexPers", 0) Then
-        IsSpecificShape = (Shp.Cells("User.IndexPers").Result(visNumber) = indexPers)
+    If shp.CellExists("User.IndexPers", 0) Then
+        IsSpecificShape = (shp.Cells("User.IndexPers").Result(visNumber) = indexPers)
     Else
         IsSpecificShape = False
     End If

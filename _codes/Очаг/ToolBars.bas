@@ -44,7 +44,7 @@ Sub AddButtons()
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
         .Caption = "Площадь"
-        .Tag = "FireAreae"
+        .tag = "FireAreae"
         .TooltipText = "Обратить в зону горения"
         .Picture = LoadPicture(DocPath & "Bitmaps\Fire1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Fire2.bmp")
@@ -53,7 +53,7 @@ Sub AddButtons()
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
         .Caption = "Шторм"
-        .Tag = "FireStorm"
+        .tag = "FireStorm"
         .TooltipText = "Обратить в огненный шторм"
         .Picture = LoadPicture(DocPath & "Bitmaps\Storm1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Storm2.bmp")
@@ -62,7 +62,7 @@ Sub AddButtons()
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
         .Caption = "Задымление"
-        .Tag = "Fog"
+        .tag = "Fog"
         .TooltipText = "Обратить в задымленную зону"
         .Picture = LoadPicture(DocPath & "Bitmaps\Fog1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Fog2.bmp")
@@ -71,7 +71,7 @@ Sub AddButtons()
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
         .Caption = "Обрушение"
-        .Tag = "Rush"
+        .tag = "Rush"
         .TooltipText = "Обратить в зону обрушения"
         .Picture = LoadPicture(DocPath & "Bitmaps\Rush1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Rush2.bmp")
@@ -85,7 +85,7 @@ Exit Sub
 EX:
     Set Button = Nothing
     Set Bar = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons"
 End Sub
 

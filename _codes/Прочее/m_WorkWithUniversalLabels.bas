@@ -27,7 +27,7 @@ Dim delFlag As Boolean
                 ShpObj.Cells("Prop.Property.Format").Formula = """" & GetPropsList(OtherShape) & """" '"Пользовательская"
             '---Устанавливаем ссылки на ячейки Prop.Property фигуры
                 str = GetPropsLinks(OtherShape)
-                ShpObj.Cells("Prop.PropertyValue.Format").Formula = str
+                ShpObj.Cells("Prop.PropertyValue.Format").FormulaU = str
                 
             '---Вбрасываем соединительную линию
                 InsertLink OtherShape, ShpObj
@@ -76,7 +76,7 @@ Dim str As String
         ShpObj.Cells("Prop.Property.Format").Formula = """" & GetPropsList(OtherShape) & """" '"Пользовательская"
     '---Устанавливаем ссылки на ячейки Prop.Property фигуры
         str = GetPropsLinks(OtherShape)
-        ShpObj.Cells("Prop.PropertyValue.Format").Formula = str
+        ShpObj.Cells("Prop.PropertyValue.Format").FormulaU = str
         
     Else
     '---В случае, если кол-во соединений не равно 1 ставим значения подписей по умолчанию
@@ -142,23 +142,20 @@ Dim pnt1 As Long, pnt2 As Long
         Cell1.GlueTo Cell2
         
         
-    '---Задаем привязку к ConnectionPoints фигуры подпси
-    CellFormula = "IF(BeginX<Sheet." & ShpFROM.ID & "!PinX,PAR(PNT(Sheet." & ShpFROM.ID & _
-        "!Connections.LeftConPoint.X,Sheet." & ShpFROM.ID & "!Connections.LeftConPoint.Y)),PAR(PNT(Sheet." & ShpFROM.ID & _
-        "!Connections.RIghtConPoint.X,Sheet." & ShpFROM.ID & "!Connections.RIghtConPoint.Y)))"
+    '---Задаем привязку к ConnectionPoints фигуры подписи
+    CellFormula = "PAR(PNT(Sheet." & ShpFROM.ID & "!Connections.ConPoint.X," & _
+                          "Sheet." & ShpFROM.ID & "!Connections.ConPoint.Y))"
         shpConnection.CellsU("EndX").FormulaU = CellFormula
         shpConnection.CellsU("EndY").FormulaU = CellFormula
+    
+    '---Задаем настройку поведения привязки для подписи
+    CellFormula = "IF(Sheet." & shpConnection.ID & "!BeginX<PinX,Width*0,Width*1)"
+        ShpFROM.CellsU("Connections.ConPoint.X").FormulaU = CellFormula
     
 '---Определяем свойства фигуры коннектора
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLOLineRouteExt).FormulaU = 1
     shpConnection.CellsSRC(visSectionObject, visRowShapeLayout, visSLORouteStyle).FormulaU = 16
-    
-    CellFormula = "AND(EndX>Sheet." & ShpTO.ID & "!PinX-Sheet." & ShpTO.ID & "!Width*0.5,EndX<Sheet." & _
-        ShpTO.ID & "!PinX+Sheet." & ShpTO.ID & "!Width*0.5,EndY<Sheet." & _
-        ShpTO.ID & "!PinY+Sheet." & ShpTO.ID & "!Height*0.5,EndY>Sheet." & _
-        ShpTO.ID & "!PinY-Sheet." & ShpTO.ID & "!Height*0.5)"
-    shpConnection.CellsSRC(visSectionFirstComponent, 0, 1).FormulaU = CellFormula
-   
+      
    CellFormula = "Sheet." & ShpFROM.ID & "!LineColor"
     shpConnection.Cells("LineColor").FormulaU = CellFormula
    
@@ -170,7 +167,6 @@ Dim pnt1 As Long, pnt2 As Long
     
 Exit Sub
 EX:
-'    MsgBox "В ходе выполнения произошла ошибка, если она будет повторяться - свяжитесь с разработчиком!"
     SaveLog Err, "InsertLabelSquare"
 '---Ставим фокус на подписи
     Application.ActiveWindow.DeselectAll
@@ -208,9 +204,21 @@ Dim tempStr As String
     '---Если секция есть - заполняем списко
         For i = 0 To DirShpObj.RowCount(visSectionProp) - 1
             If DirShpObj.CellsSRC(visSectionProp, i, visCustPropsInvis).Result(visNone) = 0 Then
-                tempStr = tempStr & Chr(38) & Chr(34) & ";" & Chr(34) & Chr(38) & _
-                            "Sheet." & DirShpObj.ID & "!" & _
-                            DirShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).Name
+                Select Case DirShpObj.CellsSRC(visSectionProp, i, visCustPropsType).Result(visNumber)
+                    Case Is = 2
+                        tempStr = tempStr & Chr(38) & Chr(34) & ";" & Chr(34) & Chr(38) & _
+                                    "Round(Sheet." & DirShpObj.ID & "!" & _
+                                    DirShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).Name & ",Prop.Round)"
+                    Case Is = 5
+                        tempStr = tempStr & Chr(38) & Chr(34) & ";" & Chr(34) & Chr(38) & _
+                                    "Format(Sheet." & DirShpObj.ID & "!" & _
+                                    DirShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).Name & "," & Chr(34) & "HH:mm" & Chr(34) & ")"
+                    Case Else
+                        tempStr = tempStr & Chr(38) & Chr(34) & ";" & Chr(34) & Chr(38) & _
+                                    "Sheet." & DirShpObj.ID & "!" & _
+                                    DirShpObj.CellsSRC(visSectionProp, i, visCustPropsValue).Name
+                End Select
+
             End If
         Next i
     End If
@@ -237,7 +245,7 @@ Public Sub ConnectedShapesLostCheck(ShpObj As Visio.Shape)
 'Процедура проверяет, не была ли удалена одна из фигур соединенных коннектором, и если была, то удаляет сам коннектор
 Dim CellsVal(4) As String
     
-On Error GoTo EX
+    On Error GoTo EX
     
     CellsVal(0) = ShpObj.Cells("BegTrigger").FormulaU
     CellsVal(1) = ShpObj.Cells("BegTrigger").Result(visUnitsString)
@@ -245,13 +253,26 @@ On Error GoTo EX
     CellsVal(3) = ShpObj.Cells("EndTrigger").Result(visUnitsString)
     
     If CellsVal(0) = CellsVal(1) Or CellsVal(2) = CellsVal(3) Then
+        FindAndDeleteLabels ShpObj
         ShpObj.Delete
     End If
+    
+
 Exit Sub
 EX:
     'Ошибка
 End Sub
 
+Private Sub FindAndDeleteLabels(ByRef shp As Visio.Shape)
+'Ищем и удаляем подписи к которым привязана данная фигура коннектора
+Dim con As Visio.Connect
 
-
-
+    For Each con In shp.FromConnects
+        If IsGFSShapeWithIP(con.ToSheet, 152) Then con.ToSheet.Delete
+        If IsGFSShapeWithIP(con.FromSheet, 152) Then con.FromSheet.Delete
+    Next con
+    For Each con In shp.Connects
+        If IsGFSShapeWithIP(con.ToSheet, 152) Then con.ToSheet.Delete
+        If IsGFSShapeWithIP(con.FromSheet, 152) Then con.FromSheet.Delete
+    Next con
+End Sub

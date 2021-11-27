@@ -10,11 +10,11 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
     
 '---Обновляем список моделей и их ТТХ
     '---Запускаем процедуру получения СПИСКА диаметров
-    DiametersListImport (ShpObj.ID)
+    DiametersListImport ShpObj
     '---Запускаем процедуру получения СПИСКА напоров
-    PressuresListImport (ShpObj.ID)
+    PressuresListImport ShpObj
     '---Запускаем процедуру пересчета водоотдачи
-    ProductionImport (ShpObj.ID)
+    ProductionImport ShpObj
 
 On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШБИКИ
 Application.DoCmd (1312)
@@ -23,21 +23,21 @@ End Sub
 
 '------------------------Блок зависимых списков------------------------------
 
-Public Sub DiametersListImport(ShpIndex As Long)
+Public Sub DiametersListImport(shp As Visio.Shape)
 'Процедура импорта списков диаметров
 '---Объявляем переменные
-Dim shp As Visio.Shape
-Dim IndexPers As Integer
+'Dim shp As Visio.Shape
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка Модели стволов для текущей фигуры
-    Select Case IndexPers
+    Select Case indexPers
         Case Is = 50 'Пожарный гидрант
             Criteria = "[Вид водовода] = '" & shp.Cells("Prop.PipeType").ResultStr(visUnitsString) & "' "
             shp.Cells("Prop.PipeDiameter.Format").FormulaU = ListImportNum("ЗапросВодоотдачи", "Диаметр водовода", Criteria)
@@ -49,7 +49,7 @@ Dim Criteria As String
 '        shp.Cells("Prop.PipeDiameter").FormulaU = "INDEX(0,Prop.PipeDiameter.Format)"
 '    End If
     
-    Set shp = Nothing
+'    Set shp = Nothing
 
 Exit Sub
 EX:
@@ -57,21 +57,21 @@ EX:
 End Sub
 
 
-Public Sub PressuresListImport(ShpIndex As Long)
+Public Sub PressuresListImport(shp As Visio.Shape)
 'Процедура импорта списка возможных напоров для заданных условий
 '---Объявляем переменные
-Dim shp As Visio.Shape
-Dim IndexPers As Integer
+'Dim shp As Visio.Shape
+Dim indexPers As Integer
 Dim Criteria As String
 
 On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
-    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+'    Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения относительного списка возможных струй стволов для текущей фигуры
-    Select Case IndexPers
+    Select Case indexPers
         Case Is = 50
             Criteria = "[Вид водовода] = '" & shp.Cells("Prop.PipeType").ResultStr(visUnitsString) & "' And " & _
                 "[Диаметр водовода] = " & shp.Cells("Prop.PipeDiameter").ResultStr(visUnitsString)
@@ -84,7 +84,7 @@ On Error GoTo EX
         shp.Cells("Prop.ShowDirectProduction").FormulaU = "INDEX(1,Prop.ShowDirectProduction.Format)"
     End If
 
-    Set shp = Nothing
+'    Set shp = Nothing
 
 Exit Sub
 EX:

@@ -61,7 +61,7 @@ Dim FormulaString As String
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_WaterGraph_AddKnot"
 End Sub
 
@@ -100,7 +100,7 @@ Dim FormulaString As String
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_WaterGraph_DeleteKnot"
 End Sub
 
@@ -141,8 +141,8 @@ Dim FormulaString As String
 
     '---Вставляем 1 новую линию
     shp.AddRow visSectionFirstComponent, CurLineRowNumber, visTagLineTo
-    shp.CellsSRC(visSectionFirstComponent, CurLineRowNumber, 0).FormulaU = "Width*(User.EndTime/User.TimeMax)"  '"Controls.Row_" & CurCtrlRowNumber
-    shp.CellsSRC(visSectionFirstComponent, CurLineRowNumber, 1).FormulaU = "Height*0"
+    shp.CellsSRC(visSectionFirstComponent, CurLineRowNumber, 0).FormulaU = "IF(Actions.NoEndTime.Checked,Width*1,Width*(User.EndTime/User.TimeMax))" '"Width*(User.EndTime/User.TimeMax)"
+    shp.CellsSRC(visSectionFirstComponent, CurLineRowNumber, 1).FormulaU = "IF(Actions.NoEndTime.Checked,Geometry1.Y" & CurLineRowNumber - 1 & ",Height*0)" ' "Height*0"
 
     'Блок добавления в массив данных о расходах привязки к новой точке
     '---Для площади
@@ -155,7 +155,7 @@ Dim FormulaString As String
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_FireGraph_AddKnot"
 End Sub
 
@@ -178,7 +178,10 @@ Dim FormulaString As String
     '---Определяем текущие номера линий
     PreviosLineRowNumber = shp.Section(visSectionFirstComponent).Count - 2
     
+    '---Удаляем предпоследнюю строку
     shp.DeleteRow visSectionFirstComponent, PreviosLineRowNumber
+    '---Изменяем формулу последней строки
+    shp.CellsSRC(visSectionFirstComponent, PreviosLineRowNumber, 1).FormulaU = "IF(Actions.NoEndTime.Checked,Geometry1.Y" & PreviosLineRowNumber - 1 & ",Height*0)"
     
     'Обновляем массивы данных о точках
     '---Для площади
@@ -188,7 +191,7 @@ Dim FormulaString As String
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_FireGraph_DeleteKnot"
 End Sub
 
@@ -243,7 +246,7 @@ Dim FormulaString As String
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_FireTGraph_AddKnot"
 End Sub
 
@@ -279,7 +282,7 @@ Dim FormulaString As String
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_FireTGraph_DeleteKnot"
 End Sub
 

@@ -69,7 +69,7 @@ Dim shp As Visio.Shape
 Dim IndexPers As Integer
 Dim Criteria As String
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     IndexPers = shp.Cells("User.IndexPers")
@@ -89,7 +89,7 @@ Dim Criteria As String
     
     Set shp = Nothing
 Exit Sub
-EX:
+ex:
     Set shp = Nothing
     SaveLog Err, "AirDevicesListImport", CStr(ShpIndex)
 End Sub
@@ -102,7 +102,7 @@ Dim shp As Visio.Shape
 Dim IndexPers As Integer
 Dim Criteria As String
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     IndexPers = shp.Cells("User.IndexPers")
@@ -117,7 +117,7 @@ Dim Criteria As String
 
 Set shp = Nothing
 Exit Sub
-EX:
+ex:
     Set shp = Nothing
     SaveLog Err, "FogRMKListImport", CStr(ShpIndex)
 End Sub

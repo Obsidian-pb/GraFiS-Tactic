@@ -8,7 +8,7 @@ Public Sub BaseListsRefresh(ShpObj As Visio.Shape)
 
 '---Проверяем вбрасывается ли данная фигура впервые
     If IsFirstDrop(ShpObj) Then
-        If Not IsShapeLinked(ShpObj) Then
+       If Not IsShapeLinked(ShpObj) Then
             '---Обновляем общие списки
             ShpObj.Cells("Prop.Set.Format").FormulaU = ListImport("Наборы", "Набор")
             ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
@@ -29,7 +29,7 @@ On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИКИ
 Application.DoCmd (1312)
 
 Exit Sub
-EX:
+ex:
     Application.EventsEnabled = True
     SaveLog Err, "BaseListsRefresh", "Пожарная техника"
 End Sub

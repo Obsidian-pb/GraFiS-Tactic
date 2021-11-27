@@ -9,7 +9,7 @@ Public Sub PS_AddWorkPlaces(ShpObj As Visio.Shape)
 Dim WorkPlaceBuilder As c_WorkPlaces
 
 '---Проверяем наличие трафарета WALL_M.VSS
-     If PF_DocumentOpened("WALL_M.VSS") = False And PF_DocumentOpened("WALL_M.VSSX") = False Then
+     If PF_DocumentOpened("WALL_M.VSS") = False Then ' And PF_DocumentOpened("WALL_M.VSSX") = False Then
         ShpObj.Delete
         MsgBox "Трафарет 'Структурные элементы' не подключен! Выполнение функции невозможно!'", vbCritical
         Exit Sub
@@ -105,7 +105,7 @@ On Error GoTo Tail
 Exit Sub
 Tail:
 '    Debug.Print Err.Description
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_AddExplicationTable"
     Application.EventsEnabled = True
     Set colWorkplaces = Nothing

@@ -3,10 +3,10 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} f_ManagementTechincs
    Caption         =   "UserForm1"
    ClientHeight    =   2970
    ClientLeft      =   45
-   ClientTop       =   435
+   ClientTop       =   375
    ClientWidth     =   13170
    OleObjectBlob   =   "f_ManagementTechincs.frx":0000
-   StartUpPosition =   1  'CenterOwner
+   ShowModal       =   0   'False
 End
 Attribute VB_Name = "f_ManagementTechincs"
 Attribute VB_GlobalNameSpace = False

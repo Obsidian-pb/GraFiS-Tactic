@@ -199,42 +199,42 @@ Private Function IsCellNearTheWallAndNotFire(ByVal xVal As Long, ByVal yVal As L
     End If
     
     'Проверяем саму клетку
-    If matrix.IsCellMaxFire(xVal, yVal) Or matrix.IsWall(xVal, yVal) Then
+    If matrix.IsCellMaxFire(xVal, yVal) Or matrix.isWall(xVal, yVal) Then
         IsCellNearTheWallAndNotFire = False
         Exit Function
     End If
     
     'По ортогонали
-    If matrix.IsWall(xVal, yVal - 1) Then
+    If matrix.isWall(xVal, yVal - 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal, yVal + 1) Then
+    If matrix.isWall(xVal, yVal + 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal - 1, yVal) Then
+    If matrix.isWall(xVal - 1, yVal) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal + 1, yVal) Then
+    If matrix.isWall(xVal + 1, yVal) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
     'По диагонали
-    If matrix.IsWall(xVal - 1, yVal - 1) Then
+    If matrix.isWall(xVal - 1, yVal - 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal - 1, yVal + 1) Then
+    If matrix.isWall(xVal - 1, yVal + 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal + 1, yVal - 1) Then
+    If matrix.isWall(xVal + 1, yVal - 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
-    If matrix.IsWall(xVal + 1, yVal + 1) Then
+    If matrix.isWall(xVal + 1, yVal + 1) Then
         IsCellNearTheWallAndNotFire = True
         Exit Function
     End If
@@ -350,7 +350,7 @@ Dim sn As Double
         xNew = startX + Fix(cs * 2.5)
         yNew = startY + Fix(sn * 2.5)
 
-        If Not matrix.IsWall(xNew, yNew) Then
+        If Not matrix.isWall(xNew, yNew) Then
             PerpendiculateCalc = perpAngle
         Else
             'Обрабатываем исключение при -180 градусах

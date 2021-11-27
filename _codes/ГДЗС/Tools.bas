@@ -72,7 +72,7 @@ Exit Sub
 
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
-    MsgBox Err.description
+    MsgBox Err.description, , ThisDocument.Name
     Set rsAD = Nothing
     Set dbs = Nothing
     SaveLog Err, "GetValuesOfCellsFromTable", "Tablename: " & TableName
@@ -150,7 +150,7 @@ Exit Sub
 
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
-    MsgBox Err.description
+    MsgBox Err.description, , ThisDocument.Name
     Set rsAD = Nothing
     Set dbs = Nothing
     SaveLog Err, "FogRMKGetValuesOfCellsFromTable", "Tablename: " & TableName
@@ -305,6 +305,15 @@ Dim i As Integer
 IsInArray = False
 End Function
 
+Public Function GetShapeByID(ByVal shpID As Long) As Visio.Shape
+'Возвращает ссылку на фигуру, если таковая имеется
+On Error GoTo ex
+    Set GetShapeByID = Application.ActivePage.Shapes.ItemFromID(shpID)
+Exit Function
+ex:
+    Set GetShapeByID = Nothing
+End Function
+
 '-----------------------------------------Функции проверки привязки данных----------------------------------------------
 Public Function IsShapeLinkedToDataAndDropFirst(ByRef shp As Visio.Shape) As Boolean
 IsShapeLinkedToDataAndDropFirst = False
@@ -320,6 +329,8 @@ Dim propIndex As Integer
     
     IsShapeLinked = False
     
+    On Error GoTo ex
+    
     For Each rst In Application.ActiveDocument.DataRecordsets
         For propIndex = 0 To shp.RowCount(visSectionProp)
             If shp.IsCustomPropertyLinked(rst.ID, propIndex) Then
@@ -328,6 +339,10 @@ Dim propIndex As Integer
             End If
         Next propIndex
     Next rst
+Exit Function
+ex:
+    IsShapeLinked = False
+    SaveLog Err, "IsShapeLinked", "Error in 201x version during test of dsts link"
 End Function
 
 

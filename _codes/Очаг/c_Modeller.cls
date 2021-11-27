@@ -28,7 +28,7 @@ Private nozzleDemon As c_FireNozzlesDemon
     
 
 
-Public Sub setMatrix(ByRef m As c_Matrix)
+Public Sub SetMatrix(ByRef m As c_Matrix)
 'Устанавливаем ссылку на матрицу
     Set matrix = m
 End Sub
@@ -46,12 +46,12 @@ Public Sub SetFireCell(ByVal x As Long, ByVal y As Long, Optional value As Doubl
     AddToActiveCells x, y
     
     'Insert Firepoint as Visio Shape
-        Dim shp As Visio.Shape
-        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-        shp.Cells("LinePattern").FormulaU = "0"
-        shp.Cells("FillForegnd").FormulaU = "2"
+'        Dim shp As Visio.Shape
+'        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
+'                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+'        shp.Cells("LinePattern").FormulaU = "0"
+'        shp.Cells("FillForegnd").FormulaU = "2"
 End Sub
 
 Public Sub SetStartFireCell(ByVal x As Long, ByVal y As Long, Optional value As Double)
@@ -91,18 +91,18 @@ Public Sub SetStartFireCell(ByVal x As Long, ByVal y As Long, Optional value As 
     AddToActiveCells x, y
     
     'Insert Firepoint as Visio Shape
-        Dim shp As Visio.Shape
-        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-        shp.Cells("LinePattern").FormulaU = "0"
-        shp.Cells("FillForegnd").FormulaU = "2"
+'        Dim shp As Visio.Shape
+'        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
+'                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+'        shp.Cells("LinePattern").FormulaU = "0"
+'        shp.Cells("FillForegnd").FormulaU = "2"
 End Sub
 
-Public Sub ActivateNozzles()
+Public Sub ActivateNozzles(ByRef frm As Object)
     Set nozzleDemon = New c_FireNozzlesDemon
-    nozzleDemon.SetGrain = grain
-    Set nozzleDemon.setMatrix = matrix
+    nozzleDemon.SetForm(frm).setGrain = grain
+    Set nozzleDemon.SetMatrix = matrix
     nozzleDemon.FindNozzles
 End Sub
 
@@ -110,9 +110,9 @@ End Sub
 
 Public Sub OneRound()
 'один шаг моделирования
-Dim Cell As c_Cell
+Dim cell As c_Cell
     
-    'РАЗОБРАТЬСЯ С ЭТИМ - рисование дополнительного шага даже приподанном стволе!!!
+    'РАЗОБРАТЬСЯ С ЭТИМ - рисование дополнительного шага даже при поданном стволе!!!
 '    'Запускаем анализ наличия пожарнных стволов
 '    Dim nozzleDemon As c_FireNozzlesDemon
 '    Set nozzleDemon = New c_FireNozzlesDemon
@@ -135,26 +135,30 @@ Dim Cell As c_Cell
     Set matrix.keyCornerCells = New Collection
 
     'Атакуем всеми активными клетками (не внутренними)
-    For Each Cell In matrix.activeFiredCells
-        Attack Cell.x, Cell.y
-    Next Cell
+    For Each cell In matrix.activeFiredCells
+        Attack cell.x, cell.y
+    Next cell
     
     '--------------------
     'После атаки увеличиваем значения горения всех клеток в соответствии с полученным ими энергиями
-    For Each Cell In matrix.chargedCells
-        RizeCellFire Cell.x, Cell.y
-    Next Cell
+    For Each cell In matrix.chargedCells
+        RizeCellFire cell.x, cell.y
+    Next cell
     
     'Очищаем коллекцию клеток получивших заряд
     Set matrix.chargedCells = New Collection
     
-    'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
-    For Each Cell In matrix.activeFiredCells
-        If matrix.IsInner(Cell.x, Cell.y) Then
-            RemoveFromActiveCells Cell.x, Cell.y
-            RemoveFromFrontCells Cell.x, Cell.y
-        End If
-    Next Cell
+    'Пока не удалять - этот блок здесь не спроста был...
+'    'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
+'    For Each cell In matrix.activeFiredCells
+'        If matrix.IsInner(cell.x, cell.y) Then
+'            RemoveFromActiveCells cell.x, cell.y
+'            RemoveFromFrontCells cell.x, cell.y
+'        End If
+'        If matrix.IsNotPerimeter(cell.x, cell.y) Then
+'            RemoveFromPerimeterCells cell.x, cell.y
+'        End If
+'    Next cell
 
     
     'Спрямляем горение у стен (проверяем все клетки, что получили энергию, но еще не горят полностью))
@@ -163,8 +167,8 @@ Dim Cell As c_Cell
         Dim cornerDemon As c_CornerDemon
         Set cornerDemon = New c_CornerDemon
         cornerDemon.Init matrix, 0, 0
-        For Each Cell In matrix.fireFrontCells
-            If matrix.IsTripleStateCell(Cell.x, Cell.y) Then
+        For Each cell In matrix.fireFrontCells
+            If matrix.IsTripleStateCell(cell.x, cell.y) Then
             
             '!!!Отрисовываем квадрат если клетка является ключевой
     
@@ -175,7 +179,7 @@ Dim Cell As c_Cell
     '            shp.Cells("FillForegnd").FormulaU = "3"
                 
                 'Запускаем демона отрисовщика
-                cornerDemon.SetStartPosition Cell.x, Cell.y
+                cornerDemon.SetStartPosition cell.x, cell.y
                 cornerDemon.SetDirection s
                 cornerDemon.RunDemon
     
@@ -183,22 +187,25 @@ Dim Cell As c_Cell
                 cornerDemon.SetDirection s
                 cornerDemon.RunDemon
             End If
-        Next Cell
+        Next cell
 
     '    Debug.Print "Точек под заливку" & cornerDemon.lineFillDemon.cellsForFill.Count
-        For Each Cell In cornerDemon.lineFillDemon.cellsForFill
-            RizeCellFireToMax Cell.x, Cell.y
-        Next Cell
+        For Each cell In cornerDemon.lineFillDemon.cellsForFill
+            RizeCellFireToMax cell.x, cell.y
+        Next cell
     End If
     
     
-    
-    For Each Cell In matrix.activeFiredCells
-        If matrix.IsInner(Cell.x, Cell.y) Then
-            RemoveFromActiveCells Cell.x, Cell.y
-            RemoveFromFrontCells Cell.x, Cell.y
+    'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
+    For Each cell In matrix.activeFiredCells
+        If matrix.IsInner(cell.x, cell.y) Then
+            RemoveFromActiveCells cell.x, cell.y
+            RemoveFromFrontCells cell.x, cell.y
         End If
-    Next Cell
+        If matrix.IsNotPerimeter(cell.x, cell.y) Then
+            RemoveFromPerimeterCells cell.x, cell.y
+        End If
+    Next cell
     
     'Запускаем анализ наличия пожарнных стволов
 '    Dim nozzleDemon As c_FireNozzlesDemon
@@ -304,20 +311,21 @@ Dim startFirePower As Double
         matrix.startedFireCells.Add CreateNewCell(x, y)
     End If
     
-    'Добавляем клетку в коллекцию клеток периметра, если мощность горения клетки максимальна
+    'Добавляем клетку в коллекцию клеток фронта и периметра, если мощность горения клетки максимальна
     If startFirePower < matrix.GetMaximumBurnPower And matrix.GetFirePower(x, y) = matrix.GetMaximumBurnPower Then
         AddToFrontCells x, y
+        AddToPerimeterCells x, y
         
         'Добавляем в коллекцию максимально горящих клеток
         matrix.fireMaxCells.Add CreateNewCell(x, y), x & ":" & y
             
-        'Отрисовываем квадрат
-        Dim shp As Visio.Shape
-        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-        shp.Cells("LinePattern").FormulaU = "0"
-        shp.Cells("FillForegnd").FormulaU = "2"
+        '        'Отрисовываем квадрат
+        '        Dim shp As Visio.Shape
+        '        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
+        '                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
+        '        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+        '        shp.Cells("LinePattern").FormulaU = "0"
+        '        shp.Cells("FillForegnd").FormulaU = "2"
 
 '            DoEvents
     End If
@@ -339,19 +347,20 @@ Private Sub RizeCellFireToMax(ByVal x As Long, ByVal y As Long)
     'Увеличиваем текущую мощность горения данной клетки
     matrix.SetFireCell x, y
        
-    'Добавляем клетку в коллекцию клеток периметра, если мощность горения клетки максимальна
+    'Добавляем клетку в коллекцию клеток фронта и периметра, если мощность горения клетки максимальна
 '    If startFirePower < matrix.GetMaximumBurnPower And matrix.GetFirePower(x, y) = matrix.GetMaximumBurnPower Then
         
         AddToFrontCells x, y
+        AddToPerimeterCells x, y
         AddToActiveCells x, y
             
-        'Отрисовываем квадрат
-        Dim shp As Visio.Shape
-        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-        shp.Cells("LinePattern").FormulaU = "0"
-        shp.Cells("FillForegnd").FormulaU = "2"
+'        'Отрисовываем квадрат
+'        Dim shp As Visio.Shape
+'        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
+'                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
+'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+'        shp.Cells("LinePattern").FormulaU = "0"
+'        shp.Cells("FillForegnd").FormulaU = "2"
 '        shp.Cells("LinePattern").FormulaU = "1"
 '        shp.Cells("LineColor").FormulaU = "2"
 '        shp.Cells("FillPattern").FormulaU = "0"
@@ -376,28 +385,39 @@ Private Sub RemoveFromActiveCells(ByVal x As Long, ByVal y As Long)
 End Sub
 
 Private Sub AddToFrontCells(ByVal x As Long, ByVal y As Long)
-'Добавляем клетку в коллекцию клеток периметра. Если же клетка с указанным ключем уже имеется - выходим
+'Добавляем клетку в коллекцию клеток фронта. Если же клетка с указанным ключем уже имеется - выходим
     On Error Resume Next
     matrix.fireFrontCells.Add CreateNewCell(x, y), x & ":" & y
 End Sub
 Private Sub RemoveFromFrontCells(ByVal x As Long, ByVal y As Long)
-'Удаляем клетку из коллекции клеток периметра. Если же клетка с указанным ключем отсутствует - выходим
+'Удаляем клетку из коллекции клеток фронта. Если же клетка с указанным ключем отсутствует - выходим
     On Error Resume Next
     matrix.fireFrontCells.Remove x & ":" & y
+End Sub
+
+Private Sub AddToPerimeterCells(ByVal x As Long, ByVal y As Long)
+'Добавляем клетку в коллекцию клеток периметра. Если же клетка с указанным ключем уже имеется - выходим
+    On Error Resume Next
+    matrix.firePerimeterCells.Add CreateNewCell(x, y), x & ":" & y
+End Sub
+Private Sub RemoveFromPerimeterCells(ByVal x As Long, ByVal y As Long)
+'Удаляем клетку из коллекции клеток периметра. Если же клетка с указанным ключем отсутствует - выходим
+    On Error Resume Next
+    matrix.firePerimeterCells.Remove x & ":" & y
 End Sub
 
 Public Sub RefreshFirePerimeter()
 'Переводим все клетки находящиеся на границе зоны горения в активное состояние
 'это позволяет возобновить расчет при появлении дыр или при изменении конфигурации открытого пространства
-Dim Cell As c_Cell
+Dim cell As c_Cell
     
     'Проверяем клетки, на предмет того, не стали ли они внтуренними, и в этом случае удаляем их из коллекций
-    For Each Cell In matrix.firedCells
-        If Not matrix.IsInner(Cell.x, Cell.y) Then
-            AddToActiveCells Cell.x, Cell.y
-            AddToFrontCells Cell.x, Cell.y
+    For Each cell In matrix.firedCells
+        If Not matrix.IsInner(cell.x, cell.y) Then
+            AddToActiveCells cell.x, cell.y
+            AddToFrontCells cell.x, cell.y
         End If
-    Next Cell
+    Next cell
 End Sub
 
 
@@ -430,14 +450,14 @@ Private Function CreateNewCell(ByVal x As Long, ByVal y As Long) As c_Cell
 'Создаем новую клетку
     On Error GoTo EX
 
-Dim Cell As c_Cell
+Dim cell As c_Cell
     
-    Set Cell = New c_Cell
-    Set Cell.ParentMatrix = matrix
-    Cell.x = x
-    Cell.y = y
+    Set cell = New c_Cell
+    Set cell.ParentMatrix = matrix
+    cell.x = x
+    cell.y = y
     
-Set CreateNewCell = Cell
+Set CreateNewCell = cell
 Exit Function
 EX:
      Debug.Print "err"
@@ -478,7 +498,24 @@ End Function
 
 Public Function GetExtSquare() As Single
 'Возвращает площадь тушения
-    GetExtSquare = extSquare.GetSquare
+Dim tmpVal As Single
+    If Not extSquare Is Nothing Then
+        tmpVal = extSquare.GetSquare
+    Else
+        tmpVal = 0
+    End If
+    
+    
+'    tmpVal = extSquare.GetSquare
+'    If tmpVal = 0 Then
+'        GetExtSquare = GetFireSquare
+'    Else
+        GetExtSquare = tmpVal
+'    End If
+End Function
+
+Public Function GetOpenSpaceLayer() As Variant
+    GetOpenSpaceLayer = matrix.GetOpenSpaceLayer
 End Function
 
 '----------------------------Расчет площадей тушения--------------------------
@@ -499,7 +536,7 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
     frontDemonImpl.SetStartState matrix.fireFrontCells
     
     extinguishingSquareDemon.CreateMatrix matrix
-    extinguishingSquareDemon.SetGrain = grain
+    extinguishingSquareDemon.setGrain = grain
     
     
     Dim i As Integer
@@ -512,13 +549,15 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
             'Формируем коллекцию фрагментов площади фронта пожара (и блоков тушения на их основе)
             frontDemonImpl.RunDemon extSquare, matrix.fireFrontCells, nozzle
             
-            'Рассчитываем размер каждого из блоков
-            extinguishingSquareDemon.RunDemon extSquare
+'            'Рассчитываем размер каждого из блоков
+'            extinguishingSquareDemon.RunDemon extSquare
 
             i = i + 1
         End If
     Next nozzle
     
+    'Рассчитываем размер каждого из блоков
+    extinguishingSquareDemon.RunDemon extSquare
     
     Dim blck As c_ExtinguishingBlock
     Dim extSquareMeters As Single
@@ -548,17 +587,51 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
     
 End Sub
 
-Public Sub DrawExtSquareByDemon()
+Public Sub DrawExtSquareByDemon(ByRef fireShp As Visio.Shape)
 'Команда демону отрисовать площадь тушения
 'Dim frontDemonImpl As c_FrontDemon
 Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
+'Dim fireConturs As Visio.Selection
+Dim extShp As Visio.Shape
+Dim ExtSquareFormula As String
+Dim squareShapesCol As Collection
 
-    Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
+'    Set squareShapesCol = New Collection
     
-    extinguishingSquareDemon.SetGrain = grain
-    extinguishingSquareDemon.DrawFireSquare extSquare
+    
+    ClearLayer "ExtSquare"
+    
+    Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
+
+    extinguishingSquareDemon.setGrain = grain
+    Set squareShapesCol = extinguishingSquareDemon.DrawFireSquare(extSquare)
+    
+    'Составляем стрку формулы для ссылки на размеры полученных площадей тушения
+    For Each extShp In squareShapesCol
+        If ExtSquareFormula = "" Then
+            ExtSquareFormula = ExtSquareFormula & "IF(ISERR(Sheet." & extShp.ID & "!Prop.ExtSquare),0,Sheet." & extShp.ID & "!Prop.ExtSquare)"
+        Else
+            ExtSquareFormula = ExtSquareFormula & "+IF(ISERR(Sheet." & extShp.ID & "!Prop.ExtSquare),0,Sheet." & extShp.ID & "!Prop.ExtSquare)"
+        End If
+    Next extShp
+    
+    'Присваиваем значению площади тушения рассматриваемой фигуры площади пожара значение сумм площадей тушения полченных фигур (формулу)
+    fireShp.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
+    fireShp.Cells("Prop.ExtSquareT").FormulaU = ExtSquareFormula
 End Sub
 
+Public Function GetWaterExpenseKind() As WaterExpenseKind
+'Проверяем достаточность расхода воды для тушения
+Dim tmpVal As WaterExpenseKind
+    
+    If Not extSquare Is Nothing Then
+        tmpVal = extSquare.GetWaterExpenseKind
+    Else
+        tmpVal = WaterExpenseKind.notSufficient
+    End If
+    
+GetWaterExpenseKind = tmpVal
+End Function
 
 ''-------Тестовая процедура
 'Public Sub DrawActiveCells()
@@ -599,3 +672,26 @@ End Sub
 '        End If
 '    Next cell
 'End Sub
+
+Public Sub DrawPerimeterCells()
+'Отрисовываем фигуру периметра при помощи демона
+Dim perimterDemon As c_PerimeterDemon
+Dim fireConturs As Visio.Selection
+Dim shp As Visio.Shape
+    
+    ClearLayer "Fire"
+    
+    Set perimterDemon = New c_PerimeterDemon
+    perimterDemon.setGrain(grain).RunDemon matrix.firePerimeterCells
+    perimterDemon.DrawSquare
+    
+    'Объединяем полученные фигуры в окончательную на текущем шаге
+'    On Error Resume Next
+    Set fireConturs = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
+    If fireConturs.Count > 0 Then
+        fireConturs.Combine
+        Set shp = Application.ActiveWindow.Selection(1)
+        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
+    End If
+    
+End Sub

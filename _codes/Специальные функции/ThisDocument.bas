@@ -12,7 +12,7 @@ Option Explicit
 Private WithEvents app As Visio.Application
 Attribute app.VB_VarHelpID = -1
 Private cellChangedCount As Long
-Const cellChangedInterval = 100000
+Const cellChangedInterval = 1000
 
 Dim ButEvent As c_Buttons
 
@@ -26,7 +26,7 @@ Dim ButEvent As c_Buttons
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 'Обрабатываем открытие документа
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
@@ -48,7 +48,7 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     fmsgCheckNewVersion.CheckUpdates
 
 Exit Sub
-EX:
+ex:
    
 End Sub
 

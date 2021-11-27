@@ -9,36 +9,70 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'Класс-обертка для окна учета ГДЗС
 
-#If VBA7 Then
-    Public FormHandle As LongPtr
-    Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" ( _
-                    ByVal lpClassName As String, _
-                    ByVal lpWindowName As String) As LongPtr
-    Private Declare PtrSafe Function SetWindowLong Lib "user32" Alias "SetWindowLongA" ( _
-                    ByVal hwnd As LongPtr, _
-                    ByVal nIndex As LongPtr, _
-                    ByVal dwNewLong As Long) As LongPtr
-    Private Declare PtrSafe Function GetWindowLong Lib "user32" Alias "GetWindowLongA" ( _
-                    ByVal hwnd As LongPtr, _
-                    ByVal nIndex As Long) As LongPtr
-    Private Declare PtrSafe Function SetParent Lib "user32" ( _
-                    ByVal hWndChild As LongPtr, _
-                    ByVal hWndNewParent As LongPtr) As LongPtr
+#If Win64 Then
+    #If VBA7 Then
+        Public FormHandle As LongPtr
+        Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" ( _
+                        ByVal lpClassName As String, _
+                        ByVal lpWindowName As String) As LongPtr
+        Private Declare PtrSafe Function SetWindowLong Lib "user32" Alias "SetWindowLongA" ( _
+                        ByVal hwnd As LongPtr, _
+                        ByVal nIndex As LongPtr, _
+                        ByVal dwNewLong As Long) As LongPtr
+        Private Declare PtrSafe Function GetWindowLong Lib "user32" Alias "GetWindowLongA" ( _
+                        ByVal hwnd As LongPtr, _
+                        ByVal nIndex As Long) As LongPtr
+        Private Declare PtrSafe Function SetParent Lib "user32" ( _
+                        ByVal hWndChild As LongPtr, _
+                        ByVal hWndNewParent As LongPtr) As LongPtr
+    #Else
+        Public FormHandle As Long
+        Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" ( _
+                        ByVal lpClassName As String, _
+                        ByVal lpWindowName As String) As Long
+        Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" ( _
+                        ByVal hwnd As Long, _
+                        ByVal nIndex As Long, _
+                        ByVal dwNewLong As Long) As Long
+        Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" ( _
+                        ByVal hwnd As Long, _
+                        ByVal nIndex As Long) As Long
+        Private Declare Function SetParent Lib "user32" ( _
+                        ByVal hWndChild As Long, _
+                        ByVal hWndNewParent As Long) As Long
+    #End If
 #Else
-    Public FormHandle As Long
-    Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" ( _
-                    ByVal lpClassName As String, _
-                    ByVal lpWindowName As String) As Long
-    Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" ( _
-                    ByVal hwnd As Long, _
-                    ByVal nIndex As Long, _
-                    ByVal dwNewLong As Long) As Long
-    Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" ( _
-                    ByVal hwnd As Long, _
-                    ByVal nIndex As Long) As Long
-    Private Declare Function SetParent Lib "user32" ( _
-                    ByVal hWndChild As Long, _
-                    ByVal hWndNewParent As Long) As Long
+    #If VBA7 Then
+        Public FormHandle As Long
+        Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" ( _
+                        ByVal lpClassName As String, _
+                        ByVal lpWindowName As String) As Long
+        Private Declare PtrSafe Function SetWindowLong Lib "user32" Alias "SetWindowLongA" ( _
+                        ByVal hwnd As Long, _
+                        ByVal nIndex As Long, _
+                        ByVal dwNewLong As Long) As Long
+        Private Declare PtrSafe Function GetWindowLong Lib "user32" Alias "GetWindowLongA" ( _
+                        ByVal hwnd As Long, _
+                        ByVal nIndex As Long) As Long
+        Private Declare PtrSafe Function SetParent Lib "user32" ( _
+                        ByVal hWndChild As Long, _
+                        ByVal hWndNewParent As Long) As Long
+    #Else
+        Public FormHandle As Long
+        Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" ( _
+                        ByVal lpClassName As String, _
+                        ByVal lpWindowName As String) As Long
+        Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" ( _
+                        ByVal hwnd As Long, _
+                        ByVal nIndex As Long, _
+                        ByVal dwNewLong As Long) As Long
+        Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" ( _
+                        ByVal hwnd As Long, _
+                        ByVal nIndex As Long) As Long
+        Private Declare Function SetParent Lib "user32" ( _
+                        ByVal hWndChild As Long, _
+                        ByVal hWndNewParent As Long) As Long
+    #End If
 #End If
 Private Const GWL_STYLE = (-16)
 Private Const WS_CHILD = &H40000000
@@ -49,6 +83,9 @@ Attribute app.VB_VarHelpID = -1
 Private v_ManagementGDZS As f_ManagementGDZS
 Private WithEvents wAddon As Visio.Window
 Attribute wAddon.VB_VarHelpID = -1
+Private WithEvents wMain As Visio.Window
+Attribute wMain.VB_VarHelpID = -1
+Const wMainCaption = "MainManagementWindow"
 
 Private Const con_BorderWidth = 6
 Private Const con_ToolBarHeight = 50
@@ -134,10 +171,27 @@ End Sub
 '---------------------------------Процедуры работы с формой в окне-------------------------------------------------------
 Private Sub ShowWindow()
 'Процедура показывает окно "Управление силами и средствами" и ассоциирует его с формой Base
-'Dim FormHandle As Long
+Dim otherForm As Object
 
-    Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom, visAnchorBarAddon, , , 300, 210)
-    Set v_ManagementGDZS = New f_ManagementGDZS
+'    If AnyFormsShowed(otherForm) Then
+'        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , , "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+'    Else
+'        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , , 210, "{BD8994FC-A032-412B-B557-9039E82AB7FA}")
+'    End If
+    If AnyFormsShowed(otherForm) Then
+        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, , "Упр", "Упр")
+    Else
+        Set wAddon = ActiveWindow.Windows.Add("GDZS", visWSVisible + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, 210, "Упр", "Упр")
+    End If
+
+'If WarningsForm.Visible = True Then
+'       Set wAddon = ActiveWindow.Windows.Add("TacticDataForm", visWSVisible + visWSAnchorMerged + visWSDockedBottom + visWSAnchorMerged, visAnchorBarAddon, , , 600, , "MC", "MC")
+'Else
+'       Set wAddon = ActiveWindow.Windows.Add("TacticDataForm", visWSVisible + visWSAnchorMerged + visWSDockedBottom, visAnchorBarAddon, , , 600, 210, "MC", "MC")
+'End If
+
+
+    Set v_ManagementGDZS = f_ManagementGDZS
     v_ManagementGDZS.Caption = "GDZS"
 
 
@@ -159,19 +213,42 @@ Private Sub ShowWindow()
     v_ManagementGDZS.ListView1.ColumnHeaders.Add 4, "Prop.FormingTime", "Время формирования", 90
     v_ManagementGDZS.ListView1.ColumnHeaders.Add 5, "Prop.Personnel", "Личный состав", 70
     v_ManagementGDZS.ListView1.ColumnHeaders.Add 6, "Prop.AirDevice", "СИЗОД", 100
-
+    
     wAddon.Caption = "Силы ГДЗС"
     
 '---передача в процедуру получения информации
     ps_GetGDZS v_ManagementGDZS
-
+    
+'---Устанавливаем размер формы, чтобы она выглядела корректно
+    If Not otherForm Is Nothing Then
+        v_ManagementGDZS.Width = otherForm.Width
+        v_ManagementGDZS.Height = otherForm.Height
+    End If
+    
 End Sub
+
+Private Function AnyFormsShowed(ByRef frm As Object) As Boolean
+'Возвращает True если хоть одна форма уже показана
+    If f_ManagementStvols.Visible = True Then
+        AnyFormsShowed = True
+        Set frm = f_ManagementStvols
+        Exit Function
+    End If
+    If f_ManagementTechincs.Visible = True Then
+        AnyFormsShowed = True
+        Set frm = f_ManagementTechincs
+        Exit Function
+    End If
+AnyFormsShowed = False
+End Function
 
 Private Sub app_ShapeAdded(ByVal Shape As IVShape)
 'Учитываем добавление новых фигур
 Dim Row As Integer
 
     On Error GoTo EX
+
+    If v_ManagementGDZS Is Nothing Then Exit Sub
 
     Row = v_ManagementGDZS.ListView1.ListItems.Count + 1
 

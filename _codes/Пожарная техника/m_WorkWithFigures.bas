@@ -10,7 +10,7 @@ Dim x As Double, y As Double
 Dim vS_ShapeName As String
 Dim TrueShape As Boolean
 
-    On Error GoTo EX
+    On Error GoTo ex
 TrueShape = False
 '---Определяем координаты активной фигуры
     x = ShpObj.Cells("PinX").Result(visInches)
@@ -54,7 +54,7 @@ TrueShape = False
             ShpObj.Cells("Prop.Hoses300").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Hose300*Prop.Quantity)"
             ShpObj.Cells("Prop.Powder").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Powder*Prop.Quantity)"
             ShpObj.Cells("Prop.Water").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Water*Prop.Quantity)"
-            ShpObj.Cells("Prop.Foam").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Foam*Prop.Quantity)"
+            ShpObj.Cells("Prop.FoamX").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Foam*Prop.Quantity)"
             ShpObj.Cells("Prop.Dest").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.Dest)"
             ShpObj.Cells("Prop.RSCHS").FormulaU = "GUARD(Sheet." & OtherShape.ID & "!Prop.RSCHS)"
             
@@ -65,9 +65,9 @@ Next OtherShape
 If TrueShape = False Then ShpObj.Delete
 Set OtherShape = Nothing
 Exit Sub
-EX:
+ex:
     Set OtherShape = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GlueToShape"
 End Sub
 

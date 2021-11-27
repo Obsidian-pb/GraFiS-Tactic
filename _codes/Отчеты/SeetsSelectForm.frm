@@ -17,6 +17,10 @@ Option Explicit
 
 Public SelectedSheet As String
 
+Private Sub B_Cancel_Click()
+    Me.Hide
+End Sub
+
 Private Sub B_OK_Click()
     
     If OB_CurrentSheet.Value = True Then

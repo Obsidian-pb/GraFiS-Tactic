@@ -19,6 +19,8 @@ Public Sub ShowData(ByVal htmlText As String)
 'Прока показывает окно с браузером и загружает содержимое
 Dim mDoc As MSHTML.IHTMLDocument
     
+    On Error GoTo Tail
+    
     htmlText = Replace(htmlText, Asc(34), "'")
     
     'Открываем пустую страницу
@@ -30,4 +32,9 @@ Dim mDoc As MSHTML.IHTMLDocument
     Set mDoc = Nothing
     
     Me.Show
+    
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "ShowData"
 End Sub

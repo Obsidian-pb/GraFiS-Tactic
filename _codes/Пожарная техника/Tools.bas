@@ -73,7 +73,7 @@ Exit Sub
 
 '---В случае ошибки открытия слишком большого количества таблиц, заканчиваем процедуру
 Tail:
-    MsgBox Err.description
+    MsgBox Err.description, , ThisDocument.Name
     Set rst = Nothing
     Set dbs = Nothing
     SaveLog Err, "GetValuesOfCellsFromTable"
@@ -183,7 +183,7 @@ Dim RSField As Object, RSField2 As Object
 ListImport2 = List
 Exit Function
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport2"
 End Function
 
@@ -250,6 +250,8 @@ Dim propIndex As Integer
     
     IsShapeLinked = False
     
+    On Error GoTo ex
+    
     For Each rst In Application.ActiveDocument.DataRecordsets
         For propIndex = 0 To shp.RowCount(visSectionProp)
             If shp.IsCustomPropertyLinked(rst.ID, propIndex) Then
@@ -258,6 +260,26 @@ Dim propIndex As Integer
             End If
         Next propIndex
     Next rst
+Exit Function
+ex:
+    IsShapeLinked = False
+    SaveLog Err, "IsShapeLinked", "Error in 201x version during test of dsts link"
 End Function
-
+Public Sub ShapeLinkRefresh(ByRef shp As Visio.Shape)
+'Refresh data from linked DataRecordset
+Dim rst As Visio.DataRecordset
+'Dim dataRowID As Integer
+Dim propIndex As Integer
+    
+'    IsShapeLinked = False
+    
+    For Each rst In Application.ActiveDocument.DataRecordsets
+        For propIndex = 0 To shp.RowCount(visSectionProp)
+            If shp.IsCustomPropertyLinked(rst.ID, propIndex) Then
+                shp.LinkToData rst.ID, shp.GetLinkedDataRow(rst.ID), False
+                Exit Sub
+            End If
+        Next propIndex
+    Next rst
+End Sub
 

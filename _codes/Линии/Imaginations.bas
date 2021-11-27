@@ -250,6 +250,7 @@ Const masterName = "Напорная линия"  'Ранее: "Рукав - скатка"
     Set ShapeFrom = ThisDocument.Masters(masterName).Shapes(1)
     IDTo = ShapeTo.ID
     IDFrom = ThisDocument.Masters(masterName).Index
+    Debug.Print ShapeFrom.Name
 
 '---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
     CloneSectionUniverseNames 240, IDFrom, IDTo
@@ -353,9 +354,9 @@ End Sub
 Function LayerImport(ShapeFromID As Long, ShapeToID As Long) As String
 'Функция возвращает номер слоя в текущем документе соответствующего слою в документе мастера
 Dim ShapeFrom As Visio.Shape
-Dim LayerNumber As Integer, LayerName As String
+Dim LayerNumber As Integer, layerName As String
 Dim Flag As Boolean
-Dim vsoLayer As Visio.Layer
+Dim vsoLayer As Visio.layer
 
     On erro GoTo EX
 '---Присваиваем объектным переменным Фигуры(ShapeFrom и ShpeTo) в соответствии с индексами
@@ -363,22 +364,22 @@ Dim vsoLayer As Visio.Layer
 '    MsgBox ThisDocument.Masters(ShapeFromID)
     
 '---Получаем название слоя соответственно номеру в исходном документе
-    LayerName = ShapeFrom.Layer(1).Name
+    layerName = ShapeFrom.layer(1).Name
 
 '---Проверяем есть ли в текущем документе слой с таким именем
     For i = 1 To Application.ActivePage.Layers.Count
-        If Application.ActivePage.Layers(i).Name = LayerName Then
+        If Application.ActivePage.Layers(i).Name = layerName Then
             Flag = True
         End If
     Next i
 
 '---В соответствии с полученным названием определяем номер слоя в текущем документе
     If Flag = True Then
-        LayerNumber = Application.ActivePage.Layers(LayerName).Index
+        LayerNumber = Application.ActivePage.Layers(layerName).Index
     Else
     '---Создаем новый слой с именем слоя к которому принадлежит исходная фигура
-        Set vsoLayer = Application.ActiveWindow.Page.Layers.Add(LayerName)
-        vsoLayer.NameU = LayerName
+        Set vsoLayer = Application.ActiveWindow.Page.Layers.Add(layerName)
+        vsoLayer.NameU = layerName
         vsoLayer.CellsC(visLayerColor).FormulaU = "255"
         vsoLayer.CellsC(visLayerStatus).FormulaU = "0"
         vsoLayer.CellsC(visLayerVisible).FormulaU = "1"
@@ -389,7 +390,7 @@ Dim vsoLayer As Visio.Layer
         vsoLayer.CellsC(visLayerGlue).FormulaU = "1"
         vsoLayer.CellsC(visLayerColorTrans).FormulaU = "0%"
     '---Присваиваем номер нового слоя
-        LayerNumber = Application.ActivePage.Layers(LayerName).Index
+        LayerNumber = Application.ActivePage.Layers(layerName).Index
     End If
         
 LayerImport = Chr(34) & LayerNumber - 1 & Chr(34)
@@ -407,7 +408,7 @@ Dim vO_Conn As Visio.Connect
 Dim ConIndent1 As String
 Dim ConIndent2 As String
 Dim ShpVS As Visio.Shape
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 Dim Shp2 As Visio.Shape
 Dim Con As Visio.Connect
 Dim Con2 As Visio.Connect
@@ -639,6 +640,81 @@ Dim diameter As Integer
     diameter = Index(hoseDiameterIndex, ShpObj.Cells("Prop.HoseDiameter.Format").Formula, ";")
     ShpObj.Cells("Prop.HoseDiameter").FormulaU = "INDEX(" & diameter & ",Prop.HoseDiameter.Format)"
     ShpObj.Cells("Prop.LineType").FormulaU = "INDEX(" & lineType & ",Prop.LineType.Format)"
+        
+'---Устанавливаем значение текущего времени без ссылки
+    ShpObj.Cells("Prop.LineTime").FormulaU = _
+        "DATETIME(" & str(ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)) & ")"
+        
+'---Открываем окно свойств обращенной фигуры
+    On Error Resume Next
+    Application.ActiveWindow.DeselectAll
+    Application.ActiveWindow.Select ShpObj, visSelect
+    Application.DoCmd (1312)
+    
+Exit Sub
+Tail:
+    '---Выходим из процедуры обработки
+    Application.EventsEnabled = True
+End Sub
+
+Public Sub MakeHoseDrop(ByRef ShpObj As Visio.Shape, ByVal hoseDiameterIndex As Integer, ByVal lineType As Byte)
+'Метод обращения в проброс рукавной линии
+Dim ShpInd As Integer
+Dim diameter As Integer
+
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+'    On Error GoTo Tail
+
+'---Идентифицируем активную фигуру
+    ShpInd = ShpObj.ID
+    '---Отключаем обработку событий приложением, обращаем фигуру и вновь включаем обработку событий
+    Application.EventsEnabled = False
+    ImportHoseInformation ShpObj
+    Application.EventsEnabled = True
+
+
+    
+'---Получаем списки для фигуры
+    '---Запускаем процедуру получения списка Подразделений
+    ShpObj.Cells("Prop.Unit.Format").FormulaU = ListImport("Подразделения", "Подразделение")
+    '---Запускаем процедуру получения СПИСКОВ Материалов рукавов
+    ShpObj.Cells("Prop.HoseMaterial.Format").FormulaU = ListImport("З_Рукава", "Материал рукава")
+    '---Запускаем процедуру получения СПИСКОВ диаметров рукавов
+    HoseDiametersListImport (ShpInd)
+    '---Запускаем процедуру получения ЗНАЧЕНИЙ Сопротивлений рукавов
+    HoseResistanceValueImport (ShpInd)
+    '---Запускаем процедуру получения ЗНАЧЕНИЙ Пропускной способности рукавов
+    HoseMaxFlowValueImport (ShpInd)
+    '---Запускаем процедуру получения ЗНАЧЕНИЙ Массы рукавов
+    HoseWeightValueImport (ShpInd)
+        
+'---Устнавливаем значения для проброса
+'    Stop
+    diameter = Index(hoseDiameterIndex, ShpObj.Cells("Prop.HoseDiameter.Format").Formula, ";")
+    ShpObj.Cells("Prop.HoseDiameter").FormulaU = "INDEX(" & diameter & ",Prop.HoseDiameter.Format)"
+    ShpObj.Cells("Prop.LineType").FormulaU = "INDEX(" & lineType & ",Prop.LineType.Format)"
+    
+    'Свойства проброса
+    '---Свойства линии
+        ShpObj.Cells("LinePattern").Formula = 16                                                                                'Пунктир
+        ShpObj.Cells("LineWeight").Formula = "0.24 pt"                                                                          'Тонкая линия
+        ShpObj.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пробросы рукавов")    'Добавляем в слой пробросов
+    '---Стили
+        ShpObj.Cells("LinePattern").FormulaU = "Styles!Р_Пробр!LinePattern"
+        ShpObj.Cells("LineWeight").FormulaU = "Styles!Р_Пробр!LineWeight"
+        ShpObj.Cells("LineColor").FormulaU = "Styles!Р_Пробр!LineColor"
+        ShpObj.Cells("LineCap").FormulaU = "Styles!Р_Пробр!LineCap"
+        ShpObj.Cells("BeginArrow").FormulaU = "Styles!Р_Пробр!BeginArrow"
+        ShpObj.Cells("EndArrow").FormulaU = "Styles!Р_Пробр!EndArrow"
+        ShpObj.Cells("LineColorTrans").FormulaU = "Styles!Р_Пробр!LineColorTrans"
+        ShpObj.Cells("BeginArrowSize").FormulaU = "Styles!Р_Пробр!BeginArrowSize"
+        ShpObj.Cells("EndArrowSize").FormulaU = "Styles!Р_Пробр!EndArrowSize"
+        ShpObj.Cells("Rounding").FormulaU = "Styles!Р_Пробр!Rounding"
+    '---Свойстварукавной линии характерные для проброса
+    ShpObj.Cells("Prop.ShowLenightDirect").FormulaU = "INDEX(1,Prop.ShowLenightDirect.Format)"          'Явное указание длины линии
+    ShpObj.Cells("Prop.LineLenightS").Formula = "0"                                                     'Явная длина линии
+    
+    
         
 '---Устанавливаем значение текущего времени без ссылки
     ShpObj.Cells("Prop.LineTime").FormulaU = _

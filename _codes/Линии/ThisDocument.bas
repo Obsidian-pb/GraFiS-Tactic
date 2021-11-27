@@ -28,6 +28,7 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     DeleteButtonLine
     DeleteButtonMLine
     DeleteButtonVHose
+    DeleteButtonHoseDrop
     
 '---Деактивируем объект отслеживания изменений в приложении для 201х версий
     If Application.version > 12 Then Set app = Nothing
@@ -73,8 +74,9 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Создаем панель управления "Превращения" и добавляем на нее кнопку "Обратить в линию"
     AddTBImagination   'Добавляем тулбокс Обрашщения
     AddButtonLine      'Добавляем кнопку рабочей линии
-    AddButtonMLine     'Добавляем фигуру магистральной линии
+    AddButtonMLine     'Добавляем кнопку магистральной линии
     AddButtonVHose     'Добавляем кнопку всасывающей линии
+    AddButtonHoseDrop  'Добавляем кнопку обращения в проброс
 
 '---Активируем объект отслеживания нажатия кнопок
     Set ButEvent = New Class1
@@ -86,7 +88,7 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     End If
 
 '---Активируем опцию приклеивания к контурам фигур
-    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints
+    Application.ActiveDocument.GlueSettings = visGlueToGeometry + visGlueToGuides + visGlueToConnectionPoints + visGlueToVertices
 
 '---Добавляем для документа своство "FireTime"
     sm_AddFireTime
@@ -103,7 +105,7 @@ End Sub
 Private Sub LineAppEvents_CellChanged(ByVal Cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Integer
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 Dim Con As Visio.Connect
 Dim Shp2 As Visio.Shape
 Dim Con2 As Visio.Connect
@@ -125,9 +127,9 @@ Dim Con2 As Visio.Connect
     If Cell.Name = "User.UseAsRazv" Then
         '---Запускаем процедуру обновления рукавных соединений для Водосборника
         
-        Set Shp = Cell.Shape
+        Set shp = Cell.Shape
         
-        For Each Con In Shp.FromConnects
+        For Each Con In shp.FromConnects
             Set Shp2 = Con.FromSheet    'Собственно рукава - для каждого из его соединений обновляем
             For Each Con2 In Shp2.Connects
                 C_ConnectionsTrace.Ps_ConnectionAdd Con2
@@ -143,7 +145,7 @@ End Sub
 
 Private Sub sp_TemplatesImport()
 
-Visio.Application.ActivePage.Drop (ThisDocument.Masters("ВсасывающийРукав"))
+Visio.Application.ActivePage.Drop ThisDocument.Masters("ВсасывающийРукав"), 0, 0
 
 End Sub
 
@@ -213,7 +215,7 @@ Dim SecExists As Boolean
     
 Exit Sub
 Tail:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчику."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчику.", , ThisDocument.Name
     SaveLog Err, "Document_DocumentOpened"
 End Sub
 

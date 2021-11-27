@@ -4,18 +4,18 @@ Option Explicit
 
 
 
-Public Function RUp(ByVal Val As Single, ByVal Modificator As Single) As Integer
+Public Function RUp(ByVal val As Single, ByVal Modificator As Single) As Integer
 'Функция возвращает значение числа округленного в большую сторноу
 Dim tmpVal As Single
 
 On Error GoTo EX
-    tmpVal = Int(Val * Modificator / 10) * 10
+    tmpVal = Int(val * Modificator / 10) * 10
     If tmpVal < 20 Then tmpVal = 20
     RUp = tmpVal
     
 Exit Function
 EX:
-    RUp = Round(Val)
+    RUp = Round(val)
 End Function
 
 
@@ -55,7 +55,7 @@ Dim IndexPers As Integer
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GraphicsFix"
 End Sub
 
@@ -88,7 +88,7 @@ Dim pos As Integer
     
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StringToArray"
 End Sub
 

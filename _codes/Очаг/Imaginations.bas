@@ -38,7 +38,7 @@ Dim RowNum As Integer, CellNum As Integer
             'If (ShapeTo.RowExists(SectionIndex, RowNum, 0) = 0) And Not (ShapeFrom.RowExists(SectionIndex, RowNum, 0) = 0) Then
                 'MsgBox "create"
                 ShapeTo.AddRow SectionIndex, RowNum, 0
-                ShapeTo.CellsSRC(SectionIndex, RowNum, CellNum).RowNameU = ShapeFrom.CellsSRC(SectionIndex, RowNum, CellNum).RowName
+                ShapeTo.CellsSRC(SectionIndex, RowNum, CellNum).RowNameU = ShapeFrom.CellsSRC(SectionIndex, RowNum, CellNum).rowName
             'End If
         Next RowNum
             
@@ -85,6 +85,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     'End If
     '
 '---Учитываем, что фигура может быть местом
+    Debug.Print Application.ActiveWindow.Selection(1).Name
     If Application.ActiveWindow.Selection(1).CellExists("User.visObjectType", 0) Then
         If Application.ActiveWindow.Selection(1).Cells("User.visObjectType") = 104 Then
             PF_GeometryCopy Application.ActiveWindow.Selection(1)
@@ -288,7 +289,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     CloneSecFill IDFrom, IDTo
 
 '---Присваиваем номер слоя
-ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
+    ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
 
 End Sub
 
@@ -509,7 +510,7 @@ Set PF_GeometryCopy = ReplicaShape
 
 Exit Function
 EX:
-    MsgBox "Возникла непредвиденная ошибка! Если она будет повторяться - обратитесь к разработчику"
+    MsgBox "Возникла непредвиденная ошибка! Если она будет повторяться - обратитесь к разработчику", , ThisDocument.Name
     SaveLog Err, "Document_DocumentOpened"
 End Function
 

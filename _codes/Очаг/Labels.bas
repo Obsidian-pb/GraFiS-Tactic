@@ -5,7 +5,7 @@ Sub InsertLabelSquare(ShpObj As Visio.Shape)
 Dim shpLabel As Visio.Shape
 Dim shpConnection As Visio.Shape
 Dim mstrConnection As Visio.Master
-Dim Cell1 As Visio.Cell, Cell2 As Visio.Cell
+Dim Cell1 As Visio.cell, Cell2 As Visio.cell
 Dim CellFormula As String
 Dim pnt1 As Long, pnt2 As Long
 
@@ -103,6 +103,7 @@ On Error GoTo EX
     CellsVal(3) = ShpObj.Cells("EndTrigger").Result(visUnitsString)
     
     If CellsVal(0) = CellsVal(1) Or CellsVal(2) = CellsVal(3) Then
+        FindAndDeleteLabels ShpObj
         ShpObj.Delete
     End If
 Exit Sub
@@ -110,11 +111,16 @@ EX:
     'Ошибка
 End Sub
 
-'Public Sub HideMaster()
-'Dim mstrConnection As Visio.Master
-'
-'    Set mstrConnection = Application.Documents("Водоснабжение.vss").Masters("Коннектор")
-'
-'    mstrConnection.Hidden = True
-'
-'End Sub
+Private Sub FindAndDeleteLabels(ByRef shp As Visio.Shape)
+'Ищем и удаляем подписи к которым привязана данная фигура коннектора
+Dim con As Visio.Connect
+
+    For Each con In shp.FromConnects
+        If IsGFSShapeWithIP(con.ToSheet, 89) Then con.ToSheet.Delete
+        If IsGFSShapeWithIP(con.FromSheet, 89) Then con.FromSheet.Delete
+    Next con
+    For Each con In shp.Connects
+        If IsGFSShapeWithIP(con.ToSheet, 89) Then con.ToSheet.Delete
+        If IsGFSShapeWithIP(con.FromSheet, 89) Then con.FromSheet.Delete
+    Next con
+End Sub

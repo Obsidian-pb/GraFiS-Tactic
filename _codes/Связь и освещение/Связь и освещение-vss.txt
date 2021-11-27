@@ -136,7 +136,7 @@
   Section: User>>>
     User.IndexPers: 57; User.IndexPers.Prompt: "Прожектор"; 
     User.ShapeColor: LineColor; User.ShapeColor.Prompt: "Цвет контура"; 
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.Version: 1; User.Version.Prompt: ""; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
     User.ShapeColor3: FillForegnd; User.ShapeColor3.Prompt: "Цвет заливки"; 

@@ -123,7 +123,7 @@ Set dbs = Nothing
 Set rst = Nothing
 Exit Function
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport"
     ListImport = Chr(34) & " " & Chr(34)
     Set dbs = Nothing
@@ -177,7 +177,7 @@ Set dbs = Nothing
 Set rst = Nothing
 Exit Function
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport2"
     ListImport2 = Chr(34) & " " & Chr(34)
     Set dbs = Nothing
@@ -298,14 +298,14 @@ End Sub
 
 Public Sub SetFormulaForAll(ShpObj As Visio.Shape, ByVal aS_CellName As String, ByVal aS_NewFormula As String)
 'Процедура устанавливает содержимое для произвольной ячейки
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
 
     'Перебираем все фигуры в выделении и если очередная фигура имеет такую же ячейку - присваиваем ей новое значение
-    For Each Shp In Application.ActiveWindow.Selection
-        If Shp.CellExists(aS_CellName, 0) = True Then
-            Shp.Cells(aS_CellName).FormulaU = """" & aS_NewFormula & """"
+    For Each shp In Application.ActiveWindow.Selection
+        If shp.CellExists(aS_CellName, 0) = True Then
+            shp.Cells(aS_CellName).FormulaU = """" & aS_NewFormula & """"
         End If
-    Next Shp
+    Next shp
 End Sub
 
 Public Sub MoveMeFront(ShpObj As Visio.Shape)
@@ -316,14 +316,14 @@ End Sub
 '-----------------------------------------Процедуры работы с фигурами----------------------------------------------
 Public Sub SetCheckForAll(ShpObj As Visio.Shape, aS_CellName As String, aB_Value As Boolean)
 'Процедура устанавливает новое значение для всех выбранных фигур одного типа
-Dim Shp As Visio.Shape
+Dim shp As Visio.Shape
     
     'Перебираем все фигуры в выделении и если очередная фигура имеет такую же ячейку - присваиваем ей новое значение
-    For Each Shp In Application.ActiveWindow.Selection
-        If Shp.CellExists(aS_CellName, 0) = True Then
-            Shp.Cells(aS_CellName).Formula = aB_Value
+    For Each shp In Application.ActiveWindow.Selection
+        If shp.CellExists(aS_CellName, 0) = True Then
+            shp.Cells(aS_CellName).Formula = aB_Value
         End If
-    Next Shp
+    Next shp
     
 End Sub
 
@@ -376,7 +376,7 @@ Dim v_Cntrl As CommandBarControl
 Exit Function
 Tail:
     ClickAndOnSameButton = False
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "NoButtonsON"
 End Function
 
@@ -411,6 +411,21 @@ Public Function IsFirstDrop(ShpObj As Visio.Shape)
     End If
 End Function
 
+'--------------------------------Работа со слоями-------------------------------------
+Public Function GetLayerNumber(ByRef layerName As String) As Integer
+'Получаем номер слоя по его названию. Если слоя нет - он будет создан
+Dim layer As Visio.layer
+
+    For Each layer In Application.ActivePage.Layers
+        If layer.Name = layerName Then
+            GetLayerNumber = layer.Index - 1
+            Exit Function
+        End If
+    Next layer
+    
+    Set layer = Application.ActivePage.Layers.Add(layerName)
+    GetLayerNumber = layer.Index - 1
+End Function
 
 
 '--------------------------------Сохранение лога ошибки-------------------------------------
@@ -434,4 +449,133 @@ Const d = " | "
 
 End Sub
 
+'-------------------Инструменты проверки фигур
+Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber) As Variant
+'Функция возвращает значение ячейки с указанным названием. Если такой ячейки нет, возвращает 0
+    
+    On Error GoTo EX
+    
+    If shp.CellExists(cellName, 0) Then
+        Select Case dataType
+            Case Is = visNumber
+                CellVal = shp.Cells(cellName).Result(dataType)
+            Case Is = visUnitsString
+                CellVal = shp.Cells(cellName).ResultStr(dataType)
+            Case Is = visDate
+                CellVal = shp.Cells(cellName).Result(dataType)
+        End Select
+    Else
+        CellVal = 0
+    End If
+    
+    
+Exit Function
+EX:
+    CellVal = 0
+End Function
 
+Public Function IsGFSShape(ByRef shp As Visio.Shape, Optional ByVal useManeure As Boolean = True) As Boolean
+'Функция возвращает True, если фигура является фигурой ГраФиС
+Dim i As Integer
+    
+    'Проверяем, является ли фигура фигурой ГраФиС
+    If useManeure Then      'Если нужно учитывать проверку на маневр
+        If shp.CellExists("User.IndexPers", 0) = True Then
+            'Если имеется ячейка опции Маневра и ее значение показывает, что
+            If shp.CellExists("Actions.MainManeure", 0) = True Then
+                If shp.Cells("Actions.MainManeure.Checked").Result(visNumber) = 0 Then
+                    IsGFSShape = True       'Фигура ГраФиС и не маневренная
+                Else
+                    IsGFSShape = False      'Фигура ГраФиС и маневренная
+                End If
+            Else
+                IsGFSShape = True       'Фигура ГраФиС и не имеет ячейки Маневр
+            End If
+        Else
+            IsGFSShape = False      'Фигура не ГраФиС
+        End If
+    Else                    'если не нужно учитывать проверку на маневр
+        IsGFSShape = shp.CellExists("User.IndexPers", 0)
+    End If
+
+End Function
+
+Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses As Variant, Optional needGFSChecj As Boolean = False) As Boolean
+'Функция возвращает True, если фигура является фигурой ГраФиС и среди переданных типов фигур ГраФиС (gfsIndexPreses) присутствует IndexPers данной фигуры
+'По умолчанию предполагается что переданная фигура уже проверена на то, относится ли она к фигурам ГраФиС. В случае, если у фигуры нет ячейки User.IndexPers _
+'обработчик ошибки указывает функции вернуть False
+'Пример использования: IsGFSShapeWithIP(shp, indexPers.ipPloschadPozhara)
+'                 или: IsGFSShapeWithIP(shp, Array(indexPers.ipPloschadPozhara, indexPers.ipAC))
+Dim i As Integer
+Dim indexPers As Integer
+    
+    On Error GoTo EX
+    
+    'Если необходима предварительная проверка на отношение фигуры к ГраФиС:
+    If needGFSChecj Then
+        If Not IsGFSShape(shp) Then
+            IsGFSShapeWithIP = False
+            Exit Function
+        End If
+    End If
+    
+    'Проверяем, является ли фигура фигурой указанного типа
+    indexPers = shp.Cells("User.IndexPers").Result(visNumber)
+    Select Case TypeName(gfsIndexPerses)
+        Case Is = "Long"    'Если передано единственное значение Long
+            If gfsIndexPerses = indexPers Then
+                IsGFSShapeWithIP = True
+                Exit Function
+            End If
+        Case Is = "Integer"    'Если передано единственное значение Integer
+            If gfsIndexPerses = indexPers Then
+                IsGFSShapeWithIP = True
+                Exit Function
+            End If
+        Case Is = "Variant()"   'Если передан массив
+            For i = 0 To UBound(gfsIndexPerses)
+                If gfsIndexPerses(i) = indexPers Then
+                    IsGFSShapeWithIP = True
+                    Exit Function
+                End If
+            Next i
+        Case Else
+            IsGFSShapeWithIP = False
+    End Select
+
+IsGFSShapeWithIP = False
+Exit Function
+EX:
+    IsGFSShapeWithIP = False
+    SaveLog Err, "m_Tools.IsGFSShapeWithIP"
+End Function
+
+'-----------------------------------------Поиск точки----------------------------------------------
+Public Function GetPointOnLineShape(ByRef center As c_Vector, ByRef lineShape As Visio.Shape, _
+                                    ByVal radiuss As Double, Optional ByVal segmentNumber As Byte = 0) As c_Vector
+'Находим первую точку на линии
+Const pi = 3.1415                           'Число Пи
+Const oneOfHundredOfPerimeter = 0.06283     'угол - одна сотая окружности в радианах
+Dim pointTolerance As Double                'Точность поиска хита с линией для каждой из точек окружности
+Dim checkPoint As c_Vector
+Dim i As Byte
+    
+    Dim shp As Visio.Shape
+    
+    pointTolerance = pi * radiuss / 100
+    
+    Set checkPoint = New c_Vector
+    
+    For i = segmentNumber To 99
+        checkPoint.Angle = i * oneOfHundredOfPerimeter
+        checkPoint.x = checkPoint.x * radiuss + center.x
+        checkPoint.y = checkPoint.y * radiuss + center.y
+        If lineShape.HitTest(checkPoint.x, checkPoint.y, pointTolerance) Then
+'            Set shp = Application.ActivePage.DrawRectangle(checkPoint.x - 0.5, checkPoint.y - 0.5, checkPoint.x + 0.5, checkPoint.y + 0.5)
+            checkPoint.segmentNumber = i
+            Set GetPointOnLineShape = checkPoint
+            Exit Function
+        End If
+    Next i
+    
+End Function

@@ -91,7 +91,7 @@ Private Function GetKindOfCell(ByVal xVal As Long, ByVal yVal As Long) As Byte
         GetKindOfCell = 1
         Exit Function
     End If
-    If matrix.IsWall(xVal, yVal) Then
+    If matrix.isWall(xVal, yVal) Then
         GetKindOfCell = 2
         Exit Function
     End If
@@ -104,13 +104,13 @@ End Function
 
 Private Sub AddToCellCollection(ByVal xVal As Long, ByVal yVal As Long)
 'Добавляем клетку в коллекцию
-    Dim Cell As c_Cell
-    Set Cell = New c_Cell
-    Cell.x = xVal
-    Cell.y = yVal
+    Dim cell As c_Cell
+    Set cell = New c_Cell
+    cell.x = xVal
+    cell.y = yVal
     
     On Error Resume Next
-    cellsForFill.Add Cell, xVal & ":" & yVal
+    cellsForFill.Add cell, xVal & ":" & yVal
 End Sub
 
 

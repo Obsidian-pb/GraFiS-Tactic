@@ -196,7 +196,7 @@
   Section: TextField>>>
     Fields.Value: ""; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.IndexPers: 1; User.IndexPers.Prompt: "АЦ"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -344,7 +344,7 @@
   Section: TextField>>>
     Fields.Value: ""; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.IndexPers: 163; User.IndexPers.Prompt: "АПП"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -489,7 +489,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 2; User.IndexPers.Prompt: "АНР"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -589,10 +589,10 @@
     Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Список подразделений гарнизона"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: "ПЧ-1;ПЧ-10;ПЧ-15;ПЧ-19;ПЧ-2;ПЧ-24;ПЧ-3;ПЧ-4;ПЧ-47;ПЧ-5;ПЧ-6;ПЧ-7;ПЧ-8;ПЧ-9;СПСЧ"; Prop.Unit.SortKey: "11"; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
     Prop.Call: "11"; Prop.Call.Prompt: "Позывной автомобиля"; Prop.Call.Label: "Позывной"; Prop.Call.SortKey: "12"; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
     Prop.ArrowLenght: 16; Prop.ArrowLenght.Prompt: "Вылет стрелы АЛ, м"; Prop.ArrowLenght.Label: "Вылет"; Prop.ArrowLenght.SortKey: "34"; Prop.ArrowLenght.Type: 2; Prop.ArrowLenght.Invisible: FALSE; Prop.ArrowLenght.Verify: FALSE; Prop.ArrowLenght.LangID: 1049; 
-    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Set: INDEX(1;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
-    Prop.Model: INDEX(2;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АЛ-17(5301);АЛ-18(52)Л2;АЛ-30(130);АЛ-30(131)Л21;АЛ-30(131)Л22;АЛ-30(131)ПМ-506Д;АЛ-30(157К)Л20;АЛ-30(4310)ПМ-512;АЛ-30(43101);АЛ-30(43114)ПМ-506Е;АЛ-30(43206);АЛ-30(433442)ПМ-506Н;АЛ-30(53373);АЛ-30(5557);АЛ-30/40(4320-60);АЛ-31(433112);АЛ-33(43114);АЛ-33(53215);АЛ-37(53213);АЛ-37(53229);АЛ-37(65115);АЛ-42(53605)01ВИТ;АЛ-45(200)ЛД;АЛ-45(257)ПМ109;АЛ-50(53229)ПМ-513;АЛ-52(65201)130ВР;АЛ-55(6520)мод.02ВИТ;АЛ-60(T815)ПМ-553А;АЛГ-17(51)ЛЧ"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
-    Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 50; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АЛ-30(131)ПМ-506Д;АЛ-30(4310)ПМ-512;АЛ-50(53229)ПМ-513"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.WFLink: "http://wiki-fire.org/АЛ_30_131_ПМ_506Д.ashx"; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 50; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
     Prop.Hose38: 0; Prop.Hose38.Prompt: "Запас напорных рукавов 38 мм"; Prop.Hose38.Label: "Рукава 38"; Prop.Hose38.Format: ""; Prop.Hose38.SortKey: "60"; Prop.Hose38.Type: 2; Prop.Hose38.Invisible: FALSE; Prop.Hose38.Verify: FALSE; Prop.Hose38.LangID: 1049; Prop.Hose38.Calendar: 0; 
     Prop.PersonnelHave: 3; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: "32"; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля, км/ч"; Prop.Speed.Label: "Максимальная скорость"; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
@@ -602,7 +602,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 3; User.IndexPers.Prompt: "АЛ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет подписи"; 
@@ -719,7 +719,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 4; User.IndexPers.Prompt: Prop.LiftTipe&" подъемник"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -874,7 +874,7 @@
   Section: TextField>>>
     Fields.Value: ""; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.IndexPers: 161; User.IndexPers.Prompt: "АЦЛ"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1037,7 +1037,7 @@
   Section: TextField>>>
     Fields.Value: ""; Fields.EditMode: 0; Fields.Format: FIELDPICTURE(0); Fields.Type: 0; Fields.UICat: 0; Fields.UICod: 255; Fields.UIFmt: 0; Fields.Calendar: 0; Fields.ObjectKind: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Основной цвет"; 
     User.IndexPers: 162; User.IndexPers.Prompt: "АЦКП"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1188,7 +1188,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 9; User.IndexPers.Prompt: "АА"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1302,7 +1302,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 5; User.IndexPers.Prompt: "АСО"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывных"; 
@@ -1419,7 +1419,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 6; User.IndexPers.Prompt: "АТ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -1526,7 +1526,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 7; User.IndexPers.Prompt: "АДУ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -1667,7 +1667,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 8; User.IndexPers.Prompt: "ПНС"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1806,7 +1806,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 10; User.IndexPers.Prompt: "АВ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -1919,9 +1919,9 @@
     Prop.Patrub: INDEX(0;Prop.Patrub.Format); Prop.Patrub.Prompt: "Показывать напорные патрубки"; Prop.Patrub.Label: "Патрубки"; Prop.Patrub.Format: "Да;Нет"; Prop.Patrub.SortKey: "20"; Prop.Patrub.Type: 1; Prop.Patrub.Invisible: TRUE; Prop.Patrub.Verify: FALSE; Prop.Patrub.LangID: 1049; 
     Prop.WaterCollect: INDEX(0;Prop.WaterCollect.Format); Prop.WaterCollect.Prompt: "Показывать водосборник"; Prop.WaterCollect.Label: "Водосборник"; Prop.WaterCollect.Format: "Да;Нет"; Prop.WaterCollect.SortKey: "20"; Prop.WaterCollect.Type: 1; Prop.WaterCollect.Invisible: TRUE; Prop.WaterCollect.Verify: FALSE; Prop.WaterCollect.LangID: 1049; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
-    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АКТ 1,0/1000-40;АКТ 2,0/2000-40"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АКТ 1,0/1000-40/40(4334);АКТ 2,0-2000-40/60(4310);АКТ 6,0/1000-80/20(53229);АКТ-05/05(66)"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
     Prop.PodOut: GUARD(Scratch.D1+Scratch.D2+User.GFS_OutLafet); Prop.PodOut.Prompt: "Текущий объем воды подаваемый насосом, л/с"; Prop.PodOut.Label: "Текущий расход"; Prop.PodOut.Format: ""; Prop.PodOut.SortKey: 42; Prop.PodOut.Type: 2; Prop.PodOut.Invisible: FALSE; Prop.PodOut.Verify: FALSE; Prop.PodOut.LangID: 1049; Prop.PodOut.Calendar: 0; 
-    Prop.Foam: 1000; Prop.Foam.Prompt: "Запас пенообразователя (л)"; Prop.Foam.Label: "Запас пенообразователя"; Prop.Foam.SortKey: "33"; Prop.Foam.Type: 2; Prop.Foam.Invisible: FALSE; Prop.Foam.Verify: FALSE; Prop.Foam.LangID: 1049; 
+    Prop.Foam: 0; Prop.Foam.Prompt: "Запас пенообразователя (л)"; Prop.Foam.Label: "Запас пенообразователя"; Prop.Foam.SortKey: "33"; Prop.Foam.Type: 2; Prop.Foam.Invisible: FALSE; Prop.Foam.Verify: FALSE; Prop.Foam.LangID: 1049; 
     Prop.PersonnelHave: 3; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: "31"; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
     Prop.Hose51: 4; Prop.Hose51.Prompt: "Запас пожарных рукавов диаметром 51мм"; Prop.Hose51.Label: "Рукава 51"; Prop.Hose51.SortKey: 35; Prop.Hose51.Type: 2; Prop.Hose51.Invisible: TRUE; Prop.Hose51.Verify: FALSE; Prop.Hose51.LangID: 1049; 
@@ -1931,8 +1931,8 @@
     Prop.PumpPresureLow: 100; Prop.PumpPresureLow.Prompt: "Максимальный напор создаваемый насосом."; Prop.PumpPresureLow.Label: "Напор"; Prop.PumpPresureLow.SortKey: 41; Prop.PumpPresureLow.Type: 2; Prop.PumpPresureLow.Invisible: FALSE; Prop.PumpPresureLow.Verify: FALSE; Prop.PumpPresureLow.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Макс скорость"; Prop.Speed.SortKey: 50; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.Powder: 1000; Prop.Powder.Prompt: "Запас порошка (кг)"; Prop.Powder.Label: "Запас порошка"; Prop.Powder.SortKey: "34"; Prop.Powder.Type: 2; Prop.Powder.Invisible: FALSE; Prop.Powder.Verify: FALSE; Prop.Powder.LangID: 1049; 
-    Prop.Water.Prompt: "Запас воды (л)"; Prop.Water.Label: "Запас воды"; Prop.Water.SortKey: "32"; Prop.Water.Type: 2; Prop.Water.Invisible: FALSE; Prop.Water.Verify: FALSE; Prop.Water.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Water: 1000; Prop.Water.Prompt: "Запас воды (л)"; Prop.Water.Label: "Запас воды"; Prop.Water.SortKey: "32"; Prop.Water.Type: 2; Prop.Water.Invisible: FALSE; Prop.Water.Verify: FALSE; Prop.Water.LangID: 1049; 
+    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
     Prop.HoseOverAll: 0; Prop.HoseOverAll.Prompt: "Длинна рукавной линии, м"; Prop.HoseOverAll.Label: "Линия"; Prop.HoseOverAll.Format: ""; Prop.HoseOverAll.SortKey: 38; Prop.HoseOverAll.Type: 2; Prop.HoseOverAll.Invisible: FALSE; Prop.HoseOverAll.Verify: FALSE; Prop.HoseOverAll.LangID: 1049; Prop.HoseOverAll.Calendar: 0; 
     Prop.PumpPressureCur: GUARD(MAX(Scratch.C1;Scratch.C2;User.GFS_OutLafet.Prompt)); Prop.PumpPressureCur.Prompt: "Текущий напор создаваемый насосом, м"; Prop.PumpPressureCur.Label: "Требуемый напор"; Prop.PumpPressureCur.Format: ""; Prop.PumpPressureCur.SortKey: 43; Prop.PumpPressureCur.Type: 2; Prop.PumpPressureCur.Invisible: FALSE; Prop.PumpPressureCur.Verify: FALSE; Prop.PumpPressureCur.LangID: 1049; Prop.PumpPressureCur.Calendar: 0; 
     Prop.PodIn: GUARD(Scratch.D3*Scratch.A3+Scratch.D4*Scratch.A4+Scratch.D5*Scratch.A5); Prop.PodIn.Prompt: "Объем воды забираемой насосом или получаемой от других источников, л/с"; Prop.PodIn.Label: "Получается воды"; Prop.PodIn.Format: ""; Prop.PodIn.SortKey: 44; Prop.PodIn.Type: 2; Prop.PodIn.Invisible: FALSE; Prop.PodIn.Verify: FALSE; Prop.PodIn.LangID: 1049; Prop.PodIn.Calendar: 0; 
@@ -1948,7 +1948,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 11; User.IndexPers.Prompt: "АКТ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -2055,7 +2055,7 @@
     Prop.Patrub: INDEX(0;Prop.Patrub.Format); Prop.Patrub.Prompt: "Показывать напорные патрубки"; Prop.Patrub.Label: "Патрубки"; Prop.Patrub.Format: "Да;Нет"; Prop.Patrub.SortKey: "20"; Prop.Patrub.Type: 1; Prop.Patrub.Invisible: TRUE; Prop.Patrub.Verify: FALSE; Prop.Patrub.LangID: 1049; 
     Prop.WaterCollect: TRUE; Prop.WaterCollect.Prompt: "Показывать водосборник"; Prop.WaterCollect.Label: "Водосборник"; Prop.WaterCollect.Format: "Да;Нет"; Prop.WaterCollect.SortKey: "20"; Prop.WaterCollect.Type: 1; Prop.WaterCollect.Invisible: TRUE; Prop.WaterCollect.Verify: FALSE; Prop.WaterCollect.LangID: 1049; 
     Prop.IndexPers: 12; Prop.IndexPers.Prompt: "Индекс Шаблона"; Prop.IndexPers.Label: "IndexPers"; Prop.IndexPers.SortKey: "1"; Prop.IndexPers.Type: 2; Prop.IndexPers.Invisible: TRUE; Prop.IndexPers.Verify: FALSE; Prop.IndexPers.LangID: 1049; 
-    Prop.Model: INDEX(1;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АП-500-20;АП-1000-40;АП-2000-60;АП-4000-60"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АП 1000-40(4327);АП 2000-60(4334);АП 4000-60(4310);АП 5000(53215);АП 500-20(33027);АП-0,7(66)122;АП-1(66);АП-3(130)148А*;АП-5 (53213) 196;АП-5-40(53215)29 ВР"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 50; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
     Prop.PersonnelHave: 3; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: "31"; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
@@ -2067,16 +2067,16 @@
     Prop.PumpPresureLow.Prompt: "Максимальный напор создаваемый насосом."; Prop.PumpPresureLow.Label: "Напор"; Prop.PumpPresureLow.SortKey: "35"; Prop.PumpPresureLow.Type: 2; Prop.PumpPresureLow.Invisible: TRUE; Prop.PumpPresureLow.Verify: FALSE; Prop.PumpPresureLow.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Максимальная скорость (км/ч)"; Prop.Speed.SortKey: "36"; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.Powder: 1000; Prop.Powder.Prompt: "Запас порошка (кг)"; Prop.Powder.Label: "Запас порошка (кг)"; Prop.Powder.SortKey: "34"; Prop.Powder.Type: 2; Prop.Powder.Invisible: FALSE; Prop.Powder.Verify: FALSE; Prop.Powder.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
     Prop.StvolNumber: 0; Prop.StvolNumber.Prompt: "Количество ручных порошковых стволов"; Prop.StvolNumber.Label: "Ручные стволы"; Prop.StvolNumber.Format: ""; Prop.StvolNumber.SortKey: "35"; Prop.StvolNumber.Type: 2; Prop.StvolNumber.Invisible: FALSE; Prop.StvolNumber.Verify: FALSE; Prop.StvolNumber.LangID: 1049; Prop.StvolNumber.Calendar: 0; 
-    Prop.Lafet: ""; Prop.Lafet.Prompt: "Тип лафетного ствола"; Prop.Lafet.Label: "Лафетный ствол"; Prop.Lafet.Format: ""; Prop.Lafet.SortKey: "40"; Prop.Lafet.Type: 0; Prop.Lafet.Invisible: FALSE; Prop.Lafet.Verify: FALSE; Prop.Lafet.LangID: 1049; Prop.Lafet.Calendar: 0; 
+    Prop.Lafet: 0; Prop.Lafet.Prompt: "Тип лафетного ствола"; Prop.Lafet.Label: "Лафетный ствол"; Prop.Lafet.Format: ""; Prop.Lafet.SortKey: "40"; Prop.Lafet.Type: 0; Prop.Lafet.Invisible: FALSE; Prop.Lafet.Verify: FALSE; Prop.Lafet.LangID: 1049; Prop.Lafet.Calendar: 0; 
   Section: Scratch>>>
     
     
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 12; User.IndexPers.Prompt: "АП"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -2187,21 +2187,21 @@
     Prop.Patrub: INDEX(0;Prop.Patrub.Format); Prop.Patrub.Prompt: "Показывать напорные патрубки"; Prop.Patrub.Label: "Патрубки"; Prop.Patrub.Format: "Да;Нет"; Prop.Patrub.SortKey: "21"; Prop.Patrub.Type: 1; Prop.Patrub.Invisible: TRUE; Prop.Patrub.Verify: FALSE; Prop.Patrub.LangID: 1049; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.PodOut: MAX(Prop.WaterMaintExt;Prop.WaterMaintPrev); Prop.PodOut.Prompt: "Требуемая подача воды (л)"; Prop.PodOut.Label: "Требуемая подача воды"; Prop.PodOut.Format: ""; Prop.PodOut.SortKey: 38; Prop.PodOut.Type: 2; Prop.PodOut.Invisible: FALSE; Prop.PodOut.Verify: FALSE; Prop.PodOut.LangID: 1049; Prop.PodOut.Calendar: 0; 
-    Prop.Model: INDEX(1;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.SortKey: "23"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АГВТ-100(131);АГВТ-150(375);АГВТ-150(43114);АГВТ-200(253)"; Prop.Model.SortKey: "23"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
     Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 50; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
     Prop.PersonnelHave: 3; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: "31"; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Макс скорость"; Prop.Speed.SortKey: "45"; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.WaterCollect: INDEX(1;Prop.WaterCollect.Format); Prop.WaterCollect.Prompt: "Показывать водосборники"; Prop.WaterCollect.Label: "Водосборники"; Prop.WaterCollect.Format: "Да;Нет"; Prop.WaterCollect.SortKey: 22; Prop.WaterCollect.Type: 1; Prop.WaterCollect.Invisible: TRUE; Prop.WaterCollect.Verify: FALSE; Prop.WaterCollect.LangID: 1049; 
-    Prop.WGProductivityExt: 0; Prop.WGProductivityExt.Prompt: "Расход воды на тушение, л/с"; Prop.WGProductivityExt.Label: "Расход воды на тушение"; Prop.WGProductivityExt.SortKey: 35; Prop.WGProductivityExt.Type: 2; Prop.WGProductivityExt.Invisible: FALSE; Prop.WGProductivityExt.Verify: FALSE; Prop.WGProductivityExt.LangID: 1049; 
-    Prop.TRDMK.Prompt: "Марка турбо-реактивного двигателя"; Prop.TRDMK.Label: "Марка ТРД"; Prop.TRDMK.SortKey: 33; Prop.TRDMK.Type: 0; Prop.TRDMK.Invisible: FALSE; Prop.TRDMK.Verify: FALSE; Prop.TRDMK.LangID: 1049; 
-    Prop.TRDVolume.Prompt: "Запас горючего для турбо-реактивного двигателя"; Prop.TRDVolume.Label: "Запас топлива ТРД"; Prop.TRDVolume.SortKey: 34; Prop.TRDVolume.Type: 2; Prop.TRDVolume.Invisible: FALSE; Prop.TRDVolume.Verify: FALSE; Prop.TRDVolume.LangID: 1049; 
-    Prop.FuelMaint: 0; Prop.FuelMaint.Prompt: "Расход топлива на оптимальном режиме"; Prop.FuelMaint.Label: "Расход топлива ТРД"; Prop.FuelMaint.SortKey: 41; Prop.FuelMaint.Type: 2; Prop.FuelMaint.Invisible: TRUE; Prop.FuelMaint.Verify: FALSE; Prop.FuelMaint.LangID: 1049; 
-    Prop.WaterMaintExt: 10; Prop.WaterMaintExt.Prompt: "Расход воды на тушение"; Prop.WaterMaintExt.Label: "Расход воды на тушение"; Prop.WaterMaintExt.SortKey: 42; Prop.WaterMaintExt.Type: 2; Prop.WaterMaintExt.Invisible: TRUE; Prop.WaterMaintExt.Verify: FALSE; Prop.WaterMaintExt.LangID: 1049; 
-    Prop.WaterMaintPrev: 15; Prop.WaterMaintPrev.Prompt: "Расход воды на орошение"; Prop.WaterMaintPrev.Label: "Расход воды на орошение"; Prop.WaterMaintPrev.SortKey: 43; Prop.WaterMaintPrev.Type: 2; Prop.WaterMaintPrev.Invisible: TRUE; Prop.WaterMaintPrev.Verify: FALSE; Prop.WaterMaintPrev.LangID: 1049; 
-    Prop.InPressure: 100; Prop.InPressure.Prompt: "Напор воды на входе в АГВТ"; Prop.InPressure.Label: "Требуемый напор"; Prop.InPressure.SortKey: 37; Prop.InPressure.Type: 2; Prop.InPressure.Invisible: FALSE; Prop.InPressure.Verify: FALSE; Prop.InPressure.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: "22"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
-    Prop.WGProductivityCold: 0; Prop.WGProductivityCold.Prompt: "Расход воды на орошение, л/с"; Prop.WGProductivityCold.Label: "Расход воды на орошение"; Prop.WGProductivityCold.Format: ""; Prop.WGProductivityCold.SortKey: "36"; Prop.WGProductivityCold.Type: 2; Prop.WGProductivityCold.Invisible: FALSE; Prop.WGProductivityCold.Verify: FALSE; Prop.WGProductivityCold.LangID: 1049; Prop.WGProductivityCold.Calendar: 0; 
+    Prop.WGProductivityExt: 60; Prop.WGProductivityExt.Prompt: "Расход воды на тушение, л/с"; Prop.WGProductivityExt.Label: "Расход воды на тушение"; Prop.WGProductivityExt.SortKey: 35; Prop.WGProductivityExt.Type: 2; Prop.WGProductivityExt.Invisible: FALSE; Prop.WGProductivityExt.Verify: FALSE; Prop.WGProductivityExt.LangID: 1049; 
+    Prop.TRDMK: "ВК-1"; Prop.TRDMK.Prompt: "Марка турбо-реактивного двигателя"; Prop.TRDMK.Label: "Марка ТРД"; Prop.TRDMK.SortKey: 33; Prop.TRDMK.Type: 0; Prop.TRDMK.Invisible: FALSE; Prop.TRDMK.Verify: FALSE; Prop.TRDMK.LangID: 1049; 
+    Prop.TRDVolume: 1700; Prop.TRDVolume.Prompt: "Запас горючего для турбо-реактивного двигателя"; Prop.TRDVolume.Label: "Запас топлива ТРД"; Prop.TRDVolume.SortKey: 34; Prop.TRDVolume.Type: 2; Prop.TRDVolume.Invisible: FALSE; Prop.TRDVolume.Verify: FALSE; Prop.TRDVolume.LangID: 1049; 
+    Prop.FuelMaint: 0,7; Prop.FuelMaint.Prompt: "Расход топлива на оптимальном режиме"; Prop.FuelMaint.Label: "Расход топлива ТРД"; Prop.FuelMaint.SortKey: 41; Prop.FuelMaint.Type: 2; Prop.FuelMaint.Invisible: TRUE; Prop.FuelMaint.Verify: FALSE; Prop.FuelMaint.LangID: 1049; 
+    Prop.WaterMaintExt: 60; Prop.WaterMaintExt.Prompt: "Расход воды на тушение"; Prop.WaterMaintExt.Label: "Расход воды на тушение"; Prop.WaterMaintExt.SortKey: 42; Prop.WaterMaintExt.Type: 2; Prop.WaterMaintExt.Invisible: TRUE; Prop.WaterMaintExt.Verify: FALSE; Prop.WaterMaintExt.LangID: 1049; 
+    Prop.WaterMaintPrev: 10; Prop.WaterMaintPrev.Prompt: "Расход воды на орошение"; Prop.WaterMaintPrev.Label: "Расход воды на орошение"; Prop.WaterMaintPrev.SortKey: 43; Prop.WaterMaintPrev.Type: 2; Prop.WaterMaintPrev.Invisible: TRUE; Prop.WaterMaintPrev.Verify: FALSE; Prop.WaterMaintPrev.LangID: 1049; 
+    Prop.InPressure: 40; Prop.InPressure.Prompt: "Напор воды на входе в АГВТ"; Prop.InPressure.Label: "Требуемый напор"; Prop.InPressure.SortKey: 37; Prop.InPressure.Type: 2; Prop.InPressure.Invisible: FALSE; Prop.InPressure.Verify: FALSE; Prop.InPressure.LangID: 1049; 
+    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: "22"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.WGProductivityCold: 10; Prop.WGProductivityCold.Prompt: "Расход воды на орошение, л/с"; Prop.WGProductivityCold.Label: "Расход воды на орошение"; Prop.WGProductivityCold.Format: ""; Prop.WGProductivityCold.SortKey: "36"; Prop.WGProductivityCold.Type: 2; Prop.WGProductivityCold.Invisible: FALSE; Prop.WGProductivityCold.Verify: FALSE; Prop.WGProductivityCold.LangID: 1049; Prop.WGProductivityCold.Calendar: 0; 
   Section: Scratch>>>
     Scratch.C1: Prop.InPressure; Scratch.D1: (Prop.PodOut)/(Scratch.A1+Scratch.A2+Scratch.A3+Scratch.A4+Scratch.A5+Scratch.A6); 
     Scratch.C2: Prop.InPressure; Scratch.D2: (Prop.PodOut)/(Scratch.A1+Scratch.A2+Scratch.A3+Scratch.A4+Scratch.A5+Scratch.A6); 
@@ -2212,7 +2212,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 13; User.IndexPers.Prompt: "АГВТ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -2314,9 +2314,9 @@
     Prop.Call: "11"; Prop.Call.Prompt: "Позывной автомобиля"; Prop.Call.Label: "Позывной"; Prop.Call.SortKey: "12"; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
     Prop.Patrub: INDEX(0;Prop.Patrub.Format); Prop.Patrub.Prompt: "Показывать напорные патрубки"; Prop.Patrub.Label: "Патрубки"; Prop.Patrub.Format: "Да;Нет"; Prop.Patrub.SortKey: "20"; Prop.Patrub.Type: 1; Prop.Patrub.Invisible: TRUE; Prop.Patrub.Verify: FALSE; Prop.Patrub.LangID: 1049; 
     Prop.WaterCollect: INDEX(1;Prop.WaterCollect.Format); Prop.WaterCollect.Prompt: "Показывать водосборник"; Prop.WaterCollect.Label: "Водосборник"; Prop.WaterCollect.Format: "Да;Нет"; Prop.WaterCollect.SortKey: "20"; Prop.WaterCollect.Type: 1; Prop.WaterCollect.Invisible: TRUE; Prop.WaterCollect.Verify: FALSE; Prop.WaterCollect.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
-    Prop.Model: INDEX(1;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АГТ-1000;АГТ-2000;АГТ-4000"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
-    Prop.Lafet: ""; Prop.Lafet.Prompt: "Тип лафетного ствола"; Prop.Lafet.Label: "Лафетный ствол"; Prop.Lafet.Format: ""; Prop.Lafet.SortKey: "40"; Prop.Lafet.Type: 0; Prop.Lafet.Invisible: FALSE; Prop.Lafet.Verify: FALSE; Prop.Lafet.LangID: 1049; Prop.Lafet.Calendar: 0; 
+    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АГТ 4000(53229);АГТ-0,25(3307);АГТ-0,6(3309);АГТ-1(4331)"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Lafet: 0; Prop.Lafet.Prompt: "Тип лафетного ствола"; Prop.Lafet.Label: "Лафетный ствол"; Prop.Lafet.Format: ""; Prop.Lafet.SortKey: "40"; Prop.Lafet.Type: 0; Prop.Lafet.Invisible: FALSE; Prop.Lafet.Verify: FALSE; Prop.Lafet.LangID: 1049; Prop.Lafet.Calendar: 0; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.PersonnelHave: 3; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: "31"; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
@@ -2331,7 +2331,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 14; User.IndexPers.Prompt: "АГ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -2430,30 +2430,30 @@
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: "60"; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
     Prop.Hose38: 0; Prop.Hose38.Prompt: "Запас напорных рукавов 38 мм"; Prop.Hose38.Label: "Рукава 38"; Prop.Hose38.Format: ""; Prop.Hose38.SortKey: ""; Prop.Hose38.Type: 2; Prop.Hose38.Invisible: FALSE; Prop.Hose38.Verify: FALSE; Prop.Hose38.LangID: 1049; Prop.Hose38.Calendar: 0; 
-    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АГ;АГ-12(2705);АГ-16(3205);АГ-16(5301);АГ-20(43101);АГ-20-9(433362);АГДЗС(150)"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АГ"; Prop.Model.SortKey: "31"; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
     Prop.Hose51: 0; Prop.Hose51.Prompt: "Запас напорных рукавов 51 мм"; Prop.Hose51.Label: "Рукава 51"; Prop.Hose51.Format: ""; Prop.Hose51.SortKey: "61"; Prop.Hose51.Type: 2; Prop.Hose51.Invisible: FALSE; Prop.Hose51.Verify: FALSE; Prop.Hose51.LangID: 1049; Prop.Hose51.Calendar: 0; 
     Prop.Hose77: 0; Prop.Hose77.Prompt: "Запас напорных рукавов 77 мм"; Prop.Hose77.Label: "Рукава 77"; Prop.Hose77.Format: ""; Prop.Hose77.SortKey: "62"; Prop.Hose77.Type: 2; Prop.Hose77.Invisible: FALSE; Prop.Hose77.Verify: FALSE; Prop.Hose77.LangID: 1049; Prop.Hose77.Calendar: 0; 
-    Prop.PersonnelHave: 4; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: "33"; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
+    Prop.PersonnelHave: 7; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: "33"; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Максимальная скорость"; Prop.Speed.SortKey: "50"; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
-    Prop.GeneratorMK.Prompt: "Марка генератора"; Prop.GeneratorMK.Label: "Генератор"; Prop.GeneratorMK.SortKey: 33; Prop.GeneratorMK.Type: 0; Prop.GeneratorMK.Invisible: FALSE; Prop.GeneratorMK.Verify: FALSE; Prop.GeneratorMK.LangID: 1049; 
-    Prop.GeneratorVoltage.Prompt: "Напряжение генератора"; Prop.GeneratorVoltage.Label: "Напряжение генератора"; Prop.GeneratorVoltage.SortKey: 34; Prop.GeneratorVoltage.Type: 2; Prop.GeneratorVoltage.Invisible: FALSE; Prop.GeneratorVoltage.Verify: FALSE; Prop.GeneratorVoltage.LangID: 1049; 
-    Prop.GeneratorPower.Prompt: "Мощность генератора (Вт)"; Prop.GeneratorPower.Label: "Мощность генератора"; Prop.GeneratorPower.SortKey: 35; Prop.GeneratorPower.Type: 2; Prop.GeneratorPower.Invisible: FALSE; Prop.GeneratorPower.Verify: FALSE; Prop.GeneratorPower.LangID: 1049; 
-    Prop.LightType.Prompt: "Тип стационарного прожектора"; Prop.LightType.Label: "Прожектор стационарый"; Prop.LightType.SortKey: 36; Prop.LightType.Type: 0; Prop.LightType.Invisible: FALSE; Prop.LightType.Verify: FALSE; Prop.LightType.LangID: 1049; 
-    Prop.LifhtCount.Prompt: "Количество прожеткоров"; Prop.LifhtCount.Label: "Количество стационарных прожекторов"; Prop.LifhtCount.SortKey: 37; Prop.LifhtCount.Type: 2; Prop.LifhtCount.Invisible: FALSE; Prop.LifhtCount.Verify: FALSE; Prop.LifhtCount.LangID: 1049; 
+    Prop.GeneratorMK: 0; Prop.GeneratorMK.Prompt: "Марка генератора"; Prop.GeneratorMK.Label: "Генератор"; Prop.GeneratorMK.SortKey: 33; Prop.GeneratorMK.Type: 0; Prop.GeneratorMK.Invisible: FALSE; Prop.GeneratorMK.Verify: FALSE; Prop.GeneratorMK.LangID: 1049; 
+    Prop.GeneratorVoltage: 0; Prop.GeneratorVoltage.Prompt: "Напряжение генератора"; Prop.GeneratorVoltage.Label: "Напряжение генератора"; Prop.GeneratorVoltage.SortKey: 34; Prop.GeneratorVoltage.Type: 2; Prop.GeneratorVoltage.Invisible: FALSE; Prop.GeneratorVoltage.Verify: FALSE; Prop.GeneratorVoltage.LangID: 1049; 
+    Prop.GeneratorPower: 16; Prop.GeneratorPower.Prompt: "Мощность генератора (Вт)"; Prop.GeneratorPower.Label: "Мощность генератора"; Prop.GeneratorPower.SortKey: 35; Prop.GeneratorPower.Type: 2; Prop.GeneratorPower.Invisible: FALSE; Prop.GeneratorPower.Verify: FALSE; Prop.GeneratorPower.LangID: 1049; 
+    Prop.LightType: 0; Prop.LightType.Prompt: "Тип стационарного прожектора"; Prop.LightType.Label: "Прожектор стационарый"; Prop.LightType.SortKey: 36; Prop.LightType.Type: 0; Prop.LightType.Invisible: FALSE; Prop.LightType.Verify: FALSE; Prop.LightType.LangID: 1049; 
+    Prop.LifhtCount: 0; Prop.LifhtCount.Prompt: "Количество прожеткоров"; Prop.LifhtCount.Label: "Количество стационарных прожекторов"; Prop.LifhtCount.SortKey: 37; Prop.LifhtCount.Type: 2; Prop.LifhtCount.Invisible: FALSE; Prop.LifhtCount.Verify: FALSE; Prop.LifhtCount.LangID: 1049; 
     Prop.LightPower.Prompt: "Мощность прожекторов"; Prop.LightPower.Label: "Мощность прожекторов"; Prop.LightPower.SortKey: 38; Prop.LightPower.Type: 2; Prop.LightPower.Invisible: FALSE; Prop.LightPower.Verify: FALSE; Prop.LightPower.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
-    Prop.LightType1: ""; Prop.LightType1.Prompt: "1 тип переносных прожекторов"; Prop.LightType1.Label: "Прожектор переносной 1"; Prop.LightType1.Format: ""; Prop.LightType1.SortKey: "40"; Prop.LightType1.Type: 0; Prop.LightType1.Invisible: FALSE; Prop.LightType1.Verify: FALSE; Prop.LightType1.LangID: 1049; Prop.LightType1.Calendar: 0; 
-    Prop.LightTipe1Numbers: ""; Prop.LightTipe1Numbers.Prompt: "Количество переносных прожекторов 1"; Prop.LightTipe1Numbers.Label: "Количество переносных прожекторов 1"; Prop.LightTipe1Numbers.Format: ""; Prop.LightTipe1Numbers.SortKey: "41"; Prop.LightTipe1Numbers.Type: 0; Prop.LightTipe1Numbers.Invisible: FALSE; Prop.LightTipe1Numbers.Verify: FALSE; Prop.LightTipe1Numbers.LangID: 1049; Prop.LightTipe1Numbers.Calendar: 0; 
-    Prop.LightType2: ""; Prop.LightType2.Prompt: "2 тип переносных прожекторов"; Prop.LightType2.Label: "Прожектор переносной 2"; Prop.LightType2.Format: ""; Prop.LightType2.SortKey: "42"; Prop.LightType2.Type: 0; Prop.LightType2.Invisible: FALSE; Prop.LightType2.Verify: FALSE; Prop.LightType2.LangID: 1049; Prop.LightType2.Calendar: 0; 
-    Prop.LightTipe2Numbers: ""; Prop.LightTipe2Numbers.Prompt: "Количество переносных прожекторов 2"; Prop.LightTipe2Numbers.Label: "Количество переносных прожекторов 1"; Prop.LightTipe2Numbers.Format: ""; Prop.LightTipe2Numbers.SortKey: "43"; Prop.LightTipe2Numbers.Type: 0; Prop.LightTipe2Numbers.Invisible: FALSE; Prop.LightTipe2Numbers.Verify: FALSE; Prop.LightTipe2Numbers.LangID: 1049; Prop.LightTipe2Numbers.Calendar: 0; 
+    Prop.Set: INDEX(1;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: "30"; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.LightType1: 0; Prop.LightType1.Prompt: "1 тип переносных прожекторов"; Prop.LightType1.Label: "Прожектор переносной 1"; Prop.LightType1.Format: ""; Prop.LightType1.SortKey: "40"; Prop.LightType1.Type: 0; Prop.LightType1.Invisible: FALSE; Prop.LightType1.Verify: FALSE; Prop.LightType1.LangID: 1049; Prop.LightType1.Calendar: 0; 
+    Prop.LightTipe1Numbers: 0; Prop.LightTipe1Numbers.Prompt: "Количество переносных прожекторов 1"; Prop.LightTipe1Numbers.Label: "Количество переносных прожекторов 1"; Prop.LightTipe1Numbers.Format: ""; Prop.LightTipe1Numbers.SortKey: "41"; Prop.LightTipe1Numbers.Type: 0; Prop.LightTipe1Numbers.Invisible: FALSE; Prop.LightTipe1Numbers.Verify: FALSE; Prop.LightTipe1Numbers.LangID: 1049; Prop.LightTipe1Numbers.Calendar: 0; 
+    Prop.LightType2: 0; Prop.LightType2.Prompt: "2 тип переносных прожекторов"; Prop.LightType2.Label: "Прожектор переносной 2"; Prop.LightType2.Format: ""; Prop.LightType2.SortKey: "42"; Prop.LightType2.Type: 0; Prop.LightType2.Invisible: FALSE; Prop.LightType2.Verify: FALSE; Prop.LightType2.LangID: 1049; Prop.LightType2.Calendar: 0; 
+    Prop.LightTipe2Numbers: 0; Prop.LightTipe2Numbers.Prompt: "Количество переносных прожекторов 2"; Prop.LightTipe2Numbers.Label: "Количество переносных прожекторов 1"; Prop.LightTipe2Numbers.Format: ""; Prop.LightTipe2Numbers.SortKey: "43"; Prop.LightTipe2Numbers.Type: 0; Prop.LightTipe2Numbers.Invisible: FALSE; Prop.LightTipe2Numbers.Verify: FALSE; Prop.LightTipe2Numbers.LangID: 1049; Prop.LightTipe2Numbers.Calendar: 0; 
     Prop.Fogers: 0; Prop.Fogers.Prompt: "Число переносных газоструйных дымососов"; Prop.Fogers.Label: "Дымососов"; Prop.Fogers.Format: ""; Prop.Fogers.SortKey: "44"; Prop.Fogers.Type: 2; Prop.Fogers.Invisible: FALSE; Prop.Fogers.Verify: FALSE; Prop.Fogers.LangID: 1049; Prop.Fogers.Calendar: 0; 
     Prop.BetBrakers: 0; Prop.BetBrakers.Prompt: "Количество переносных бетоноломов"; Prop.BetBrakers.Label: "Бетоноломов"; Prop.BetBrakers.Format: ""; Prop.BetBrakers.SortKey: "45"; Prop.BetBrakers.Type: 2; Prop.BetBrakers.Invisible: FALSE; Prop.BetBrakers.Verify: FALSE; Prop.BetBrakers.LangID: 1049; Prop.BetBrakers.Calendar: 0; 
-    Prop.Mast: 0; Prop.Mast.Prompt: "Высота мачты, м"; Prop.Mast.Label: "Высота мачты"; Prop.Mast.Format: ""; Prop.Mast.SortKey: "46"; Prop.Mast.Type: 2; Prop.Mast.Invisible: FALSE; Prop.Mast.Verify: FALSE; Prop.Mast.LangID: 1049; Prop.Mast.Calendar: 0; 
+    Prop.Mast: 6; Prop.Mast.Prompt: "Высота мачты, м"; Prop.Mast.Label: "Высота мачты"; Prop.Mast.Format: ""; Prop.Mast.SortKey: "46"; Prop.Mast.Type: 2; Prop.Mast.Invisible: FALSE; Prop.Mast.Verify: FALSE; Prop.Mast.LangID: 1049; Prop.Mast.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 15; User.IndexPers.Prompt: "АГДЗС"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2550,16 +2550,16 @@
     Prop.Call: "11"; Prop.Call.Prompt: "Позывной автомобиля"; Prop.Call.Label: "Позывной"; Prop.Call.SortKey: 12; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 50; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
-    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: ""; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "ПКС-400(4334)"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
     Prop.PersonnelHave: 2; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: 33; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Макс скорость"; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
-    Prop.Proizv: 0; Prop.Proizv.Prompt: "Производительность м.куб./час"; Prop.Proizv.Label: "Производительность"; Prop.Proizv.Format: ""; Prop.Proizv.SortKey: 35; Prop.Proizv.Type: 2; Prop.Proizv.Invisible: FALSE; Prop.Proizv.Verify: FALSE; Prop.Proizv.LangID: 1049; Prop.Proizv.Calendar: 0; 
+    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Proizv: 115; Prop.Proizv.Prompt: "Производительность м.куб./час"; Prop.Proizv.Label: "Производительность"; Prop.Proizv.Format: ""; Prop.Proizv.SortKey: 35; Prop.Proizv.Type: 2; Prop.Proizv.Invisible: FALSE; Prop.Proizv.Verify: FALSE; Prop.Proizv.LangID: 1049; Prop.Proizv.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 16; User.IndexPers.Prompt: "КС"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2656,15 +2656,15 @@
     Prop.Call: "12"; Prop.Call.Prompt: "Позывной автомобиля"; Prop.Call.Label: "Позывной"; Prop.Call.SortKey: 12; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 50; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
-    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "ЛБ"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.Model: INDEX(1;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: ";ЛБ"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
     Prop.PersonnelHave: 2; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: 33; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Макс скорость"; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Set: INDEX(1;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 17; User.IndexPers.Prompt: "ЛБ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2759,27 +2759,27 @@
   Section: Prop>>>
     Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Список подразделений гарнизона"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: "ПЧ-1"; Prop.Unit.SortKey: 11; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
     Prop.Call: "11"; Prop.Call.Prompt: "Позывной автомобиля"; Prop.Call.Label: "Позывной"; Prop.Call.SortKey: 12; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
     Prop.GeneratorMobMK: 0; Prop.GeneratorMobMK.Prompt: "Мощность выносного электрического агрегата, кВт"; Prop.GeneratorMobMK.Label: "Мощность выносного электрогенератора"; Prop.GeneratorMobMK.Format: ""; Prop.GeneratorMobMK.SortKey: 36; Prop.GeneratorMobMK.Type: 2; Prop.GeneratorMobMK.Invisible: FALSE; Prop.GeneratorMobMK.Verify: FALSE; Prop.GeneratorMobMK.LangID: 1049; Prop.GeneratorMobMK.Calendar: 0; 
-    Prop.KraneType: "Укосина"; Prop.KraneType.Prompt: "Тип подъемного крана"; Prop.KraneType.Label: "Тип крана"; Prop.KraneType.Format: "Укосина;Консольный"; Prop.KraneType.SortKey: 40; Prop.KraneType.Type: 1; Prop.KraneType.Invisible: FALSE; Prop.KraneType.Verify: FALSE; Prop.KraneType.LangID: 1049; Prop.KraneType.Calendar: 0; 
-    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: ""; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.KraneType: 0; Prop.KraneType.Prompt: "Тип подъемного крана"; Prop.KraneType.Label: "Тип крана"; Prop.KraneType.Format: "Укосина;Консольный"; Prop.KraneType.SortKey: 40; Prop.KraneType.Type: 1; Prop.KraneType.Invisible: FALSE; Prop.KraneType.Verify: FALSE; Prop.KraneType.LangID: 1049; Prop.KraneType.Calendar: 0; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АСА-16(3205);АСА-16(432732);АСА-16(5301);АСА-16(5301СС);АСА-20(32114);АСА-20(43101);АСА-20(43203-01);АСА-20(4326)"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
     Prop.KraneHeight: 0; Prop.KraneHeight.Prompt: "Максимальная высота подъема крюка от земли, мм"; Prop.KraneHeight.Label: "Высота подъема"; Prop.KraneHeight.Format: ""; Prop.KraneHeight.SortKey: 42; Prop.KraneHeight.Type: 2; Prop.KraneHeight.Invisible: FALSE; Prop.KraneHeight.Verify: FALSE; Prop.KraneHeight.LangID: 1049; Prop.KraneHeight.Calendar: 0; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
-    Prop.PersonnelHave: 3; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: 33; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
+    Prop.PersonnelHave: 4; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: 33; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 50; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Макс скорость"; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
-    Prop.WeightUp.Prompt: "Грузоподъемность крана (кг.)"; Prop.WeightUp.Label: "Грузоподъемность"; Prop.WeightUp.SortKey: 41; Prop.WeightUp.Type: 2; Prop.WeightUp.Invisible: FALSE; Prop.WeightUp.Verify: FALSE; Prop.WeightUp.LangID: 1049; 
-    Prop.GeneratorMK: ""; Prop.GeneratorMK.Prompt: "Марка генератора"; Prop.GeneratorMK.Label: "Марка генератора"; Prop.GeneratorMK.SortKey: 33; Prop.GeneratorMK.Type: 0; Prop.GeneratorMK.Invisible: FALSE; Prop.GeneratorMK.Verify: FALSE; Prop.GeneratorMK.LangID: 1049; 
+    Prop.WeightUp: 0; Prop.WeightUp.Prompt: "Грузоподъемность крана (кг.)"; Prop.WeightUp.Label: "Грузоподъемность"; Prop.WeightUp.SortKey: 41; Prop.WeightUp.Type: 2; Prop.WeightUp.Invisible: FALSE; Prop.WeightUp.Verify: FALSE; Prop.WeightUp.LangID: 1049; 
+    Prop.GeneratorMK: 0; Prop.GeneratorMK.Prompt: "Марка генератора"; Prop.GeneratorMK.Label: "Марка генератора"; Prop.GeneratorMK.SortKey: 33; Prop.GeneratorMK.Type: 0; Prop.GeneratorMK.Invisible: FALSE; Prop.GeneratorMK.Verify: FALSE; Prop.GeneratorMK.LangID: 1049; 
     Prop.GeneratorVoltage.Prompt: "Напряжение генератора"; Prop.GeneratorVoltage.Label: "Напряжение генератора"; Prop.GeneratorVoltage.SortKey: 34; Prop.GeneratorVoltage.Type: 2; Prop.GeneratorVoltage.Invisible: FALSE; Prop.GeneratorVoltage.Verify: FALSE; Prop.GeneratorVoltage.LangID: 1049; 
-    Prop.GeneratorPower: 12; Prop.GeneratorPower.Prompt: "Мощность генератора (Вт)"; Prop.GeneratorPower.Label: "Мощность стационарного электрогенератора"; Prop.GeneratorPower.SortKey: 35; Prop.GeneratorPower.Type: 2; Prop.GeneratorPower.Invisible: FALSE; Prop.GeneratorPower.Verify: FALSE; Prop.GeneratorPower.LangID: 1049; 
+    Prop.GeneratorPower: 16; Prop.GeneratorPower.Prompt: "Мощность генератора (Вт)"; Prop.GeneratorPower.Label: "Мощность стационарного электрогенератора"; Prop.GeneratorPower.SortKey: 35; Prop.GeneratorPower.Type: 2; Prop.GeneratorPower.Invisible: FALSE; Prop.GeneratorPower.Verify: FALSE; Prop.GeneratorPower.LangID: 1049; 
     Prop.LightType.Prompt: "Тип прожекторов"; Prop.LightType.Label: "Тип прожекторов"; Prop.LightType.SortKey: 36; Prop.LightType.Type: 0; Prop.LightType.Invisible: TRUE; Prop.LightType.Verify: FALSE; Prop.LightType.LangID: 1049; 
     Prop.LifhtCount.Prompt: "Количество прожеткоров"; Prop.LifhtCount.Label: "Количество прожеткоров"; Prop.LifhtCount.SortKey: 37; Prop.LifhtCount.Type: 2; Prop.LifhtCount.Invisible: TRUE; Prop.LifhtCount.Verify: FALSE; Prop.LifhtCount.LangID: 1049; 
     Prop.LightPower.Prompt: "Мощность прожекторов"; Prop.LightPower.Label: "Мощность прожекторов"; Prop.LightPower.SortKey: 38; Prop.LightPower.Type: 2; Prop.LightPower.Invisible: TRUE; Prop.LightPower.Verify: FALSE; Prop.LightPower.LangID: 1049; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 18; User.IndexPers.Prompt: "АСА"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2876,16 +2876,16 @@
     Prop.Call: ""; Prop.Call.Prompt: "Позывной автомобиля"; Prop.Call.Label: "Позывной"; Prop.Call.SortKey: 12; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 50; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
-    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АШ"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
-    Prop.PersonnelHave: 4; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: 33; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АШ-5(2705);АШ-5(322173);АШ-5(37411);АШ-8(3205)"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.PersonnelHave: 5; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: 33; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Макс скорость"; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
-    Prop.Set: "Стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Стандартный"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
     Prop.MobStationsNumbers: 0; Prop.MobStationsNumbers.Prompt: "Количество переносных радиостанций"; Prop.MobStationsNumbers.Label: "Переносных радиостанций"; Prop.MobStationsNumbers.Format: ""; Prop.MobStationsNumbers.SortKey: 34; Prop.MobStationsNumbers.Type: 2; Prop.MobStationsNumbers.Invisible: FALSE; Prop.MobStationsNumbers.Verify: FALSE; Prop.MobStationsNumbers.LangID: 1049; Prop.MobStationsNumbers.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 19; User.IndexPers.Prompt: "АШ"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -2986,21 +2986,21 @@
   Section: Prop>>>
     Prop.Unit: INDEX(0;Prop.Unit.Format); Prop.Unit.Prompt: "Список подразделений гарнизона"; Prop.Unit.Label: "Подразделение"; Prop.Unit.Format: "ПЧ-1;ПЧ-10;ПЧ-19;ПЧ-2;ПЧ-24;ПЧ-3;ПЧ-4;ПЧ-47;ПЧ-5;ПЧ-6;ПЧ-7;ПЧ-8;ПЧ-9;СПЧ по ТКП"; Prop.Unit.SortKey: 11; Prop.Unit.Type: 4; Prop.Unit.Invisible: FALSE; Prop.Unit.Verify: FALSE; Prop.Unit.LangID: 1049; 
     Prop.Call: ""; Prop.Call.Prompt: "Позывной автомобиля"; Prop.Call.Label: "Позывной"; Prop.Call.SortKey: 12; Prop.Call.Type: 0; Prop.Call.Invisible: FALSE; Prop.Call.Verify: FALSE; Prop.Call.LangID: 1049; 
-    Prop.Set: "стандартный"; Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Специфический;Стандартный"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
+    Prop.Set: INDEX(0;Prop.Set.Format); Prop.Set.Prompt: "Набор ТТХ. Например, 'Стандартный' или 'Специфичный для региона'"; Prop.Set.Label: GUARD("Набор "); Prop.Set.Format: "Полный;Распространенные;Специфический"; Prop.Set.SortKey: 30; Prop.Set.Type: 1; Prop.Set.Invisible: FALSE; Prop.Set.Verify: FALSE; Prop.Set.LangID: 1049; Prop.Set.Calendar: 0; 
     Prop.WaterCollect: INDEX(1;Prop.WaterCollect.Format); Prop.WaterCollect.Prompt: "Показывать водосборник"; Prop.WaterCollect.Label: "Водосборник"; Prop.WaterCollect.Format: "Да;Нет"; Prop.WaterCollect.SortKey: 22; Prop.WaterCollect.Type: 1; Prop.WaterCollect.Invisible: TRUE; Prop.WaterCollect.Verify: FALSE; Prop.WaterCollect.LangID: 1049; 
     Prop.Lafet: 0; Prop.Lafet.Prompt: "Марка автомобильного лафетного ствола"; Prop.Lafet.Label: "Лафетный ствол"; Prop.Lafet.Format: ""; Prop.Lafet.SortKey: 46; Prop.Lafet.Type: 0; Prop.Lafet.Invisible: TRUE; Prop.Lafet.Verify: FALSE; Prop.Lafet.LangID: 1049; Prop.Lafet.Calendar: 0; 
-    Prop.Model: INDEX(1;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АР-2(131)133;АР-2(157К)121;АР-2(43101);АР-2(5557)"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
-    Prop.HoseLaySpeed: 10; Prop.HoseLaySpeed.Prompt: "Скорость выкладки рукавных линий, км/ч"; Prop.HoseLaySpeed.Label: "Скорость выкладки"; Prop.HoseLaySpeed.Format: ""; Prop.HoseLaySpeed.SortKey: "61"; Prop.HoseLaySpeed.Type: 2; Prop.HoseLaySpeed.Invisible: FALSE; Prop.HoseLaySpeed.Verify: FALSE; Prop.HoseLaySpeed.LangID: 1049; Prop.HoseLaySpeed.Calendar: 0; 
-    Prop.Hose89: 2200; Prop.Hose89.Prompt: "Запас пожарных рукавов диаметром 89мм"; Prop.Hose89.Label: "Рукава 89"; Prop.Hose89.Format: ""; Prop.Hose89.SortKey: 41; Prop.Hose89.Type: 2; Prop.Hose89.Invisible: FALSE; Prop.Hose89.Verify: FALSE; Prop.Hose89.LangID: 1049; Prop.Hose89.Calendar: 0; 
+    Prop.Model: INDEX(0;Prop.Model.Format); Prop.Model.Prompt: "Модель автомобиля"; Prop.Model.Label: GUARD("Модель "); Prop.Model.Format: "АР-2(131)133;АР-2(157К)121;АР-2(43101);АР-2(5557)"; Prop.Model.SortKey: 31; Prop.Model.Type: 4; Prop.Model.Invisible: FALSE; Prop.Model.Verify: FALSE; Prop.Model.LangID: 1049; 
+    Prop.HoseLaySpeed: 9; Prop.HoseLaySpeed.Prompt: "Скорость выкладки рукавных линий, км/ч"; Prop.HoseLaySpeed.Label: "Скорость выкладки"; Prop.HoseLaySpeed.Format: ""; Prop.HoseLaySpeed.SortKey: "61"; Prop.HoseLaySpeed.Type: 2; Prop.HoseLaySpeed.Invisible: FALSE; Prop.HoseLaySpeed.Verify: FALSE; Prop.HoseLaySpeed.LangID: 1049; Prop.HoseLaySpeed.Calendar: 0; 
+    Prop.Hose89: 1900; Prop.Hose89.Prompt: "Запас пожарных рукавов диаметром 89мм"; Prop.Hose89.Label: "Рукава 89"; Prop.Hose89.Format: ""; Prop.Hose89.SortKey: 41; Prop.Hose89.Type: 2; Prop.Hose89.Invisible: FALSE; Prop.Hose89.Verify: FALSE; Prop.Hose89.LangID: 1049; Prop.Hose89.Calendar: 0; 
     Prop.PersonnelHave: 3; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: 34; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 13; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
-    Prop.Hose110: 1800; Prop.Hose110.Prompt: "Запас пожарных рукавов диаметром 110мм"; Prop.Hose110.Label: "Рукава 110"; Prop.Hose110.Format: ""; Prop.Hose110.SortKey: 42; Prop.Hose110.Type: 2; Prop.Hose110.Invisible: FALSE; Prop.Hose110.Verify: FALSE; Prop.Hose110.LangID: 1049; Prop.Hose110.Calendar: 0; 
+    Prop.Hose110: 1760; Prop.Hose110.Prompt: "Запас пожарных рукавов диаметром 110мм"; Prop.Hose110.Label: "Рукава 110"; Prop.Hose110.Format: ""; Prop.Hose110.SortKey: 42; Prop.Hose110.Type: 2; Prop.Hose110.Invisible: FALSE; Prop.Hose110.Verify: FALSE; Prop.Hose110.LangID: 1049; Prop.Hose110.Calendar: 0; 
     Prop.ArrivalTime: TheDoc!User.CurrentTime; Prop.ArrivalTime.Prompt: "Полное географическое время прибытия"; Prop.ArrivalTime.Label: "Время прибытия"; Prop.ArrivalTime.Format: "{{dd.MM.yyyy HH:mm}}"; Prop.ArrivalTime.SortKey: 13; Prop.ArrivalTime.Type: 5; Prop.ArrivalTime.Invisible: FALSE; Prop.ArrivalTime.Verify: FALSE; Prop.ArrivalTime.LangID: 1049; Prop.ArrivalTime.Calendar: 0; 
     Prop.WFLink: 0; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 60; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
     Prop.Hose66: 0; Prop.Hose66.Prompt: "Запас пожарных рукавов диаметром 66мм"; Prop.Hose66.Label: "Рукава 66"; Prop.Hose66.Format: ""; Prop.Hose66.SortKey: "39"; Prop.Hose66.Type: 2; Prop.Hose66.Invisible: FALSE; Prop.Hose66.Verify: FALSE; Prop.Hose66.LangID: 1049; Prop.Hose66.Calendar: 0; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Максимальная скорость"; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
-    Prop.Hose77: 2500; Prop.Hose77.Prompt: "Запас пожарных рукавов диаметром 77мм"; Prop.Hose77.Label: "Рукава 77"; Prop.Hose77.SortKey: 40; Prop.Hose77.Type: 2; Prop.Hose77.Invisible: FALSE; Prop.Hose77.Verify: FALSE; Prop.Hose77.LangID: 1049; 
-    Prop.Hose150: 1500; Prop.Hose150.Prompt: "Запас пожарных рукавов диаметром 150мм"; Prop.Hose150.Label: "Рукава 150"; Prop.Hose150.SortKey: 43; Prop.Hose150.Type: 2; Prop.Hose150.Invisible: FALSE; Prop.Hose150.Verify: FALSE; Prop.Hose150.LangID: 1049; 
+    Prop.Hose77: 2040; Prop.Hose77.Prompt: "Запас пожарных рукавов диаметром 77мм"; Prop.Hose77.Label: "Рукава 77"; Prop.Hose77.SortKey: 40; Prop.Hose77.Type: 2; Prop.Hose77.Invisible: FALSE; Prop.Hose77.Verify: FALSE; Prop.Hose77.LangID: 1049; 
+    Prop.Hose150: 1340; Prop.Hose150.Prompt: "Запас пожарных рукавов диаметром 150мм"; Prop.Hose150.Label: "Рукава 150"; Prop.Hose150.SortKey: 43; Prop.Hose150.Type: 2; Prop.Hose150.Invisible: FALSE; Prop.Hose150.Verify: FALSE; Prop.Hose150.LangID: 1049; 
     Prop.PodOutLafet: User.GFS_OutLafet; Prop.PodOutLafet.Prompt: "Подается через лафетный ствол, л/с"; Prop.PodOutLafet.Label: "Подается через лафетный ствол"; Prop.PodOutLafet.Format: ""; Prop.PodOutLafet.SortKey: 50; Prop.PodOutLafet.Type: 2; Prop.PodOutLafet.Invisible: NOT(User.GFS_OutLafet); Prop.PodOutLafet.Verify: FALSE; Prop.PodOutLafet.LangID: 1049; Prop.PodOutLafet.Calendar: 0; 
     Prop.PumpPressureCur: GUARD(User.GFS_OutLafet.Prompt); Prop.PumpPressureCur.Prompt: "Требуемый напор на лафетном стволе, м"; Prop.PumpPressureCur.Label: "Требуемый напор на лафетном стволе"; Prop.PumpPressureCur.Format: ""; Prop.PumpPressureCur.SortKey: 51; Prop.PumpPressureCur.Type: 2; Prop.PumpPressureCur.Invisible: NOT(User.GFS_OutLafet); Prop.PumpPressureCur.Verify: FALSE; Prop.PumpPressureCur.LangID: 1049; Prop.PumpPressureCur.Calendar: 0; 
     Prop.Hose38: 0; Prop.Hose38.Prompt: "Запас пожарных рукавов диаметром 38мм"; Prop.Hose38.Label: "Рукава 38"; Prop.Hose38.Format: ""; Prop.Hose38.SortKey: "38"; Prop.Hose38.Type: 2; Prop.Hose38.Invisible: FALSE; Prop.Hose38.Verify: FALSE; Prop.Hose38.LangID: 1049; Prop.Hose38.Calendar: 0; 
@@ -3015,7 +3015,7 @@
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 20; User.IndexPers.Prompt: "АР"; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Styles!Т_Патрубки!LineColor; User.ShapeColor2.Prompt: "Цвет патрубков"; 
@@ -3115,22 +3115,25 @@
     Prop.Type: INDEX(8;Prop.Type.Format); Prop.Type.Prompt: "Тип пожарного автомобиля"; Prop.Type.Label: GUARD("Тип ПА"); Prop.Type.Format: "АБР;АБГ;АВЗ;АПП;АВД;АПТС;АОПТ;АДПТ;"; Prop.Type.SortKey: 15; Prop.Type.Type: 4; Prop.Type.Invisible: FALSE; Prop.Type.Verify: FALSE; Prop.Type.LangID: 1049; 
     Prop.PersonnelHave: 3; Prop.PersonnelHave.Prompt: "Количество личного состава выезжающего на автомобиле"; Prop.PersonnelHave.Label: "Боевой расчет"; Prop.PersonnelHave.SortKey: 33; Prop.PersonnelHave.Type: 2; Prop.PersonnelHave.Invisible: FALSE; Prop.PersonnelHave.Verify: FALSE; Prop.PersonnelHave.LangID: 1049; 
     Prop.Speed.Prompt: "Максимальная скорость движения пожарного автомобиля"; Prop.Speed.Label: "Макс скорость"; Prop.Speed.SortKey: 45; Prop.Speed.Type: 2; Prop.Speed.Invisible: TRUE; Prop.Speed.Verify: FALSE; Prop.Speed.LangID: 1049; 
-    Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 14; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: FALSE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
-    Prop.Dest: INDEX(0;Prop.Dest.Format); Prop.Dest.Prompt: "Вид пожарного автомобиля"; Prop.Dest.Label: "Вид ПА"; Prop.Dest.Format: "Специальный;Основной общего применения;Основной целевого применения"; Prop.Dest.SortKey: "15"; Prop.Dest.Type: 1; Prop.Dest.Verify: FALSE; Prop.Dest.LangID: 1049; 
+    Prop.RegNum.Prompt: "Государственный регистрационный знак автомобиля"; Prop.RegNum.Label: "Гос.номер"; Prop.RegNum.SortKey: 14; Prop.RegNum.Type: 0; Prop.RegNum.Invisible: TRUE; Prop.RegNum.Verify: FALSE; Prop.RegNum.LangID: 1049; 
+    Prop.Dest: INDEX(0;Prop.Dest.Format); Prop.Dest.Prompt: "Вид пожарного автомобиля"; Prop.Dest.Label: "Вид ПА"; Prop.Dest.Format: "Специальный;Специальный высотный;Основной общего применения;Основной целевого применения"; Prop.Dest.SortKey: "15"; Prop.Dest.Type: 1; Prop.Dest.Verify: FALSE; Prop.Dest.LangID: 1049; 
     Prop.RSCHS: 0; Prop.RSCHS.Prompt: "Относится ли техника к силам и средствам РСЧС"; Prop.RSCHS.Label: "РСЧС"; Prop.RSCHS.Format: "Входит;Не входит"; Prop.RSCHS.SortKey: 40; Prop.RSCHS.Type: 1; Prop.RSCHS.Invisible: TRUE; Prop.RSCHS.Verify: FALSE; Prop.RSCHS.LangID: 1049; Prop.RSCHS.Calendar: 0; 
-    Prop.Hose38: 0; Prop.Hose38.Prompt: "Запас напорных рукавов 38 мм"; Prop.Hose38.Label: "Рукава 38"; Prop.Hose38.Format: ""; Prop.Hose38.SortKey: ""; Prop.Hose38.Type: 2; Prop.Hose38.Invisible: FALSE; Prop.Hose38.Verify: FALSE; Prop.Hose38.LangID: 1049; Prop.Hose38.Calendar: 0; 
-    Prop.Hose51: 0; Prop.Hose51.Prompt: "Запас напорных рукавов 51 мм"; Prop.Hose51.Label: "Рукава 51"; Prop.Hose51.Format: ""; Prop.Hose51.SortKey: ""; Prop.Hose51.Type: 2; Prop.Hose51.Invisible: FALSE; Prop.Hose51.Verify: FALSE; Prop.Hose51.LangID: 1049; Prop.Hose51.Calendar: 0; 
-    Prop.Hose77: 0; Prop.Hose77.Prompt: "Запас напорных рукавов 77 мм"; Prop.Hose77.Label: "Рукава 77"; Prop.Hose77.Format: ""; Prop.Hose77.SortKey: ""; Prop.Hose77.Type: 2; Prop.Hose77.Invisible: FALSE; Prop.Hose77.Verify: FALSE; Prop.Hose77.LangID: 1049; Prop.Hose77.Calendar: 0; 
+    Prop.Hose38: 0; Prop.Hose38.Prompt: "Запас напорных рукавов 38 мм"; Prop.Hose38.Label: "Рукава 38"; Prop.Hose38.Format: ""; Prop.Hose38.SortKey: "34"; Prop.Hose38.Type: 2; Prop.Hose38.Invisible: FALSE; Prop.Hose38.Verify: FALSE; Prop.Hose38.LangID: 1049; Prop.Hose38.Calendar: 0; 
+    Prop.Hose51: 0; Prop.Hose51.Prompt: "Запас напорных рукавов 51 мм"; Prop.Hose51.Label: "Рукава 51"; Prop.Hose51.Format: ""; Prop.Hose51.SortKey: "34"; Prop.Hose51.Type: 2; Prop.Hose51.Invisible: FALSE; Prop.Hose51.Verify: FALSE; Prop.Hose51.LangID: 1049; Prop.Hose51.Calendar: 0; 
+    Prop.Hose77: 0; Prop.Hose77.Prompt: "Запас напорных рукавов 77 мм"; Prop.Hose77.Label: "Рукава 77"; Prop.Hose77.Format: ""; Prop.Hose77.SortKey: "35"; Prop.Hose77.Type: 2; Prop.Hose77.Invisible: FALSE; Prop.Hose77.Verify: FALSE; Prop.Hose77.LangID: 1049; Prop.Hose77.Calendar: 0; 
     Prop.Hose89: 0; Prop.Hose89.Prompt: "Запас напорных рукавов 89 мм"; Prop.Hose89.Label: "Рукава 89"; Prop.Hose89.Format: ""; Prop.Hose89.SortKey: ""; Prop.Hose89.Type: 2; Prop.Hose89.Invisible: FALSE; Prop.Hose89.Verify: FALSE; Prop.Hose89.LangID: 1049; Prop.Hose89.Calendar: 0; 
     Prop.Hose110: 0; Prop.Hose110.Prompt: "Запас напорных рукавов 110 мм"; Prop.Hose110.Label: "Рукава 110"; Prop.Hose110.Format: ""; Prop.Hose110.SortKey: ""; Prop.Hose110.Type: 2; Prop.Hose110.Invisible: FALSE; Prop.Hose110.Verify: FALSE; Prop.Hose110.LangID: 1049; Prop.Hose110.Calendar: 0; 
     Prop.Hose150: 0; Prop.Hose150.Prompt: "Запас напорных рукавов 150 мм"; Prop.Hose150.Label: "Рукава 150"; Prop.Hose150.Format: ""; Prop.Hose150.SortKey: ""; Prop.Hose150.Type: 2; Prop.Hose150.Invisible: FALSE; Prop.Hose150.Verify: FALSE; Prop.Hose150.LangID: 1049; Prop.Hose150.Calendar: 0; 
     Prop.Hose200: 0; Prop.Hose200.Prompt: "Запас напорных рукавов 200 мм"; Prop.Hose200.Label: "Рукава 200"; Prop.Hose200.Format: ""; Prop.Hose200.SortKey: ""; Prop.Hose200.Type: 2; Prop.Hose200.Invisible: FALSE; Prop.Hose200.Verify: FALSE; Prop.Hose200.LangID: 1049; Prop.Hose200.Calendar: 0; 
     Prop.Hose250: 0; Prop.Hose250.Prompt: "Запас напорных рукавов 250 мм"; Prop.Hose250.Label: "Рукава 250"; Prop.Hose250.Format: ""; Prop.Hose250.SortKey: ""; Prop.Hose250.Type: 2; Prop.Hose250.Invisible: FALSE; Prop.Hose250.Verify: FALSE; Prop.Hose250.LangID: 1049; Prop.Hose250.Calendar: 0; 
     Prop.Hose300: 0; Prop.Hose300.Prompt: "Запас напорных рукавов 300 мм"; Prop.Hose300.Label: "Рукава 300"; Prop.Hose300.Format: ""; Prop.Hose300.SortKey: ""; Prop.Hose300.Type: 2; Prop.Hose300.Invisible: FALSE; Prop.Hose300.Verify: FALSE; Prop.Hose300.LangID: 1049; Prop.Hose300.Calendar: 0; 
+    Prop.Water: 0; Prop.Water.Prompt: "Запас воды (л)"; Prop.Water.Label: "Запас воды"; Prop.Water.Format: ""; Prop.Water.SortKey: "33"; Prop.Water.Type: 2; Prop.Water.Invisible: FALSE; Prop.Water.Verify: FALSE; Prop.Water.LangID: 1049; Prop.Water.Calendar: 0; 
+    Prop.Foam: 0; Prop.Foam.Prompt: "Запас пенообразователя (л)"; Prop.Foam.Label: "Запас пенообразователя"; Prop.Foam.Format: ""; Prop.Foam.SortKey: "33"; Prop.Foam.Type: 2; Prop.Foam.Invisible: FALSE; Prop.Foam.Verify: FALSE; Prop.Foam.LangID: 1049; Prop.Foam.Calendar: 0; 
+    Prop.Hose66: 0; Prop.Hose66.Prompt: "Запас напорных рукавов 300 мм"; Prop.Hose66.Label: "Рукава 66"; Prop.Hose66.Format: ""; Prop.Hose66.SortKey: "34"; Prop.Hose66.Type: 2; Prop.Hose66.Invisible: FALSE; Prop.Hose66.Verify: FALSE; Prop.Hose66.LangID: 1049; Prop.Hose66.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
-    User.DownOrient: IF(Angle>-1 град;1;0); User.DownOrient.Prompt: ""; 
+    User.DownOrient: IF(ANG360(Angle)<180 град;1;0); User.DownOrient.Prompt: ""; 
     User.IndexPers: 160; User.IndexPers.Prompt: Prop.Type; 
     User.ShapeColor1: LineColor; User.ShapeColor1.Prompt: "Цвет контура"; 
     User.ShapeColor2: Char.Color; User.ShapeColor2.Prompt: "Цвет позывного"; 
@@ -3231,7 +3234,7 @@
     Prop.Hoses110: 0; Prop.Hoses110.Prompt: "Общие данные с учетом количества однотипных изделий техники"; Prop.Hoses110.Label: "Рукавов 110 всего, шт."; Prop.Hoses110.Format: ""; Prop.Hoses110.SortKey: "15"; Prop.Hoses110.Type: 2; Prop.Hoses110.Invisible: Prop.Hoses110=0; Prop.Hoses110.Verify: FALSE; Prop.G268: FALSE; Prop.Hoses110.LangID: 1049; Prop.Hoses110.Calendar: 0; 
     Prop.Hoses150: 0; Prop.Hoses150.Prompt: "Общие данные с учетом количества однотипных изделий техники"; Prop.Hoses150.Label: "Рукавов 150 всего, шт."; Prop.Hoses150.Format: ""; Prop.Hoses150.SortKey: "16"; Prop.Hoses150.Type: 2; Prop.Hoses150.Invisible: Prop.Hoses150=0; Prop.Hoses150.Verify: FALSE; Prop.G270: FALSE; Prop.Hoses150.LangID: 1049; Prop.Hoses150.Calendar: 0; 
     Prop.Water: 0; Prop.Water.Prompt: "Общие данные с учетом количества однотипных изделий техники"; Prop.Water.Label: "Запас воды всего, л"; Prop.Water.Format: ""; Prop.Water.SortKey: "20"; Prop.Water.Type: 2; Prop.Water.Invisible: Prop.Water=0; Prop.Water.Verify: FALSE; Prop.G44: FALSE; Prop.Water.LangID: 1049; Prop.Water.Calendar: 0; 
-    Prop.Foam: 0; Prop.Foam.Prompt: "Общие данные с учетом количества однотипных изделий техники"; Prop.Foam.Label: "Запас пенообразователя всего, л"; Prop.Foam.Format: ""; Prop.Foam.SortKey: "21"; Prop.Foam.Type: 2; Prop.Foam.Invisible: Prop.Foam=0; Prop.Foam.Verify: FALSE; Prop.G45: FALSE; Prop.Foam.LangID: 1049; Prop.Foam.Calendar: 0; 
+    Prop.FoamX: 0; Prop.FoamX.Prompt: "Общие данные с учетом количества однотипных изделий техники"; Prop.FoamX.Label: "Запас пенообразователя всего, л"; Prop.FoamX.Format: ""; Prop.FoamX.SortKey: "21"; Prop.FoamX.Type: 2; Prop.FoamX.Invisible: Prop.FoamX=0; Prop.FoamX.Verify: FALSE; Prop.G271: FALSE; Prop.FoamX.LangID: 1049; Prop.FoamX.Calendar: 0; 
     Prop.NModel: "Модель не определена"; Prop.NModel.Prompt: "Общие данные с учетом количества однотипных изделий техники"; Prop.NModel.Label: "Модель"; Prop.NModel.Format: ""; Prop.NModel.SortKey: "02"; Prop.NModel.Type: 0; Prop.NModel.Invisible: FALSE; Prop.NModel.Verify: FALSE; Prop.G261: FALSE; Prop.NModel.LangID: 1049; Prop.NModel.Calendar: 0; 
     Prop.Powder: 0; Prop.Powder.Prompt: "Общие данные с учетом количества однотипных изделий техники"; Prop.Powder.Label: "Запас порошка всего, кг"; Prop.Powder.Format: ""; Prop.Powder.SortKey: "22"; Prop.Powder.Type: 2; Prop.Powder.Invisible: Prop.Powder=0; Prop.Powder.Verify: FALSE; Prop.G71: FALSE; Prop.Powder.LangID: 1049; Prop.Powder.Calendar: 0; 
     Prop.Dest: 0; Prop.Dest.Prompt: ""; Prop.Dest.Label: "Вид ПА"; Prop.Dest.Format: ""; Prop.Dest.SortKey: "03"; Prop.Dest.Type: 0; Prop.Dest.Invisible: TRUE; Prop.Dest.Verify: FALSE; Prop.G200: FALSE; Prop.Dest.LangID: 1049; Prop.Dest.Calendar: 0; 
@@ -3250,7 +3253,7 @@
     User.IndexPers: 195; User.IndexPers.Prompt: "Фигура Индекс количества технических изделий"; 
     User.Version: 1; User.Version.Prompt: ""; 
   Section Object, row: visRowEvent>>>
-    EventDblClick: OPENTEXTWIN(); EventDrop: CALLTHIS("PS_GlueToShape";"ПожТехникаНовая2"); 
+    EventDblClick: DOCMD(1312); EventDrop: CALLTHIS("PS_GlueToShape";"ПожТехникаНовая2"); 
   Section Object, row: visRowFill>>>
     FillForegnd: 1; FillBkgnd: 0; FillPattern: THEMEGUARD(0); ShdwForegnd: 0; ShdwBkgnd: 1; ShdwPattern: THEMEGUARD(0); FillForegndTrans: 0%; FillBkgndTrans: 0%; ShdwForegndTrans: 0%; ShdwBkgndTrans: 0%; ShapeShdwType: 0; ShapeShdwOffsetX: 0 мм; ShapeShdwOffsetY: 0 мм; ShapeShdwObliqueAngle: 0 град; ShapeShdwScaleFactor: 100%; 
   Section Object, row: visRowGroup>>>

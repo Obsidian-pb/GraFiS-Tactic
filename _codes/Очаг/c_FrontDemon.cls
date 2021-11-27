@@ -33,9 +33,9 @@ End Sub
 Public Sub SetStartState(ByRef frontCellsCollection As Collection)
 'Устанавливаем стартовое состояние матрицы
     '1 Задаем стартовое состояние матрицы 5 - путь
-    For Each Cell In frontCellsCollection
-        matrix(Cell.x, Cell.y) = CellType.fireFrontNotInBlock
-    Next Cell
+    For Each cell In frontCellsCollection
+        matrix(cell.x, cell.y) = CellType.fireFrontNotInBlock
+    Next cell
 End Sub
 
 
@@ -43,7 +43,7 @@ End Sub
 
 Public Sub RunDemon(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
                     ByRef nozzle As c_FireNozzleModel)
-'Разбиваем площадь пожара на блоки
+'Разбиваем фронт пожара на блоки
 Dim block As c_ExtinguishingBlock
 
     '1 проверяем, не входит ли точка контакта зоны работы ствола в фрагмент фронта пожара, который уже распределен
@@ -60,7 +60,24 @@ Dim block As c_ExtinguishingBlock
 
 End Sub
 
+Public Sub RunDemon2(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
+                    ByRef frontCells As Collection)
+'Разбиваем фронт пожара на блоки для расчета требуемой площади тушения
+'Dim block As c_ExtinguishingBlock
+'
+'    '1 проверяем, не входит ли точка контакта зоны работы ствола в фрагмент фронта пожара, который уже распределен
+'    Set block = CheckBlockExists(extSquare, nozzle.fireContactCell)
+'    If block Is Nothing Then
+'        '2 разбить коллекцию фронта на участки не связанные между собой
+'        BreakFront extSquare, frontCellsCollection, nozzle
+'    Else
+'        '3 Добавляем данные в существующий блок
+'        block.expenseFact = block.expenseFact + nozzle.waterExpense
+'    End If
+    
+    BreakFront2 extSquare, frontCellsCollection, frontCells
 
+End Sub
 
 
 Private Sub BreakFront(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
@@ -73,7 +90,7 @@ Dim tmpColl As Collection
     'Перебираем все клетки в коллекции стартовых клеток
 '    For Each cell In startCellsCollection
         
-        'если клетка еще не распределена по блокам, начинаем от нее рекурсивный поиск всех клеток плоащди тушения данного блока
+        'если клетка еще не распределена по блокам, начинаем от нее рекурсивный поиск всех клеток площади тушения данного блока
 '        If matrix(startCell.x, startCell.y) = CellType.fireFrontNotInBlock Then
             'создаем новую коллекцию
             Set tmpColl = New Collection
@@ -102,54 +119,95 @@ Dim tmpColl As Collection
         
 End Sub
 
-Private Sub TryAddCell(ByRef thisColl As Collection, ByVal Cell As c_Cell)
+Private Sub BreakFront2(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCollection As Collection, _
+                    ByRef frontCells As Collection)
+'Разбиваем фронт пожара на участки для расчета требуемой площади тушения
+Dim cell As c_Cell
+Dim extBlock As c_ExtinguishingBlock
+Dim tmpColl As Collection
+
+    'Перебираем все клетки в коллекции стартовых клеток
+    For Each cell In frontCellsCollection
+        
+        'если клетка еще не распределена по блокам, начинаем от нее рекурсивный поиск всех клеток площади тушения данного блока
+        If matrix(cell.x, cell.y) = CellType.fireFrontNotInBlock Then
+            'создаем новую коллекцию
+            Set tmpColl = New Collection
+            'Для новой коллекции выполняем рекурсивное наполнение от текущей ячейки
+'            TryAddCell tmpColl, nozzle.fireContactCell
+            TryAddCell tmpColl, cell
+            
+            'Создаем новый блок и передаем ему временную коллекцию клеток фронта
+            Set extBlock = New c_ExtinguishingBlock
+            Set extBlock.fireFrontCells = tmpColl
+            extBlock.CreateMatrix UBound(matrix, 1), UBound(matrix, 2)
+            extBlock.AddToExtCellsCollection tmpColl
+'            AddCellsToCollection extBlock.extinguishingCells, tmpColl
+            '---Устанавливаем глубину тушения
+                extBlock.fireWay = 5000     'Для ручных стволов
+'                If nozzle.nozzleType = waterHand Then
+'                    extBlock.fireWay = 5000     'Для ручных стволов
+'                Else
+'                    extBlock.fireWay = 10000     'Для лафетных стволов
+'                End If
+'                extBlock.expenseFact = extBlock.expenseFact + nozzle.waterExpense
+                extBlock.grain = grain
+            
+            'Добавляем созданный блок в коллекцию блоков модели площади тушения
+            extSquare.AddExtinguishingBlock extBlock
+        End If
+    Next cell
+        
+End Sub
+
+Private Sub TryAddCell(ByRef thisColl As Collection, ByVal cell As c_Cell)
 'Пытаемся добавить клетку в коллекцию (рекурсия)
     
     'Если указанная точка находится за пределами матрицы - выходим из процедуры
-    If Cell.x < 0 Or Cell.y < 0 Or Cell.x > dimensionByX - 1 Or Cell.y > dimensionByY - 1 Then Exit Sub
+    If cell.x < 0 Or cell.y < 0 Or cell.x > dimensionByX - 1 Or cell.y > dimensionByY - 1 Then Exit Sub
     
     'Проверяем является ли данная клетка клеткой фронта пожара
-    If matrix(Cell.x, Cell.y) = CellType.notFireFront Then Exit Sub
+    If matrix(cell.x, cell.y) = CellType.notFireFront Then Exit Sub
     
     'Если является проверяем, нет ли ее уже в коллекции
-    If matrix(Cell.x, Cell.y) = CellType.fireFrontInBlock Then Exit Sub
+    If matrix(cell.x, cell.y) = CellType.fireFrontInBlock Then Exit Sub
     
     'Добавляем клетку в коллецию
-    AddCellToCollection thisColl, Cell
-    matrix(Cell.x, Cell.y) = CellType.fireFrontInBlock
+    AddCellToCollection thisColl, cell
+    matrix(cell.x, cell.y) = CellType.fireFrontInBlock
     
     'Если нет - рекурсия на следующие клетки
-        TryAddCell thisColl, NextCell(Cell, l)
-        TryAddCell thisColl, NextCell(Cell, lu)
-        TryAddCell thisColl, NextCell(Cell, u)
-        TryAddCell thisColl, NextCell(Cell, ru)
-        TryAddCell thisColl, NextCell(Cell, r)
-        TryAddCell thisColl, NextCell(Cell, rd)
-        TryAddCell thisColl, NextCell(Cell, d)
-        TryAddCell thisColl, NextCell(Cell, ld)
+        TryAddCell thisColl, NextCell(cell, l)
+        TryAddCell thisColl, NextCell(cell, lu)
+        TryAddCell thisColl, NextCell(cell, u)
+        TryAddCell thisColl, NextCell(cell, ru)
+        TryAddCell thisColl, NextCell(cell, r)
+        TryAddCell thisColl, NextCell(cell, rd)
+        TryAddCell thisColl, NextCell(cell, d)
+        TryAddCell thisColl, NextCell(cell, ld)
    
 End Sub
 
-Private Sub AddCellToCollection(ByRef thisColl As Collection, ByVal Cell As c_Cell)
+Private Sub AddCellToCollection(ByRef thisColl As Collection, ByVal cell As c_Cell)
 'Добавляем в указанную коллекцию указанную клетку
-    thisColl.Add Cell, Cell.x & ":" & Cell.y
+    thisColl.Add cell, cell.x & ":" & cell.y
 End Sub
 
 Private Sub AddCellsToCollection(ByRef col1 As Collection, ByRef col2 As Collection)
 'Добавляем все клетки из коллекции 2 в коллекцию 1
-Dim Cell As c_Cell
+Dim cell As c_Cell
 
-    For Each Cell In col2
-        col1.Add Cell, Cell.x & ":" & Cell.y
-    Next Cell
+    For Each cell In col2
+        col1.Add cell, cell.x & ":" & cell.y
+    Next cell
 End Sub
 
-Private Function CheckBlockExists(ByRef extSquare As c_ExtinguishingSquare, ByRef Cell As c_Cell) As c_ExtinguishingBlock
+Private Function CheckBlockExists(ByRef extSquare As c_ExtinguishingSquare, ByRef cell As c_Cell) As c_ExtinguishingBlock
 'Пытаемся найти блок к которому может относиться пришедшая клетка. Еслитн аходим возвращаем ссылку на него, иначе - Nothing
 Dim blck As c_ExtinguishingBlock
 
     For Each blck In extSquare.extinguishingBlocks
-        If blck.IsCellInThisFront(Cell) Then
+        If blck.IsCellInThisFront(cell) Then
             Set CheckBlockExists = blck
             Exit Function
         End If
@@ -186,36 +244,36 @@ End Function
 
 
 
-Private Function NextCell(ByRef Cell As c_Cell, ByVal dir As Directions) As c_Cell
+Private Function NextCell(ByRef cell As c_Cell, ByVal Dir As Directions) As c_Cell
 'Возвращает следующую клетку согласно указанного направления
-    Select Case dir
+    Select Case Dir
         Case Is = Directions.l
-            Set NextCell = NewCell(Cell.x - 1, Cell.y)
+            Set NextCell = NewCell(cell.x - 1, cell.y)
         Case Is = Directions.lu
-            Set NextCell = NewCell(Cell.x - 1, Cell.y + 1)
+            Set NextCell = NewCell(cell.x - 1, cell.y + 1)
         Case Is = Directions.u
-            Set NextCell = NewCell(Cell.x, Cell.y + 1)
+            Set NextCell = NewCell(cell.x, cell.y + 1)
         Case Is = Directions.ru
-            Set NextCell = NewCell(Cell.x + 1, Cell.y + 1)
+            Set NextCell = NewCell(cell.x + 1, cell.y + 1)
         Case Is = Directions.r
-            Set NextCell = NewCell(Cell.x + 1, Cell.y)
+            Set NextCell = NewCell(cell.x + 1, cell.y)
         Case Is = Directions.rd
-            Set NextCell = NewCell(Cell.x + 1, Cell.y - 1)
+            Set NextCell = NewCell(cell.x + 1, cell.y - 1)
         Case Is = Directions.d
-            Set NextCell = NewCell(Cell.x, Cell.y - 1)
+            Set NextCell = NewCell(cell.x, cell.y - 1)
         Case Is = Directions.ld
-            Set NextCell = NewCell(Cell.x - 1, Cell.y - 1)
+            Set NextCell = NewCell(cell.x - 1, cell.y - 1)
     End Select
 End Function
 
 Private Function NewCell(ByVal x As Long, ByVal y As Long) As c_Cell
 'Создаем новую клетку
-Dim Cell As c_Cell
-    Set Cell = New c_Cell
-    Cell.x = x
-    Cell.y = y
+Dim cell As c_Cell
+    Set cell = New c_Cell
+    cell.x = x
+    cell.y = y
     
-    Set NewCell = Cell
+    Set NewCell = cell
 End Function
 
 Public Property Get GetMatrix() As Variant

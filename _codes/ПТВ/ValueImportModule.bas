@@ -5,17 +5,17 @@ Public Sub StvolStreamValueImport(ShpIndex As Long)
 'Процедура возвращающая и присваивающая ячейке Тип струи в соответсвии с видом струи
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения Типа струи при заданном Виде струи для текущей фигуры
-Select Case IndexPers
+Select Case indexPers
     Case Is = 34
         Criteria = "[Вид струи] = '" & shp.Cells("Prop.StreamType").ResultStr(visUnitsString) & "'"
         shp.Cells("Prop.Stream").FormulaU = ValueImportStr("Струи", "Тип струи", Criteria)
@@ -36,7 +36,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolStreamValueImport"
 End Sub
 
@@ -44,17 +44,17 @@ Public Sub StvolDiameterInImport(ShpIndex As Long)
 'Процедура возвращающая и присваивающая ячейке Тип струи в соответсвии с видом струи
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения Типа струи при заданном Виде струи для текущей фигуры
-Select Case IndexPers
+Select Case indexPers
     Case Is = 34
         Criteria = "[Модель ствола] = '" & shp.Cells("Prop.StvolType").ResultStr(visUnitsString) & "' "
         shp.Cells("Prop.DiameterIn").FormulaU = ValueImportSng("МоделиСтволов", "Условный проход", Criteria)
@@ -78,7 +78,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolDiameterInImport"
 End Sub
 
@@ -86,17 +86,17 @@ Public Sub StvolProductionImport(ShpIndex As Long)
 'Процедура возвращающая и присваивающая ячейке Напор в соответсвии с прочими данными
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения Типа струи при заданном Виде струи для текущей фигуры
-Select Case IndexPers
+Select Case indexPers
     Case Is = 34   ' Ручной водяной ствол
         Criteria = "[Модель ствола] = '" & shp.Cells("Prop.StvolType").ResultStr(visUnitsString) & "' And " & _
             "[Вариант ствола] = '" & shp.Cells("Prop.Variant").ResultStr(visUnitsString) & "' And " & _
@@ -144,7 +144,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolProductionImport"
 End Sub
 
@@ -153,7 +153,7 @@ Public Sub StvolWFLinkImport(ShpIndex As Long)
 'в соответствии с моделью ствола
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
@@ -170,7 +170,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolWFLinkImport"
 End Sub
 
@@ -178,7 +178,7 @@ Public Sub StvolWFLinkFree(ShpIndex As Long)
 'Прока устанавливает в качестве ссылки пустое значение
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
@@ -193,7 +193,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolWFLinkImport"
 End Sub
 
@@ -202,7 +202,7 @@ Public Sub StvolHeadDiapasoneImport(ShpIndex As Long)
 'в соответствии с моделью ствола
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
@@ -219,7 +219,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolWFLinkImport"
 End Sub
 
@@ -227,17 +227,17 @@ Public Sub StvolRFImport(ShpIndex As Long)
 'Процедура возвращающая и присваивающая ячейке Кратность в соответсвии с моделью ствола
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
-    IndexPers = shp.Cells("User.IndexPers")
+    indexPers = shp.Cells("User.IndexPers")
 
 '---Запускаем процедуру получения Кратности при заданной модели ствола для текущей фигуры
-Select Case IndexPers
+Select Case indexPers
 
     Case Is = 35   ' Ручной пенный ствол
         Criteria = "[Модель ствола] = '" & shp.Cells("Prop.StvolType").ResultStr(visUnitsString) & "' And " & _
@@ -257,7 +257,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "StvolRFImport"
 End Sub
 
@@ -266,7 +266,7 @@ Public Sub ColFlowMaxImport(ShpIndex As Long)
 'Процедура присваивающая значение ячейке Проводимость в соответсвии с напором
 '---Объявляем переменные
 Dim shp As Visio.Shape
-Dim IndexPers As Integer
+Dim indexPers As Integer
 Dim Criteria As String
 
     On Error GoTo EX
@@ -289,7 +289,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ColFlowMaxImport"
 End Sub
 
@@ -320,7 +320,7 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "FoamDiffKoeffImport"
 End Sub
 
@@ -344,6 +344,6 @@ Set shp = Nothing
 Exit Sub
 EX:
     Set shp = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "NozzleProvKoeffImport"
 End Sub

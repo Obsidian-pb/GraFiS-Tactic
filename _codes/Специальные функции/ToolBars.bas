@@ -23,15 +23,15 @@ End Sub
 
 Sub RemoveTB_SpecFunc()
 'Процедура добавления панели управления "Спецфункции"-------------------------------
-    On Error GoTo EX
+    On Error GoTo ex
     Application.CommandBars("Спецфункции").Delete
 
-EX:
+ex:
 End Sub
 
 Sub AddButtons()
 'Процедура добавление новой кнопки на панель управления "Спецфункции"--------------
-    On Error GoTo EX
+    On Error GoTo ex
 '---Объявляем переменные и постоянные--------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -77,6 +77,14 @@ Sub AddButtons()
         .Picture = LoadPicture(DocPath & "Bitmaps\Count1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Count2.bmp")
     End With
+'---Кнопка "Выбрать подобные"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Выбрать подобные"
+        .Tag = "Select"
+        .TooltipText = "Выбрать фигуры аналогичные выделенным"
+        .FaceID = 1446
+    End With
 '---Кнопка "Панель таймера"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button
@@ -92,8 +100,8 @@ Sub AddButtons()
 
 Set Bar = Nothing
 Exit Sub
-EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+ex:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons"
 End Sub
 
@@ -101,31 +109,42 @@ End Sub
 Sub DeleteButtons()
 '---Процедура удаления кнопки "Мастер проверок" из панели управления "Спецфункции"--------------
 
+    On Error GoTo ex
+
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
 
     Set Bar = Application.CommandBars("Спецфункции")
-'---Удаление кнопки "Рукав" из панели управления "Экспорт в JPG"------------------------
+'---Удаление кнопки "Экспорт в JPG" из панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Экспорт в JPG")
     Button.Delete
-'---Удаление кнопки "Рукав" из панели управления "Аспект"------------------------
+'---Удаление кнопки "Аспект" из панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Аспект")
     Button.Delete
-'---Удаление кнопки "Рукав" из панели управления "Исправить расположение"------------------------
+'---Удаление кнопки "Исправить расположение" из панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Исправить расположение")
     Button.Delete
-'---Удаление кнопки "Рукав" из панели управления "Количество фигур"------------------------
+'---Удаление кнопки "Количество фигур" из панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Количество фигур")
     Button.Delete
-'---Удаление кнопки "Рукав" из панели управления "Таймер"------------------------
+'---Удаление кнопки "Выбрать подобные" из панели управления "Спецфункции"------------------------
+    Set Button = Bar.Controls("Выбрать подобные")
+    Button.Delete
+'---Удаление кнопки "Таймер" из панели управления "Спецфункции"------------------------
     Set Button = Bar.Controls("Таймер")
     Button.Delete
     
     
 Set Button = Nothing
 Set Bar = Nothing
+Exit Sub
 
+ex:
+    Set Button = Nothing
+    Set Bar = Nothing
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "DeleteButtons"
 End Sub
 
 

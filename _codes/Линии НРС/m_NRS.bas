@@ -70,7 +70,7 @@ Public WaterContainers_Value As Double
 Public Sub GESystemTest(ShpObj As Visio.Shape)
 'Основная процедура получения сведений о насосно-рукавной системе
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     '---Выделяем память под коллекцию фигур в НРС
     Set shapesInNRS = New Collection
@@ -85,7 +85,7 @@ Public Sub GESystemTest(ShpObj As Visio.Shape)
         
     Set shapesInNRS = Nothing
 Exit Sub
-EX:
+ex:
     Set shapesInNRS = Nothing
 End Sub
 
@@ -246,7 +246,7 @@ Public Sub NRS_Analize()
 Dim vsO_Shape As Visio.Shape
 Dim vsi_ShapeIndex As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Очищаем все переменные
     ClearVaraibles
@@ -434,7 +434,7 @@ Dim vsi_ShapeIndex As Integer
 
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "NRS_Analize"
     
 End Sub

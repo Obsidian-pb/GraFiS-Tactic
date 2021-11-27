@@ -16,7 +16,9 @@ Private Function GetConnectedHosesValue(ByRef shp As Visio.Shape) As Double
 Dim con As Connect
 Dim sideShp As Visio.Shape
 Dim totalHoseValue As Double
-
+    
+    On Error GoTo Tail
+    
     For Each con In shp.Connects
             Set sideShp = con.ToSheet
             If sideShp.CellExists("User.IndexPers", 0) Then
@@ -37,5 +39,9 @@ Dim totalHoseValue As Double
     Next con
 
 GetConnectedHosesValue = totalHoseValue
+Exit Function
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "GetConnectedHosesValue"
 End Function
 

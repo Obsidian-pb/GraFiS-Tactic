@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} F_InsertFire 
-   Caption         =   "Укажите исходные данные"
-   ClientHeight    =   7290
+   Caption         =   "Исходные данные"
+   ClientHeight    =   7620
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   8895.001
+   ClientWidth     =   8895
    OleObjectBlob   =   "F_InsertFire.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -17,7 +17,7 @@ Option Explicit
 
 Public Vfl_TargetShapeID As Long
 Public VmD_TimeStart As Date
-Private VfB_NotShowPropertiesWindow As Boolean
+'Private VfB_NotShowPropertiesWindow As Boolean      'Возможно стоит удалить
 Private vfStr_ObjList() As String
 
 
@@ -75,16 +75,19 @@ Private Sub B_Cancel2_Click()
 End Sub
 
 Private Sub btnBakeMatrix_Click()
-    If IsAcceptableMatrixSize(1200000) = False Then
-        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы."
+    If IsAcceptableMatrixSize(1200000, Me.txtGrainSize.value) = False Then
+        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы.", vbInformation, "ГраФиС-Тактик"
         Exit Sub
     End If
 
     'Запоминаем значение зерна матрицы
     grain = Me.txtGrainSize
     
+    'Удаляем фигуры слоя Fire
+    ClearLayer "Fire"
+    
     'Запекаем матрицу
-    MakeMatrix
+    MakeMatrix Me
 End Sub
 
 Private Sub btnDeleteMatrix_Click()
@@ -100,13 +103,13 @@ Private Sub btnDeleteMatrix_Click()
 End Sub
 
 Private Sub btnRefreshMatrix_Click()
-    If IsAcceptableMatrixSize(1200000) = False Then
-        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы."
+    If IsAcceptableMatrixSize(1200000, Me.txtGrainSize.value) = False Then
+        MsgBox "Слишком большой размер результирующей матрицы! Уменьшите размер рабочего листа или зерна матрицы.", vbInformation, "ГраФиС-Тактик"
         Exit Sub
     End If
     
     'Обновляем матрицу открытых пространств
-    RefreshOpenSpacesMatrix
+    RefreshOpenSpacesMatrix Me
 End Sub
 
 Private Sub btnRunFireModelling_Click()
@@ -133,7 +136,7 @@ Private Sub btnRunFireModelling_Click()
     Dim vsD_TimeCur As Date
     If Me.OB_ByTime = True Then
         vsD_TimeCur = DateValue(Me.TB_Time) + TimeValue(Me.TB_Time)
-        timeElapsed = DateDiff("s", VmD_TimeStart, vsD_TimeCur) / 60 ' В МИНУТАХ!!!!!!
+        timeElapsed = DateDiff("s", VmD_TimeStart, vsD_TimeCur) / 60 - timeElapsedMain ' В МИНУТАХ!!!!!!
     End If
     If Me.OB_ByDuration = True Then
         timeElapsed = Me.TB_Duration
@@ -177,7 +180,7 @@ Private Sub btnRunFireModelling_Click()
     Dim actTime As Date
     actTime = DateAdd("n", timeElapsedMain, VmD_TimeStart)
     vsO_FireShape.Cells("Prop.SquareTime").FormulaU = "DateTime(" & str(CDbl(actTime)) & ")"
-    
+        
 Exit Sub
 EX:
     MsgBox "Не все данные корректно указаны!", vbCritical
@@ -221,7 +224,7 @@ Public Sub AddCheckedSize(ByVal size As Long)
 'Добавляем кол-во проверенных клеток
     matrixChecked = matrixChecked + size
     
-    'Обновляем статусную строку с количество проверенных клеток
+    'Обновляем статусную строку с количеством проверенных клеток
     lblMatrixIsBaked.Caption = GetMatrixCheckedStatus
     lblMatrixIsBaked.ForeColor = vbBlack
 '    Me.Repaint
@@ -339,6 +342,12 @@ Private Sub UserForm_Initialize()
     
 End Sub
 
+Public Property Get AttackDeep() As Integer
+    AttackDeep = 5000   'Условно глубину тушения принимаем по умолчанию равной 5м
+End Property
+Public Property Get StvolCalcDistance() As Integer
+    StvolCalcDistance = txtNozzleRangeValue * 1000
+End Property
 
 Private Sub UserForm_Activate()
 'Процедура активации формы - при показе
@@ -363,8 +372,6 @@ Private Sub UserForm_Activate()
         Me.txtGrainSize.value = 200
     End If
     
-    
-
 End Sub
 
 Private Sub sf_ObjectTypesListRefresh()
@@ -615,7 +622,7 @@ Exit Sub
 EX:
 'MsgBox "Одно из указанных вами значений слишком велико или введено с ошибками! " & _
 '    "Проверьте правильность введенных данных!", vbCritical
-    MsgBox "В процессе работы программы возникла ошибка! Убедитесь в правильности введенных вами данных."
+    MsgBox "В процессе работы программы возникла ошибка! Убедитесь в правильности введенных вами данных.", , ThisDocument.Name
 '---Очищаем объекты
     Set vsO_DropTargetShape = Nothing
     Set vsO_DropShape = Nothing
@@ -779,24 +786,6 @@ Function GetIntense() As Single
     End If
 End Function
 
-Function IsAcceptableMatrixSize(ByVal maxMatrixSize As Long) As Boolean
-Dim xCount As Long
-Dim yCount As Long
-Dim grain As Integer
-
-    
-    On Error GoTo EX
-    
-    grain = Me.txtGrainSize.value
-
-    xCount = ActivePage.PageSheet.Cells("PageWidth").Result(visMillimeters) / grain
-    yCount = ActivePage.PageSheet.Cells("PageHeight").Result(visMillimeters) / grain
-    
-    IsAcceptableMatrixSize = xCount * yCount < maxMatrixSize
-Exit Function
-EX:
-    IsAcceptableMatrixSize = False
-End Function
 
 
 '--------------------------------Функции проверки корректности введенных данных----------------------------------

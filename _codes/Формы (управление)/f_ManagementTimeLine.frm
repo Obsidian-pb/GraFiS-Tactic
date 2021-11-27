@@ -6,6 +6,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} f_ManagementTimeLine
    ClientTop       =   375
    ClientWidth     =   13065
    OleObjectBlob   =   "f_ManagementTimeLine.frx":0000
+   ShowModal       =   0   'False
    StartUpPosition =   1  'CenterOwner
 End
 Attribute VB_Name = "f_ManagementTimeLine"

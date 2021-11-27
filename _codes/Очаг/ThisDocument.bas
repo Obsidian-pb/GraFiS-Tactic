@@ -12,7 +12,7 @@ Option Explicit
 Private WithEvents app As Visio.Application
 Attribute app.VB_VarHelpID = -1
 Private cellChangedCount As Long
-Const cellChangedInterval = 100000
+Const cellChangedInterval = 1000
 
 Dim WithEvents SquareAppEvents As Visio.Application
 Attribute SquareAppEvents.VB_VarHelpID = -1
@@ -96,23 +96,33 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
 End Sub
 
 
-Private Sub SquareAppEvents_CellChanged(ByVal Cell As IVCell)
+Private Sub SquareAppEvents_CellChanged(ByVal cell As IVCell)
 'Процедура обновления списков в фигурах
 Dim ShpInd As Long '(64) - Площадь пожара
+'Dim shpFire As Visio.Shape 'Фигура Площадь пожара
+
+'---Проверяем не произошло ли событие в мастере
+    On Error GoTo EX
+    If cell.Shape.ContainingMasterID >= 0 Then Exit Sub
+    
 '---Проверяем имя ячейки
-    
-    
-    If Cell.Name = "Prop.FireCategorie" Then
-        ShpInd = Cell.Shape.ID
+    If cell.Name = "Prop.FireCategorie" Then
+        ShpInd = cell.Shape.ID
         '---Запускаем процедуру получения СПИСКОВ описаний объектов пожара для указанной категории
         DescriptionsListImport (ShpInd)
     End If
         
-    If Cell.Name = "Prop.FireDescription" Then
-        ShpInd = Cell.Shape.ID
+    If cell.Name = "Prop.FireDescription" Then
+        ShpInd = cell.Shape.ID
         '---Запускаем процедуру получения ЗНАЧЕНИЙ факторов пожара для данного описания
         GetFactorsByDescription (ShpInd)
     End If
+    
+'    If cell.Name = "Prop.FireTime" Then
+'        '---Переносим новые данные из шейп личста фигуры в шейп лист документа
+'        Application.ActiveDocument.DocumentSheet.Cells("User.FireTime").FormulaU = _
+'            "DATETIME(" & str(CDbl(cell.Shape.Cells("Prop.FireTime").Result(visDate))) & ")"
+'    End If
         
         
 '    ElseIf Cell.Name = "Prop.FireObject" Then
@@ -133,6 +143,7 @@ Dim ShpInd As Long '(64) - Площадь пожара
 'MsgBox Cell.Shape.ID
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
+EX:
 End Sub
 
 Public Sub MastersImport()
@@ -236,14 +247,14 @@ Dim v_Ctrl As CommandBarControl
     
 Exit Sub
 Tail:
-    MsgBox "В ходе работы программы возникла ошибка! Если она будет повторяться - обратитесь к разработчику."
+    MsgBox "В ходе работы программы возникла ошибка! Если она будет повторяться - обратитесь к разработчику.", , ThisDocument.Name
     SaveLog Err, "Document_DocumentOpened"
 End Sub
 
 Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
-Dim Cell As Visio.Cell
+Dim cell As Visio.cell
 
     Set docSheet = Application.ActiveDocument.DocumentSheet
     
@@ -258,7 +269,7 @@ Dim Cell As Visio.Cell
 
 End Sub
 
-Private Sub app_CellChanged(ByVal Cell As IVCell)
+Private Sub app_CellChanged(ByVal cell As IVCell)
 '---Один раз в выполняем обновление иконок на кнопках
     cellChangedCount = cellChangedCount + 1
     If cellChangedCount > cellChangedInterval Then

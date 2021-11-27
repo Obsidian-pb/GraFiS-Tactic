@@ -6,8 +6,9 @@ Public Sub GetValuesOfCellsFromTable(ShpIndex As Long, TableName As String)
 Dim dbs As Object, rst As Object
 Dim pth As String
 Dim ShpObj As Visio.Shape
-Dim SQL As String, Critria As String, PAModel As String, PASet As String
+Dim SQL As String, Criteria As String, PAModel As String, PASet As String
 Dim i, k As Integer 'Индексы итерации
+Dim fieldType As Long
 
 '---Определяем действие в случае ошибки открытия слишком большого количества таблиц
 On Error GoTo Tail
@@ -73,7 +74,7 @@ Tail:
 'MsgBox Err.Description
     Set rst = Nothing
     Set dbs = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "GetValuesOfCellsFromTable"
 
 End Sub
@@ -86,6 +87,8 @@ Dim pth As String
 Dim SQLQuery As String
 Dim List As String
 Dim RSField As Object
+
+    On Error GoTo Tail
 
 '---Определяем набор записей
     '---Определяем запрос SQL для отбора записей из базы данных
@@ -116,6 +119,12 @@ Dim RSField As Object
 
 Set dbs = Nothing
 Set rst = Nothing
+Exit Function
+Tail:
+    Set dbs = Nothing
+    Set rst = Nothing
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "ListImport"
 End Function
 
 
@@ -166,7 +175,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImportInt"
 End Function
 
@@ -220,7 +229,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ListImport2"
 End Function
 
@@ -270,7 +279,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ValueImportStr"
 End Function
 
@@ -322,7 +331,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ValueImportSng"
 End Function
 
@@ -373,7 +382,7 @@ Exit Function
 EX:
     Set dbs = Nothing
     Set rst = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "ValueImportSngStr"
 End Function
 
@@ -393,8 +402,10 @@ Dim shp As Visio.Shape
     
 End Sub
 
-Public Function IsFirstDrop(ShpObj As Visio.Shape)
+Public Function IsFirstDrop(ShpObj As Visio.Shape) As Boolean
 'Функция проверяет вброшенали фигура впервые и если вброшена впервые добавляет строчку свойства User.InPage
+    On Error GoTo Tail
+    
     If ShpObj.CellExists("User.InPage", 0) = 0 Then
         Dim newRowIndex As Integer
         newRowIndex = ShpObj.AddNamedRow(visSectionUser, "InPage", visRowUser)
@@ -405,6 +416,12 @@ Public Function IsFirstDrop(ShpObj As Visio.Shape)
     Else
         IsFirstDrop = False
     End If
+    
+Exit Function
+Tail:
+    IsFirstDrop = False
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "IsFirstDrop"
 End Function
 
 
@@ -428,4 +445,111 @@ Const d = " | "
     Close #1
 
 End Sub
+
+
+'-------------------Инструменты проверки фигур
+Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber) As Variant
+'Функция возвращает значение ячейки с указанным названием. Если такой ячейки нет, возвращает 0
+    
+    On Error GoTo EX
+    
+    If shp.CellExists(cellName, 0) Then
+        Select Case dataType
+            Case Is = visNumber
+                CellVal = shp.Cells(cellName).Result(dataType)
+            Case Is = visUnitsString
+                CellVal = shp.Cells(cellName).ResultStr(dataType)
+            Case Is = visDate
+                CellVal = shp.Cells(cellName).Result(dataType)
+        End Select
+    Else
+        CellVal = 0
+    End If
+    
+    
+Exit Function
+EX:
+    CellVal = 0
+End Function
+
+Public Function IsGFSShape(ByRef shp As Visio.Shape, Optional ByVal useManeure As Boolean = True) As Boolean
+'Функция возвращает True, если фигура является фигурой ГраФиС
+Dim i As Integer
+    
+    'Проверяем, является ли фигура фигурой ГраФиС
+    If useManeure Then      'Если нужно учитывать проверку на маневр
+        If shp.CellExists("User.IndexPers", 0) = True Then
+            'Если имеется ячейка опции Маневра и ее значение показывает, что
+            If shp.CellExists("Actions.MainManeure", 0) = True Then
+                If shp.Cells("Actions.MainManeure.Checked").Result(visNumber) = 0 Then
+                    IsGFSShape = True       'Фигура ГраФиС и не маневренная
+                Else
+                    IsGFSShape = False      'Фигура ГраФиС и маневренная
+                End If
+            Else
+                IsGFSShape = True       'Фигура ГраФиС и не имеет ячейки Маневр
+            End If
+        Else
+            IsGFSShape = False      'Фигура не ГраФиС
+        End If
+    Else                    'если не нужно учитывать проверку на маневр
+        IsGFSShape = shp.CellExists("User.IndexPers", 0)
+    End If
+
+Exit Function
+Tail:
+    IsGFSShape = False
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "IsGFSShape"
+End Function
+
+Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses As Variant, Optional needGFSChecj As Boolean = False) As Boolean
+'Функция возвращает True, если фигура является фигурой ГраФиС и среди переданных типов фигур ГраФиС (gfsIndexPreses) присутствует IndexPers данной фигуры
+'По умолчанию предполагается что переданная фигура уже проверена на то, относится ли она к фигурам ГраФиС. В случае, если у фигуры нет ячейки User.IndexPers _
+'обработчик ошибки указывает функции вернуть False
+'Пример использования: IsGFSShapeWithIP(shp, indexPers.ipPloschadPozhara)
+'                 или: IsGFSShapeWithIP(shp, Array(indexPers.ipPloschadPozhara, indexPers.ipAC))
+Dim i As Integer
+Dim indexPers As Integer
+    
+    On Error GoTo EX
+    
+    'Если необходима предварительная проверка на отношение фигуры к ГраФиС:
+    If needGFSChecj Then
+        If Not IsGFSShape(shp) Then
+            IsGFSShapeWithIP = False
+            Exit Function
+        End If
+    End If
+    
+    'Проверяем, является ли фигура фигурой указанного типа
+    indexPers = shp.Cells("User.IndexPers").Result(visNumber)
+    Select Case TypeName(gfsIndexPerses)
+        Case Is = "Long"    'Если передано единственное значение Long
+            If gfsIndexPerses = indexPers Then
+                IsGFSShapeWithIP = True
+                Exit Function
+            End If
+        Case Is = "Integer"    'Если передано единственное значение Integer
+            If gfsIndexPerses = indexPers Then
+                IsGFSShapeWithIP = True
+                Exit Function
+            End If
+        Case Is = "Variant()"   'Если передан массив
+            For i = 0 To UBound(gfsIndexPerses)
+                If gfsIndexPerses(i) = indexPers Then
+                    IsGFSShapeWithIP = True
+                    Exit Function
+                End If
+            Next i
+        Case Else
+            IsGFSShapeWithIP = False
+    End Select
+
+IsGFSShapeWithIP = False
+Exit Function
+EX:
+    IsGFSShapeWithIP = False
+    SaveLog Err, "m_Tools.IsGFSShapeWithIP"
+End Function
 

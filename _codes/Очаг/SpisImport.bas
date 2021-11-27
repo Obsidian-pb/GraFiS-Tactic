@@ -71,18 +71,18 @@ End Sub
 
 
 
-Private Sub ToZeroListIndex(Cell As String, ShpIndex As Long) '!!!Временно не используется в связи с отсутствием необхоимости
+Private Sub ToZeroListIndex(cell As String, ShpIndex As Long) '!!!Временно не используется в связи с отсутствием необхоимости
 '---В случае, если значение поля для нового списка равно "", переводим фокус в ячейке на 0-е положение.
-Dim CellName As String, CellContent As String
+Dim cellName As String, CellContent As String
 
 '---Проверяем к какой именно фигуре относится данная ячейка
     Set shp = Application.ActivePage.Shapes.ItemFromID(ShpIndex)
     
 '---Определяем названия ячеек которым будут меняться значения
-    CellName = "Prop." & Cell
-    CellContent = "INDEX(0,Prop." & Cell & ".Format)"
-    If shp.Cells(CellName).ResultStr(Visio.visNone) = "" Then
-        shp.Cells(CellName).FormulaU = CellContent
+    cellName = "Prop." & cell
+    CellContent = "INDEX(0,Prop." & cell & ".Format)"
+    If shp.Cells(cellName).ResultStr(Visio.visNone) = "" Then
+        shp.Cells(cellName).FormulaU = CellContent
     End If
 End Sub
 

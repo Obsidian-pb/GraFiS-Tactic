@@ -52,10 +52,6 @@ Private Sub Class_Initialize()
 End Sub
 
 
-Private Sub Class_Terminate()
-
-End Sub
-
 '----------------------------------------Внешние команды (процедуры и функции к ним)-------------------------------
 Public Sub sC_ColRefresh() '(as_PageIndex As Integer)
 'Процедура обновления коллекций класса
@@ -94,7 +90,7 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
                 End If
             Case Is = 70 'Очаг пожара
                 Set pcpO_BeginFire = vsO_Shape
-                pcpD_BeginDate = pcpO_BeginFire.Cells("Prop.FireTime")
+                pcpD_BeginDate = pcpO_BeginFire.Cells("Prop.FireTime").ResultStr(visUnitsString)
             End Select
         End If
     End If
@@ -106,7 +102,7 @@ WStvolsColSorted = False
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "sC_ColRefresh"
 End Sub
 
@@ -115,6 +111,8 @@ Public Sub PS_GetFireSquares(ByRef MainArray())
 'Процедура получает динамический массив и заполняет его данными о площадах пожара
 'Первая цифра (0-абс.время; 1-значение площади), Вторая значение соответсвующего атрибута точки
 Dim CurShape As Visio.Shape
+Dim curTime As Date
+Dim curSquare As Double
 Dim i As Integer
 
     On Error GoTo EX
@@ -126,20 +124,39 @@ Dim i As Integer
     If ColP_Fires.Count = 0 Then
         Exit Sub
     Else
-        ReDim MainArray(1, ColP_Fires.Count - 1)
+        ReDim MainArray(1, ColP_Fires.Count)
     End If
 
 '---Перебираем все фигуры в коллекции
+'    i = 0
+'    For Each CurShape In ColP_Fires
+'        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
+'        MainArray(1, i) = CurShape.Cells("User.FireSquare")
+'        i = i + 1
+'    Next CurShape
     i = 0
     For Each CurShape In ColP_Fires
-        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
-        MainArray(1, i) = CurShape.Cells("User.FireSquare")
-        i = i + 1
+        If curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate)) Then
+            curSquare = curSquare + CurShape.Cells("User.FireSquare")
+        Else
+            curSquare = CurShape.Cells("User.FireSquare")
+            curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
+            i = i + 1
+        End If
+        MainArray(0, i) = curTime
+        MainArray(1, i) = curSquare
+        
     Next CurShape
+    
+'---Удаляем пустые строки из конца массива (если таковые имеются)
+    For i = UBound(MainArray, 2) To 1 Step -1
+        If Not IsEmpty(MainArray(1, i)) Then Exit For
+    Next i
+    ReDim Preserve MainArray(1, i)
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GetFireSquares"
 End Sub
 
@@ -147,6 +164,8 @@ Public Sub PS_GetExtSquares(ByRef MainArray())
 'Процедура получает динамический массив и заполняет его данными о площадах ТУШЕНИЯ пожара
 'Первая цифра (0-абс.время; 1-значение площади), Вторая значение соответсвующего атрибута точки
 Dim CurShape As Visio.Shape
+Dim curTime As Date
+Dim curSquare As Double
 Dim i As Integer
 
     On Error GoTo EX
@@ -158,20 +177,39 @@ Dim i As Integer
     If ColP_Fires.Count = 0 Then
         Exit Sub
     Else
-        ReDim MainArray(1, ColP_Fires.Count - 1)
+        ReDim MainArray(1, ColP_Fires.Count)
     End If
 
 '---Перебираем все фигуры в коллекции
+'    i = 0
+'    For Each CurShape In ColP_Fires
+'        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
+'        MainArray(1, i) = CurShape.Cells("User.ExtSquare")
+'        i = i + 1
+'    Next CurShape
     i = 0
     For Each CurShape In ColP_Fires
-        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
-        MainArray(1, i) = CurShape.Cells("User.ExtSquare")
-        i = i + 1
+        If curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate)) Then
+            curSquare = curSquare + CurShape.Cells("User.ExtSquare")
+        Else
+            curSquare = CurShape.Cells("User.ExtSquare")
+            curTime = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SquareTime").ResultStr(visDate))
+            i = i + 1
+        End If
+        MainArray(0, i) = curTime
+        MainArray(1, i) = curSquare
+        
     Next CurShape
+    
+'---Удаляем пустые строки из конца массива (если таковые имеются)
+    For i = UBound(MainArray, 2) To 1 Step -1
+        If Not IsEmpty(MainArray(1, i)) Then Exit For
+    Next i
+    ReDim Preserve MainArray(1, i)
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GetExtSquares"
 End Sub
 
@@ -203,7 +241,7 @@ Dim i As Integer
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GetWStvolsPodOut"
 End Sub
 
@@ -235,7 +273,7 @@ Dim i As Integer
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GetWStvolsEffPodOut"
 End Sub
 
@@ -247,7 +285,9 @@ End Function
 Public Function PF_GetIntence(ByVal ShpPos As Integer) As Single
 'Функция возвращает значение интенсивности фигуры площади пожара в списке согласно позиции ShpPos
 On Error GoTo EX
-
+    
+'    If ColP_Fires.Count = 0 Then Exit Function
+    
 '---Сортируем фигуры в коллекции площадей пожара
     sC_SortFires
 '---Получаем данные
@@ -266,7 +306,7 @@ Public Function PF_GetTimeEnd(ByVal Modificator As Single, ByVal Opt As String) 
 'Единицы выбираются в указанных опцией
 Dim i As Integer
     
-'---Сортируем фигуры в коллекции плоащдей пожара
+'---Сортируем фигуры в коллекции площадей пожара
     sC_SortFires
     
     PF_GetTimeEnd = DateDiff(Opt, pcpD_BeginDate, ColP_Fires(ColP_Fires.Count).Cells("Prop.SquareTime").ResultStr(visDate)) * Modificator
@@ -277,12 +317,28 @@ Public Function PF_CheckFireBeginExist() As Boolean
     PF_CheckFireBeginExist = fC_FireCheck(pi_TargetPageIndex)
 End Function
 
+Public Function GetMaxGraphSize(ByVal ShpPos) As Single
+Dim maxSquare As Single
+Dim exp As Single
+    
+    maxSquare = PF_GetMaxSquare(ShpPos)
+    exp = PF_GetExpence / PF_GetIntence(ShpPos)
+        
+    If exp > maxSquare Then
+        GetMaxGraphSize = exp
+    Else
+        GetMaxGraphSize = maxSquare
+    End If
+End Function
+
 Public Function PF_GetMaxSquare(ByVal ShpPos) As Single
 'Функция возвращает значение максимальной площади пожара
 Dim i As Integer
     
 On Error GoTo EX
-
+    
+    If ColP_Fires.Count = 0 Then Exit Function
+    
 '---Сортируем фигуры в коллекции площадей пожара
     sC_SortFires
 '---Получаем данные
@@ -293,6 +349,27 @@ EX:
     MsgBox Err.description
     SaveLog Err, "PF_GetMaxSquare"
     PF_GetMaxSquare = 320
+End Function
+
+Public Function PF_GetExpence() As Single
+'Функция возвращает значение максимального расхода воды
+Dim i As Integer
+Dim shp As Visio.Shape
+Dim val As Double
+    
+On Error GoTo EX
+
+'---Получаем данные
+    For Each shp In ColP_WStvols
+        val = val + shp.Cells("User.PodOut").Result(visNumber)
+    Next shp
+    PF_GetExpence = val
+
+Exit Function
+EX:
+    MsgBox Err.description
+    SaveLog Err, "PF_GetExpence"
+    PF_GetExpence = 32
 End Function
 
 
@@ -341,7 +418,7 @@ Next i
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "sC_SortFires"
 Exit Sub
 End Sub
@@ -391,7 +468,7 @@ Next i
 
 Exit Sub
 EX:
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "sC_SortWStvols"
 End Sub
 

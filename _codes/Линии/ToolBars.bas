@@ -125,6 +125,47 @@ Set Button = Nothing
 Set Bar = Nothing
 End Sub
 
+'--------------------------------------Кнопка Проброс-------------------------
+Sub AddButtonHoseDrop()
+'Процедура добавление новой кнопки "Проброс" на панель управления "Превращения"--------------
+'---Объявляем переменные и постоянные--------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Превращения")
+    DocPath = ThisDocument.path
+   
+'---Добавляем кнопки на панель управления "Превращения"--------------------------------
+'---Кнопка "Обратить в Проброс"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Проброс"
+        .Tag = "HoseDrop"
+        .TooltipText = "Обратить в проброс рукавной линии между позициями"
+        .Picture = LoadPicture(DocPath & "Bitmaps\HoseDrop1.bmp")
+        .Mask = LoadPicture(DocPath & "Bitmaps\HoseDrop2.bmp")
+    End With
+    Set Button = Nothing
+
+Set Bar = Nothing
+End Sub
+
+
+Sub DeleteButtonHoseDrop()
+'---Процедура удаления кнопки "Проброс" с панели управления "Превращения"--------------
+'---Объявляем переменные и постоянные-------------------------------------------------
+    Dim Bar As CommandBar, Button As CommandBarButton
+    Dim DocPath As String
+
+    Set Bar = Application.CommandBars("Превращения")
+'---Удаление кнопки "Проброс" на панели управления "Превращения"------------------------
+    Set Button = Bar.Controls("Проброс")
+    Button.Delete
+
+    
+Set Button = Nothing
+Set Bar = Nothing
+End Sub
 
 '--------------------------------------Кнопка всасывающая линия-------------------------
 Sub AddButtonVHose()

@@ -36,7 +36,7 @@ Dim vs_Aspect As Single
 
 Set vO_Sheet = Application.ActiveWindow.Shape
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Провряем иеется ли на странице ячейка GFS_Aspect
     If vO_Sheet.CellExists("User.GFS_Aspect", 0) = False Then
@@ -55,7 +55,7 @@ On Error GoTo EX
     
 '---Проверяем корректность значения Аспекта
     If vs_Aspect <= 0 Or vs_Aspect > 100 Then
-        GoTo EX
+        GoTo ex
     End If
 
 '---Устанавливаем новое значение Аспекта
@@ -66,8 +66,8 @@ Application.EndUndoScope UndoScopeID, True
 
 Exit Sub
 
-EX:
-MsgBox "Введеное вами значение не может быть установлено в качестве Аспекта! Проверьте правильно ли вы его указали! В качестве значений могут быть использованы только числа от 0,1 до 100!", vbCritical
+ex:
+MsgBox "Введеное вами значение не может быть установлено в качестве Аспекта! Проверьте правильно ли вы его указали! В качестве значений могут быть использованы только числа от 0,1 до 100!", vbCritical, ThisDocument.Name
 Set vO_Sheet = Nothing
 Application.EndUndoScope UndoScopeID, True
 
@@ -78,7 +78,7 @@ Public Sub FixZIndex_P()
 'Прока исправляет положение фигур ГраФиС относительно стен и прочего
 Dim vsoSelection As Visio.Selection
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     '---перемещаем вперед //Техника;ПТВ;Рукавные линии;Водоисточники;Очаг
     Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Техника;ПТВ;Рукавные линии;Водоисточники;Очаг")
@@ -98,7 +98,7 @@ Dim vsoSelection As Visio.Selection
     
     
 Exit Sub
-EX:
+ex:
     
 End Sub
 
@@ -108,11 +108,11 @@ Public Sub ShapesCountShow()
 Dim vO_ShpItm As Visio.Shape
 Dim x, y As Double
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     'Определяем на какую фигуру вброшена текущая
     MsgBox "Количество фигур в выделении: " & Application.ActiveWindow.Selection.Count, , "ГраФиС"
     
 Exit Sub
-EX:
+ex:
 End Sub

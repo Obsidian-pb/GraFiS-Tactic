@@ -27,6 +27,8 @@ Public WithEvents ComButLastTime As Office.CommandBarButton  'Самое позднее врем
 Attribute ComButLastTime.VB_VarHelpID = -1
 Public WithEvents ComButShapeTime As Office.CommandBarButton  'Время выбранной фигуры
 Attribute ComButShapeTime.VB_VarHelpID = -1
+Public WithEvents ComButTimeToShape As Office.CommandBarButton  'Установить текущее время
+Attribute ComButTimeToShape.VB_VarHelpID = -1
 
 Public CurrentTimerActive As Boolean
 '----------------------------------------------------------------------------------------
@@ -42,6 +44,7 @@ Private Sub Class_Initialize()
     Set ComButFireTime = Application.CommandBars("Таймер").Controls("Время начала пожара")
     Set ComButLastTime = Application.CommandBars("Таймер").Controls("Самое позднее время")
     Set ComButShapeTime = Application.CommandBars("Таймер").Controls("Время выбранной фигуры")
+    Set ComButTimeToShape = Application.CommandBars("Таймер").Controls("Установить текущее время")
     '---Ассоциируем поля
     Set TB_Date = Application.CommandBars("Таймер").Controls("Дата")
     Set TB_Time = Application.CommandBars("Таймер").Controls("Время")
@@ -61,7 +64,7 @@ Public Sub AddTBTimerDirect()
 '---Добавляем тулбокс таймера
 Dim i As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Объявляем переменные и постоянные--------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
@@ -82,19 +85,19 @@ Dim i As Integer
     AddTBTimerButtons
 
 Exit Sub
-EX:
+ex:
     'Error
 
 End Sub
 
 Public Sub RemoveTBTimer()
 'Процедура добавления панели управления "Таймер"-------------------------------
-    On Error GoTo EX
+    On Error GoTo ex
 '---Отключаем таймер текущего системного времени, если он был включен
     tmrKill
 '---Удаляем панель управления
     Application.CommandBars("Таймер").Delete
-EX:
+ex:
 End Sub
 
 Public Sub AddTBTimerButtons()
@@ -103,7 +106,7 @@ Public Sub AddTBTimerButtons()
     Dim Bar As CommandBar, control As CommandBarControl, Button As CommandBarButton
     Dim DocPath As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set Bar = Application.CommandBars("Таймер")
     
@@ -129,7 +132,6 @@ Public Sub AddTBTimerButtons()
         .TooltipText = "Уменьшить текущее время схемы на 1 минуту"
         .FaceID = 2944
         .BeginGroup = True
-'        .OnAction = "OnDelMinuteAction"
     End With
     Set Button = Nothing
 '---Контрол "Дата"
@@ -139,7 +141,6 @@ Public Sub AddTBTimerButtons()
         .Tag = "CurrentTime"
         .TooltipText = "Текущее время схемы"
         .Width = 45
-'        .OnAction = "OnCurrentTimeAction"
     End With
     PS_LoadFromSheetTime control
     Set control = Nothing
@@ -150,7 +151,6 @@ Public Sub AddTBTimerButtons()
         .Tag = "Rise1min"
         .TooltipText = "Увеличить текущее время схемы на 1 минуту"
         .FaceID = 2945
-'        .OnAction = "OnAddMinuteAction"
     End With
     Set Button = Nothing
 '---Кнопка "Системное время"-------------------------------------------------
@@ -171,7 +171,6 @@ Public Sub AddTBTimerButtons()
         .Tag = "CurrentTimeContinous"
         .TooltipText = "Переключиться на текущее системеное время (таймер с интервалом 10с.)"
         .FaceID = 2146
-'        .OnAction = "OnCurrentTimeComtinousAction"
     End With
     Set Button = Nothing
 '---Кнопка "Время начала пожара"-------------------------------------------------
@@ -181,7 +180,6 @@ Public Sub AddTBTimerButtons()
         .Tag = "FireTime"
         .TooltipText = "Переключиться на время начала пожара"
         .FaceID = 1885
-'        .OnAction = "OnFireTimeAction"
     End With
     Set Button = Nothing
 '---Кнопка "Самое позднее время"-------------------------------------------------
@@ -199,16 +197,28 @@ Public Sub AddTBTimerButtons()
         .Caption = "Время выбранной фигуры"
         .Tag = "ShapeTime"
         .TooltipText = "Переключиться на время выбранной фигуры"
-        .FaceID = 2694
+        .FaceID = 110
+    End With
+    Set Button = Nothing
+'---Кнопка "Установить текущее время"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "Установить текущее время"
+        .Tag = "TimeToShape"
+        .TooltipText = "Установить для выбранной фигуры текущее время схемы"
+        .FaceID = 111
+        .BeginGroup = True
     End With
     Set Button = Nothing
 
 
 Set Bar = Nothing
 Exit Sub
-EX:
+ex:
 '    Debug.Print Err.Description
-    
+    Set Bar = Nothing
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "AddTBTimerButtons"
 End Sub
 
 Public Sub RemooveTBTimer()
@@ -241,7 +251,9 @@ End Sub
 Private Sub ComButShapeTime_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     OnShapeTimeAction
 End Sub
-
+Private Sub ComButTimeToShape_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    OnShapeTimeToShapeAction
+End Sub
 
 
 
@@ -253,7 +265,7 @@ Public Sub OnCurrentDateAction()
 'Прока запускаемая при ввдении данных в поле CurrentDate
 '---Отключаем таймер (если был включен)
 '    tmrKill
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем корректность введенного значения
     If IsDate(TB_Date.Text) Then
     '---Если корректно - обновляем значение ячейки TheDoc!User.CurrentTime
@@ -263,7 +275,7 @@ Public Sub OnCurrentDateAction()
         PS_LoadFromSheetDate TB_Date
     End If
     
-EX:
+ex:
 End Sub
 
 Public Sub OnCurrentTimeAction()
@@ -271,7 +283,7 @@ Public Sub OnCurrentTimeAction()
     
 '---Отключаем таймер (если был включен)
 '    tmrKill
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем корректность введенного значения
     If IsDate(TB_Time.Text) Then
     '---Если корректно - обновляем значение ячейки TheDoc!User.CurrentTime
@@ -281,14 +293,14 @@ Public Sub OnCurrentTimeAction()
         PS_LoadFromSheetTime TB_Time
     End If
     
-EX:
+ex:
 End Sub
 
 Private Sub OnDelMinuteAction()
 'Прока запускается при нажатии на кнопку "Уменьшить на 1 минуту"
 Dim tmpDate As Date
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Отключаем таймер (если был включен)
     CurrentTimerActive = False
@@ -310,13 +322,13 @@ Dim tmpDate As Date
 '---Передаем данные в контрол
     PS_UpdateDateTime TB_Date, TB_Time
 
-EX:
+ex:
 End Sub
 Private Sub OnAddMinuteAction()
 'Прока запускается при нажатии на кнопку "Увеличить на 1 минуту"
 Dim tmpDate As Date
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Отключаем таймер (если был включен)
     CurrentTimerActive = False
@@ -338,13 +350,13 @@ Dim tmpDate As Date
 '---Передаем данные в контрол
     PS_UpdateDateTime TB_Date, TB_Time
 
-EX:
+ex:
 End Sub
 
 Private Sub OnSystemTimeAction()
 'Прока запускаетсяпри нажатии на кнопку "Переключиться на системное время"
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Отключаем таймер (если был включен)
     CurrentTimerActive = False
@@ -356,13 +368,13 @@ Private Sub OnSystemTimeAction()
 '---Передаем данные в контрол
     PS_UpdateDateTime TB_Date, TB_Time
     
-EX:
+ex:
 End Sub
 
 Private Sub OnFireTimeAction()
 'Прока запускается при нажатии на кнопку "FireTime"
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Отключаем таймер (если был включен)
     CurrentTimerActive = False
@@ -381,13 +393,13 @@ Private Sub OnFireTimeAction()
     PS_LoadFromSheetDate TB_Date
     PS_LoadFromSheetTime TB_Time
     
-EX:
+ex:
 End Sub
 
 Private Sub OnCurrentTimeComtinousAction()
 'Прока запускается при нажатии на кнопку "CurrentTime"
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Показываем текуще значение времени
     OnSystemTimeAction
@@ -396,13 +408,13 @@ Private Sub OnCurrentTimeComtinousAction()
 '    tmrStart
     CurrentTimerActive = True
     
-EX:
+ex:
 End Sub
 
 Private Sub OnLastTimeAction()
 'Прока запускается при нажатии на кнопку "FireTime"
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Отключаем таймер (если был включен)
     CurrentTimerActive = False
@@ -415,13 +427,13 @@ Private Sub OnLastTimeAction()
     PS_LoadFromSheetDate TB_Date
     PS_LoadFromSheetTime TB_Time
     
-EX:
+ex:
 End Sub
 
 Private Sub OnShapeTimeAction()
 'Прока запускается при нажатии на кнопку "ShapeTime" - получить время выбранной фигуры
 
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Если ни одна фигура не выделена - выходим
     If Application.ActiveWindow.Selection.Count = 0 Then Exit Sub
@@ -437,9 +449,29 @@ Private Sub OnShapeTimeAction()
     PS_LoadFromSheetDate TB_Date
     PS_LoadFromSheetTime TB_Time
     
-EX:
+ex:
 End Sub
 
+Private Sub OnShapeTimeToShapeAction()
+'Прока запускается при нажатии на кнопку "TimeToShape" - Установить для выбранной фигуры (фигур) текущее время схемы
+Dim shp As Visio.Shape
+Dim curTime As Double
+
+    On Error GoTo ex
+    
+'---Если ни одна фигура не выделена - выходим
+    If Application.ActiveWindow.Selection.Count = 0 Then Exit Sub
+    
+'---Получаем текущее время схемы
+    curTime = Application.ActiveDocument.DocumentSheet.Cells("TheDoc!User.CurrentTime").Result(visDate)
+    
+'---Перебираем все фигуры в выделении
+    For Each shp In Application.ActiveWindow.Selection
+        SetCurrentShapeTime shp, curTime
+    Next shp
+    
+ex:
+End Sub
 
 
 '---------------Служебные проки------------------------------------------------------------------
@@ -447,7 +479,7 @@ Private Sub PS_DateChange(ByRef controlDate As CommandBarControl, ByVal changeVa
 'Прока уменьшает значение даты в контроле CurrentDate на 1 день
 Dim tmpDate As Date
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Получаем текущее значение
     tmpDate = DateValue(controlDate.Text)
@@ -458,13 +490,13 @@ Dim tmpDate As Date
 '---Устанавливаем новое значение для контрола
     controlDate.Text = DateValue(tmpDate)
     
-EX:
+ex:
 End Sub
 
 Public Sub FillFullData()
 'Если в полях времени и даты пусто - устанавливаем
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '    Debug.Print TB_Date.Text
     If TB_Date.Text = "" Then
@@ -474,7 +506,7 @@ Public Sub FillFullData()
         PS_LoadFromSheetTime TB_Time
     End If
     
-EX:
+ex:
 End Sub
 
 Private Function GetLastTime(ByVal fireStartTime As Double) As String
@@ -483,7 +515,7 @@ Dim shp As Visio.Shape
 Dim curVal As Double
 Dim maxVal As Double
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     maxVal = fireStartTime
     '---Перебираем все фигуры на листе и если значение ячайки со временм яляется максимальным возвращаем его
@@ -502,15 +534,18 @@ Dim maxVal As Double
     
     GetLastTime = "DATETIME(" & str(maxVal) & ")"
 Exit Function
-EX:
+ex:
     GetLastTime = "User.FireTime"
 End Function
 Private Function GetShapeTime(ByRef shp As Visio.Shape, ByVal cellName) As Double
 'Функция возвращает значение для текущей ячейки, если такой ячейки нет - возвращается 0
-On Error GoTo EX
+On Error GoTo ex
     GetShapeTime = shp.Cells(cellName).Result(visDate)
+    If GetShapeTime = 0 Then
+        GetShapeTime = shp.Cells(cellName).ResultStr(visUnitsString)
+    End If
 Exit Function
-EX:
+ex:
     GetShapeTime = 0
 End Function
 
@@ -518,7 +553,7 @@ Private Function GetCurrentShapeTime(ByRef shp As Visio.Shape) As String
 'Функция возвращает значение времени для выбранной фигуры
 Dim curVal As Double
     
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Получаем значение любой ячейки содержащей значения времени прибытия (установки и т.д.)
     curVal = GetShapeTime(shp, "Prop.ArrivalTime") + _
@@ -542,25 +577,43 @@ Dim curVal As Double
     End If
 
 Exit Function
-EX:
+ex:
     GetCurrentShapeTime = "User.FireTime"
 End Function
 
+Private Sub SetCurrentShapeTime(ByRef shp As Visio.Shape, ByRef dateVal As Double)
+'Процедура устанавливает значение времени для выбранной фигуры
+    On Error Resume Next
+    With shp
+        .Cells("Prop.ArrivalTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.LineTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.SetTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.SquareTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.StabCreationTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.UTPCreationTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.FormingTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.FindTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.RushTime").Formula = "DATETIME(" & dateVal & ")"
+        .Cells("Prop.FireTime").Formula = "DATETIME(" & dateVal & ")"
+    End With
+ 
+End Sub
+
 Private Function GetGDZSChainCorrectTime(ByRef shp As Visio.Shape, ByVal testVal As Double) As Double
 'Функция возвращае ткорректное значение для фигур звеньев ГДЗС
-On Error GoTo EX
+On Error GoTo ex
     If shp.CellExists("User.IndexPers", 0) Then
         If shp.Cells("User.IndexPers").Result(visNumber) = 46 Then
             GetGDZSChainCorrectTime = shp.Cells("Prop.FormingTime").Result(visDate)
             Exit Function
         End If
     End If
-EX:
+ex:
     GetGDZSChainCorrectTime = testVal
 End Function
 
 Private Function GetFireTime() As Boolean
-'Функция устанавливает значение времени начала пожара для ячейки User.FireTime и вщзвращает истину если фигура есть
+'Функция устанавливает значение времени начала пожара для ячейки User.FireTime и возвращает истину если фигура есть
 'Ложь - если нет
 Dim shp As Visio.Shape
 Dim timeVal As Double
@@ -580,7 +633,7 @@ Dim timeVal As Double
 
 GetFireTime = False
 Exit Function
-EX:
+ex:
     GetFireTime = False
 End Function
 
@@ -590,12 +643,12 @@ End Function
 Public Sub PS_UpdateDateTime(ByRef controlDate As CommandBarControl, ByRef controlTime As CommandBarControl)
 'Обновляем значение поля TheDoc!User.CurrentTime в соответсвии с переданным значением
 Dim tmpDate As Date
-    On Error GoTo EX
+    On Error GoTo ex
     tmpDate = DateValue(controlDate.Text) + TimeValue(controlTime.Text)
     Application.ActiveDocument.DocumentSheet.Cells("TheDoc!User.CurrentTime").Formula = _
         "DATETIME(" & str(CDbl(tmpDate)) & ")"
 
-EX:
+ex:
 End Sub
 
 Public Sub PS_LoadFromSheetDate(ByRef control As CommandBarControl)
@@ -664,3 +717,4 @@ End Sub
 'EX:
 '    Debug.Print Err.Description
 'End Sub
+

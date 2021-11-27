@@ -114,7 +114,7 @@ Set OtherShape = Nothing
 Exit Sub
 EX:
     Set OtherShape = Nothing
-    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "PS_GlueToShape"
 End Sub
 
@@ -143,30 +143,39 @@ Public Sub PS_ReleaseShape(ShpObj As Visio.Shape, ShapeID As Long)
 'Процедура снимает закрепление лафетного ствола за автомобилем
 Dim OtherShape As Visio.Shape
 
-If ShapeID = 0 Then Exit Sub
+    On Error GoTo Tail
 
-Set OtherShape = Application.ActivePage.Shapes.ItemFromID(ShapeID)
-
-On Error Resume Next
-
-    ShpObj.Cells("PinX").FormulaForce = ShpObj.Cells("PinX").Result(visNumber)
-    ShpObj.Cells("PinY").FormulaForce = ShpObj.Cells("PinY").Result(visNumber)
-    ShpObj.Cells("Angle").FormulaForce = ShpObj.Cells("Angle").Result(visNumber)
-    ShpObj.Cells("Width").FormulaForce = ShpObj.Cells("Width").Result(visNumber)
-    ShpObj.Cells("Height").FormulaForce = ShpObj.Cells("Height").Result(visNumber)
-    ShpObj.Cells("Prop.Unit").FormulaForceU = """" & ShpObj.Cells("Prop.Unit").ResultStr(visUnitsString) & """"
-    ShpObj.Cells("Prop.SetTime").FormulaForce = ShpObj.Cells("Prop.SetTime").Result(visDate)
-    ShpObj.Cells("User.DownOrient").FormulaU = "IF(Angle>-1 deg,1,0)"
-    ShpObj.Cells("User.ShapeFromID").FormulaU = 0
+    If ShapeID = 0 Then Exit Sub
     
-    OtherShape.Cells("User.GFS_OutLafet").FormulaU = 0
-    OtherShape.Cells("User.GFS_OutLafet.Prompt").FormulaU = 0
-    ShpObj.BringToFront
-
-Set OtherShape = Nothing
+    Set OtherShape = Application.ActivePage.Shapes.ItemFromID(ShapeID)
+    
+    On Error Resume Next
+    
+        ShpObj.Cells("PinX").FormulaForce = ShpObj.Cells("PinX").Result(visNumber)
+        ShpObj.Cells("PinY").FormulaForce = ShpObj.Cells("PinY").Result(visNumber)
+        ShpObj.Cells("Angle").FormulaForce = ShpObj.Cells("Angle").Result(visNumber)
+        ShpObj.Cells("Width").FormulaForce = ShpObj.Cells("Width").Result(visNumber)
+        ShpObj.Cells("Height").FormulaForce = ShpObj.Cells("Height").Result(visNumber)
+        ShpObj.Cells("Prop.Unit").FormulaForceU = """" & ShpObj.Cells("Prop.Unit").ResultStr(visUnitsString) & """"
+        ShpObj.Cells("Prop.SetTime").FormulaForce = ShpObj.Cells("Prop.SetTime").Result(visDate)
+        ShpObj.Cells("User.DownOrient").FormulaU = "IF(Angle>-1 deg,1,0)"
+        ShpObj.Cells("User.ShapeFromID").FormulaU = 0
+        
+        OtherShape.Cells("User.GFS_OutLafet").FormulaU = 0
+        OtherShape.Cells("User.GFS_OutLafet.Prompt").FormulaU = 0
+        ShpObj.BringToFront
+    
+    Set OtherShape = Nothing
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "PS_ReleaseShape"
 End Sub
-'Процедура маняет направление потока в водосборнике
+
 Public Sub DirectVS(shp As Visio.Shape, AsRazv As Boolean)
+'Процедура маняет направление потока в водосборнике
+    On Error GoTo Tail
+
   If AsRazv Then ' Сборник
      shp.Cells("Connections.GFS_In").RowNameU = "GFS_Out"
      shp.Cells("Connections.GFS_Out1").RowNameU = "GFS_In1"
@@ -190,5 +199,55 @@ Public Sub DirectVS(shp As Visio.Shape, AsRazv As Boolean)
   End If
   shp.Cells("User.UseAsRazv").FormulaU = AsRazv
   
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "DirectVS"
 End Sub
+
+Public Sub SearchWSShape(shp As Visio.Shape, x As Double, y As Double)
+'Процедура ищет фигуры водоисточников и проверяет не оказался ли конец всасывающей линии в них. Если оказался, то для ячейки "User.WSShapeID" устанавливает ее ID
+Dim curShp As Visio.Shape
+Dim corX As Double
+Dim corY As Double
+        
+    On Error GoTo Tail
+        
+    'Преобразуем локальные координаты фигуры в коорджинаты страницы
+    shp.XYToPage corX, corY, x, y
+    
+    'перебираем все страницы на листе и проверяем, являются ли они фигурой Водоема
+    For Each curShp In Application.ActivePage.Shapes
+        'Если пожарный водоем
+        If IsGFSShapeWithIP(curShp, 51, True) Then
+            'Проверяем находится ли указанная точка внутри фигуры водоема
+            If curShp.HitTest(x, y, 0) > 0 Then
+                shp.Cells("User.WSShapeID").Formula = curShp.ID
+                Exit Sub
+            End If
+        End If
+        'Если открытый водоисточник
+        If IsGFSShapeWithIP(curShp, 53, True) Then
+            'Проверяем находится ли указанная точка внутри фигуры открытого водоисточника
+            If curShp.HitTest(x, y, 0) > 0 Then
+                shp.Cells("User.WSShapeID").Formula = curShp.ID
+                Exit Sub
+            End If
+        End If
+    Next curShp
+    
+'Если ничего не было найдено, указываем, что всасывающая линия ни откуда не забирает воду
+shp.Cells("User.WSShapeID").Formula = 0
+
+Exit Sub
+Tail:
+    MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
+    SaveLog Err, "SearchWSShape"
+End Sub
+
+
+
+
+
+
 

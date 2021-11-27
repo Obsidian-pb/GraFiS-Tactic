@@ -20,17 +20,7 @@ Private WithEvents vO_App As Visio.Application
 Attribute vO_App.VB_VarHelpID = -1
 Private cpO_InShape, cpO_OutShape As Visio.Shape 'Фигуры в которую входит поток и выходит, соответственно
 
-'---Постоянные индеков графиков
-Const ccs_InIdent = "Connections.GFS_In"
-Const ccs_OutIdent = "Connections.GFS_Ou"
-Const vb_ShapeType_Other = 0                'Ничего
-Const vb_ShapeType_Hose = 1                 'Рукава
-Const vb_ShapeType_PTV = 2                  'ПТВ
-Const vb_ShapeType_Razv = 3                 'Разветвление
-Const vb_ShapeType_Tech = 4                 'Техника
-Const vb_ShapeType_VsasSet = 5              'Всасывающая сетка с линией
-Const vb_ShapeType_GE = 6                   'Гидроэлеватор
-Const vb_ShapeType_WaterContainer = 7       'Водяная емкость
+
 
 'Const vb_LineTypeWork = 0                   'Рабочая рукавная линия
 'Const vb_LineTypeMag = 1                    'Магистральная рукавная линия
@@ -172,7 +162,7 @@ Dim vb_InShapeType, vb_OutShapeType As Byte
 Dim i As Integer
 Dim vs_Formula As String
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Проверить чем являются соединяемые фигуры
     '---УстанавливаемIndexPers для каждой из фигур
@@ -352,7 +342,7 @@ On Error GoTo EX
     
     
 Exit Sub
-EX:
+ex:
     Debug.Print Err.description
 '    Debug.Print vs_Formula
     SaveLog Err, "ps_LinkShapes"
@@ -370,7 +360,7 @@ Public Sub Ps_ConnectionDelete(ByRef aO_Conn As Visio.Connect)
 Dim vO_FromShape, vO_ToShape As Visio.Shape
 Dim vi_InRowNumber, vi_OutRowNumber As Integer
 
-On Error GoTo EX
+On Error GoTo ex
     
 '---Определяем каие фигуры были соединены
     Set vO_FromShape = aO_Conn.FromSheet
@@ -444,7 +434,7 @@ On Error GoTo EX
     Set cpO_OutShape = Nothing
 Exit Sub
 
-EX:
+ex:
 '    Resume Next
     Set cpO_InShape = Nothing
     Set cpO_OutShape = Nothing
@@ -457,7 +447,7 @@ Dim vi_IPInShape, vi_IPOutShape As Integer
 Dim vb_InShapeType, vb_OutShapeType As Byte
 Dim i As Integer
 
-On Error GoTo EX
+On Error GoTo ex
 
 '---Проверить чем являются соединяемые фигуры
     '---УстанавливаемIndexPers для каждой из фигур
@@ -558,7 +548,7 @@ On Error GoTo EX
     
     
 Exit Sub
-EX:
+ex:
 '    Debug.Print Err.Description
     SaveLog Err, "ps_DisLinkShapes"
 
