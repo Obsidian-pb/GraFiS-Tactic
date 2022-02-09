@@ -109,7 +109,8 @@ End Sub
 Sub DeleteButtons()
 '---Процедура удаления кнопки "Мастер проверок" из панели управления "Спецфункции"--------------
 
-    On Error GoTo ex
+'    On Error GoTo ex
+    On Error Resume Next
 
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
