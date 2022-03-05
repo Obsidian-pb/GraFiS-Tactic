@@ -44,7 +44,7 @@ Dim f As frm_ListForm
             myArray(i, 1) = CellVal(shp, "Prop.Unit", visUnitsString, "") & CellVal(shp, "Prop.Owner", visUnitsString, "")  '"Подразделение"
             myArray(i, 2) = CellVal(shp, "Prop.Call", visUnitsString, "") & CellVal(shp, "Prop.About", visUnitsString, "")  '"Позывной"
             myArray(i, 3) = CellVal(shp, "Prop.Model", visUnitsString, "")  '"Модель"
-            myArray(i, 4) = Format(CellVal(shp, "Prop.ArrivalTime"), "hh:mm:ss")  '"Время прибытия"
+            myArray(i, 4) = Format(CellVal(shp, "Prop.ArrivalTime"), "DD.MM.YYYY hh:nn:ss")  '"Время прибытия"
             myArray(i, 5) = CellVal(shp, "Prop.PersonnelHave")  '"Личный состав"
         Next i
     End If
@@ -98,7 +98,7 @@ Dim f As frm_ListForm
             myArray(i, 1) = CellVal(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
             myArray(i, 2) = CellVal(shp, "User.IndexPers.Prompt", visUnitsString, "")  '"Тип ствола"
             myArray(i, 3) = CellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
-            myArray(i, 4) = Format(CellVal(shp, "Prop.SetTime"), "hh:mm:ss")  '"Время подачи"
+            myArray(i, 4) = Format(CellVal(shp, "Prop.SetTime"), "DD.MM.YYYY hh:nn:ss")  '"Время подачи"
             myArray(i, 5) = CellVal(shp, "Prop.Personnel")  '"Личный состав"
             myArray(i, 6) = CellVal(shp, "Prop.UseDirection", visUnitsString, "")  '"Работа"
             myArray(i, 7) = CellVal(shp, "User.PodOut")  '"Производительность"
@@ -153,7 +153,7 @@ Dim f As frm_ListForm
             myArray(i, 1) = CellVal(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
             myArray(i, 2) = CellVal(shp, "User.IndexPers.Prompt", visUnitsString, "")  '"Тип"
             myArray(i, 3) = CellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
-            myArray(i, 4) = Format(CellVal(shp, "Prop.FormingTime"), "hh:mm:ss")  '"Время формирования"
+            myArray(i, 4) = Format(CellVal(shp, "Prop.FormingTime"), "DD.MM.YYYY hh:nn:ss")  '"Время формирования"
             myArray(i, 5) = CellVal(shp, "Prop.Personnel")  '"Личный состав"
             myArray(i, 6) = CellVal(shp, "Prop.AirDevice", visUnitsString, " ")  '"СИЗОД"
         Next i
@@ -207,7 +207,7 @@ Dim f As frm_ListForm
             myArray(i, 1) = CellVal(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
             myArray(i, 2) = CellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
             myArray(i, 3) = CellVal(shp, "User.IndexPers.Prompt", visUnitsString)  '"Тип"
-            myArray(i, 4) = Format(pf_GetTime(shp), "hh:mm:ss")  '"Время"
+            myArray(i, 4) = Format(pf_GetTime(shp), "DD.MM.YYYY hh:nn:ss")  '"Время"
         Next i
     End If
 
