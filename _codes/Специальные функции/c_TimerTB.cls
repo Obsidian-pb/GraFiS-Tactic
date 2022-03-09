@@ -529,8 +529,14 @@ Dim maxVal As Double
                  GetShapeTime(shp, "Prop.FormingTime") + _
                  GetShapeTime(shp, "Prop.FindTime") + _
                  GetShapeTime(shp, "Prop.RushTime")
+        
         If curVal > maxVal And curVal < maxVal + 100 Then maxVal = curVal 'Здесь +100 -> учет перебора для фигур у которых несколько ячеек с именами времен, например звенья ГДЗС
+        
+        '---Предотвращаем ошибку при нулевом (ошибочном) времени начала пожара. Принимаем не просто ноль, во избежание случайного ввода минут пользователем, но 1, т.е. в пределах первого дня 0-й даты
+        If maxVal <= 1 Then maxVal = curVal
     Next shp
+    
+    
     
     GetLastTime = "DATETIME(" & str(maxVal) & ")"
 Exit Function

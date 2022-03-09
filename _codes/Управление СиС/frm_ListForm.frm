@@ -131,6 +131,7 @@ Dim colCount As Byte
     End If
     
     Me.LB_List.List = arr
+    Me.LB_List.AddItem  'Добавляемпустую строку, для предотвращения скрытия последней строки в списке. (!)Эта же строка будет флагом окончания списка
     
     'Показываем привязанную к приложению форму
     Set wAddon = ActiveWindow.Windows.Add(frmID, visWSVisible + visWSAnchorMerged + visWSDockedBottom, visAnchorBarAddon, , , 300, 300, "LST", "LST")
@@ -289,11 +290,22 @@ Dim colCount As Byte
     
     
     'Заполняем таблицу
-    For i = 0 To Me.LB_List.ListCount - 1
+    i = 0
+    Do Until IsNull(Me.LB_List.Column(1, i))
         For j = 1 To colCount
             wrdTbl.Rows(i + 1).Cells(j).Range.text = Me.LB_List.Column(j, i)
         Next j
-    Next i
+        i = i + 1
+        If i > 1000 Then
+            'аварийный выход
+            Exit Do
+        End If
+    Loop
+'    For i = 0 To Me.LB_List.ListCount - 2
+'        For j = 1 To colCount
+'            wrdTbl.Rows(i + 1).Cells(j).Range.text = Me.LB_List.Column(j, i)
+'        Next j
+'    Next i
     
     wrdTbl.AutoFitBehavior 1        'Устанавливаем ширину столбцов по содержимому
 End Sub

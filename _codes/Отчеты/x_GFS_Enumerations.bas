@@ -131,6 +131,7 @@ Public Enum indexPers
    ipPodpisUniversal = 152                     'Универсальная подпись
    ipPodpisStepenOgnestoykosty = 153           'Подпись степени огнестойкости
    ipPodpisVhodVZdanie = 154                   'Подпись входа в здание
+   ipCurrentTime = 155                         'Подпись текущего времени схемы
    ipPAObscheeOboznachenie = 160               'ПА – общее обозначение
    ipACL = 161                                 'АЦЛ
    ipACKP = 162                                'АЦКП
@@ -169,6 +170,7 @@ Public Enum indexPers
    ipInfoEffects = 606                         'Инфоблок Последствия
    ipInfoSignatures = 607                      'Инфоблок Подписи
    ipInfoCommonFireInfo = 608                  'Инфоблок Сведения о тушении пожара
+   ipGeoCoords = 700                           'Точка с геокоординатами
    ipStatist = 1000                            'Статисты (для учений)
 End Enum
 
