@@ -548,7 +548,8 @@ Private Function GetShapeTime(ByRef shp As Visio.Shape, ByVal cellName) As Doubl
 On Error GoTo ex
     GetShapeTime = shp.Cells(cellName).Result(visDate)
     If GetShapeTime = 0 Then
-        GetShapeTime = shp.Cells(cellName).ResultStr(visUnitsString)
+        GetShapeTime = DateValue(shp.Cells(cellName).ResultStr(visUnitsString)) + _
+                       TimeValue(shp.Cells(cellName).ResultStr(visUnitsString))
     End If
 Exit Function
 ex:

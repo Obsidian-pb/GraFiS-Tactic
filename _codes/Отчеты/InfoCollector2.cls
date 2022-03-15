@@ -215,7 +215,9 @@ Dim latestSquareTime As Date
                         If cellVal(shp, "Prop.SquareTime", visDate) > latestSquareTime Then 'Проверяем является ли данная фигура последней по времени
                             .SetValByCellID shp, "User.FireSquare;User.ExtSquare;User.NeedStreamW"
                                                 
-                            latestSquareTime = cellVal(shp, "Prop.SquareTime", visDate) 'Устанавливаем новое значение наибольшего времени учета для площади
+                            'Устанавливаем новое значение наибольшего времени учета для площади
+                            tmp = Format(cellVal(shp, "Prop.SquareTime", visDate), "dd.mm.yyyy HH:MM")
+                            latestSquareTime = DateValue(tmp) + TimeValue(tmp)
                         ElseIf cellVal(shp, "Prop.SquareTime", visDate) = latestSquareTime Then
                             .RaiseByCellID shp, "User.FireSquare;User.ExtSquare;User.NeedStreamW"
                         End If

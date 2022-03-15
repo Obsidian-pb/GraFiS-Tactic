@@ -91,6 +91,22 @@ For Each vsO_Shape In vsO_TargetPage.Shapes
             Case Is = 70 'Очаг пожара
                 Set pcpO_BeginFire = vsO_Shape
                 pcpD_BeginDate = pcpO_BeginFire.Cells("Prop.FireTime").ResultStr(visUnitsString)
+            Case Is = 35 'ручные пенные стволы
+                If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
+                    ColP_WStvols.Add vsO_Shape, str(vsO_Shape.ID)
+                End If
+            Case Is = 37 'лафетные пенные стволы
+                If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
+                    ColP_WStvols.Add vsO_Shape, str(vsO_Shape.ID)
+                End If
+            Case Is = 45 'пеноподъемники
+                If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
+                    ColP_WStvols.Add vsO_Shape, str(vsO_Shape.ID)
+                End If
+            Case Is = 22 'гребенка пеногенераторов
+                If vsO_Shape.Cells("Prop.MainManeure").ResultStr(visUnitsString) = "Основное положение" Then
+                    ColP_WStvols.Add vsO_Shape, str(vsO_Shape.ID)
+                End If
             End Select
         End If
     End If
