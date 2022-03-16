@@ -1092,7 +1092,8 @@
     Para.IndFirst: 0 мм; Para.IndLeft: 0 мм; Para.IndRight: 0 мм; Para.SpLine: -120%; Para.SpBefore: 0 пт; Para.SpAfter: 0 пт; Para.HorzAlign: 1; Para.Bullet: 0; Para.BulletStr: ""; Para.BulletFont: 0; Para.LocalizeBulletFont: 0; Para.BulletFontSize: -100%; Para.TextPosAfterBullet: 0 мм; Para.Flags: 0; 
   Section: Prop>>>
     Prop.SetTime: DATETIME(42828,546527778); Prop.SetTime.Prompt: "Полное географическое время появления свища или порыва"; Prop.SetTime.Label: "Время установки"; Prop.SetTime.Format: "{{dd.MM.yyyy H:mm}}"; Prop.SetTime.SortKey: 10; Prop.SetTime.Type: 5; Prop.SetTime.Invisible: FALSE; Prop.SetTime.Verify: FALSE; Prop.SetTime.LangID: 1049; 
-    Prop.WFLink: "http://wiki-fire.org/Рукавные%20мостики.ashx"; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: ""; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
+    Prop.WFLink: "http://wiki-fire.org/Рукавные%20мостики.ashx"; Prop.WFLink.Prompt: "Попытаться найти ссылку на страницу данной модели на проекте wiki-fire.org."; Prop.WFLink.Label: "Ссылка WF"; Prop.WFLink.Format: ""; Prop.WFLink.SortKey: 20; Prop.WFLink.Type: 0; Prop.WFLink.Invisible: TRUE; Prop.WFLink.Verify: FALSE; Prop.WFLink.LangID: 1049; Prop.WFLink.Calendar: 0; 
+    Prop.SizeScale: 1; Prop.SizeScale.Prompt: "Коэффициент дополнительной увеличивающий или уменьшающий фигуру - будет полезен при работе в больших масштабах"; Prop.SizeScale.Label: "Дополнительный масштаб"; Prop.SizeScale.Format: ""; Prop.SizeScale.SortKey: 11; Prop.SizeScale.Type: 2; Prop.SizeScale.Invisible: FALSE; Prop.SizeScale.Verify: FALSE; Prop.SizeScale.LangID: 1049; Prop.SizeScale.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>

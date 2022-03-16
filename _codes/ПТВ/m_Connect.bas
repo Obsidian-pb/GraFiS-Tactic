@@ -9,7 +9,7 @@ On Error GoTo SubExit
 '---Если подпись ни к чему не приклеена, процедура заканчивается
     If ShpObj.Connects.Count > 0 Then
         ToShape = ShpObj.Connects.Item(1).ToSheet.ID
-        ShpObj.Cells("Prop.FlowIn").FormulaU = "Sheet." & ToShape & "!Prop.Production" & ""
+        ShpObj.Cells("Prop.FlowIn").FormulaU = "Sheet." & ToShape & "!User.Production" & ""
         ShpObj.Cells("User.WSShapeID").Formula = ToShape
     Else
         ShpObj.Cells("Prop.FlowIn").FormulaU = 0

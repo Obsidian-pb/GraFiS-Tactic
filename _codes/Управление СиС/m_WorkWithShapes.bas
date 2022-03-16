@@ -29,22 +29,39 @@ End Sub
 
 Public Sub CheckEnd(ByRef shp As Visio.Shape, ByVal t As Date)
     
+'    Select Case GetTactState(shp)
+'        Case Is = tactState.tsInProgress
+'            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 346
+'            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Выполняет поставленные задачи"
+'        Case Is = tactState.tsWaiting
+'            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 1089
+'            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Ожидает команд"
+'        Case Is = tactState.tsEnd
+'            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 1088  ' 840
+'            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Закончил работу на пожаре (убыл)"
+'        Case Is = tactState.tsNotStarted
+'            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 2743
+'            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Выполнение не началось"
+'        Case Is = tactState.tsError
+'            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 463
+'            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "ОШИБКА - проверьте корректность данных"
+'    End Select
     Select Case GetTactState(shp)
         Case Is = tactState.tsInProgress
-            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 346
-            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Выполняет поставленные задачи"
+            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 346
+            SetCellVal shp, "SmartTags.GFS_Commands.Description", "Выполняет поставленные задачи"
         Case Is = tactState.tsWaiting
-            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 1089
-            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Ожидает команд"
+            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 1089
+            SetCellVal shp, "SmartTags.GFS_Commands.Description", "Ожидает команд"
         Case Is = tactState.tsEnd
-            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 1088  ' 840
-            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Закончил работу на пожаре (убыл)"
+            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 1088  ' 840
+            SetCellVal shp, "SmartTags.GFS_Commands.Description", "Закончил работу на пожаре (убыл)"
         Case Is = tactState.tsNotStarted
-            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 2743
-            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "Выполнение не началось"
+            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 2743
+            SetCellVal shp, "SmartTags.GFS_Commands.Description", "Выполнение не началось"
         Case Is = tactState.tsError
-            SetCellFrml shp, "SmartTags.GFS_Commands.ButtonFace", 463
-            SetCellFrml shp, "SmartTags.GFS_Commands.Description", "ОШИБКА - проверьте корректность данных"
+            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 463
+            SetCellVal shp, "SmartTags.GFS_Commands.Description", "ОШИБКА - проверьте корректность данных"
     End Select
 
 End Sub
@@ -59,7 +76,7 @@ Dim firstState As tactState
     
     For i = 0 To shp.RowCount(visSectionAction) - 1
         If left(shp.CellsSRC(visSectionAction, i, 0).rowName, 11) = "GFS_Command" Then
-            curCommandState = GetCommandState(CellVal(shp, "User.CurrentDocTime", visDate), _
+            curCommandState = GetCommandState(cellval(shp, "User.CurrentDocTime", visDate), _
                            shp.CellsSRC(visSectionAction, i, visActionMenu).ResultStr(visUnitsString))
             Select Case curCommandState
                 Case Is = tactState.tsInProgress
@@ -101,7 +118,7 @@ Dim startTime As Date
 Dim durationS As String
 Dim durationI As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 
     'Если время выполнения не указано, работа не имеет ограничения
     'Если время выполнения = *, единица закончила работу на пожаре
@@ -135,6 +152,6 @@ Dim durationI As Integer
     End If
     
 Exit Function
-EX:
+ex:
     GetCommandState = tsError
 End Function

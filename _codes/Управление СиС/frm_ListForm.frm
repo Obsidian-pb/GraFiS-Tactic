@@ -152,20 +152,20 @@ End Function
 Private Sub LB_List_Change()
 Dim shpID As Long
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     'Выделояем фигуру
     shpID = Me.LB_List.Column(0, Me.LB_List.ListIndex)
     Application.ActiveWindow.Select Application.ActivePage.Shapes.ItemFromID(shpID), visDeselectAll + visSelect
     
-EX:
+ex:
 End Sub
 
 Private Sub LB_List_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 Dim shpID As Long
 Dim shp As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
     
     'Определяем фигуру для которой сделана запись
     shpID = Me.LB_List.Column(0, Me.LB_List.ListIndex)
@@ -175,7 +175,7 @@ Dim shp As Visio.Shape
     'Устанавливаем фокус на фигуре
     Application.ActiveWindow.Zoom = 1.5 * GetScaleAt200
     Application.ActiveWindow.ScrollViewTo shp.Cells("PinX"), shp.Cells("PinY")
-EX:
+ex:
 End Sub
 
 

@@ -152,7 +152,7 @@ End Function
 Private Function GetCommandText(Optional ByVal l As Integer = 25) As String
 Dim str As String
 
-    On Error GoTo EX
+    On Error GoTo ex
 
     str = FixText(Me.txt_InfoText)
     If Len(str) < l Then
@@ -162,14 +162,14 @@ Dim str As String
     End If
 
 Exit Function
-EX:
+ex:
     GetCommandText = "***"
 End Function
 Private Function GetRowIndex(cellName As String) As Integer
-    On Error GoTo EX
+    On Error GoTo ex
     GetRowIndex = shp.Cells(cellName).Row
 Exit Function
-EX:
+ex:
     GetRowIndex = -1
 End Function
 

@@ -17,7 +17,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
     For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
-        If pf_IsMainTechnics(CellVal(shp, "User.IndexPers")) Then
+        If pf_IsMainTechnics(cellval(shp, "User.IndexPers")) Then
             AddUniqueCollectionItem units, shp
         End If
     Next shp
@@ -41,11 +41,11 @@ Dim f As frm_ListForm
             '---Вставка остальных записей
             Set shp = units(i)
             myArray(i, 0) = shp.ID
-            myArray(i, 1) = CellVal(shp, "Prop.Unit", visUnitsString, "") & CellVal(shp, "Prop.Owner", visUnitsString, "")  '"Подразделение"
-            myArray(i, 2) = CellVal(shp, "Prop.Call", visUnitsString, "") & CellVal(shp, "Prop.About", visUnitsString, "")  '"Позывной"
-            myArray(i, 3) = CellVal(shp, "Prop.Model", visUnitsString, "")  '"Модель"
-            myArray(i, 4) = Format(CellVal(shp, "Prop.ArrivalTime"), "DD.MM.YYYY hh:nn:ss")  '"Время прибытия"
-            myArray(i, 5) = CellVal(shp, "Prop.PersonnelHave")  '"Личный состав"
+            myArray(i, 1) = cellval(shp, "Prop.Unit", visUnitsString, "") & cellval(shp, "Prop.Owner", visUnitsString, "")  '"Подразделение"
+            myArray(i, 2) = cellval(shp, "Prop.Call", visUnitsString, "") & cellval(shp, "Prop.About", visUnitsString, "")  '"Позывной"
+            myArray(i, 3) = cellval(shp, "Prop.Model", visUnitsString, "")  '"Модель"
+            myArray(i, 4) = Format(cellval(shp, "Prop.ArrivalTime"), "DD.MM.YYYY hh:nn:ss")  '"Время прибытия"
+            myArray(i, 5) = cellval(shp, "Prop.PersonnelHave")  '"Личный состав"
         Next i
     End If
 
@@ -69,7 +69,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
     For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
-        If pf_IsStvols(CellVal(shp, "User.IndexPers")) Then
+        If pf_IsStvols(cellval(shp, "User.IndexPers")) Then
             AddUniqueCollectionItem units, shp
         End If
     Next shp
@@ -95,13 +95,13 @@ Dim f As frm_ListForm
             '---Вставка остальных записей
             Set shp = units(i)
             myArray(i, 0) = shp.ID
-            myArray(i, 1) = CellVal(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
-            myArray(i, 2) = CellVal(shp, "User.IndexPers.Prompt", visUnitsString, "")  '"Тип ствола"
-            myArray(i, 3) = CellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
-            myArray(i, 4) = Format(CellVal(shp, "Prop.SetTime"), "DD.MM.YYYY hh:nn:ss")  '"Время подачи"
-            myArray(i, 5) = CellVal(shp, "Prop.Personnel")  '"Личный состав"
-            myArray(i, 6) = CellVal(shp, "Prop.UseDirection", visUnitsString, "")  '"Работа"
-            myArray(i, 7) = CellVal(shp, "User.PodOut")  '"Производительность"
+            myArray(i, 1) = cellval(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
+            myArray(i, 2) = cellval(shp, "User.IndexPers.Prompt", visUnitsString, "")  '"Тип ствола"
+            myArray(i, 3) = cellval(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
+            myArray(i, 4) = Format(cellval(shp, "Prop.SetTime"), "DD.MM.YYYY hh:nn:ss")  '"Время подачи"
+            myArray(i, 5) = cellval(shp, "Prop.Personnel")  '"Личный состав"
+            myArray(i, 6) = cellval(shp, "Prop.UseDirection", visUnitsString, "")  '"Работа"
+            myArray(i, 7) = cellval(shp, "User.PodOut")  '"Производительность"
         Next i
     End If
 
@@ -125,7 +125,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
     For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
-        If pf_IsGDZS(CellVal(shp, "User.IndexPers")) Then
+        If pf_IsGDZS(cellval(shp, "User.IndexPers")) Then
             AddUniqueCollectionItem units, shp
         End If
     Next shp
@@ -150,12 +150,12 @@ Dim f As frm_ListForm
             '---Вставка остальных записей
             Set shp = units(i)
             myArray(i, 0) = shp.ID
-            myArray(i, 1) = CellVal(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
-            myArray(i, 2) = CellVal(shp, "User.IndexPers.Prompt", visUnitsString, "")  '"Тип"
-            myArray(i, 3) = CellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
-            myArray(i, 4) = Format(CellVal(shp, "Prop.FormingTime"), "DD.MM.YYYY hh:nn:ss")  '"Время формирования"
-            myArray(i, 5) = CellVal(shp, "Prop.Personnel")  '"Личный состав"
-            myArray(i, 6) = CellVal(shp, "Prop.AirDevice", visUnitsString, " ")  '"СИЗОД"
+            myArray(i, 1) = cellval(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
+            myArray(i, 2) = cellval(shp, "User.IndexPers.Prompt", visUnitsString, "")  '"Тип"
+            myArray(i, 3) = cellval(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
+            myArray(i, 4) = Format(cellval(shp, "Prop.FormingTime"), "DD.MM.YYYY hh:nn:ss")  '"Время формирования"
+            myArray(i, 5) = cellval(shp, "Prop.Personnel")  '"Личный состав"
+            myArray(i, 6) = cellval(shp, "Prop.AirDevice", visUnitsString, " ")  '"СИЗОД"
         Next i
     End If
 
@@ -204,9 +204,9 @@ Dim f As frm_ListForm
             '---Вставка остальных записей
             Set shp = units(i)
             myArray(i, 0) = shp.ID
-            myArray(i, 1) = CellVal(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
-            myArray(i, 2) = CellVal(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
-            myArray(i, 3) = CellVal(shp, "User.IndexPers.Prompt", visUnitsString)  '"Тип"
+            myArray(i, 1) = cellval(shp, "Prop.Unit", visUnitsString, "")  '"Подразделение"
+            myArray(i, 2) = cellval(shp, "Prop.Call", visUnitsString, "")  '"Позывной"
+            myArray(i, 3) = cellval(shp, "User.IndexPers.Prompt", visUnitsString)  '"Тип"
             myArray(i, 4) = Format(pf_GetTime(shp), "DD.MM.YYYY hh:nn:ss")  '"Время"
         Next i
     End If
@@ -252,9 +252,9 @@ Dim f As frm_ListForm
             '---Вставка остальных записей
             Set shp = units(i)
             myArray(i, 0) = shp.ID
-            myArray(i, 1) = CellVal(shp, "Prop.State", visUnitsString, "")   '"Состояние"
-            myArray(i, 2) = CellVal(shp, "Prop.Info", visUnitsString, "")  '"Информация"
-            myArray(i, 3) = CellVal(shp, "Prop.StatistsQuatity")  '"Количество людей"
+            myArray(i, 1) = cellval(shp, "Prop.State", visUnitsString, "")   '"Состояние"
+            myArray(i, 2) = cellval(shp, "Prop.Info", visUnitsString, "")  '"Информация"
+            myArray(i, 3) = cellval(shp, "Prop.StatistsQuatity")  '"Количество людей"
         Next i
     End If
 
@@ -278,7 +278,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
     For Each shp In Application.ActivePage.Shapes
-        If CellVal(shp, "User.ShapeType") = 38 Then
+        If cellval(shp, "User.ShapeType") = 38 Then
             AddUniqueCollectionItem units, shp
         End If
     Next shp
@@ -300,11 +300,11 @@ Dim f As frm_ListForm
             '---Вставка остальных записей
             Set shp = units(i)
             myArray(i, 0) = shp.ID
-            myArray(i, 1) = CellVal(shp, "Prop.LocationID", , "")   '"Код"
-            myArray(i, 2) = CellVal(shp, "Prop.Use", visUnitsString, "")  '"Назначение"
-            myArray(i, 3) = CellVal(shp, "Prop.Name", visUnitsString, "")  '"Имя"
-            myArray(i, 4) = CellVal(shp, "Prop.visArea", visUnitsString, "")    '"Площадь"
-            myArray(i, 5) = CellVal(shp, "Prop.OccupantCount")  '"Рассчетное число людей"
+            myArray(i, 1) = cellval(shp, "Prop.LocationID", , "")   '"Код"
+            myArray(i, 2) = cellval(shp, "Prop.Use", visUnitsString, "")  '"Назначение"
+            myArray(i, 3) = cellval(shp, "Prop.Name", visUnitsString, "")  '"Имя"
+            myArray(i, 4) = cellval(shp, "Prop.visArea", visUnitsString, "")    '"Площадь"
+            myArray(i, 5) = cellval(shp, "Prop.OccupantCount")  '"Рассчетное число людей"
         Next i
     End If
 
@@ -363,7 +363,7 @@ End Function
 
 Private Function pf_GetTime(ByRef aO_Shape As Visio.Shape) As String
 'Получение времени фигуры
-On Error GoTo EX
+On Error GoTo ex
 
     If aO_Shape.CellExists("Prop.ArrivalTime", 0) = True Then
         pf_GetTime = aO_Shape.Cells("Prop.ArrivalTime").ResultStr(visDate)
@@ -391,6 +391,6 @@ On Error GoTo EX
     End If
 
 Exit Function
-EX:
+ex:
     pf_GetTime = "не определено"
 End Function

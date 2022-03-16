@@ -91,7 +91,7 @@ Dim targetCellNameShort As String
         shp.CellsSRC(visSectionAction, rowA, visActionAction).FormulaU = frml
         
         'Добавляем строку проверки текущего времени User.CurrentDocTime, если ее нет
-        If CellVal(shp, "User.CurrentDocTime", , "-1") < 0 Then
+        If cellval(shp, "User.CurrentDocTime", , "-1") < 0 Then
             rowIName = "CurrentDocTime"
             rowI = shp.AddNamedRow(visSectionUser, rowIName, 0)
             shp.CellsSRC(visSectionUser, rowI, 0).Formula = "TheDoc!User.CurrentTime"
@@ -154,7 +154,7 @@ End Function
 Private Function GetCommandText(Optional ByVal l As Integer = 25) As String
 Dim str As String
 
-    On Error GoTo EX
+    On Error GoTo ex
 
     str = FixText(Me.txt_CommandText)
     If Len(str) < l Then
@@ -164,14 +164,14 @@ Dim str As String
     End If
 
 Exit Function
-EX:
+ex:
     GetCommandText = "***"
 End Function
 Private Function GetRowIndex(cellName As String) As Integer
-    On Error GoTo EX
+    On Error GoTo ex
     GetRowIndex = shp.Cells(cellName).Row
 Exit Function
-EX:
+ex:
     GetRowIndex = -1
 End Function
 

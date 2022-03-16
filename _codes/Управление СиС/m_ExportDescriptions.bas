@@ -63,7 +63,7 @@ Dim fireTime As Date
         r = 1
         A.Refresh Application.ActivePage.Index, curTime
 '        fireTime = A.Result("FireTime")     'Не слишкои надежно
-        fireTime = CellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
+        fireTime = cellval(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
         curTime = comColSorted(1).time
         '---Вставка первой записи
 '        wrdTblRow = wrdTbl.Rows(r)
@@ -154,7 +154,7 @@ Dim f As frm_ListForm
     If comColSorted.Count > 0 Then
         A.Refresh Application.ActivePage.Index, curTime
         
-        fireTime = CellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
+        fireTime = cellval(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
 '        fireTime = A.Result("FireTime")
         curTime = comColSorted(1).time
         
@@ -226,7 +226,7 @@ Dim i As Integer
 Dim rowName As String
 Dim cmnd As c_SimpleDescription
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     For i = 0 To shp.RowCount(visSectionUser) - 1
         rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
@@ -254,7 +254,7 @@ Dim cmnd As c_SimpleDescription
     
     
 Exit Sub
-EX:
+ex:
 
 End Sub
 
@@ -289,10 +289,10 @@ End Sub
 'End Sub
 
 Public Function getCallName(ByRef shp As Visio.Shape) As String
-    On Error GoTo EX
+    On Error GoTo ex
     getCallName = shp.Cells("Prop.Call").ResultStr(visUnitsString)
 Exit Function
-EX:
+ex:
     getCallName = "-"
 End Function
 'Public Sub getSetTime(ByRef shp As Visio.Shape)

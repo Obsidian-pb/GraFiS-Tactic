@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 Option Explicit
 
 'Private WithEvents app As Visio.Application
-
+Private sequencer As c_Sequencer
 
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
@@ -30,12 +30,18 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Показываем панель управления РТП
     AddTB
     
+'---Активируем автоматизатор временных свойств фигур ГраФиС
+    ActivateSequencer
+    
 '---Проверяем наличие обновлений
     fmsgCheckNewVersion.CheckUpdates
 
 End Sub
 
 Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
+'---Деактивируем автоматизатор временных свойств фигур ГраФиС
+    DeActivateSequencer
+'---Скрываем панель управления РТП
     RemoveTB
 End Sub
 
@@ -65,8 +71,12 @@ End Sub
 
 
 
-
-
+Public Sub ActivateSequencer()
+    Set sequencer = New c_Sequencer
+End Sub
+Public Sub DeActivateSequencer()
+    Set sequencer = Nothing
+End Sub
 
 
 

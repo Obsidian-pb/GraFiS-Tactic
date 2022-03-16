@@ -65,10 +65,10 @@ End Sub
 
 '---Свойства
 Public Property Get time() As Date
-On Error GoTo EX
+On Error GoTo ex
     time = t
 Exit Property
-EX:
+ex:
     time = 0
 End Property
 Public Property Let time(ByVal vNewValue As Date)
@@ -76,10 +76,10 @@ Public Property Let time(ByVal vNewValue As Date)
 End Property
 
 Public Property Get duration() As Integer
-On Error GoTo EX
+On Error GoTo ex
     duration = d
 Exit Property
-EX:
+ex:
     duration = 0
 End Property
 Public Property Let duration(ByVal vNewValue As Integer)
@@ -87,11 +87,11 @@ Public Property Let duration(ByVal vNewValue As Integer)
 End Property
 
 Public Property Get text() As String
-On Error GoTo EX
+On Error GoTo ex
     text = tx
     
 Exit Property
-EX:
+ex:
     text = ""
 End Property
 Public Property Let text(ByVal vNewValue As String)
@@ -99,10 +99,10 @@ Public Property Let text(ByVal vNewValue As String)
 End Property
 
 Public Property Get sdType() As Byte
-On Error GoTo EX
+On Error GoTo ex
     sdType = sd_Type
 Exit Property
-EX:
+ex:
     sdType = 1
 End Property
 

@@ -59,7 +59,8 @@ Dim cll As Visio.cell
         '!!!Need to test!!!
         Select Case TypeName(NewFrml)
             Case Is = "String"
-                shp.Cells(cellName).FormulaForceU = """" & NewFrml & """"
+'                shp.Cells(cellName).FormulaForceU = """" & NewFrml & """"
+                shp.Cells(cellName).FormulaForceU = NewFrml
             Case Is = "Integer"
                 shp.Cells(cellName).FormulaForceU = NewFrml
             Case Is = "Long"
@@ -74,7 +75,7 @@ Dim cll As Visio.cell
     End If
     
 Exit Sub
-EX:
+ex:
 
 End Sub
 
@@ -84,7 +85,7 @@ Dim rowName As String
 Dim cur As Integer
 Dim number As Integer
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     For i = 0 To shp.RowCount(visSectionUser) - 1
         rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
@@ -101,6 +102,6 @@ Dim number As Integer
     
 GetNextNumber = number + 1
 Exit Function
-EX:
+ex:
     GetNextNumber = 25 + Int(10000 * Rnd())
 End Function

@@ -12,6 +12,7 @@
     User.CurrentTime: DATETIME(42811,473414352); User.CurrentTime.Prompt: ""; 
     
     User.FireEndTime: User.FireTime+0,05; User.FireEndTime.Prompt: ""; 
+    User.LPPTime: User.FireTime+0,05; User.LPPTime.Prompt: ""; 
   Section Object, row: visRowEvent>>>
     
   Section Object, row: visRowDoc>>>
@@ -138,7 +139,7 @@
     Prop.WaterIntenseType: INDEX(0;Prop.WaterIntenseType.Format); Prop.WaterIntenseType.Prompt: "Указывать интенсивность подачи воды явным образом"; Prop.WaterIntenseType.Label: "Указывать интенсивность подачи воды явным образом"; Prop.WaterIntenseType.Format: "Да;Нет"; Prop.WaterIntenseType.SortKey: 30; Prop.WaterIntenseType.Type: 1; Prop.WaterIntenseType.Invisible: FALSE; Prop.WaterIntenseType.Verify: FALSE; Prop.WaterIntenseType.LangID: 1049; Prop.WaterIntenseType.Calendar: 0; 
     Prop.TimeBegin: TheDoc!User.FireTime; Prop.TimeBegin.Prompt: "Полное астрономическое время начала пожара"; Prop.TimeBegin.Label: "Время начала пожара"; Prop.TimeBegin.Format: ""; Prop.TimeBegin.SortKey: 10; Prop.TimeBegin.Type: 5; Prop.TimeBegin.Invisible: FALSE; Prop.TimeBegin.Verify: FALSE; Prop.TimeBegin.LangID: 1049; Prop.TimeBegin.Calendar: 0; 
     Prop.Round: INDEX(3;Prop.Round.Format); Prop.Round.Prompt: "Точность округления"; Prop.Round.Label: "Точность округления"; Prop.Round.Format: "-2;-1;0;1;2"; Prop.Round.SortKey: 40; Prop.Round.Type: 1; Prop.Round.Invisible: FALSE; Prop.Round.Verify: FALSE; Prop.Round.LangID: 1049; Prop.Round.Calendar: 0; 
-    Prop.FireEndTime: TheDoc!User.FireEndTime; Prop.FireEndTime.Prompt: "Полное астрономическое время окончания пожара"; Prop.FireEndTime.Label: "Время окончания пожара"; Prop.FireEndTime.Format: ""; Prop.FireEndTime.SortKey: 11; Prop.FireEndTime.Type: 5; Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
+    Prop.FireEndTime: TheDoc!User.LPPTime; Prop.FireEndTime.Prompt: "Полное астрономическое время окончания пожара"; Prop.FireEndTime.Label: "Время окончания пожара"; Prop.FireEndTime.Format: ""; Prop.FireEndTime.SortKey: 11; Prop.FireEndTime.Type: 5; Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -246,7 +247,7 @@
     Prop.WaterIntenseType: INDEX(0;Prop.WaterIntenseType.Format); Prop.WaterIntenseType.Prompt: "Указывать интенсивность подачи воды явным образом"; Prop.WaterIntenseType.Label: "Указывать интенсивность подачи воды явным образом"; Prop.WaterIntenseType.Format: "Да;Нет"; Prop.WaterIntenseType.SortKey: 30; Prop.WaterIntenseType.Type: 1; Prop.WaterIntenseType.Invisible: FALSE; Prop.WaterIntenseType.Verify: FALSE; Prop.WaterIntenseType.LangID: 1049; Prop.WaterIntenseType.Calendar: 0; 
     Prop.TimeBegin: TheDoc!User.FireTime; Prop.TimeBegin.Prompt: "Полное географическое время начала пожара"; Prop.TimeBegin.Label: "Время начала пожара"; Prop.TimeBegin.Format: ""; Prop.TimeBegin.SortKey: 10; Prop.TimeBegin.Type: 5; Prop.TimeBegin.Invisible: FALSE; Prop.TimeBegin.Verify: FALSE; Prop.TimeBegin.LangID: 1049; Prop.TimeBegin.Calendar: 0; 
     Prop.Round: INDEX(3;Prop.Round.Format); Prop.Round.Prompt: "Точность округления"; Prop.Round.Label: "Точность округления"; Prop.Round.Format: "-2;-1;0;1;2"; Prop.Round.SortKey: 40; Prop.Round.Type: 1; Prop.Round.Invisible: FALSE; Prop.Round.Verify: FALSE; Prop.Round.LangID: 1049; Prop.Round.Calendar: 0; 
-    Prop.FireEndTime: TheDoc!User.FireEndTime; Prop.FireEndTime.Prompt: "Полное астрономическое время окончания пожара"; Prop.FireEndTime.Label: "Время окончания пожара"; Prop.FireEndTime.Format: ""; Prop.FireEndTime.SortKey: 11; Prop.FireEndTime.Type: 5; Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
+    Prop.FireEndTime: TheDoc!User.LPPTime; Prop.FireEndTime.Prompt: "Полное астрономическое время окончания пожара"; Prop.FireEndTime.Label: "Время окончания пожара"; Prop.FireEndTime.Format: ""; Prop.FireEndTime.SortKey: 11; Prop.FireEndTime.Type: 5; Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -354,7 +355,7 @@
     Prop.WaterIntenseType: INDEX(0;Prop.WaterIntenseType.Format); Prop.WaterIntenseType.Prompt: "Указывать интенсивность подачи воды явным образом"; Prop.WaterIntenseType.Label: "Указывать интенсивность подачи воды явным образом"; Prop.WaterIntenseType.Format: "Да;Нет"; Prop.WaterIntenseType.SortKey: 30; Prop.WaterIntenseType.Type: 1; Prop.WaterIntenseType.Invisible: FALSE; Prop.WaterIntenseType.Verify: FALSE; Prop.WaterIntenseType.LangID: 1049; Prop.WaterIntenseType.Calendar: 0; 
     Prop.TimeBegin: TheDoc!User.FireTime; Prop.TimeBegin.Prompt: "Полное географическое время начала пожара"; Prop.TimeBegin.Label: "Время начала пожара"; Prop.TimeBegin.Format: ""; Prop.TimeBegin.SortKey: 10; Prop.TimeBegin.Type: 5; Prop.TimeBegin.Invisible: FALSE; Prop.TimeBegin.Verify: FALSE; Prop.TimeBegin.LangID: 1049; Prop.TimeBegin.Calendar: 0; 
     Prop.Round: INDEX(3;Prop.Round.Format); Prop.Round.Prompt: "Точность округления"; Prop.Round.Label: "Точность округления"; Prop.Round.Format: "-2;-1;0;1;2"; Prop.Round.SortKey: 40; Prop.Round.Type: 1; Prop.Round.Invisible: FALSE; Prop.Round.Verify: FALSE; Prop.Round.LangID: 1049; Prop.Round.Calendar: 0; 
-    Prop.FireEndTime: TheDoc!User.FireEndTime; Prop.FireEndTime.Prompt: "Полное астрономическое время окончания пожара"; Prop.FireEndTime.Label: "Время окончания пожара"; Prop.FireEndTime.Format: ""; Prop.FireEndTime.SortKey: 11; Prop.FireEndTime.Type: 5; Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
+    Prop.FireEndTime: TheDoc!User.LPPTime; Prop.FireEndTime.Prompt: "Полное астрономическое время окончания пожара"; Prop.FireEndTime.Label: "Время окончания пожара"; Prop.FireEndTime.Format: ""; Prop.FireEndTime.SortKey: 11; Prop.FireEndTime.Type: 5; Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>
@@ -462,7 +463,7 @@
     Prop.WaterIntenseType: INDEX(0;Prop.WaterIntenseType.Format); Prop.WaterIntenseType.Prompt: "Указывать интенсивность подачи воды явным образом"; Prop.WaterIntenseType.Label: "Указывать интенсивность подачи воды явным образом"; Prop.WaterIntenseType.Format: "Да;Нет"; Prop.WaterIntenseType.SortKey: 30; Prop.WaterIntenseType.Type: 1; Prop.WaterIntenseType.Invisible: FALSE; Prop.WaterIntenseType.Verify: FALSE; Prop.WaterIntenseType.LangID: 1049; Prop.WaterIntenseType.Calendar: 0; 
     Prop.TimeBegin: TheDoc!User.FireTime; Prop.TimeBegin.Prompt: "Полное географическое время начала пожара"; Prop.TimeBegin.Label: "Время начала пожара"; Prop.TimeBegin.Format: ""; Prop.TimeBegin.SortKey: 10; Prop.TimeBegin.Type: 5; Prop.TimeBegin.Invisible: FALSE; Prop.TimeBegin.Verify: FALSE; Prop.TimeBegin.LangID: 1049; Prop.TimeBegin.Calendar: 0; 
     Prop.Round: INDEX(3;Prop.Round.Format); Prop.Round.Prompt: "Точность округления"; Prop.Round.Label: "Точность округления"; Prop.Round.Format: "-2;-1;0;1;2"; Prop.Round.SortKey: 40; Prop.Round.Type: 1; Prop.Round.Invisible: FALSE; Prop.Round.Verify: FALSE; Prop.Round.LangID: 1049; Prop.Round.Calendar: 0; 
-    Prop.FireEndTime: TheDoc!User.FireEndTime; Prop.FireEndTime.Prompt: "Полное астрономическое время окончания пожара"; Prop.FireEndTime.Label: "Время окончания пожара"; Prop.FireEndTime.Format: ""; Prop.FireEndTime.SortKey: 11; Prop.FireEndTime.Type: 5; Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
+    Prop.FireEndTime: TheDoc!User.LPPTime; Prop.FireEndTime.Prompt: "Полное астрономическое время окончания пожара"; Prop.FireEndTime.Label: "Время окончания пожара"; Prop.FireEndTime.Format: ""; Prop.FireEndTime.SortKey: 11; Prop.FireEndTime.Type: 5; Prop.FireEndTime.Invisible: FALSE; Prop.FireEndTime.Verify: FALSE; Prop.FireEndTime.LangID: 1049; Prop.FireEndTime.Calendar: 0; 
   Section: Tab>>>
     Tabs.X1: 0; 
   Section: User>>>

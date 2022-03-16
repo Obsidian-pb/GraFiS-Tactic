@@ -360,7 +360,7 @@ Dim vsi_ShapeIndex As Integer
             
                     '---ПТВ-----------------------------------
                         Case Is = indexPers.ipStvolRuch 'Ручной водяной
-                            If vsO_Shape.Cells("User.DiameterIn").Result(visNumber) = 50 Then
+                            If vsO_Shape.Cells("User.DiameterIn").Result(visNumber) <= 50 Then
                                 StvB_Count = StvB_Count + 1
                             Else
                                 StvA_Count = StvA_Count + 1
