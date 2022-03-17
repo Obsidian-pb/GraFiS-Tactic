@@ -246,8 +246,8 @@ End Sub
 
 
 Private Sub UserForm_Terminate()
-'---Скрываем кнопку "Экспорт в Word"
-    Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = False
+''---Скрываем кнопку "Экспорт в Word"
+'    Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = False
 End Sub
 
 

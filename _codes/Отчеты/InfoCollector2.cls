@@ -212,13 +212,14 @@ Dim latestSquareTime As Date
                 '---Объекты пожара-----------------
                     Case Is = indexPers.ipPloschadPozhara 'Площадь пожара
                         .Raise "FireCount"
-                        If cellVal(shp, "Prop.SquareTime", visDate) > latestSquareTime Then 'Проверяем является ли данная фигура последней по времени
+                        tmp = Format(cellVal(shp, "Prop.SquareTime", visDate), "dd.mm.yyyy HH:MM")
+                        tmp = DateValue(tmp) + TimeValue(tmp)
+                        If tmp > latestSquareTime Then 'Проверяем является ли данная фигура последней по времени
                             .SetValByCellID shp, "User.FireSquare;User.ExtSquare;User.NeedStreamW"
                                                 
                             'Устанавливаем новое значение наибольшего времени учета для площади
-                            tmp = Format(cellVal(shp, "Prop.SquareTime", visDate), "dd.mm.yyyy HH:MM")
-                            latestSquareTime = DateValue(tmp) + TimeValue(tmp)
-                        ElseIf cellVal(shp, "Prop.SquareTime", visDate) = latestSquareTime Then
+                            latestSquareTime = tmp
+                        ElseIf tmp = latestSquareTime Then
                             .RaiseByCellID shp, "User.FireSquare;User.ExtSquare;User.NeedStreamW"
                         End If
                         
