@@ -60,17 +60,16 @@ Sub AddButtons()
         .FaceID = 1090
         .beginGroup = False
     End With
-'--- нопка "Ёкспорт в ¬орд"-------------------------------------------------
-    'ѕока только тактические данные, в перспективе нужноседалть экспорт данных активного окна
-    Set Button = Bar.Controls.Add(Type:=msoControlButton)
-    With Button
-        .Visible = False
-        .Caption = "Ёкспорт в Word"
-        .Tag = "export_to_Word"
-        .TooltipText = "Ёкспортировать тактические данные в документ Word"
-        .FaceID = 268
-        .beginGroup = False
-    End With
+''--- нопка "Ёкспорт в ¬орд"-------------------------------------------------
+'    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+'    With Button
+'        .Visible = False
+'        .Caption = "Ёкспорт в Word"
+'        .Tag = "export_to_Word"
+'        .TooltipText = "Ёкспортировать тактические данные в документ Word"
+'        .FaceID = 268
+'        .beginGroup = False
+'    End With
 '--- нопка "Ќастройки"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
     With Button

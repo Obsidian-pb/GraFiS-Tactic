@@ -101,8 +101,10 @@ Private Sub fillElemCollection()
     AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резервных звеньях имеется", , , , , False
     AddNewElement "GDZSMansRezCountNeed", "Газодымозащитников в резерве требуется", , , , , False
     AddNewElement "GDZSDiscr", "Несоотвествие количества газодымозащитников в звене сложным условиям", , False
-    AddNewElement "GDZSPBCount", "ПБ ГДЗС имеется", , , , , False
-    AddNewElement "GDZSKPPCount", "КПП ГДЗС имеется", , , , , False
+    AddNewElement "GDZSPBCount", "ПБ ГДЗС имеется", "{$} ({GDZSPBNeed} требуется)", , , , True
+    AddNewElement "GDZSKPPCount", "КПП ГДЗС имеется", "{$} ({GDZSKPPNeed} требуется)", , , , True
+    AddNewElement "GDZSPBNeed", "ПБ ГДЗС требуется", , , , , False
+    AddNewElement "GDZSKPPNeed", "КПП ГДЗС требуется", , , , , False
 
     AddNewElement "Hoses38Count", "Рукавов 38 мм используется", , , , , False
     AddNewElement "Hoses51Count", "Рукавов 51 мм используется", , , , , False

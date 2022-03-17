@@ -63,8 +63,8 @@ Private Sub ComButTactic_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefa
 '---Запускаем основное событие
     TacticDataForm.Activate.Refresh
     
-'---Показываем кнопку "Экспорт в Word"
-    Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = True
+''---Показываем кнопку "Экспорт в Word"
+'    Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = True
     
 Tail:
     '---Выходим из процедуры обработки

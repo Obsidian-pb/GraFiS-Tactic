@@ -38,7 +38,7 @@ End Sub
 
 '-----------------Инструменты обновления сведений в фигурах отчетов---------------------------
 Public Sub ReportShapesStringsRefresh(ByVal block As Boolean)
-'Служебная процедура! Вызывается ТОЛЬКО при разработке функционала трафарета Отчеты
+'Служебная процедура! Вызывается ТОЛЬКО при разработке функционала трафарета "Отчеты". Правильный вызов: ReportShapesStringsRefresh True
 Dim doc As Visio.Document
 Dim elements As ElementsShell
 Dim CallNames As String

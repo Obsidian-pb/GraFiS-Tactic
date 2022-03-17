@@ -717,7 +717,8 @@ Dim latestSquareTime As Date
         
         'ГДЗС
         .SetVal "GDZSChainsCountWork", .Sum("GDZSChainsCountWorkSoft;GDZSChainsCountWorkHard")
-        '---расчет требуемого кол-ва резервных ввеньев для работы в простых условиях
+        
+        '---расчет требуемого кол-ва резервных звеньев для работы в простых условиях
         If options.GDZSRezRoundUp Then
             .SetVal "GDZSChainsRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWorkSoft").Result / 3)
             .SetVal "GDZSMansRezCountNeed", PF_RoundUp(.ByID("GDZSChainsCountWorkSoft").Result / 3) * 3
@@ -732,6 +733,11 @@ Dim latestSquareTime As Date
         .SetVal "GDZSMansCountNeed", .Sum("GDZSMansCountWork;GDZSMansRezCountNeed")
         '---Общее количесатво требуемых звеньев
         .SetVal "GDZSChainsCountNeed", .Sum("GDZSChainsCountWork;GDZSChainsRezCountNeed")
+        '---Количество ПБ и КПП ГДЗС
+        .SetVal "GDZSPBNeed", .Result("GDZSChainsCountWork")    ', .Sum("GDZSChainsCountWorkSoft;GDZSChainsCountWorkHard")
+        If .Result("GDZSPBCount") >= 3 Then
+            .SetVal "GDZSKPPNeed", 1
+        End If
         
         
         'Итог

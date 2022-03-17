@@ -95,12 +95,11 @@ Attribute app.VB_VarHelpID = -1
 Private WithEvents wAddon As Visio.Window
 Attribute wAddon.VB_VarHelpID = -1
 
-Public WithEvents menuButtonHide As CommandBarButton
-Attribute menuButtonHide.VB_VarHelpID = -1
-Public WithEvents menuButtonRestore As CommandBarButton
-Attribute menuButtonRestore.VB_VarHelpID = -1
-Public WithEvents menuButtonOptions As CommandBarButton
-Attribute menuButtonOptions.VB_VarHelpID = -1
+'Public WithEvents menuButtonHide As CommandBarButton
+'Public WithEvents menuButtonRestore As CommandBarButton
+'Public WithEvents menuButtonOptions As CommandBarButton
+Public WithEvents menuButtonExportToWord As CommandBarButton
+Attribute menuButtonExportToWord.VB_VarHelpID = -1
 
 Private curShapeID As Long
 Private lastCalcTime As Double
@@ -147,8 +146,8 @@ Public Sub CloseThis()
     Set app = Nothing
     wAddon.Close
     
-'---Скрываем кнопку "Экспорт в Word"
-    Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = False
+''---Скрываем кнопку "Экспорт в Word"
+'    Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = False
 End Sub
 
 Public Sub app_CellChanged(ByVal Cell As Visio.IVCell)
@@ -236,8 +235,10 @@ Dim i As Integer
     
     'Заполняем табблицу тактическими данными
     For i = 1 To tactDataRowsCount
-        wrdTbl.Rows(i).Cells(1).Range.Text = lstTacticData.List(i - 1, 0)
-        wrdTbl.Rows(i).Cells(2).Range.Text = lstTacticData.List(i - 1, 1)
+        If Not IsNull(lstTacticData.List(i - 1, 1)) Then
+            wrdTbl.Rows(i).Cells(1).Range.Text = lstTacticData.List(i - 1, 0)
+            wrdTbl.Rows(i).Cells(2).Range.Text = lstTacticData.List(i - 1, 1)
+        End If
     Next i
 End Sub
 
@@ -248,3 +249,74 @@ Private Sub UserForm_Terminate()
 '---Скрываем кнопку "Экспорт в Word"
     Application.CommandBars("Спецфункции").Controls("Экспорт в Word").Visible = False
 End Sub
+
+
+
+
+
+'------------------Работа с всплывающим меню------------------
+Private Sub lstTacticData_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    If Button = 2 Then
+        CreateNewMenu
+    End If
+End Sub
+
+
+Private Sub CreateNewMenu()
+'Создаём всплывающее меню мастера проверок
+Dim popupMenuBar As CommandBar
+Dim Ctrl As CommandBarControl
+    
+    'Получаем ссылку на всплывающее меню
+    GetToolBar popupMenuBar, "ContextListMenuTacic", msoBarPopup
+    
+    'Очищаем имеющиеся пункты меню
+    For Each Ctrl In popupMenuBar.Controls
+        Ctrl.Delete
+    Next
+    
+    'Добавляем новые кнопки
+    Set menuButtonExportToWord = NewPopupItem(popupMenuBar, 1, 268, "Экспортировать в Word")
+    
+    'Показываем меню
+    popupMenuBar.ShowPopup
+End Sub
+
+Private Function NewPopupItem(ByRef commBar As CommandBar, ByVal itemType As Integer, ByVal itemFace As Integer, _
+ByVal itemCaption As String, Optional ByVal beginGroup As Boolean = False, Optional ByVal enableTab As Boolean = True, _
+Optional itemTag As String = "") As CommandBarControl
+'Функция создает элемент контекстного меню и возвращает на него ссылку
+Dim newControl As CommandBarControl
+
+'    On Error Resume Next
+    'Создаем новый контрол
+    Set newControl = commBar.Controls.Add(itemType)
+    
+    'Указываем свойства нового контрола
+    With newControl
+        If itemFace > 0 Then .FaceID = itemFace
+        .Tag = itemTag
+        .Caption = itemCaption
+'        .beginGroup = beginGroup
+        .Enabled = enableTab
+    End With
+    
+Set NewPopupItem = newControl
+End Function
+
+Private Sub GetToolBar(ByRef toolBar As CommandBar, ByVal toolBarName As String, ByVal barPosition As MsoBarPosition)
+    On Error Resume Next
+    'Пытаемся получить ссылку на всплывающее меню
+    Set toolBar = Application.CommandBars(toolBarName)
+
+    'Если такого меню нет, создаем его
+    If toolBar Is Nothing Then
+        Set toolBar = Application.CommandBars.Add(toolBarName, barPosition)
+    End If
+    
+End Sub
+
+Private Sub menuButtonExportToWord_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    ExportToWord
+End Sub
+

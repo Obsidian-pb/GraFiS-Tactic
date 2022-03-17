@@ -1,14 +1,14 @@
 Attribute VB_Name = "t_Shapes"
 Public Function IsShapeOnSheet(ByRef shp As Visio.Shape) As Boolean
 'Returns True if shape is in page rect
-Dim x As Double
-Dim y As Double
+Dim X As Double
+Dim Y As Double
 
-    x = shp.Cells("PinX").Result(visInches)
-    y = shp.Cells("PinY").Result(visInches)
+    X = shp.Cells("PinX").Result(visInches)
+    Y = shp.Cells("PinY").Result(visInches)
 
-    If x < 0 Or x > Application.ActivePage.PageSheet.Cells("PageWidth").Result(visInches) Or _
-        y < 0 Or y > Application.ActivePage.PageSheet.Cells("PageHeight").Result(visInches) Then
+    If X < 0 Or X > Application.ActivePage.PageSheet.Cells("PageWidth").Result(visInches) Or _
+        Y < 0 Or Y > Application.ActivePage.PageSheet.Cells("PageHeight").Result(visInches) Then
         IsShapeOnSheet = False
         Exit Function
     End If
