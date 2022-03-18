@@ -206,7 +206,7 @@ Dim Ctrl As CommandBarControl
     Next
     
     'Добавляем новые кнопки
-    Set menuButtonExportToWord = NewPopupItem(popupMenuBar, 1, 214, "Экспортировать в Word")
+    Set menuButtonExportToWord = NewPopupItem(popupMenuBar, 1, 268, "Экспортировать в Word")
 '    Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все скрытые замечания" & " (" & remarksHided & ")", , remarksHided <> 0)
 '    Set menuButtonOptions = NewPopupItem(popupMenuBar, 1, 212, "Опции замечаний")
     

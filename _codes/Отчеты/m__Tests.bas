@@ -78,10 +78,32 @@ Public Sub TestInfoCollector()
 
 '    A.PrintState "PersonnelNeed;GDZSChainsCountWork;GDZSChainsCountNeed;GDZSChainsRezCountHave;GDZSChainsRezCountNeed;GDZSMansCountWork;GDZSMansCountNeed;GDZSMansRezCountHave;GDZSMansRezCountNeed"
     
-    A.PrintState ("HosesHave;PersonnelNeed;PAHighHave;TechnicsNotMchsHave;TechnicsNotMchsOtherHave;ACNeed;ANRNeed;StvolWBNeed;StvolWANeed;StvolWLNeed;PANeedOnWaterSource")
+'    A.PrintState ("HosesHave;PersonnelNeed;PAHighHave;TechnicsNotMchsHave;TechnicsNotMchsOtherHave;ACNeed;ANRNeed;StvolWBNeed;StvolWANeed;StvolWLNeed;PANeedOnWaterSource")
 '    Debug.Print A.Refresh(1).Result("Ïכמשאהü ןמזאנא")
     
+Dim tmpcol As Collection
     
+'    Set tmpcol = SortCol(A.GFSShapes, "Prop.Call", False, visUnitsString)
+'    Set tmpcol = GetUniqueVals(tmpcol, "Prop.Call", , , " ")
+'    Debug.Print StrColToStr(tmpcol, ";")
+'
+'    Set tmpcol = SortCol(A.GFSShapes, "Prop.Call", True, visUnitsString)
+'    Set tmpcol = GetUniqueVals(tmpcol, "Prop.Call", , , " ")
+'    Debug.Print StrColToStr(tmpcol, ";")
+'
+'
+'    Set tmpcol = SortCol(A.GFSShapes, "Prop.Unit", False, visUnitsString)
+'    Set tmpcol = GetUniqueVals(tmpcol, "Prop.Unit", , , " ")
+'    Debug.Print StrColToStr(tmpcol, ";")
+'
+'    Set tmpcol = SortCol(A.GFSShapes, "Prop.Unit", True, visUnitsString)
+'    Set tmpcol = GetUniqueVals(tmpcol, "Prop.Unit", , , " ")
+'    Debug.Print StrColToStr(tmpcol, ";")
+
+'    Set tmpcol = FilterShapes(A.GFSShapes, "Prop.Personnel")
+    Set tmpcol = FilterShapesAnd(A.GFSShapes, "Prop.PersonnelHave:;Prop.Unit:ÑÏÑ×")
+    Set tmpcol = GetUniqueVals(tmpcol, "Prop.Call", , , " ")
+    Debug.Print StrColToStr(tmpcol, ";")
     
 End Sub
 

@@ -21,6 +21,8 @@ Public WithEvents ComButDescView As Office.CommandBarButton          'Показать о
 Attribute ComButDescView.VB_VarHelpID = -1
 Public WithEvents ComButTechView As Office.CommandBarButton          'Показать список техники
 Attribute ComButTechView.VB_VarHelpID = -1
+Public WithEvents ComButPersonnel As Office.CommandBarButton         'Показать перечень личного состава и боевых позиций
+Attribute ComButPersonnel.VB_VarHelpID = -1
 Public WithEvents ComButNozzlesView As Office.CommandBarButton       'Показать список стволов
 Attribute ComButNozzlesView.VB_VarHelpID = -1
 Public WithEvents ComButGDZSView As Office.CommandBarButton          'Показать список ГДЗС
@@ -43,10 +45,11 @@ Private Sub Class_Initialize()
     
     Set ComButDescView = Application.CommandBars("РТП").Controls("Показать описание БД")
     Set ComButTechView = Application.CommandBars("РТП").Controls("Список техники")
+    Set ComButPersonnel = Application.CommandBars("РТП").Controls("Список боевых позиций")
     Set ComButNozzlesView = Application.CommandBars("РТП").Controls("Список стволов")
     Set ComButGDZSView = Application.CommandBars("РТП").Controls("Список ГДЗС")
     Set ComButTimelineView = Application.CommandBars("РТП").Controls("Таймлайн")
-    Set ComButStatistsView = Application.CommandBars("РТП").Controls("Список статистов")
+'    Set ComButStatistsView = Application.CommandBars("РТП").Controls("Список статистов")
     Set ComButExplicationView = Application.CommandBars("РТП").Controls("Экспликация")
     
     Set ComButDescExport = Application.CommandBars("РТП").Controls("Экспорт описания БД")
@@ -59,6 +62,7 @@ Private Sub Class_Terminate()
     
     Set ComButDescView = Nothing
     Set ComButTechView = Nothing
+    Set ComButPersonnel = Nothing
     Set ComButNozzlesView = Nothing
     Set ComButGDZSView = Nothing
     Set ComButTimelineView = Nothing
@@ -116,6 +120,17 @@ Private Sub ComButTechView_Click(ByVal Ctrl As Office.CommandBarButton, CancelDe
     
 '---Запускаем основное событие
     ShowUnits
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
+Private Sub ComButPersonnel_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки
+    
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+'---Запускаем основное событие
+    ShowPersonnel
 Tail:
     '---Выходим из процедуры обработки
 End Sub

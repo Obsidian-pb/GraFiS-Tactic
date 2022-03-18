@@ -55,6 +55,86 @@ Dim f As frm_ListForm
     
 End Sub
 
+Public Sub ShowPersonnel()
+'Показываем имеющиеся на схеме фигуры подразумевающие работу с ними личного состава
+Dim i As Integer
+Dim j As Integer
+Dim row As Integer
+Dim shp As Visio.Shape
+'Dim units As Collection
+
+Dim myArray As Variant
+Dim f As frm_ListForm
+
+Dim unitsList As Collection
+Dim unitName As String
+Dim callsList As String
+Dim positions As Collection
+Dim unitPositions As Collection
+Dim pr As String
+    
+    
+    '---Получаем список имеющихся пожарных частей
+    A.Refresh Application.ActivePage.Index
+    Set unitsList = GetUniqueVals(A.GFSShapes, _
+                                 "Prop.Unit", , , " ")
+
+    '---Получаем список всех боевых позиций
+    Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave")
+    AddUniqueCollectionItems positions, FilterShapes(A.GFSShapes, "Prop.Personnel")
+
+    
+    'Заполняем таблицу  с перечнем техники
+        '---Создаем новый массив для дальнейшего формирования списка
+        ReDim myArray(unitsList.Count + positions.Count, 4)
+        '---Вставка первой записи
+        row = 0
+        myArray(row, 0) = "ID"
+        myArray(row, 1) = "Тип"
+        myArray(row, 2) = "Боевой расчет"
+        myArray(row, 3) = "Работает"
+        
+        '---Перебираем названия подразделений и для каждого из них заполняем перечень имеющихся боевых позиций
+        For i = 1 To unitsList.Count
+            row = row + 1
+            unitName = unitsList(i)
+            
+            '---Получаем список позывных техники данного подразделения
+            callsList = StrColToStr(GetUniqueVals( _
+                                        FilterShapesAnd(A.GFSShapes, "Prop.PersonnelHave:;Prop.Unit:" & unitName), _
+                                        "Prop.Call", , , " "), ", ")
+            '---Получаем перечень боевых позиций для данного подразделения
+            Set unitPositions = FilterShapes(positions, "Prop.Unit:" & unitName)
+            
+            
+            myArray(row, 0) = -1    '(-1 признак того, что для данной записи нет фигур и переходить к ним не нужно)
+            myArray(row, 1) = unitName & ":   " & callsList  '"Подразделение"
+            myArray(row, 2) = CellSum(unitPositions, "Prop.PersonnelHave")  '"Боевой расчет"
+            myArray(row, 3) = CellSum(unitPositions, "Prop.Personnel")      '"Работает л/с"
+            
+            For Each shp In unitPositions
+                row = row + 1
+
+                myArray(row, 0) = shp.ID
+                myArray(row, 1) = ChrW(9500) & cellval(shp, "User.IndexPers.Prompt", visUnitsString)  '"Тип"
+                myArray(row, 2) = cellval(shp, "Prop.PersonnelHave", , " ") '"Боевой расчет"
+                myArray(row, 3) = cellval(shp, "Prop.Personnel", , " ")  '"Работает л/с"
+
+            Next shp
+            
+            'Заменяем префикс для последней дочерней записи, при условии таковых
+            If unitPositions.Count > 0 Then
+                myArray(row, 1) = ChrW(9492) & Right(myArray(row, 1), Len(myArray(row, 1)) - 1)
+            End If
+        Next i
+    
+
+    '---Показываем форму
+    Set f = New frm_ListForm
+    f.Activate myArray, "0 pt;125 pt;75 pt;75 pt", "Personnel", "Личный состав"
+    
+End Sub
+
 Public Sub ShowNozzles()
 'Показываем имеющиеся на схеме стволы
 Dim i As Integer

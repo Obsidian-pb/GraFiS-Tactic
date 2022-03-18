@@ -167,7 +167,7 @@ ex:
 End Function
 Private Function GetRowIndex(cellName As String) As Integer
     On Error GoTo ex
-    GetRowIndex = shp.Cells(cellName).Row
+    GetRowIndex = shp.Cells(cellName).row
 Exit Function
 ex:
     GetRowIndex = -1

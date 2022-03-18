@@ -86,6 +86,14 @@ Sub AddButtons()
 '        .BeginGroup = True
         .FaceID = 1277
     End With
+    '---"Боевые позиции"
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Список боевых позиций"
+        .Tag = "PersonnelView"
+        .TooltipText = "Показать список боевых позиций"
+'        .BeginGroup = True
+        .FaceID = 2141
+    End With
     '---"Стволы"
     With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Список стволов"
@@ -117,14 +125,15 @@ Sub AddButtons()
         .TooltipText = "Показать экспликацию помещенийи"
         .FaceID = 544
     End With
-    '---"Статисты"
-    With Bar.Controls.Add(Type:=msoControlButton)
-        .Caption = "Список статистов"
-        .Tag = "StatistsView"
-        .TooltipText = "Показать сведения о статистах"
-'        .BeginGroup = True
-        .FaceID = 2141
-    End With
+'    ЗАРЕЗЕРВИРОВАНО
+'    '---"Статисты"
+'    With Bar.Controls.Add(Type:=msoControlButton)
+'        .Caption = "Список статистов"
+'        .Tag = "StatistsView"
+'        .TooltipText = "Показать сведения о статистах"
+''        .BeginGroup = True
+'        .FaceID = 2141
+'    End With
     
     
     

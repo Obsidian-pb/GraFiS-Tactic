@@ -118,7 +118,7 @@ Public Function FilterShapes(ByRef shpColl As Variant, ByVal filterStr As String
 'filterStr - строка фильтра
 'd_elem разделитель пар ячейка/значение
 'd_val разделитель ячейки и значения в паре ячейка/значение - если после разделителя нет ничего, то проверяется просто наличие такой ячейки
-'Применение: GetGFSShapes("User.IndexPers:500;User.IndexPers:1", ":", ";")
+'Применение: FilterShapes(A.GFSShapes, "User.IndexPers:500;User.IndexPers:1", ":", ";")
 'На вход принимаются коллекции только Visio.Shape. Все прочие объкуты игнорируются!
 Dim shp As Visio.Shape
 Dim filters() As String
@@ -140,8 +140,13 @@ Dim tmpColl As Collection
         If TypeName(shp) = "Shape" Then
             For i = 0 To UBound(filters)
                 filterItem = Split(filters(i), d_val)
-                filterItemCellName = filterItem(0)
-                filterItemCellValue = filterItem(1)
+                If UBound(filterItem) = 1 Then
+                    filterItemCellName = filterItem(0)
+                    filterItemCellValue = filterItem(1)
+                ElseIf UBound(filterItem) = 0 Then
+                    filterItemCellName = filterItem(0)
+                    filterItemCellValue = ""
+                End If
                 
                 If filterItemCellValue = "" Then
                     If ShapeHaveCell(shp, filterItemCellName) Then AddUniqueCollectionItem tmpColl, shp
@@ -190,8 +195,13 @@ Dim approved As Boolean
             approved = True
             For i = 0 To UBound(filters)
                 filterItem = Split(filters(i), d_val)
-                filterItemCellName = filterItem(0)
-                filterItemCellValue = filterItem(1)
+                If UBound(filterItem) = 1 Then
+                    filterItemCellName = filterItem(0)
+                    filterItemCellValue = filterItem(1)
+                ElseIf UBound(filterItem) = 0 Then
+                    filterItemCellName = filterItem(0)
+                    filterItemCellValue = ""
+                End If
                 
                 If filterItemCellValue = "" Then
                     If Not ShapeHaveCell(shp, filterItemCellName) Then
@@ -224,27 +234,32 @@ Public Function SortCol(ByVal shps As Collection, ByVal sortCellName As String, 
 'desc: True - от большего к меньшему; False - от меньшего к большему
 Dim i As Integer
 Dim tmpshp As Visio.Shape
+Dim innerShps As Collection     'еременная дл хранения копии коллекции shps, для избежани ее изменения
 Dim tmpColl As Collection
 
     
     Set tmpColl = New Collection
     
-    Do While shps.count > 1
+    'Создаем копию входящей коллекции
+    Set innerShps = New Collection
+    AddUniqueCollectionItems innerShps, shps
+    
+    Do While innerShps.count > 1
         
         If desc Then
-            Set tmpshp = GetMaxShp(shps, sortCellName, dataType)
+            Set tmpshp = GetMaxShp(innerShps, sortCellName, dataType)
         Else
-            Set tmpshp = GetMinShp(shps, sortCellName, dataType)
+            Set tmpshp = GetMinShp(innerShps, sortCellName, dataType)
         End If
         
         AddUniqueCollectionItem tmpColl, tmpshp
-        RemoveFromCollection shps, tmpshp
+        RemoveFromCollection innerShps, tmpshp
         
         i = i + 1
-        If i > 100 Then Exit Do
+        If i > 10000 Then Exit Do
     Loop
     
-    Set tmpshp = shps(1)
+    Set tmpshp = innerShps(1)
     AddUniqueCollectionItem tmpColl, tmpshp
 '    Debug.Print tmpshp.ID & " " & cellVal(tmpshp, sortCellName)
     
@@ -257,8 +272,8 @@ Dim i As Integer
 Dim j As Integer
 Dim shp1 As Visio.Shape
 Dim shp2 As Visio.Shape
-Dim shp1Val As Double
-Dim shp2Val As Double
+Dim shp1Val As Variant
+Dim shp2Val As Variant
 Const d = ";"
 Dim sortCellNames() As String
 Dim sortCellNameOne As String
@@ -302,7 +317,7 @@ Dim sortCellNameOne As String
             shp1Val = shp2Val
         End If
     Next i
-    Debug.Print shp1.ID & " " & shp1Val
+'    Debug.Print shp1.ID & " " & shp1Val
     
 Set GetMaxShp = shp1
 End Function
@@ -313,8 +328,8 @@ Dim i As Integer
 Dim j As Integer
 Dim shp1 As Visio.Shape
 Dim shp2 As Visio.Shape
-Dim shp1Val As Double
-Dim shp2Val As Double
+Dim shp1Val As Variant
+Dim shp2Val As Variant
 Const d = ";"
 Dim sortCellNames() As String
 Dim sortCellNameOne As String
@@ -449,7 +464,6 @@ Public Function GetUniqueVals(ByRef shpColl As Variant, ByVal cellName As String
                               Optional ByVal defaultValue As Variant = 0, _
                               Optional ByVal valueToIgnore As Variant) As Collection
 'Возвращает коллекцию уникальных значений в ячейках фигур коллекции shpColl
-'dim tmpVal
 Dim newColl As Collection
 Dim tmp As String
 Dim shp As Visio.Shape
@@ -458,7 +472,7 @@ Dim shp As Visio.Shape
     
     For Each shp In shpColl
         tmp = cellVal(shp, cellName, returnType, defaultValue)
-        If valueToIgnore = Empty Then
+        If valueToIgnore = Empty Then   'Проверить!
             AddUniqueCollectionItem newColl, tmp, tmp
         Else
             If tmp <> valueToIgnore Then
