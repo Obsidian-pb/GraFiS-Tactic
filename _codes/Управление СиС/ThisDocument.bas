@@ -70,7 +70,7 @@ End Sub
 
 
 
-
+'Активация и деактивация контроллера временной последовательности фигур
 Public Sub ActivateSequencer()
     Set sequencer = New c_Sequencer
 End Sub
@@ -78,17 +78,4 @@ Public Sub DeActivateSequencer()
     Set sequencer = Nothing
 End Sub
 
-
-
-'Public Sub ActivateApp()
-'    If app Is Nothing Then
-'        Set app = Visio.Application
-'    Else
-'        Set app = Nothing
-'    End If
-'End Sub
-
-'Private Sub app_SelectionChanged(ByVal Window As IVWindow)
-'    Debug.Print Window.Selection.Count
-'End Sub
 

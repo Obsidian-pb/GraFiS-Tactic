@@ -76,23 +76,27 @@ Dim pr As String
     
     '---Получаем список имеющихся пожарных частей
     A.Refresh Application.ActivePage.Index
-    Set unitsList = GetUniqueVals(A.GFSShapes, _
-                                 "Prop.Unit", , , " ")
+    Set unitsList = SortCol(A.GFSShapes, "Prop.Unit", False, visUnitsString)
+    Set unitsList = GetUniqueVals(unitsList, _
+                                 "Prop.Unit", , " ", " ")
 
     '---Получаем список всех боевых позиций
-    Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave")
-    AddUniqueCollectionItems positions, FilterShapes(A.GFSShapes, "Prop.Personnel")
-
+'    Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave")
+'    AddUniqueCollectionItems positions, FilterShapes(A.GFSShapes, "Prop.Personnel")
+    Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave;Prop.Personnel")
+    '---Сортируем
+    Set positions = SortCol(positions, "Prop.ArrivalTime;Prop.LineTime;Prop.SetTime;Prop.FormingTime;Prop.SquareTime;Prop.FireTime", False, visDate)
     
     'Заполняем таблицу  с перечнем техники
         '---Создаем новый массив для дальнейшего формирования списка
-        ReDim myArray(unitsList.Count + positions.Count, 4)
+        ReDim myArray(unitsList.Count + positions.Count, 5)
         '---Вставка первой записи
         row = 0
         myArray(row, 0) = "ID"
         myArray(row, 1) = "Тип"
         myArray(row, 2) = "Боевой расчет"
         myArray(row, 3) = "Работает"
+        myArray(row, 4) = "Время"
         
         '---Перебираем названия подразделений и для каждого из них заполняем перечень имеющихся боевых позиций
         For i = 1 To unitsList.Count
@@ -108,17 +112,19 @@ Dim pr As String
             
             
             myArray(row, 0) = -1    '(-1 признак того, что для данной записи нет фигур и переходить к ним не нужно)
-            myArray(row, 1) = unitName & ":   " & callsList  '"Подразделение"
+            myArray(row, 1) = unitName & ":   " & callsList                 '"Подразделение"
             myArray(row, 2) = CellSum(unitPositions, "Prop.PersonnelHave")  '"Боевой расчет"
             myArray(row, 3) = CellSum(unitPositions, "Prop.Personnel")      '"Работает л/с"
+            myArray(row, 4) = " "                                           '"Время"
             
             For Each shp In unitPositions
                 row = row + 1
 
                 myArray(row, 0) = shp.ID
                 myArray(row, 1) = ChrW(9500) & cellval(shp, "User.IndexPers.Prompt", visUnitsString)  '"Тип"
-                myArray(row, 2) = cellval(shp, "Prop.PersonnelHave", , " ") '"Боевой расчет"
-                myArray(row, 3) = cellval(shp, "Prop.Personnel", , " ")  '"Работает л/с"
+                myArray(row, 2) = cellval(shp, "Prop.PersonnelHave", , " ")             '"Боевой расчет"
+                myArray(row, 3) = cellval(shp, "Prop.Personnel", , " ")                 '"Работает л/с"
+                myArray(row, 4) = Format(pf_GetTime(shp), "DD.MM.YYYY hh:nn")           '"Время"
 
             Next shp
             
@@ -131,7 +137,7 @@ Dim pr As String
 
     '---Показываем форму
     Set f = New frm_ListForm
-    f.Activate myArray, "0 pt;125 pt;75 pt;75 pt", "Personnel", "Личный состав"
+    f.Activate myArray, "0 pt;125 pt;75 pt;75 pt;100 pt", "Personnel", "Личный состав"
     
 End Sub
 

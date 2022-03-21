@@ -40,14 +40,16 @@ End Sub
 Private Sub app_ShapeAdded(ByVal shp As IVShape)
 Dim mainShp As Visio.Shape
     On Error GoTo ex
-    Set mainShp = GetGraFisShape(shp)
-    If Not mainShp Is Nothing Then
-        GetShpData mainShp, shp
+    
+    If IsGFSShape(shp) Then
+        Set mainShp = GetGraFisShape(shp)
+        If Not mainShp Is Nothing Then
+            GetShpData mainShp, shp
+        End If
+        
+'        Debug.Print mainShp.Name
     End If
-    
-    
-    
-    Debug.Print mainShp.Name
+
 Exit Sub
 ex:
     Debug.Print ("None")
@@ -93,20 +95,22 @@ Dim tmpDateTimeS As String
     tmpDateTime = GetGFSShapeTime(mainShp)
                     
     If tmpDateTime > 0 Then
-        If shp.CellExists("User.InPage", 0) = 0 Then
-            shp.AddNamedRow visSectionUser, "InPage", visRowUser
-            SetCellVal shp, "User.InPage", 1
-            SetCellVal shp, "User.InPage.Prompt", "+"
-        End If
+'        '¬ременно отключил, т.к. вы€снилось, что на правктике удобнее работать с текущим временем схемы
+'        If shp.CellExists("User.InPage", 0) = 0 Then
+'            shp.AddNamedRow visSectionUser, "InPage", visRowUser
+'            SetCellVal shp, "User.InPage", 1
+'            SetCellVal shp, "User.InPage.Prompt", "+"
+'        End If
         
         SetCellVal shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)
         SetCellVal shp, "Prop.Call", cellval(mainShp, "Prop.Call", visUnitsString)
     
-        tmpDateTimeS = ToTimeString(tmpDateTime)
-    '    SetCellVal shp, "Prop.SetTime", tmpDateTimeS
-    '    SetCellVal shp, "Prop.FormingTime", tmpDateTimeS
-        SetCellFrml shp, "Prop.SetTime", tmpDateTimeS
-        SetCellFrml shp, "Prop.FormingTime", tmpDateTimeS
+    '¬ременно отключил, т.к. вы€снилось, что на правктике удобнее работать с текущим временем схемы
+'        tmpDateTimeS = ToTimeString(tmpDateTime)
+'    '    SetCellVal shp, "Prop.SetTime", tmpDateTimeS
+'    '    SetCellVal shp, "Prop.FormingTime", tmpDateTimeS
+'        SetCellFrml shp, "Prop.SetTime", tmpDateTimeS
+'        SetCellFrml shp, "Prop.FormingTime", tmpDateTimeS
     End If
     
 End Function

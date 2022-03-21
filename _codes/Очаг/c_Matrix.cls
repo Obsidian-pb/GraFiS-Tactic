@@ -56,16 +56,8 @@ Public Sub CreateMatrix(ByVal dimX As Long, dimY As Long)
 End Sub
 
 Public Sub SetOpenSpace(ByRef outerMatrix As Variant)
-'Заполняем слой ограждающих конструкций
-Dim i As Long
-Dim j As Long
-    
-    For i = 0 To dimensionByX
-        For j = 0 To dimensionByY
-            openSpaceLayer(i, j) = outerMatrix(i, j)
-        Next j
-    Next i
-    
+'Сохраняем слой ограждающих конструкций
+    openSpaceLayer = outerMatrix
 End Sub
 
 
@@ -412,6 +404,12 @@ Private Function IsCellCanFire(ByVal x As Long, ByVal y As Long) As Boolean
     
     'Проверяем, входит ли клетка в пределы матрицы
     If x < 0 Or y < 0 Or x > DimensionX Or y > DimensionY Then
+        IsCellCanFire = False
+        Exit Function
+    End If
+    
+    'Проверяем, не выходит ли клетка за пределы границы расчета
+    If TypeName(openSpaceLayer(x, y)) = "Empty" Then
         IsCellCanFire = False
         Exit Function
     End If
