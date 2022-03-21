@@ -689,7 +689,7 @@ Dim latestSquareTime As Date
                 End Select
                 'Вычисляем некоторые элементы по CellName
                 .RaiseByCellID shp, "Prop.Hose38;Prop.Hose51;Prop.Hose66;Prop.Hose77;Prop.Hose89;Prop.Hose110;Prop.Hose150;Prop.Hose200;Prop.Hose250;Prop.Hose300;" & _
-                                    "Prop.Foam"
+                                    "Prop.Foam;Prop.GDZSHave"
                 End With    'elements
                 
             End If
@@ -718,6 +718,7 @@ Dim latestSquareTime As Date
         
         'ГДЗС
         .SetVal "GDZSChainsCountWork", .Sum("GDZSChainsCountWorkSoft;GDZSChainsCountWorkHard")
+'        .SetVal "GDZSMansHave", .Sum("GDZSChainsCountWorkSoft;GDZSChainsCountWorkHard")
         
         '---расчет требуемого кол-ва резервных звеньев для работы в простых условиях
         If options.GDZSRezRoundUp Then

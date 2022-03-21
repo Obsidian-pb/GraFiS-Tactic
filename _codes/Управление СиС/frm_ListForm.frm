@@ -264,6 +264,7 @@ Dim i As Integer
 Dim j As Integer
 Dim colCount As Byte
 
+Dim s As String
     
     
     colCount = Me.LB_List.ColumnCount - 1
@@ -289,14 +290,17 @@ Dim colCount As Byte
     End With
     
     
-    'Заполняем таблицу
+    'Заполняем таблицу ChrW(9500)
     i = 0
     Do Until IsNull(Me.LB_List.Column(1, i))
         For j = 1 To colCount
-            wrdTbl.Rows(i + 1).Cells(j).Range.text = Me.LB_List.Column(j, i)
+            s = Me.LB_List.Column(j, i)
+            s = Replace(s, ChrW(9500), "")
+            s = Replace(s, ChrW(9492), "")
+            wrdTbl.Rows(i + 1).Cells(j).Range.text = s
         Next j
         i = i + 1
-        If i > 1000 Then
+        If i > 2000 Then
             'аварийный выход
             Exit Do
         End If

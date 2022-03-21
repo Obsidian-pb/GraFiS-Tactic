@@ -96,6 +96,7 @@ Private Sub fillElemCollection()
     AddNewElement "GDZSChainsRezCountHave", "Звеньев ГДЗС в резерве имеется", "{$} ({GDZSMansRezCountHave} газодымозащитников)", , , , False
     AddNewElement "GDZSChainsRezCountNeed", "Звеньев ГДЗС в резерве требуется", , , , , False
 '    AddNewElement "GDZSChainsCanBeFormed", "Звеньев ГДЗС Может быть сформировано"
+    AddNewElement "GDZSMansHave", "Газодымозащитников имеется на машинах", , , "Prop.GDZSHave", , True
     AddNewElement "GDZSMansCountWork", "Газодымозащитников работает", , , , , False
     AddNewElement "GDZSMansCountNeed", "Газодымозащитников требуется", , , , , False
     AddNewElement "GDZSMansRezCountHave", "Газодымозащитников в резервных звеньях имеется", , , , , False

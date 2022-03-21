@@ -476,6 +476,7 @@ Dim shp As Visio.Shape
             AddUniqueCollectionItem newColl, tmp, tmp
         Else
             If tmp <> valueToIgnore Then
+'                If tmp = "" Then tmp = " "
                 AddUniqueCollectionItem newColl, tmp, tmp
             End If
         End If

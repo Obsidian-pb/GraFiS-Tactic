@@ -81,15 +81,13 @@ Dim pr As String
                                  "Prop.Unit", , " ", " ")
 
     '---Получаем список всех боевых позиций
-'    Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave")
-'    AddUniqueCollectionItems positions, FilterShapes(A.GFSShapes, "Prop.Personnel")
     Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave;Prop.Personnel")
     '---Сортируем
     Set positions = SortCol(positions, "Prop.ArrivalTime;Prop.LineTime;Prop.SetTime;Prop.FormingTime;Prop.SquareTime;Prop.FireTime", False, visDate)
     
     'Заполняем таблицу  с перечнем техники
         '---Создаем новый массив для дальнейшего формирования списка
-        ReDim myArray(unitsList.Count + positions.Count, 5)
+        ReDim myArray(unitsList.Count + positions.Count, 4)
         '---Вставка первой записи
         row = 0
         myArray(row, 0) = "ID"
@@ -121,7 +119,7 @@ Dim pr As String
                 row = row + 1
 
                 myArray(row, 0) = shp.ID
-                myArray(row, 1) = ChrW(9500) & cellval(shp, "User.IndexPers.Prompt", visUnitsString)  '"Тип"
+                myArray(row, 1) = "  " & ChrW(9500) & " " & cellval(shp, "User.IndexPers.Prompt", visUnitsString)  '"Тип"
                 myArray(row, 2) = cellval(shp, "Prop.PersonnelHave", , " ")             '"Боевой расчет"
                 myArray(row, 3) = cellval(shp, "Prop.Personnel", , " ")                 '"Работает л/с"
                 myArray(row, 4) = Format(pf_GetTime(shp), "DD.MM.YYYY hh:nn")           '"Время"
@@ -130,7 +128,7 @@ Dim pr As String
             
             'Заменяем префикс для последней дочерней записи, при условии таковых
             If unitPositions.Count > 0 Then
-                myArray(row, 1) = ChrW(9492) & Right(myArray(row, 1), Len(myArray(row, 1)) - 1)
+                myArray(row, 1) = "  " & ChrW(9492) & " " & Right(myArray(row, 1), Len(myArray(row, 1)) - 3)
             End If
         Next i
     
