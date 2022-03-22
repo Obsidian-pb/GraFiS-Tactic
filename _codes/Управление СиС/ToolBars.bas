@@ -88,9 +88,9 @@ Sub AddButtons()
     End With
     '---"Боевые позиции"
     With Bar.Controls.Add(Type:=msoControlButton)
-        .Caption = "Список боевых позиций"
+        .Caption = "Список личного состава"
         .Tag = "PersonnelView"
-        .TooltipText = "Показать список боевых позиций"
+        .TooltipText = "Показать список личного состава"
 '        .BeginGroup = True
         .FaceID = 2141
     End With

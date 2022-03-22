@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "АИГС ГраФиС-Тактик"
-#define MyAppVersion "12.9.00"
+#define MyAppVersion "13.0.00 beta"
 #define MyAppPublisher "НТЦ ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России"
 #define MyAppURL "https://www.graphicalfiresets.ru/"
 
@@ -38,14 +38,14 @@ WizardImageFile=_installer\SideImage1.bmp
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
-Source: "!Wiki-fire - электронная энциклопедия пожарной безопасности.url"; DestDir: "{group}\Другие наши продукты\"
-Source: "!Дети01.url"; DestDir: "{group}\Другие наши продукты\"
-Source: "!Официальная группа ГраФиС (Вконтакте).url"; DestDir: "{group}\Другие наши продукты\"
-Source: "!Официальный сайт проекта ГраФиС.url"; DestDir: "{group}\Другие наши продукты\"
-Source: "!Официальный сайт Сибирской пожарно-спасательной академии.url"; DestDir: "{group}\Другие наши продукты\"
-Source: "!Справочник начальника караула (приложение для Android).url"; DestDir: "{group}\Другие наши продукты\"
-Source: "!Справочник начальника караула (приложение для iOS).url"; DestDir: "{group}\Другие наши продукты\"
-Source: "!ЭСУППВ.рф.url"; DestDir: "{group}\Другие наши продукты\"
+Source: "_links\!Wiki-fire - электронная энциклопедия пожарной безопасности.url"; DestDir: "{group}\Другие наши продукты\"
+Source: "_links\!Дети01.url"; DestDir: "{group}\Другие наши продукты\"
+Source: "_links\!Официальная группа ГраФиС (Вконтакте).url"; DestDir: "{group}\Другие наши продукты\"
+Source: "_links\!Официальный сайт проекта ГраФиС.url"; DestDir: "{group}\Другие наши продукты\"
+Source: "_links\!Официальный сайт Сибирской пожарно-спасательной академии.url"; DestDir: "{group}\Другие наши продукты\"
+Source: "_links\!Справочник начальника караула (приложение для Android).url"; DestDir: "{group}\Другие наши продукты\"
+Source: "_links\!Справочник начальника караула (приложение для iOS).url"; DestDir: "{group}\Другие наши продукты\"
+Source: "_links\!ЭСУППВ.рф.url"; DestDir: "{group}\Другие наши продукты\"
 Source: "Signs.fdb"; DestDir: "{app}"; Flags: confirmoverwrite; components: traf traf_nrs
 Source: "Version.txt"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Авиация.vss"; DestDir: "{app}"; components: traf
@@ -89,7 +89,6 @@ Source: "Шаблон плана эвакуации (500).vst"; DestDir: "{app}"; components: templa
 Source: "Шаблон плана эвакуации (1000).vst"; DestDir: "{app}"; components: templatesEvac
 Source: "Bitmaps\*"; DestDir: "{app}\Bitmaps\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "Templates\*"; DestDir: "{app}\Templates\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
-Source: "Norilsk2021\*"; DestDir: "{app}\Norilsk2021\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
 Source: "_installer\ico.ico"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Отчеты\Конструктор отчетов.vsd"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
 Source: "Отчеты\Детали отчетов.vss"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf

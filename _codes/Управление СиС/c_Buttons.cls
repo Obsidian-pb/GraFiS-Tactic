@@ -45,7 +45,7 @@ Private Sub Class_Initialize()
     
     Set ComButDescView = Application.CommandBars("РТП").Controls("Показать описание БД")
     Set ComButTechView = Application.CommandBars("РТП").Controls("Список техники")
-    Set ComButPersonnel = Application.CommandBars("РТП").Controls("Список боевых позиций")
+    Set ComButPersonnel = Application.CommandBars("РТП").Controls("Список личного состава")
     Set ComButNozzlesView = Application.CommandBars("РТП").Controls("Список стволов")
     Set ComButGDZSView = Application.CommandBars("РТП").Controls("Список ГДЗС")
     Set ComButTimelineView = Application.CommandBars("РТП").Controls("Таймлайн")
