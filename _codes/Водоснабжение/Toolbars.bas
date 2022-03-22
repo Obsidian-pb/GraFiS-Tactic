@@ -44,6 +44,7 @@ Sub AddButtons()
         .TooltipText = "Обратить в естественный водоисточник"
         .Picture = LoadPicture(DocPath & "Bitmaps\Lake1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Lake2.bmp")
+        .BeginGroup = True
     End With
     
     Set Button = Nothing

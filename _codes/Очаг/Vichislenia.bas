@@ -3,10 +3,20 @@ Option Explicit
 
 Sub SquareSet(ShpObj As Visio.Shape)
 'Процедура присвоения текстовому полю выделенной фигуры значения площади фигуры
+'Только для фигур Площади пожара
 Dim SquareCalc As Long
 
 SquareCalc = ShpObj.AreaIU * 0.00064516 'переводим из квадратных дюймов в квадратные метры
 ShpObj.Cells("User.FireSquareP").FormulaForceU = SquareCalc
+
+End Sub
+
+Sub USquareSet(ShpObj As Visio.Shape)
+'Процедура присвоения текстовому полю выделенной фигуры значения площади фигуры
+Dim SquareCalc As Long
+
+SquareCalc = ShpObj.AreaIU * 0.00064516 'переводим из квадратных дюймов в квадратные метры
+ShpObj.Cells("User.SquareP").FormulaForceU = SquareCalc
 
 End Sub
 

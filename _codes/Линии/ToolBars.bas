@@ -59,6 +59,7 @@ Sub AddButtonLine()
         .TooltipText = "Обратить в рабочую рукавную линию"
         .Picture = LoadPicture(DocPath & "Bitmaps\Hose1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Hose2.bmp")
+        .BeginGroup = True
     End With
     Set Button = Nothing
 

@@ -310,6 +310,7 @@ End Sub
 
 Public Sub MoveMeFront(ShpObj As Visio.Shape)
 'Прока перемещает фигуру вперед
+    On Error Resume Next
     ShpObj.BringToFront
 End Sub
 

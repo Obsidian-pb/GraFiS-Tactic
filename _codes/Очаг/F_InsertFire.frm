@@ -230,7 +230,9 @@ Public Sub AddCheckedSize(ByVal size As Long)
 '    Me.Repaint
 End Sub
 
-
+Public Sub Refresh()
+    Me.Repaint
+End Sub
 
 
 

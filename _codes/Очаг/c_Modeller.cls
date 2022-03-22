@@ -273,6 +273,9 @@ Private Sub RizeGettedCellPower(ByVal x As Long, ByVal y As Long, ByVal value As
     'Проверяем, не выходит ли координата ячейки за пределы матрицы
     If x < 0 Or y < 0 Or x > matrix.DimensionX Or y > matrix.DimensionY Then Exit Sub
     
+    'Проверяем, не входит ли данная клетка в область расчета
+    If matrix.IsCellOutOfArea(x, y) Then Exit Sub
+    
     'Проверяем, не является ли указанная ячейка стеной
     If matrix.GetOpenSpaceLayerValue(x, y) = 1 Then Exit Sub
     

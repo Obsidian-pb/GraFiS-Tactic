@@ -45,20 +45,19 @@ Sub AddButtons()
     Set Bar = Application.CommandBars("РТП")
     
 '---Добавляем кнопки на панель управления "РТП"--------------------------------
-'---Кнопка "Команда"-------------------------------------------------
-    With Bar.Controls.Add(Type:=msoControlButton)
-        .Caption = "Команда"
-        .Tag = "Command"
-        .TooltipText = "Команда тактической единице"
-        .FaceID = 346
-    End With
 '---Кнопка "Информация"-------------------------------------------------
     With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Информация"
         .Tag = "Info"
         .TooltipText = "Информация для фигуры"
         .FaceID = 487 ' 162
-        .beginGroup = True
+    End With
+'---Кнопка "Команда"-------------------------------------------------
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Команда"
+        .Tag = "Command"
+        .TooltipText = "Команда тактической единице"
+        .FaceID = 346
     End With
 '---Кнопка "Оценка"-------------------------------------------------
     With Bar.Controls.Add(Type:=msoControlButton)

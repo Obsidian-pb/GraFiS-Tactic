@@ -399,17 +399,20 @@ End Function
 '    IsCellNotMaxFire = currentgPowerLayer(x, y) < maximumBurnPower
 'End Function
 
+Public Function IsCellOutOfArea(ByVal x As Long, ByVal y As Long) As Boolean
+'Проверяем, выходит ли клетка за пределы границы расчета
+    If TypeName(openSpaceLayer(x, y)) = "Empty" Then
+        IsCellOutOfArea = True
+        Exit Function
+    End If
+IsCellOutOfArea = False
+End Function
+
 Private Function IsCellCanFire(ByVal x As Long, ByVal y As Long) As Boolean
 'Возвращает Истина, если клетка может гореть и Ложь, если нет
     
     'Проверяем, входит ли клетка в пределы матрицы
     If x < 0 Or y < 0 Or x > DimensionX Or y > DimensionY Then
-        IsCellCanFire = False
-        Exit Function
-    End If
-    
-    'Проверяем, не выходит ли клетка за пределы границы расчета
-    If TypeName(openSpaceLayer(x, y)) = "Empty" Then
         IsCellCanFire = False
         Exit Function
     End If

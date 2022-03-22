@@ -148,9 +148,13 @@ Dim DischargeTime As Double
         FlowOut = PodOut - PodIn
         DischargeTime = ((WaterValue + PW_Value + WaterOpen_Value - HosesValue) / FlowOut) / 60
         If Int(DischargeTime) > 0 Then
-            totalStr = totalStr & "Возможное время работы системы - " & _
+            If Int(DischargeTime) > 100000 Then          'Предотвращение чрезмерно больших значений из-за мелких разниц
+                totalStr = totalStr & "Возможное время работы системы - бесконечно" & Chr(10)
+            Else
+                totalStr = totalStr & "Возможное время работы системы - " & _
                      Int(DischargeTime) & ":" & Int((DischargeTime - Int(DischargeTime)) * 60) _
                      & Chr(10)
+            End If
         Else
             totalStr = totalStr & "ОШИБКА РАСЧЕТА ВРЕМЕНИ РАБОТЫ СИСТЕМЫ!" & Chr(10)
         End If

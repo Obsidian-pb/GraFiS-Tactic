@@ -40,12 +40,13 @@ Public Sub SetForm(ByRef frm As Object)
 End Sub
 
 
-Public Function NewMatrix(ByVal grainVal As Integer, Optional ByRef rect As c_Rect) As Variant()
+Public Function NewMatrix(ByVal grainVal As Integer) As Variant()
 'Функция создает и возвращает новую матрицу объекта для расчета
 'grain - размер зерна в мм
 Dim xCount As Long
 Dim yCount As Long
 Dim arr() As Integer
+Dim areaBuilder As c_MatrixAreaBuilder
 
     grain = grainVal
 
@@ -54,10 +55,23 @@ Dim arr() As Integer
     Debug.Print "Размер матрицы " & xCount * yCount
     
     ReDim matrix(xCount, yCount)
-    FillMatrixZero      'Заполняем матрицу нолями
-       
+    
     'Проверяем наличие контурной фигуры
     TryGetShape bordreRect, "User.IndexPers:1001"
+    
+    'Определяем расчетную область (При условии, что имеется фигура ограничивающей зоны)
+    If bordreRect Is Nothing Then
+        FillMatrixZero      'Заполняем матрицу нолями
+    Else
+        Set areaBuilder = New c_MatrixAreaBuilder
+'            areaBuilder.SetForm form
+            form.lblMatrixIsBaked.Caption = "Оценка расчетной зоны, подождите"
+            form.lblMatrixIsBaked.ForeColor = vbBlack
+            DoEvents
+            
+            matrix = areaBuilder.FillArea(matrix, bordreRect, grain)
+        Set areaBuilder = Nothing
+    End If
        
     'Определяем конфигурацию матрицы (стены, зоны горения и т.д.)
     Set maskBuilder = New c_MaskBuilder
@@ -108,52 +122,11 @@ End Sub
 Private Function IsOpenSpace(x As Long, y As Long, tolerance As Double) As Boolean
 'Функция возвращает Истина, если указанная точка не соприкасается с маской стен, и наоборот, если соприкасается
     IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-    
-'    'Доделать учет ограничивающей фигуры!!!
-'    If bordreRect Is Nothing Then
-'        'Снаружи только маски стен
-'        IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-'    Else
-'        'Снаружи и маски стен и ограничивающей фигуры
-''        flag1 = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-''        flag2 = bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-''        IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 And _
-''                      bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) > 0
-'
-'        'Если за пределами, то не учитывается!
-''        IsOpenSpace = bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) > 0
-'        If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 Then
-'            IsOpenSpace = False
-''            IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-'        Else
-'            IsOpenSpace = True
-'            IsOpenSpace = maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-'        End If
-''        IsOpenSpace = flag1 Or flag2
-'    End If
-    
 End Function
 
 Private Function IsTotalWall(x As Long, y As Long, tolerance As Double) As Boolean
 'Функция возвращает Истина, если указанная точка не соприкасается с маской свободного пространства, и наоборот, если соприкасается
     IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-    
-'    If bordreRect Is Nothing Then
-'        'Снаружи только маски стен
-'        IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-'    Else
-'        'Снаружи и маски стен и ограничивающей фигуры
-'        'Если за пределами, то не учитывается!
-''        IsTotalWall = bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-'        If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 Then
-'            IsTotalWall = True
-''            IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-'        Else
-'            IsTotalWall = False
-'            IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
-'        End If
-'
-'    End If
 End Function
 
 

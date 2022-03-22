@@ -82,6 +82,9 @@ Dim i As Integer
         'Проверяем не выходит ли данная клетка за пределы допустимого угла
         If Not isPossiblePlace Then Exit Do
         
+        'Проверяем, не выходит ли данная клетка за пределы расчета
+        If matrix.IsCellOutOfArea(x, y) Then Exit Sub
+        
         'Запускаем демона закрашивающего линию от текущего положения
         If lineFillDemon.testLine(x, y, perpAngle) = False Then Exit Do
         

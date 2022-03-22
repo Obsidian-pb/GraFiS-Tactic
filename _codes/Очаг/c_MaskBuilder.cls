@@ -40,6 +40,7 @@ Dim vO_Shape As Visio.Shape
     Set col_DoorsShapes = New Collection
     
     For Each vO_Shape In Application.ActivePage.Shapes
+        Stop            'Добавить выбор только стен входящих в расчетную зону, при ее наличии
         ps_AddShape vO_Shape
     Next vO_Shape
     

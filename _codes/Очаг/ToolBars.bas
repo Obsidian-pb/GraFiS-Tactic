@@ -48,6 +48,7 @@ Sub AddButtons()
         .TooltipText = "Обратить в зону горения"
         .Picture = LoadPicture(DocPath & "Bitmaps\Fire1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Fire2.bmp")
+        .BeginGroup = True
     End With
 '---Кнопка "Обратить в зону горения"-------------------------------------------------
     Set Button = Bar.Controls.Add(Type:=msoControlButton)
