@@ -4,7 +4,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
                         Optional ByVal defaultValue As Double = 0) As Variant
 'Returns cell with cellName value. If such cell does not exists, return 0
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     If shp.CellExists(cellName, 0) Then
         Select Case dataType
@@ -22,7 +22,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
     End If
     
 Exit Function
-EX:
+ex:
     CellVal = defaultValue
 End Function
 
@@ -31,7 +31,7 @@ Public Sub SetCellVal(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal 
 Dim cll As Visio.cell
 Dim typeN As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     typeN = TypeName(NewVal)
     If shp.CellExists(cellName, 0) Then
@@ -48,7 +48,7 @@ Dim typeN As String
     End If
     
 Exit Sub
-EX:
+ex:
 
 End Sub
 
@@ -56,7 +56,7 @@ Public Sub SetCellFrml(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal
 'Set cell with cellName formula. If such cell does not exists, does nothing
 Dim cll As Visio.cell
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
@@ -64,7 +64,7 @@ Dim cll As Visio.cell
     End If
     
 Exit Sub
-EX:
+ex:
 
 End Sub
 
@@ -131,7 +131,7 @@ End Sub
 
 Public Function ShapeHaveCell(ByRef shp As Visio.Shape, ByVal cellName As String, _
                               Optional ByVal val As Variant = "") As Boolean
-On Error GoTo EX
+On Error GoTo ex
     
     If shp.CellExists(cellName, 0) Then
         If val <> "" Then
@@ -150,6 +150,6 @@ On Error GoTo EX
     End If
     
 Exit Function
-EX:
+ex:
     ShapeHaveCell = False
 End Function

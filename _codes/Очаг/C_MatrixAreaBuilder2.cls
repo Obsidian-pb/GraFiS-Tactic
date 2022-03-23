@@ -2,7 +2,7 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "c_MatrixAreaBuilder"
+Attribute VB_Name = "C_MatrixAreaBuilder2"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
@@ -17,10 +17,14 @@ Const mmInInch As Double = 25.4
 'Private form As Object
 
 Private bordreRect As Visio.Shape
-Private scanner As Visio.Shape      'Фигура-сканер которая будет оценивать пространство
+Private bordreOpen As Visio.Shape
+'Private scanner As Visio.Shape      'Фигура-сканер которая будет оценивать пространство
+Private points As Collection
 
 Public matrix As Variant
 
+'Const radiussModificator As Double = 1.4142
+Const radiussModificator As Double = 1.5
 
 
 
@@ -36,10 +40,6 @@ Public Function FillArea(ByRef matrix_a As Variant, ByRef bordreRect_a As Visio.
 Dim xCount As Long
 Dim yCount As Long
 Dim arr() As Integer
-
-    On Error GoTo ex
-    
-    Application.EventsEnabled = False
     
     grain = grain_a
     matrix = matrix_a
@@ -55,13 +55,10 @@ Dim arr() As Integer
     '---Возвращаем результат - матрицу заполненную данными о расчетном пространстве
     FillArea = matrix
     
-    'Удаляем фигуру сканер
-    scanner.Delete
+    'Удаляем сканер
+    bordreOpen.Delete
     
-    Application.EventsEnabled = True
-Exit Function
-ex:
-    Application.EventsEnabled = True
+
 End Function
 
 Private Sub CheckEnvironment()
@@ -77,7 +74,15 @@ Dim startRectSizeHalf As Long
         CheckRect startRectSizeHalf, startRectSizeHalf, startRectSizeHalf
 End Sub
 
+Private Function IsOpenSpace(x As Long, y As Long, tolerance As Double) As Boolean
+'Функция возвращает Истина, если указанная точка не соприкасается с маской стен, и наоборот, если соприкасается
+    IsOpenSpace = bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+End Function
 
+Private Function IsTotalWall(x As Long, y As Long, tolerance As Double) As Boolean
+'Функция возвращает Истина, если указанная точка не соприкасается с маской свободного пространства, и наоборот, если соприкасается
+    IsTotalWall = bordreOpen.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
+End Function
 
 
 
@@ -85,26 +90,23 @@ End Sub
 Private Sub CheckRect(ByVal x As Long, ByVal y As Long, ByVal radiuss As Integer)
 'Здесь radiuss - в зернах!!!!
 Dim radiussHalf As Integer
-Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, что бы гарантировать проверку всей площади квадрата - переводит длину пришедшего радиуса (являющегося половиной длины квадрата) к радиусу круга описывающего квадрат, в идеале равен 1,4142135623731
-Dim scanResult As Byte
+'Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, что бы гарантировать проверку всей площади квадрата - переводит длину пришедшего радиуса (являющегося половиной длины квадрата) к радиусу круга описывающего квадрат, в идеале равен 1,4142135623731
 
     On Error GoTo ex
+    Dim shp As Visio.Shape
     
-    
-    SanerPos x, y, radiuss * 2
-    scanResult = Scan
 '1 Проверяем утверждение, что в радиусе нет расчетной области (везде - РО)
     '---Если стен нет, оставляем для всей клетки 0
-        If scanResult = 0 Then
+        If IsOpenSpace(x, y, radiuss * radiussModificator * grain) Then
 '            form.AddCheckedSize (radiuss * 2) ^ 2
 '            form.Refresh
 '            Dim shp As Visio.Shape
-'            Set shp = Application.ActivePage.DrawRectangle((x - radiuss) * grain / mmInInch, (y - radiuss) * grain / mmInInch, _
-'                    (x + radiuss) * grain / mmInInch, (y + radiuss) * grain / mmInInch)
-'            shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
-'            shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
-'
-'            DoEvents
+            Set shp = Application.ActivePage.DrawRectangle((x - radiuss) * grain / mmInInch, (y - radiuss) * grain / mmInInch, _
+                    (x + radiuss) * grain / mmInInch, (y + radiuss) * grain / mmInInch)
+            shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
+            shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
+
+            DoEvents
 
             Exit Sub
         End If
@@ -112,18 +114,18 @@ Dim scanResult As Byte
 '2 Если стены есть, проверяем меньшие квадраты
 '3 проверяем утверждение, что в радиусе нет открытого пространства
     '---Если стены есть, проверяем более детально
-        If scanResult = 2 Then
+        If IsTotalWall(x, y, radiuss * radiussModificator * grain) Then
         'Если при этом в радиусе нет открытого пространства, ставим для всех входящих точек значение стены (1)
             SetToAllCells x, y, radiuss, CellState.csOpenSpace
 '            form.AddCheckedSize (radiuss * 2) ^ 2
             
 '                Dim shp As Visio.Shape
-'                Set shp = Application.ActivePage.DrawRectangle((x - radiuss) * grain / mmInInch, (y - radiuss) * grain / mmInInch, _
-'                        (x + radiuss) * grain / mmInInch, (y + radiuss) * grain / mmInInch)
-'                shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
-'                shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
-''
-'                DoEvents
+                Set shp = Application.ActivePage.DrawRectangle((x - radiuss) * grain / mmInInch, (y - radiuss) * grain / mmInInch, _
+                        (x + radiuss) * grain / mmInInch, (y + radiuss) * grain / mmInInch)
+                shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
+                shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
+'
+                DoEvents
         Else
             If radiuss = 1 Then
 '                form.AddCheckedSize 1
@@ -162,12 +164,15 @@ End Sub
 
 Private Sub checkSingleCell(ByVal x As Integer, ByVal y As Integer, ByVal dirRight As Boolean, ByVal dirUp As Boolean, Optional tolerance As Double = 0)
 'Проверяем наличие стен для единичной (атомарной ячейки)
-Dim scanResult As Byte
+Dim xAct As Double
+Dim yAct As Double
+'Const radiussModificator As Double = 1.4142
 
-    SanerPos x, y
-    scanResult = Scan
+    xAct = x + 0.5 + Not dirRight
+    yAct = y + 0.5 + Not dirUp
     
-    If scanResult = 2 Then
+'    If bordreOpen.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 Then
+    If bordreOpen.HitTest(x * grain / mmInInch, y * grain / mmInInch, 0) = 0 Then
         If dirRight = True And dirUp = True Then matrix(x, y) = CellState.csOpenSpace
         If dirRight = False And dirUp = True Then matrix(x - 1, y) = CellState.csOpenSpace
         If dirRight = True And dirUp = False Then matrix(x, y - 1) = CellState.csOpenSpace
@@ -190,13 +195,13 @@ Dim scanResult As Byte
 '        If dirRight = False And dirUp = False Then matrix(x - 1, y - 1) = CellState.csOpenSpace
     
     
-'                    x = x + Not dirRight
-'                    y = y + Not dirUp
-'                    Dim shp As Visio.Shape
-'                    Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-'                        (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-'                    shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
-'                    shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
+                    x = x + Not dirRight
+                    y = y + Not dirUp
+                    Dim shp As Visio.Shape
+                    Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
+                        (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
+                    shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
+                    shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
     End If
 
 End Sub
@@ -235,19 +240,88 @@ End Function
 
 
 
+
+
+
 '------------------Функции сканера--------------------------
-Public Sub NewScaner()
-    Set scanner = Application.ActivePage.DrawRectangle(0, 0, 0, 0)
+Private Sub NewScaner()
+Dim shp1 As Visio.Shape
+Dim shp2 As Visio.Shape
+'Dim sel As Visio.Selection
+
+    Set points = New Collection
+    
+    Set shp1 = Application.ActivePage.DrawRectangle(0, 0, Application.ActivePage.PageSheet.Cells("PageWidth").Result(visInches), Application.ActivePage.PageSheet.Cells("PageHeight").Result(visInches))
+    Set shp2 = Application.ActivePage.Drop(bordreRect, bordreRect.Cells("PinX").Result(visInches), bordreRect.Cells("PinY").Result(visInches))
+    
+    '---Добавляем в выделение прямоугольник страницы и маску стен
+    Application.ActiveWindow.Selection.DeselectAll
+    Application.ActiveWindow.Select shp2, visSelect
+    Application.ActiveWindow.Select shp1, visSelect
+    '---Вычитаем из прямоугольника листа клон маски стен
+    Application.ActiveWindow.Selection.Combine
+    
+    Set bordreOpen = Application.ActiveWindow.Selection(1)
+    
 End Sub
 
-Public Sub SanerPos(ByVal x As Double, ByVal y As Double, Optional ByVal size As Double = 1)
-    SetCellVal scanner, "PinX", x * grain / mmInInch
-    SetCellVal scanner, "PinY", y * grain / mmInInch
-    SetCellVal scanner, "Width", size * grain / mmInInch
-    SetCellVal scanner, "Height", size * grain / mmInInch
-End Sub
+'Private Sub SanerPos(ByVal x As Double, ByVal y As Double, Optional ByVal size As Double = 1)
+''    SetCellVal scanner, "PinX", x * grain / mmInInch
+''    SetCellVal scanner, "PinY", y * grain / mmInInch
+''    SetCellVal scanner, "Width", size * grain / mmInInch
+''    SetCellVal scanner, "Height", size * grain / mmInInch
+'
+'End Sub
 
-Public Function Scan() As Byte
+Private Function Scan(ByVal x As Double, ByVal y As Double, Optional ByVal size As Double = 1) As Byte
 '0 - scanner не входит в bordreRect, 1 - накладывается, 2 - полностью укладывается
-    Scan = bordreRect.SpatialRelation(scanner, 0, VisSpatialRelationFlags.visSpatialFrontToBack + VisSpatialRelationFlags.visSpatialIncludeHidden)
+Dim val As Byte
+
+    val = ScanPoint(x, y) + ScanPoint(x, y - size) + ScanPoint(x - size, y) + ScanPoint(x - size, y - size)
+    If val = 0 Then
+        Scan = 0
+    ElseIf val = 4 Then
+        Scan = 2
+    Else
+        Scan = 1
+    End If
+End Function
+Private Function ScanSingle(ByVal x As Double, ByVal y As Double, Optional ByVal size As Double = 1) As Byte
+'0 - scanner не входит в bordreRect, 1 - накладывается, 2 - находится внутри
+Dim val As Byte
+Dim idx As String
+
+    ScanSingle = bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, size)
+    
+    idx = XYtoIndex(x, y)
+    If ScanSingle = 0 Then
+        points.Add False, idx
+    ElseIf val = 2 Then
+        points.Add True, idx
+    Else
+        points.Add False, idx
+    End If
+End Function
+
+Private Function ScanPoint(ByVal x As Long, ByVal y As Long) As Boolean
+'Возвращает True если точка внутри расчетной зоны, иначе False
+Dim idx As String
+
+    On Error GoTo ex
+    
+    idx = XYtoIndex(x, y)
+    ScanPoint = points.item(idx)
+    
+Exit Function
+ex:
+    If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, 0) = 2 Then
+        ScanPoint = True
+    Else
+        ScanPoint = False
+    End If
+    points.Add ScanPoint, idx
+End Function
+
+Private Function XYtoIndex(ByVal x As Long, ByVal y As Long) As String
+    XYtoIndex = str(x) & ":" & str(y)
 End Function

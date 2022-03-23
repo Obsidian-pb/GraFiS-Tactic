@@ -46,7 +46,7 @@ Public Function NewMatrix(ByVal grainVal As Integer) As Variant()
 Dim xCount As Long
 Dim yCount As Long
 Dim arr() As Integer
-Dim areaBuilder As c_MatrixAreaBuilder
+Dim areaBuilder As C_MatrixAreaBuilder2
 
     grain = grainVal
 
@@ -63,7 +63,7 @@ Dim areaBuilder As c_MatrixAreaBuilder
     If bordreRect Is Nothing Then
         FillMatrixZero      'Заполняем матрицу нолями
     Else
-        Set areaBuilder = New c_MatrixAreaBuilder
+        Set areaBuilder = New C_MatrixAreaBuilder2
 '            areaBuilder.SetForm form
             form.lblMatrixIsBaked.Caption = "Оценка расчетной зоны, подождите"
             form.lblMatrixIsBaked.ForeColor = vbBlack
@@ -76,7 +76,7 @@ Dim areaBuilder As c_MatrixAreaBuilder
     'Определяем конфигурацию матрицы (стены, зоны горения и т.д.)
     Set maskBuilder = New c_MaskBuilder
     '---Создаем маску
-    maskBuilder.s_makeMask
+    maskBuilder.s_makeMask bordreRect
         '---Если маска стен не была создана в результате отсутсвия таковых - возвращаем чисутю матрицу
         If maskBuilder.pO_MaskShape Is Nothing Then
             '---Возвращаем результат - матрицу заполненную данными о ограждающих конструкциях
@@ -138,7 +138,7 @@ Private Sub CheckRect(ByVal x As Long, ByVal y As Long, ByVal radiuss As Integer
 Dim radiussHalf As Integer
 Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, что бы гарантировать проверку всей площади квадрата - переводит длину пришедшего радиуса (являющегося половиной длины квадрата) к радиусу круга описывающего квадрат, в идеале равен 1,4142135623731
 
-    On Error GoTo EX
+    On Error GoTo ex
                
 ''0 Проверяем утверждение, что в радиусе нет нерассчитываемых зон
 '    If Not bordreRect Is Nothing Then
@@ -220,7 +220,7 @@ Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, 
                 CheckRect x - radiussHalf, y - radiussHalf, radiussHalf
         End If
 Exit Sub
-EX:
+ex:
     Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
 End Sub
 

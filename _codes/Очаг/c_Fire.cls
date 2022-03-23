@@ -63,7 +63,7 @@ Private Sub vO_App_ShapeAdded(ByVal Shape As IVShape)
 'В случае, если включен учет добавляемых фигур - проверяет является ли вброшенная фигура затравочной
 'т.е. отходящей непосредственно от очага
 
-    On Error GoTo EX
+    On Error GoTo ex
     Select Case VI_ShapesCheckFlag
         Case Is = 0
             Exit Sub
@@ -116,7 +116,7 @@ Private Sub vO_App_ShapeAdded(ByVal Shape As IVShape)
     End Select
 
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "vO_App_ShapeAdded"
 End Sub
@@ -486,7 +486,7 @@ Dim vO_ColShape As Visio.Shape, vO_TempShape As Visio.Shape, vO_ActiveShape As V
     Set vO_ColShape = Nothing
     Set vO_TempShape = Nothing
 Exit Sub
-EX:
+ex:
     Set vO_ActiveShape = Nothing
     Set vO_ColShape = Nothing
     Set vO_TempShape = Nothing
@@ -524,7 +524,7 @@ Dim vS_LeftRadiuss As Single 'Остаточный радиус распространения огня от двери
 Dim v_Distance As Double
 Dim x0 As Double, y0 As Double
     
-    On Error GoTo EX
+    On Error GoTo ex
     For Each vO_Door In col_DoorsShapes
     '---Вычисляем защищенный радиус
         vS_ProtectedRadiussByDoor = PI_DoorsREI * fD_MetersToInch(PS_LineSpeedM)
@@ -555,7 +555,7 @@ Dim x0 As Double, y0 As Double
     Next vO_Door
 
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "s_AddDoorsFires"
 End Sub
@@ -592,7 +592,7 @@ Private Sub s_SearchWalls(ByRef aO_Shape As Visio.Shape, ByVal a_X As Double, By
 Dim vO_shp As Visio.Shape
 Dim v_X As Double, v_Y As Double
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем, находится ли фигура в зоне досягаемости очага
     My_XYFromPage aO_Shape, a_X, a_Y, v_X, v_Y
     If aO_Shape.HitTest(v_X, v_Y, a_R * 1.05) = 0 Then Exit Sub
@@ -617,7 +617,7 @@ Dim v_X As Double, v_Y As Double
     End If
 
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "s_SearchWalls"
 End Sub
@@ -628,7 +628,7 @@ Private Sub s_SearchDoors(ByRef aO_Shape As Visio.Shape, ByVal a_X As Double, By
 Dim vO_shp As Visio.Shape
 Dim v_X As Double, v_Y As Double
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем, находится ли фигура в зоне досягаемости очага
     My_XYFromPage aO_Shape, a_X, a_Y, v_X, v_Y
     If aO_Shape.HitTest(v_X, v_Y, a_R * 1.05) = 0 Then Exit Sub
@@ -653,7 +653,7 @@ Dim v_X As Double, v_Y As Double
     End If
 
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "s_SearchDoors"
 End Sub
@@ -665,7 +665,7 @@ Private Sub s_SearchPortals(ByRef aO_Shape As Visio.Shape, ByVal a_X As Double, 
 Dim vO_shp As Visio.Shape
 Dim v_X As Double, v_Y As Double
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем, находится ли фигура в зоне досягаемости очага
     My_XYFromPage aO_Shape, a_X, a_Y, v_X, v_Y
     If aO_Shape.HitTest(v_X, v_Y, a_R * 1.05) = 0 Then Exit Sub
@@ -690,7 +690,7 @@ Dim v_X As Double, v_Y As Double
     End If
 
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "s_SearchPortals"
 End Sub
@@ -701,7 +701,7 @@ Private Sub s_makeMask(ByVal a_X As Double, ByVal a_Y As Double, ByVal a_R As Do
 'Процедура создает маску обрезки (ОСНОВНАЯ)
 Dim vO_Shape As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
     '---Формируем коллекции
     For Each vO_Shape In Application.ActivePage.Shapes
         '---Для коллекции стен
@@ -726,7 +726,7 @@ Dim vO_Shape As Visio.Shape
 
 Set vO_Shape = Nothing
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."
     SaveLog Err, "s_makeMask"
 End Sub
@@ -1004,7 +1004,7 @@ Dim x1, y1 As Double
 Dim i As Integer
 Dim vB_PointFlag As Boolean
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Если коллекция col_FireShapes пуста, то функция возвращает False, т.к. это автоматически означает, что мы имеем дело с первой фигурой
     If col_FireShapes.Count = 0 Then
         s_CheckConsists = False
@@ -1042,7 +1042,7 @@ s_CheckConsists = True
 Set vO_ActiveShape = Nothing
 Set vO_ColShape = Nothing
 Exit Function
-EX:
+ex:
     Set vO_ActiveShape = Nothing
     Set vO_ColShape = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу."

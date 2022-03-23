@@ -34,25 +34,36 @@ Sub AddButtons()
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set Bar = Application.CommandBars("Превращения")
     DocPath = ThisDocument.path
     
 '---Добавляем кнопки на панель управления "Превращения"--------------------------------
+'---Кнопка "Обратить в расчетную зону"-------------------------------------------------
+'    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Расчетная зона"
+        .tag = "CalcArea"
+        .TooltipText = "Обратить в расчетную зону"
+'        .Picture = LoadPicture(DocPath & "Bitmaps\Fire1.bmp")
+'        .Mask = LoadPicture(DocPath & "Bitmaps\Fire2.bmp")
+        .FaceID = 150
+        .BeginGroup = True
+    End With
 '---Кнопка "Обратить в зону горения"-------------------------------------------------
-    Set Button = Bar.Controls.Add(Type:=msoControlButton)
-    With Button
+'    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Площадь"
         .tag = "FireAreae"
         .TooltipText = "Обратить в зону горения"
         .Picture = LoadPicture(DocPath & "Bitmaps\Fire1.bmp")
         .Mask = LoadPicture(DocPath & "Bitmaps\Fire2.bmp")
-        .BeginGroup = True
+        .BeginGroup = False
     End With
 '---Кнопка "Обратить в зону горения"-------------------------------------------------
-    Set Button = Bar.Controls.Add(Type:=msoControlButton)
-    With Button
+'    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Шторм"
         .tag = "FireStorm"
         .TooltipText = "Обратить в огненный шторм"
@@ -60,8 +71,8 @@ Sub AddButtons()
         .Mask = LoadPicture(DocPath & "Bitmaps\Storm2.bmp")
     End With
 '---Кнопка "Обратить в Задымление"-------------------------------------------------
-    Set Button = Bar.Controls.Add(Type:=msoControlButton)
-    With Button
+'    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Задымление"
         .tag = "Fog"
         .TooltipText = "Обратить в задымленную зону"
@@ -69,8 +80,8 @@ Sub AddButtons()
         .Mask = LoadPicture(DocPath & "Bitmaps\Fog2.bmp")
     End With
 '---Кнопка "Обратить в зону обрушения"-------------------------------------------------
-    Set Button = Bar.Controls.Add(Type:=msoControlButton)
-    With Button
+'    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Обрушение"
         .tag = "Rush"
         .TooltipText = "Обратить в зону обрушения"
@@ -83,7 +94,7 @@ Sub AddButtons()
     Set Bar = Nothing
 
 Exit Sub
-EX:
+ex:
     Set Button = Nothing
     Set Bar = Nothing
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
@@ -93,13 +104,17 @@ End Sub
 
 Sub DeleteButtons()
 '---Процедура удаления кнопки "Площадь" из панели управления "Превращения"--------------
-
 '---Объявляем переменные и постоянные-------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
+    
+    On Error Resume Next
 
     Set Bar = Application.CommandBars("Превращения")
-'---Удаление кнопки "Рукав" из панели управления "Превращения"------------------------
+'---Удаление кнопки "Расчетная зона" из панели управления "Превращения"------------------------
+    Set Button = Bar.Controls("Расчетная зона")
+    Button.Delete
+'---Удаление кнопки "Площадь" из панели управления "Превращения"------------------------
     Set Button = Bar.Controls("Площадь")
     Button.Delete
 '---Удаление кнопки "Шторм" из панели управления "Превращения"------------------------

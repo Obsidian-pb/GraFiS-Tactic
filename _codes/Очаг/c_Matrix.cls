@@ -69,7 +69,7 @@ End Sub
 
 Public Sub SetCellValue(ByVal x As Long, ByVal y As Long, ByVal layer As MatrixLayerType, ByVal value As Variant)
 '”станавливаем значение дл€ клетки с указанными координатами в указанном слое
-    On Error GoTo EX
+    On Error GoTo ex
 
     Select Case layer
         Case Is = MatrixLayerType.mtrOpenSpaceLayer
@@ -80,7 +80,7 @@ Public Sub SetCellValue(ByVal x As Long, ByVal y As Long, ByVal layer As MatrixL
             gettedPowerInOneStepLayer(x, y) = value
     End Select
 Exit Sub
-EX:
+ex:
     Debug.Print "Error: x=" & x & ", y=" & y & ", layer=" & layer & ", value=" & value
 End Sub
 
@@ -434,23 +434,23 @@ End Function
 
 Public Function isWall(ByVal x As Long, ByVal y As Long) As Boolean
 'ѕровер€ем, находитс€ ли в указанной клетке стена
-    On Error GoTo EX
+    On Error GoTo ex
     If openSpaceLayer(x, y) = 1 Then
         isWall = True
     Else
         isWall = False
     End If
 Exit Function
-EX:
+ex:
     isWall = True
 End Function
 
 Public Function IsCellMaxFire(ByVal x As Long, ByVal y As Long) As Boolean
 'ѕровер€ем, горит ли клетка на полную мощность
-    On Error GoTo EX
+    On Error GoTo ex
     IsCellMaxFire = currentgPowerLayer(x, y) = maximumBurnPower
 Exit Function
-EX:
+ex:
     IsCellMaxFire = False
 End Function
 
@@ -458,13 +458,13 @@ Public Function IsOuterActiveCell(ByVal x As Long, ByVal y As Long) As Boolean
 'ѕровер€ем, €вл€етс€ ли клетка внешней активной, т.е. еще не горит на полную мщность и находитс€ за пределами площади горени€
 Dim val As Double
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     val = GetFirePower(x, y)
     IsOuterActiveCell = val > 0 And val < maximumBurnPower
         
 Exit Function
-EX:
+ex:
     
 End Function
 

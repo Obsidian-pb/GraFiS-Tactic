@@ -28,7 +28,7 @@ Private col_WindowsShapes As Collection 'Коллекция окон
 
 
 '-----------------------------------------------------Процедуры создания маски----------------------------------------------------
-Public Sub s_makeMask()
+Public Sub s_makeMask(Optional ByRef borders As Visio.Shape = Nothing)
 'Процедура создает маску стен
 Dim vO_Shape As Visio.Shape
     
@@ -39,10 +39,18 @@ Dim vO_Shape As Visio.Shape
     Set col_WallsShapes = New Collection
     Set col_DoorsShapes = New Collection
     
-    For Each vO_Shape In Application.ActivePage.Shapes
-        Stop            'Добавить выбор только стен входящих в расчетную зону, при ее наличии
-        ps_AddShape vO_Shape
-    Next vO_Shape
+    
+    If borders Is Nothing Then
+        For Each vO_Shape In Application.ActivePage.Shapes
+            ps_AddShape vO_Shape
+        Next vO_Shape
+    Else
+        For Each vO_Shape In Application.ActivePage.Shapes
+            If borders.SpatialRelation(vO_Shape, 0, VisSpatialRelationFlags.visSpatialFrontToBack) > 0 Then
+                ps_AddShape vO_Shape
+            End If
+        Next vO_Shape
+    End If
     
     '---Делаем маску стен
     '---Проверяем имеются ли фигуры в коллекции col_WallsShapes

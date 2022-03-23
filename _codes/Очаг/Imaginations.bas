@@ -1,6 +1,6 @@
 Attribute VB_Name = "Imaginations"
 
-Sub SquareSetInner(shpObjName As String) 'ВНУТРЕННЯЯ
+Public Sub SquareSetInner(shpObjName As String) 'ВНУТРЕННЯЯ
 'Процедура присвоения текстовому полю выделенной фигуры значения площади фигуры
 Dim SquareCalc As Integer
 Dim ShpObj As Visio.Shape
@@ -14,7 +14,7 @@ Dim ShpObj As Visio.Shape
 
 End Sub
 
-Sub CloneSectionUniverseNames(SectionIndex As Integer, ShapeFromID As Long, ShapeToID As Long)
+Public Sub CloneSectionUniverseNames(SectionIndex As Integer, ShapeFromID As Long, ShapeToID As Long)
 'Процедура копирования необходимого набора свойств указанной секции из Фигуры(ShapeFrom) в Фигуру(ShapeTo)
 
 '---Объявляем переменные
@@ -44,7 +44,7 @@ Dim RowNum As Integer, CellNum As Integer
             
 End Sub
 
-Sub CloneSectionUniverseValues(SectionIndex As Integer, ShapeFromID As Long, ShapeToID As Long)
+Public Sub CloneSectionUniverseValues(SectionIndex As Integer, ShapeFromID As Long, ShapeToID As Long)
 '---Процедура копирования свойств указанной секции из Фигуры(ShapeFrom) в Фигуру(ShapeTo)
 
 '---Объявляем переменные
@@ -71,7 +71,7 @@ End Sub
 
 
 '---------------------------------Обращение в площадь горения-------------------------------------
-Sub ImportAreaInformation() '(Площадь пожара)
+Public Sub ImportAreaInformation() '(Площадь пожара)
 'Процедура для импорта свойств объекта донора
 
 '---Объявляем переменные
@@ -142,7 +142,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 End Sub
 
-Sub CloneSectionLine(ShapeFromID As Long, ShapeToID As Long)
+Public Sub CloneSectionLine(ShapeFromID As Long, ShapeToID As Long)
 'Процедура клонирования данных из секции "Line"
 
 '---Объявляем переменные
@@ -161,7 +161,7 @@ Dim RowNum As Integer, CellNum As Integer
 
 End Sub
 
-Sub CloneSecEvent(ShapeFromID As Long, ShapeToID As Long)
+Public Sub CloneSecEvent(ShapeFromID As Long, ShapeToID As Long)
 'Процедура копирования значений строк для секции "Event"
 '---Объявляем переменные
 Dim ShapeFrom As Visio.Shape, ShapeTo As Visio.Shape
@@ -179,7 +179,7 @@ Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 End Sub
 
-Sub CloneSecFill(ShapeFromID As Long, ShapeToID As Long)
+Public Sub CloneSecFill(ShapeFromID As Long, ShapeToID As Long)
 'Процедура копирования значений строк для секции "Fill"
 '---Объявляем переменные
 Dim ShapeFrom As Visio.Shape, ShapeTo As Visio.Shape
@@ -197,7 +197,7 @@ Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 
 End Sub
 
-Sub CloneSecMiscellanious(ShapeFromID As Long, ShapeToID As Long)
+Public Sub CloneSecMiscellanious(ShapeFromID As Long, ShapeToID As Long)
 'Процедура копирования значений строк для секции "Miscellanious"
 '---Объявляем переменные
 Dim ShapeFrom As Visio.Shape, ShapeTo As Visio.Shape
@@ -216,7 +216,7 @@ Set ShapeTo = Application.ActivePage.Shapes.ItemFromID(ShapeToID)
 End Sub
 
 
-Sub CreateTextFild(ShapeToID As Long)
+Public Sub CreateTextFild(ShapeToID As Long)
 'Процедура текстового поля
 '---Объявляем переменные
 Dim ShapeTo As Visio.Shape
@@ -246,7 +246,7 @@ End Sub
 
 
 '---------------------------------Обращение в Шторм-------------------------------------
-Sub ImportStormInformation()
+Public Sub ImportStormInformation()
 'Процедура для импорта свойств обекта донора
 '---Объявляем переменные
 Dim IDFrom As Long, IDTo As Long
@@ -295,14 +295,14 @@ End Sub
 
 
 '---------------------------------Обращение в задымленную зону-------------------------------------
-Sub ImportFogInformation()
+Public Sub ImportFogInformation()
 'Процедура для импорта свойств обекта донора
 
 '---Объявляем переменные
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем выбран ли какой либо объект
     If Application.ActiveWindow.Selection.Count < 1 Then
         MsgBox "Не выбрана ни одна фигура!", vbInformation
@@ -341,20 +341,20 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ImportFogInformation"
 End Sub
 
 
 '---------------------------------Обращение в зону обрушения-------------------------------------
-Sub ImportRushInformation()
+Public Sub ImportRushInformation()
 'Процедура для импорта свойств обекта донора
 
 '---Объявляем переменные
 Dim IDFrom As Long, IDTo As Long
 Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проверяем выбран ли какой либо объект
     If Application.ActiveWindow.Selection.Count < 1 Then
         MsgBox "Не выбрана ни одна фигура!", vbInformation
@@ -398,15 +398,75 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
 
 '---Открываем окно свойств обращенной фигуры
-    On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИКИ
+    On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИБКИ
 
     SquareSetInner (ShapeTo.Name)
     Application.DoCmd (1312)
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ImportRushInformation"
 End Sub
+
+'---------------------------------Обращение в расчетную зону-------------------------------------
+Public Sub ImportCalcAreaInformation()
+'Процедура для импорта свойств обекта донора
+
+'---Объявляем переменные
+Dim IDFrom As Long, IDTo As Long
+Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
+
+    On Error GoTo ex
+    
+'---Проверяем выбран ли какой либо объект
+    If Application.ActiveWindow.Selection.Count < 1 Then
+        MsgBox "Не выбрана ни одна фигура!", vbInformation
+        Exit Sub
+    End If
+
+'---Проверяем, не является ли выбранная фигура уже площадью или другой фигурой с назначенными свойствами
+    If Application.ActiveWindow.Selection(1).RowCount(visSectionUser) > 0 Then
+        MsgBox "Выбранная фигура уже имеет специальные свойства и не может быть обращена", vbInformation
+        Exit Sub
+    End If
+
+'---Проверяем Является ли выбранная фигура площадью
+    If Application.ActiveWindow.Selection(1).AreaIU = 0 Then
+        MsgBox "Выбранная фигура не имеет площади и не может быть обращена!", vbInformation
+        Exit Sub
+    End If
+
+'---Присваиваем переменным индексы Фигур(ShapeFrom и ShpeTo)
+    Set ShapeTo = Application.ActiveWindow.Selection(1)
+    Set ShapeFrom = ThisDocument.Masters("Расчетная зона").Shapes(1)
+    IDTo = ShapeTo.ID
+    IDFrom = ThisDocument.Masters("Расчетная зона").Index
+
+'---Создаем необходимый набор пользовательских ячеек для секций User, Prop, Action, Controls
+    CloneSectionUniverseNames 242, IDFrom, IDTo  'User
+    CloneSectionUniverseNames 243, IDFrom, IDTo  'Prop
+
+'---Копируем формулы ячеек для указанных секций
+    CloneSectionUniverseValues 242, IDFrom, IDTo  'User
+    CloneSectionUniverseValues 243, IDFrom, IDTo  'Prop
+    CloneSectionLine IDFrom, IDTo
+    CloneSecFill IDFrom, IDTo
+    CloneSecEvent IDFrom, IDTo
+    CloneSecMiscellanious IDFrom, IDTo
+
+'---Присваиваем номер слоя
+    ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
+
+'---Открываем окно свойств обращенной фигуры
+    On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИБКИ
+    
+Exit Sub
+ex:
+    SaveLog Err, "ImportCalcAreaInformation"
+End Sub
+
+
+
 
 '--------------------------------Получение номера слоя--------------------------------------------------
 Function LayerImport(ShapeFromID As Long, ShapeToID As Long) As String
@@ -464,7 +524,7 @@ Dim i As Integer
 Dim j As Integer
 Dim k As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 '    Set OriginalShp = Application.ActiveWindow.Page.Shapes.ItemFromID(231)
     Set ReplicaShape = Application.ActiveWindow.Page.DrawRectangle(0, 0, 100, 100)
     
@@ -509,7 +569,7 @@ Dim k As Integer
 Set PF_GeometryCopy = ReplicaShape
 
 Exit Function
-EX:
+ex:
     MsgBox "Возникла непредвиденная ошибка! Если она будет повторяться - обратитесь к разработчику", , ThisDocument.Name
     SaveLog Err, "Document_DocumentOpened"
 End Function

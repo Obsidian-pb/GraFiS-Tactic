@@ -306,12 +306,12 @@ End Function
 
 Private Function isCorrectData(ByVal txt As String) As Boolean
 Dim test As Date
-    On Error GoTo EX
+    On Error GoTo ex
     test = CDate(txt)
     
 isCorrectData = True
 Exit Function
-EX:
+ex:
     isCorrectData = False
 End Function
 
@@ -380,7 +380,7 @@ Dim dt As Date
 Dim cntrl As Control
 Dim str As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set cntrl = GetControl(tag)
     dt = CDate(cntrl.value)
@@ -388,7 +388,7 @@ Dim str As String
     
     cntrl.Text = CStr(dt)
 Exit Sub
-EX:
+ex:
     If Err.number = 13 Then
         str = GetControl(tag & ".cpt").Caption
         MsgBox "Не верно указана дата в поле '" & Left(str, Len(str) - 1) & "'"
@@ -436,7 +436,7 @@ Private Sub CheckField(ByVal tag As String)
 Dim cntrl As Control
 Dim str As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set cntrl = GetControl(tag)
     str = cntrl.Text
@@ -448,7 +448,7 @@ Dim str As String
     End If
     
 Exit Sub
-EX:
+ex:
     Debug.Print "Error"
 End Sub
 

@@ -9,22 +9,22 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Public WithEvents comBut As Office.CommandBarButton
-Attribute comBut.VB_VarHelpID = -1
+Public WithEvents ComBut As Office.CommandBarButton
+Attribute ComBut.VB_VarHelpID = -1
 
 
 Private Sub Class_Initialize()
-    Set comBut = Application.CommandBars("Превращения").Controls("Площадь")
+    Set ComBut = Application.CommandBars("Превращения").Controls("Площадь")
 'MsgBox ComBut.Caption
 End Sub
 
 Private Sub Class_Terminate()
-    Set comBut = Nothing
+    Set ComBut = Nothing
 End Sub
 
 Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Проверяем включена ли кнопка - если включена - отключаем
     If Ctrl.State = msoButtonDown Then
@@ -46,13 +46,13 @@ Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As
     End If
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "ComBut_Click"
 End Sub
 
 Public Sub MorphToFireArea()
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Проверяем имеется ли возможность обращения фигуры
 '    If Not CheckSquareShape Then
@@ -65,7 +65,7 @@ Public Sub MorphToFireArea()
     ImportAreaInformation
     
 Exit Sub
-EX:
+ex:
     SaveLog Err, "MorphToFireArea"
 End Sub
 

@@ -148,13 +148,13 @@ End Function
 Public Function IsCellInThisBlock(ByRef cell As c_Cell) As Boolean
 'Проверяем, относится ли пришедшая клетка к коллекции клеток данного блока
 Dim tmpCell As c_Cell
-    On Error GoTo EX
+    On Error GoTo ex
     'Добавить проверку на выход из матрицы!!!
     
     Set tmpCell = extinguishingCells.item(cell.x & ":" & cell.y)
     IsCellInThisBlock = True
 Exit Function
-EX:
+ex:
 '    Debug.Print cell.x * grain & ":" & cell.y * grain
     IsCellInThisBlock = False
 End Function

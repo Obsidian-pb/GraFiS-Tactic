@@ -451,7 +451,7 @@ End Sub
 '-----------------------------Инструменты-------------------------------------------
 Private Function CreateNewCell(ByVal x As Long, ByVal y As Long) As c_Cell
 'Создаем новую клетку
-    On Error GoTo EX
+    On Error GoTo ex
 
 Dim cell As c_Cell
     
@@ -462,7 +462,7 @@ Dim cell As c_Cell
     
 Set CreateNewCell = cell
 Exit Function
-EX:
+ex:
      Debug.Print "err"
 End Function
 

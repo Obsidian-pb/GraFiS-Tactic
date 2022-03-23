@@ -17,11 +17,11 @@ Const cellChangedInterval = 1000
 Dim WithEvents SquareAppEvents As Visio.Application
 Attribute SquareAppEvents.VB_VarHelpID = -1
 
-Dim ButEventFireArea As ClassFireArea, ButEventStorm As ClassStorm, ButEventFog As ClassFog, ButEventRush As ClassRush
+Dim ButEventFireArea As ClassFireArea, ButEventStorm As ClassStorm, ButEventFog As ClassFog, ButEventRush As ClassRush, ButEventCalcArea As ClassCalcArea
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
@@ -67,11 +67,12 @@ Set ButEventFireArea = New ClassFireArea
 Set ButEventStorm = New ClassStorm
 Set ButEventFog = New ClassFog
 Set ButEventRush = New ClassRush
+Set ButEventCalcArea = New ClassCalcArea
 
 '---Добавляем свойство документа "FireTime"
     sm_AddFireTime
 Exit Sub
-EX:
+ex:
     SaveLog Err, "Document_DocumentOpened"
 End Sub
 
@@ -83,6 +84,7 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     Set ButEventStorm = Nothing
     Set ButEventFog = Nothing
     Set ButEventRush = Nothing
+    Set ButEventCalcArea = Nothing
     DeleteButtons
     
 '---Деактивируем объект отслеживания изменений в приложении для 201х версий
@@ -102,7 +104,7 @@ Dim ShpInd As Long '(64) - Площадь пожара
 'Dim shpFire As Visio.Shape 'Фигура Площадь пожара
 
 '---Проверяем не произошло ли событие в мастере
-    On Error GoTo EX
+    On Error GoTo ex
     If cell.Shape.ContainingMasterID >= 0 Then Exit Sub
     
 '---Проверяем имя ячейки
@@ -117,33 +119,9 @@ Dim ShpInd As Long '(64) - Площадь пожара
         '---Запускаем процедуру получения ЗНАЧЕНИЙ факторов пожара для данного описания
         GetFactorsByDescription (ShpInd)
     End If
-    
-'    If cell.Name = "Prop.FireTime" Then
-'        '---Переносим новые данные из шейп личста фигуры в шейп лист документа
-'        Application.ActiveDocument.DocumentSheet.Cells("User.FireTime").FormulaU = _
-'            "DATETIME(" & str(CDbl(cell.Shape.Cells("Prop.FireTime").Result(visDate))) & ")"
-'    End If
-        
-        
-'    ElseIf Cell.Name = "Prop.FireObject" Then
-'        '---Запускаем процедуру получения ЗНФЧЕНИЙ интенсивностей подачи воды объектов пожара
-'        GetIntenseWaterByObject (ShpInd)
-'        '---Запускаем процедуру получения ЗНФЧЕНИЙ линейной скорости для объектов пожара
-'        GetSpeedByObject (ShpInd)
-'    ElseIf Cell.Name = "Prop.FireMaterials" Then
-'        '---Запускаем процедуру получения ЗНФЧЕНИЙ интенсивностей подачи воды горючих материалов
-'        GetIntenseWaterByMaterial (ShpInd)
-'        '---Запускаем процедуру получения ЗНФЧЕНИЙ линейной скорости для материалов пожара
-'        GetSpeedByMaterial (ShpInd)
-'    End If
-    
-    
-    
-'MsgBox Cell.Shape.Index
-'MsgBox Cell.Shape.ID
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
-EX:
+ex:
 End Sub
 
 Public Sub MastersImport()
