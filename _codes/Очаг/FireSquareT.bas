@@ -275,11 +275,15 @@ End Sub
 Public Function IsAcceptableMatrixSize(ByVal maxMatrixSize As Long, ByVal grain As Integer) As Boolean
 Dim xCount As Long
 Dim yCount As Long
-'Dim grain As Integer
+Dim shp As Visio.Shape
 
-    
     On Error GoTo ex
     
+    'ѕровер€ем нет ли на данной страницы фигуры расчетной зоны. ≈сли есть, то определ€ем, что расчет возможен
+    If TryGetShape(shp, "User.IndexPers:1001") Then
+        IsAcceptableMatrixSize = True
+        Exit Function
+    End If
 '    grain = Me.txtGrainSize.value
 
     xCount = ActivePage.PageSheet.Cells("PageWidth").Result(visMillimeters) / grain
