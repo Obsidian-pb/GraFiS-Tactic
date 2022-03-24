@@ -412,7 +412,11 @@ Private Function IsCellCanFire(ByVal x As Long, ByVal y As Long) As Boolean
 'Возвращает Истина, если клетка может гореть и Ложь, если нет
     
     'Проверяем, входит ли клетка в пределы матрицы
-    If x < 0 Or y < 0 Or x > DimensionX Or y > DimensionY Then
+'    If x < 0 Or y < 0 Or x > DimensionX Or y > DimensionY Then
+'        IsCellCanFire = False
+'        Exit Function
+'    End If
+    If IsCellInMatrix(x, y) = False Then
         IsCellCanFire = False
         Exit Function
     End If
@@ -431,6 +435,16 @@ Private Function IsCellCanFire(ByVal x As Long, ByVal y As Long) As Boolean
     End If
     
 End Function
+
+Public Function IsCellInMatrix(ByVal x As Long, ByVal y As Long) As Boolean
+'Проверка на нахождение клетки с такими координатами в матрице
+    If x < 0 Or y < 0 Or x > DimensionX Or y > DimensionY Then
+        IsCellInMatrix = False
+        Exit Function
+    End If
+IsCellInMatrix = True
+End Function
+
 
 Public Function isWall(ByVal x As Long, ByVal y As Long) As Boolean
 'Проверяем, находится ли в указанной клетке стена

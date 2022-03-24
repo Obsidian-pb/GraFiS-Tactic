@@ -65,7 +65,7 @@ Dim shp As Visio.Shape
 '                fireMatrixObject.SetCellValue offsetXC + i + 1, offsetYC + j + 1, mtrCurrentgPowerLayer, 100 ' CellState.csFire
 '                fireMatrixObject.SetFiredCell offsetXC + i + 1, offsetYC + j + 1
                 fireMatrixObject.SetCellValue offsetXC + i, offsetYC + j, mtrCurrentgPowerLayer, 100   ' CellState.csFire
-                fireMatrixObject.SetFiredCell offsetXC + i, offsetYC + j
+                fireMatrixObject.SetFiredCell offsetXC + i, offsetYC + j, 100
                 
 '                Set shp = Application.ActivePage.DrawRectangle(((offsetXC + i) * grain) / mmInInch, ((offsetYC + j) * grain) / mmInInch, _
 '                                                     ((offsetXC + i) * grain + grain) / mmInInch, ((offsetYC + j) * grain + grain) / mmInInch)
@@ -96,3 +96,4 @@ Private Sub AddToFrontCells(ByRef fireMatrixObject As c_Matrix, ByRef cell As c_
     On Error Resume Next
     fireMatrixObject.fireFrontCells.Add cell, cell.x & ":" & cell.y
 End Sub
+

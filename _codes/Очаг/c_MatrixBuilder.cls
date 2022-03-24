@@ -46,7 +46,7 @@ Public Function NewMatrix(ByVal grainVal As Integer) As Variant()
 Dim xCount As Long
 Dim yCount As Long
 Dim arr() As Integer
-Dim areaBuilder As C_MatrixAreaBuilder2
+Dim areaBuilder As C_MatrixAreaBuilder
 
     grain = grainVal
 
@@ -63,13 +63,13 @@ Dim areaBuilder As C_MatrixAreaBuilder2
     If bordreRect Is Nothing Then
         FillMatrixZero      'Заполняем матрицу нолями
     Else
-        Set areaBuilder = New C_MatrixAreaBuilder2
+        Set areaBuilder = New C_MatrixAreaBuilder
 '            areaBuilder.SetForm form
             form.lblMatrixIsBaked.Caption = "Оценка расчетной зоны, подождите"
             form.lblMatrixIsBaked.ForeColor = vbBlack
             DoEvents
             
-            matrix = areaBuilder.FillArea(matrix, bordreRect, grain)
+            matrix = areaBuilder.SetForm(form).FillArea(matrix, bordreRect, grain)
         Set areaBuilder = Nothing
     End If
        
@@ -196,17 +196,18 @@ Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, 
 '                '4 - вниз влево
 '                    checkSingleCell x - 0.5, y - 0.5
                 '1 - вверх влево
-                    checkSingleCell x, y, False, True
+                    CheckSingleCell x, y, False, True
                 '2 - вверх вправо
-                    checkSingleCell x, y, True, True
+                    CheckSingleCell x, y, True, True
                 '3 - вниз вправо
-                    checkSingleCell x, y, True, False
+                    CheckSingleCell x, y, True, False
                 '4 - вниз влево
-                    checkSingleCell x, y, False, False
+                    CheckSingleCell x, y, False, False
 '                Проверяем текущую клетку, т.к. при радиусе = 0 она является атомарной и далее не делится
 '                checkSingleCell x + 0.5, y + 0.5
                 Exit Sub
-            End If
+'            End If
+            Else
             
             'Иначе рекурсивно вызываем проверку четырех входящих квадратов
             radiussHalf = radiuss * 0.5
@@ -218,6 +219,8 @@ Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, 
                 CheckRect x + radiussHalf, y - radiussHalf, radiussHalf
             '4 - вниз влево
                 CheckRect x - radiussHalf, y - radiussHalf, radiussHalf
+            
+            End If
         End If
 Exit Sub
 ex:
@@ -226,7 +229,7 @@ End Sub
 
 
 
-Private Sub checkSingleCell(ByVal x As Integer, ByVal y As Integer, ByVal dirRight As Boolean, ByVal dirUp As Boolean, Optional tolerance As Double = 0)
+Private Sub CheckSingleCell(ByVal x As Integer, ByVal y As Integer, ByVal dirRight As Boolean, ByVal dirUp As Boolean, Optional tolerance As Double = 0)
 'Проверяем наличие стен для единичной (атомарной ячейки)
 Dim xAct As Double
 Dim yAct As Double

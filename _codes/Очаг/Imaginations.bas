@@ -457,6 +457,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 '---Присваиваем номер слоя
     ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
 
+'---Пересмещаем фигуры на задний план
+    ShapeTo.SendToBack
+    
 '---Открываем окно свойств обращенной фигуры
     On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИБКИ
     

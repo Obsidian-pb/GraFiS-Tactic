@@ -188,9 +188,9 @@ Dim borderShape As Visio.Shape
         F_InsertFire.lblCurrentStatus.Caption = "Шаг: " & i & "(" & fireModeller.CurrentStep & "), " & _
                                                 " пройденный путь: " & Round(realDiffDistance, 2) & "(" & Round(realCurrentDistance, 2) & ")м.," & _
                                                 " время: " & Round(diffTime, 2) & "(" & Round(currentTime, 2) & ")мин, " & _
-                                                "Площадь пожара: " & fireModeller.GetFireSquare & "м.кв., " & _
-                                                "Площадь тушения: " & fireModeller.GetExtSquare & "м.кв., " & _
-                                                "Требуемый расход: " & fireModeller.GetExtSquare * fireModeller.intenseNeed & "л/с"
+                                                Chr(13) & "Площадь пожара: " & fireModeller.GetFireSquare & "м.кв., " & _
+                                                Chr(13) & "Площадь тушения: " & fireModeller.GetExtSquare & "м.кв., " & _
+                                                Chr(13) & "Требуемый расход: " & fireModeller.GetExtSquare * fireModeller.intenseNeed & "л/с"
         'Указываем форме настроек время прошедшее с начала моделирования
         F_InsertFire.timeElapsedMain = currentTime
         'Указываем форме настроек путь пройденный с начала моделирования
@@ -222,10 +222,7 @@ Dim borderShape As Visio.Shape
     '---Собственно обращение
     ImportAreaInformation
 '    '---Указываем для фигуры фактическую площадь тушения
-    If fireModeller.GetExtSquare > 0 Then
-'        modelledFireShape.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
-'        modelledFireShape.Cells("Prop.ExtSquareT").Formula = CLng(fireModeller.GetExtSquare)
-        
+    If fireModeller.GetExtSquare > 0 And F_InsertFire.flag_DrawExtSquare.value = True Then
         fireModeller.DrawExtSquareByDemon modelledFireShape
     End If
     'Перемещаем полученные фигуры на задний план
@@ -388,18 +385,17 @@ Private Function IsEven(ByVal number As Integer) As Boolean
 End Function
 
 
-'------------------------------------РАсчет и построение площади тушения------------------------------
-'Public Sub TestExtSquareCalculationRun(ByRef shp As Visio.Shape)
-'    TestExtSquareCalculation
-'End Sub
+'------------------------------------Добавление к площади пожара указанной фигуры------------------------------
+Public Sub AddFireArea(ShpObj As Visio.Shape)
+'Добавление к площади пожара указанной фигуры
+        
+    If Not IsMatrixBacked Then
+        MsgBox "Матрица не запечена!!!"
+        Exit Sub
+    End If
+    
+    'Анализируем фигуру и добавляем зону горения в расчет
+    fireModeller.AddFireFromShape ShpObj
 
-'Public Sub TestExtSquareCalculation()
-''Проверяем работоспособность расчета площади тушения
-'Dim extSquareCalculator As c_ExtSquareCalculator
-'
-'    Set extSquareCalculator = New c_ExtSquareCalculator
-'    extSquareCalculator.grain = grain
-'    extSquareCalculator.SetOpenSpaceLayer fireModeller
-'    extSquareCalculator.RunDemon
-'
-'End Sub
+    MsgBox "Площадь фигуры добавлена к площади горения"
+End Sub

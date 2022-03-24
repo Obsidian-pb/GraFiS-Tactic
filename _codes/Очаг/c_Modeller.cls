@@ -99,6 +99,19 @@ Public Sub SetStartFireCell(ByVal x As Long, ByVal y As Long, Optional value As 
 '        shp.Cells("FillForegnd").FormulaU = "2"
 End Sub
 
+Public Function AddFireFromShape(ByRef fireShape As Visio.Shape) As c_Modeller
+'ƒобавление к площади пожара указанной фигуры
+Dim fireShapeDemon As c_FireShapeDemon
+
+    Set fireShapeDemon = New c_FireShapeDemon
+    '–асчитываем область горени€ фигуры
+    fireShapeDemon.setGrain(grain).SetFireShape(fireShape).RunDemon matrix
+
+    Set fireShapeDemon = Nothing
+    
+Set AddFireFromShape = Me
+End Function
+
 Public Sub ActivateNozzles(ByRef frm As Object)
     Set nozzleDemon = New c_FireNozzlesDemon
     nozzleDemon.SetForm(frm).setGrain = grain
@@ -230,7 +243,12 @@ Private Sub Attack(ByVal x As Long, ByVal y As Long)
 'јтакуем указанной клеткой все соседние в соовтествии с мощностью горени€ и весами распространени€
 Dim firePower As Double
 'GetFirePower
-
+    
+    '0 ѕровер€ем находитс€ ли клетка на листе
+    If matrix.IsCellInMatrix(x, y) = False Then
+        Exit Sub
+    End If
+    
     '1 получаем мощность горени€ клетки
     firePower = matrix.GetFirePower(x, y)
     
@@ -508,13 +526,10 @@ Dim tmpVal As Single
         tmpVal = 0
     End If
     
-    
-'    tmpVal = extSquare.GetSquare
-'    If tmpVal = 0 Then
-'        GetExtSquare = GetFireSquare
-'    Else
-        GetExtSquare = tmpVal
-'    End If
+    If tmpVal = 0 Then
+        tmpVal = GetFireSquare
+    End If
+    GetExtSquare = tmpVal
 End Function
 
 Public Function GetOpenSpaceLayer() As Variant
@@ -601,6 +616,10 @@ Dim squareShapesCol As Collection
 
 '    Set squareShapesCol = New Collection
     
+    'ѕровер€ем активен ли построитель площадей тушени€
+    If extSquare.extinguishingBlocks.Count = 0 Then
+        Exit Sub
+    End If
     
     ClearLayer "ExtSquare"
     

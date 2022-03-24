@@ -76,7 +76,7 @@ Dim extSquareCalculator As c_ExtSquareCalculator
         Exit Sub
     End If
     
-    'Собственно запускаем расет и построение
+    'Собственно запускаем расчет и построение
     Set extSquareCalculator = New c_ExtSquareCalculator
     extSquareCalculator.SetOpenSpaceLayer fireModeller
     extSquareCalculator.RunDemon fireShape
