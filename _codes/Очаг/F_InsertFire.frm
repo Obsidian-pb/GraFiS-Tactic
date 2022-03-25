@@ -378,6 +378,9 @@ Private Sub UserForm_Activate()
         Me.txtGrainSize.value = 200
     End If
     
+    
+'    VmD_TimeStart = Application.act
+    
 End Sub
 
 Private Sub sf_ObjectTypesListRefresh()

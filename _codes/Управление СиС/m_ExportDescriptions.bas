@@ -289,11 +289,14 @@ End Sub
 'End Sub
 
 Public Function getCallName(ByRef shp As Visio.Shape) As String
+'Dim txt As String
     On Error GoTo ex
-    getCallName = shp.Cells("Prop.Call").ResultStr(visUnitsString)
+    getCallName = "-"
+    getCallName = shp.Cells("Prop.Unit").ResultStr(visUnitsString)
+    getCallName = getCallName & "(" & shp.Cells("Prop.Call").ResultStr(visUnitsString) & ")"
 Exit Function
 ex:
-    getCallName = "-"
+'    getCallName = "-"
 End Function
 'Public Sub getSetTime(ByRef shp As Visio.Shape)
 '    On Error GoTo ex

@@ -5,12 +5,14 @@ Option Explicit
 
 Public Sub Sm_ShapeFormShow(ShpObj As Visio.Shape)
 'Процедура показвает форму добавления площадей горения в соответствии с заданными показателями
+Dim timeStart As Date
 
     On Error GoTo ex
 '---Определяем стартовые значения формы
+    timeStart = ActiveDocument.DocumentSheet.Cells("User.FireTime").ResultStr(0)
 '    F_InsertFire.TB_Time.Value = ShpObj.Cells("Prop.FireTime").ResultStr(visDate)
     F_InsertFire.TB_Time.value = ActiveDocument.DocumentSheet.Cells("User.CurrentTime").ResultStr(0)
-    F_InsertFire.TB_Duration.value = DateDiff("n", ActiveDocument.DocumentSheet.Cells("User.FireTime").Result(visDate), _
+    F_InsertFire.TB_Duration.value = DateDiff("n", timeStart, _
                                         ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate))
     F_InsertFire.TB_Radius.value = Round(ShpObj.Shapes.item(4).Cells("Width").Result(visMeters), 2)
 
@@ -18,7 +20,8 @@ Public Sub Sm_ShapeFormShow(ShpObj As Visio.Shape)
     F_InsertFire.Vfl_TargetShapeID = ShpObj.ID
 
 '---Указываем объекту формы, стартовую дату
-    F_InsertFire.VmD_TimeStart = ActiveDocument.DocumentSheet.Cells("User.FireTime").Result(visDate)
+'    F_InsertFire.VmD_TimeStart = ActiveDocument.DocumentSheet.Cells("User.FireTime").Result(visDate)
+    F_InsertFire.VmD_TimeStart = timeStart
     F_InsertFire.FireTime.Caption = "Начало пожара: " & ActiveDocument.DocumentSheet.Cells("User.FireTime").ResultStr(0)
 
 '---Показываем форму

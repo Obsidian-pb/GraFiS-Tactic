@@ -228,7 +228,7 @@ Dim borderShape As Visio.Shape
     'Перемещаем полученные фигуры на задний план
     modelledFireShape.SendToBack
     
-    'Перемещаем фигуру расетной зоны (при ее наличии) на задний план
+    'Перемещаем фигуру расчетной зоны (при ее наличии) на задний план
     If TryGetShape(borderShape, "User.IndexPers:1001") Then
         borderShape.SendToBack
     End If
