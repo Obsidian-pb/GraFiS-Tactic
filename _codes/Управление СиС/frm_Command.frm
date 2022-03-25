@@ -35,13 +35,13 @@ Private Sub UserForm_Activate()
 '    Me.txt_CommandText.Text = GetCurrentTime & delimiter
 End Sub
 
-Public Sub NewCommand()
+Public Sub NewCommand(Optional ByVal m As String = "2", Optional ByVal cmnd As String = "")
     If Application.ActiveWindow.Selection.Count <> 1 Then Exit Sub
     
     Set shp = Application.ActiveWindow.Selection(1)
     targetCellName = ""
     
-    Me.txt_CommandText.text = GetCurrentTime & delimiter & "2" & delimiter
+    Me.txt_CommandText.text = GetCurrentTime & delimiter & m & delimiter & cmnd
     
     Me.Show
 End Sub

@@ -16,7 +16,7 @@ Dim f As frm_ListForm
     
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
-    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+    For Each shp In a.Refresh(Application.ActivePage.Index).GFSShapes
         If pf_IsMainTechnics(cellval(shp, "User.IndexPers")) Then
             AddUniqueCollectionItem units, shp
         End If
@@ -75,13 +75,13 @@ Dim pr As String
     
     
     '---Получаем список имеющихся пожарных частей
-    A.Refresh Application.ActivePage.Index
-    Set unitsList = SortCol(A.GFSShapes, "Prop.Unit", False, visUnitsString)
+    a.Refresh Application.ActivePage.Index
+    Set unitsList = SortCol(a.GFSShapes, "Prop.Unit", False, visUnitsString)
     Set unitsList = GetUniqueVals(unitsList, _
                                  "Prop.Unit", , " ", " ")
 
     '---Получаем список всех боевых позиций
-    Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave;Prop.Personnel")
+    Set positions = FilterShapes(a.GFSShapes, "Prop.PersonnelHave;Prop.Personnel")
     '---Сортируем
     Set positions = SortCol(positions, "Prop.ArrivalTime;Prop.LineTime;Prop.SetTime;Prop.FormingTime;Prop.SquareTime;Prop.FireTime", False, visDate)
     
@@ -103,7 +103,7 @@ Dim pr As String
             
             '---Получаем список позывных техники данного подразделения
             callsList = StrColToStr(GetUniqueVals( _
-                                        FilterShapesAnd(A.GFSShapes, "Prop.PersonnelHave:;Prop.Unit:" & unitName), _
+                                        FilterShapesAnd(a.GFSShapes, "Prop.PersonnelHave:;Prop.Unit:" & unitName), _
                                         "Prop.Call", , , " "), ", ")
             '---Получаем перечень боевых позиций для данного подразделения
             Set unitPositions = FilterShapes(positions, "Prop.Unit:" & unitName)
@@ -152,7 +152,7 @@ Dim f As frm_ListForm
     
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
-    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+    For Each shp In a.Refresh(Application.ActivePage.Index).GFSShapes
         If pf_IsStvols(cellval(shp, "User.IndexPers")) Then
             AddUniqueCollectionItem units, shp
         End If
@@ -208,7 +208,7 @@ Dim f As frm_ListForm
     
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
-    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+    For Each shp In a.Refresh(Application.ActivePage.Index).GFSShapes
         If pf_IsGDZS(cellval(shp, "User.IndexPers")) Then
             AddUniqueCollectionItem units, shp
         End If
@@ -262,7 +262,7 @@ Dim f As frm_ListForm
     
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
-    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+    For Each shp In a.Refresh(Application.ActivePage.Index).GFSShapes
         If pf_IsTimeLine(shp) Then
             AddUniqueCollectionItem units, shp
         End If
@@ -314,7 +314,7 @@ Dim f As frm_ListForm
     
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
-    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+    For Each shp In a.Refresh(Application.ActivePage.Index).GFSShapes
         If IsGFSShapeWithIP(shp, indexPers.ipStatist) Then
             AddUniqueCollectionItem units, shp
         End If
