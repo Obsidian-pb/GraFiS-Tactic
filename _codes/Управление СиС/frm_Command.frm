@@ -17,13 +17,15 @@ Attribute VB_Exposed = False
 Private shp As Visio.Shape
 Private targetCellName As String
 
+Public isOk As Boolean
 
 
 
 
 
-
-
+Private Sub UserForm_Initialize()
+    AddTimeFlag = False
+End Sub
 
 Private Sub UserForm_Activate()
 '    If Application.ActiveWindow.Selection.Count <> 1 Then Exit Sub
@@ -103,7 +105,7 @@ Dim targetCellNameShort As String
         
         'Здесь в будущем можно будет указывать иконку самой строки команды
 '        shp.CellsSRC(visSectionAction, rowA, visActionButtonFace).Formula = 346
-        
+               
     Else
         shp.Cells(targetCellName).Formula = """" & FixText(Me.txt_CommandText) & """"
         targetCellNameShort = Split(targetCellName, ".")(1)
@@ -111,10 +113,11 @@ Dim targetCellNameShort As String
     End If
     
 
-    
+    Me.isOk = True
     Me.Hide
 End Sub
 Private Sub btn_Cancel_Click()
+    Me.isOk = False
     Me.Hide
 End Sub
 
@@ -196,3 +199,14 @@ Dim smartTagRowIndex As Integer
     End If
 
 End Sub
+
+Public Function GetCommandTime() As Integer
+    
+    On Error GoTo ex
+    GetCommandTime = Split(Me.txt_CommandText, delimiter)(1)
+    
+Exit Function
+ex:
+    GetCommandTime = 0
+End Function
+

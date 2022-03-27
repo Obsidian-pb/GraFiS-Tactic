@@ -64,45 +64,43 @@ ex:
 End Sub
 
 Private Sub CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As Visio.Shape)
-'Dim t As String
     
     If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)) Then
         Select Case cellval(child, "user.IndexPers")
-            Case Is = indexPers.ipStvolRuch
-                t = AskTimeDiff
-                frm_Command.NewCommand t, "Подать ствол "
-            Case Is = indexPers.ipGDZSZvenoVozd
-                t = AskTimeDiff("1")
-                frm_Command.NewCommand t, "Сформировать звено ГДЗС"
-            Case Is = indexPers.ipGDZSPost
-                t = AskTimeDiff("1")
-                frm_Command.NewCommand t, "Выставить пост безопасности ГДЗС"
-            Case Is = indexPers.ipLestn3Kol
-                t = AskTimeDiff("2")
-                frm_Command.NewCommand t, "Установить трехколенную лестницу"
-            Case Is = indexPers.ipLestnPalka
-                t = AskTimeDiff("1")
-                frm_Command.NewCommand t, "Установить лестницу-палку"
-            Case Is = indexPers.ipLestnSturm
-                t = AskTimeDiff("1")
-                frm_Command.NewCommand t, "Установить штурмовую лестницу"
-            Case Is = indexPers.ipRazvetvlenie
-                t = AskTimeDiff("3")
-                frm_Command.NewCommand t, "Проложить магистральную рукавную линию, установить разветвление"
+            Case Is = indexpers.ipStvolRuch
+                frm_Command.NewCommand "2", "Подать ствол "
+                If frm_Command.isOk Then
+                    setcellval parent, "Actions.Patrub.Checked", 1
+                End If
+            Case Is = indexpers.ipGDZSZvenoVozd
+                frm_Command.NewCommand "1", "Сформировать звено ГДЗС"
+            Case Is = indexpers.ipGDZSPost
+                frm_Command.NewCommand "1", "Выставить пост безопасности ГДЗС"
+            Case Is = indexpers.ipLestn3Kol
+                frm_Command.NewCommand "2", "Установить трехколенную лестницу"
+            Case Is = indexpers.ipLestnPalka
+                frm_Command.NewCommand "1", "Установить лестницу-палку"
+            Case Is = indexpers.ipLestnSturm
+                frm_Command.NewCommand "1", "Установить штурмовую лестницу"
+            Case Is = indexpers.ipRazvetvlenie
+                frm_Command.NewCommand "3", "Проложить магистральную рукавную линию, установить разветвление"
+            Case Is = indexpers.ipKolonka
+                frm_Command.NewCommand "2", "Установить автомобиль на ПГ"
+                If frm_Command.isOk Then
+                    setcellval parent, "Actions.WaterCollect.Checked", 1
+                End If
             Case Else
                 t = "0"
         End Select
-    Else
-        t = "0"
     End If
     
     
 End Sub
 
-Private Function AskTimeDiff(Optional ByVal d As String = "2") As String
-'Запрашиваем у пользователя время требуемое на выполнение команды
-    AskTimeDiff = InputBox("Сколько времени требуется на выполнение данной команды?", , d)
-End Function
+'Private Function AskTimeDiff(Optional ByVal d As String = "2") As String
+''Запрашиваем у пользователя время требуемое на выполнение команды
+'    AskTimeDiff = InputBox("Сколько времени требуется на выполнение данной команды?", , d)
+'End Function
 
 
 ' Служебные функции
@@ -136,24 +134,21 @@ Dim tmpDateTime As Double
 Dim tmpDateTimeS As String
     On Error Resume Next
     
-'    tmpDateTime = cellval(mainShp, "Prop.SetTime", visDate) + _
-'                    cellval(mainShp, "Prop.ArrivalTime", visDate) + _
-'                    cellval(mainShp, "Prop.FormingTime", visDate)
-'    tmpDateTime = DateAdd("n", Int(t), tmpDateTime)
     
     tmpDateTime = GetGFSShapeTime(mainShp)
-    tmpDateTime = DateAdd("n", Int(t), tmpDateTime)
+'    tmpDateTime = DateAdd("n", Int(t), tmpDateTime)
+    tmpDateTime = DateAdd("n", frm_Command.GetCommandTime, tmpDateTime)
                     
     If tmpDateTime > 0 Then
-        SetCellVal shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)
-        SetCellVal shp, "Prop.Call", cellval(mainShp, "Prop.Call", visUnitsString)
+        setcellval shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)
+        setcellval shp, "Prop.Call", cellval(mainShp, "Prop.Call", visUnitsString)
     
     
         'Временно отключил, т.к. выяснилось, что на правктике удобнее работать с текущим временем схемы
         If shp.CellExists("User.InPage", 0) = 0 Then
             shp.AddNamedRow visSectionUser, "InPage", visRowUser
-            SetCellVal shp, "User.InPage", 1
-            SetCellVal shp, "User.InPage.Prompt", "+"
+            setcellval shp, "User.InPage", 1
+            setcellval shp, "User.InPage.Prompt", "+"
         End If
     'Временно отключил, т.к. выяснилось, что на правктике удобнее работать с текущим временем схемы
         tmpDateTimeS = ToTimeString(tmpDateTime)

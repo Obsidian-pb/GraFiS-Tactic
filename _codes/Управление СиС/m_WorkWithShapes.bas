@@ -48,20 +48,20 @@ Public Sub CheckEnd(ByRef shp As Visio.Shape, ByVal t As Date)
 '    End Select
     Select Case GetTactState(shp)
         Case Is = tactState.tsInProgress
-            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 346
-            SetCellVal shp, "SmartTags.GFS_Commands.Description", "Выполняет поставленные задачи"
+            setcellval shp, "SmartTags.GFS_Commands.ButtonFace", 346
+            setcellval shp, "SmartTags.GFS_Commands.Description", "Выполняет поставленные задачи"
         Case Is = tactState.tsWaiting
-            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 1089
-            SetCellVal shp, "SmartTags.GFS_Commands.Description", "Ожидает команд"
+            setcellval shp, "SmartTags.GFS_Commands.ButtonFace", 1089
+            setcellval shp, "SmartTags.GFS_Commands.Description", "Ожидает команд"
         Case Is = tactState.tsEnd
-            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 1088  ' 840
-            SetCellVal shp, "SmartTags.GFS_Commands.Description", "Закончил работу на пожаре (убыл)"
+            setcellval shp, "SmartTags.GFS_Commands.ButtonFace", 1088  ' 840
+            setcellval shp, "SmartTags.GFS_Commands.Description", "Закончил работу на пожаре (убыл)"
         Case Is = tactState.tsNotStarted
-            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 2743
-            SetCellVal shp, "SmartTags.GFS_Commands.Description", "Выполнение не началось"
+            setcellval shp, "SmartTags.GFS_Commands.ButtonFace", 2743
+            setcellval shp, "SmartTags.GFS_Commands.Description", "Выполнение не началось"
         Case Is = tactState.tsError
-            SetCellVal shp, "SmartTags.GFS_Commands.ButtonFace", 463
-            SetCellVal shp, "SmartTags.GFS_Commands.Description", "ОШИБКА - проверьте корректность данных"
+            setcellval shp, "SmartTags.GFS_Commands.ButtonFace", 463
+            setcellval shp, "SmartTags.GFS_Commands.Description", "ОШИБКА - проверьте корректность данных"
     End Select
 
 End Sub

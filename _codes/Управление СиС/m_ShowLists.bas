@@ -315,7 +315,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
     For Each shp In a.Refresh(Application.ActivePage.Index).GFSShapes
-        If IsGFSShapeWithIP(shp, indexPers.ipStatist) Then
+        If IsGFSShapeWithIP(shp, indexpers.ipStatist) Then
             AddUniqueCollectionItem units, shp
         End If
     Next shp
