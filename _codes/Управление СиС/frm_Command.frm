@@ -37,10 +37,15 @@ Private Sub UserForm_Activate()
 '    Me.txt_CommandText.Text = GetCurrentTime & delimiter
 End Sub
 
-Public Sub NewCommand(Optional ByVal m As String = "2", Optional ByVal cmnd As String = "")
+Public Sub NewCommand(Optional ByRef shp_a As Visio.Shape = Nothing, Optional ByVal m As String = "2", Optional ByVal cmnd As String = "")
     If Application.ActiveWindow.Selection.Count <> 1 Then Exit Sub
     
-    Set shp = Application.ActiveWindow.Selection(1)
+    If shp_a Is Nothing Then
+        Set shp = Application.ActiveWindow.Selection(1)
+    Else
+        Set shp = shp_a
+    End If
+    
     targetCellName = ""
     
     Me.txt_CommandText.text = GetCurrentTime & delimiter & m & delimiter & cmnd

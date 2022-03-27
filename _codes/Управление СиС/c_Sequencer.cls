@@ -68,24 +68,24 @@ Private Sub CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As Visio
     If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)) Then
         Select Case cellval(child, "user.IndexPers")
             Case Is = indexpers.ipStvolRuch
-                frm_Command.NewCommand "2", "Подать ствол "
+                frm_Command.NewCommand parent, "2", "Подать ствол "
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.Patrub.Checked", 1
                 End If
             Case Is = indexpers.ipGDZSZvenoVozd
-                frm_Command.NewCommand "1", "Сформировать звено ГДЗС"
+                frm_Command.NewCommand parent, "1", "Сформировать звено ГДЗС"
             Case Is = indexpers.ipGDZSPost
-                frm_Command.NewCommand "1", "Выставить пост безопасности ГДЗС"
+                frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС"
             Case Is = indexpers.ipLestn3Kol
-                frm_Command.NewCommand "2", "Установить трехколенную лестницу"
+                frm_Command.NewCommand parent, "2", "Установить трехколенную лестницу"
             Case Is = indexpers.ipLestnPalka
-                frm_Command.NewCommand "1", "Установить лестницу-палку"
+                frm_Command.NewCommand parent, "1", "Установить лестницу-палку"
             Case Is = indexpers.ipLestnSturm
-                frm_Command.NewCommand "1", "Установить штурмовую лестницу"
+                frm_Command.NewCommand parent, "1", "Установить штурмовую лестницу"
             Case Is = indexpers.ipRazvetvlenie
-                frm_Command.NewCommand "3", "Проложить магистральную рукавную линию, установить разветвление"
+                frm_Command.NewCommand parent, "3", "Проложить магистральную рукавную линию, установить разветвление"
             Case Is = indexpers.ipKolonka
-                frm_Command.NewCommand "2", "Установить автомобиль на ПГ"
+                frm_Command.NewCommand parent, "2", "Установить автомобиль на ПГ"
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.WaterCollect.Checked", 1
                 End If
