@@ -90,7 +90,6 @@ End Function
 Private Sub CheckRect(ByVal x As Long, ByVal y As Long, ByVal radiuss As Integer)
 'Здесь radiuss - в зернах!!!!
 Dim radiussHalf As Integer
-'Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, что бы гарантировать проверку всей площади квадрата - переводит длину пришедшего радиуса (являющегося половиной длины квадрата) к радиусу круга описывающего квадрат, в идеале равен 1,4142135623731
 
     On Error GoTo ex
     Dim shp As Visio.Shape
@@ -106,7 +105,7 @@ Dim radiussHalf As Integer
 '            shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
 '            shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
 '
-'            DoEvents
+            DoEvents
 
             Exit Sub
         End If
@@ -125,7 +124,7 @@ Dim radiussHalf As Integer
 '                shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
 '                shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
 ''
-'                DoEvents
+                DoEvents
         Else
             If radiuss = 1 Then
                 form.AddCheckedSize 1, 1
@@ -156,7 +155,7 @@ Dim radiussHalf As Integer
         End If
 Exit Sub
 ex:
-    Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
+'    Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
 End Sub
 
 Private Sub CheckSingleCell(ByVal x As Integer, ByVal y As Integer, Optional tolerance As Double = 0)

@@ -61,19 +61,19 @@ Dim fireTime As Date
     'Заполняем таблицу описания боевых действий
     If comColSorted.Count > 0 Then
         r = 1
-        a.Refresh Application.ActivePage.Index, curTime
+        A.Refresh Application.ActivePage.Index, curTime
 '        fireTime = A.Result("FireTime")     'Не слишкои надежно
         fireTime = cellval(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
         curTime = comColSorted(1).time
         '---Вставка первой записи
 '        wrdTblRow = wrdTbl.Rows(r)
         wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, curTime)
-        wrdTbl.Rows(r).Cells(3).Range.text = Round(a.Result("NeedStreamW"), 1)
-        wrdTbl.Rows(r).Cells(4).Range.text = a.Result("StvolWBHave")
-        wrdTbl.Rows(r).Cells(5).Range.text = a.Result("StvolWAHave")
-        wrdTbl.Rows(r).Cells(6).Range.text = a.Result("StvolWLHave")
-        wrdTbl.Rows(r).Cells(7).Range.text = a.Result("StvolFoamHave")
-        wrdTbl.Rows(r).Cells(8).Range.text = Round(a.Result("FactStreamW"), 1)
+        wrdTbl.Rows(r).Cells(3).Range.text = Round(A.Result("NeedStreamW"), 1)
+        wrdTbl.Rows(r).Cells(4).Range.text = A.Result("StvolWBHave")
+        wrdTbl.Rows(r).Cells(5).Range.text = A.Result("StvolWAHave")
+        wrdTbl.Rows(r).Cells(6).Range.text = A.Result("StvolWLHave")
+        wrdTbl.Rows(r).Cells(7).Range.text = A.Result("StvolFoamHave")
+        wrdTbl.Rows(r).Cells(8).Range.text = Round(A.Result("FactStreamW"), 1)
 '        r = r + 1
         
         
@@ -81,19 +81,19 @@ Dim fireTime As Date
             Set com = comColSorted(i)
             'Если время текущей фигуры больше чем время предыдущей - обновляем канализатор
             If curTime <> com.time Then
-                a.Refresh Application.ActivePage.Index, com.time
+                A.Refresh Application.ActivePage.Index, com.time
                 '---Вставка записей начиная со второй (при условии их изменения)
 '                r = r + 1
                 r = wrdTbl.Rows.Add().Index
                 
 '                wrdTblRow = wrdTbl.Rows(r)
                 wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, com.time)
-                wrdTbl.Rows(r).Cells(3).Range.text = Round(a.Result("NeedStreamW"), 1)
-                wrdTbl.Rows(r).Cells(4).Range.text = a.Result("StvolWBHave")
-                wrdTbl.Rows(r).Cells(5).Range.text = a.Result("StvolWAHave")
-                wrdTbl.Rows(r).Cells(6).Range.text = a.Result("StvolWLHave")
-                wrdTbl.Rows(r).Cells(7).Range.text = a.Result("StvolFoamHave")
-                wrdTbl.Rows(r).Cells(8).Range.text = Round(a.Result("FactStreamW"), 1)
+                wrdTbl.Rows(r).Cells(3).Range.text = Round(A.Result("NeedStreamW"), 1)
+                wrdTbl.Rows(r).Cells(4).Range.text = A.Result("StvolWBHave")
+                wrdTbl.Rows(r).Cells(5).Range.text = A.Result("StvolWAHave")
+                wrdTbl.Rows(r).Cells(6).Range.text = A.Result("StvolWLHave")
+                wrdTbl.Rows(r).Cells(7).Range.text = A.Result("StvolFoamHave")
+                wrdTbl.Rows(r).Cells(8).Range.text = Round(A.Result("FactStreamW"), 1)
                 
                 curTime = comColSorted(i).time
             End If
@@ -152,7 +152,7 @@ Dim f As frm_ListForm
     
     'Заполняем таблицу описания боевых действий
     If comColSorted.Count > 0 Then
-        a.Refresh Application.ActivePage.Index, curTime
+        A.Refresh Application.ActivePage.Index, curTime
         
         fireTime = cellval(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
 '        fireTime = A.Result("FireTime")
@@ -170,7 +170,11 @@ Dim f As frm_ListForm
                 curTime = comColSorted(i).time
                 
                 myArray(i, 0) = com.shp.ID
-                myArray(i, 1) = "Ч+" & DateDiff("n", fireTime, curTime)
+                If DateDiff("n", fireTime, curTime) < 2000 Then
+                    myArray(i, 1) = "Ч+" & DateDiff("n", fireTime, curTime)
+                Else
+                    myArray(i, 1) = Format(curTime, "HH:MM")
+                End If
                 
                 If com.sdType = 1 Then
                     myArray(i, 3) = com.text

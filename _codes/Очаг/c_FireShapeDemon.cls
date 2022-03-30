@@ -64,8 +64,10 @@ Dim shp As Visio.Shape
             If fireShp.HitTest(x, y, 0) > 0 Then
 '                fireMatrixObject.SetCellValue offsetXC + i + 1, offsetYC + j + 1, mtrCurrentgPowerLayer, 100 ' CellState.csFire
 '                fireMatrixObject.SetFiredCell offsetXC + i + 1, offsetYC + j + 1
-                fireMatrixObject.SetCellValue offsetXC + i, offsetYC + j, mtrCurrentgPowerLayer, 100   ' CellState.csFire
+'                if fireMatrixObject.is
+'                fireMatrixObject.SetCellValue offsetXC + i, offsetYC + j, mtrCurrentgPowerLayer, 100   ' CellState.csFire
                 fireMatrixObject.SetFiredCell offsetXC + i, offsetYC + j, 100
+                
                 
 '                Set shp = Application.ActivePage.DrawRectangle(((offsetXC + i) * grain) / mmInInch, ((offsetYC + j) * grain) / mmInInch, _
 '                                                     ((offsetXC + i) * grain + grain) / mmInInch, ((offsetYC + j) * grain + grain) / mmInInch)
@@ -75,8 +77,9 @@ Dim shp As Visio.Shape
         Next j
     Next i
     
-    '4 - Определяем клетки фронта фигуры
+    '4 - Определяем клетки фронта и периметра фигуры
     For Each cell In fireMatrixObject.firedCells
+        'Фронт пожара
         If Not fireMatrixObject.IsInner(cell.x, cell.y) Then
             AddToFrontCells fireMatrixObject, cell          'Добавляем клетку в коллекцию клеток фронта пожара
 
@@ -86,14 +89,22 @@ Dim shp As Visio.Shape
 '                                                     shp.Cells("FillForegnd").Formula = 2
 '                                                     shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("FireFront")
         End If
+        'Периметр пожара
+        If Not fireMatrixObject.IsNotPerimeter(cell.x, cell.y) Then
+            AddToPerimeterCells fireMatrixObject, cell          'Добавляем клетку в коллекцию клеток фронта пожара
+        End If
     Next cell
     
 End Sub
 
 
 Private Sub AddToFrontCells(ByRef fireMatrixObject As c_Matrix, ByRef cell As c_Cell)
-'Добавляем клетку в коллекцию клеток периметра. Если же клетка с указанным ключем уже имеется - выходим
+'Добавляем клетку в коллекцию клеток фронта пожара. Если же клетка с указанным ключем уже имеется - выходим
     On Error Resume Next
     fireMatrixObject.fireFrontCells.Add cell, cell.x & ":" & cell.y
 End Sub
-
+Private Sub AddToPerimeterCells(ByRef fireMatrixObject As c_Matrix, ByRef cell As c_Cell)
+'Добавляем клетку в коллекцию клеток периметра. Если же клетка с указанным ключем уже имеется - выходим
+    On Error Resume Next
+    fireMatrixObject.firePerimeterCells.Add cell, cell.x & ":" & cell.y
+End Sub

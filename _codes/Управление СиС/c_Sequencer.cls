@@ -47,9 +47,11 @@ Dim mainShp As Visio.Shape
         Set mainShp = GetGraFisShape(shp)
         If Not mainShp Is Nothing Then
             '---Добавляем команду
-            CheckAndAddCommand mainShp, shp
+            If CheckAndAddCommand(mainShp, shp) Then
+                GetShpData mainShp, shp
+            End If
             
-            GetShpData mainShp, shp
+            
             
 '            frm_Command.NewCommand
             
@@ -63,9 +65,12 @@ ex:
     Debug.Print ("None")
 End Sub
 
-Private Sub CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As Visio.Shape)
+Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As Visio.Shape) As Boolean
     
-    If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)) Then
+    CheckAndAddCommand = False
+    
+    'Техника (+разветвление временно)
+    If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42)) Then
         Select Case cellval(child, "user.IndexPers")
             Case Is = indexpers.ipStvolRuch
                 frm_Command.NewCommand parent, "2", "Подать ствол "
@@ -76,6 +81,8 @@ Private Sub CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As Visio
                 frm_Command.NewCommand parent, "1", "Сформировать звено ГДЗС"
             Case Is = indexpers.ipGDZSPost
                 frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС"
+            Case Is = indexpers.ipKPP
+                frm_Command.NewCommand parent, "1", "Организовать работу КПП ГДЗС"
             Case Is = indexpers.ipLestn3Kol
                 frm_Command.NewCommand parent, "2", "Установить трехколенную лестницу"
             Case Is = indexpers.ipLestnPalka
@@ -84,6 +91,9 @@ Private Sub CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As Visio
                 frm_Command.NewCommand parent, "1", "Установить штурмовую лестницу"
             Case Is = indexpers.ipRazvetvlenie
                 frm_Command.NewCommand parent, "3", "Проложить магистральную рукавную линию, установить разветвление"
+                If frm_Command.isOk Then
+                    setcellval parent, "Actions.Patrub.Checked", 1
+                End If
             Case Is = indexpers.ipKolonka
                 frm_Command.NewCommand parent, "2", "Установить автомобиль на ПГ"
                 If frm_Command.isOk Then
@@ -92,10 +102,33 @@ Private Sub CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As Visio
             Case Else
                 t = "0"
         End Select
+        CheckAndAddCommand = True
+'    Else
+'        t = "0"
+'        CheckAndAddCommand = False
+    End If
+    
+    'Звенья ГДЗС
+    If IsGFSShapeWithIP(parent, Array(46, 90)) Then
+        Select Case cellval(child, "user.IndexPers")
+            Case Is = indexpers.ipStvolRuch
+                frm_Command.NewCommand parent, "2", "Звеном ГДЗС подать ствол "
+                If frm_Command.isOk Then
+                    setcellval parent, "Actions.Patrub.Checked", 1
+                End If
+            Case Is = indexpers.ipGDZSPost
+                frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС"
+            Case Else
+                t = "0"
+        End Select
+        CheckAndAddCommand = True
+'    Else
+'        t = "0"
+'        CheckAndAddCommand = False
     End If
     
     
-End Sub
+End Function
 
 'Private Function AskTimeDiff(Optional ByVal d As String = "2") As String
 ''Запрашиваем у пользователя время требуемое на выполнение команды
@@ -107,26 +140,43 @@ End Sub
 Private Function GetGraFisShape(shp As Visio.Shape) As Visio.Shape
 ' Ищем фигуру на которую была наложена текущая (shp) и если эта фигура является фигурой ГраФиС, возвращаем ее
 Dim tmpShp As Visio.Shape
-Dim sel As Visio.Selection
+'Dim sel As Visio.Selection
+'
+'    Set sel = Application.ActivePage.SpatialSearch(cellval(shp, "PinX", visInches), cellval(shp, "PinY", visInches), _
+'                                                    VisSpatialRelationCodes.visSpatialTouching + VisSpatialRelationCodes.visSpatialContainedIn, _
+'                                                    0, _
+'                                                    visSpatialFrontToBack + visSpatialIgnoreVisible)
+'    For Each tmpShp In sel
+'        If Not (tmpShp.ID = shp.ID) Then
+'            ' if shape is grafis shape
+'            If IsGFSShape(tmpShp) Then
+'                ' if not fire or fog
+'                If Not IsGFSShapeWithIP(shp, Array(64, 71)) Then
+'                    Set GetGraFisShape = tmpShp
+'                    Exit Function
+'                End If
+'            End If
+'        End If
+'    Next tmpShp
     
-    Set sel = Application.ActivePage.SpatialSearch(cellval(shp, "PinX", visInches), cellval(shp, "PinY", visInches), _
-                                                    VisSpatialRelationCodes.visSpatialTouching + VisSpatialRelationCodes.visSpatialContainedIn, _
-                                                    0, _
-                                                    visSpatialFrontToBack + visSpatialIgnoreVisible)
-    For Each tmpShp In sel
+    
+'    Dim OtherShape As Visio.Shape
+    For Each tmpShp In Application.ActivePage.Shapes
+'        If IsCorrectShapeForLabel(tmpShp) Then 'And OtherShape.CellExists("User.Version", 0) = True Then
         If Not (tmpShp.ID = shp.ID) Then
-            ' if shape is grafis shape
-            If IsGFSShape(shp) Then
-                ' if not fire or fog
-                If Not IsGFSShapeWithIP(shp, Array(64, 71)) Then
-                    Set GetGraFisShape = tmpShp
-                    Exit Function
+            If IsGFSShape(tmpShp) Then
+                If tmpShp.HitTest(cellval(shp, "PinX", visInches), cellval(shp, "PinY", visInches), 10) >= 1 Then
+                    If Not IsGFSShapeWithIP(shp, Array(64, 71)) Then
+                        Set GetGraFisShape = tmpShp
+    '                    Exit Function
+                    End If
                 End If
             End If
         End If
+
     Next tmpShp
     
-Set GetGraFisShape = Nothing
+'Set GetGraFisShape = Nothing
 End Function
 
 Private Function GetShpData(ByRef mainShp As Visio.Shape, shp As Visio.Shape) As Variant
@@ -144,18 +194,18 @@ Dim tmpDateTimeS As String
         setcellval shp, "Prop.Call", cellval(mainShp, "Prop.Call", visUnitsString)
     
     
-        'Временно отключил, т.к. выяснилось, что на правктике удобнее работать с текущим временем схемы
-        If shp.CellExists("User.InPage", 0) = 0 Then
-            shp.AddNamedRow visSectionUser, "InPage", visRowUser
-            setcellval shp, "User.InPage", 1
-            setcellval shp, "User.InPage.Prompt", "+"
+        If frm_Command.isOk Then
+            'Передаем фигуре время родительской, если на форме команды был нажат "Ок"
+            If shp.CellExists("User.InPage", 0) = 0 Then
+                shp.AddNamedRow visSectionUser, "InPage", visRowUser
+                setcellval shp, "User.InPage", 1
+                setcellval shp, "User.InPage.Prompt", "+"
+            End If
+
+            tmpDateTimeS = ToTimeString(tmpDateTime)
+            SetCellFrml shp, "Prop.SetTime", tmpDateTimeS
+            SetCellFrml shp, "Prop.FormingTime", tmpDateTimeS
         End If
-    'Временно отключил, т.к. выяснилось, что на правктике удобнее работать с текущим временем схемы
-        tmpDateTimeS = ToTimeString(tmpDateTime)
-    '    SetCellVal shp, "Prop.SetTime", tmpDateTimeS
-    '    SetCellVal shp, "Prop.FormingTime", tmpDateTimeS
-        SetCellFrml shp, "Prop.SetTime", tmpDateTimeS
-        SetCellFrml shp, "Prop.FormingTime", tmpDateTimeS
     End If
     
 End Function

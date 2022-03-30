@@ -64,7 +64,6 @@ Dim areaBuilder As C_MatrixAreaBuilder
         FillMatrixZero      'Заполняем матрицу нолями
     Else
         Set areaBuilder = New C_MatrixAreaBuilder
-'            areaBuilder.SetForm form
             form.lblMatrixIsBaked.Caption = "Оценка расчетной зоны, подождите"
             form.lblMatrixIsBaked.ForeColor = vbBlack
             DoEvents
@@ -224,7 +223,7 @@ Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, 
         End If
 Exit Sub
 ex:
-    Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
+'    Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
 End Sub
 
 

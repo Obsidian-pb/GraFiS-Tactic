@@ -43,9 +43,15 @@ Private Sub BuildConturLine(ByRef perimeterCellsCollection As Collection)
 Dim cell As c_Cell
 Dim shp As Visio.Shape
     
+'    ClearLayer "Пространство"
+    
     For Each cell In perimeterCellsCollection
         BuildConturElement cell
         
+'        Set shp = Application.ActivePage.DrawRectangle((cell.x * grain) / mmInInch, (cell.y * grain) / mmInInch, _
+'                        ((cell.x + 1) * grain) / mmInInch, ((cell.y + 1) * grain) / mmInInch)
+'                shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Пространство")
+'                shp.CellsSRC(visSectionObject, visRowLine, visLineWeight).FormulaU = "0.1 pt"
     Next cell
 End Sub
 
