@@ -1,9 +1,9 @@
 Attribute VB_Name = "m_ExportDescriptions"
 Option Explicit
 
-Private exl As Object ' Excel.Application
-Private wkbk As Object '  Excel.Workbook
-Private wkst As Object '  Excel.Worksheet
+'Private exl As Object ' Excel.Application
+'Private wkbk As Object '  Excel.Workbook
+'Private wkst As Object '  Excel.Worksheet
 Private cmndID As Integer
 
 
@@ -66,27 +66,27 @@ Dim fireTime As Date
         fireTime = cellval(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
         curTime = comColSorted(1).time
         '---Вставка первой записи
-'        wrdTblRow = wrdTbl.Rows(r)
-        wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, curTime)
+        If DateDiff("n", fireTime, curTime) < 2000 Then
+            wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, curTime)
+        Else
+            wrdTbl.Rows(r).Cells(1).Range.text = Format(curTime, "HH:MM")
+        End If
         wrdTbl.Rows(r).Cells(3).Range.text = Round(A.Result("NeedStreamW"), 1)
         wrdTbl.Rows(r).Cells(4).Range.text = A.Result("StvolWBHave")
         wrdTbl.Rows(r).Cells(5).Range.text = A.Result("StvolWAHave")
         wrdTbl.Rows(r).Cells(6).Range.text = A.Result("StvolWLHave")
         wrdTbl.Rows(r).Cells(7).Range.text = A.Result("StvolFoamHave")
         wrdTbl.Rows(r).Cells(8).Range.text = Round(A.Result("FactStreamW"), 1)
-'        r = r + 1
         
         
         For i = 1 To comColSorted.Count
             Set com = comColSorted(i)
-            'Если время текущей фигуры больше чем время предыдущей - обновляем канализатор
+            'Если время текущей фигуры больше чем время предыдущей - обновляем анализатор
             If curTime <> com.time Then
                 A.Refresh Application.ActivePage.Index, com.time
                 '---Вставка записей начиная со второй (при условии их изменения)
-'                r = r + 1
                 r = wrdTbl.Rows.Add().Index
                 
-'                wrdTblRow = wrdTbl.Rows(r)
                 wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, com.time)
                 wrdTbl.Rows(r).Cells(3).Range.text = Round(A.Result("NeedStreamW"), 1)
                 wrdTbl.Rows(r).Cells(4).Range.text = A.Result("StvolWBHave")
@@ -99,16 +99,12 @@ Dim fireTime As Date
             End If
             
             If com.sdType = 1 Then
-'                Debug.Print wrdTbl.Rows(r).Cells(9).Range.text
-'                Debug.Print Len(wrdTbl.Rows(r).Cells(9).Range.text)
-'                Debug.Print Asc(wrdTbl.Rows(r).Cells(9).Range.text)
                 If Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 13 Then
                     wrdTbl.Rows(r).Cells(9).Range.text = com.text
                 Else
                     wrdTbl.Rows(r).Cells(9).Range.text = wrdTbl.Rows(r).Cells(9).Range.text & Chr(10) & com.text
                 End If
             Else
-'                wrdTbl.Rows(r).Cells(2).Range.text = wrdTbl.Rows(r).Cells(2).Range.text & Chr(10) & com.text
                 If Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 13 Then
                     wrdTbl.Rows(r).Cells(2).Range.text = com.text
                 Else
@@ -199,32 +195,6 @@ End Sub
 
 
 
-
-'Public Sub Export()
-'
-'
-'Dim shp As Visio.Shape
-'
-'
-'    Set exl = CreateObject("Excel.Application")   ' New Excel.Application
-'    Set wkbk = exl.Workbooks.Add()
-'    Set wkst = exl.ActiveSheet
-'    exl.visible = True
-'
-'    rowNumber = 1
-'    For Each shp In Application.ActivePage.Shapes
-'        fillCommand shp
-'    Next shp
-'
-''    rowNumber = 1
-''    For Each shp In Application.ActivePage.Shapes
-''        getSetTime shp
-''
-'''        rowNumber = rowNumber + 1
-''    Next shp
-'
-'End Sub
-
 Private Sub checkCommands(ByRef comCol As Collection, ByRef shp As Visio.Shape)
 Dim i As Integer
 Dim rowName As String
@@ -262,62 +232,27 @@ ex:
 
 End Sub
 
-'Private Sub fillCommand(ByRef shp As Visio.Shape)
-'Dim i As Integer
-'Dim rowName As String
-'Dim comTime As String
-'Dim comText As String
-'Dim comArr() As String
-'
-'    On Error GoTo ex
-'
-'    For i = 0 To shp.RowCount(visSectionUser) - 1
-'        rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
-'        If Len(rowName) > 12 Then
-'            If left(rowName, 12) = "GFS_Command_" Then
-'                comArr = Split(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), delimiter)
-'                wkst.Cells(rowNumber, 1) = comArr(0)
-'                wkst.Cells(rowNumber, 2) = getCallName(shp) & " " & comArr(UBound(comArr))
-'
-'                rowNumber = rowNumber + 1
-'            End If
-'        End If
-'
-'
-'    Next i
-'
-'
-'Exit Sub
-'ex:
-'
-'End Sub
+
 
 Public Function getCallName(ByRef shp As Visio.Shape) As String
-'Dim txt As String
+Dim txt As String
+
     On Error GoTo ex
-    getCallName = "-"
-    getCallName = shp.Cells("Prop.Unit").ResultStr(visUnitsString)
-    getCallName = getCallName & "(" & shp.Cells("Prop.Call").ResultStr(visUnitsString) & ")"
+    getCallName = ""
+    'Подразделение
+    txt = shp.Cells("Prop.Unit").ResultStr(visUnitsString)
+    If Not txt = "" Then
+        getCallName = txt
+    End If
+    'Позывной
+    txt = shp.Cells("Prop.Call").ResultStr(visUnitsString)
+    If Not txt = "" Then
+        getCallName = getCallName & "(" & txt & ")"
+    End If
+    
 Exit Function
 ex:
-'    getCallName = "-"
+    getCallName = "-"
 End Function
-'Public Sub getSetTime(ByRef shp As Visio.Shape)
-'    On Error GoTo ex
-'    If shp.Cells("User.IndexPers").Result(visNumber) = 34 Then
-'        wkst.Cells(rowNumber, 4) = shp.Cells("Prop.SetTime").ResultStr(visDate)
-'        wkst.Cells(rowNumber, 5) = shp.Cells("User.DiameterIn").ResultStr(visUnitsString)
-'        rowNumber = rowNumber + 1
-'    End If
-'    If shp.Cells("User.IndexPers").Result(visNumber) = 36 Then
-'        wkst.Cells(rowNumber, 4) = shp.Cells("Prop.SetTime").ResultStr(visDate)
-'        wkst.Cells(rowNumber, 5) = shp.Cells("User.DiameterIn").ResultStr(visUnitsString)
-'        rowNumber = rowNumber + 1
-'    End If
-'
-'
-'Exit Sub
-'ex:
-'
-'End Sub
+
 

@@ -1,6 +1,7 @@
 Attribute VB_Name = "m_ShowLists"
 Option Explicit
 
+Public ctrlOn As Boolean
 
 '-------------------Модуль для отображения списков (Подразделения, Свтолы и т.д.)---------------------
 Public Sub ShowUnits()
@@ -315,7 +316,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
     For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
-        If IsGFSShapeWithIP(shp, indexpers.ipStatist) Then
+        If IsGFSShapeWithIP(shp, indexPers.ipStatist) Then
             AddUniqueCollectionItem units, shp
         End If
     Next shp

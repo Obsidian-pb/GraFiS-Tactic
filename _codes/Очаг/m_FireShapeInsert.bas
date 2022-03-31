@@ -6,10 +6,12 @@ Option Explicit
 Public Sub Sm_ShapeFormShow(ShpObj As Visio.Shape)
 'Процедура показвает форму добавления площадей горения в соответствии с заданными показателями
 Dim timeStart As Date
+Dim time1Stvol As Date
 
     On Error GoTo ex
 '---Определяем стартовые значения формы
     timeStart = ActiveDocument.DocumentSheet.Cells("User.FireTime").ResultStr(0)
+    time1Stvol = CellVal(Application.ActiveDocument.DocumentSheet, "User.FirstStvolTime", visDate)
 '    F_InsertFire.TB_Time.Value = ShpObj.Cells("Prop.FireTime").ResultStr(visDate)
     F_InsertFire.TB_Time.value = ActiveDocument.DocumentSheet.Cells("User.CurrentTime").ResultStr(0)
     F_InsertFire.TB_Duration.value = DateDiff("n", timeStart, _
@@ -23,6 +25,12 @@ Dim timeStart As Date
 '    F_InsertFire.VmD_TimeStart = ActiveDocument.DocumentSheet.Cells("User.FireTime").Result(visDate)
     F_InsertFire.VmD_TimeStart = timeStart
     F_InsertFire.FireTime.Caption = "Начало пожара: " & ActiveDocument.DocumentSheet.Cells("User.FireTime").ResultStr(0)
+'---Указываем объекту формы, дату подачи 1 ствола
+    If Not time1Stvol = 0 Then
+        F_InsertFire.VmD_Time1Stvol = time1Stvol
+        F_InsertFire.FireTime.Caption = F_InsertFire.FireTime.Caption & _
+            " | Подача 1 ствола: " & CellVal(Application.ActiveDocument.DocumentSheet, "User.FirstStvolTime", visUnitsString)
+    End If
 
 '---Показываем форму
     F_InsertFire.Show

@@ -50,11 +50,8 @@ Dim callName As String
     comArr = Split(infoText, delimiter)
     time = CDate(comArr(0))
     callName = getCallName(comShp)
-'    If callName = "-" Then
-        text = comArr(1)
-'    Else
-'        text = getCallName(comShp) & callName_text & comArr(1)
-'    End If
+
+    text = comArr(1)
     
     sd_Type = 0     'Info
     

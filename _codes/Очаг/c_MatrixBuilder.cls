@@ -223,7 +223,7 @@ Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, 
         End If
 Exit Sub
 ex:
-'    Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
+    Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
 End Sub
 
 

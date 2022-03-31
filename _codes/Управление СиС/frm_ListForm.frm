@@ -106,6 +106,13 @@ Private Sub Stretch()
 End Sub
 
 
+'Почему то не работает - возможно стоит потом разобраться. Как то очень криво работает эта функция...
+Private Sub LB_List_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+    If KeyCode = 17 Then ctrlOn = True
+End Sub
+Private Sub LB_List_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+    If KeyCode = 17 Then ctrlOn = False
+End Sub
 
 Private Sub UserForm_Resize()
     Stretch
@@ -154,9 +161,16 @@ Dim shpID As Long
     
     On Error GoTo ex
     
-    'Выделояем фигуру
+'---Выделяем фигуру
     shpID = Me.LB_List.Column(0, Me.LB_List.ListIndex)
-    Application.ActiveWindow.Select Application.ActivePage.Shapes.ItemFromID(shpID), visDeselectAll + visSelect
+    '---Если нажат Ctrl, то выделяем имеющиеся фигуры
+    If ctrlOn Then
+        Me.LB_List.MultiSelect = 1 'Потом разобраться почему не работает!
+        Application.ActiveWindow.Select Application.ActivePage.Shapes.ItemFromID(shpID), visSelect
+    Else
+        Me.LB_List.MultiSelect = 0
+        Application.ActiveWindow.Select Application.ActivePage.Shapes.ItemFromID(shpID), visDeselectAll + visSelect
+    End If
     
 ex:
 End Sub
@@ -313,6 +327,9 @@ Dim s As String
     
     wrdTbl.AutoFitBehavior 1        'Устанавливаем ширину столбцов по содержимому
 End Sub
+
+
+
 
 
 

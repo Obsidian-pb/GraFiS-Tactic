@@ -155,7 +155,7 @@ Dim radiussHalf As Integer
         End If
 Exit Sub
 ex:
-'    Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
+    Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
 End Sub
 
 Private Sub CheckSingleCell(ByVal x As Integer, ByVal y As Integer, Optional tolerance As Double = 0)

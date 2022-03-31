@@ -282,6 +282,6 @@ Dim tmpVal As Integer
 GetCornerLen = tmpVal
 End Function
 
-Private Function IsOdd(ByVal value As Integer) As Boolean
-    IsOdd = value / 2 = Int(value / 2)
+Private Function isOdd(ByVal value As Integer) As Boolean
+    isOdd = value / 2 = Int(value / 2)
 End Function

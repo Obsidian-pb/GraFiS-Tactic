@@ -11,6 +11,20 @@ Option Explicit
 
 'Private WithEvents app As Visio.Application
 Private sequencer As c_Sequencer
+Private WithEvents app As Visio.Application
+Attribute app.VB_VarHelpID = -1
+
+
+
+
+Private Sub app_KeyDown(ByVal KeyCode As Long, ByVal KeyButtonState As Long, CancelDefault As Boolean)
+    If KeyCode = 17 Then ctrlOn = True
+End Sub
+Private Sub app_KeyUp(ByVal KeyCode As Long, ByVal KeyButtonState As Long, CancelDefault As Boolean)
+    If KeyCode = 17 Then ctrlOn = False
+End Sub
+
+
 
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
@@ -33,6 +47,9 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Активируем автоматизатор временных свойств фигур ГраФиС
     ActivateSequencer
     
+'---Получаем ссылку на приложение
+    Set app = Visio.Application
+    
 '---Проверяем наличие обновлений
     fmsgCheckNewVersion.CheckUpdates
 
@@ -43,6 +60,8 @@ Private Sub Document_BeforeDocumentClose(ByVal doc As IVDocument)
     DeActivateSequencer
 '---Скрываем панель управления РТП
     RemoveTB
+'---Удаляем ссылку на приложение
+    Set app = Nothing
 End Sub
 
 Private Sub AddTimeUserCells()

@@ -36,9 +36,6 @@ End Sub
 
 
 ' Процедуры функционала приложения
-'Private Sub app_AppActivated(ByVal app As IVApplication)
-'
-'End Sub
 Private Sub app_ShapeAdded(ByVal shp As IVShape)
 Dim mainShp As Visio.Shape
     On Error GoTo ex
@@ -72,33 +69,35 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
     'Техника (+разветвление временно)
     If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42)) Then
         Select Case cellval(child, "user.IndexPers")
-            Case Is = indexpers.ipStvolRuch
+            Case Is = indexPers.ipStvolRuch
                 frm_Command.NewCommand parent, "2", "Подать ствол "
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.Patrub.Checked", 1
                 End If
-            Case Is = indexpers.ipGDZSZvenoVozd
+            Case Is = indexPers.ipGDZSZvenoVozd
                 frm_Command.NewCommand parent, "1", "Сформировать звено ГДЗС"
-            Case Is = indexpers.ipGDZSPost
+            Case Is = indexPers.ipGDZSPost
                 frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС"
-            Case Is = indexpers.ipKPP
+            Case Is = indexPers.ipKPP
                 frm_Command.NewCommand parent, "1", "Организовать работу КПП ГДЗС"
-            Case Is = indexpers.ipLestn3Kol
+            Case Is = indexPers.ipLestn3Kol
                 frm_Command.NewCommand parent, "2", "Установить трехколенную лестницу"
-            Case Is = indexpers.ipLestnPalka
+            Case Is = indexPers.ipLestnPalka
                 frm_Command.NewCommand parent, "1", "Установить лестницу-палку"
-            Case Is = indexpers.ipLestnSturm
+            Case Is = indexPers.ipLestnSturm
                 frm_Command.NewCommand parent, "1", "Установить штурмовую лестницу"
-            Case Is = indexpers.ipRazvetvlenie
+            Case Is = indexPers.ipRazvetvlenie
                 frm_Command.NewCommand parent, "3", "Проложить магистральную рукавную линию, установить разветвление"
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.Patrub.Checked", 1
                 End If
-            Case Is = indexpers.ipKolonka
+            Case Is = indexPers.ipKolonka
                 frm_Command.NewCommand parent, "2", "Установить автомобиль на ПГ"
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.WaterCollect.Checked", 1
                 End If
+            Case Is = indexPers.ipStab
+                frm_Command.NewCommand parent, "1", "Сформировать оперативный штаб пожаротушения"
             Case Else
                 t = "0"
         End Select
@@ -111,12 +110,12 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
     'Звенья ГДЗС
     If IsGFSShapeWithIP(parent, Array(46, 90)) Then
         Select Case cellval(child, "user.IndexPers")
-            Case Is = indexpers.ipStvolRuch
+            Case Is = indexPers.ipStvolRuch
                 frm_Command.NewCommand parent, "2", "Звеном ГДЗС подать ствол "
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.Patrub.Checked", 1
                 End If
-            Case Is = indexpers.ipGDZSPost
+            Case Is = indexPers.ipGDZSPost
                 frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС"
             Case Else
                 t = "0"

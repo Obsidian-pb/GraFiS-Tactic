@@ -14,6 +14,9 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
                 CellVal = shp.Cells(cellName).ResultStr(dataType)
             Case Is = visDate
                 CellVal = shp.Cells(cellName).Result(dataType)
+                If CellVal = 0 Then
+                    CellVal = CDate(shp.Cells(cellName).ResultStr(visUnitsString))
+                End If
             Case Else
                 CellVal = shp.Cells(cellName).Result(dataType)
         End Select

@@ -85,7 +85,7 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     'End If
     '
 '---Учитываем, что фигура может быть местом
-'    Debug.Print Application.ActiveWindow.Selection(1).Name
+    Debug.Print Application.ActiveWindow.Selection(1).Name
     If Application.ActiveWindow.Selection(1).CellExists("User.visObjectType", 0) Then
         If Application.ActiveWindow.Selection(1).Cells("User.visObjectType") = 104 Then
             PF_GeometryCopy Application.ActiveWindow.Selection(1)

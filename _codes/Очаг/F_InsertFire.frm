@@ -17,6 +17,7 @@ Option Explicit
 
 Public Vfl_TargetShapeID As Long
 Public VmD_TimeStart As Date
+Public VmD_Time1Stvol As Date
 'Private VfB_NotShowPropertiesWindow As Boolean      'Возможно стоит удалить
 Private vfStr_ObjList() As String
 
@@ -345,6 +346,7 @@ Private Sub UserForm_Initialize()
     sf_ObjectTypesListRefresh
     sf_ObjectsListRefresh
     sf_FireFormLoad
+    sf_StvolsOptionsLoad
     
 End Sub
 
@@ -530,6 +532,15 @@ Private Sub sf_FireFormLoad()
         .ListIndex = 0
     End With
 
+End Sub
+
+Private Sub sf_StvolsOptionsLoad()
+'Определяем список опций учета стволов
+    With Me.CB_StvolsOptions
+        .AddItem "всех стволов"
+        .AddItem "первого поданного ствола"
+        .ListIndex = 0
+    End With
 End Sub
 
 

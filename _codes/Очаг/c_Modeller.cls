@@ -242,6 +242,7 @@ End Sub
 Private Sub Attack(ByVal x As Long, ByVal y As Long)
 'Атакуем указанной клеткой все соседние в соовтествии с мощностью горения и весами распространения
 Dim firePower As Double
+Dim delta1Stvol As Date
 'GetFirePower
     
     '0 Проверяем находится ли клетка на листе
@@ -257,19 +258,31 @@ Dim firePower As Double
         Exit Sub
     End If
     
-    '3 Проверяем четность хода, время прошедшее с начала пожара (более 10 минут) и подачу воды на тушение
-    If Not extSquare Is Nothing Then
-        Select Case extSquare.IsCellExtinguished(x, y)
-            Case Is = WaterExpenseKind.notSet               'Вода не подается или клетка не находится в зоне тушения
-                'Ничего не делаем - идем дальше и строим как ни в чем не бывало
-            Case Is = WaterExpenseKind.notSufficient        'Воды подается недостаточно - считаем только каждый второй раз
-                If Int(step / 2) = step / 2 And time > 10 Then
+    '3 Проверяем какой вариант расчета поданных стволов выбран
+'Это все следует обрабатывать в построителе площади тушения (Если выбрана опчия ТОЛЬКО ПЕРВЫЙ СТВОЛ, то площадь тушения оприори считается от всего фронта пожара)
+'    If F_InsertFire.CB_StvolsOptions.Text = "первого поданного ствола" Then
+'        '3.1 Проверяем находится ли текущее расчетное время в диапазоне 10 минут - время подачи 1 ствола (ВП1) и исходя из этого считаем распространение
+'        ' Для работы текущее время должно быть больше 10 и меньше дельты подачи первого ствола (с момента начала пожара)
+'        delta1Stvol = DateDiff("n", F_InsertFire.VmD_TimeStart, F_InsertFire.VmD_Time1Stvol)
+'        If time > 10 And time < delta1Stvol And isOdd(step) Then
+'            Exit Sub
+'        End If
+'    Else
+        '3.2 Проверяем четность хода, время прошедшее с начала пожара (более 10 минут) и подачу воды на тушение
+        If Not extSquare Is Nothing Then
+            Select Case extSquare.IsCellExtinguished(x, y)
+                Case Is = WaterExpenseKind.notSet               'Вода не подается или клетка не находится в зоне тушения
+                    'Ничего не делаем - идем дальше и строим как ни в чем не бывало
+                Case Is = WaterExpenseKind.notSufficient        'Воды подается недостаточно - считаем только каждый второй раз
+                    If isOdd(step) And time > 10 Then
+                        Exit Sub
+                    End If
+                Case Is = WaterExpenseKind.sufficient           'Воды поджается достаточно - не рассчитываем далее
                     Exit Sub
-                End If
-            Case Is = WaterExpenseKind.sufficient           'Воды поджается достаточно - не рассчитываем далее
-                Exit Sub
-        End Select
-    End If
+            End Select
+        End If
+'    End If
+
     
     '4 Атакуем соседние клетки
     'по диагонали

@@ -210,6 +210,11 @@ ex:
     SaveLog Err, "m_Tools.IsGFSShapeWithIP"
 End Function
 
+Public Function isOdd(ByVal val As Double) As Boolean
+'Проверяем четность значения val
+    isOdd = Int(val / 2) = val / 2
+End Function
+
 
 '--------------------------------Проверка возможности обращения фигур---------------------
 Public Function IsSelectedOneShape(ShowMessage As Boolean) As Boolean
