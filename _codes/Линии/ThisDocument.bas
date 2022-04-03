@@ -144,9 +144,7 @@ Dim Con2 As Visio.Connect
 End Sub
 
 Private Sub sp_TemplatesImport()
-
-Visio.Application.ActivePage.Drop ThisDocument.Masters("ВсасывающийРукав"), 0, 0
-
+    Visio.Application.ActivePage.Drop ThisDocument.Masters("ВсасывающийРукав"), 0, 0
 End Sub
 
 
