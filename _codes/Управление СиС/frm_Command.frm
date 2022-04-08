@@ -37,7 +37,7 @@ Private Sub UserForm_Activate()
 '    Me.txt_CommandText.Text = GetCurrentTime & delimiter
 End Sub
 
-Public Sub NewCommand(Optional ByRef shp_a As Visio.Shape = Nothing, Optional ByVal m As String = "2", Optional ByVal cmnd As String = "")
+Public Sub NewCommand(Optional ByRef shp_a As Visio.Shape = Nothing, Optional ByVal m As String = "2", Optional ByVal cmnd As String = "", Optional currentTime As Boolean = True)
     If Application.ActiveWindow.Selection.Count <> 1 Then Exit Sub
     
     If shp_a Is Nothing Then
@@ -48,7 +48,12 @@ Public Sub NewCommand(Optional ByRef shp_a As Visio.Shape = Nothing, Optional By
     
     targetCellName = ""
     
-    Me.txt_CommandText.text = GetCurrentTime & delimiter & m & delimiter & cmnd
+    'Если указано опция установки текущего времени, то ставим текущее время схемы, иначе - получаем последнее активное время выбранной фигуры
+    If currentTime Then
+        Me.txt_CommandText.text = GetCurrentTime & delimiter & m & delimiter & cmnd
+    Else
+        Me.txt_CommandText.text = getShpTime(shp) & delimiter & m & delimiter & cmnd
+    End If
     
     Me.Show
 End Sub
@@ -168,7 +173,7 @@ Dim str As String
     If Len(str) < l Then
         GetCommandText = str
     Else
-        GetCommandText = left(str, l) & "..."
+        GetCommandText = Left(str, l) & "..."
     End If
 
 Exit Function
@@ -182,6 +187,18 @@ Exit Function
 ex:
     GetRowIndex = -1
 End Function
+
+'Private Function GetShapeTime(ByRef shp As Visio.Shape) As String
+'Dim shp As Visio.Shape
+    
+'    If Application.ActiveWindow.Selection.Count = 0 Then
+'        Set shp = Application.ActiveWindow.Selection(1)
+'        GetShapeTime = getShpTime(shp)
+'    Else
+'        GetShapeTime = GetCurrentTime
+'        Exit Function
+'    End If
+'End Function
 
 Private Sub TryDeleteSmartTag(stName As String, rowName As String)
 'stName - название смарт-тега, rowName - название строки смарт-тега в секции SmartTags
@@ -213,5 +230,50 @@ Public Function GetCommandTime() As Integer
 Exit Function
 ex:
     GetCommandTime = 0
+End Function
+
+Public Function GetCommandTextDate(ByVal cmnd_txt As String) As Date
+' Получаем строку команды и возвращаем врем окончания ее выполнения
+Dim arr() As String
+Dim tm As Date
+Dim m As Integer
+
+'    On Error GoTo ex
+    
+    arr = Split(cmnd_txt, delimiter)
+    tm = arr(0)
+    If IsNumeric(arr(1)) Then
+        m = arr(1)
+    Else
+        m = 0
+    End If
+    
+    GetCommandTextDate = DateAdd("n", m, tm)
+    
+Exit Function
+ex:
+    GetCommandTextDate = GetCurrentTime
+End Function
+
+Private Function getShpTime(ByRef shp As Visio.Shape) As String
+'Возвращаем время окончания выполнения всех команд фигурой. Если команд нет, возвращаем время фигуры
+Dim tm As Date
+Dim tm_temp As Date
+    
+'    On Error GoTo ex
+    
+    tm = GetGFSShapeTime(shp)
+    
+    For i = 0 To shp.RowCount(visSectionUser) - 1
+        If Left(shp.CellsSRC(visSectionUser, i, 0).Name, 17) = "User.GFS_Command_" Then
+            tm_temp = GetCommandTextDate(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString))
+            If tm_temp > tm Then tm = tm_temp
+        End If
+    Next i
+
+getShpTime = tm
+Exit Function
+ex:
+    getShpTime = GetCurrentTime
 End Function
 

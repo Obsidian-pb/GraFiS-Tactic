@@ -205,7 +205,7 @@ Dim cmnd As c_SimpleDescription
     For i = 0 To shp.RowCount(visSectionUser) - 1
         rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
         If Len(rowName) > 9 Then
-            If left(rowName, 12) = "GFS_Command_" Then
+            If Left(rowName, 12) = "GFS_Command_" Then
                 Set cmnd = New c_SimpleDescription
                 cmnd.Activate shp, shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), CStr(cmndID)
                 AddUniqueCollectionItem comCol, cmnd
@@ -214,7 +214,7 @@ Dim cmnd As c_SimpleDescription
                 cmndID = cmndID + 1
             End If
             
-            If left(rowName, 9) = "GFS_Info_" Then
+            If Left(rowName, 9) = "GFS_Info_" Then
                 Set cmnd = New c_SimpleDescription
                 cmnd.ActivateAsInfo shp, shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), CStr(cmndID)
                 AddUniqueCollectionItem comCol, cmnd

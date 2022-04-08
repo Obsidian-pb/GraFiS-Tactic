@@ -11,6 +11,19 @@ Dim v_Major As Double
     GetScaleAt200 = (v_Major / v_Minor) / 200
 End Function
 
+Public Function GetGFSShapeTime(ByRef shp As Visio.Shape) As Double
+    
+    GetGFSShapeTime = cellval(shp, "Prop.SetTime", visDate)
+    If GetGFSShapeTime > 0 Then Exit Function
+    
+    GetGFSShapeTime = cellval(shp, "Prop.FormingTime", visDate)
+    If GetGFSShapeTime > 0 Then Exit Function
+    
+    GetGFSShapeTime = cellval(shp, "Prop.ArrivalTime", visDate)
+    If GetGFSShapeTime > 0 Then Exit Function
+
+GetGFSShapeTime = 0
+End Function
 
 
 '--------------------------------Сохранение лога ошибки-------------------------------------

@@ -404,3 +404,9 @@ Public Sub AddFireArea(ShpObj As Visio.Shape)
     MsgBox "Площадь фигуры добавлена к площади горения." & Chr(13) & Chr(13) & _
             "ОБРАТИТЕ ВНИМАНИЕ, что выбранная фигура сохранится на листе и будет учитыватья при анализе! Чтобы избежать этого, удалите ее!"
 End Sub
+
+Public Sub FixateExtSquare(shp As Visio.Shape)
+' Фиксация текущей площади тушения
+    On Error Resume Next
+    SetCellFrml shp, "Prop.ExtSquareT", CellVal(shp, "Prop.ExtSquareT")
+End Sub

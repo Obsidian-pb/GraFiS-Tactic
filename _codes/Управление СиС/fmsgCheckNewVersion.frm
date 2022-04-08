@@ -98,7 +98,7 @@ Dim firstString As String
 Dim secondString As String
 
     firstString = CStr(a_version)
-    secondString = left(firstString, 2) & "." & Mid(firstString, 3, 1) & "." & Right(firstString, 2)
+    secondString = Left(firstString, 2) & "." & Mid(firstString, 3, 1) & "." & Right(firstString, 2)
     
     VersionToMaskString = secondString
     

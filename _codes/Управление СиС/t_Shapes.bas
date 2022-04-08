@@ -90,10 +90,10 @@ Dim number As Integer
     For i = 0 To shp.RowCount(visSectionUser) - 1
         rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
         If Len(rowName) > 9 Then
-            If left(rowName, 12) = "GFS_Command_" Then
+            If Left(rowName, 12) = "GFS_Command_" Then
                 cur = Int(Right(rowName, Len(rowName) - 12))
             End If
-            If left(rowName, 9) = "GFS_Info_" Then
+            If Left(rowName, 9) = "GFS_Info_" Then
                 cur = Int(Right(rowName, Len(rowName) - 9))
             End If
             If cur > number Then number = cur
