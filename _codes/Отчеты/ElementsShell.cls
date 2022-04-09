@@ -170,15 +170,15 @@ Private Sub fillElemCollection()
     AddNewElement "AllHosesWithPos", "Все рабочие рукавные линии с подписями положения", , True, , False, False
     
     'Временные показатели
-    AddNewElement "FireTime", "Время возникновения пожара", , , "Prop.FireTime", True
-    AddNewElement "FindTime", "Время обнаружения пожара", , , "Prop.FindTime", True
-    AddNewElement "InfoTime", "Время сообщения о пожаре", , , "Prop.InfoTime", True
-    AddNewElement "FirstArrivalTime", "Время прибытия первого подразделения", , , "Prop.FirstArrivalTime", True
-    AddNewElement "FirstStvolTime", "Время подачи первого ствола", , , "Prop.FirstStvolTime", True
-    AddNewElement "LocalizationTime", "Время локализации", , , "Prop.LocalizationTime", True
-    AddNewElement "LOGTime", "Время ликвидации открытого горения", , , "Prop.LOGTime", True
-    AddNewElement "LPPTime", "Время ликвидации последствий пожара", , , "Prop.LPPTime", True
-    AddNewElement "FireEndTime", "Время окончания пожара", , , "Prop.FireEndTime", True
+    AddNewElement "FireTime", "Время возникновения пожара", , , "Prop.FireTime", True, False
+    AddNewElement "FindTime", "Время обнаружения пожара", , , "Prop.FindTime", True, False
+    AddNewElement "InfoTime", "Время сообщения о пожаре", , , "Prop.InfoTime", True, False
+    AddNewElement "FirstArrivalTime", "Время прибытия первого подразделения", , , "Prop.FirstArrivalTime", True, False
+    AddNewElement "FirstStvolTime", "Время подачи первого ствола", , , "Prop.FirstStvolTime", True, False
+    AddNewElement "LocalizationTime", "Время локализации", , , "Prop.LocalizationTime", True, False
+    AddNewElement "LOGTime", "Время ликвидации открытого горения", , , "Prop.LOGTime", True, False
+    AddNewElement "LPPTime", "Время ликвидации последствий пожара", , , "Prop.LPPTime", True, False
+    AddNewElement "FireEndTime", "Время окончания пожара", , , "Prop.FireEndTime", True, False
     
     
 End Sub

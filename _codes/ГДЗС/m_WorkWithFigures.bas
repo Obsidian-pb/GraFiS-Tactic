@@ -79,9 +79,12 @@ Dim curHoseShape As Visio.Shape
 Dim curHoseDistance As Double
 Dim newHoseDistance As Double
 
-Dim curHoseShapeID As Integer
+Dim curHoseShapeID As Long
+
+Dim needToFindNewShape As Boolean
 
     On Error GoTo ex
+    needToFindNewShape = False
 
 '---Проверяем имеются ли у данной фигуры необходимые поля (для проверки фигур составленных ранее схем)
     If ShpObj.CellExists("User.ShapeHoseID", 0) = False Then Exit Sub
@@ -91,24 +94,47 @@ Dim curHoseShapeID As Integer
     y = ShpObj.Cells("Piny").Result(visInches)
     shpSize = ShpObj.Cells("Height").Result(visInches) / 2
     curHoseDistance = shpSize * 1.01
+    
+'---Проверяем по прежнему ли подключена фигура к рукавной линии
+    On Error Resume Next
+    curHoseShapeID = ShpObj.Cells("User.ShapeHoseID").Result(visNumber)
+    If curHoseShapeID > 0 Then
+        Set curHoseShape = Application.ActivePage.Shapes.ItemFromID(ShpObj.Cells("User.ShapeHoseID").Result(visNumber))
+    End If
+    On Error GoTo ex
+    
+    '!!!ПЕРЕПИСАТЬ ВЕСЬ ЭТОТ БЛОК КОДА!!!
+    If Not curHoseShape Is Nothing Then
+        'Если звено уже подключено к линии и такая фигура есть, проверяем по прежнему ли подключено звено ГДЗС к ней
+        If curHoseShape.HitTest(x, y, shpSize) > 0 Then
+            needToFindNewShape = False
+        Else
+            needToFindNewShape = True
+            Set curHoseShape = Nothing
+        End If
+    Else
+        needToFindNewShape = True
+    End If
 
-'---Проверяем наличие фигуры на месте перемещения
-    '---Перебираем все фигуры на странице
-    For Each OtherShape In Application.ActivePage.Shapes
-    '    '---Если фигура является группой перебираем и все входящие в нее фигуры тоже
-    '        PS_GlueToHose ShpObj
-        '---Проверяем, является ли эта фигура фигурой напорной рукавной линии
-        If IsShapeGraFiSType(OtherShape, Array(100)) Then
-            '---Если является, проверяем проходит ли она в радиусе shpSize от Pin фигуры звена ГДЗС
-            If OtherShape.HitTest(x, y, shpSize) > 0 Then
-                newHoseDistance = OtherShape.DistanceFromPoint(x, y, 0)
-                If curHoseDistance > newHoseDistance Then
-                    Set curHoseShape = OtherShape
-                    curHoseDistance = newHoseDistance
+'---Проверяем наличие фигуры на месте перемещения (при необходимости)
+    If needToFindNewShape Then
+        '---Перебираем все фигуры на странице
+        For Each OtherShape In Application.ActivePage.Shapes
+        '    '---Если фигура является группой перебираем и все входящие в нее фигуры тоже
+        '        PS_GlueToHose ShpObj
+            '---Проверяем, является ли эта фигура фигурой напорной рукавной линии
+            If IsShapeGraFiSType(OtherShape, Array(100)) Then
+                '---Если является, проверяем проходит ли она в радиусе shpSize от Pin фигуры звена ГДЗС
+                If OtherShape.HitTest(x, y, shpSize) > 0 Then
+                    newHoseDistance = OtherShape.DistanceFromPoint(x, y, 0)
+                    If curHoseDistance > newHoseDistance Then
+                        Set curHoseShape = OtherShape
+                        curHoseDistance = newHoseDistance
+                    End If
                 End If
             End If
-        End If
-    Next OtherShape
+        Next OtherShape
+    End If
 
 '---Если была найдена фигура рукавной линии, к которой нужно приклеить звено
     If Not curHoseShape Is Nothing Then
