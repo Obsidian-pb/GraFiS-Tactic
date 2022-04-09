@@ -64,9 +64,12 @@ Private Sub fillElemCollection()
     
     AddNewElement "FireSquare", "Площадь пожара", "{$} м.кв. ({ExtSquare} м.кв. - площадь тушения)", , "User.FireSquare"
     AddNewElement "ExtSquare", "Площадь тушения", , , "User.ExtSquare", , False
-    AddNewElement "FactStreamW", "Расход воды фактический", "{$} л/с ({NeedStreamW} - л/с требуемый)", , "User.PodOut"
+    AddNewElement "FactStreamW", "Расход воды общий, фактический", "{$} л/с", , "User.PodOut"
+    AddNewElement "FactStreamWExt", "Расход воды на тушение, фактический", , , , , False
+    AddNewElement "FactStreamWProt", "Расход воды на защиту, фактический", , , , , False
+    AddNewElement "FactStreamWChill", "Расход воды на охлаждение, фактический", , , , , False
     AddNewElement "IntenseWater", "Интенсивность подачи воды"
-    AddNewElement "NeedStreamW", "Расход воды требуемый", "{$} л/с", , "User.NeedStreamW", , False
+    AddNewElement "NeedStreamW", "Расход воды общий, требуемый", "{$} л/с", , "User.NeedStreamW", , True
     
     AddNewElement "PersonnelHave", "Личного состава имеется", "{$} чел. ({PersonnelNeed} чел. - требуется)"
     AddNewElement "PersonnelNeed", "Личного состава требуется", , , "Prop.Personnel", , False
@@ -78,6 +81,12 @@ Private Sub fillElemCollection()
     AddNewElement "StvolWBNeed", "Стволов Б требуется", , , , , False
     AddNewElement "StvolWANeed", "Стволов А требуется", , , , , False
     AddNewElement "StvolWLNeed", "Стволов водяных лафетных требуется", , , , , False
+    AddNewElement "StvolHave", "Стволов всего подано", "{$} ({StvolExtHave} - тушение, {StvolProtHave} - защита, {StvolChillHave} - охлаждение, {StvolEvacHave} - эвакуация, {StvolCheckHave} - проверка)", , , , True
+    AddNewElement "StvolExtHave", "Стволов на тушение, подано", , , , , False
+    AddNewElement "StvolProtHave", "Стволов на защиту, подано", , , , , False
+    AddNewElement "StvolChillHave", "Стволов на охлаждение, подано", , , , , False
+    AddNewElement "StvolEvacHave", "Стволов для эвакуации, подано", , , , , False
+    AddNewElement "StvolCheckHave", "Стволов на проверку, подано", , , , , False
     
     AddNewElement "StvolFoamHave", "Стволов пенных подано"
     AddNewElement "StvolGasHave", "Стволов газовых подано"

@@ -329,7 +329,7 @@ Dim latestSquareTime As Date
                     Case Is = indexPers.ipStvolRuch 'Ручной водяной
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
                             .RaiseByCellID shp, "Prop.Personnel;User.PodOut"
-                            .Raise "StvolWHave"
+                            .Raise "StvolWHave;StvolHave"
                             
                             If cellVal(shp, "User.DiameterIn") = 50 Then
                                 .Raise "StvolWBHave"
@@ -337,43 +337,51 @@ Dim latestSquareTime As Date
                                 .Raise "StvolWAHave"
                             End If
                         End If
+                        RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolRuchPena 'Ручной пенный
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
-                            .Raise "StvolFoamHave"
+                            .Raise "StvolFoamHave;StvolHave"
                             .Raise "FactStreamW", cellVal(shp, "Prop.PodOut") * (100 - cellVal(shp, "Prop.FoamPerc")) / 100
                             .RaiseByCellID shp, "Prop.Personnel"
                         End If
+                        RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolGas 'Ручной газовый
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
                             .RaiseByCellID shp, "Prop.Personnel"
-                            .Raise "StvolGasHave"
+                            .Raise "StvolGasHave;StvolHave"
                         End If
+                        RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolPoroshok 'Ручной порошковый
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
                             .RaiseByCellID shp, "Prop.Personnel"
-                            .Raise "StvolPowderHave"
+                            .Raise "StvolPowderHave;StvolHave"
                         End If
+                        RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolLafVoda 'Лафетный водяной
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
                             .RaiseByCellID shp, "Prop.Personnel;User.PodOut"
-                            .Raise "StvolWHave;StvolWLHave"
+                            .Raise "StvolWHave;StvolWLHave;StvolHave"
                         End If
+                        RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolLafPena 'Лафетный пенный
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
-                            .Raise "StvolFoamHave"
+                            .Raise "StvolFoamHave;StvolHave"
                             .Raise "FactStreamW", cellVal(shp, "Prop.PodOut") * (100 - cellVal(shp, "Prop.FoamPerc")) / 100
                             .RaiseByCellID shp, "Prop.Personnel"
                         End If
+                        RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolLafPoroshok 'Лафетный порошковый
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
                             .RaiseByCellID shp, "Prop.Personnel"
-                            .Raise "StvolPowderHave"
+                            .Raise "StvolPowderHave;StvolHave"
                         End If
+                        RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolLafVozimiy 'Лафетный водяной возимый
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
                             .RaiseByCellID shp, "Prop.Personnel;User.PodOut"
-                            .Raise "StvolWHave;StvolWLHave"
+                            .Raise "StvolWHave;StvolWLHave;StvolHave"
                         End If
+                        RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipHydroelevator 'Гидроэлеватор
                         .RaiseByCellID shp, "Prop.Personnel"
                         If cellVal(shp, "Prop.GetingWater", visUnitsString) = "Да" Then
@@ -825,6 +833,28 @@ Exit Function
 EX:
     IsEternalSource = False
 End Function
+
+Private Sub RizeWorkTypesOfStvols(ByRef shp As Visio.Shape)
+'Частная процедура подсчета типов стволов "Тушение;Защита;Охлаждение;Эвакуация людей;Проверка"
+    On Error Resume Next
+    With elements
+        Select Case cellVal(shp, "Prop.UseDirection", visUnitsString)
+            Case Is = "Тушение"
+                .Raise "StvolExtHave"
+                .Raise "FactStreamWExt", cellVal(shp, "User.PodOut")
+            Case Is = "Защита"
+                .Raise "StvolProtHave"
+                .Raise "FactStreamWProt", cellVal(shp, "User.PodOut")
+            Case Is = "Охлаждение"
+                .Raise "StvolChillHave"
+                .Raise "FactStreamWChill", cellVal(shp, "User.PodOut")
+            Case Is = "Эвакуация людей"
+                .Raise "StvolEvacHave"
+            Case Is = "Проверка"
+                .Raise "StvolCheckHave"
+        End Select
+    End With
+End Sub
 
 '---------------Функции работы с элементами-----------------------
 Public Function Result(ByVal ID As String) As Variant
