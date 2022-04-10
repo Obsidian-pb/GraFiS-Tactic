@@ -155,7 +155,7 @@ Private Sub fillElemCollection()
     AddNewElement "BUCount", "БУ создано"
     AddNewElement "SPRCount", "СПР создано"
     AddNewElement "ShtabCount", "Количество штабов", , 0, , False, False
-    AddNewElement "RNBDCount", "Количество решающих направления боевых действий", , 0, , False, False
+    AddNewElement "RNBDCount", "Количество решающих направлений боевых действий", , 0, , False, False
     AddNewElement "OchagCount", "Количество очагов", , 0, , False, False
     AddNewElement "SpreadCount", "Количество направлдений распространения огня", , 0, , False, False
     AddNewElement "SmokeCount", "Задымление", , 0, , False, False
@@ -188,7 +188,8 @@ Private Sub fillElemCollection()
     AddNewElement "LOGTime", "Время ликвидации открытого горения", , , "Prop.LOGTime", True, False
     AddNewElement "LPPTime", "Время ликвидации последствий пожара", , , "Prop.LPPTime", True, False
     AddNewElement "FireEndTime", "Время окончания пожара", , , "Prop.FireEndTime", True, False
-    
+    AddNewElement "CurrentTime", "Текущее астрономическое время схемы", , , , True, True
+    AddNewElement "CurrentTimeDelta", "Текущее относительное время схемы", "Ч+{$}", , , True, False
     
 End Sub
 

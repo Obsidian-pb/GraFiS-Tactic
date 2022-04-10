@@ -749,6 +749,10 @@ Dim latestSquareTime As Date
             .SetVal "GDZSKPPNeed", 1
         End If
         
+        'Времена
+        tmp = Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").ResultStr(visUnitsString)
+        .SetVal "CurrentTime", tmp
+        .SetVal "CurrentTimeDelta", DateDiff("n", .Result("FireTime"), tmp)
         
         'Итог
         .Raise "PersonnelNeed", .Result("GDZSMansRezCountNeed")
