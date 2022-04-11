@@ -91,7 +91,7 @@ Private Sub CheckRect(ByVal x As Long, ByVal y As Long, ByVal radiuss As Integer
 'Здесь radiuss - в зернах!!!!
 Dim radiussHalf As Integer
 
-    On Error GoTo ex
+    On Error GoTo EX
     Dim shp As Visio.Shape
     
 '1 Проверяем утверждение, что в радиусе нет расчетной области (везде - РО)
@@ -154,7 +154,7 @@ Dim radiussHalf As Integer
             End If
         End If
 Exit Sub
-ex:
+EX:
     Debug.Print "x=" & x & ", y=" & y & ", radiuss=" & radiuss
 End Sub
 
@@ -258,13 +258,13 @@ Private Function ScanPoint(ByVal x As Long, ByVal y As Long) As Boolean
 'Возвращает True если точка внутри расчетной зоны, иначе False
 Dim idx As String
 
-    On Error GoTo ex
+    On Error GoTo EX
     
     idx = XYtoIndex(x, y)
     ScanPoint = points.item(idx)
     
 Exit Function
-ex:
+EX:
     If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, 0) = 2 Then
         ScanPoint = True
     Else

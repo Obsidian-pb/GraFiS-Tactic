@@ -21,7 +21,7 @@ Dim ButEventFireArea As ClassFireArea, ButEventStorm As ClassStorm, ButEventFog 
 
 Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 
-    On Error GoTo ex
+    On Error GoTo EX
     
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
@@ -72,7 +72,7 @@ Set ButEventCalcArea = New ClassCalcArea
 '---Добавляем свойство документа "FireTime"
     sm_AddFireTime
 Exit Sub
-ex:
+EX:
     SaveLog Err, "Document_DocumentOpened"
 End Sub
 
@@ -104,7 +104,7 @@ Dim ShpInd As Long '(64) - Площадь пожара
 'Dim shpFire As Visio.Shape 'Фигура Площадь пожара
 
 '---Проверяем не произошло ли событие в мастере
-    On Error GoTo ex
+    On Error GoTo EX
     If cell.Shape.ContainingMasterID >= 0 Then Exit Sub
     
 '---Проверяем имя ячейки
@@ -121,7 +121,7 @@ Dim ShpInd As Long '(64) - Площадь пожара
     End If
 
 'В случае, если произошло изменение не нужной ячейки прекращаем событие
-ex:
+EX:
 End Sub
 
 Public Sub MastersImport()

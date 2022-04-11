@@ -23,12 +23,12 @@ End Sub
 
 Private Sub ComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 
-    On Error GoTo ex
+    On Error GoTo EX
     
     ImportCalcAreaInformation
     
 Exit Sub
-ex:
+EX:
     SaveLog Err, "CalcArea_ComBut_Click"
 End Sub
 

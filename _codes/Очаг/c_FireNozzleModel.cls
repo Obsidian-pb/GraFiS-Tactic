@@ -15,5 +15,5 @@ Public fireContactCell As c_Cell            'Клетка координаты контакта рабочей 
 Public nozzleType As NozzleTypes            'Тип ствола
 Public waterExpense As Single               'Расход ствола л/с
 Public angle As Double                      'Угол наклона ствола
-
+Public timeOfSet As Long                    'Врямя подачи ствола в виде Ч+ (сек)
 

@@ -86,7 +86,7 @@ End Function
 
 Private Function GetKindOfCell(ByVal xVal As Long, ByVal yVal As Long) As Byte
 'Возвращает тип клетки (0-свободная, 1-горит на максимум, 2-непроходима-прекратить проверку)
-    On Error GoTo ex
+    On Error GoTo EX
     If matrix.IsCellMaxFire(xVal, yVal) Then
         GetKindOfCell = 1
         Exit Function
@@ -97,7 +97,7 @@ Private Function GetKindOfCell(ByVal xVal As Long, ByVal yVal As Long) As Byte
     End If
     GetKindOfCell = 0
 Exit Function
-ex:
+EX:
     GetKindOfCell = 2
 End Function
 

@@ -123,7 +123,7 @@ Private Sub btnRunFireModelling_Click()
     
     stopModellingFlag = False
     
-    On Error GoTo ex
+    On Error GoTo EX
     'Определяем требуемое количество шагов
     Dim spd As Single
     Dim timeElapsed As Single
@@ -183,7 +183,7 @@ Private Sub btnRunFireModelling_Click()
     vsO_FireShape.Cells("Prop.SquareTime").FormulaU = "DateTime(" & str(CDbl(actTime)) & ")"
         
 Exit Sub
-ex:
+EX:
     MsgBox "Не все данные корректно указаны!", vbCritical
 End Sub
 
@@ -391,7 +391,7 @@ Dim vsO_DBS As Object, vsO_RST As Object
 Dim vsStr_SQL As String
 Dim vsStr_Pth As String
 
-    On Error GoTo ex
+    On Error GoTo EX
 '---Очищаем имеющиеся списки
 '    If CB_ObjectType.ListCount > 0 Then Exit Sub 'В случае, если список уже заполнен - не обновляем его
     Me.CB_ObjectType.Clear
@@ -427,7 +427,7 @@ Dim vsStr_Pth As String
     Set vsO_DBS = Nothing
     Set vsO_RST = Nothing
 Exit Sub
-ex:
+EX:
 '---Очищаем объекты
     Set vsO_DBS = Nothing
     Set vsO_RST = Nothing
@@ -442,7 +442,7 @@ Dim vsStr_SQL As String
 Dim vsStr_Pth As String
 Dim i As Integer
 
-    On Error GoTo ex
+    On Error GoTo EX
 '---Определяем запрос SQL для отбора записей категорий из базы данных
     vsStr_SQL = "SELECT Категория, Описание, СкоростьРасч, ИнтенсивностьПоВодеРасч FROM З_Интенсивности;"
     
@@ -479,7 +479,7 @@ Dim i As Integer
     Set vsO_DBS = Nothing
     Set vsO_RST = Nothing
 Exit Sub
-ex:
+EX:
     SaveLog Err, "sf_ObjectsListCreation"
 End Sub
 
@@ -557,7 +557,7 @@ Dim vsD_TimeCur As Date
 Dim vsL_Duration As Long
 
 '---Активируем обработку ошибок
-    On Error GoTo ex
+    On Error GoTo EX
 '---Определяем рабочие объекты
     Set vsO_DropTargetShape = Application.ActivePage.Shapes.ItemFromID(Vfl_TargetShapeID)
     Set vsO_DropMaster = ThisDocument.Masters(Me.CB_Shape.value)
@@ -639,7 +639,7 @@ Dim vsL_Duration As Long
     
 Exit Sub
 
-ex:
+EX:
 'MsgBox "Одно из указанных вами значений слишком велико или введено с ошибками! " & _
 '    "Проверьте правильность введенных данных!", vbCritical
     MsgBox "В процессе работы программы возникла ошибка! Убедитесь в правильности введенных вами данных.", , ThisDocument.Name

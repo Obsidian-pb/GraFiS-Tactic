@@ -93,7 +93,7 @@ Dim modelledFireShape As Visio.Shape
 Dim borderShape As Visio.Shape
 
     'Включаем обработчик ошибок - для предупреждения об отсутствии запеченной матрицы
-    On Error GoTo ex
+    On Error GoTo EX
     
     'Если путь равен 0, то указываем его бесконечно большим
     If path = 0 Then path = 10000
@@ -129,7 +129,8 @@ Dim borderShape As Visio.Shape
     
     prevTime = fireModeller.time
     
-    Do While diffTime < timeElapsed And realCurrentDistance < path
+'    Do While diffTime < timeElapsed And realCurrentDistance < path
+    Do
         ClearLayer "ExtSquare"
         
 '        Stop   ' - Здесь нужно добавить проверку на достаточность расхода для тушения -> fireModeller.GetExtSquare
@@ -175,6 +176,7 @@ Dim borderShape As Visio.Shape
         'Увеличиваем шаг расчета
         fireModeller.RizeCurrentStep
             
+                    'Возможно это стоит вынести в сам модельер
         currentDistance = GetWayLen(fireModeller.CurrentStep, grain)
         diffDistance = currentDistance - prevDistance
         realCurrentDistance = GetWayLen(fireModeller.CalculatedStep, grain)
@@ -197,7 +199,7 @@ Dim borderShape As Visio.Shape
         F_InsertFire.pathMain = realCurrentDistance
         
         
-        On Error GoTo ex
+        On Error GoTo EX
         
         i = i + 1
         
@@ -207,6 +209,18 @@ Dim borderShape As Visio.Shape
         'Очищаем выделение и выполняем команды пользователя
         Application.ActiveWindow.DeselectAll
         DoEvents
+        
+        'Если достигнуты пределы моделирвоания, выходим из цикла
+        If F_InsertFire.OB_ByRadius = True Then
+            If realCurrentDistance >= path Then
+                stopModellingFlag = True
+            End If
+        Else
+            If diffTime >= timeElapsed Or realCurrentDistance >= path Then
+                stopModellingFlag = True
+            End If
+        End If
+
         
         'Если пользователь нажал в форме кнопку "Остановить" прекращаем моделирвоание
         If stopModellingFlag Then
@@ -246,7 +260,7 @@ Application.ActiveWindow.Select modelledFireShape, visSelect
     Set tmr2 = Nothing
     
 Exit Sub
-ex:
+EX:
     MsgBox "Матрица не запечена!", vbCritical
     
     '---Определяем получившуюся фигуру и обращаем ее в фигуру площади горения
@@ -277,7 +291,7 @@ Dim xCount As Long
 Dim yCount As Long
 Dim shp As Visio.Shape
 
-    On Error GoTo ex
+    On Error GoTo EX
     
     'Проверяем нет ли на данной страницы фигуры расчетной зоны. Если есть, то определяем, что расчет возможен
     If TryGetShape(shp, "User.IndexPers:1001") Then
@@ -291,7 +305,7 @@ Dim shp As Visio.Shape
     
     IsAcceptableMatrixSize = xCount * yCount < maxMatrixSize
 Exit Function
-ex:
+EX:
     IsAcceptableMatrixSize = False
 End Function
 
@@ -407,6 +421,6 @@ End Sub
 
 Public Sub FixateExtSquare(shp As Visio.Shape)
 ' Фиксация текущей площади тушения
-    On Error Resume Next
-    SetCellFrml shp, "Prop.ExtSquareT", CellVal(shp, "Prop.ExtSquareT")
+'    On Error Resume Next
+    SetCellFrml shp, "Prop.ExtSquareT", Replace(CellVal(shp, "Prop.ExtSquareT", visUnitsString), ",", ".")
 End Sub

@@ -53,17 +53,13 @@ End Function
 Public Sub RunDemon()
 'Запускаем демона
 Dim nozzle As c_FireNozzleModel
-    
-'    'Формируем коллекцию расположенных на странице стволов
-'    FindNozzles
-    
+       
     'Перебираем все стволы и проверяем, касается ли их зона тушения (5м для ручных и 10 для лафетных) фронта пожара
     For Each nozzle In nozzles
         ReDim matrix(fireMatrixObject.DimensionX, fireMatrixObject.DimensionY)
         ReDim calculatedCells(fireMatrixObject.DimensionX, fireMatrixObject.DimensionY)
         
         'Проверяем, находится ли ствол в пределах страницы
-'        Debug.Print UBound(calculatedCells, 1) & " " & UBound(calculatedCells, 2)
         If nozzle.position.x < 0 Or nozzle.position.y < 0 Or _
                 nozzle.position.x > UBound(calculatedCells, 1) Or nozzle.position.y > UBound(calculatedCells, 2) Then
         Else
@@ -95,17 +91,25 @@ Dim indexPers As Integer
             If indexPers = 34 Or indexPers = 36 Or indexPers = 39 Then      '34 - ручной водяной ствол, 36 - лафетный водяной, 39 - возимый водяной
                 'Проверка на маневренность
                 If shp.Cells("Actions.MainManeure.Checked").Result(visNumber) = 0 Then
-                    Set nozzle = New c_FireNozzleModel
-                    If indexPers = 34 Then      '34 - ручной водяной ствол, 36 - лафетный водяной, 39 - возимый водяной
-                        nozzle.nozzleType = waterHand
-                    ElseIf indexPers = 36 Or indexPers = 39 Then
-                        nozzle.nozzleType = waterLafet
+                    'Проверка на подачу на тушение или защиту
+                    If (form.flag_StvolOnlyForExtinguishing And ShapeHaveCell(shp, "Prop.UseDirection", "Тушение;Защита")) _
+                        Or Not form.flag_StvolOnlyForExtinguishing Then
+                            Set nozzle = New c_FireNozzleModel
+                            If indexPers = 34 Then      '34 - ручной водяной ствол, 36 - лафетный водяной, 39 - возимый водяной
+                                nozzle.nozzleType = waterHand
+                            ElseIf indexPers = 36 Or indexPers = 39 Then
+                                nozzle.nozzleType = waterLafet
+                            End If
+                            Set nozzle.position = GetNozzlePosition(shp.Cells("PinX").Result(visMillimeters), _
+                                shp.Cells("PinY").Result(visMillimeters))
+                            nozzle.waterExpense = shp.Cells("User.PodOut").Result(visNumber)
+                            nozzle.angle = shp.Cells("Angle").Result(visNumber) + halfRadian
+                            
+                            nozzles.Add nozzle
                     End If
-                    Set nozzle.position = GetNozzlePosition(shp.Cells("PinX").Result(visMillimeters), _
-                        shp.Cells("PinY").Result(visMillimeters))
-                    nozzle.waterExpense = shp.Cells("User.PodOut").Result(visNumber)
-                    nozzle.angle = shp.Cells("Angle").Result(visNumber) + halfRadian
-                    nozzles.Add nozzle
+                    
+                    
+
                 End If
             End If
         End If
@@ -139,7 +143,7 @@ Dim i As Integer
 Dim cell As c_Cell
 
     If F_InsertFire.optValue Then
-        On Error GoTo ex
+        On Error GoTo EX
 '        maxWay = F_InsertFire.txtNozzleRangeValue * 1000
         maxWay = form.StvolCalcDistance
         On Error GoTo EX1
@@ -194,7 +198,7 @@ Dim cell As c_Cell
         Loop
     
 Exit Sub
-ex:
+EX:
     MsgBox "Не правильно указано значение расстояния рассчета стволов"
 Exit Sub
 EX1:

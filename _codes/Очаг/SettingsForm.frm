@@ -83,7 +83,7 @@ Private Sub btnRunFireModelling_Click()
 'При нажатии на кнопку запускаем моделирование
     stopModellingFlag = False
     
-    On Error GoTo ex
+    On Error GoTo EX
     'Определяем требуемое количество шагов
     Dim spd As Single
     Dim timeElapsed As Single
@@ -100,7 +100,7 @@ Private Sub btnRunFireModelling_Click()
         MsgBox "Не все данные корректно указаны!", vbCritical
     End If
 Exit Sub
-ex:
+EX:
     MsgBox "Не все данные корректно указаны!", vbCritical
 End Sub
 

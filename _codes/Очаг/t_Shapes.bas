@@ -4,7 +4,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
                         Optional ByVal defaultValue As Double = 0) As Variant
 'Returns cell with cellName value. If such cell does not exists, return 0
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         Select Case dataType
@@ -25,7 +25,7 @@ Public Function CellVal(ByRef shp As Visio.Shape, ByVal cellName As String, Opti
     End If
     
 Exit Function
-ex:
+EX:
     CellVal = defaultValue
 End Function
 
@@ -34,7 +34,7 @@ Public Sub SetCellVal(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal 
 Dim cll As Visio.cell
 Dim typeN As String
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     typeN = TypeName(NewVal)
     If shp.CellExists(cellName, 0) Then
@@ -51,7 +51,7 @@ Dim typeN As String
     End If
     
 Exit Sub
-ex:
+EX:
 
 End Sub
 
@@ -59,7 +59,7 @@ Public Sub SetCellFrml(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal
 'Set cell with cellName formula. If such cell does not exists, does nothing
 Dim cll As Visio.cell
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
@@ -67,7 +67,7 @@ Dim cll As Visio.cell
     End If
     
 Exit Sub
-ex:
+EX:
 
 End Sub
 
@@ -133,17 +133,42 @@ Dim shp2 As Visio.Shape
 End Sub
 
 Public Function ShapeHaveCell(ByRef shp As Visio.Shape, ByVal cellName As String, _
-                              Optional ByVal val As Variant = "") As Boolean
-On Error GoTo ex
+                              Optional ByVal val As Variant = "", Optional ByVal delimiter As Variant = ";") As Boolean
+'Функция возвращает Истина, если такая ячейка есть
+'Если указано значение ячейки, также проверяется и она. Если указано несколько значений, то проверяются все они
+Dim vals() As String
+Dim curval As String
+Dim i As Integer
+
+On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         If val <> "" Then
-            If shp.Cells(cellName).ResultStr(visUnitsString) = val Then
-                ShapeHaveCell = True
-            ElseIf shp.Cells(cellName).Result(visNumber) = val Then
-                ShapeHaveCell = True
+            ' Проверяем одно ли значение передано в атрибуте val
+            If InStr(1, val, delimiter) > 0 Then
+                '---Если значений несколько
+                vals = Split(val, delimiter)
+                For i = 0 To UBound(vals)
+                    curval = vals(i)
+                    If shp.Cells(cellName).ResultStr(visUnitsString) = curval Then
+                        ShapeHaveCell = True
+                        Exit Function
+                    ElseIf shp.Cells(cellName).Result(visNumber) = curval Then
+                        ShapeHaveCell = True
+                        Exit Function
+                    Else
+                        ShapeHaveCell = False
+                    End If
+                Next i
             Else
-                ShapeHaveCell = False
+                '---Если значение одно
+                If shp.Cells(cellName).ResultStr(visUnitsString) = val Then
+                    ShapeHaveCell = True
+                ElseIf shp.Cells(cellName).Result(visNumber) = val Then
+                    ShapeHaveCell = True
+                Else
+                    ShapeHaveCell = False
+                End If
             End If
         Else
             ShapeHaveCell = True
@@ -153,6 +178,8 @@ On Error GoTo ex
     End If
     
 Exit Function
-ex:
+EX:
     ShapeHaveCell = False
 End Function
+
+

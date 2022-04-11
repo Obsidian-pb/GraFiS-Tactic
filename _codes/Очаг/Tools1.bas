@@ -144,7 +144,7 @@ Dim isStrait As Boolean
     
     ShapeIsLine = False
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     If shp.RowCount(visSectionFirstComponent) <> 3 Then Exit Function       'Строк в секции геометрии больше или меньше двух
     If shp.RowType(visSectionFirstComponent, 2) <> 139 Then Exit Function   '139 - LineTo
@@ -152,7 +152,7 @@ Dim isStrait As Boolean
 ShapeIsLine = True
 Exit Function
 
-ex:
+EX:
 ShapeIsLine = False
 End Function
 

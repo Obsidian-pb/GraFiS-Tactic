@@ -98,6 +98,8 @@ Dim ExtSquareFormula As String
             ExtSquareFormula = ExtSquareFormula & "+IF(ISERR(Sheet." & extShp.ID & "!Prop.ExtSquare),0,Sheet." & extShp.ID & "!Prop.ExtSquare)"
         End If
     Next extShp
+    'Дополняем формулу округлением
+    ExtSquareFormula = "Round(" & ExtSquareFormula & ",0)"
     'Присваиваем значению площади тушения рассматриваемой фигуры площади пожара значение сумм площадей тушения полченных фигур (формулу)
     shp.Cells("Prop.ExtFull").FormulaU = "Index(1, Prop.ExtFull.Format)"
     shp.Cells("Prop.ExtSquareT").FormulaU = ExtSquareFormula

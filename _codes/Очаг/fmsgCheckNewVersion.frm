@@ -62,7 +62,7 @@ Dim xmlNode As Object
 
     GetData = False
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     Set xmlDoc = CreateObject("MSXML.DOMDocument") ' New DOMDocument60
     xmlDoc.async = False
@@ -87,7 +87,7 @@ Dim xmlNode As Object
     Set xmlNode = Nothing
     Set xmlDoc = Nothing
 Exit Function
-ex:
+EX:
     GetData = False
 End Function
 

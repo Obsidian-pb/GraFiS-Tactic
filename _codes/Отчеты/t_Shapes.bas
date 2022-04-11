@@ -150,17 +150,42 @@ EX:
 End Sub
 
 Public Function ShapeHaveCell(ByRef shp As Visio.Shape, ByVal cellName As String, _
-                              Optional ByVal val As Variant = "") As Boolean
+                              Optional ByVal val As Variant = "", Optional ByVal delimiter As Variant = ";") As Boolean
+'Функция возвращает Истина, если такая ячейка есть
+'Если указано значение ячейки, также проверяется и она. Если указано несколько значений, то проверяются все они
+Dim vals() As String
+Dim curval As String
+Dim i As Integer
+
 On Error GoTo EX
     
     If shp.CellExists(cellName, 0) Then
         If val <> "" Then
-            If shp.Cells(cellName).ResultStr(visUnitsString) = val Then
-                ShapeHaveCell = True
-            ElseIf shp.Cells(cellName).Result(visNumber) = val Then
-                ShapeHaveCell = True
+            ' Проверяем одно ли значение передано в атрибуте val
+            If InStr(1, val, delimiter) > 0 Then
+                '---Если значений несколько
+                vals = Split(val, delimiter)
+                For i = 0 To UBound(vals)
+                    curval = vals(i)
+                    If shp.Cells(cellName).ResultStr(visUnitsString) = curval Then
+                        ShapeHaveCell = True
+                        Exit Function
+                    ElseIf shp.Cells(cellName).Result(visNumber) = curval Then
+                        ShapeHaveCell = True
+                        Exit Function
+                    Else
+                        ShapeHaveCell = False
+                    End If
+                Next i
             Else
-                ShapeHaveCell = False
+                '---Если значение одно
+                If shp.Cells(cellName).ResultStr(visUnitsString) = val Then
+                    ShapeHaveCell = True
+                ElseIf shp.Cells(cellName).Result(visNumber) = val Then
+                    ShapeHaveCell = True
+                Else
+                    ShapeHaveCell = False
+                End If
             End If
         Else
             ShapeHaveCell = True
@@ -174,114 +199,7 @@ EX:
     ShapeHaveCell = False
 End Function
 
-'Public Sub FixLineGroupProportions()
-''Main sub for fixation the line width of each shape in groupe
-'Dim shp As Visio.Shape
-'
-'    Set shp = Application.ActiveWindow.Selection(1)
-'
-'    FixLineProportions shp
-'End Sub
-'
-'Public Sub FixLineProportions(ByRef shp As Visio.Shape)
-''Fixes the line width of each shape in groupe
-'Dim lineProp As Double
-'Dim frml As String
-'Dim shp2 As Visio.Shape
-'
-'    lineProp = cellVal(shp, "LineWeight") / cellVal(shp, "Height")
-'
-'    frml = "Height*" & lineProp & "*(ThePage!PageScale/ThePage!DrawingScale)"
-'    shp.Cells("LineWeight").Formula = frml
-'
-'    If shp.Shapes.count > 0 Then
-'        For Each shp2 In shp.Shapes
-'            FixLineProportions shp2
-'        Next shp2
-'    End If
-'
-'End Sub
 
-'Public Sub FixTextGroupProportions()
-''Main sub for fixation the text height of each shape in groupe
-'Dim shp As Visio.Shape
-'
-'    Set shp = Application.ActiveWindow.Selection(1)
-'
-'    FixTextProportions shp
-'End Sub
-'
-'Public Sub FixTextProportions(ByRef shp As Visio.Shape)
-''Fixes the text height of each shape in groupe
-'Dim textProp As Double
-'Dim frml As String
-'Dim shp2 As Visio.Shape
-'
-'    textProp = cellVal(shp, "Char.Size") / cellVal(shp, "Height")
-'
-'    frml = "Height*" & textProp & "*(ThePage!PageScale/ThePage!DrawingScale)"
-'    shp.Cells("Char.Size").Formula = frml
-'    shp.Cells("LeftMargin").Formula = 0
-'    shp.Cells("RightMargin").Formula = 0
-'    shp.Cells("TopMargin").Formula = 0
-'    shp.Cells("BottomMargin").Formula = 0
-'
-'    If shp.Shapes.count > 0 Then
-'        For Each shp2 In shp.Shapes
-'            FixTextProportions shp2
-'        Next shp2
-'    End If
-'
-'End Sub
 
-'Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses As Variant, Optional needGFSChecj As Boolean = False) As Boolean
-''Функция возвращает True, если фигура является фигурой ГраФиС и среди переданных типов фигур ГраФиС (gfsIndexPreses) присутствует IndexPers данной фигуры
-''По умолчанию предполагается что переданная фигура уже проверена на то, относится ли она к фигурам ГраФиС. В случае, если у фигуры нет ячейки User.IndexPers _
-''обработчик ошибки указывает функции вернуть False
-''Пример использования: IsGFSShapeWithIP(shp, indexPers.ipPloschadPozhara)
-''                 или: IsGFSShapeWithIP(shp, Array(indexPers.ipPloschadPozhara, indexPers.ipAC))
-'Dim i As Integer
-'Dim indexPers As Integer
-'
-'    On Error GoTo EX
-'
-'    'Если необходима предварительная проверка на отношение фигуры к ГраФиС:
-'    If needGFSChecj Then
-'        If Not IsGFSShape(shp) Then
-'            IsGFSShapeWithIP = False
-'            Exit Function
-'        End If
-'    End If
-'
-'    'Проверяем, является ли фигура фигурой указанного типа
-'    indexPers = shp.Cells("User.IndexPers").Result(visNumber)
-'    Select Case TypeName(gfsIndexPerses)
-'        Case Is = "Long"    'Если передано единственное значение Long
-'            If gfsIndexPerses = indexPers Then
-'                IsGFSShapeWithIP = True
-'                Exit Function
-'            End If
-'        Case Is = "Integer"    'Если передано единственное значение Integer
-'            If gfsIndexPerses = indexPers Then
-'                IsGFSShapeWithIP = True
-'                Exit Function
-'            End If
-'        Case Is = "Variant()"   'Если передан массив
-'            For i = 0 To UBound(gfsIndexPerses)
-'                If gfsIndexPerses(i) = indexPers Then
-'                    IsGFSShapeWithIP = True
-'                    Exit Function
-'                End If
-'            Next i
-'        Case Else
-'            IsGFSShapeWithIP = False
-'    End Select
-'
-'IsGFSShapeWithIP = False
-'Exit Function
-'EX:
-'    IsGFSShapeWithIP = False
-'    SaveLog Err, "m_Tools.IsGFSShapeWithIP"
-'End Function
 
 

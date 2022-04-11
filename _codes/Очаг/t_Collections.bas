@@ -100,7 +100,7 @@ Dim filterItemCellValue As String
 Dim i As Integer
 Dim tmpColl As Collection
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     Set tmpColl = New Collection
     
@@ -127,7 +127,7 @@ Dim tmpColl As Collection
     Set FilterShapes = tmpColl
     
 Exit Function
-ex:
+EX:
     Set FilterShapes = New Collection
 End Function
 
@@ -137,7 +137,7 @@ Public Function TryGetShape(ByRef shp As Visio.Shape, ByVal filterStr As String,
 Dim shpTmp As Visio.Shape
 Dim col As Collection
     
-    On Error GoTo ex
+    On Error GoTo EX
     
     Set col = FilterShapes(Application.ActivePage.Shapes, filterStr, d_elem, d_val)
     If col.Count >= 1 Then
@@ -148,7 +148,7 @@ Dim col As Collection
     End If
     
 Exit Function
-ex:
+EX:
     TryGetShape = False
 End Function
 

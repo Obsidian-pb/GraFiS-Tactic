@@ -504,9 +504,9 @@ StrColToStr = str
 End Function
 
 Public Function GetGFSShapeSetTime(ByRef shp As Visio.Shape) As Date
-Dim curVal As Date
+Dim curval As Date
 
-    curVal = cellVal(shp, "Prop.ArrivalTime", visDate) + _
+    curval = cellVal(shp, "Prop.ArrivalTime", visDate) + _
                  cellVal(shp, "Prop.LineTime", visDate) + _
                  cellVal(shp, "Prop.SetTime", visDate) + _
                  cellVal(shp, "Prop.SquareTime", visDate) + _
@@ -517,7 +517,7 @@ Dim curVal As Date
                  cellVal(shp, "Prop.RushTime", visDate)
 '    Debug.Print curVal
 
-GetGFSShapeSetTime = curVal
+GetGFSShapeSetTime = curval
 End Function
 
 
