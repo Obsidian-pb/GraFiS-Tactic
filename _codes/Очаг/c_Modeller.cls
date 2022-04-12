@@ -45,13 +45,6 @@ Public Sub SetFireCell(ByVal x As Long, ByVal y As Long, Optional value As Doubl
     'Добавляем запись о горящей точке в коллекцию активных клеток
     AddToActiveCells x, y
     
-    'Insert Firepoint as Visio Shape
-'        Dim shp As Visio.Shape
-'        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-'                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-'        shp.Cells("LinePattern").FormulaU = "0"
-'        shp.Cells("FillForegnd").FormulaU = "2"
 End Sub
 
 Public Sub SetStartFireCell(ByVal x As Long, ByVal y As Long, Optional value As Double)
@@ -90,13 +83,6 @@ Public Sub SetStartFireCell(ByVal x As Long, ByVal y As Long, Optional value As 
     'Добавляем запись о горящей точке в коллекцию активных клеток
     AddToActiveCells x, y
     
-    'Insert Firepoint as Visio Shape
-'        Dim shp As Visio.Shape
-'        Set shp = Application.ActivePage.DrawRectangle(x * grain / mmInInch, y * grain / mmInInch, _
-'                (x + 1) * grain / mmInInch, (y + 1) * grain / mmInInch)
-'        shp.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("Fire")
-'        shp.Cells("LinePattern").FormulaU = "0"
-'        shp.Cells("FillForegnd").FormulaU = "2"
 End Sub
 
 Public Function AddFireFromShape(ByRef fireShape As Visio.Shape) As c_Modeller
@@ -126,20 +112,7 @@ Public Sub OneRound()
 Dim cell As c_Cell
     
     'РАЗОБРАТЬСЯ С ЭТИМ - рисование дополнительного шага даже при поданном стволе!!!
-'    'Запускаем анализ наличия пожарнных стволов
-'    Dim nozzleDemon As c_FireNozzlesDemon
-'    Set nozzleDemon = New c_FireNozzlesDemon
-'    nozzleDemon.SetGrain = grain
-'    Set nozzleDemon.setMatrix = matrix
-'    nozzleDemon.RunDemon
-'
-'    'Возможно имеет смысл оставить в качестве опции (или еще как то) безусловный расчет площади тушения, в независимаости от того, поданы стволы или нет - это важно
-'    'Рассчитываем площади тушения для каждого имеющегося на странице ствола, при условии, что для него укзана точка контакта с фронтом пожара
-'    FireSquareCalculate nozzleDemon.nozzles
-    
-    
-    
-    
+  
     
     'Очищаем коллекцию клеток только начинающих гореть (разгорающихся)
     Set matrix.startedFireCells = New Collection
@@ -219,19 +192,10 @@ Dim cell As c_Cell
             RemoveFromPerimeterCells cell.x, cell.y
         End If
     Next cell
-    
-    'Запускаем анализ наличия пожарнных стволов
-'    Dim nozzleDemon As c_FireNozzlesDemon
-'    Set nozzleDemon = New c_FireNozzlesDemon
-'    nozzleDemon.SetGrain = grain
-'    Set nozzleDemon.setMatrix = matrix
-    nozzleDemon.RunDemon
 
-    'Возможно имеет смысл оставить в качестве опции (или еще как то) безусловный расчет площади тушения, в независимаости от того, поданы стволы или нет - это важно
     'Рассчитываем площади тушения для каждого имеющегося на странице ствола, при условии, что для него укзана точка контакта с фронтом пожара
-    FireSquareCalculate nozzleDemon.nozzles
-
-
+    'Запускаем анализ наличия пожарнных стволов
+    NozllesRecalculate
 
 
     'Увеличиваем номер расчитанного шага
@@ -243,7 +207,6 @@ Private Sub Attack(ByVal x As Long, ByVal y As Long)
 'Атакуем указанной клеткой все соседние в соовтествии с мощностью горения и весами распространения
 Dim firePower As Double
 Dim delta1Stvol As Date
-'GetFirePower
     
     '0 Проверяем находится ли клетка на листе
     If matrix.IsCellInMatrix(x, y) = False Then
@@ -270,18 +233,33 @@ Dim delta1Stvol As Date
 '    Else
         '3.2 Проверяем четность хода, время прошедшее с начала пожара (более 10 минут) и подачу воды на тушение
         If Not extSquare Is Nothing Then
-            Select Case extSquare.IsCellExtinguished(x, y)
-                Case Is = WaterExpenseKind.notSet               'Вода не подается или клетка не находится в зоне тушения
-                    'Ничего не делаем - идем дальше и строим как ни в чем не бывало
-                Case Is = WaterExpenseKind.notSufficient        'Воды подается недостаточно - считаем только каждый второй раз
-                    If isOdd(step) And time > 10 Then
+            'Если расчет производится с учетмо реального положения стволов
+            If F_InsertFire.flag_StvolPlaceCheck Then
+                Select Case extSquare.IsCellExtinguished(x, y)
+                    Case Is = WaterExpenseKind.notSet               'Вода не подается или клетка не находится в зоне тушения
+                        'Ничего не делаем - идем дальше и строим как ни в чем не бывало
+                    Case Is = WaterExpenseKind.notSufficient        'Воды подается недостаточно - считаем только каждый второй раз
+                        If isOdd(step) And time > 10 Then
+                            Exit Sub
+                        End If
+                    Case Is = WaterExpenseKind.sufficient           'Воды поджается достаточно - не рассчитываем далее
                         Exit Sub
-                    End If
-                Case Is = WaterExpenseKind.sufficient           'Воды поджается достаточно - не рассчитываем далее
-                    Exit Sub
-            End Select
+                End Select
+            Else
+                'Если расчет производится без учета реального положения стволов
+                Select Case extSquare.IsSquareExtinguished(nozzleDemon, time)
+                    Case Is = WaterExpenseKind.notSet               'Вода не подается или клетка не находится в зоне тушения
+                        'Ничего не делаем - идем дальше и строим как ни в чем не бывало
+                    Case Is = WaterExpenseKind.notSufficient        'Воды подается недостаточно - считаем только каждый второй раз
+                        If isOdd(step) And time > 10 Then
+                            Exit Sub
+                        End If
+                    Case Is = WaterExpenseKind.sufficient           'Воды поджается достаточно - не рассчитываем далее
+                        Exit Sub
+                End Select
+            End If
         End If
-'    End If
+
 
     
     '4 Атакуем соседние клетки
@@ -468,13 +446,6 @@ End Property
 Public Sub RizeCurrentStep()
 'Увеличиваем текущий шаг расчета
     step = step + 1
-    
-'    'Расчитываем пройденный путь и затраченное время
-'    distance = GetWayLen(calcStep, grain)
-''    diffDistance = currentDistance - prevDistance
-'
-'    time = distance / speed
-''    diffTime = currentTime - prevTime
 End Sub
 
 
@@ -497,25 +468,7 @@ EX:
      Debug.Print "err"
 End Function
 
-'Private Function GetWayLen(ByVal stepsCount As Integer, ByVal grain As Double) As Single
-''Функция возвращает пройденный путь в метрах
-'    Dim metersInGrain As Double
-'    metersInGrain = grain / 1000
-'
-'    GetWayLen = CalculateWayLen(stepsCount) * metersInGrain
-'End Function
-'
-'Private Function CalculateWayLen(ByVal stepsCount As Integer) As Integer
-''Функция возвращает пройденный путь в клетках
-'    Dim tmpVal As Integer
-'    tmpVal = 0.58 * stepsCount
-'    CalculateWayLen = IIf(tmpVal < 0, 0, tmpVal)
-'End Function
-'
-'Private Function IsEven(ByVal number As Integer) As Boolean
-''Проверяем, четное ли число
-'    IsEven = Int(number / 2) = number / 2
-'End Function
+
 
 '-----------------------------Разное-------------------------------------------
 Public Function GetFiredCellsCount() As Long
@@ -550,6 +503,49 @@ Public Function GetOpenSpaceLayer() As Variant
 End Function
 
 '----------------------------Расчет площадей тушения--------------------------
+Public Sub FireSquareCalculate2()
+'Для расчета площади тушения при опции "Не учитывать реальное положение стволов"
+Dim frontDemonImpl As c_FrontDemon
+Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
+    
+    Set extSquare = New c_ExtinguishingSquare
+    extSquare.intenseNeed = intenseNeed
+    
+    Set frontDemonImpl = New c_FrontDemon
+    Set extinguishingSquareDemon = New c_ExtinguishSquareDemon
+    
+    frontDemonImpl.CreateMatrix matrix.DimensionX, matrix.DimensionY
+    frontDemonImpl.grain = grain
+    frontDemonImpl.SetStartState matrix.fireFrontCells
+    frontDemonImpl.RunDemon2 extSquare, matrix.fireFrontCells, matrix.fireFrontCells
+    
+    extinguishingSquareDemon.CreateMatrix matrix
+    extinguishingSquareDemon.setGrain = grain
+    
+    'Рассчитываем размер каждого из блоков
+    extinguishingSquareDemon.RunDemon extSquare
+    
+    'Вывод результата
+    Dim blck As c_ExtinguishingBlock
+    Dim extSquareMeters As Single
+    Dim needExpense As Single
+    Dim factExpense As Single
+    Dim expKindForAll As String
+    For Each blck In extSquare.extinguishingBlocks
+        extSquareMeters = extSquareMeters + blck.GetSquare
+        needExpense = needExpense + blck.GetExpenceNeed
+        factExpense = factExpense + blck.expenseFact
+        expKindForAll = expKindForAll & " " & blck.GetWaterExpenseKind
+    Next blck
+    
+
+        Debug.Print "Площадь тушения: " & extSquareMeters
+        Debug.Print "Требуемый расход : " & needExpense
+        Debug.Print "Фактический расход : " & factExpense
+        Debug.Print "Достаточность расхода: " & expKindForAll
+
+End Sub
+
 Public Sub FireSquareCalculate(ByRef nozzleCollection As Collection)
 'Процедура получения блоков площади тушения
 Dim nozzle As c_FireNozzleModel
@@ -610,25 +606,16 @@ Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
         Debug.Print "Достаточность расхода: " & expKindForAll
 '    End If
     
-    
-    
-    
-    
-    
-    
+   
 End Sub
 
 Public Sub DrawExtSquareByDemon(ByRef fireShp As Visio.Shape)
 'Команда демону отрисовать площадь тушения
-'Dim frontDemonImpl As c_FrontDemon
 Dim extinguishingSquareDemon As c_ExtinguishSquareDemon
-'Dim fireConturs As Visio.Selection
 Dim extShp As Visio.Shape
 Dim ExtSquareFormula As String
 Dim squareShapesCol As Collection
-
-'    Set squareShapesCol = New Collection
-    
+   
     'Проверяем активен ли построитель площадей тушения
     If extSquare.extinguishingBlocks.Count = 0 Then
         Exit Sub
@@ -667,6 +654,22 @@ Dim tmpVal As WaterExpenseKind
     
 GetWaterExpenseKind = tmpVal
 End Function
+
+Public Sub ClearFireExtSquare()
+    Set extSquare = Nothing
+End Sub
+
+Public Sub NozllesRecalculate()
+    'Запускаем анализ наличия пожарнных стволов
+    nozzleDemon.RunDemon time
+
+    'Рассчитываем площади тушения для каждого имеющегося на странице ствола, при условии, что для него укзана точка контакта с фронтом пожара
+    If F_InsertFire.flag_StvolPlaceCheck Then
+        FireSquareCalculate nozzleDemon.nozzles
+    Else
+        FireSquareCalculate2
+    End If
+End Sub
 
 ''-------Тестовая процедура
 'Public Sub DrawActiveCells()

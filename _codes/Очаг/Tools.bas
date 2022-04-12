@@ -58,10 +58,6 @@ Dim RSField As Object, RSField2 As Object
             "AND (([" & FieldName2 & "])= '" & Criteria & "');"
         
     '---—оздаем набор записей дл€ получени€ списка
-'        pth = ThisDocument.path & "Signs.fdb"
-'        Set dbs = GetDBEngine.OpenDatabase(pth)
-'        Set rst = dbs.CreateQueryDef("", SQLQuery).OpenRecordset(dbOpenDynaset)  '—оздание набора записей
-'        Set RSField = rst.Fields(FieldName)
         pth = ThisDocument.path & "Signs.fdb"
         Set dbs = CreateObject("ADODB.Connection")
         dbs = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" & pth & ";Uid=Admin;Pwd=;"
@@ -89,16 +85,6 @@ Dim RSField As Object, RSField2 As Object
 ListImport2 = List
 
 End Function
-
-'Public Function GetDBEngine() As Object
-''Function returns DBEngine for current Office Engine Type (DAO.DBEngine.60 or DAO.DBEngine.120)
-'Dim engine As Object
-'    On Error GoTo EX
-'    Set GetDBEngine = DBEngine
-'Exit Function
-'EX:
-'    Set GetDBEngine = CreateObject("DAO.DBEngine.120")
-'End Function
 
 
 
@@ -150,11 +136,6 @@ Dim i As Integer
             IsGFSShape = False      '‘игура не √ра‘и—
         End If
     Else                    'если не нужно учитывать проверку на маневр
-'        If shp.CellExists("User.IndexPers", 0) = True Then
-'            IsGFSShape = True       '‘игура √ра‘и—
-'        Else
-'            IsGFSShape = False      '‘игура не √ра‘и—
-'        End If
         IsGFSShape = shp.CellExists("User.IndexPers", 0)
     End If
 

@@ -153,9 +153,9 @@ On Error GoTo EX
                     If shp.Cells(cellName).ResultStr(visUnitsString) = curval Then
                         ShapeHaveCell = True
                         Exit Function
-                    ElseIf shp.Cells(cellName).Result(visNumber) = curval Then
-                        ShapeHaveCell = True
-                        Exit Function
+'                    ElseIf shp.Cells(cellName).Result(visNumber) = curval Then
+'                        ShapeHaveCell = True
+'                        Exit Function
                     Else
                         ShapeHaveCell = False
                     End If

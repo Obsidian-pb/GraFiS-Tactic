@@ -50,7 +50,7 @@ End Function
 
 
 
-Public Sub RunDemon()
+Public Sub RunDemon(ByVal currentTime As Single)
 'Запускаем демона
 Dim nozzle As c_FireNozzleModel
        
@@ -63,9 +63,21 @@ Dim nozzle As c_FireNozzleModel
         If nozzle.position.x < 0 Or nozzle.position.y < 0 Or _
                 nozzle.position.x > UBound(calculatedCells, 1) Or nozzle.position.y > UBound(calculatedCells, 2) Then
         Else
-            calculatedCells(nozzle.position.x, nozzle.position.y) = 1
-            'Если зона досягаемости ствола касается где-либо фронта, далее отдаем команду модельеру на расчет блока тушения
-            checkFireIntercourse nozzle
+            'Проверяем флаг "Учитывать стволы только после их подачи"
+            If F_InsertFire.flag_UseStvolsAfterTime Then
+                'Проверяем был ли подан ствол
+                If currentTime >= nozzle.timeOfSet Then
+                    calculatedCells(nozzle.position.x, nozzle.position.y) = 1
+                    'Если зона досягаемости ствола касается где-либо фронта, далее отдаем команду модельеру на расчет блока тушения
+                    checkFireIntercourse nozzle
+                End If
+            Else
+                calculatedCells(nozzle.position.x, nozzle.position.y) = 1
+                'Если зона досягаемости ствола касается где-либо фронта, далее отдаем команду модельеру на расчет блока тушения
+                checkFireIntercourse nozzle
+            End If
+            
+
         End If
         
 
@@ -104,6 +116,8 @@ Dim indexPers As Integer
                                 shp.Cells("PinY").Result(visMillimeters))
                             nozzle.waterExpense = shp.Cells("User.PodOut").Result(visNumber)
                             nozzle.angle = shp.Cells("Angle").Result(visNumber) + halfRadian
+                            nozzle.timeOfSet = getNozzleTime(shp)
+                            
                             
                             nozzles.Add nozzle
                     End If
@@ -116,6 +130,19 @@ Dim indexPers As Integer
     Next shp
 End Sub
 
+Public Function GetExpense(ByVal currentTime As Single) As Single
+'Возвращает расход всех стволов
+Dim nozzle As c_FireNozzleModel
+    
+    For Each nozzle In nozzles
+        If currentTime >= nozzle.timeOfSet Then    'Не учитывать время подачи ствола
+            GetExpense = GetExpense + nozzle.waterExpense
+        End If
+    Next nozzle
+    
+End Function
+
+
 Private Function GetNozzlePosition(ByVal xPos As Double, ByVal yPos As Double) As c_Cell
 'Находим координату расположения ствола
 Dim x As Integer
@@ -127,7 +154,15 @@ Dim y As Integer
     Set GetNozzlePosition = NewCell(x, y)
 End Function
 
+Private Function getNozzleTime(shp As Visio.Shape) As Single
+Dim t1 As Date
+Dim t2 As Date
 
+    t1 = Application.ActiveDocument.DocumentSheet.Cells("User.FireTime").ResultStr(visUnitsString)
+    t2 = shp.Cells("Prop.SetTime").ResultStr(visUnitsString)
+    getNozzleTime = DateDiff("n", t1, t2)
+    
+End Function
 
 
 Private Sub checkFireIntercourse(ByRef nozzle As c_FireNozzleModel)

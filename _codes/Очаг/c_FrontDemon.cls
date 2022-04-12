@@ -45,7 +45,7 @@ Public Sub RunDemon(ByRef extSquare As c_ExtinguishingSquare, ByRef frontCellsCo
                     ByRef nozzle As c_FireNozzleModel)
 'Разбиваем фронт пожара на блоки
 Dim block As c_ExtinguishingBlock
-
+    'ЗДЕСЬ В СЛУЧАЕ ФЛАГА БЕЗ УЧЕТА ПОЛОЖЕНИЯ СТВОЛОВ ПРОСТО ДОБАВЛЯЕМ ВСЕ УЧАСТКИ ФРОНТА И ОТ НИХ РАСЧИТЫВАЕМ
     '1 проверяем, не входит ли точка контакта зоны работы ствола в фрагмент фронта пожара, который уже распределен
     Set block = CheckBlockExists(extSquare, nozzle.fireContactCell)
     If block Is Nothing Then

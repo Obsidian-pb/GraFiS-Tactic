@@ -36,7 +36,6 @@ Public Sub SetNextPoint(ByRef pnt As c_Point)
     CheckDir
 End Sub
 Public Function GetNextPoint() As c_Point
-'    Set GetNextPoint = nextPoint
     If Not nextPoint2 Is Nothing Then
         Set GetNextPoint = nextPoint2
         Set nextPoint2 = Nothing

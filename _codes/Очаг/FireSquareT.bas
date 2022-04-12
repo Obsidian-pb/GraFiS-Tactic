@@ -129,13 +129,16 @@ Dim borderShape As Visio.Shape
     
     prevTime = fireModeller.time
     
-'    Do While diffTime < timeElapsed And realCurrentDistance < path
+    'Обновляем расходы на тушение - нжно, для того, чтобы при удалении и перемещении стволов возобновлялся рост площади
+    fireModeller.NozllesRecalculate
+    
     Do
         ClearLayer "ExtSquare"
         
 '        Stop   ' - Здесь нужно добавить проверку на достаточность расхода для тушения -> fireModeller.GetExtSquare
+        
+        'Если размер площади тушения меньше площади пожара:
         If fireModeller.GetExtSquare < fireModeller.GetFireSquare Then
-'        fireModeller.
             'Проверяем, сколько времени длится расчет, если меньше 10 минут, то расчитываем, только каждый второй шаг, т.е., с половиной скорости
             If currentTime < 10 Then
                 'При вермени менее 10 минут считаем рост только каждый второй шаг
@@ -153,7 +156,7 @@ Dim borderShape As Visio.Shape
             End If
         ElseIf fireModeller.GetExtSquare >= fireModeller.GetFireSquare Then
             If Not fireModeller.GetWaterExpenseKind = sufficient Then   'Если достаточно расхода то ничего не делаем, просто считаем следующий шаг
-            
+'                MakeShape
 '            Else
                 'Проверяем, сколько времени длится расчет, если меньше 10 минут, то расчитываем, только каждый второй шаг, т.е., с половиной скорости
                 If currentTime < 10 Then
@@ -228,6 +231,13 @@ Dim borderShape As Visio.Shape
         End If
     Loop
         
+    '---Если происходит тушение и расхода достаточно, то значит ранее вигура построена не была и ее необходимо построить
+    If fireModeller.GetExtSquare >= fireModeller.GetFireSquare Then
+        If fireModeller.GetWaterExpenseKind = sufficient Then   'Если достаточно расхода то ничего не делаем, просто считаем следующий шаг
+            MakeShape
+        End If
+    End If
+    
     '---Определяем получившуюся фигуру и обращаем ее в фигуру площади горения
     Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Fire")
     Set modelledFireShape = vsoSelection(1)
@@ -247,11 +257,14 @@ Dim borderShape As Visio.Shape
         borderShape.SendToBack
     End If
         
-''TEST:
-'fireModeller.DrawExtSquareByDemon modelledFireShape
-'Ставим фокус на построенной ранее фигуре зоны горения
-Application.ActiveWindow.DeselectAll
-Application.ActiveWindow.Select modelledFireShape, visSelect
+    'Построение фигуры площади тушения по итогам сессии моделирвоания
+    If F_InsertFire.flag_DrawExtSquare Then
+        fireModeller.DrawExtSquareByDemon modelledFireShape
+    End If
+    
+    'Ставим фокус на построенной ранее фигуре зоны горения
+    Application.ActiveWindow.DeselectAll
+    Application.ActiveWindow.Select modelledFireShape, visSelect
 
         
     Debug.Print "Всего затрачено " & tmr2.GetElapsedTime & "с."
@@ -298,7 +311,6 @@ Dim shp As Visio.Shape
         IsAcceptableMatrixSize = True
         Exit Function
     End If
-'    grain = Me.txtGrainSize.value
 
     xCount = ActivePage.PageSheet.Cells("PageWidth").Result(visMillimeters) / grain
     yCount = ActivePage.PageSheet.Cells("PageHeight").Result(visMillimeters) / grain
@@ -312,11 +324,6 @@ End Function
 
 
 
-'Не понял откуда это
-'Public Sub DrawExtSquare()
-''Внешняя команда на отрисовку площади тушения
-'    fireModeller.DrawExtSquareByDemon
-'End Sub
 
 
 
@@ -421,6 +428,6 @@ End Sub
 
 Public Sub FixateExtSquare(shp As Visio.Shape)
 ' Фиксация текущей площади тушения
-'    On Error Resume Next
+    On Error Resume Next
     SetCellFrml shp, "Prop.ExtSquareT", Replace(CellVal(shp, "Prop.ExtSquareT", visUnitsString), ",", ".")
 End Sub

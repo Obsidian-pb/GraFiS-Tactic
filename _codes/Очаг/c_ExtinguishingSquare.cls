@@ -37,7 +37,29 @@ Dim block As c_ExtinguishingBlock
         End If
     Next block
     
+    
 IsCellExtinguished = notSet
+End Function
+
+Public Function IsSquareExtinguished(ByRef nozzleDemon As c_FireNozzlesDemon, ByVal curTime As Single) As WaterExpenseKind
+'Возвращает достаточность расхода
+Dim ExpNeed As Double
+Dim ExpFact As Double
+
+    ExpNeed = GetSquare * intenseNeed
+    ExpFact = nozzleDemon.GetExpense(curTime)
+        
+    If ExpFact = 0 Then
+        IsSquareExtinguished = notSet
+        Exit Function
+    End If
+    
+    If ExpNeed < ExpFact Then
+        IsSquareExtinguished = sufficient
+    Else
+        IsSquareExtinguished = notSufficient
+    End If
+    
 End Function
 
 Public Function GetSquare() As Single
