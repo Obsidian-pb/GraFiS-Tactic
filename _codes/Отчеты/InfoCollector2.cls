@@ -328,8 +328,13 @@ Dim latestSquareTime As Date
                 '---ПТВ-----------------------------------
                     Case Is = indexPers.ipStvolRuch 'Ручной водяной
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
-                            .RaiseByCellID shp, "Prop.Personnel;User.PodOut"
+                            .RaiseByCellID shp, "Prop.Personnel"
                             .Raise "StvolWHave;StvolHave"
+                            
+                            tmp = cellVal(shp, "Prop.UseDirection", visUnitsString)
+                            If tmp = "Тушение" Or tmp = "Защита" Or tmp = "Охлаждение" Or tmp = "" Then
+                                .RaiseByCellID shp, "User.PodOut"
+                            End If
                             
                             If cellVal(shp, "User.DiameterIn") = 50 Then
                                 .Raise "StvolWBHave"
@@ -341,7 +346,12 @@ Dim latestSquareTime As Date
                     Case Is = indexPers.ipStvolRuchPena 'Ручной пенный
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
                             .Raise "StvolFoamHave;StvolHave"
-                            .Raise "FactStreamW", cellVal(shp, "Prop.PodOut") * (100 - cellVal(shp, "Prop.FoamPerc")) / 100
+                            
+                            tmp = cellVal(shp, "Prop.UseDirection", visUnitsString)
+                            If tmp = "Тушение" Or tmp = "Защита" Or tmp = "Охлаждение" Or tmp = "" Then
+                                .Raise "FactStreamW", cellVal(shp, "Prop.PodOut") * (100 - cellVal(shp, "Prop.FoamPerc")) / 100
+                            End If
+                            
                             .RaiseByCellID shp, "Prop.Personnel"
                         End If
                         RizeWorkTypesOfStvols shp
@@ -359,14 +369,24 @@ Dim latestSquareTime As Date
                         RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolLafVoda 'Лафетный водяной
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
-                            .RaiseByCellID shp, "Prop.Personnel;User.PodOut"
+                            .RaiseByCellID shp, "Prop.Personnel"
                             .Raise "StvolWHave;StvolWLHave;StvolHave"
+                            
+                            tmp = cellVal(shp, "Prop.UseDirection", visUnitsString)
+                            If tmp = "Тушение" Or tmp = "Защита" Or tmp = "Охлаждение" Or tmp = "" Then
+                                .RaiseByCellID shp, "User.PodOut"
+                            End If
                         End If
                         RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolLafPena 'Лафетный пенный
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
                             .Raise "StvolFoamHave;StvolHave"
-                            .Raise "FactStreamW", cellVal(shp, "Prop.PodOut") * (100 - cellVal(shp, "Prop.FoamPerc")) / 100
+                            
+                            tmp = cellVal(shp, "Prop.UseDirection", visUnitsString)
+                            If tmp = "Тушение" Or tmp = "Защита" Or tmp = "Охлаждение" Or tmp = "" Then
+                                .Raise "FactStreamW", cellVal(shp, "Prop.PodOut") * (100 - cellVal(shp, "Prop.FoamPerc")) / 100
+                            End If
+                            
                             .RaiseByCellID shp, "Prop.Personnel"
                         End If
                         RizeWorkTypesOfStvols shp
@@ -378,7 +398,11 @@ Dim latestSquareTime As Date
                         RizeWorkTypesOfStvols shp
                     Case Is = indexPers.ipStvolLafVozimiy 'Лафетный водяной возимый
                         If cellVal(shp, "Prop.MainManeure", visUnitsString) = "Основное положение" Then
-                            .RaiseByCellID shp, "Prop.Personnel;User.PodOut"
+                            .RaiseByCellID shp, "Prop.Personnel"
+                            tmp = cellVal(shp, "Prop.UseDirection", visUnitsString)
+                            If tmp = "Тушение" Or tmp = "Защита" Or tmp = "Охлаждение" Or tmp = "" Then
+                                .RaiseByCellID shp, "User.PodOut"
+                            End If
                             .Raise "StvolWHave;StvolWLHave;StvolHave"
                         End If
                         RizeWorkTypesOfStvols shp
