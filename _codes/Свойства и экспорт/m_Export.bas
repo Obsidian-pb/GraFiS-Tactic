@@ -449,6 +449,8 @@ Dim gettedTxt As String
         Set gettedCol = A.GetGFSShapes("User.IndexPers:46;User.IndexPers:90")
         If gettedCol.Count > 0 Then
             SetData wrd, "ГДЗС", A.Result("GDZSChainsCountWork") & " звеньев, " & A.Result("GDZSMansCountWork") & " газодымозащитинков"
+        Else
+            SetData wrd, "ГДЗС", "не использовалась"
         End If
         '1 звено
         '---Не реализовано
@@ -691,6 +693,7 @@ Dim i As Integer
 Dim rowName As String
 Dim marks As String
 Dim shp As Visio.Shape
+Dim tmpStr As String
     
     On Error GoTo ex
     
@@ -703,7 +706,10 @@ Dim shp As Visio.Shape
                     If IsGFSShapeWithIP(shp, ipDutyFace, True) Then
                         marks = marks & cellVal(shp, "Prop.Duty", visUnitsString) & " " & GetInfo(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)) & ", " & Chr(13)
                     Else
-                        marks = marks & GetInfo(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)) & ", " & Chr(13)
+                        tmpStr = shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)
+                        If InStr(1, tmpStr, " Оценка ") > 0 Then
+                            marks = marks & GetInfo(tmpStr) & ", " & Chr(13)
+                        End If
                     End If
                     
 '                    cmndID = cmndID + 1
