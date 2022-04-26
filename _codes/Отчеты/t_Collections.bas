@@ -110,6 +110,23 @@ EX:
     IsInCollection = False
 End Function
 
+Public Function IsKeyInCollection(ByRef coll As Collection, key As String) As Boolean
+'Check item's key existance in collection
+Dim item As Object
+
+    On Error GoTo EX
+    
+    Set item = coll.item(key)
+    If Not item Is Nothing Then
+        IsKeyInCollection = True
+    Else
+        IsKeyInCollection = False
+    End If
+    
+Exit Function
+EX:
+    IsKeyInCollection = False
+End Function
 
 Public Function FilterShapes(ByRef shpColl As Variant, ByVal filterStr As String, _
             Optional ByVal d_elem As String = ";", Optional ByVal d_val As String = ":") As Collection

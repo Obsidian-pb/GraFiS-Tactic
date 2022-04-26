@@ -172,6 +172,7 @@ Public Enum indexPers
    ipInfoCommonFireInfo = 608                  'Инфоблок Сведения о тушении пожара
    ipGeoCoords = 700                           'Точка с геокоординатами
    ipStatist = 1000                            'Статисты (для учений)
+   ipEvacNode = 5000                           'Узел пути эвакуации
 End Enum
 
 'Перечисления констант объектов железной дороги
