@@ -153,13 +153,15 @@ Dim nextNode As c_Node
                 'Поскольку для дверных проемов скорости не известны, то значение получим исходя из данных горизонтального участка
                 node.V = vdq_tool.GetVByQ(node.q, wayClasses.hor)
                 
-                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)) - (1 / (node.qw)))
+'                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)) - (1 / (node.qw)))
+                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw_prevs)))
                 node.t_sk = node.peoplesFlow * f / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)
                 node.t_here = (node.lenight / node.V) + node.t_zad
             Case Else
                 node.V = vdq_tool.GetVByQ(node.q, node.nodeClass)
                 
-                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)) - (1 / (node.qw)))
+'                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)) - (1 / (node.qw)))
+                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw_prevs)))
                 node.t_sk = node.peoplesFlow * f / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)
                 node.t_here = (node.lenight / node.V) + node.t_zad
         End Select
@@ -200,13 +202,15 @@ Dim nextNode As c_Node
                 'Поскольку для дверных проемов скорости не известны, то значение получим исходя из данных горизонтального участка
                 node.V = vdq_tool.GetVByQ(node.q, wayClasses.hor)
                 
-                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw)))
+'                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw)))
+                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw_prevs)))
                 node.t_sk = node.peoplesFlow * f / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)
                 node.t_here = (node.lenight / node.V) + node.t_zad
             Case Else
                 node.V = vdq_tool.GetVByQ(node.q, node.nodeClass)
                 
-                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw)))
+'                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw)))
+                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw_prevs)))
                 node.t_sk = node.peoplesFlow * f / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)
                 node.t_here = (node.lenight / node.V) + node.t_zad
         End Select

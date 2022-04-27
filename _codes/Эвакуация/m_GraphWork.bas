@@ -105,7 +105,7 @@ Dim col As Collection
         End If
     Next OtherShape
 
-
+Application.DoCmd 1312
 Set OtherShape = Nothing
 Exit Sub
 EX:
