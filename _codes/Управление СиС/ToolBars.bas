@@ -59,12 +59,22 @@ Sub AddButtons()
         .TooltipText = "Команда тактической единице"
         .FaceID = 346
     End With
+'---Кнопка "Очистить"-------------------------------------------------
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Очистить"
+        .Tag = "ClearInfCom"
+        .TooltipText = "Очистить все команды и обстановку после указанного времени" & vbNewLine & _
+            "(для всех или только выделенных фигур)"
+        .FaceID = 214
+    End With
+    
 '---Кнопка "Оценка"-------------------------------------------------
     With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Оценка"
         .Tag = "Mark"
         .TooltipText = "Оценка участника боевых действий или личного состава"
         .FaceID = 215 ' 162
+        .beginGroup = True
     End With
     
 '---Кнопки списков-------------------------------------------------

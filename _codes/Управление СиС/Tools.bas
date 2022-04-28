@@ -25,6 +25,35 @@ Public Function GetGFSShapeTime(ByRef shp As Visio.Shape) As Double
 GetGFSShapeTime = 0
 End Function
 
+Public Sub P_TryDeleteSmartTag(ByRef shp As Visio.Shape, stName As String, rowName As String)
+'stName - название смарт-тега, rowName - название строки смарт-тега в секции SmartTags
+Dim i As Integer
+Dim smartTagRowIndex As Integer
+    
+    'Получаем инекс смарт тега и проверяем имеется ли такой смарт тег
+    smartTagRowIndex = P_GetRowIndex(shp, rowName)
+    If smartTagRowIndex >= 0 Then
+        'Проверяем все строки секции Actions на предмет наличия ссылок на указанный смарт тег
+        For i = 0 To shp.RowCount(visSectionAction) - 1
+            'Если есть хоть одна - выходим из процедуры не удаляя смарт тег
+            If shp.CellsSRC(visSectionAction, i, visActionTagName).ResultStr(visUnitsString) = stName Then Exit Sub
+        Next i
+    
+        shp.DeleteRow visSectionSmartTag, smartTagRowIndex
+        'Удаляем так же и ячейку отслеживания времени
+        On Error Resume Next
+        shp.DeleteRow visSectionUser, shp.Cells("User.CurrentDocTime").row
+    End If
+
+End Sub
+
+Public Function P_GetRowIndex(ByRef shp As Visio.Shape, cellName As String) As Integer
+    On Error GoTo ex
+    P_GetRowIndex = shp.Cells(cellName).row
+Exit Function
+ex:
+    P_GetRowIndex = -1
+End Function
 
 '--------------------------------Сохранение лога ошибки-------------------------------------
 Public Sub SaveLog(ByRef error As ErrObject, ByVal eroorPosition As String, Optional ByVal addition As String)

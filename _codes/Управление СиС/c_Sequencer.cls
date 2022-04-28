@@ -179,14 +179,16 @@ Dim tmpShp As Visio.Shape
 End Function
 
 Private Function GetShpData(ByRef mainShp As Visio.Shape, shp As Visio.Shape) As Variant
+Dim tmpDateTime0 As Double
 Dim tmpDateTime As Double
+Dim tmpDateTime0S As String
 Dim tmpDateTimeS As String
     On Error Resume Next
     
     
-    tmpDateTime = GetGFSShapeTime(mainShp)
+    tmpDateTime0 = GetGFSShapeTime(mainShp)
 '    tmpDateTime = DateAdd("n", Int(t), tmpDateTime)
-    tmpDateTime = DateAdd("n", frm_Command.GetCommandTime, tmpDateTime)
+    tmpDateTime = DateAdd("n", frm_Command.GetCommandTime, tmpDateTime0)
                     
     If tmpDateTime > 0 Then
         setcellval shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)
@@ -201,9 +203,11 @@ Dim tmpDateTimeS As String
                 setcellval shp, "User.InPage.Prompt", "+"
             End If
 
+            tmpDateTime0S = ToTimeString(tmpDateTime0)
             tmpDateTimeS = ToTimeString(tmpDateTime)
             SetCellFrml shp, "Prop.SetTime", tmpDateTimeS
-            SetCellFrml shp, "Prop.FormingTime", tmpDateTimeS
+            SetCellFrml shp, "Prop.FormingTime", tmpDateTime0S
+            SetCellFrml shp, "Prop.ArrivalTime", tmpDateTimeS
         End If
     End If
     

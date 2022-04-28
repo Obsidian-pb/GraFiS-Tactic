@@ -105,7 +105,7 @@ Dim fireTime As Date
                     wrdTbl.Rows(r).Cells(9).Range.text = wrdTbl.Rows(r).Cells(9).Range.text & Chr(10) & com.text
                 End If
             Else
-                If Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 13 Then
+                If Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 13 Or Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 10 Then
                     wrdTbl.Rows(r).Cells(2).Range.text = com.text
                 Else
                     wrdTbl.Rows(r).Cells(2).Range.text = wrdTbl.Rows(r).Cells(2).Range.text & Chr(10) & com.text
@@ -199,6 +199,7 @@ Private Sub checkCommands(ByRef comCol As Collection, ByRef shp As Visio.Shape)
 Dim i As Integer
 Dim rowName As String
 Dim cmnd As c_SimpleDescription
+Dim tmpStr As String
     
     On Error GoTo ex
     
@@ -215,13 +216,14 @@ Dim cmnd As c_SimpleDescription
             End If
             
             If Left(rowName, 9) = "GFS_Info_" Then
-                Set cmnd = New c_SimpleDescription
-                cmnd.ActivateAsInfo shp, shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), CStr(cmndID)
-                AddUniqueCollectionItem comCol, cmnd
-'                        shp.Cells("Actions." & rowName & ".Action").Formula = Replace(shp.Cells("Actions." & rowName & ".Action").Formula, "РТП", "Управление_СиС")
+                tmpStr = shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString)
+                If Not InStr(1, tmpStr, " Оценка ") > 0 Then
+                    Set cmnd = New c_SimpleDescription
+                    cmnd.ActivateAsInfo shp, shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString), CStr(cmndID)
+                    AddUniqueCollectionItem comCol, cmnd
 
-                
-                cmndID = cmndID + 1
+                    cmndID = cmndID + 1
+                End If
             End If
         End If
     Next i

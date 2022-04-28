@@ -155,3 +155,72 @@ Exit Function
 ex:
     GetCommandState = tsError
 End Function
+
+
+Public Sub ClearComInf()
+Dim t As Date
+Dim shp As Visio.Shape
+Dim shps As Variant
+    
+    On Error GoTo ex
+    t = CDate(InputBox("Укажите время после которого следует удалить информацию и команды", "Укажите время"))
+    
+    If Application.ActiveWindow.Selection.Count > 0 Then
+        Set shps = Application.ActiveWindow.Selection
+    Else
+        Set shps = Application.ActivePage.Shapes
+    End If
+    
+    For Each shp In shps
+        checkCommandsForDelete shp, t
+        P_TryDeleteSmartTag shp, "Commands", "SmartTags.GFS_Commands"
+        P_TryDeleteSmartTag shp, "Info", "SmartTags.GFS_Info"
+    Next shp
+    
+ex:
+End Sub
+
+Private Sub checkCommandsForDelete(ByRef shp As Visio.Shape, ByVal maxTime As Date)
+'Проверяем все команды фигуры для удаления
+Dim i As Integer
+Dim rowName As String
+Dim t As Date
+Dim targetRowIndex As Integer
+    
+    On Error GoTo ex
+    
+    For i = 0 To shp.RowCount(visSectionUser) - 1
+        rowName = shp.CellsSRC(visSectionUser, i, 0).rowName
+        If Len(rowName) > 9 Then
+            If Left(rowName, 12) = "GFS_Command_" Or Left(rowName, 9) = "GFS_Info_" Then
+                t = GetInfComTime(shp.CellsSRC(visSectionUser, i, 0).ResultStr(visUnitsString))
+                If t > maxTime Then
+                    'Строка в секции User
+                    targetRowIndex = P_GetRowIndex(shp, "User." & rowName)
+                    If targetRowIndex >= 0 Then
+                        shp.DeleteRow visSectionUser, targetRowIndex
+                    End If
+                    'Строка в секции Action
+                    targetRowIndex = P_GetRowIndex(shp, "Actions." & rowName)   'Actions.GFS_Command_14
+                    If targetRowIndex >= 0 Then
+                        shp.DeleteRow visSectionAction, targetRowIndex
+                    End If
+                    i = i - 1
+                End If
+            End If
+        End If
+    Next i
+    
+    
+Exit Sub
+ex:
+
+End Sub
+
+Public Function GetInfComTime(ByVal txt As String) As Date
+    On Error GoTo ex
+    GetInfComTime = CDate(Split(txt, delimiter)(0))
+Exit Function
+ex:
+    GetInfComTime = 0
+End Function

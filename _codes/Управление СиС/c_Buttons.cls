@@ -14,6 +14,9 @@ Public WithEvents ComButCommand As Office.CommandBarButton           'Команда
 Attribute ComButCommand.VB_VarHelpID = -1
 Public WithEvents ComButInfo As Office.CommandBarButton              'Информация
 Attribute ComButInfo.VB_VarHelpID = -1
+Public WithEvents ComButClearComInf As Office.CommandBarButton       'Очистить
+Attribute ComButClearComInf.VB_VarHelpID = -1
+
 Public WithEvents ComButMark As Office.CommandBarButton              'Оценка
 Attribute ComButMark.VB_VarHelpID = -1
 
@@ -41,6 +44,7 @@ Attribute ComButDescExport.VB_VarHelpID = -1
 Private Sub Class_Initialize()
     Set ComButCommand = Application.CommandBars("РТП").Controls("Команда")
     Set ComButInfo = Application.CommandBars("РТП").Controls("Информация")
+    Set ComButClearComInf = Application.CommandBars("РТП").Controls("Очистить")
     Set ComButMark = Application.CommandBars("РТП").Controls("Оценка")
     
     Set ComButDescView = Application.CommandBars("РТП").Controls("Показать описание БД")
@@ -58,6 +62,7 @@ End Sub
 Private Sub Class_Terminate()
     Set ComButCommand = Nothing
     Set ComButInfo = Nothing
+    Set ComButClearComInf = Nothing
     Set ComButMark = Nothing
     
     Set ComButDescView = Nothing
@@ -85,6 +90,17 @@ Tail:
     '---Выходим из процедуры обработки
 End Sub
 
+Private Sub ComButClearComInf_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки
+    
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+'---Запускаем основное событие
+    ClearComInf
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
 
 Private Sub ComButDescExport_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 'Отслеживаем событие нажатия кнопки

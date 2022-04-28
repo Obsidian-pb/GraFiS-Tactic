@@ -204,7 +204,7 @@ Private Sub TryDeleteSmartTag(stName As String, rowName As String)
 'stName - название смарт-тега, rowName - название строки смарт-тега в секции SmartTags
 Dim i As Integer
 Dim smartTagRowIndex As Integer
-    
+
     'Получаем инекс смарт тега и проверяем имеется ли такой смарт тег
     smartTagRowIndex = GetRowIndex(rowName)
     If smartTagRowIndex >= 0 Then
@@ -213,7 +213,7 @@ Dim smartTagRowIndex As Integer
             'Если есть хоть одна - выходим из процедуры не удаляя смарт тег
             If shp.CellsSRC(visSectionAction, i, visActionTagName).ResultStr(visUnitsString) = stName Then Exit Sub
         Next i
-    
+
         shp.DeleteRow visSectionSmartTag, smartTagRowIndex
         'Удаляем так же и ячейку отслеживания времени
         On Error Resume Next
