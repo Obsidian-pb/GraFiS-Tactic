@@ -111,7 +111,7 @@ Dim nextNode As c_Node
     node.V = vdq_tool.GetV(node.D, node.nodeClass)
     
     If node.V > 0 Then
-        node.t_here = node.lenight / node.V
+        node.t_here = Round(node.lenight / node.V, 2)
     Else
         node.t_here = 0
     End If
@@ -143,7 +143,7 @@ Dim nextNode As c_Node
                 node.t_here = 0
             Case Else
                 node.V = vdq_tool.GetVByQ(node.q, node.nodeClass)
-                node.t_here = node.lenight / node.V
+                node.t_here = Round(node.lenight / node.V, 2)
         End Select
     Else
     'Есть задержка
@@ -156,14 +156,14 @@ Dim nextNode As c_Node
 '                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)) - (1 / (node.qw)))
                 node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw_prevs)))
                 node.t_sk = node.peoplesFlow * f / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)
-                node.t_here = (node.lenight / node.V) + node.t_zad
+                node.t_here = Round((node.lenight / node.V) + node.t_zad, 2)
             Case Else
                 node.V = vdq_tool.GetVByQ(node.q, node.nodeClass)
                 
 '                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)) - (1 / (node.qw)))
                 node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw_prevs)))
                 node.t_sk = node.peoplesFlow * f / (vdq_tool.GetQ(node.D, node.nodeClass) * node.nextNodes(1).width)
-                node.t_here = (node.lenight / node.V) + node.t_zad
+                node.t_here = Round((node.lenight / node.V) + node.t_zad, 2)
         End Select
     End If
     
@@ -192,7 +192,7 @@ Dim nextNode As c_Node
                 node.t_here = 0
             Case Else
                 node.V = vdq_tool.GetVByQ(node.q, node.nodeClass)
-                node.t_here = node.lenight / node.V
+                node.t_here = Round(node.lenight / node.V, 2)
         End Select
     Else
     'Есть задержка
@@ -205,14 +205,14 @@ Dim nextNode As c_Node
 '                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw)))
                 node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw_prevs)))
                 node.t_sk = node.peoplesFlow * f / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)
-                node.t_here = (node.lenight / node.V) + node.t_zad
+                node.t_here = Round((node.lenight / node.V) + node.t_zad, 2)
             Case Else
                 node.V = vdq_tool.GetVByQ(node.q, node.nodeClass)
                 
 '                node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw)))
                 node.t_zad = node.peoplesFlow * f * ((1 / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)) - (1 / (node.qw_prevs)))
                 node.t_sk = node.peoplesFlow * f / (vdq_tool.GetQ(node.D, node.nodeClass) * node.width)
-                node.t_here = (node.lenight / node.V) + node.t_zad
+                node.t_here = Round((node.lenight / node.V) + node.t_zad, 2)
         End Select
     End If
     

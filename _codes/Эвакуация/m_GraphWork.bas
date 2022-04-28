@@ -46,8 +46,9 @@ Dim controller As c_ControllerGraph
     
     Debug.Print "Общее время эвакуации как сумма времен всех узлов: " & controller.TotalTime
     Debug.Print "Время эвакуации по последнему узлу: " & controller.graph.exitNodes(1).t_flow
-    MsgBox "Общее время эвакуации как сумма времен всех узлов: " & controller.TotalTime & vbNewLine & _
-            "Время эвакуации по последнему узлу: " & controller.graph.exitNodes(1).t_flow
+'    MsgBox "Общее время эвакуации как сумма времен всех узлов: " & controller.TotalTime & vbNewLine & _
+'            "Время эвакуации по последнему узлу: " & controller.graph.exitNodes(1).t_flow
+    MsgBox "Время эвакуации: " & controller.graph.exitNodes(1).t_flow
     
     Set graph = Nothing
 End Sub
