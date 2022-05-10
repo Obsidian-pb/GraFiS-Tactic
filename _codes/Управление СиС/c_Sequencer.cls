@@ -67,7 +67,7 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
     CheckAndAddCommand = False
     
     'Техника (+разветвление временно)
-    If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42)) Then
+    If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42, 34)) Then
         Select Case cellval(child, "user.IndexPers")
             Case Is = indexPers.ipStvolRuch
                 frm_Command.NewCommand parent, "2", "Подать ствол ", False
@@ -75,7 +75,14 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
                     setcellval parent, "Actions.Patrub.Checked", 1
                 End If
             Case Is = indexPers.ipGDZSZvenoVozd
-                frm_Command.NewCommand parent, "1", "Сформировать звено ГДЗС", False
+                'Если поверх ствола добавляется звено, то просто связываем с родительской фигурой
+                If IsGFSShapeWithIP(parent, Array(34)) Then
+                    GetShpData_0 parent, child
+'                    frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС", False
+                Else
+                    frm_Command.NewCommand parent, "1", "Сформировать звено ГДЗС", False
+                End If
+'                frm_Command.NewCommand parent, "1", "Сформировать звено ГДЗС", False
             Case Is = indexPers.ipGDZSPost
                 frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС", False
             Case Is = indexPers.ipKPP
@@ -216,6 +223,45 @@ Dim tmpDateTimeS As String
     End If
     
 End Function
+
+Private Function GetShpData_0(ByRef mainShp As Visio.Shape, shp As Visio.Shape) As Variant
+Dim tmpDateTime0 As Double
+Dim tmpDateTime As Double
+Dim tmpDateTime0S As String
+Dim tmpDateTimeS As String
+    On Error Resume Next
+    
+    
+    tmpDateTime0 = GetGFSShapeTime(mainShp)
+    tmpDateTime = tmpDateTime0
+
+    
+'    Debug.Print (CDate(tmpDateTime0))
+'    Debug.Print (CDate(tmpDateTime))
+                    
+    If tmpDateTime > 0 Then
+        setcellval shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)
+        setcellval shp, "Prop.Call", cellval(mainShp, "Prop.Call", visUnitsString)
+    
+        'Передаем фигуре время родительской, если на форме команды был нажат "Ок"
+        If shp.CellExists("User.InPage", 0) = 0 Then
+            shp.AddNamedRow visSectionUser, "InPage", visRowUser
+            setcellval shp, "User.InPage", 1
+            setcellval shp, "User.InPage.Prompt", "+"
+        End If
+
+        tmpDateTime0S = ToTimeString(tmpDateTime0)
+        tmpDateTimeS = ToTimeString(tmpDateTime)
+        SetCellFrml shp, "Prop.SetTime", tmpDateTimeS
+        SetCellFrml shp, "Prop.FormingTime", tmpDateTime0S
+        SetCellFrml shp, "Prop.ArrivalTime", tmpDateTimeS
+    End If
+    
+End Function
+
+
+
+
 
 'Private Function GetGFSShapeTime(ByRef shp As Visio.Shape) As Double
 '
