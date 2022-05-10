@@ -188,7 +188,11 @@ Dim tmpDateTimeS As String
     
     tmpDateTime0 = GetGFSShapeTime(mainShp)
 '    tmpDateTime = DateAdd("n", Int(t), tmpDateTime)
-    tmpDateTime = DateAdd("n", frm_Command.GetCommandTime, tmpDateTime0)
+'    tmpDateTime = DateAdd("n", frm_Command.GetCommandTime, tmpDateTime0)
+    tmpDateTime = frm_Command.GetCommandDateTime
+    
+    Debug.Print (CDate(tmpDateTime0))
+    Debug.Print (CDate(tmpDateTime))
                     
     If tmpDateTime > 0 Then
         setcellval shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)

@@ -232,8 +232,20 @@ ex:
     GetCommandTime = 0
 End Function
 
+Public Function GetCommandDateTime() As Double
+Dim tmp() As String
+    On Error GoTo ex
+'    GetCommandDateTime = Split(Me.txt_CommandText, delimiter)(1)  Split(Me.txt_CommandText, delimiter)(1)
+    tmp = Split(Me.txt_CommandText, delimiter)
+    GetCommandDateTime = DateAdd("n", tmp(1), CDate(tmp(0)))
+    
+Exit Function
+ex:
+    GetCommandDateTime = 0
+End Function
+
 Public Function GetCommandTextDate(ByVal cmnd_txt As String) As Date
-' Получаем строку команды и возвращаем врем окончания ее выполнения
+' Получаем строку команды и возвращаем время окончания ее выполнения
 Dim arr() As String
 Dim tm As Date
 Dim m As Integer
@@ -244,11 +256,13 @@ Dim m As Integer
     tm = arr(0)
     If IsNumeric(arr(1)) Then
         m = arr(1)
+        GetCommandTextDate = DateAdd("n", m, tm)
     Else
         m = 0
+        GetCommandTextDate = GetCurrentTime
     End If
     
-    GetCommandTextDate = DateAdd("n", m, tm)
+'    GetCommandTextDate = DateAdd("n", m, tm)
     
 Exit Function
 ex:

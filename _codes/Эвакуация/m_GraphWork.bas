@@ -72,7 +72,7 @@ Dim OtherShape As Visio.Shape
 Dim x, y As Double
 Dim col As Collection
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Определяем координаты активной фигуры
     x = ShpObj.Cells("PinX").Result(visInches)
     y = ShpObj.Cells("Piny").Result(visInches)
@@ -109,7 +109,7 @@ Dim col As Collection
 Application.DoCmd 1312
 Set OtherShape = Nothing
 Exit Sub
-EX:
+ex:
     Set OtherShape = Nothing
     SaveLog Err, "SeekPlace", ShpObj.Name
 End Sub

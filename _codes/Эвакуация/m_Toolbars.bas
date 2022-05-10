@@ -25,15 +25,15 @@ End Sub
 
 Public Sub RemoveTB_Evacuation()
 'Процедура добавления панели управления "Эвакуация"-------------------------------
-    On Error GoTo EX
+    On Error GoTo ex
     Application.CommandBars("Эвакуация").Delete
 
-EX:
+ex:
 End Sub
 
 Public Sub AddButtons()
 'Процедура добавление новой кнопки на панель управления "Эвакуация"--------------
-    On Error GoTo EX
+    On Error GoTo ex
 '---Объявляем переменные и постоянные--------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -69,7 +69,7 @@ Public Sub AddButtons()
 
 Set Bar = Nothing
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons"
 End Sub

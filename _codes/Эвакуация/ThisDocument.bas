@@ -99,6 +99,7 @@ Dim shpTo As Visio.Shape
                 conLine.AddNamedRow visSectionProp, "EdgeLen", 0
                 SetCellVal conLine, "Prop.EdgeLen.Label", "ƒлина"
                 SetCellFrml conLine, "EventXFMod", Replace("CallThis('GetShapeLen','Ёвакуаци€')", "'", Chr(34))
+                GetShapeLen conLine
 
             End If
             'ƒл€ предыдущей фигуры узла (при условии, что это горизонтальный проход) добавл€ем длину соединительной линии, как длину пути

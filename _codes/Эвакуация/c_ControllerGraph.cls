@@ -106,6 +106,8 @@ Private Sub CalcNode_Start(ByRef node As c_Node)
 '–асчет параметров дл€ стартового узла
 Dim nextNode As c_Node
     
+    On Error GoTo ex
+    
     node.D = (node.peoplesFlow * f) / (node.lenight * node.width)
     node.q = vdq_tool.GetQ(node.D, node.nodeClass)
     node.V = vdq_tool.GetV(node.D, node.nodeClass)
@@ -125,7 +127,9 @@ Dim nextNode As c_Node
             CalcNode_Exit nextNode
         End If
     Next nextNode
-    
+Exit Sub
+ex:
+    MsgBox "Ќе верное указание параметров в узле с номером " & node.number
 End Sub
 
 
