@@ -48,7 +48,7 @@ Dim SQLQuery As String
 Dim List As String
 Dim i As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
     '---Список степеней огнестойкости
     For i = 1 To 5
         Me.CB_FireRating.AddItem (i)
@@ -80,7 +80,7 @@ Dim i As Integer
     End With
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "UserForm_Initialize"
 End Sub
 

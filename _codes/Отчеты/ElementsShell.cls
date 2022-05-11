@@ -267,21 +267,21 @@ End Sub
 '-------------------------------------ѕубличные функции классса----------------------------------------------
 Public Function ByID(ByVal a_elemID As String) As Element
 '‘ункци€ возвращает ссылку на Ёлемент с ID = a_elemID
-    On Error GoTo EX
+    On Error GoTo ex
     Set ByID = elemCollection.item(a_elemID)
     
 Exit Function
-EX:
+ex:
     Set ByID = Nothing
 End Function
 
 Public Function ByCellID(ByVal a_elemCellID As String) As Element
 '‘ункци€ возвращает ссылку на Ёлемент с именем €чейки CellID = a_elemCellID
-    On Error GoTo EX
+    On Error GoTo ex
     Set ByCellID = elemWithCellsCollection.item(a_elemCellID)
     
 Exit Function
-EX:
+ex:
     Set ByCellID = Nothing
 End Function
 

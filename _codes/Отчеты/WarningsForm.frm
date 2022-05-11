@@ -195,7 +195,7 @@ Public Sub Refresh()
 'Обновляем содержимое списка предупреждений
 Dim i As Integer
 
-    On Error GoTo EX
+    On Error GoTo ex
 '---Проводим расчет элементов
     A.Refresh Application.ActivePage.Index
     
@@ -477,7 +477,7 @@ Dim i As Integer
     'Формируем список предупреждений
     On Error Resume Next
         lstWarnings.List = GetWarningsListArray
-    On Error GoTo EX
+    On Error GoTo ex
     
     'Если предупреждений не обнаружено, сообщаем об этом
     If lstWarnings.ListCount = 0 Then lstWarnings.AddItem "Замечаний не обнаружено"
@@ -486,7 +486,7 @@ Dim i As Integer
     lstWarnings.AddItem " "
 
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "WarningForm.Refresh"
 End Sub

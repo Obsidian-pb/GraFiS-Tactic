@@ -23,7 +23,7 @@ Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByVal item
 'Add item (with unique .key prop) to oldCollection
 'Dim i As Integer
 'Dim s As String
-    On Error GoTo EX
+    On Error GoTo ex
     
     If key = "" Then
         oldCollection.Add item, CStr(item.ID)
@@ -37,14 +37,14 @@ Public Sub AddUniqueCollectionItem(ByRef oldCollection As Collection, ByVal item
     End If
 
 Exit Sub
-EX:
+ex:
 '    Debug.Print "Item with key='" & item.ID & "' is already exists!)"
 End Sub
 
 Public Sub SetCollectionItems(ByRef oldCollection As Collection, ByRef newCollection As Collection)
 'Refresh old collection items with items from newCollection
 Dim item As Object
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set oldCollection = New Collection
 
@@ -53,7 +53,7 @@ Dim item As Object
     Next item
     
 Exit Sub
-EX:
+ex:
 '    Debug.Print "Item with key='" & item.ID & "' is already exists!)"
 End Sub
 
@@ -79,7 +79,7 @@ Public Function GetFromCollection(ByRef coll As Collection, ByVal ID As String) 
 'Get specific item (with unique .ID prop) from collection
 Dim item As Object
 
-    On Error GoTo EX
+    On Error GoTo ex
     Set item = coll.item(ID)
     If Not item Is Nothing Then
         Set GetFromCollection = item
@@ -88,7 +88,7 @@ Dim item As Object
     End If
     
 Exit Function
-EX:
+ex:
     Set GetFromCollection = Nothing
 End Function
 
@@ -96,7 +96,7 @@ Public Function IsInCollection(ByRef coll As Collection, obj As Object) As Boole
 'Check item (with unique .ID prop) existance in collection
 Dim item As Object
 
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set item = coll.item(CStr(obj.ID))
     If Not item Is Nothing Then
@@ -106,7 +106,7 @@ Dim item As Object
     End If
     
 Exit Function
-EX:
+ex:
     IsInCollection = False
 End Function
 
@@ -114,7 +114,7 @@ Public Function IsKeyInCollection(ByRef coll As Collection, key As String) As Bo
 'Check item's key existance in collection
 Dim item As Object
 
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set item = coll.item(key)
     If Not item Is Nothing Then
@@ -124,7 +124,7 @@ Dim item As Object
     End If
     
 Exit Function
-EX:
+ex:
     IsKeyInCollection = False
 End Function
 
@@ -145,7 +145,7 @@ Dim filterItemCellValue As String
 Dim i As Integer
 Dim tmpColl As Collection
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set tmpColl = New Collection
     
@@ -177,7 +177,7 @@ Dim tmpColl As Collection
     Set FilterShapes = tmpColl
     
 Exit Function
-EX:
+ex:
     Set FilterShapes = New Collection
 End Function
 
@@ -199,7 +199,7 @@ Dim i As Integer
 Dim tmpColl As Collection
 Dim approved As Boolean
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     Set tmpColl = New Collection
     
@@ -241,7 +241,7 @@ Dim approved As Boolean
     Set FilterShapesAnd = tmpColl
     
 Exit Function
-EX:
+ex:
     Set FilterShapesAnd = New Collection
 End Function
 

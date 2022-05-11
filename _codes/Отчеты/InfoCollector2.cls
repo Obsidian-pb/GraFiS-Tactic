@@ -46,7 +46,7 @@ Dim targetPage As Visio.Page
 Dim tmp As Variant
 Dim latestSquareTime As Date
 
-    On Error GoTo EX
+    On Error GoTo ex
 'Обнуляем количественные свойства
 '---Обнуляем минимальное время площади пожара
     latestSquareTime = 0
@@ -714,7 +714,7 @@ Dim latestSquareTime As Date
                                     Then .Raise "TargetedPAHave", cellVal(shp, "Prop.Quantity") - 1 ' pi_TargetedPAHave = pi_TargetedPAHave + (vsO_Shape.Cells("Prop.Quantity") - 1)
                                 If InStr(1, cellVal(shp, "Prop.Dest", visUnitsString), "Основ") <> 0 _
                                     Then .Raise "MainOverallHave", cellVal(shp, "Prop.Quantity") - 1 ' pi_MainOverallCount = pi_MainOverallCount + (vsO_Shape.Cells("Prop.Quantity") - 1)
-                                On Error GoTo EX
+                                On Error GoTo ex
                         End Select
         
                     
@@ -791,7 +791,7 @@ Dim latestSquareTime As Date
 RaiseEvent AfterRefresh
 Set Refresh = Me
 Exit Function
-EX:
+ex:
     SaveLog Err, "Refresh"
     If Not shp Is Nothing Then Debug.Print shp.Name
     Set Refresh = Me
@@ -847,7 +847,7 @@ Private Function IsEternalSource(ByRef shp As Visio.Shape) As Boolean
 Dim shpWS As Visio.Shape
 Dim shpWSIndex As Long
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     shpWSIndex = cellVal(shp, "User.WSShapeID")
     If shpWSIndex > 0 Then
@@ -858,7 +858,7 @@ Dim shpWSIndex As Long
     End If
     
 Exit Function
-EX:
+ex:
     IsEternalSource = False
 End Function
 
@@ -941,7 +941,7 @@ Public Function GetSingleValue(ByVal cellName As String, Optional ByVal dataType
 Dim shp As Visio.Shape
 Dim tmpStr As String
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     For Each shp In A.GFSShapes
         tmpStr = cellVal(shp, cellName, dataType, "")
@@ -952,7 +952,7 @@ Dim tmpStr As String
     Next shp
         
 Exit Function
-EX:
+ex:
     GetSingleValue = ""
 End Function
 

@@ -61,7 +61,7 @@ Dim shp As Visio.Shape
         Next shp
     Next mstr
     
-    On Error GoTo EX
+    On Error GoTo ex
     '!Для экспорта в детали отчетов
     Set doc = Application.Documents("Детали отчетов.vss")
     If Not doc Is Nothing Then
@@ -73,7 +73,7 @@ Dim shp As Visio.Shape
         Next mstr
     End If
 
-EX:
+ex:
     Set changedNames = Nothing
     Set elements = Nothing
 End Sub
@@ -85,29 +85,29 @@ Dim curCallName As String
 Dim newCallName As String
     
     If shp.CellExists("Prop.PropertyName", 0) Then
-        shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
+'        shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
     
         'More accurate fix - tmporary blocked! Need to review
-'        curCallName = cellVal(shp, "Prop.PropertyName.Value", visUnitsString)
-''        Debug.Print curCallName
-'        If Not InStr(1, properyNames, curCallName, vbTextCompare) > 0 Then
-'            Debug.Print curCallName
-'            'Проверяем заменялось ли уже такое имя вызова
-'            newCallName = GetExistedAnswer(curCallName)
-'            If newCallName = "" Then
-'                NewPropSelectForm.OpenForSelect properyNames, curCallName
-'                If NewPropSelectForm.ok Then
-'                    shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
-'                    shp.Cells("Prop.PropertyName.Value").Formula = """" & NewPropSelectForm.lbCallNames.Text & """"
-'                    'Сохраняем принятый вариант для следующих изменений ДОРАБОТАТЬ! ИНОГДА ВЫЗЫВАЕТ ОШИБКУ
-'
-''                    changedNames.Add NewPropSelectForm.lbCallNames.Text, curCallName
-'                End If
-'            Else
-'                shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
-'                shp.Cells("Prop.PropertyName.Value").Formula = """" & newCallName & """"
-'            End If
-'        End If
+        curCallName = cellVal(shp, "Prop.PropertyName.Value", visUnitsString)
+'        Debug.Print curCallName
+        If Not InStr(1, properyNames, curCallName, vbTextCompare) > 0 Then
+            Debug.Print curCallName
+            'Проверяем заменялось ли уже такое имя вызова
+            newCallName = GetExistedAnswer(curCallName)
+            If newCallName = "" Then
+                NewPropSelectForm.OpenForSelect properyNames, curCallName
+                If NewPropSelectForm.ok Then
+                    shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
+                    shp.Cells("Prop.PropertyName.Value").Formula = """" & NewPropSelectForm.lbCallNames.Text & """"
+                    'Сохраняем принятый вариант для следующих изменений ДОРАБОТАТЬ! ИНОГДА ВЫЗЫВАЕТ ОШИБКУ
+
+'                    changedNames.Add NewPropSelectForm.lbCallNames.Text, curCallName
+                End If
+            Else
+                shp.Cells("Prop.PropertyName.Format").Formula = """" & properyNames & """"
+                shp.Cells("Prop.PropertyName.Value").Formula = """" & newCallName & """"
+            End If
+        End If
     End If
     
     If shp.Shapes.count > 0 Then
@@ -120,11 +120,11 @@ End Sub
 Private Function GetExistedAnswer(ByVal curCallName As String) As String
 Dim str As Object
     
-    On Error GoTo EX
+    On Error GoTo ex
 
     Set str = changedNames.item(curCallName)
 Exit Function
-EX:
+ex:
     Set str = Nothing
 End Function
 

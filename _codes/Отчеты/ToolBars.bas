@@ -26,15 +26,15 @@ End Sub
 
 Sub RemoveTB_SpecFunc()
 'Процедура добавления панели управления "Спецфункции"-------------------------------
-    On Error GoTo EX
+    On Error GoTo ex
     Application.CommandBars("Спецфункции").Delete
     Set btns = Nothing
-EX:
+ex:
 End Sub
 
 Sub AddButtons()
 'Процедура добавление новой кнопки на панель управления "Спецфункции"--------------
-    On Error GoTo EX
+    On Error GoTo ex
 '---Объявляем переменные и постоянные--------------------------------------------------
     Dim Bar As CommandBar, Button As CommandBarButton
     Dim DocPath As String
@@ -88,7 +88,7 @@ Sub AddButtons()
     
 Set Bar = Nothing
 Exit Sub
-EX:
+ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons"
 End Sub

@@ -27,7 +27,7 @@ Private Sub sp_DocumentRowsAdd()
 '---Объявляем переменные
 Dim vpVS_DocShape As Visio.Shape
 
-    On erro GoTo EX
+    On erro GoTo ex
 '---Инициируем объект Шэйп-листа документа
     Set vpVS_DocShape = Application.ActiveDocument.DocumentSheet
 
@@ -55,7 +55,7 @@ Dim vpVS_DocShape As Visio.Shape
     vpVS_DocShape.Cells("User.FireRating.Prompt").FormulaU = """Степень огнестойкости"""
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "sp_DocumentRowsAdd"
 End Sub
 

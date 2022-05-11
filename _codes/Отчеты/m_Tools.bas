@@ -84,7 +84,7 @@ Public Function IsGFSShapeWithIP(ByRef shp As Visio.Shape, ByRef gfsIndexPerses 
 Dim i As Integer
 Dim indexPers As Integer
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     'Если необходима предварительная проверка на отношение фигуры к ГраФиС:
     If needGFSCheck Then
@@ -120,13 +120,13 @@ Dim indexPers As Integer
 
 IsGFSShapeWithIP = False
 Exit Function
-EX:
+ex:
     IsGFSShapeWithIP = False
     SaveLog Err, "m_Tools.IsGFSShapeWithIP"
 End Function
 
 Public Function SM(ByVal str As String, ByVal count As Integer) As String
-'Мультипличируем строку указанное количество раз
+'Мультиплицируем строку указанное количество раз
 'Например, SM("*",5) => "*****"
 Dim i As Integer
 Dim strTmp As String
@@ -134,6 +134,14 @@ Dim strTmp As String
         strTmp = strTmp & str
     Next i
 SM = strTmp
+End Function
+
+Public Function SelectedShape() As Visio.Shape
+    On Error GoTo ex
+    Set SelectedShape = Application.ActiveWindow.Selection(1)
+Exit Function
+ex:
+    Set SelectedShape = Nothing
 End Function
 
 '--------------------------------Сохранение лога ошибки-------------------------------------

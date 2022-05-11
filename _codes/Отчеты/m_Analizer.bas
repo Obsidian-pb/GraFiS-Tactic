@@ -7,7 +7,7 @@ Public Sub sP_ChangeValue(ShpObj As Visio.Shape)
 'Процедура реакции на действие пользователя
 Dim targetPage As Visio.Page
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '---Предлагаем пользователю указать страницу для анализа
     SeetsSelectForm.Show
@@ -21,14 +21,14 @@ Dim targetPage As Visio.Page
 '---Запускаем циклы обработки фигур отчета
     sP_ChangeValueMain ShpObj, targetPage
 
-EX:
+ex:
 End Sub
 
 Public Sub sP_ChangeValueMain(ByRef vsO_BaseShape As Visio.Shape, ByRef vsO_TargetPage As Visio.Page)
 'Процедура реакции на действие пользователя
 Dim vsO_Shape As Visio.Shape
 
-    On Error GoTo EX
+    On Error GoTo ex
 
 '---Перебираем все фигуры в отчете
     If vsO_BaseShape.Shapes.count > 0 Then
@@ -45,7 +45,7 @@ Dim vsO_Shape As Visio.Shape
     End If
 
 Exit Sub
-EX:
+ex:
     SaveLog Err, "sP_ChangeValueMain"
 End Sub
 

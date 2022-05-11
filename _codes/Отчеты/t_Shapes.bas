@@ -72,7 +72,7 @@ Public Function cellVal(ByRef shps As Variant, ByVal cellName As String, Optiona
 Dim shp As Visio.Shape
 Dim tmpVal As Variant
     
-    On Error GoTo EX
+    On Error GoTo ex
     
 '    Debug.Print TypeName(shps)
     If TypeName(shps) = "Shape" Then        'Если фигура
@@ -109,7 +109,7 @@ Dim tmpVal As Variant
     
 cellVal = defaultValue
 Exit Function
-EX:
+ex:
     cellVal = defaultValue
 End Function
 
@@ -121,7 +121,7 @@ Public Sub SetCellVal(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal 
 'Set cell with cellName value. If such cell does not exists, does nothing
 Dim cll As Visio.Cell
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
@@ -129,7 +129,7 @@ Dim cll As Visio.Cell
     End If
     
 Exit Sub
-EX:
+ex:
     Debug.Print "Error in t_Shapes modul in 'Otcheti'! " & shp.Name & ", " & cellName & ", " & NewVal
 End Sub
 
@@ -137,7 +137,7 @@ Public Sub SetCellFrml(ByRef shp As Visio.Shape, ByVal cellName As String, ByVal
 'Set cell with cellName formula. If such cell does not exists, does nothing
 Dim cll As Visio.Cell
     
-    On Error GoTo EX
+    On Error GoTo ex
     
     If shp.CellExists(cellName, 0) Then
         '!!!Need to test!!!
@@ -145,7 +145,7 @@ Dim cll As Visio.Cell
     End If
     
 Exit Sub
-EX:
+ex:
 
 End Sub
 
@@ -157,7 +157,7 @@ Dim vals() As String
 Dim curval As String
 Dim i As Integer
 
-On Error GoTo EX
+On Error GoTo ex
     
     If shp.CellExists(cellName, 0) Then
         If val <> "" Then
@@ -195,7 +195,7 @@ On Error GoTo EX
     End If
     
 Exit Function
-EX:
+ex:
     ShapeHaveCell = False
 End Function
 
