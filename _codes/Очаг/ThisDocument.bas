@@ -233,7 +233,7 @@ Private Sub AddTimeUserCells()
 'Прока добавляет ячейки "User.FireTime", "User.CurrentTime"
 Dim docSheet As Visio.Shape
 Dim cell As Visio.cell
-
+    
     Set docSheet = Application.ActiveDocument.DocumentSheet
     
     If Not docSheet.CellExists("User.FireTime", 0) Then
