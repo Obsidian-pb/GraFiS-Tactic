@@ -399,8 +399,92 @@ Dim f As frm_ListForm
     
 End Sub
 
+Public Sub ShowEvacNodes()
+'Показываем список имеющихся на схеме узлов эвакуации по результатам расчета
+Dim i As Integer
+Dim shp As Visio.Shape
+Dim nodes As Collection
 
+Dim myArray As Variant
+Dim f As frm_ListForm
+    
+    
+    
+    '---Формируем коллекцию фигур и сортируем их по номеру
+    Set nodes = New Collection
+    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+        If IsGFSShapeWithIP(shp, indexPers.ipEvacNode) Then
+            AddOrderedNodeItem nodes, shp
+        End If
+    Next shp
+    If nodes.Count = 0 Then Exit Sub
+    
+    
+    'Заполняем таблицу  с перечнем техники
+    If nodes.Count > 0 Then
+        ReDim myArray(nodes.Count, 9)
+        '---Вставка первой записи
+        myArray(0, 0) = "ID"
+        myArray(0, 1) = "№"
+        myArray(0, 2) = "Класс"
+        myArray(0, 3) = "Тип"
+        myArray(0, 4) = "Ширина"
+        myArray(0, 5) = "Длина"
+        myArray(0, 6) = "Людей"
+        myArray(0, 7) = "Людской поток"
+        myArray(0, 8) = "Время участка"
+        myArray(0, 9) = "Время общее"
+        
 
+        For i = 1 To nodes.Count
+            '---Вставка остальных записей
+            Set shp = nodes(i)
+            myArray(i, 0) = shp.ID
+            myArray(i, 1) = cellval(shp, "Prop.NodeNumber", visUnitsString, "")
+            myArray(i, 2) = cellval(shp, "Prop.WayClass", visUnitsString, "")
+            myArray(i, 3) = cellval(shp, "Prop.WayType", visUnitsString, "")
+            myArray(i, 4) = cellval(shp, "Prop.WayWidth", visUnitsString, "")
+            myArray(i, 5) = cellval(shp, "Prop.WayLen", visUnitsString, "")
+            myArray(i, 6) = cellval(shp, "Prop.PeopleHere", visUnitsString, "")
+            myArray(i, 7) = cellval(shp, "Prop.PeopleFlow", visUnitsString, "")
+            myArray(i, 8) = cellval(shp, "Prop.tHere", visUnitsString, "")
+            myArray(i, 9) = cellval(shp, "Prop.t_Flow", visUnitsString, "")
+        Next i
+    End If
+
+    '---Показываем форму
+    Set f = New frm_ListForm
+    f.Activate myArray, "0 pt;25 pt;100 pt;100 pt;50 pt;50 pt;50 pt;70 pt;70 pt;70 pt", "EvacNodes", "Узлы пути"
+
+End Sub
+
+Private Sub AddOrderedNodeItem(ByRef nodes As Collection, ByVal nodeItem As Visio.Shape)
+Dim nextNode As Visio.Shape
+    
+    Set nextNode = FindHigherNode(nodes, nodeItem)
+    'Основная коллекция
+    If nextNode Is Nothing Then
+        nodes.Add nodeItem, CStr(nodeItem.ID)
+    Else
+        nodes.Add nodeItem, CStr(nodeItem.ID), CStr(nextNode.ID)
+    End If
+    
+End Sub
+Private Function FindHigherNode(ByRef nodes As Collection, ByRef nodeIn As Visio.Shape) As Visio.Shape
+'Возвращает элемент в коллекции nodes с номером больше чем у текущего (тот элемент перед которым нужно будет вставить новый)
+Dim node As Visio.Shape
+Dim nodeNumber As Integer
+Dim nodeInNumber As Integer
+    
+    nodeInNumber = cellval(nodeIn, "Prop.NodeNumber")
+    For Each node In nodes
+        nodeNumber = cellval(node, "Prop.NodeNumber")
+        If nodeNumber > nodeInNumber Then
+            Set FindHigherNode = node
+            Exit Function
+        End If
+    Next node
+End Function
 
 '----------------------------Функции проверки типов фигур
 Private Function pf_IsMainTechnics(ByVal a_IndexPers As Integer) As Boolean

@@ -134,6 +134,15 @@ Sub AddButtons()
         .TooltipText = "Показать экспликацию помещенийи"
         .FaceID = 544
     End With
+    '---Кнопка "Список узлов"-------------------------------------------------
+'    If IsDocumentOpened("Эвакуация.vss") Then
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Пути эвакуации"
+        .Tag = "NodesList"
+        .TooltipText = "Перечень всех путей эвакуации"
+        .FaceID = 2074
+    End With
+'    End If
 '    ЗАРЕЗЕРВИРОВАНО
 '    '---"Статисты"
 '    With Bar.Controls.Add(Type:=msoControlButton)
@@ -174,18 +183,21 @@ Sub DeleteButtons()
     Dim Bar As CommandBar, Button As CommandBarButton
 
     Set Bar = Application.CommandBars("РТП")
-'---Удаление кнопки "Команда" из панели управления "РТП"------------------------
-    Set Button = Bar.Controls("Команда")
-    Button.Delete
-'---Удаление кнопки "Информация" из панели управления "РТП"------------------------
-    Set Button = Bar.Controls("Информация")
-    Button.Delete
-'---Удаление кнопки "Оценка" из панели управления "РТП"------------------------
-    Set Button = Bar.Controls("Оценка")
-    Button.Delete
-'---Удаление кнопки "Экспорт описания БД" из панели управления "РТП"------------------------
-    Set Button = Bar.Controls("Экспорт описания БД")
-    Button.Delete
+    For Each Button In Bar.Controls
+        Button.Delete
+    Next Button
+''---Удаление кнопки "Команда" из панели управления "РТП"------------------------
+'    Set Button = Bar.Controls("Команда")
+'    Button.Delete
+''---Удаление кнопки "Информация" из панели управления "РТП"------------------------
+'    Set Button = Bar.Controls("Информация")
+'    Button.Delete
+''---Удаление кнопки "Оценка" из панели управления "РТП"------------------------
+'    Set Button = Bar.Controls("Оценка")
+'    Button.Delete
+''---Удаление кнопки "Экспорт описания БД" из панели управления "РТП"------------------------
+'    Set Button = Bar.Controls("Экспорт описания БД")
+'    Button.Delete
 
 Set btns = Nothing
 

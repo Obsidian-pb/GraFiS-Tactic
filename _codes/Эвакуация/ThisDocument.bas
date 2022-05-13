@@ -63,7 +63,9 @@ End Sub
 Private Sub SelectComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     SelectNodes
 End Sub
-
+Private Sub NodesListComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    SelectNodes
+End Sub
 
 '--------Блок работы с соединениями--------------------
 Public Sub ActivateApp()

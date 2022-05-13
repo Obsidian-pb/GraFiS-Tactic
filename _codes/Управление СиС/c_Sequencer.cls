@@ -70,6 +70,8 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
     If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42, 34)) Then
         Select Case cellval(child, "user.IndexPers")
             Case Is = indexPers.ipStvolRuch
+
+                
                 frm_Command.NewCommand parent, "2", "Подать ствол ", False
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.Patrub.Checked", 1
@@ -198,8 +200,8 @@ Dim tmpDateTimeS As String
 '    tmpDateTime = DateAdd("n", frm_Command.GetCommandTime, tmpDateTime0)
     tmpDateTime = frm_Command.GetCommandDateTime
     
-    Debug.Print (CDate(tmpDateTime0))
-    Debug.Print (CDate(tmpDateTime))
+'    Debug.Print (CDate(tmpDateTime0))
+'    Debug.Print (CDate(tmpDateTime))
                     
     If tmpDateTime > 0 Then
         setcellval shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)

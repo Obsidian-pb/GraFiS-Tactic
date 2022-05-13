@@ -27,7 +27,7 @@ Public Sub RemoveTB_Evacuation()
 'Процедура добавления панели управления "Эвакуация"-------------------------------
     On Error GoTo ex
     Application.CommandBars("Эвакуация").Delete
-
+    
 ex:
 End Sub
 
@@ -62,7 +62,7 @@ Public Sub AddButtons()
         .Caption = "Рассчитать"
         .Tag = "Calculate"
         .TooltipText = "Рассчитать время эвакуации"
-        .FaceID = 283
+        .FaceID = 2145  ' 2151
         .BeginGroup = True
     End With
     
@@ -73,4 +73,5 @@ ex:
     MsgBox "В ходе выполнения программы произошла ошибка! Если она будет повторяться - обратитесь к разработчкиу.", , ThisDocument.Name
     SaveLog Err, "AddButtons"
 End Sub
+
 

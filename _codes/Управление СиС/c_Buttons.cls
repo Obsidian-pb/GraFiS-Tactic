@@ -36,6 +36,8 @@ Public WithEvents ComButStatistsView As Office.CommandBarButton      'Показать с
 Attribute ComButStatistsView.VB_VarHelpID = -1
 Public WithEvents ComButExplicationView As Office.CommandBarButton   'Показать экспликацию
 Attribute ComButExplicationView.VB_VarHelpID = -1
+Public WithEvents NodesListComBut As Office.CommandBarButton         'Список узлов пути эвакуации
+Attribute NodesListComBut.VB_VarHelpID = -1
 
 Public WithEvents ComButDescExport As Office.CommandBarButton        'Экспорт описания БД
 Attribute ComButDescExport.VB_VarHelpID = -1
@@ -57,6 +59,9 @@ Private Sub Class_Initialize()
     Set ComButExplicationView = Application.CommandBars("РТП").Controls("Экспликация")
     
     Set ComButDescExport = Application.CommandBars("РТП").Controls("Экспорт описания БД")
+    
+    On Error Resume Next
+    Set NodesListComBut = Application.CommandBars("РТП").Controls("Пути эвакуации")
 End Sub
 
 Private Sub Class_Terminate()
@@ -75,6 +80,9 @@ Private Sub Class_Terminate()
     Set ComButExplicationView = Nothing
     
     Set ComButDescExport = Nothing
+    
+    On Error Resume Next
+    Set NodesListComBut = Nothing
 End Sub
 
 
@@ -205,7 +213,17 @@ Private Sub ComButExplicationView_Click(ByVal Ctrl As Office.CommandBarButton, C
 Tail:
     '---Выходим из процедуры обработки
 End Sub
-
+Private Sub NodesListComBut_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки
+    
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+'---Запускаем основное событие
+    ShowEvacNodes
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
 
 
 
