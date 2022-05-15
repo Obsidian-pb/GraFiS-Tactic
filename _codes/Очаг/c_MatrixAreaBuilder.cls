@@ -45,7 +45,7 @@ Dim arr() As Integer
     matrix = matrix_a
     Set bordreRect = bordreRect_a
     
-    '---Создаме фигуру-сканер
+    '---Создаем фигуру-сканер
     NewScaner
     
     '---Определяем окружение

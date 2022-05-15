@@ -25,7 +25,11 @@ Dim y As Integer
     For y = 0 To UBound(lay, 2)
         s = ""
         For x = 0 To UBound(lay, 1)
-            s = s & CStr(lay(x, y)) & ","
+            If IsEmpty(lay(x, y)) Then
+                s = s & "2,"
+            Else
+                s = s & CStr(lay(x, y)) & ","
+            End If
         Next x
     '---Записываем в конец файла лога сведения о ошибке
         Print #1, Left(s, Len(s) - 1)
