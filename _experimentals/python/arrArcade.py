@@ -1,21 +1,9 @@
 #%%
 import numpy as np
-import matplotlib.pyplot as plt
-
-
-# %%
-arr = np.loadtxt("ToMatrixTest.csv", delimiter=",")
-print(arr.shape)
-plt.imshow(arr)
-
+import arcade
 
 #%%
-#============Настройки========
-cellsWeight = [
-    [pow(2,0.5), 1, pow(2,0.5)],
-    [1,          0, 1],
-    [pow(2,0.5), 1, pow(2,0.5)]
-]
+arr = np.loadtxt("ToMatrixTest.csv", delimiter=",")
 
 #%%
 #============Классы===================
@@ -30,30 +18,13 @@ class Claster(object):
         vals = matrix.copy()
         vals.fill(0)
         self.vals = vals
-
-        self.weightProfile = [
-        [pow(2,0.5), 1, pow(2,0.5)],
-        [1,          0, 1],
-        [pow(2,0.5), 1, pow(2,0.5)]
-        ]
         
-    def setWeightProfile(self, weightProfile):
-        '''
-        Устанавливаем профиль весов клеток
-        '''
-        self.weightProfile = weightProfile
-
     def setStartPoint(self, xy):
-        '''
-        Устанавливаем стартовую клетку кластера
-        '''
         self.cells.append(xy)
         self.front.append(xy)
+        # self.vals[xy[0],xy[1]]=1
 
     def oneStep(self, curLen):
-        '''
-        Один шаг расчета
-        '''
         #Перебираем все клетки во фронте распротстранения
         cellsTemp = self.front.copy()
         for cell in cellsTemp:
@@ -64,12 +35,12 @@ class Claster(object):
                 # Для всех клеток в окрестности вычисляем длину пути к ним от текущей
                 for dx in range(-1,2):
                     for dy in range(-1,2):
-                        w = self.vals[cy,cx]+self.weightProfile[dy+1][dx+1]
+                        w = self.vals[cy,cx]+cellsWeight[dy+1][dx+1]
                         x = cx+dx
                         y = cy+dy
                         # Если лежит в пределах матрицы
                         if self.isCellInMatrix((y,x)):
-                            # Если не стена (или неучетное пространство)
+                            # Если не стена
                             if self.space[y,x]==0:
                                 if (self.vals[y,x]>w) or (self.vals[y,x]==0):
                                     self.vals[y,x]=w
@@ -96,61 +67,35 @@ class Claster(object):
         elif kind=='list':
             return self.front
 
-    def getArea(self, kind='only'):
+    def getArea(self):
         area = self.vals
         for x in range(area.shape[0]):
             for y in range(area.shape[1]):
                 area[x,y] = round(area[x,y],1)
-
-        if kind=='only':
-            return area
-        elif kind=='inSpace':
-            m = area.max()
-            area = area/m
-            area = area*255
-
-            for x in range(area.shape[0]):
-                for y in range(area.shape[1]):
-                    area[x,y] = area[x,y] + self.space[x,y]*255*2
-            return area
+        return area
 
     def isCellInMatrix(self, xy):
         x, y = xy
         r = (x in range(self.vals.shape[0])) and (y in range(self.vals.shape[1]))
         return (r)
 
-
-
-
-
-
+#%%
 #%%
 # arr = np.zeros((1000,1000))
 
-yx_0 = (105, 35)
+yx_0 = (50, 125)
 claster = Claster(arr)
 claster.setStartPoint(yx_0)
 
 
 # циклы расчетов
-for i in range (150):
+for i in range (200):
     claster.oneStep(i)
-    if i%25==0:
-        area = claster.getArea(kind='inSpace')
-        area[(yx_0[0], yx_0[1])]=1000
-        # plt.imshow(area)
-        # plt.show()
-        # plt.imshow(claster.getFront())
-        # plt.show()
+    print('step {}'.format(i))
 
-        front = claster.getFront()
-        for x in range(area.shape[0]):
-            for y in range(area.shape[1]):
-                area[x,y] = area[x,y] + front[x,y]*255*3
-        
-        plt.imshow(area)
-        plt.show()
-
-#%%
-plt.imshow(arr)
-plt.show()
+area = claster.getArea()
+m = area.max()
+area = area/m
+area = area*255
+area[(yx_0[0], yx_0[1])]=255
+# plt.imshow(area)
