@@ -19,7 +19,7 @@ Dim i As Integer
     Set Bar = Application.CommandBars.Add(Position:=msoBarRight, Temporary:=True)
     With Bar
         .Name = "РТП"
-        .visible = True
+        .Visible = True
     End With
 
 '---Добавляем кнопки на панель управления

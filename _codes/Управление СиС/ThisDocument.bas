@@ -33,7 +33,7 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     AddTimeUserCells
 
 '---Показываем окно свойств
-    Application.ActiveWindow.Windows.ItemFromID(visWinIDCustProp).visible = True
+    Application.ActiveWindow.Windows.ItemFromID(visWinIDCustProp).Visible = True
     
 '---Обновляем/экспортируем в активный документ стили трафарета
     '---Проверяем не является ли активный документ документом цветовой схемы

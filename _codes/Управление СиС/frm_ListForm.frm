@@ -96,6 +96,8 @@ Attribute wAddon.VB_VarHelpID = -1
 
 Public WithEvents menuButtonExportToWord As CommandBarButton
 Attribute menuButtonExportToWord.VB_VarHelpID = -1
+Public WithEvents menuButtonExportToExcel As CommandBarButton
+Attribute menuButtonExportToExcel.VB_VarHelpID = -1
 
 
 
@@ -219,10 +221,9 @@ Dim Ctrl As CommandBarControl
         Ctrl.Delete
     Next
     
-    'Добавляем новые кнопки
-    Set menuButtonExportToWord = NewPopupItem(popupMenuBar, 1, 268, "Экспортировать в Word")
-'    Set menuButtonRestore = NewPopupItem(popupMenuBar, 1, 213, "Показать все скрытые замечания" & " (" & remarksHided & ")", , remarksHided <> 0)
-'    Set menuButtonOptions = NewPopupItem(popupMenuBar, 1, 212, "Опции замечаний")
+    'Добавляем новые кнопки (Потом переписать код остальных панелей инструментов в таком же ключе)
+    Set menuButtonExportToWord = NewPopupItem(popupMenuBar, 1, 567, "Экспортировать в Word")        '268,751
+    Set menuButtonExportToExcel = NewPopupItem(popupMenuBar, 1, 566, "Экспортировать в Excel")
     
     'Показываем меню
     popupMenuBar.ShowPopup
@@ -235,6 +236,7 @@ Optional itemTag As String = "") As CommandBarControl
 Dim newControl As CommandBarControl
 
 '    On Error Resume Next
+
     'Создаем новый контрол
     Set newControl = commBar.Controls.Add(itemType)
     
@@ -243,9 +245,9 @@ Dim newControl As CommandBarControl
         If itemFace > 0 Then .FaceID = itemFace
         .Tag = itemTag
         .Caption = itemCaption
-'        .beginGroup = beginGroup
         .Enabled = enableTab
     End With
+    
     
 Set NewPopupItem = newControl
 End Function
@@ -265,8 +267,11 @@ End Sub
 Private Sub menuButtonExportToWord_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
     ExportToWord
 End Sub
+Private Sub menuButtonExportToExcel_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+    ExportToExcel
+End Sub
 
-'---------------------Экспорт в Ворд---------------------------------
+'---------------------Экспорт в Word---------------------------------
 Public Sub ExportToWord()
 'Экспортируем содержимое списка в документ Word
 Dim wrd As Object
@@ -285,7 +290,7 @@ Dim s As String
     
     'Создаем новый документ Word
     Set wrd = CreateObject("Word.Application")
-    wrd.visible = True
+    wrd.Visible = True
     wrd.Activate
     Set wrdDoc = wrd.Documents.Add
     wrdDoc.Activate
@@ -319,17 +324,65 @@ Dim s As String
             Exit Do
         End If
     Loop
-'    For i = 0 To Me.LB_List.ListCount - 2
-'        For j = 1 To colCount
-'            wrdTbl.Rows(i + 1).Cells(j).Range.text = Me.LB_List.Column(j, i)
-'        Next j
-'    Next i
     
     wrdTbl.AutoFitBehavior 1        'Устанавливаем ширину столбцов по содержимому
 End Sub
 
 
+'---------------------Экспорт в Excel---------------------------------
+Public Sub ExportToExcel()
+'Экспортируем содержимое списка в документ Excel
+Dim exl As Object
+Dim wkb As Object
+Dim sht As Object
+'Dim shtRow As Object
 
+Dim i As Integer
+Dim j As Integer
+Dim colCount As Byte
+
+Dim s As String
+    
+    
+    colCount = Me.LB_List.ColumnCount - 1
+    
+    'Создаем новый документ Excel
+    Set exl = CreateObject("Excel.Application")
+    exl.Visible = True
+'    exl.ActiveWindow.WindowState = -4137
+    Set wkb = exl.Workbooks.Add
+    Set sht = wkb.Sheets(1)
+    wkb.Activate
+       
+    'Настраиваем таблицу
+    sht.Range(sht.Cells(1, 1), sht.Cells(UBound(Me.LB_List.List, 1), colCount)).Select
+    With exl.Selection.Borders()
+        .LineStyle = 1
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = 2
+    End With
+    exl.Selection.NumberFormat = "@"
+    
+    
+    'Заполняем таблицу ChrW(9500)
+    i = 0
+    Do Until IsNull(Me.LB_List.Column(1, i))
+        For j = 1 To colCount
+            s = Me.LB_List.Column(j, i)
+            s = Replace(s, ChrW(9500), "")
+            s = Replace(s, ChrW(9492), "")
+            sht.Cells(i + 1, j).Formula = s
+        Next j
+        i = i + 1
+        If i > 2000 Then
+            'аварийный выход
+            Exit Do
+        End If
+    Loop
+    
+    exl.Selection.Columns.AutoFit    'Устанавливаем ширину столбцов по содержимому
+End Sub
 
 
 

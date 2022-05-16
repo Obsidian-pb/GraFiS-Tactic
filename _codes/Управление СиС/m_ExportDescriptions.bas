@@ -38,7 +38,7 @@ Dim fireTime As Date
     
     'Создаем новый документ Word
     Set wrd = CreateObject("Word.Application")
-    wrd.visible = True
+    wrd.Visible = True
     wrd.Activate
     Set wrdDoc = wrd.Documents.Add
     wrdDoc.Activate
