@@ -93,7 +93,7 @@ Dim pr As String
         row = 0
         myArray(row, 0) = "ID"
         myArray(row, 1) = "Тип"
-        myArray(row, 2) = "Боевой расчет"
+        myArray(row, 2) = "Пожарных"
         myArray(row, 3) = "Работает"
         myArray(row, 4) = "Время"
         
@@ -111,25 +111,25 @@ Dim pr As String
             
             
             myArray(row, 0) = -1    '(-1 признак того, что для данной записи нет фигур и переходить к ним не нужно)
-            myArray(row, 1) = unitName & ":   " & callsList                 '"Подразделение"
-            myArray(row, 2) = CellSum(unitPositions, "Prop.PersonnelHave")  '"Боевой расчет"
-            myArray(row, 3) = CellSum(unitPositions, "Prop.Personnel")      '"Работает л/с"
-            myArray(row, 4) = " "                                           '"Время"
+            myArray(row, 1) = unitName & ":   " & callsList                      '"Подразделение"
+            myArray(row, 2) = GetPersonnelCount(unitPositions)                   '"Боевой расчет"
+            myArray(row, 3) = CellSum(unitPositions, "Prop.Personnel")           '"Работает л/с"
+            myArray(row, 4) = " "                                                '"Время"
             
             For Each shp In unitPositions
                 row = row + 1
 
                 myArray(row, 0) = shp.ID
                 myArray(row, 1) = "  " & ChrW(9500) & " " & cellval(shp, "User.IndexPers.Prompt", visUnitsString)  '"Тип"
-                myArray(row, 2) = cellval(shp, "Prop.PersonnelHave", , " ")             '"Боевой расчет"
-                myArray(row, 3) = cellval(shp, "Prop.Personnel", , " ")                 '"Работает л/с"
-                myArray(row, 4) = Format(pf_GetTime(shp), "DD.MM.YYYY hh:nn")           '"Время"
+                myArray(row, 2) = GetPersonnelCount(shp)                          '"Боевой расчет"
+                myArray(row, 3) = cellval(shp, "Prop.Personnel", , " ")           '"Работает л/с"
+                myArray(row, 4) = Format(pf_GetTime(shp), "DD.MM.YYYY hh:nn")     '"Время"
 
             Next shp
             
             'Заменяем префикс для последней дочерней записи, при условии таковых
             If unitPositions.Count > 0 Then
-                myArray(row, 1) = "  " & ChrW(9492) & " " & Right(myArray(row, 1), Len(myArray(row, 1)) - 3)
+                myArray(row, 1) = "  " & ChrW(9492) & Right(myArray(row, 1), Len(myArray(row, 1)) - 3)
             End If
         Next i
     
@@ -139,6 +139,37 @@ Dim pr As String
     f.Activate myArray, "0 pt;125 pt;75 pt;75 pt;100 pt", "Personnel", "Личный состав"
     
 End Sub
+
+Private Function GetPersonnelCount(ByRef shps As Variant) As String
+'Считаем количество пожарных (без учета водителей)
+Dim shp As Visio.Shape
+Dim tmpVal As Integer
+Dim tmpSum As Integer
+    
+    If TypeName(shps) = "Shape" Then        'Если фигура
+        Set shp = shps
+        tmpVal = cellval(shp, "Prop.PersonnelHave")
+        If tmpVal = 0 Then
+            tmpSum = tmpVal
+        Else
+            tmpSum = tmpVal - 1
+        End If
+    ElseIf TypeName(shps) = "Shapes" Or TypeName(shps) = "Collection" Then     'Если коллекция
+        For Each shp In shps
+            tmpVal = cellval(shp, "Prop.PersonnelHave")
+            If tmpVal > 0 Then
+                tmpSum = tmpSum + tmpVal - 1
+            End If
+        Next shp
+    End If
+    
+    If tmpSum = 0 Then
+        GetPersonnelCount = " "
+    Else
+        GetPersonnelCount = CStr(tmpSum)
+    End If
+End Function
+
 
 Public Sub ShowNozzles()
 'Показываем имеющиеся на схеме стволы
