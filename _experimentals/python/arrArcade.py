@@ -1,11 +1,19 @@
 #%%
 import numpy as np
 import arcade
+import matplotlib.pyplot as plt
 
 #%%
 arr = np.loadtxt("ToMatrixTest.csv", delimiter=",")
+print(arr.shape)
 
 #%%
+#============Настройки========
+cellsWeight = [
+    [pow(2,0.5), 1, pow(2,0.5)],
+    [1,          0, 1],
+    [pow(2,0.5), 1, pow(2,0.5)]
+]
 #============Классы===================
 class Claster(object):
 
@@ -80,10 +88,11 @@ class Claster(object):
         return (r)
 
 #%%
-#%%
+yx_0 = (50, 125)
+
 # arr = np.zeros((1000,1000))
 
-yx_0 = (50, 125)
+
 claster = Claster(arr)
 claster.setStartPoint(yx_0)
 
@@ -91,11 +100,51 @@ claster.setStartPoint(yx_0)
 # циклы расчетов
 for i in range (200):
     claster.oneStep(i)
-    print('step {}'.format(i))
+    # print('step {}'.format(i))
 
 area = claster.getArea()
 m = area.max()
 area = area/m
 area = area*255
 area[(yx_0[0], yx_0[1])]=255
-# plt.imshow(area)
+#%%
+plt.imshow(area)
+
+#%%
+# Задать константы для размеров экрана
+SCREEN_WIDTH = arr.shape[1]
+SCREEN_HEIGHT = arr.shape[0]
+
+# Открыть окно. Задать заголовок и размеры окна (ширина и высота)
+arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing Example")
+
+# Задать белый цвет фона.
+# Для просмотра списка названий цветов прочитайте:
+# http://arcade.academy/arcade.color.html
+# Цвета также можно задавать в (красный, зеленый, синий) и
+# (красный, зеленый, синий, альфа) формате.
+arcade.set_background_color(arcade.color.WHITE)
+
+# Начать процесс рендера. Это нужно сделать до команд рисования
+arcade.start_render()
+
+# Рисуем стены
+# try:
+for x in range(SCREEN_WIDTH):
+    for y in range(SCREEN_HEIGHT):
+        if arr[y, x]==1:
+            arcade.draw_point(x, y, arcade.color.BLACK, size=1)
+            # arcade.finish_render()
+        if area[y, x]>0:
+            arcade.draw_point(x, y, arcade.color.RED, size=1)
+    # arcade.finish_render()
+# except:
+#     arcade.finish_render()
+
+# Завершить рисование и показать результат
+arcade.finish_render()
+
+# Держать окно открытым до тех пор, пока пользователь не нажмет кнопку “закрыть”
+arcade.run()
+
+# %%
