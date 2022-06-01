@@ -32,8 +32,12 @@ Public WithEvents ComButGDZSView As Office.CommandBarButton          'Показать с
 Attribute ComButGDZSView.VB_VarHelpID = -1
 Public WithEvents ComButTimelineView As Office.CommandBarButton      'Показать таймлайн
 Attribute ComButTimelineView.VB_VarHelpID = -1
+Public WithEvents ComButDutyListView As Office.CommandBarButton      'Показать таймлайн
+Attribute ComButDutyListView.VB_VarHelpID = -1
 Public WithEvents ComButStatistsView As Office.CommandBarButton      'Показать список статистов
 Attribute ComButStatistsView.VB_VarHelpID = -1
+Public WithEvents ComButPosredniksView As Office.CommandBarButton    'Показать список посредников
+Attribute ComButPosredniksView.VB_VarHelpID = -1
 Public WithEvents ComButExplicationView As Office.CommandBarButton   'Показать экспликацию
 Attribute ComButExplicationView.VB_VarHelpID = -1
 Public WithEvents NodesListComBut As Office.CommandBarButton         'Список узлов пути эвакуации
@@ -55,7 +59,11 @@ Private Sub Class_Initialize()
     Set ComButNozzlesView = Application.CommandBars("РТП").Controls("Список стволов")
     Set ComButGDZSView = Application.CommandBars("РТП").Controls("Список ГДЗС")
     Set ComButTimelineView = Application.CommandBars("РТП").Controls("Таймлайн")
-'    Set ComButStatistsView = Application.CommandBars("РТП").Controls("Список статистов")
+    Set ComButDutyListView = Application.CommandBars("РТП").Controls("Должностные лица")
+    
+    Set ComButStatistsView = Application.CommandBars("РТП").Controls("Список статистов")
+    Set ComButPosredniksView = Application.CommandBars("РТП").Controls("Список посредников")
+    
     Set ComButExplicationView = Application.CommandBars("РТП").Controls("Экспликация")
     
     Set ComButDescExport = Application.CommandBars("РТП").Controls("Экспорт описания БД")
@@ -76,7 +84,11 @@ Private Sub Class_Terminate()
     Set ComButNozzlesView = Nothing
     Set ComButGDZSView = Nothing
     Set ComButTimelineView = Nothing
+    Set ComButDutyListView = Nothing
+    
     Set ComButStatistsView = Nothing
+    Set ComButPosredniksView = Nothing
+    
     Set ComButExplicationView = Nothing
     
     Set ComButDescExport = Nothing
@@ -136,6 +148,31 @@ Private Sub ComButDescView_Click(ByVal Ctrl As Office.CommandBarButton, CancelDe
 Tail:
     '---Выходим из процедуры обработки
 End Sub
+
+Private Sub ComButDutyListView_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки
+    
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+'---Запускаем основное событие
+    ShowDutyList
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
+
+Private Sub ComButPosredniksView_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'Отслеживаем событие нажатия кнопки
+    
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+'---Запускаем основное событие
+    ShowPosredniks
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
+
 Private Sub ComButTechView_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
 'Отслеживаем событие нажатия кнопки
     

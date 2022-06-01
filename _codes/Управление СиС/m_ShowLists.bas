@@ -333,53 +333,6 @@ Dim f As frm_ListForm
     
 End Sub
 
-Public Sub ShowStatists()
-'Показываем список имеющихся на схеме статистов
-Dim i As Integer
-Dim shp As Visio.Shape
-Dim units As Collection
-
-Dim myArray As Variant
-Dim f As frm_ListForm
-    
-    
-    
-    '---Формируем коллекцию фигур и сортируем их по времени
-    Set units = New Collection
-    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
-        If IsGFSShapeWithIP(shp, indexPers.ipStatist) Then
-            AddUniqueCollectionItem units, shp
-        End If
-    Next shp
-    If units.Count = 0 Then Exit Sub
-
-    
-    'Заполняем таблицу  с перечнем техники
-    If units.Count > 0 Then
-        ReDim myArray(units.Count, 3)
-        '---Вставка первой записи
-        myArray(0, 0) = "ID"
-        myArray(0, 1) = "Состояние"
-        myArray(0, 2) = "Информация"
-        myArray(0, 3) = "Количество людей"
-
-    
-        For i = 1 To units.Count
-            '---Вставка остальных записей
-            Set shp = units(i)
-            myArray(i, 0) = shp.ID
-            myArray(i, 1) = cellval(shp, "Prop.State", visUnitsString, "")   '"Состояние"
-            myArray(i, 2) = cellval(shp, "Prop.Info", visUnitsString, "")  '"Информация"
-            myArray(i, 3) = cellval(shp, "Prop.StatistsQuatity")  '"Количество людей"
-        Next i
-    End If
-
-    '---Показываем форму
-    Set f = New frm_ListForm
-    f.Activate myArray, "0 pt;100 pt;500 pt;50 pt", "Statists", "Статисты"
-    
-End Sub
-
 Public Sub ShowExplication()
 'Показываем список имеющихся на схеме помещений (Экспликацию)
 Dim i As Integer
@@ -427,6 +380,59 @@ Dim f As frm_ListForm
     '---Показываем форму
     Set f = New frm_ListForm
     f.Activate myArray, "0 pt;50 pt;200 pt;200 pt;100 pt;100 pt", "Places", "Экспликация"
+    
+End Sub
+
+Public Sub ShowDutyList()
+'Показываем список имеющихся на схеме должностных лиц
+Dim i As Integer
+Dim shp As Visio.Shape
+Dim persons As Collection
+
+Dim myArray As Variant
+Dim f As frm_ListForm
+    
+    
+    
+    '---Формируем коллекцию фигур и сортируем их по времени
+    Set persons = New Collection
+    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+        If IsGFSShapeWithIP(shp, indexPers.ipDutyFace) Then
+            AddUniqueCollectionItem persons, shp
+        End If
+    Next shp
+    If persons.Count = 0 Then Exit Sub
+
+    
+    'Заполняем таблицу  с перечнем техники
+    If persons.Count > 0 Then
+        '---Сортируем коллекцию
+        Set persons = SortCol(persons, "Prop.ArrivalTime", False)
+        
+        ReDim myArray(persons.Count, 4)
+        '---Вставка первой записи
+        myArray(0, 0) = "ID"
+        myArray(0, 1) = "Должность на пожаре"
+        myArray(0, 2) = "Должность, ФИО"
+        myArray(0, 3) = "Время прибытия"
+        myArray(0, 4) = "Принадлежность"
+
+    
+        For i = 1 To persons.Count
+            '---Вставка остальных записей
+            Set shp = persons(i)
+            myArray(i, 0) = shp.ID
+            myArray(i, 1) = cellval(shp, "Prop.Duty", visUnitsString)                    '"Должность на пожаре"
+            myArray(i, 2) = cellval(shp, "Prop.DutyJob", visUnitsString) & _
+                ", " & cellval(shp, "Prop.FIO", visUnitsString)                          '"Должность, ФИО"
+            myArray(i, 3) = cellval(shp, "Prop.ArrivalTime", visUnitsString)             '"Время прибытия"
+            myArray(i, 4) = cellval(shp, "Prop.ServiceMembership", visUnitsString)       '"Принадлежность"
+        Next i
+    End If
+
+    '---Показываем форму
+    Set f = New frm_ListForm
+    f.Activate myArray, "0 pt;40 pt;400 pt;100 pt", "DutyList", "Должностные лица на пожаре"
     
 End Sub
 
@@ -516,6 +522,111 @@ Dim nodeInNumber As Integer
         End If
     Next node
 End Function
+
+
+'----------------------------Списки для учений------------------------
+Public Sub ShowStatists()
+'Показываем список имеющихся на схеме статистов
+Dim i As Integer
+Dim shp As Visio.Shape
+Dim units As Collection
+
+Dim myArray As Variant
+Dim f As frm_ListForm
+    
+    
+    
+    '---Формируем коллекцию фигур и сортируем их по времени
+    Set units = New Collection
+    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+        If IsGFSShapeWithIP(shp, indexPers.ipStatist) Then
+            AddUniqueCollectionItem units, shp
+        End If
+    Next shp
+    If units.Count = 0 Then Exit Sub
+
+    
+    'Заполняем таблицу  с перечнем техники
+    If units.Count > 0 Then
+        ReDim myArray(units.Count, 3)
+        '---Вставка первой записи
+        myArray(0, 0) = "ID"
+        myArray(0, 1) = "Состояние"
+        myArray(0, 2) = "Информация"
+        myArray(0, 3) = "Количество людей"
+
+    
+        For i = 1 To units.Count
+            '---Вставка остальных записей
+            Set shp = units(i)
+            myArray(i, 0) = shp.ID
+            myArray(i, 1) = cellval(shp, "Prop.State", visUnitsString, "")   '"Состояние"
+            myArray(i, 2) = cellval(shp, "Prop.Info", visUnitsString, "")  '"Информация"
+            myArray(i, 3) = cellval(shp, "Prop.StatistsQuatity")  '"Количество людей"
+        Next i
+    End If
+
+    '---Показываем форму
+    Set f = New frm_ListForm
+    f.Activate myArray, "0 pt;100 pt;500 pt;50 pt", "Statists", "Статисты"
+    
+End Sub
+
+Public Sub ShowPosredniks()
+'Показываем список имеющихся на схеме посредников
+Dim i As Integer
+Dim shp As Visio.Shape
+Dim posr As Collection
+
+Dim myArray As Variant
+Dim f As frm_ListForm
+    
+    
+    
+    '---Формируем коллекцию фигур и сортируем их по времени
+    Set posr = New Collection
+    For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
+        If IsGFSShapeWithIP(shp, 1002) Then
+            AddUniqueCollectionItem posr, shp
+        End If
+    Next shp
+    If posr.Count = 0 Then Exit Sub
+
+    
+    'Заполняем таблицу  с перечнем техники
+    If posr.Count > 0 Then
+        '---Сортируем коллекцию
+        Set posr = SortCol(posr, "Prop.PosrednikNumber", False)
+        
+        ReDim myArray(posr.Count, 4)
+        '---Вставка первой записи
+        myArray(0, 0) = "ID"
+        myArray(0, 1) = "Номер"
+        myArray(0, 2) = "За кем закреплен"
+        myArray(0, 3) = "Должность, ФИО"
+        myArray(0, 4) = "Информация"
+
+    
+        For i = 1 To posr.Count
+            '---Вставка остальных записей
+            Set shp = posr(i)
+            myArray(i, 0) = shp.ID
+            myArray(i, 1) = cellval(shp, "Prop.PosrednikNumber")                            '"Номер"
+            myArray(i, 2) = cellval(shp, "Prop.Target", visUnitsString, "")                 '"За кем закреплен"
+            myArray(i, 3) = cellval(shp, "Prop.PosredinikDuty", visUnitsString) & _
+                ", " & cellval(shp, "Prop.PosredinikFIO", visUnitsString)                   '"Должность, ФИО"
+            myArray(i, 4) = cellval(shp, "Prop.Info", visUnitsString)                       '"Информация"
+        Next i
+    End If
+
+    '---Показываем форму
+    Set f = New frm_ListForm
+    f.Activate myArray, "0 pt;25 pt;150 pt;400 pt;200 pt", "Posredniks", "Посредники"
+    
+End Sub
+
+
+
 
 '----------------------------Функции проверки типов фигур
 Private Function pf_IsMainTechnics(ByVal a_IndexPers As Integer) As Boolean

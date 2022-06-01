@@ -119,6 +119,13 @@ Sub AddButtons()
 '        .BeginGroup = True
         .FaceID = 1253
     End With
+    '---"Должностные лица на пожаре"
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Должностные лица"
+        .Tag = "DutyList"
+        .TooltipText = "Показать список должностных лиц на пожаре"
+        .FaceID = 758
+    End With
     '---"Таймлайн"
     With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Таймлайн"
@@ -134,25 +141,34 @@ Sub AddButtons()
         .TooltipText = "Показать экспликацию помещенийи"
         .FaceID = 544
     End With
+    
     '---Кнопка "Список узлов"-------------------------------------------------
 '    If IsDocumentOpened("Эвакуация.vss") Then
     With Bar.Controls.Add(Type:=msoControlButton)
         .Caption = "Пути эвакуации"
         .Tag = "NodesList"
         .TooltipText = "Перечень всех путей эвакуации"
+        .beginGroup = True
         .FaceID = 2074
     End With
+    
 '    End If
 '    ЗАРЕЗЕРВИРОВАНО
-'    '---"Статисты"
-'    With Bar.Controls.Add(Type:=msoControlButton)
-'        .Caption = "Список статистов"
-'        .Tag = "StatistsView"
-'        .TooltipText = "Показать сведения о статистах"
-''        .BeginGroup = True
-'        .FaceID = 2141
-'    End With
-    
+    '---"Статисты"
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Список статистов"
+        .Tag = "StatistsView"
+        .TooltipText = "Показать список статистов на учениях"
+        .beginGroup = True
+        .FaceID = 607
+    End With
+    '---"Посредники"
+    With Bar.Controls.Add(Type:=msoControlButton)
+        .Caption = "Список посредников"
+        .Tag = "PosredniksList"
+        .TooltipText = "Показать список посредников на учениях"
+        .FaceID = 682
+    End With
     
     
 '---Кнопка "Экспорт описания БД"-------------------------------------------------
