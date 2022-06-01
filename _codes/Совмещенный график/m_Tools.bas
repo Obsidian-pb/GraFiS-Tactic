@@ -139,6 +139,49 @@ Dim shp As Visio.Shape
     
 End Sub
 
+Public Function cellVal(ByRef shps As Variant, ByVal cellName As String, Optional ByVal dataType As VisUnitCodes = visNumber, Optional defaultValue As Variant = 0) As Variant
+'Функция возвращает значение ячейки с указанным названием. Если такой ячейки нет, возвращает 0
+Dim shp As Visio.Shape
+Dim tmpVal As Variant
+    
+    On Error GoTo EX
+    
+    If TypeName(shps) = "Shape" Then        'Если фигура
+        Set shp = shps
+        If shp.CellExists(cellName, 0) Then
+            Select Case dataType
+                Case Is = visNumber
+                    cellVal = shp.Cells(cellName).Result(dataType)
+                Case Is = visUnitsString
+                    cellVal = shp.Cells(cellName).ResultStr(dataType)
+                Case Is = visDate
+                    cellVal = shp.Cells(cellName).Result(dataType)
+                    If cellVal = 0 Then
+                        cellVal = CDate(shp.Cells(cellName).ResultStr(visUnitsString))
+                    End If
+                Case Else
+                    cellVal = shp.Cells(cellName).Result(dataType)
+            End Select
+        Else
+            cellVal = defaultValue
+        End If
+        Exit Function
+    ElseIf TypeName(shps) = "Shapes" Or TypeName(shps) = "Collection" Then     'Если коллекция
+        For Each shp In shps
+            tmpVal = cellVal(shp, cellName, dataType, defaultValue)
+            If tmpVal <> defaultValue Then
+                cellVal = tmpVal
+                Exit Function
+            End If
+        Next shp
+    End If
+    
+cellVal = defaultValue
+Exit Function
+EX:
+    cellVal = defaultValue
+End Function
+
 
 '--------------------------------Сохранение лога ошибки-------------------------------------
 Public Sub SaveLog(ByRef error As ErrObject, ByVal eroorPosition As String, Optional ByVal addition As String)

@@ -80,8 +80,8 @@ Dim vsoSelection As Visio.Selection
     
     On Error GoTo ex
     
-    '---перемещаем вперед //Техника;ПТВ;Рукавные линии;Водоисточники;Очаг
-    Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Техника;ПТВ;Рукавные линии;Водоисточники;Очаг")
+    '---перемещаем вперед //Техника;ПТВ;Рукавные линии;Водоисточники;Очаг;Статисты и посредники
+    Set vsoSelection = Application.ActiveWindow.Page.CreateSelection(visSelTypeByLayer, visSelModeSkipSuper, "Техника;ПТВ;Рукавные линии;Водоисточники;Очаг;Статисты и посредники")
     Application.ActiveWindow.Selection = vsoSelection
     
     Application.ActiveWindow.Selection.BringToFront

@@ -60,8 +60,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Включаем показ окон
     VfB_NotShowPropertiesWindow = False
 
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
 
 Set ButEventFireArea = New ClassFireArea
 Set ButEventStorm = New ClassStorm

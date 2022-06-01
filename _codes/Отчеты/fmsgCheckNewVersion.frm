@@ -35,10 +35,15 @@ Private Sub lblGoHyperlink_Click()
 End Sub
 
 Public Sub CheckUpdates()
-    
+' Проверка появления новой версии на сайте
 Dim lastCheckDate As Date
 Dim currentVersion As Integer
 
+    'Проверяем имеется ли в реестре нужная запись, и если ее нет, добавляем с текущим временем
+    If GetSetting("GraFiS", "GFS_Version", "LastCheckDate") = "" Then
+        SaveSetting "GraFiS", "GFS_Version", "LastCheckDate", CStr(Now())
+    End If
+    
     'Проверяем дату последней проверки - если прошло меньше суток выходим
     lastCheckDate = CDate(GetSetting("GraFiS", "GFS_Version", "LastCheckDate", Now()))
     If DateDiff("d", lastCheckDate, Now()) >= 1 Then

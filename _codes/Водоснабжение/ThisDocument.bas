@@ -90,8 +90,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
     Set WaterAppEvents = Visio.Application
     Set ButEventOpenWater = New ClassLake
     
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
 
 Exit Sub
 Tail:

@@ -108,5 +108,6 @@ End Sub
 
 Sub PS_SendMeBack(ShpObj As Visio.Shape)
 'Отправляет текущую фигуру назад
+    On Error Resume Next
     ShpObj.SendToBack
 End Sub

@@ -244,15 +244,24 @@ Dim i As Integer
     If ColP_WStvols.Count = 0 Then
         Exit Sub
     Else
-        ReDim MainArray(1, ColP_WStvols.Count - 1)
+        i = 0
+        For Each CurShape In ColP_WStvols
+            If cellVal(CurShape, "Prop.UseDirection", visUnitsString) = "Тушение" Then
+                i = i + 1
+            End If
+        Next CurShape
+'        ReDim MainArray(1, ColP_WStvols.Count - 1)
+        ReDim MainArray(1, i - 1)
     End If
 
 '---Перебираем все фигуры в коллекции
     i = 0
     For Each CurShape In ColP_WStvols
-        MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SetTime").ResultStr(visDate))
-        MainArray(1, i) = CurShape.Cells("User.PodOut")
-        i = i + 1
+        If cellVal(CurShape, "Prop.UseDirection", visUnitsString) = "Тушение" Then
+            MainArray(0, i) = DateDiff("s", pcpD_BeginDate, CurShape.Cells("Prop.SetTime").ResultStr(visDate))
+            MainArray(1, i) = CurShape.Cells("User.PodOut")
+            i = i + 1
+        End If
     Next CurShape
 
 Exit Sub
@@ -377,7 +386,9 @@ On Error GoTo EX
 
 '---Получаем данные
     For Each shp In ColP_WStvols
-        val = val + shp.Cells("User.PodOut").Result(visNumber)
+        If cellVal(shp, "Prop.UseDirection", visUnitsString) = "Тушение" Then
+            val = val + shp.Cells("User.PodOut").Result(visNumber)
+        End If
     Next shp
     PF_GetExpence = val
 

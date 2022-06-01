@@ -37,8 +37,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Объявляем переменную приложения для дальнейшего реагирования на изменение содержимого ячеек
     Set PTVAppEvents = Visio.Application
     
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
     
 Exit Sub
 EX:

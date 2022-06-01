@@ -50,8 +50,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Получаем ссылку на приложение
     Set app = Visio.Application
     
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
 
 End Sub
 

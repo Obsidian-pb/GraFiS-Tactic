@@ -44,8 +44,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
         cellChangedCount = cellChangedInterval - 10
     End If
 
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
 
 Exit Sub
 ex:

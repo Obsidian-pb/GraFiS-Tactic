@@ -23,8 +23,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
         StyleExport
     End If
 
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
 
 End Sub
 

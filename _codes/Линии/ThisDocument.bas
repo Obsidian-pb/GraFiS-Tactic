@@ -93,8 +93,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Добавляем для документа своство "FireTime"
     sm_AddFireTime
     
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
     
 Exit Sub
 EX:

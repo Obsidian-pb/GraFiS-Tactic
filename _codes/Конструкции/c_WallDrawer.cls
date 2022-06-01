@@ -14,6 +14,7 @@ Public WithEvents visApp As Visio.Application
 Attribute visApp.VB_VarHelpID = -1
 Public WithEvents wallShape As Visio.Shape
 Attribute wallShape.VB_VarHelpID = -1
+Public newWallShape As Visio.Shape
 Public WallDrawerToolButton As Office.CommandBarButton  'Рисование стен
 
 
@@ -44,12 +45,53 @@ End Function
 
 
 
+'Private Sub visApp_MouseDown(ByVal Button As Long, ByVal KeyButtonState As Long, ByVal x As Double, ByVal y As Double, CancelDefault As Boolean)
+'
+'    '---Проверяем, включен ли инструмент Линия
+''    If Not LineToolIsSelected Then Exit Sub
+'    '---Проверяем что добавлена именно линия и она прямая
+''    If Not ShapeIsLine(Shape) Then Exit Sub
+'
+'    '---Вбрасываем фигуру стены
+'    Application.EventsEnabled = False
+'        Set newWallShape = Application.ActivePage.Drop(wallShape, x, y)
+'    Application.EventsEnabled = True
+'
+'    '---Указываем конечную и начальную точку новой стены
+'    With newWallShape
+'        .Cells("BeginX").Formula = x
+'        .Cells("BeginY").Formula = y
+''        .Cells("EndX").Formula = Shape.Cells("EndX").Formula
+''        .Cells("EndY").Formula = Shape.Cells("EndY").Formula
+'    End With
+'End Sub
+'
+'
+'
+'Private Sub visApp_MouseMove(ByVal Button As Long, ByVal KeyButtonState As Long, ByVal x As Double, ByVal y As Double, CancelDefault As Boolean)
+'    '---Проверяем, добавлена ли фигура новой стены
+'    If newWallShape Is Nothing Then Exit Sub
+'
+'    '---Указываем конечную и начальную точку новой стены
+'    With newWallShape
+'        .Cells("EndX").Formula = x
+'        .Cells("EndY").Formula = y
+'    End With
+'
+'    DoEvents
+'End Sub
+'
+'Private Sub visApp_MouseUp(ByVal Button As Long, ByVal KeyButtonState As Long, ByVal x As Double, ByVal y As Double, CancelDefault As Boolean)
+'    Set newWallShape = Nothing
+'End Sub
+
+
 Private Sub visApp_ShapeAdded(ByVal Shape As IVShape)
 'Прока добавления фигуры стены поверх фигуры линии
 Dim shp As Visio.Shape
-    
+
     On Error GoTo EX
-    
+
     '---Проверяем, включен ли инструмент Линия
     If Not LineToolIsSelected Then Exit Sub
     '---Проверяем что добавлена именно линия и она прямая
@@ -75,11 +117,11 @@ Dim shp As Visio.Shape
 Exit Sub
 EX:
     Application.EventsEnabled = True
-    
+
     On Error Resume Next
     '---Удаляем линию
     'Shape.Delete
-    
+
     '---Снимаем выделение
     Application.ActiveWindow.DeselectAll
 End Sub

@@ -56,8 +56,8 @@ Private Sub OpenDoc()
         cellChangedCount = cellChangedInterval - 10
     End If
     
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
 End Sub
 
 Private Sub CloseDoc()

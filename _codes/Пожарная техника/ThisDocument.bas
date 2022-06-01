@@ -35,8 +35,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '        MsgBox "Не Цветовая схема!"
     End If
     
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
 
 End Sub
 

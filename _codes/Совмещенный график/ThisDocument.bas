@@ -14,8 +14,8 @@ Private Sub Document_DocumentOpened(ByVal doc As IVDocument)
 '---Добавляем ячейки "User.FireTime", "User.CurrentTime"
     AddTimeUserCells
     
-'---Проверяем наличие обновлений
-    fmsgCheckNewVersion.CheckUpdates
+''---Проверяем наличие обновлений
+'    fmsgCheckNewVersion.CheckUpdates
 
 End Sub
 

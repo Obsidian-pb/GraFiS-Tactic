@@ -172,6 +172,8 @@ Public Enum indexPers
    ipInfoCommonFireInfo = 608                  'Инфоблок Сведения о тушении пожара
    ipGeoCoords = 700                           'Точка с геокоординатами
    ipStatist = 1000                            'Статисты (для учений)
+   ipCalcZone = 1001                           'Расчетная зона
+   ipPosrednik = 1002                          'Посредники (для учений)
    ipEvacNode = 5000                           'Узел пути эвакуации
    ipEvacEdge = 5001                           'Вершины графа путей эвакуации
 End Enum
