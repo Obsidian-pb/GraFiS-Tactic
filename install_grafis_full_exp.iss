@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "АИГС ГраФиС-Тактик"
-#define MyAppVersion "13.0.01"
+#define MyAppVersion "13.0.02"
 #define MyAppPublisher "НТЦ ФГБОУ ВО Сибирская пожарно-спасательная академия ГПС МЧС России"
 #define MyAppURL "https://www.graphicalfiresets.ru/"
 
@@ -38,14 +38,18 @@ WizardImageFile=_installer\SideImage1.bmp
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
+Source: "_links\!Официальная группа ГраФиС (Вконтакте).url"; DestDir: "{group}\Все о ГраФиС\"
+Source: "_links\!Официальный сайт проекта ГраФиС.url"; DestDir: "{group}\Все о ГраФиС\"
+Source: "_links\!ГраФиС-блог - о ходе работы над проектом.url"; DestDir: "{group}\Все о ГраФиС\"
+Source: "_links\!Репозиторий ГраФиС-Тактик на GitHub.url"; DestDir: "{group}\Все о ГраФиС\"
+
 Source: "_links\!Wiki-fire - электронная энциклопедия пожарной безопасности.url"; DestDir: "{group}\Другие наши продукты\"
 Source: "_links\!Дети01.url"; DestDir: "{group}\Другие наши продукты\"
-Source: "_links\!Официальная группа ГраФиС (Вконтакте).url"; DestDir: "{group}\Другие наши продукты\"
-Source: "_links\!Официальный сайт проекта ГраФиС.url"; DestDir: "{group}\Другие наши продукты\"
 Source: "_links\!Официальный сайт Сибирской пожарно-спасательной академии.url"; DestDir: "{group}\Другие наши продукты\"
 Source: "_links\!Справочник начальника караула (приложение для Android).url"; DestDir: "{group}\Другие наши продукты\"
 Source: "_links\!Справочник начальника караула (приложение для iOS).url"; DestDir: "{group}\Другие наши продукты\"
 Source: "_links\!ЭСУППВ.рф.url"; DestDir: "{group}\Другие наши продукты\"
+
 Source: "Signs.fdb"; DestDir: "{app}"; Flags: confirmoverwrite; components: traf traf_nrs
 Source: "Version.txt"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Авиация.vss"; DestDir: "{app}"; components: traf
@@ -58,7 +62,7 @@ Source: "Железная дорога.vss"; DestDir: "{app}"; components: traf
 Source: "Конструкции.vss"; DestDir: "{app}"; components: traf
 Source: "Линии НРС.vss"; DestDir: "{app}"; components: traf_nrs
 Source: "Линии.vss"; DestDir: "{app}"; components: traf
-Source: "Отчеты.vss"; DestDir: "{app}"; components: traf
+Source: "Отчеты.vss"; DestDir: "{app}"; components: traf traf_calc traf_nrs
 Source: "Очаг.vss"; DestDir: "{app}"; components: traf
 Source: "План на местности.vss"; DestDir: "{app}"; components: traf
 Source: "Пожарная техника НРС.vss"; DestDir: "{app}"; components: traf_nrs
@@ -78,8 +82,9 @@ Source: "Справочник.accdb"; DestDir: "{app}"; components: traf traf_nrs
 Source: "Техника прочее НРС.vss"; DestDir: "{app}"; components: traf_nrs
 Source: "Техника прочее.vss"; DestDir: "{app}"; components: traf
 Source: "Управление СиС.vss"; DestDir: "{app}"; components: traf
-Source: "Формулы.vss"; DestDir: "{app}"; components: traf
-Source: "Расчеты\*"; DestDir: "{app}\Расчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
+Source: "Формулы.vss"; DestDir: "{app}"; components: traf traf_calc
+Source: "Учения.vss"; DestDir: "{app}"; components: traf
+Source: "Расчеты\*"; DestDir: "{app}\Расчеты\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_calc
 Source: "Сведения.xls"; DestDir: "{app}"; Flags: confirmoverwrite; components: traf
 Source: "Шаблон моделирование НРС с масштабом 200.vst"; DestDir: "{app}"; components: traf_nrs
 Source: "Шаблон с масштабом 1000.vst"; DestDir: "{app}"; components: traf
@@ -89,10 +94,10 @@ Source: "Шаблон плана эвакуации (200).vst"; DestDir: "{app}"; components: templa
 Source: "Шаблон плана эвакуации (500).vst"; DestDir: "{app}"; components: templatesEvac
 Source: "Шаблон плана эвакуации (1000).vst"; DestDir: "{app}"; components: templatesEvac
 Source: "Bitmaps\*"; DestDir: "{app}\Bitmaps\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_nrs
-Source: "Templates\*"; DestDir: "{app}\Templates\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf
+Source: "Templates\*"; DestDir: "{app}\Templates\"; Flags: ignoreversion recursesubdirs createallsubdirs; components: traf traf_calc
 Source: "_installer\ico.ico"; DestDir: "{app}"; components: traf traf_nrs
-Source: "Отчеты\Конструктор отчетов.vsd"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion; components: traf
-Source: "Отчеты\Детали отчетов.vss"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion; components: traf
+Source: "Отчеты\Конструктор отчетов.vsd"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion; components: traf traf_calc traf_nrs
+Source: "Отчеты\Детали отчетов.vss"; DestDir: "{app}\Отчеты\"; Flags: ignoreversion; components: traf traf_calc traf_nrs
 
 Source: "Цветовые схемы\Белая школьная доска - ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion; components: traf traf_nrs
 Source: "Цветовые схемы\БУПО-2017 (красная) + ГОСТ.vsd"; DestDir: "{app}\Цветовые схемы\"; Flags: ignoreversion; components: traf traf_nrs
@@ -164,12 +169,14 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\11.0\Visio\Security"; ValueType: 
 [Types]
 Name: "main"; Description: "Основной набор ГраФиС-Тактик"
 Name: "nrs"; Description: "Набор ГраФиС-Тактик НРС"
+Name: "calc"; Description: "Набор Формулы и расчеты"
 Name: "osm"; Description: "Надстройка OSM2Visio для MS Visio" 
 Name: "full"; Description: "Полный набор ГраФиС-Тактик"
 Name: "custom"; Description: "Выборочная установка"; Flags: iscustom
 [Components]
 Name: "traf"; Description: "Трафареты УГО"; Types: main full
 Name: "traf_nrs"; Description: "Трафареты НРС"; Types: nrs full
+Name: "traf_calc"; Description: "Трафареты формул и расчетов"; Types: main calc full
 Name: "templatesEvac"; Description: "Шаблоны плана эвакуации"; Types: main full
 Name: "gr"; Description: "Надстройка OSM2Visio для MS Visio"; Types: osm full
 Name: "gr\visio07"; Description: "для MS Visio 2007"; Flags: exclusive
