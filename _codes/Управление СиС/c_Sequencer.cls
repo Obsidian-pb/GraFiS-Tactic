@@ -68,15 +68,15 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
     
     'Техника (+разветвление временно)
     If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42, 34)) Then
-        Select Case cellval(child, "user.IndexPers")
-            Case Is = indexPers.ipStvolRuch
+        Select Case cellval(child, "User.IndexPers")
+            Case Is = indexpers.ipStvolRuch
 
                 
                 frm_Command.NewCommand parent, "2", "Подать ствол ", False
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.Patrub.Checked", 1
                 End If
-            Case Is = indexPers.ipGDZSZvenoVozd
+            Case Is = indexpers.ipGDZSZvenoVozd
                 'Если поверх ствола добавляется звено, то просто связываем с родительской фигурой
                 If IsGFSShapeWithIP(parent, Array(34)) Then
                     GetShpData_0 parent, child
@@ -85,28 +85,31 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
                     frm_Command.NewCommand parent, "1", "Сформировать звено ГДЗС", False
                 End If
 '                frm_Command.NewCommand parent, "1", "Сформировать звено ГДЗС", False
-            Case Is = indexPers.ipGDZSPost
+            Case Is = indexpers.ipGDZSPost
                 frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС", False
-            Case Is = indexPers.ipKPP
+            Case Is = indexpers.ipKPP
                 frm_Command.NewCommand parent, "1", "Организовать работу КПП ГДЗС", False
-            Case Is = indexPers.ipLestn3Kol
+            Case Is = indexpers.ipLestn3Kol
                 frm_Command.NewCommand parent, "2", "Установить трехколенную лестницу", False
-            Case Is = indexPers.ipLestnPalka
+            Case Is = indexpers.ipLestnPalka
                 frm_Command.NewCommand parent, "1", "Установить лестницу-палку", False
-            Case Is = indexPers.ipLestnSturm
+            Case Is = indexpers.ipLestnSturm
                 frm_Command.NewCommand parent, "1", "Установить штурмовую лестницу", False
-            Case Is = indexPers.ipRazvetvlenie
+            Case Is = indexpers.ipRazvetvlenie
                 frm_Command.NewCommand parent, "3", "Проложить магистральную рукавную линию, установить разветвление", False
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.Patrub.Checked", 1
                 End If
-            Case Is = indexPers.ipKolonka
+            Case Is = indexpers.ipKolonka
                 frm_Command.NewCommand parent, "2", "Установить автомобиль на ПГ", False
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.WaterCollect.Checked", 1
                 End If
-            Case Is = indexPers.ipStab
+            Case Is = indexpers.ipStab
                 frm_Command.NewCommand parent, "1", "Сформировать оперативный штаб пожаротушения", False
+            Case Is = indexpers.ipDutyFace
+'                setcellval child, "Prop.Unit", cellval(parent, "Prop.Unit")
+'                setcellval child, "Prop.ArrivalTime", cellval(parent, "Prop.ArrivalTime")
             Case Else
                 t = "0"
         End Select
@@ -119,12 +122,12 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
     'Звенья ГДЗС
     If IsGFSShapeWithIP(parent, Array(46, 90)) Then
         Select Case cellval(child, "user.IndexPers")
-            Case Is = indexPers.ipStvolRuch
+            Case Is = indexpers.ipStvolRuch
                 frm_Command.NewCommand parent, "2", "Звеном ГДЗС подать ствол ", False
                 If frm_Command.isOk Then
                     setcellval parent, "Actions.Patrub.Checked", 1
                 End If
-            Case Is = indexPers.ipGDZSPost
+            Case Is = indexpers.ipGDZSPost
                 frm_Command.NewCommand parent, "1", "Выставить пост безопасности ГДЗС", False
             Case Else
                 t = "0"

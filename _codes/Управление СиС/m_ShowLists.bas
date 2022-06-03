@@ -82,7 +82,7 @@ Dim pr As String
                                  "Prop.Unit", , " ", " ")
 
     '---Получаем список всех боевых позиций
-    Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave;Prop.Personnel")
+    Set positions = FilterShapes(A.GFSShapes, "Prop.PersonnelHave;Prop.Personnel;Prop.DutyJob")
     '---Сортируем
     Set positions = SortCol(positions, "Prop.ArrivalTime;Prop.LineTime;Prop.SetTime;Prop.FormingTime;Prop.SquareTime;Prop.FireTime", False, visDate)
     
@@ -397,7 +397,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по времени
     Set persons = New Collection
     For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
-        If IsGFSShapeWithIP(shp, indexPers.ipDutyFace) Then
+        If IsGFSShapeWithIP(shp, indexpers.ipDutyFace) Then
             AddUniqueCollectionItem persons, shp
         End If
     Next shp
@@ -450,7 +450,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по номеру
     Set nodes = New Collection
     For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
-        If IsGFSShapeWithIP(shp, indexPers.ipEvacNode) Then
+        If IsGFSShapeWithIP(shp, indexpers.ipEvacNode) Then
             AddOrderedNodeItem nodes, shp
         End If
     Next shp
@@ -539,7 +539,7 @@ Dim f As frm_ListForm
     '---Формируем коллекцию фигур и сортируем их по времени
     Set units = New Collection
     For Each shp In A.Refresh(Application.ActivePage.Index).GFSShapes
-        If IsGFSShapeWithIP(shp, indexPers.ipStatist) Then
+        If IsGFSShapeWithIP(shp, indexpers.ipStatist) Then
             AddUniqueCollectionItem units, shp
         End If
     Next shp
