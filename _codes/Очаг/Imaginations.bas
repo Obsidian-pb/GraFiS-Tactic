@@ -130,6 +130,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
     ShapeTo.Cells("Prop.SquareTime").Formula = _
         "=DATETIME(" & CStr(Application.ActiveDocument.DocumentSheet.Cells("User.CurrentTime").Result(visDate)) & ")"
 
+'---Указываем, что фигура вброшена впервые
+    IsFirstDrop ShapeTo
+
 '---Присваиваем номер слоя
     ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
 
@@ -290,6 +293,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 '---Присваиваем номер слоя
     ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
+    
+'---Указываем, что фигура вброшена впервые
+    IsFirstDrop ShapeTo
 
 End Sub
 
@@ -396,6 +402,9 @@ Dim ShapeTo As Visio.Shape, ShapeFrom As Visio.Shape
 
 '---Присваиваем номер слоя
     ShapeTo.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = LayerImport(IDFrom, IDTo)
+
+'---Указываем, что фигура вброшена впервые
+    IsFirstDrop ShapeTo
 
 '---Открываем окно свойств обращенной фигуры
     On Error Resume Next 'НЕ ЗАБЫТЬ ЧТО ВКЛЮЧЕН ОБРАБОТЧИК ОШИБКИ

@@ -2,6 +2,7 @@
 import numpy as np
 import arcade
 import matplotlib.pyplot as plt
+import time
 
 #%%
 arr = np.loadtxt("ToMatrixTest.csv", delimiter=",")
@@ -137,7 +138,8 @@ for x in range(SCREEN_WIDTH):
             # arcade.finish_render()
         if area[y, x]>0:
             arcade.draw_point(x, y, arcade.color.RED, size=1)
-    # arcade.finish_render()
+    time.sleep(0.1)   
+    arcade.finish_render()
 # except:
 #     arcade.finish_render()
 

@@ -264,7 +264,7 @@ End Function
 
 
 Public Function IsFirstDrop(ShpObj As Visio.Shape)
-'Функция проверяет вброшенали фигура впервые и если вброшена впервые добавляет строчку свойства User.InPage
+'Функция проверяет вброшена ли фигура впервые и если вброшена впервые добавляет строчку свойства User.InPage
     If ShpObj.CellExists("User.InPage", 0) = 0 Then
         Dim newRowIndex As Integer
         newRowIndex = ShpObj.AddNamedRow(visSectionUser, "InPage", visRowUser)

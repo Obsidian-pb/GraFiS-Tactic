@@ -13,7 +13,7 @@ plt.imshow(arr)
 #============Настройки========
 cellsWeight = [
     [pow(2,0.5), 1, pow(2,0.5)],
-    [1,          0, 1],
+    [1,          0,         1],
     [pow(2,0.5), 1, pow(2,0.5)]
 ]
 
@@ -154,3 +154,6 @@ for i in range (150):
 #%%
 plt.imshow(arr)
 plt.show()
+
+#%%
+print(*[1,2,3,4,5])
