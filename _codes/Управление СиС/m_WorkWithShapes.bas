@@ -76,7 +76,7 @@ Dim firstState As tactState
     
     For i = 0 To shp.RowCount(visSectionAction) - 1
         If Left(shp.CellsSRC(visSectionAction, i, 0).rowName, 11) = "GFS_Command" Then
-            curCommandState = GetCommandState(cellval(shp, "User.CurrentDocTime", visDate), _
+            curCommandState = GetCommandState(cellVal(shp, "User.CurrentDocTime", visDate), _
                            shp.CellsSRC(visSectionAction, i, visActionMenu).ResultStr(visUnitsString))
             Select Case curCommandState
                 Case Is = tactState.tsInProgress

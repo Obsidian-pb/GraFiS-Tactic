@@ -9,6 +9,119 @@ Private cmndID As Integer
 
 
 
+'Public Sub DescriptionExportToWord()
+''Экспортируем описание боевых действий в документ Word
+'Dim wrd As Object
+'Dim wrdDoc As Object
+'Dim wrdTbl As Object
+'Dim wrdTblRow As Object
+''Dim comRowsCount As Integer
+'Dim i As Integer
+'Dim r As Integer
+'Dim shp As Visio.Shape
+'Dim comCol As Collection
+'Dim comColSorted As Collection
+'Dim com As c_SimpleDescription
+'Dim curTime As Date
+'Dim fireTime As Date
+'
+'    '---Формируем коллекцию фигур и сортируем их по времени
+'    Set comCol = New Collection
+'    cmndID = 0
+'    For Each shp In Application.ActivePage.Shapes
+'        checkCommands comCol, shp
+'    Next shp
+'
+'    '---Сортируем
+'    Set comColSorted = SortCommands(comCol)
+'
+'
+'    'Создаем новый документ Word
+'    Set wrd = CreateObject("Word.Application")
+'    wrd.Visible = True
+'    wrd.Activate
+'    Set wrdDoc = wrd.Documents.Add
+'    wrdDoc.Activate
+'    'Создаем в новом документе таблицу требуемых размеров
+''    Set wrdTbl = wrdDoc.Tables.Add(wrd.Selection.Range, comColSorted.Count, 9)
+'    Set wrdTbl = wrdDoc.Tables.Add(wrd.Selection.Range, 1, 9)
+'    With wrdTbl
+'        If .style <> "Сетка таблицы" Then
+'            .style = "Сетка таблицы"
+'        End If
+'        .ApplyStyleHeadingRows = True
+'        .ApplyStyleLastRow = False
+'        .ApplyStyleFirstColumn = True
+'        .ApplyStyleLastColumn = False
+'        .ApplyStyleRowBands = True
+'        .ApplyStyleColumnBands = False
+'    End With
+'
+'
+'    'Заполняем таблицу описания боевых действий
+'    If comColSorted.Count > 0 Then
+'        r = 1
+'        A.Refresh Application.ActivePage.Index, curTime
+''        fireTime = A.Result("FireTime")     'Не слишкои надежно
+'        fireTime = cellval(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
+'        curTime = comColSorted(1).time
+'        '---Вставка первой записи
+'        If DateDiff("n", fireTime, curTime) < 2000 Then
+'            wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, curTime)
+'        Else
+'            wrdTbl.Rows(r).Cells(1).Range.text = Format(curTime, "HH:MM")
+'        End If
+'        wrdTbl.Rows(r).Cells(3).Range.text = Round(A.Result("NeedStreamW"), 1)
+'        wrdTbl.Rows(r).Cells(4).Range.text = A.Result("StvolWBHave")
+'        wrdTbl.Rows(r).Cells(5).Range.text = A.Result("StvolWAHave")
+'        wrdTbl.Rows(r).Cells(6).Range.text = A.Result("StvolWLHave")
+'        wrdTbl.Rows(r).Cells(7).Range.text = A.Result("StvolFoamHave")
+'        wrdTbl.Rows(r).Cells(8).Range.text = Round(A.Result("FactStreamW"), 1)
+'        Set com = comColSorted(1)
+'        If com.sdType = 1 Then
+'            wrdTbl.Rows(r).Cells(9).Range.text = com.text
+'        Else
+'            wrdTbl.Rows(r).Cells(2).Range.text = com.text
+'        End If
+'
+'        For i = 1 To comColSorted.Count
+'            Set com = comColSorted(i)
+'            'Если время текущей фигуры больше чем время предыдущей - обновляем анализатор
+'            If curTime <> com.time Then
+'                A.Refresh Application.ActivePage.Index, com.time
+'                '---Вставка записей начиная со второй (при условии их изменения)
+'                r = wrdTbl.Rows.Add().Index
+'
+'                wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, com.time)
+'                wrdTbl.Rows(r).Cells(3).Range.text = Round(A.Result("NeedStreamW"), 1)
+'                wrdTbl.Rows(r).Cells(4).Range.text = A.Result("StvolWBHave")
+'                wrdTbl.Rows(r).Cells(5).Range.text = A.Result("StvolWAHave")
+'                wrdTbl.Rows(r).Cells(6).Range.text = A.Result("StvolWLHave")
+'                wrdTbl.Rows(r).Cells(7).Range.text = A.Result("StvolFoamHave")
+'                wrdTbl.Rows(r).Cells(8).Range.text = Round(A.Result("FactStreamW"), 1)
+'
+'                curTime = comColSorted(i).time
+'            End If
+'
+'            If com.sdType = 1 Then
+'                If Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 13 Then
+'                    wrdTbl.Rows(r).Cells(9).Range.text = com.text
+'                Else
+'                    wrdTbl.Rows(r).Cells(9).Range.text = wrdTbl.Rows(r).Cells(9).Range.text & Chr(10) & com.text
+'                End If
+'            Else
+'                If Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 13 Or Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 10 Then
+'                    wrdTbl.Rows(r).Cells(2).Range.text = com.text
+'                Else
+'                    wrdTbl.Rows(r).Cells(2).Range.text = wrdTbl.Rows(r).Cells(2).Range.text & Chr(10) & com.text
+'                End If
+'            End If
+'
+'        Next i
+'    End If
+'    wrdTbl.AutoFitBehavior 1        'Устанавливаем ширину столбцов по содержимому
+'End Sub
+
 Public Sub DescriptionExportToWord()
 'Экспортируем описание боевых действий в документ Word
 Dim wrd As Object
@@ -17,6 +130,7 @@ Dim wrdTbl As Object
 Dim wrdTblRow As Object
 'Dim comRowsCount As Integer
 Dim i As Integer
+Dim j As Integer
 Dim r As Integer
 Dim shp As Visio.Shape
 Dim comCol As Collection
@@ -24,6 +138,8 @@ Dim comColSorted As Collection
 Dim com As c_SimpleDescription
 Dim curTime As Date
 Dim fireTime As Date
+
+Dim strArr(9) As String
     
     '---Формируем коллекцию фигур и сортируем их по времени
     Set comCol = New Collection
@@ -61,61 +177,94 @@ Dim fireTime As Date
     'Заполняем таблицу описания боевых действий
     If comColSorted.Count > 0 Then
         r = 1
-        A.Refresh Application.ActivePage.Index, curTime
+        a.Refresh Application.ActivePage.Index, curTime
 '        fireTime = A.Result("FireTime")     'Не слишкои надежно
-        fireTime = cellval(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
+        fireTime = cellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
         curTime = comColSorted(1).time
-        '---Вставка первой записи
-        If DateDiff("n", fireTime, curTime) < 2000 Then
-            wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, curTime)
+'        '---Вставка первой записи
+'        htmlTable = htmlTable & "<thead><tr>"
+'            htmlTable = htmlTable & "<th>1</th>"
+'            htmlTable = htmlTable & "<th>2</th>"
+'            htmlTable = htmlTable & "<th>3</th>"
+'            htmlTable = htmlTable & "<th>4</th>"
+'            htmlTable = htmlTable & "<th>5</th>"
+'            htmlTable = htmlTable & "<th>6</th>"
+'            htmlTable = htmlTable & "<th>7</th>"
+'            htmlTable = htmlTable & "<th>8</th>"
+'            htmlTable = htmlTable & "<th>9</th>"
+'        htmlTable = htmlTable & "</tr></thead>" & Chr(10)
+        
+        'Данные для первой записи
+        Set com = comColSorted(1)
+        a.Refresh Application.ActivePage.Index, com.time
+        strArr(1) = "Ч+" & DateDiff("n", fireTime, com.time)
+        strArr(3) = Round(a.Result("NeedStreamW"), 1)
+        strArr(4) = a.Result("StvolWBHave")
+        strArr(5) = a.Result("StvolWAHave")
+        strArr(6) = a.Result("StvolWLHave")
+        strArr(7) = a.Result("StvolFoamHave")
+        strArr(8) = Round(a.Result("FactStreamW"), 1)
+        If com.sdType = 1 Then
+            strArr(9) = strArr(9) & com.text & Chr(10) & Chr(10)
         Else
-            wrdTbl.Rows(r).Cells(1).Range.text = Format(curTime, "HH:MM")
+            strArr(2) = strArr(2) & com.text & Chr(10) & Chr(10)
         End If
-        wrdTbl.Rows(r).Cells(3).Range.text = Round(A.Result("NeedStreamW"), 1)
-        wrdTbl.Rows(r).Cells(4).Range.text = A.Result("StvolWBHave")
-        wrdTbl.Rows(r).Cells(5).Range.text = A.Result("StvolWAHave")
-        wrdTbl.Rows(r).Cells(6).Range.text = A.Result("StvolWLHave")
-        wrdTbl.Rows(r).Cells(7).Range.text = A.Result("StvolFoamHave")
-        wrdTbl.Rows(r).Cells(8).Range.text = Round(A.Result("FactStreamW"), 1)
-        
-        
-        For i = 1 To comColSorted.Count
+        curTime = com.time
+
+        'Все последующие записи
+        For i = 2 To comColSorted.Count
             Set com = comColSorted(i)
-            'Если время текущей фигуры больше чем время предыдущей - обновляем анализатор
-            If curTime <> com.time Then
-                A.Refresh Application.ActivePage.Index, com.time
-                '---Вставка записей начиная со второй (при условии их изменения)
-                r = wrdTbl.Rows.Add().Index
-                
-                wrdTbl.Rows(r).Cells(1).Range.text = "Ч+" & DateDiff("n", fireTime, com.time)
-                wrdTbl.Rows(r).Cells(3).Range.text = Round(A.Result("NeedStreamW"), 1)
-                wrdTbl.Rows(r).Cells(4).Range.text = A.Result("StvolWBHave")
-                wrdTbl.Rows(r).Cells(5).Range.text = A.Result("StvolWAHave")
-                wrdTbl.Rows(r).Cells(6).Range.text = A.Result("StvolWLHave")
-                wrdTbl.Rows(r).Cells(7).Range.text = A.Result("StvolFoamHave")
-                wrdTbl.Rows(r).Cells(8).Range.text = Round(A.Result("FactStreamW"), 1)
-                
-                curTime = comColSorted(i).time
-            End If
-            
-            If com.sdType = 1 Then
-                If Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 13 Then
-                    wrdTbl.Rows(r).Cells(9).Range.text = com.text
+            If curTime = com.time Then
+                If com.sdType = 1 Then
+                    strArr(9) = strArr(9) & com.text & Chr(10) & Chr(10)
                 Else
-                    wrdTbl.Rows(r).Cells(9).Range.text = wrdTbl.Rows(r).Cells(9).Range.text & Chr(10) & com.text
+                    strArr(2) = strArr(2) & com.text & Chr(10) & Chr(10)
                 End If
             Else
-                If Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 13 Or Asc(wrdTbl.Rows(r).Cells(9).Range.text) = 10 Then
-                    wrdTbl.Rows(r).Cells(2).Range.text = com.text
+                'Формируем код!
+                For j = 1 To UBound(strArr)
+                    wrdTbl.Rows(r).Cells(j).Range.text = strArr(j)
+                Next j
+                
+                'Обновляем данные для текущего времени
+                ClearArr strArr
+                
+                a.Refresh Application.ActivePage.Index, com.time
+                
+                strArr(1) = "Ч+" & DateDiff("n", fireTime, com.time)
+                strArr(3) = Round(a.Result("NeedStreamW"), 1)
+                strArr(4) = a.Result("StvolWBHave")
+                strArr(5) = a.Result("StvolWAHave")
+                strArr(6) = a.Result("StvolWLHave")
+                strArr(7) = a.Result("StvolFoamHave")
+                strArr(8) = Round(a.Result("FactStreamW"), 1)
+                
+                If com.sdType = 1 Then
+                    strArr(9) = strArr(9) & com.text & Chr(10) & Chr(10)
                 Else
-                    wrdTbl.Rows(r).Cells(2).Range.text = wrdTbl.Rows(r).Cells(2).Range.text & Chr(10) & com.text
+                    strArr(2) = strArr(2) & com.text & Chr(10) & Chr(10)
                 End If
+                
+                curTime = com.time
+                r = wrdTbl.Rows.Add().Index
             End If
-            
         Next i
+
     End If
+    
     wrdTbl.AutoFitBehavior 1        'Устанавливаем ширину столбцов по содержимому
 End Sub
+
+Private Function ClearArr(ByRef arr As Variant) As Variant
+Dim i As Integer
+    
+    For i = 0 To UBound(arr)
+        arr(i) = ""
+    Next i
+    
+ClearArr = arr
+End Function
+
 
 Public Sub DescriptionViewInList()
 'Экспортируем описанме боевых действий в документ Word
@@ -148,9 +297,9 @@ Dim f As frm_ListForm
     
     'Заполняем таблицу описания боевых действий
     If comColSorted.Count > 0 Then
-        A.Refresh Application.ActivePage.Index, curTime
+        a.Refresh Application.ActivePage.Index, curTime
         
-        fireTime = cellval(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
+        fireTime = cellVal(Application.ActivePage.Shapes, "Prop.FireTime", visUnitsString)  ' visDate)    'Так надежнее
 '        fireTime = A.Result("FireTime")
         curTime = comColSorted(1).time
         

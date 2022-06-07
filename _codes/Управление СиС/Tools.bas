@@ -13,13 +13,13 @@ End Function
 
 Public Function GetGFSShapeTime(ByRef shp As Visio.Shape) As Double
     
-    GetGFSShapeTime = cellval(shp, "Prop.SetTime", visDate)
+    GetGFSShapeTime = cellVal(shp, "Prop.SetTime", visDate)
     If GetGFSShapeTime > 0 Then Exit Function
     
-    GetGFSShapeTime = cellval(shp, "Prop.FormingTime", visDate)
+    GetGFSShapeTime = cellVal(shp, "Prop.FormingTime", visDate)
     If GetGFSShapeTime > 0 Then Exit Function
     
-    GetGFSShapeTime = cellval(shp, "Prop.ArrivalTime", visDate)
+    GetGFSShapeTime = cellVal(shp, "Prop.ArrivalTime", visDate)
     If GetGFSShapeTime > 0 Then Exit Function
 
 GetGFSShapeTime = 0

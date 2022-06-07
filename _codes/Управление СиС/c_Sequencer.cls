@@ -68,7 +68,7 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
     
     'Техника (+разветвление временно)
     If IsGFSShapeWithIP(parent, Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 42, 34)) Then
-        Select Case cellval(child, "User.IndexPers")
+        Select Case cellVal(child, "User.IndexPers")
             Case Is = indexpers.ipStvolRuch
 
                 
@@ -121,7 +121,7 @@ Private Function CheckAndAddCommand(ByRef parent As Visio.Shape, ByRef child As 
     
     'Звенья ГДЗС
     If IsGFSShapeWithIP(parent, Array(46, 90)) Then
-        Select Case cellval(child, "user.IndexPers")
+        Select Case cellVal(child, "user.IndexPers")
             Case Is = indexpers.ipStvolRuch
                 frm_Command.NewCommand parent, "2", "Звеном ГДЗС подать ствол ", False
                 If frm_Command.isOk Then
@@ -176,7 +176,7 @@ Dim tmpShp As Visio.Shape
 '        If IsCorrectShapeForLabel(tmpShp) Then 'And OtherShape.CellExists("User.Version", 0) = True Then
         If Not (tmpShp.ID = shp.ID) Then
             If IsGFSShape(tmpShp) Then
-                If tmpShp.HitTest(cellval(shp, "PinX", visInches), cellval(shp, "PinY", visInches), 10) >= 1 Then
+                If tmpShp.HitTest(cellVal(shp, "PinX", visInches), cellVal(shp, "PinY", visInches), 10) >= 1 Then
                     If Not IsGFSShapeWithIP(shp, Array(64, 71)) Then
                         Set GetGraFisShape = tmpShp
     '                    Exit Function
@@ -207,8 +207,8 @@ Dim tmpDateTimeS As String
 '    Debug.Print (CDate(tmpDateTime))
                     
     If tmpDateTime > 0 Then
-        setcellval shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)
-        setcellval shp, "Prop.Call", cellval(mainShp, "Prop.Call", visUnitsString)
+        setcellval shp, "Prop.Unit", cellVal(mainShp, "Prop.Unit", visUnitsString)
+        setcellval shp, "Prop.Call", cellVal(mainShp, "Prop.Call", visUnitsString)
     
     
         If frm_Command.isOk Then
@@ -245,8 +245,8 @@ Dim tmpDateTimeS As String
 '    Debug.Print (CDate(tmpDateTime))
                     
     If tmpDateTime > 0 Then
-        setcellval shp, "Prop.Unit", cellval(mainShp, "Prop.Unit", visUnitsString)
-        setcellval shp, "Prop.Call", cellval(mainShp, "Prop.Call", visUnitsString)
+        setcellval shp, "Prop.Unit", cellVal(mainShp, "Prop.Unit", visUnitsString)
+        setcellval shp, "Prop.Call", cellVal(mainShp, "Prop.Call", visUnitsString)
     
         'Передаем фигуре время родительской, если на форме команды был нажат "Ок"
         If shp.CellExists("User.InPage", 0) = 0 Then

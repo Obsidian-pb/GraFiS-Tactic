@@ -103,7 +103,7 @@ Dim targetCellNameShort As String
         shp.CellsSRC(visSectionAction, rowA, visActionAction).FormulaU = frml
         
         'Добавляем строку проверки текущего времени User.CurrentDocTime, если ее нет
-        If cellval(shp, "User.CurrentDocTime", , "-1") < 0 Then
+        If cellVal(shp, "User.CurrentDocTime", , "-1") < 0 Then
             rowIName = "CurrentDocTime"
             rowI = shp.AddNamedRow(visSectionUser, rowIName, 0)
             shp.CellsSRC(visSectionUser, rowI, 0).Formula = "TheDoc!User.CurrentTime"
