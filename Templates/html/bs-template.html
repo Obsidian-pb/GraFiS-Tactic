@@ -33,28 +33,32 @@
         <div class="col-md-2">
           <div class="bg-white position-fixed col-md-2">
             <p>$pagesHeader$</p>
-            <ul>
+            <ul class="nav flex-column">
               $pages$
-              <!-- <li><a href="index.html" title="">Страница 1 </a></li>
-              <li><a href="index2.html" title="">Страница 2 fghfh dfgfdgdfg sdfdsfsfs dfdsgfdsgss</a></li> -->
             </ul>
           </div>
         </div>
         
         <div class="col-md-8">
           <div class="my-3 p-3 bg-white rounded shadow-sm">
-            $body$
+            <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+              $body$
+            </div>
+
+
           </div>
         </div>
         
         <div class="col-md-2">
           <div class="position-fixed">
             <p>$contenetHeader$</p>
-            <ul>
-              $content$
-
-            </ul>
+            <div id="list-example" class="list-group">
+              <ul class="list-inline">
+                $content$
+              </ul>               
+            </div>
           </div>
+
         </div>
       </div>      
     </div>
