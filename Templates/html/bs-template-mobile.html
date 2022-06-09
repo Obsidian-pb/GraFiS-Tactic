@@ -14,12 +14,14 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #0c5460">
       <div class="container">
-          <span class="navbar-brand" href="/">$brand$</span>
+          <span class="navbar-brand" href="/">$title$</span>
+          <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                  aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
           <div class="collapse navbar-collapse" id="collapsibleNavId">
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                  <li class="nav-item" id="nav-item-main">
-                      <a class="nav-link" href="$doc-ref$">$title$</a>
-                  </li>
+                $pages$
               </ul>
           </div>
       </div>
@@ -29,17 +31,20 @@
 
     <!-- Content -->
     <div class="container-fluid">
-      <div class="row">
+      <div class="row">       
         <div class="col-md-2">
-          <div class="bg-white position-fixed col-md-2">
-            <p>$pagesHeader$</p>
-            <ul class="nav flex-column">
-              $pages$
-            </ul>
-          </div>
-        </div>
-        
-        <div class="col-md-8">
+          <!-- <div class="position-fixed"> -->
+            <p>$contenetHeader$</p>
+            <div id="list-example" class="list-group">
+              <ul class="list-inline">
+                $content$
+              </ul>               
+            </div>
+          <!-- </div> -->
+
+        </div>        
+
+        <div class="col-md-10">
           <div class="my-3 p-3 bg-white rounded shadow-sm">
             <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
               $body$
@@ -49,24 +54,11 @@
           </div>
         </div>
         
-        <div class="col-md-2">
-          <div class="position-fixed">
-            <p>$contenetHeader$</p>
-            <div id="list-example" class="list-group">
-              <ul class="list-inline">
-                $content$
-              </ul>               
-            </div>
-          </div>
-
-        </div>
       </div>      
     </div>
     
-
-    <hr />
     <footer>
-      <div class="container-lg">
+      <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <p>$company$</p>
