@@ -161,6 +161,7 @@ Public Enum indexPers
 '   ipMashiniMinzdrav = 3002                    'Машины Минздрав
    ipFormula = 500                             'Формулы
    ipFormulaConnector = 501                    'Соединитель формул
+   ipImageArea = 502                           'Снимок схемы (экспорт в изображение)
    ipInfoMain = 600                            'Инфоблок Основные сведения
    ipInfoOrganization = 601                    'Инфоблок Организация
    ipInfoObject = 602                          'Инфоблок Объект пожара
