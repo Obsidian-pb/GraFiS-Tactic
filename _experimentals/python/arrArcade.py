@@ -134,12 +134,12 @@ arcade.start_render()
 for x in range(SCREEN_WIDTH):
     for y in range(SCREEN_HEIGHT):
         if arr[y, x]==1:
-            arcade.draw_point(x, y, arcade.color.BLACK, size=1)
-            # arcade.finish_render()
+            arcade.draw_point(x, y, arcade.color.BLACK, size=2)
         if area[y, x]>0:
-            arcade.draw_point(x, y, arcade.color.RED, size=1)
-    time.sleep(0.1)   
+            arcade.draw_point(x, y, arcade.color.RED, size=2)
+
     arcade.finish_render()
+    time.sleep(0.02)       
 # except:
 #     arcade.finish_render()
 
