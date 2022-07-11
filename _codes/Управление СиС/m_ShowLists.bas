@@ -353,6 +353,9 @@ Dim f As frm_ListForm
     Next shp
     If units.Count = 0 Then Exit Sub
     
+    '---Сортируем коллекцию по номеру помещения
+    Set units = SortCol(units, "Prop.LocationID", False)
+    
     'Заполняем таблицу  с перечнем сведений о местах
     If units.Count > 0 Then
         ReDim myArray(units.Count, 5)
