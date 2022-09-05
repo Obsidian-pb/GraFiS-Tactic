@@ -83,6 +83,9 @@ Public Sub GESystemTest(ShpObj As Visio.Shape)
     '---Выделяем память под коллекцию фигур в НРС
     Set shapesInNRS = New Collection
     
+    '---Добавляем текущую фигуру (первую в коллекцию уже проверенных)
+        shapesInNRS.Add ShpObj
+    
     '---Наполняем коллекцию фигурами входящими в НРС
         GetTechShapeForGESystem ShpObj
     
@@ -102,6 +105,10 @@ Private Sub GetTechShapeForGESystem(ByRef shp As Visio.Shape)
 Dim Con As Connect
 Dim sideShp As Visio.Shape
 
+    '---Проверяем, является ли фигура фигурой ГраФиС
+    If Not IsGFSShape(shp) Then Exit Sub
+
+    '---Проверяем все фигуры подключенные к (от) фигуре
     For Each Con In shp.Connects
         If Not IsShapeAllreadyChecked(Con.ToSheet) Then
             shapesInNRS.Add Con.ToSheet
