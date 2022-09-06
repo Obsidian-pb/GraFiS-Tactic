@@ -13,6 +13,8 @@ Option Explicit
 
 Private grain As Integer        'Размер зерна в мм
 Const mmInInch As Double = 25.4
+Private grain_i As Double
+Private currentCells As Collection
 
 Private form As Object
 
@@ -49,6 +51,7 @@ Dim arr() As Integer
 Dim areaBuilder As C_MatrixAreaBuilder
 
     grain = grainVal
+    grain_i = grain / mmInInch
 
     xCount = ActivePage.PageSheet.Cells("PageWidth").Result(visMillimeters) / grain
     yCount = ActivePage.PageSheet.Cells("PageHeight").Result(visMillimeters) / grain
@@ -73,36 +76,112 @@ Dim areaBuilder As C_MatrixAreaBuilder
     End If
        
     'Определяем конфигурацию матрицы (стены, зоны горения и т.д.)
-    Set maskBuilder = New c_MaskBuilder
-    '---Создаем маску
-    maskBuilder.s_makeMask bordreRect
-        '---Если маска стен не была создана в результате отсутсвия таковых - возвращаем чисутю матрицу
-        If maskBuilder.pO_MaskShape Is Nothing Then
-            '---Возвращаем результат - матрицу заполненную данными о ограждающих конструкциях
-            NewMatrix = matrix
-            
-            '---Уничтожаем построитель масок
-            Set maskBuilder = Nothing
-            Exit Function
-        End If
-    '---Создаем маску свободного пространства
-    maskBuilder.s_makeOpenSpaceMask
-
-    '---Определяем окружение
-    CheckEnvironment
-
+'    Set maskBuilder = New c_MaskBuilder
+'    '---Создаем маску
+'    maskBuilder.s_makeMask bordreRect
+'        '---Если маска стен не была создана в результате отсутсвия таковых - возвращаем чисутю матрицу
+'        If maskBuilder.pO_MaskShape Is Nothing Then
+'            '---Возвращаем результат - матрицу заполненную данными о ограждающих конструкциях
+'            NewMatrix = matrix
+'
+'            '---Уничтожаем построитель масок
+'            Set maskBuilder = Nothing
+'            Exit Function
+'        End If
+'    '---Создаем маску свободного пространства
+'    maskBuilder.s_makeOpenSpaceMask
+'
+'    '---Определяем окружение
+'    CheckEnvironment
+    
+    '---Рекурсивная идентификация контура стен
+    Dim shp As Visio.Shape
+    If bordreRect Is Nothing Then
+        For Each shp In Application.ActivePage.Shapes
+            If PFB_isWall(shp) Then
+                Set currentCells = New Collection
+                Attack shp, Int(CellVal(shp, "BeginX", visMillimeters) / grain), Int(CellVal(shp, "BeginY", visMillimeters) / grain)
+            End If
+        Next shp
+    Else
+        For Each shp In Application.ActivePage.Shapes
+            If PFB_isWall(shp) Then
+                If bordreRect.SpatialRelation(shp, 0, VisSpatialRelationFlags.visSpatialFrontToBack) > 0 Then
+                    Set currentCells = New Collection
+                    Attack shp, CellVal(shp, "BeginX", visMillimeters), CellVal(shp, "BeginY", visMillimeters)
+                End If
+            End If
+        Next shp
+    End If
 
     '---Возвращаем результат - матрицу заполненную данными о ограждающих конструкциях
     NewMatrix = matrix
 
-    '---Удаляем маски
-    maskBuilder.pO_MaskShape.Delete
-    maskBuilder.pO_FreespaceMaskShape.Delete
-    
-    '---Уничтожаем построитель масок
-    Set maskBuilder = Nothing
+'    '---Удаляем маски
+'    maskBuilder.pO_MaskShape.Delete
+'    maskBuilder.pO_FreespaceMaskShape.Delete
+'
+'    '---Уничтожаем построитель масок
+'    Set maskBuilder = Nothing
 
 End Function
+
+Public Sub Attack(ByRef shp As Visio.Shape, ByVal x As Double, ByVal y As Double)
+    
+Dim radiuss As Integer
+Dim x_i As Integer
+Dim y_i As Integer
+Dim pnt As c_Point
+'Dim grain_i As Double
+
+    On Error GoTo ErrRange
+    
+'    x = Int(x / grain) mmInInch
+'    y = Int(x / grain)
+    x_i = x / mmInInch
+    y_i = y / mmInInch
+'    grain_i = grain / mmInInch
+    
+    If x < 0 Or y < 0 Or x > UBound(matrix, 1) * grain Or y > UBound(matrix, 2) * grain Then
+        Exit Sub
+    End If
+    
+'    DoEvents
+    
+    radiuss = grain * 0.5
+'    Debug.Print x; y   '; matrix(x, y) = CellState.csWall
+    
+'    If matrix(Int(x / grain), Int(y / grain)) = CellState.csWall Then Exit Sub
+    Set pnt = New c_Point
+    pnt.SetData Int(x / grain), Int(y / grain)
+    If IsInCollection(currentCells, pnt) Then Exit Sub
+    
+    
+    If shp.HitTest(x_i, y_i, grain_i * 0.5) Then
+'        Application.ActivePage.DrawRectangle x - radiuss, y - radiuss, _
+'                                             x + radiuss, y + radiuss
+'        currentCells.Add pnt, str(Int(x / grain)) & "_" & str(Int(y / grain))
+        currentCells.Add pnt
+        matrix(Int(x / grain), Int(y / grain)) = CellState.csWall
+        
+        Attack shp, x - grain, y
+        Attack shp, x - grain, y + grain
+        Attack shp, grain, y + grain
+        Attack shp, x + grain, y + grain
+        Attack shp, x + grain, y
+        Attack shp, x + grain, y - grain
+        Attack shp, grain, y - grain
+        Attack shp, x - grain, y - grain
+    End If
+    
+Exit Sub
+ErrRange:
+    If Err.number = 9 Then
+        Exit Sub
+    Else
+        Debug.Print Err.description
+    End If
+End Sub
 
 Private Sub CheckEnvironment(Optional ByRef rect As c_Rect)
 'Процедура определяет конфигурацию пространства

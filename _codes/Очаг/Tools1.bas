@@ -251,7 +251,14 @@ End Function
 '    Next i
 'End Sub
 
-
+'Public Sub TEST_1()
+'Dim shp As Visio.Shape
+'Dim x As Double
+'Dim y As Double
+'
+'    x = cellval(
+'    Debug.Print shp.HitTest(x, y, grain * 0.5)
+'End Sub
 
 
 

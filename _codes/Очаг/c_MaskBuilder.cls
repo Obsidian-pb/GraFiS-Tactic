@@ -45,6 +45,7 @@ Dim vO_Shape As Visio.Shape
             ps_AddShape vO_Shape
         Next vO_Shape
     Else
+        ' Заменить на SpatialSearch
         For Each vO_Shape In Application.ActivePage.Shapes
             If borders.SpatialRelation(vO_Shape, 0, VisSpatialRelationFlags.visSpatialFrontToBack) > 0 Then
                 ps_AddShape vO_Shape
