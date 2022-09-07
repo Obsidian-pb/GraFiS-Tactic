@@ -75,8 +75,8 @@ Dim shp As Visio.Shape
 '            matrix = areaBuilder.SetForm(form).FillArea(matrix, bordreRect, grain)
 '        Set areaBuilder = Nothing
 '    End If
-       
-    'Определяем конфигурацию матрицы (стены, зоны горения и т.д.)
+'
+''    Определяем конфигурацию матрицы (стены, зоны горения и т.д.)
 '    Set maskBuilder = New c_MaskBuilder
 '    '---Создаем маску
 '    maskBuilder.s_makeMask bordreRect
@@ -95,15 +95,26 @@ Dim shp As Visio.Shape
 '    '---Определяем окружение
 '    CheckEnvironment
     
+    
+    
+    'Включаем цвет подписи в форме отчета хода расчета
+'    form.lblMatrixIsBaked.ForeColor = vbBlack
+    
     '---Заполняем матрицу нолями
     FillMatrixZero
-    
+
     '---Рекурсивная идентификация контура стен
+    form.lblMatrixIsBaked.Caption = "Определение контура стен"
+    form.SetMatrixSize Application.ActivePage.Shapes.Count
+'    DoEvents
     If bordreRect Is Nothing Then
         For Each shp In Application.ActivePage.Shapes
             If PFB_isWall(shp) Then
                 Set currentCells = New Collection
-                Attack shp, CellVal(shp, "BeginX", visMillimeters), CellVal(shp, "BeginY", visMillimeters)
+'                Attack shp, CellVal(shp, "BeginX", visMillimeters), CellVal(shp, "BeginY", visMillimeters)
+                Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters)
+                
+                form.AddCheckedSize 1, 2
             End If
         Next shp
     Else
@@ -111,18 +122,26 @@ Dim shp As Visio.Shape
             If PFB_isWall(shp) Then
                 If bordreRect.SpatialRelation(shp, 0, VisSpatialRelationFlags.visSpatialFrontToBack) > 0 Then
                     Set currentCells = New Collection
-                    Attack shp, CellVal(shp, "BeginX", visMillimeters), CellVal(shp, "BeginY", visMillimeters)
+                    Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters)
+                    
+                    form.AddCheckedSize 1, 2
                 End If
             End If
         Next shp
     End If
 
+    
     '---Рекурсивная идентификация контура дверей
+    form.lblMatrixIsBaked.Caption = "Определение контура окон"
+    form.SetMatrixSize Application.ActivePage.Shapes.Count
+'    DoEvents
     If bordreRect Is Nothing Then
         For Each shp In Application.ActivePage.Shapes
             If PFB_isDoor(shp) Then
                 Set currentCells = New Collection
                 Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters), csOpenSpace
+                
+                form.AddCheckedSize 1, 3
             End If
         Next shp
     Else
@@ -131,6 +150,8 @@ Dim shp As Visio.Shape
                 If bordreRect.SpatialRelation(shp, 0, VisSpatialRelationFlags.visSpatialFrontToBack) > 0 Then
                     Set currentCells = New Collection
                     Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters), csOpenSpace
+                
+                    form.AddCheckedSize 1, 3
                 End If
             End If
         Next shp
@@ -151,7 +172,7 @@ End Function
 
 Public Sub Attack(ByRef shp As Visio.Shape, ByVal x As Double, ByVal y As Double, Optional ByVal state As CellState = CellState.csWall)
     
-Dim radiuss As Integer
+Dim radiuss As Double
 Dim x_i As Integer
 Dim y_i As Integer
 Dim pnt As c_Point
@@ -179,7 +200,8 @@ Dim pnt As c_Point
     Set pnt = New c_Point
     pnt.SetData Int(x / grain), Int(y / grain)
     If IsInCollection(currentCells, pnt) Then Exit Sub
-    
+'    Debug.Print Int(x / grain); Int(y / grain)
+'   debug.Print ActivePage.Shapes.ItemFromID(22).HitTest(945,2160,40)
     
     If shp.HitTest(x_i, y_i, radiuss) Then
 '        Application.ActivePage.DrawRectangle x_i - radiuss, y_i - radiuss, _

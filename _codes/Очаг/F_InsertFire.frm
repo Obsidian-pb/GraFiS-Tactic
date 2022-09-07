@@ -211,11 +211,17 @@ Private Function GetMatrixCheckedStatus(Optional kind As Byte = 0) As String
 Dim procent As Single
     procent = Round(matrixChecked / matrixSize, 4) * 100
     
-    If kind = 0 Then
-        GetMatrixCheckedStatus = "Запечено " & procent & "%"
-    ElseIf kind = 1 Then
-        GetMatrixCheckedStatus = "Обработка расчетной зоны " & procent & "%"
-    End If
+    Select Case kind
+        Case Is = 0
+            GetMatrixCheckedStatus = "Запечено " & procent & "%"
+        Case Is = 1
+            GetMatrixCheckedStatus = "Обработка расчетной зоны " & procent & "%"
+        Case Is = 2
+            GetMatrixCheckedStatus = "Обработано " & procent & "% стен"
+        Case Is = 3
+            GetMatrixCheckedStatus = "Обработано " & procent & "% дверей"
+    End Select
+
 End Function
 
 '--------------------------Внешние процедуры и функции МОДЕЛИРОВАНИЕ--------------------------
@@ -232,6 +238,7 @@ Public Sub AddCheckedSize(ByVal size As Long, Optional kind As Byte = 0)
     'Обновляем статусную строку с количеством проверенных клеток
     lblMatrixIsBaked.Caption = GetMatrixCheckedStatus(kind)
     lblMatrixIsBaked.ForeColor = vbBlack
+    DoEvents
 '    Me.Repaint
 End Sub
 
