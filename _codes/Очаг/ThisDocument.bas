@@ -185,7 +185,7 @@ Dim v_Ctrl As CommandBarControl
 
 '---Проверяем какая кнопка нажата и в зависимости от этого выполняем действие
     For Each v_Ctrl In Application.CommandBars("Превращения").Controls
-        If v_Ctrl.State = msoButtonDown Then
+        If v_Ctrl.state = msoButtonDown Then
             Select Case v_Ctrl.Caption
                 Case Is = "Площадь"
                     If IsSelectedOneShape(False) Then

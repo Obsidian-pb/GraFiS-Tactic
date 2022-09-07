@@ -49,6 +49,7 @@ Dim xCount As Long
 Dim yCount As Long
 Dim arr() As Integer
 Dim areaBuilder As C_MatrixAreaBuilder
+Dim shp As Visio.Shape
 
     grain = grainVal
     grain_i = grain / mmInInch
@@ -62,18 +63,18 @@ Dim areaBuilder As C_MatrixAreaBuilder
     'Проверяем наличие контурной фигуры
     TryGetShape bordreRect, "User.IndexPers:1001"
     
-    'Определяем расчетную область (При условии, что имеется фигура ограничивающей зоны)
-    If bordreRect Is Nothing Then
-        FillMatrixZero      'Заполняем матрицу нолями
-    Else
-        Set areaBuilder = New C_MatrixAreaBuilder
-            form.lblMatrixIsBaked.Caption = "Оценка расчетной зоны, подождите"
-            form.lblMatrixIsBaked.ForeColor = vbBlack
-            DoEvents
-            
-            matrix = areaBuilder.SetForm(form).FillArea(matrix, bordreRect, grain)
-        Set areaBuilder = Nothing
-    End If
+'    'Определяем расчетную область (При условии, что имеется фигура ограничивающей зоны)
+'    If bordreRect Is Nothing Then
+'        FillMatrixZero      'Заполняем матрицу нолями
+'    Else
+'        Set areaBuilder = New C_MatrixAreaBuilder
+'            form.lblMatrixIsBaked.Caption = "Оценка расчетной зоны, подождите"
+'            form.lblMatrixIsBaked.ForeColor = vbBlack
+'            DoEvents
+'
+'            matrix = areaBuilder.SetForm(form).FillArea(matrix, bordreRect, grain)
+'        Set areaBuilder = Nothing
+'    End If
        
     'Определяем конфигурацию матрицы (стены, зоны горения и т.д.)
 '    Set maskBuilder = New c_MaskBuilder
@@ -94,13 +95,15 @@ Dim areaBuilder As C_MatrixAreaBuilder
 '    '---Определяем окружение
 '    CheckEnvironment
     
+    '---Заполняем матрицу нолями
+    FillMatrixZero
+    
     '---Рекурсивная идентификация контура стен
-    Dim shp As Visio.Shape
     If bordreRect Is Nothing Then
         For Each shp In Application.ActivePage.Shapes
             If PFB_isWall(shp) Then
                 Set currentCells = New Collection
-                Attack shp, Int(CellVal(shp, "BeginX", visMillimeters) / grain), Int(CellVal(shp, "BeginY", visMillimeters) / grain)
+                Attack shp, CellVal(shp, "BeginX", visMillimeters), CellVal(shp, "BeginY", visMillimeters)
             End If
         Next shp
     Else
@@ -114,6 +117,26 @@ Dim areaBuilder As C_MatrixAreaBuilder
         Next shp
     End If
 
+    '---Рекурсивная идентификация контура дверей
+    If bordreRect Is Nothing Then
+        For Each shp In Application.ActivePage.Shapes
+            If PFB_isDoor(shp) Then
+                Set currentCells = New Collection
+                Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters), csOpenSpace
+            End If
+        Next shp
+    Else
+        For Each shp In Application.ActivePage.Shapes
+            If PFB_isDoor(shp) Then
+                If bordreRect.SpatialRelation(shp, 0, VisSpatialRelationFlags.visSpatialFrontToBack) > 0 Then
+                    Set currentCells = New Collection
+                    Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters), csOpenSpace
+                End If
+            End If
+        Next shp
+    End If
+
+
     '---Возвращаем результат - матрицу заполненную данными о ограждающих конструкциях
     NewMatrix = matrix
 
@@ -126,7 +149,7 @@ Dim areaBuilder As C_MatrixAreaBuilder
 
 End Function
 
-Public Sub Attack(ByRef shp As Visio.Shape, ByVal x As Double, ByVal y As Double)
+Public Sub Attack(ByRef shp As Visio.Shape, ByVal x As Double, ByVal y As Double, Optional ByVal state As CellState = CellState.csWall)
     
 Dim radiuss As Integer
 Dim x_i As Integer
@@ -148,7 +171,8 @@ Dim pnt As c_Point
     
 '    DoEvents
     
-    radiuss = grain * 0.5
+    radiuss = grain_i * 0.5
+'    If state = csOpenSpace Then Debug.Print Int(x / grain); Int(y / grain)
 '    Debug.Print x; y   '; matrix(x, y) = CellState.csWall
     
 '    If matrix(Int(x / grain), Int(y / grain)) = CellState.csWall Then Exit Sub
@@ -157,21 +181,21 @@ Dim pnt As c_Point
     If IsInCollection(currentCells, pnt) Then Exit Sub
     
     
-    If shp.HitTest(x_i, y_i, grain_i * 0.5) Then
-'        Application.ActivePage.DrawRectangle x - radiuss, y - radiuss, _
-'                                             x + radiuss, y + radiuss
-'        currentCells.Add pnt, str(Int(x / grain)) & "_" & str(Int(y / grain))
+    If shp.HitTest(x_i, y_i, radiuss) Then
+'        Application.ActivePage.DrawRectangle x_i - radiuss, y_i - radiuss, _
+'                                             x_i + radiuss, y_i + radiuss
+
         currentCells.Add pnt
-        matrix(Int(x / grain), Int(y / grain)) = CellState.csWall
+        matrix(Int(x / grain), Int(y / grain)) = state
         
-        Attack shp, x - grain, y
-        Attack shp, x - grain, y + grain
-        Attack shp, grain, y + grain
-        Attack shp, x + grain, y + grain
-        Attack shp, x + grain, y
-        Attack shp, x + grain, y - grain
-        Attack shp, grain, y - grain
-        Attack shp, x - grain, y - grain
+        Attack shp, x - grain, y, state
+        Attack shp, x - grain, y + grain, state
+        Attack shp, grain, y + grain, state
+        Attack shp, x + grain, y + grain, state
+        Attack shp, x + grain, y, state
+        Attack shp, x + grain, y - grain, state
+        Attack shp, grain, y - grain, state
+        Attack shp, x - grain, y - grain, state
     End If
     
 Exit Sub
