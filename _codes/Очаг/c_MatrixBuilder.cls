@@ -98,10 +98,22 @@ Dim shp As Visio.Shape
     
     
     'Включаем цвет подписи в форме отчета хода расчета
-'    form.lblMatrixIsBaked.ForeColor = vbBlack
+    form.lblMatrixIsBaked.ForeColor = vbBlack
     
     '---Заполняем матрицу нолями
     FillMatrixZero
+
+    '---Заполняем матрицу неучетным пространством в случае, если указана расчетная зона
+    If Not bordreRect Is Nothing Then
+        Set areaBuilder = New C_MatrixAreaBuilder
+            form.lblMatrixIsBaked.Caption = "Оценка расчетной зоны, подождите"
+'            form.lblMatrixIsBaked.ForeColor = vbBlack
+            DoEvents
+
+            FillMatrixWalls
+            matrix = areaBuilder.SetForm(form).FillArea(matrix, bordreRect, grain)
+        Set areaBuilder = Nothing
+    End If
 
     '---Рекурсивная идентификация контура стен
     form.lblMatrixIsBaked.Caption = "Определение контура стен"
@@ -441,6 +453,18 @@ Dim y As Long
     For y = 0 To UBound(matrix, 1)
         For x = 0 To UBound(matrix, 2)
             matrix(y, x) = CellState.csOpenSpace
+        Next x
+    Next y
+End Sub
+
+Private Sub FillMatrixWalls()
+'Заполняем матрицу нолями
+Dim x As Long
+Dim y As Long
+    
+    For y = 0 To UBound(matrix, 1)
+        For x = 0 To UBound(matrix, 2)
+            matrix(y, x) = CellState.csWall
         Next x
     Next y
 End Sub
