@@ -26,15 +26,6 @@ Public matrix As Variant
 
 
 
-'Public Function GetMatrix(ByRef refMatrix() As Variant) As Boolean
-''Если матрица уже была создана - возвращает True и присваивает ее значение ссылке, если нет, то возвращает false
-'    If matrix = Empty Then
-'        GetMatrix = False
-'    Else
-'        refMatrix = matrix
-'        GetMatrix = True
-'    End If
-'End Function
 
 Public Sub SetForm(ByRef frm As Object)
 'Указываем ссылку на внешнюю форму в которую будет выводиться отчет о процессе запекания формы
@@ -50,6 +41,7 @@ Dim yCount As Long
 Dim arr() As Integer
 Dim areaBuilder As C_MatrixAreaBuilder
 Dim shp As Visio.Shape
+Dim perc As Double                      'Процент открытия двери
 
     grain = grainVal
     grain_i = grain / mmInInch
@@ -62,39 +54,6 @@ Dim shp As Visio.Shape
     
     'Проверяем наличие контурной фигуры
     TryGetShape bordreRect, "User.IndexPers:1001"
-    
-'    'Определяем расчетную область (При условии, что имеется фигура ограничивающей зоны)
-'    If bordreRect Is Nothing Then
-'        FillMatrixZero      'Заполняем матрицу нолями
-'    Else
-'        Set areaBuilder = New C_MatrixAreaBuilder
-'            form.lblMatrixIsBaked.Caption = "Оценка расчетной зоны, подождите"
-'            form.lblMatrixIsBaked.ForeColor = vbBlack
-'            DoEvents
-'
-'            matrix = areaBuilder.SetForm(form).FillArea(matrix, bordreRect, grain)
-'        Set areaBuilder = Nothing
-'    End If
-'
-''    Определяем конфигурацию матрицы (стены, зоны горения и т.д.)
-'    Set maskBuilder = New c_MaskBuilder
-'    '---Создаем маску
-'    maskBuilder.s_makeMask bordreRect
-'        '---Если маска стен не была создана в результате отсутсвия таковых - возвращаем чисутю матрицу
-'        If maskBuilder.pO_MaskShape Is Nothing Then
-'            '---Возвращаем результат - матрицу заполненную данными о ограждающих конструкциях
-'            NewMatrix = matrix
-'
-'            '---Уничтожаем построитель масок
-'            Set maskBuilder = Nothing
-'            Exit Function
-'        End If
-'    '---Создаем маску свободного пространства
-'    maskBuilder.s_makeOpenSpaceMask
-'
-'    '---Определяем окружение
-'    CheckEnvironment
-    
     
     
     'Включаем цвет подписи в форме отчета хода расчета
@@ -123,7 +82,6 @@ Dim shp As Visio.Shape
         For Each shp In Application.ActivePage.Shapes
             If PFB_isWall(shp) Then
                 Set currentCells = New Collection
-'                Attack shp, CellVal(shp, "BeginX", visMillimeters), CellVal(shp, "BeginY", visMillimeters)
                 Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters)
                 
                 form.AddCheckedSize 1, 2
@@ -150,8 +108,12 @@ Dim shp As Visio.Shape
     If bordreRect Is Nothing Then
         For Each shp In Application.ActivePage.Shapes
             If PFB_isDoor(shp) Then
+                perc = CloseDoor(shp)
+                
                 Set currentCells = New Collection
                 Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters), csOpenSpace
+                
+                OpenDoor shp, perc
                 
                 form.AddCheckedSize 1, 3
             End If
@@ -160,9 +122,13 @@ Dim shp As Visio.Shape
         For Each shp In Application.ActivePage.Shapes
             If PFB_isDoor(shp) Then
                 If bordreRect.SpatialRelation(shp, 0, VisSpatialRelationFlags.visSpatialFrontToBack) > 0 Then
+                    perc = CloseDoor(shp)
+                    
                     Set currentCells = New Collection
                     Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters), csOpenSpace
-                
+                    
+                    OpenDoor shp, perc
+                    
                     form.AddCheckedSize 1, 3
                 End If
             End If
@@ -173,13 +139,6 @@ Dim shp As Visio.Shape
     '---Возвращаем результат - матрицу заполненную данными о ограждающих конструкциях
     NewMatrix = matrix
 
-'    '---Удаляем маски
-'    maskBuilder.pO_MaskShape.Delete
-'    maskBuilder.pO_FreespaceMaskShape.Delete
-'
-'    '---Уничтожаем построитель масок
-'    Set maskBuilder = Nothing
-
 End Function
 
 Public Sub Attack(ByRef shp As Visio.Shape, ByVal x As Double, ByVal y As Double, Optional ByVal state As CellState = CellState.csWall)
@@ -188,7 +147,6 @@ Dim radiuss As Double
 Dim x_i As Integer
 Dim y_i As Integer
 Dim pnt As c_Point
-'Dim grain_i As Double
 
     On Error GoTo ErrRange
     
@@ -205,19 +163,13 @@ Dim pnt As c_Point
 '    DoEvents
     
     radiuss = grain_i * 0.5
-'    If state = csOpenSpace Then Debug.Print Int(x / grain); Int(y / grain)
-'    Debug.Print x; y   '; matrix(x, y) = CellState.csWall
-    
-'    If matrix(Int(x / grain), Int(y / grain)) = CellState.csWall Then Exit Sub
+
     Set pnt = New c_Point
     pnt.SetData Int(x / grain), Int(y / grain)
     If IsInCollection(currentCells, pnt) Then Exit Sub
-'    Debug.Print Int(x / grain); Int(y / grain)
-'   debug.Print ActivePage.Shapes.ItemFromID(22).HitTest(945,2160,40)
+
     
     If shp.HitTest(x_i, y_i, radiuss) Then
-'        Application.ActivePage.DrawRectangle x_i - radiuss, y_i - radiuss, _
-'                                             x_i + radiuss, y_i + radiuss
 
         currentCells.Add pnt
         matrix(Int(x / grain), Int(y / grain)) = state
@@ -276,15 +228,6 @@ Const radiussModificator As Double = 1.4142       'Модификатор радиуса - нужен, 
 
     On Error GoTo EX
                
-''0 Проверяем утверждение, что в радиусе нет нерассчитываемых зон
-'    If Not bordreRect Is Nothing Then
-'        If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) > 1 Then
-'            form.AddCheckedSize (radiuss * 2) ^ 2
-'
-''            Exit Sub
-'        End If
-'
-'    End If
                
 '1 Проверяем утверждение, что в радиусе нет стен
     '---Если стен нет, оставляем для всей клетки 0
@@ -373,18 +316,6 @@ Const radiussModificator As Double = 1.4142
 
     xAct = x + 0.5 + Not dirRight
     yAct = y + 0.5 + Not dirUp
-
-'    If Not maskBuilder.pO_MaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, radiussModificator * grain * 0.5 / mmInInch) = 0 Then
-'    If Not bordreRect Is Nothing Then
-'        If bordreRect.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0 Then
-'            If dirRight = True And dirUp = True Then matrix(x, y) = CellState.csWall
-'            If dirRight = False And dirUp = True Then matrix(x - 1, y) = CellState.csWall
-'            If dirRight = True And dirUp = False Then matrix(x, y - 1) = CellState.csWall
-'            If dirRight = False And dirUp = False Then matrix(x - 1, y - 1) = CellState.csWall
-'        End If
-'        Exit Sub
-'    End If
-    
     
     If Not maskBuilder.pO_MaskShape.HitTest(xAct * grain / mmInInch, yAct * grain / mmInInch, radiussModificator * grain * 0.5 / mmInInch) = 0 Then
         If dirRight = True And dirUp = True Then matrix(x, y) = CellState.csWall
@@ -469,4 +400,15 @@ Dim y As Long
     Next y
 End Sub
 
+'------------------Функции-----------------------
+Private Function CloseDoor(ByRef shp As Visio.Shape) As Double
+Dim perc As Double
+    
+    CloseDoor = CellVal(shp, "Prop.VisDoorOpenPercent")
+    SetCellVal shp, "Prop.VisDoorOpenPercent", 0
+    
+End Function
 
+Private Sub OpenDoor(ByRef shp As Visio.Shape, Optional ByVal perc As Double = 50)
+     SetCellVal shp, "Prop.VisDoorOpenPercent", perc
+End Sub
