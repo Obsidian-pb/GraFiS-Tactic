@@ -170,7 +170,8 @@ Dim pnt As c_Point
 
     
     If shp.HitTest(x_i, y_i, radiuss) Then
-
+        Debug.Print "c_MatrixBuilder->Attack->shp.HitTest: Уточнить радус и порадок расета - не срабатывает для тонких стен"
+        
         currentCells.Add pnt
         matrix(Int(x / grain), Int(y / grain)) = state
         

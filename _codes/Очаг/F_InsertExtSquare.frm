@@ -121,12 +121,26 @@ Private Sub btnRefreshMatrix_Click()
 End Sub
 
 '--------------------------Внутрение процедуры МОДЕЛИРОВАНИЕ----------------------------------
-Private Function GetMatrixCheckedStatus() As String
+Private Function GetMatrixCheckedStatus(Optional kind As Byte = 0) As String
 'Возвращает подпись для статуса запекания матрицы
+'Dim procent As Single
+'    procent = Round(matrixChecked / matrixSize, 4) * 100
+'
+'    GetMatrixCheckedStatus = "Запечено " & procent & "%"
+    
 Dim procent As Single
     procent = Round(matrixChecked / matrixSize, 4) * 100
     
-    GetMatrixCheckedStatus = "Запечено " & procent & "%"
+    Select Case kind
+        Case Is = 0
+            GetMatrixCheckedStatus = "Запечено " & procent & "%"
+        Case Is = 1
+            GetMatrixCheckedStatus = "Обработка расчетной зоны " & procent & "%"
+        Case Is = 2
+            GetMatrixCheckedStatus = "Обработано " & procent & "% стен"
+        Case Is = 3
+            GetMatrixCheckedStatus = "Обработано " & procent & "% дверей"
+    End Select
 End Function
 
 
@@ -137,12 +151,12 @@ Public Sub SetMatrixSize(ByVal size As Long)
     matrixChecked = 0
 End Sub
 
-Public Sub AddCheckedSize(ByVal size As Long)
+Public Sub AddCheckedSize(ByVal size As Long, Optional kind As Byte = 0)
 'Добавляем кол-во проверенных клеток
     matrixChecked = matrixChecked + size
     
     'Обновляем статусную строку с количеством проверенных клеток
-    lblMatrixIsBaked.Caption = GetMatrixCheckedStatus
+    lblMatrixIsBaked.Caption = GetMatrixCheckedStatus(kind)
     lblMatrixIsBaked.ForeColor = vbBlack
 '    Me.Repaint
 End Sub
