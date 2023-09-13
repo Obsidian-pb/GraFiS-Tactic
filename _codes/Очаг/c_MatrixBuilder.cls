@@ -42,6 +42,8 @@ Dim arr() As Integer
 Dim areaBuilder As C_MatrixAreaBuilder
 Dim shp As Visio.Shape
 Dim perc As Double                      'Процент открытия двери
+Dim PinX As Long
+Dim PinY As Long
 
     grain = grainVal
     grain_i = grain / mmInInch
@@ -81,8 +83,12 @@ Dim perc As Double                      'Процент открытия двери
     If bordreRect Is Nothing Then
         For Each shp In Application.ActivePage.Shapes
             If PFB_isWall(shp) Then
+'                Application.ActiveWindow.Select shp, visSelect
                 Set currentCells = New Collection
-                Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters)
+                PinX = CellVal(shp, "PinX", visMillimeters)
+                PinY = CellVal(shp, "PinY", visMillimeters)
+'                Patch PinX, PinY
+                Attack shp, PinX, PinY
                 
                 form.AddCheckedSize 1, 2
             End If
@@ -92,7 +98,11 @@ Dim perc As Double                      'Процент открытия двери
             If PFB_isWall(shp) Then
                 If bordreRect.SpatialRelation(shp, 0, VisSpatialRelationFlags.visSpatialFrontToBack) > 0 Then
                     Set currentCells = New Collection
-                    Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters)
+'                    Attack shp, CellVal(shp, "PinX", visMillimeters), CellVal(shp, "PinY", visMillimeters)
+                    PinX = CellVal(shp, "PinX", visMillimeters)
+                    PinY = CellVal(shp, "PinY", visMillimeters)
+'                    Patch PinX, PinY
+                    Attack shp, PinX, PinY
                     
                     form.AddCheckedSize 1, 2
                 End If
@@ -108,6 +118,7 @@ Dim perc As Double                      'Процент открытия двери
     If bordreRect Is Nothing Then
         For Each shp In Application.ActivePage.Shapes
             If PFB_isDoor(shp) Then
+'                Application.ActiveWindow.Select shp, visSelect
                 perc = CloseDoor(shp)
                 
                 Set currentCells = New Collection
@@ -150,8 +161,10 @@ Dim pnt As c_Point
 
     On Error GoTo ErrRange
     
-'    x = Int(x / grain) mmInInch
-'    y = Int(x / grain)
+    ' Приведение к размерности матрицы
+    x = Int(x / grain) * grain + grain / 2
+    y = Int(y / grain) * grain + grain / 2
+    
     x_i = x / mmInInch
     y_i = y / mmInInch
 '    grain_i = grain / mmInInch
@@ -162,15 +175,24 @@ Dim pnt As c_Point
     
 '    DoEvents
     
-    radiuss = grain_i * 0.5
+    radiuss = grain_i * 0.75
+'    radiuss = grain_i
 
     Set pnt = New c_Point
     pnt.SetData Int(x / grain), Int(y / grain)
-    If IsInCollection(currentCells, pnt) Then Exit Sub
+    If IsInCollection(currentCells, pnt) Then
+        Exit Sub
+    End If
 
-    
+'                'Отрисовываем квадрат
+'                Dim shpT As Visio.Shape
+'                Set shpT = Application.ActivePage.DrawRectangle(x / mmInInch, y / mmInInch, _
+'                        (x + grain) / mmInInch, (y + grain) / mmInInch)
+'                shpT.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("test")
+'                shpT.Cells("LinePattern").FormulaU = "0"
+'                shpT.Cells("FillForegnd").FormulaU = "2"
     If shp.HitTest(x_i, y_i, radiuss) Then
-        Debug.Print "c_MatrixBuilder->Attack->shp.HitTest: Уточнить радус и порадок расета - не срабатывает для тонких стен"
+'        Debug.Print "c_MatrixBuilder->Attack->shp.HitTest: Уточнить радус и порадок расета - не срабатывает для тонких стен"
         
         currentCells.Add pnt
         matrix(Int(x / grain), Int(y / grain)) = state
@@ -217,6 +239,33 @@ Private Function IsTotalWall(x As Long, y As Long, tolerance As Double) As Boole
 'Функция возвращает Истина, если указанная точка не соприкасается с маской свободного пространства, и наоборот, если соприкасается
     IsTotalWall = maskBuilder.pO_FreespaceMaskShape.HitTest(x * grain / mmInInch, y * grain / mmInInch, tolerance / mmInInch) = 0
 End Function
+
+Private Sub Patch(x, y, Optional ByVal state As CellState = CellState.csOpenSpace)
+' Процедура добавляет в точку матрицы с координатами x, y накладку из клеток в которых установлено значение CellState
+Dim xx As Integer
+Dim yy As Integer
+
+    xx = Int(x / grain)
+    yy = Int(y / grain)
+
+'                'Отрисовываем квадрат
+'                Dim shpT As Visio.Shape
+'                Set shpT = Application.ActivePage.DrawRectangle(x / mmInInch, y / mmInInch, _
+'                        (x + grain) / mmInInch, (y + grain) / mmInInch)
+'                shpT.CellsSRC(visSectionObject, visRowLayerMem, visLayerMember).FormulaForceU = GetLayerNumber("test")
+'                shpT.Cells("LinePattern").FormulaU = "0"
+'                shpT.Cells("FillForegnd").FormulaU = "2"
+
+    matrix(xx - 1, yy - 1) = state
+    matrix(xx - 1, yy) = state
+    matrix(xx - 1, yy + 1) = state
+    matrix(xx, yy - 1) = state
+    matrix(xx, yy) = state
+    matrix(xx, yy + 1) = state
+    matrix(xx + 1, yy - 1) = state
+    matrix(xx + 1, yy) = state
+    matrix(xx + 1, yy + 1) = state
+End Sub
 
 
 
