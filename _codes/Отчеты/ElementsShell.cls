@@ -91,6 +91,7 @@ Private Sub fillElemCollection()
     AddNewElement "StvolFoamHave", "Стволов пенных подано"
     AddNewElement "StvolGasHave", "Стволов газовых подано"
     AddNewElement "StvolPowderHave", "Стволов порошковых подано"
+    AddNewElement "Razvetvlen", "Разветвлений", , , , , False
 
     AddNewElement "GetedWaterValue", "Забирается воды из внешних источников", "{$} л/с (max = {GetedWaterValueMax} л/с )", , , , False
     AddNewElement "GetedWaterValueMax", "Забирается воды из внешних источников Максимум", , , , , False

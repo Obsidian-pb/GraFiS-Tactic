@@ -421,6 +421,7 @@ Dim latestSquareTime As Date
                         .RaiseByCellID shp, "Prop.Personnel"
                     Case Is = indexPers.ipRazvetvlenie 'Разветвление
                         .RaiseByCellID shp, "Prop.Personnel"
+                        .Raise "Razvetvlen"
                         
                     Case Is = indexPers.ipLestnPalka 'Лестница-палка ВОЗМОЖНО номер "85"???
                         .RaiseByCellID shp, "Prop.Personnel"
