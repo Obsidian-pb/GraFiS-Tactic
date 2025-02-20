@@ -80,6 +80,15 @@ Sub AddButtons()
         .beginGroup = False
     End With
     
+'--- нопка "ƒлина стен"-------------------------------------------------
+    Set Button = Bar.Controls.Add(Type:=msoControlButton)
+    With Button
+        .Caption = "ƒлина стен"
+        .Tag = "calculationWallLens"
+        .TooltipText = "ƒлина стен"
+        .FaceID = 107
+        .beginGroup = True
+    End With
     
     Set Button = Nothing
     

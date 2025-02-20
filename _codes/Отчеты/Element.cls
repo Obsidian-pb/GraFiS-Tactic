@@ -70,11 +70,11 @@ End Property
 
 
 '--------------------Публичные функции класса--------------------
-Public Function Activate(ByVal a_ID As String, ByVal a_CallName As String, Optional ByVal a_resultStrPattern As String = "", _
+Public Function Activate(ByVal a_id As String, ByVal a_CallName As String, Optional ByVal a_resultStrPattern As String = "", _
                         Optional ByVal a_startValue As Variant = 0, Optional a_CellID As String = "", _
                         Optional a_InShapes As Boolean = True, Optional a_InTacticDataForm As Boolean = True) As Element
 'Активируем объект
-    p_ID = a_ID
+    p_ID = a_id
     p_callName = a_CallName
     p_resultStrPattern = a_resultStrPattern
     p_value = a_startValue

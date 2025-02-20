@@ -19,12 +19,16 @@ Attribute ComButTactic.VB_VarHelpID = -1
 Public WithEvents ComButSettings As Office.CommandBarButton     'Настройки
 Attribute ComButSettings.VB_VarHelpID = -1
 
+Public WithEvents ComButWalls As Office.CommandBarButton     'Расчет длин стен
+Attribute ComButWalls.VB_VarHelpID = -1
+
 
 Private Sub Class_Initialize()
     Set ComButCheck = Application.CommandBars("Спецфункции").Controls("Мастер проверок")
     Set ComButTactic = Application.CommandBars("Спецфункции").Controls("Тактические данные")
 '    Set ComButExportToWord = Application.CommandBars("Спецфункции").Controls("Экспорт в Word")
     Set ComButSettings = Application.CommandBars("Спецфункции").Controls("Настройки")
+    Set ComButWalls = Application.CommandBars("Спецфункции").Controls("Длина стен")
 End Sub
 
 Private Sub Class_Terminate()
@@ -32,6 +36,7 @@ Private Sub Class_Terminate()
     Set ComButTactic = Nothing
 '    Set ComButExportToWord = Nothing
     Set ComButSettings = Nothing
+    Set ComButWalls = Nothing
 End Sub
 
 
@@ -100,3 +105,12 @@ Tail:
 End Sub
 
 
+Private Sub ComButWalls_Click(ByVal Ctrl As Office.CommandBarButton, CancelDefault As Boolean)
+'---Включаем обработку ошибок - для предотвращения выброса класса при попытке обращения ничего
+    On Error GoTo Tail
+    
+    PrintWallsLen
+    
+Tail:
+    '---Выходим из процедуры обработки
+End Sub
